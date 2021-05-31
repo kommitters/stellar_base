@@ -20,35 +20,40 @@ defmodule HorizonTest do
     }
   end
 
-  describe "network request" do
+  describe "request/5" do
     setup do
       on_exit(fn -> Application.put_env(:stellar, :network, :test) end)
     end
 
-    test "request/5", %{body: body, body_404: body_404, headers: headers} do
+    test "success", %{body: body, headers: headers} do
+      HackneyMock
+      |> expect(:request, fn _method, _url, _body, _headers, _opts ->
+        {:ok,
+         %{
+           status_code: 200,
+           body: body,
+           headers: headers
+         }}
+      end)
+
+      {:ok, %{status_code: 200, body: ^body}} = Horizon.request(:get, "/accounts/id")
+    end
+
+    test "not_found", %{body: body_404, headers: headers} do
       HackneyMock
       |> expect(:request, fn _method, _url, _body, _headers, _opts ->
         {:ok,
          %{
            status_code: 404,
-           body: body_404,
-           headers: headers
-         }}
-      end)
-      |> expect(:request, fn _method, _url, _body, _headers, _opts ->
-        {:ok,
-         %{
-           status_code: 200,
            headers: headers,
-           body: body
+           body: body_404
          }}
       end)
 
       {:ok, %{status_code: 404, body: ^body_404}} = Horizon.request(:get, "/accounts/unknow_id")
-      {:ok, %{status_code: 200, body: ^body}} = Horizon.request(:get, "/accounts/id")
     end
 
-    test "request/5 error" do
+    test "error" do
       expect(HackneyMock, :request, fn _method, _url, _body, _headers, _opts ->
         {:error, %{reason: "reason"}}
       end)
@@ -57,7 +62,7 @@ defmodule HorizonTest do
     end
   end
 
-  describe "network configuration" do
+  describe "configuration" do
     setup do
       on_exit(fn -> Application.put_env(:stellar, :network, :test) end)
     end
