@@ -15,10 +15,10 @@ defmodule Stellar.XDR.Int32 do
   defdelegate encode_xdr!(int_32), to: XDR.Int
 
   @impl true
-  defdelegate decode_xdr(bytes), to: XDR.Int
+  defdelegate decode_xdr(bytes, term \\ nil), to: XDR.Int
 
   @impl true
-  defdelegate decode_xdr!(bytes), to: XDR.Int
+  defdelegate decode_xdr!(bytes, term  \\ nil), to: XDR.Int
 end
 
 defmodule Stellar.XDR.Int64 do
@@ -38,8 +38,8 @@ defmodule Stellar.XDR.Int64 do
   defdelegate encode_xdr!(int_64), to: XDR.HyperInt
 
   @impl true
-  defdelegate decode_xdr(bytes), to: XDR.HyperInt
+  defdelegate decode_xdr(bytes, term \\ nil), to: XDR.HyperInt
 
   @impl true
-  defdelegate decode_xdr!(bytes), to: XDR.HyperInt
+  defdelegate decode_xdr!(bytes, term  \\ nil), to: XDR.HyperInt
 end
