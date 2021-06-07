@@ -1,4 +1,4 @@
-defmodule HorizonTest do
+defmodule Stellar.HorizonTest do
   use ExUnit.Case, async: true
 
   import Mox
