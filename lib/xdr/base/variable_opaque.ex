@@ -42,9 +42,7 @@ defmodule Stellar.XDR.VariableOpaque64 do
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
   def decode_xdr!(bytes, spec) do
-    with {%XDR.VariableOpaque{opaque: opaque}, rest} <-
-           XDR.VariableOpaque.decode_xdr!(bytes, spec) do
-      {new(opaque), rest}
-    end
+    {%XDR.VariableOpaque{opaque: opaque}, rest} = XDR.VariableOpaque.decode_xdr!(bytes, spec)
+    {new(opaque), rest}
   end
 end
