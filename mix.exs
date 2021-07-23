@@ -31,6 +31,7 @@ defmodule Stellar.MixProject do
   defp deps do
     [
       {:hackney, "~> 1.17", optional: true},
+      {:elixir_xdr, "~> 0.1.4"},
       {:mox, "~> 1.0", only: :test}
     ]
   end
