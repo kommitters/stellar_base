@@ -42,9 +42,8 @@ defmodule Stellar.XDR.Opaque4 do
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
   def decode_xdr!(bytes, spec) do
-    with {%XDR.FixedOpaque{opaque: opaque}, rest} <- XDR.FixedOpaque.decode_xdr!(bytes, spec) do
-      {new(opaque), rest}
-    end
+    {%XDR.FixedOpaque{opaque: opaque}, rest} = XDR.FixedOpaque.decode_xdr!(bytes, spec)
+    {new(opaque), rest}
   end
 end
 
@@ -92,9 +91,8 @@ defmodule Stellar.XDR.Opaque12 do
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
   def decode_xdr!(bytes, spec) do
-    with {%XDR.FixedOpaque{opaque: opaque}, rest} <- XDR.FixedOpaque.decode_xdr!(bytes, spec) do
-      {new(opaque), rest}
-    end
+    {%XDR.FixedOpaque{opaque: opaque}, rest} = XDR.FixedOpaque.decode_xdr!(bytes, spec)
+    {new(opaque), rest}
   end
 end
 
@@ -142,8 +140,7 @@ defmodule Stellar.XDR.Opaque32 do
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
   def decode_xdr!(bytes, spec) do
-    with {%XDR.FixedOpaque{opaque: opaque}, rest} <- XDR.FixedOpaque.decode_xdr!(bytes, spec) do
-      {new(opaque), rest}
-    end
+    {%XDR.FixedOpaque{opaque: opaque}, rest} = XDR.FixedOpaque.decode_xdr!(bytes, spec)
+    {new(opaque), rest}
   end
 end

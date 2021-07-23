@@ -39,9 +39,8 @@ defmodule Stellar.XDR.Int32 do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    with {%XDR.Int{datum: int32}, rest} <- XDR.Int.decode_xdr!(bytes) do
-      {new(int32), rest}
-    end
+    {%XDR.Int{datum: int32}, rest} = XDR.Int.decode_xdr!(bytes)
+    {new(int32), rest}
   end
 end
 
@@ -86,8 +85,7 @@ defmodule Stellar.XDR.Int64 do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    with {%XDR.HyperInt{datum: int64}, rest} <- XDR.HyperInt.decode_xdr!(bytes) do
-      {new(int64), rest}
-    end
+    {%XDR.HyperInt{datum: int64}, rest} = XDR.HyperInt.decode_xdr!(bytes)
+    {new(int64), rest}
   end
 end

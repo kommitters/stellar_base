@@ -39,9 +39,8 @@ defmodule Stellar.XDR.UInt32 do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    with {%XDR.UInt{datum: uint32}, rest} <- XDR.UInt.decode_xdr!(bytes) do
-      {new(uint32), rest}
-    end
+    {%XDR.UInt{datum: uint32}, rest} = XDR.UInt.decode_xdr!(bytes)
+    {new(uint32), rest}
   end
 end
 
@@ -86,18 +85,16 @@ defmodule Stellar.XDR.UInt64 do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    with {%XDR.HyperUInt{datum: uint64}, rest} <- XDR.HyperUInt.decode_xdr!(bytes) do
-      {new(uint64), rest}
-    end
+    {%XDR.HyperUInt{datum: uint64}, rest} = XDR.HyperUInt.decode_xdr!(bytes)
+    {new(uint64), rest}
   end
 end
 
-#### PENDINF
 defmodule Stellar.XDR.UInt256 do
   @moduledoc """
   Representation of Stellar `UInt256` type.
   """
-  alias Stellar.XDR.Opaque32
+  @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{datum: binary()}
 
@@ -106,23 +103,27 @@ defmodule Stellar.XDR.UInt256 do
   @spec new(uint256 :: binary()) :: t()
   def new(uint256), do: %__MODULE__{datum: uint256}
 
-  @spec encode_xdr(uint256 :: binary()) :: {:ok, {term(), binary()}}
-  defdelegate encode_xdr(uint256), to: Opaque32
+  @impl true
+  defdelegate encode_xdr(uint256), to: Stellar.XDR.Opaque32
 
-  @spec encode_xdr!(uint256 :: binary()) :: {term(), binary()}
-  defdelegate encode_xdr!(uint256), to: Opaque32
+  @impl true
+  defdelegate encode_xdr!(uint256), to: Stellar.XDR.Opaque32
 
-  @spec decode_xdr(bytes :: binary()) :: {:ok, {t(), binary()}}
-  def decode_xdr(bytes) do
-    with {:ok, {%Opaque32{opaque: uint256}, rest}} <- Opaque32.decode_xdr(bytes) do
-      {:ok, {new(uint256), rest}}
+  @impl true
+  def decode_xdr(bytes, term \\ nil)
+
+  def decode_xdr(bytes, _term) do
+    case Stellar.XDR.Opaque32.decode_xdr(bytes) do
+      {:ok, {%Stellar.XDR.Opaque32{opaque: uint256}, rest}} -> {:ok, {new(uint256), rest}}
+      error -> error
     end
   end
 
-  @spec decode_xdr!(bytes :: binary()) :: {t(), binary()}
-  def decode_xdr!(bytes) do
-    with {%Opaque32{opaque: uint256}, rest} <- Opaque32.decode_xdr!(bytes) do
-      {new(uint256), rest}
-    end
+  @impl true
+  def decode_xdr!(bytes, term \\ nil)
+
+  def decode_xdr!(bytes, _term) do
+    {%Stellar.XDR.Opaque32{opaque: uint256}, rest} = Stellar.XDR.Opaque32.decode_xdr!(bytes)
+    {new(uint256), rest}
   end
 end
