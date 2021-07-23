@@ -82,14 +82,10 @@ defmodule Stellar.XDR.Int64 do
   end
 
   @impl true
-<<<<<<< HEAD
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
     {%XDR.HyperInt{datum: int64}, rest} = XDR.HyperInt.decode_xdr!(bytes)
     {new(int64), rest}
   end
-=======
-  defdelegate decode_xdr!(bytes, term \\ nil), to: XDR.HyperInt
->>>>>>> Remove extra space
 end
