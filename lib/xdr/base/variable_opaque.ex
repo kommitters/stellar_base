@@ -2,25 +2,49 @@ defmodule Stellar.XDR.VariableOpaque64 do
   @moduledoc """
   Representation of Stellar `VariableOpaque64` type.
   """
-
   @behaviour XDR.Declaration
 
+  @type t :: %__MODULE__{opaque: binary(), max_size: integer()}
+
+  defstruct [:opaque, :max_size]
+
   @max_size 64
-  @opaque_spec XDR.FixedOpaque.new(nil, @max_size)
+  @opaque_spec XDR.VariableOpaque.new(nil, @max_size)
 
-  @spec new(opaque :: binary(), max_size :: pos_integer()) :: XDR.FixedOpaque.t()
-  def new(opaque, max_size \\ @max_size) when max_size <= @max_size,
-    do: XDR.VariableOpaque.new(opaque, max_size)
-
-  @impl true
-  defdelegate encode_xdr(variable_opaque), to: XDR.VariableOpaque
+  @spec new(opaque :: binary()) :: t()
+  def new(opaque), do: %__MODULE__{opaque: opaque, max_size: @max_size}
 
   @impl true
-  defdelegate encode_xdr!(variable_opaque), to: XDR.VariableOpaque
+  def encode_xdr(opaque) do
+    opaque
+    |> XDR.VariableOpaque.new(@max_size)
+    |> XDR.VariableOpaque.encode_xdr()
+  end
 
   @impl true
-  defdelegate decode_xdr(bytes, variable_opaque \\ @opaque_spec), to: XDR.VariableOpaque
+  def encode_xdr!(opaque) do
+    opaque
+    |> XDR.VariableOpaque.new(@max_size)
+    |> XDR.VariableOpaque.encode_xdr!()
+  end
 
   @impl true
-  defdelegate decode_xdr!(bytes, variable_opaque \\ @opaque_spec), to: XDR.VariableOpaque
+  def decode_xdr(bytes, spec \\ @opaque_spec)
+
+  def decode_xdr(bytes, spec) do
+    case XDR.VariableOpaque.decode_xdr(bytes, spec) do
+      {:ok, {%XDR.VariableOpaque{opaque: opaque}, rest}} -> {:ok, {new(opaque), rest}}
+      error -> error
+    end
+  end
+
+  @impl true
+  def decode_xdr!(bytes, spec \\ @opaque_spec)
+
+  def decode_xdr!(bytes, spec) do
+    with {%XDR.VariableOpaque{opaque: opaque}, rest} <-
+           XDR.VariableOpaque.decode_xdr!(bytes, spec) do
+      {new(opaque), rest}
+    end
+  end
 end
