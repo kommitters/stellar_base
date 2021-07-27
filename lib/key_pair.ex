@@ -10,6 +10,6 @@ defmodule Stellar.KeyPair do
   def from_secret(secret), do: current_impl().from_secret(secret)
 
   defp current_impl do
-    Application.get_env(:stellar, :ed25519_module, Stellar.KeyPair.Default)
+    Application.get_env(:stellar, :keypair_generator, Stellar.KeyPair.Default)
   end
 end
