@@ -23,7 +23,9 @@ defmodule Stellar.Ed25519.StrKeyTest do
 
   describe "encode!/2" do
     test "nil data" do
-      assert_raise ArgumentError, "cannot encode nil data", fn -> StrKey.encode!(nil, @pk_version_bytes) end
+      assert_raise ArgumentError, "cannot encode nil data", fn ->
+        StrKey.encode!(nil, @pk_version_bytes)
+      end
     end
 
     test "public key", %{public_key: public_key, public_key_binary: public_key_binary} do
@@ -52,6 +54,7 @@ defmodule Stellar.Ed25519.StrKeyTest do
 
     test "invalid checksum" do
       bad_secret_key = "SB72G7VGRAH2LAMX3WOIPSRNFW4TI35NAVNGOHSWLP6C4HSYOE3FLMSS"
+
       assert_raise ArgumentError, "invalid checksum", fn ->
         StrKey.decode!(bad_secret_key, @sk_version_bytes)
       end
