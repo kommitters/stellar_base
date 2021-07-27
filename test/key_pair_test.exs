@@ -37,7 +37,7 @@ defmodule Stellar.KeyPairTest do
 
   describe "custom ed25519 module" do
     setup do
-      on_exit(fn -> Application.put_env(:stellar, :ed25519_module, Stellar.KeyPair.Default) end)
+      on_exit(fn -> Application.put_env(:stellar, :keypair_generator, Stellar.KeyPair.Default) end)
 
       %{
         public_key: "GC3NRDSKRPYPRK3RBCCHOCG3HYJRXTTHCGI7TTF6KGSJH27GSEFWBB5M",
@@ -46,12 +46,12 @@ defmodule Stellar.KeyPairTest do
     end
 
     test "random/0", %{public_key: public_key, secret: secret} do
-      Application.put_env(:stellar, :ed25519_module, Stellar.KeyPair.CannedEd25519)
+      Application.put_env(:stellar, :keypair_generator, Stellar.KeyPair.CannedEd25519)
       {^public_key, ^secret} = Stellar.KeyPair.random()
     end
 
     test "from_secret/1", %{public_key: public_key, secret: secret} do
-      Application.put_env(:stellar, :ed25519_module, Stellar.KeyPair.CannedEd25519)
+      Application.put_env(:stellar, :keypair_generator, Stellar.KeyPair.CannedEd25519)
       {^public_key, ^secret} = Stellar.KeyPair.from_secret(secret)
     end
   end
