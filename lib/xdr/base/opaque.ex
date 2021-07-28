@@ -94,15 +94,15 @@ defmodule Stellar.XDR.Opaque32 do
   """
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{opaque: binary(), length: integer()}
+  @type t :: %__MODULE__{opaque: binary()}
 
-  defstruct [:opaque, :length]
+  defstruct [:opaque]
 
   @length 32
   @opaque_spec XDR.FixedOpaque.new(nil, @length)
 
   @spec new(opaque :: binary()) :: t()
-  def new(opaque), do: %__MODULE__{opaque: opaque, length: @length}
+  def new(opaque), do: %__MODULE__{opaque: opaque}
 
   @impl true
   def encode_xdr(%__MODULE__{opaque: opaque}) do
