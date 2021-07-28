@@ -12,17 +12,13 @@ defmodule Stellar.XDR.UInt32 do
   def new(uint32), do: %__MODULE__{datum: uint32}
 
   @impl true
-  def encode_xdr(uint32) do
-    uint32
-    |> XDR.UInt.new()
-    |> XDR.UInt.encode_xdr()
+  def encode_xdr(%__MODULE__{datum: uint32}) do
+    XDR.UInt.encode_xdr(%XDR.UInt{datum: uint32})
   end
 
   @impl true
-  def encode_xdr!(uint32) do
-    uint32
-    |> XDR.UInt.new()
-    |> XDR.UInt.encode_xdr!()
+  def encode_xdr!(%__MODULE__{datum: uint32}) do
+    XDR.UInt.encode_xdr!(%XDR.UInt{datum: uint32})
   end
 
   @impl true
@@ -58,17 +54,13 @@ defmodule Stellar.XDR.UInt64 do
   def new(uint64), do: %__MODULE__{datum: uint64}
 
   @impl true
-  def encode_xdr(uint64) do
-    uint64
-    |> XDR.HyperUInt.new()
-    |> XDR.HyperUInt.encode_xdr()
+  def encode_xdr(%__MODULE__{datum: uint64}) do
+    XDR.HyperUInt.encode_xdr(%XDR.HyperUInt{datum: uint64})
   end
 
   @impl true
-  def encode_xdr!(uint64) do
-    uint64
-    |> XDR.HyperUInt.new()
-    |> XDR.HyperUInt.encode_xdr!()
+  def encode_xdr!(%__MODULE__{datum: uint64}) do
+    XDR.HyperUInt.encode_xdr!(%XDR.HyperUInt{datum: uint64})
   end
 
   @impl true
@@ -94,6 +86,8 @@ defmodule Stellar.XDR.UInt256 do
   @moduledoc """
   Representation of Stellar `UInt256` type.
   """
+  alias Stellar.XDR.Opaque32
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{datum: binary()}
@@ -104,17 +98,21 @@ defmodule Stellar.XDR.UInt256 do
   def new(uint256), do: %__MODULE__{datum: uint256}
 
   @impl true
-  defdelegate encode_xdr(uint256), to: Stellar.XDR.Opaque32
+  def encode_xdr(%__MODULE__{datum: uint256}) do
+    Opaque32.encode_xdr(%Opaque32{opaque: uint256})
+  end
 
   @impl true
-  defdelegate encode_xdr!(uint256), to: Stellar.XDR.Opaque32
+  def encode_xdr!(%__MODULE__{datum: uint256}) do
+    Opaque32.encode_xdr!(%Opaque32{opaque: uint256})
+  end
 
   @impl true
   def decode_xdr(bytes, term \\ nil)
 
   def decode_xdr(bytes, _term) do
-    case Stellar.XDR.Opaque32.decode_xdr(bytes) do
-      {:ok, {%Stellar.XDR.Opaque32{opaque: uint256}, rest}} -> {:ok, {new(uint256), rest}}
+    case Opaque32.decode_xdr(bytes) do
+      {:ok, {%Opaque32{opaque: uint256}, rest}} -> {:ok, {new(uint256), rest}}
       error -> error
     end
   end
@@ -123,7 +121,7 @@ defmodule Stellar.XDR.UInt256 do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    {%Stellar.XDR.Opaque32{opaque: uint256}, rest} = Stellar.XDR.Opaque32.decode_xdr!(bytes)
+    {%Opaque32{opaque: uint256}, rest} = Opaque32.decode_xdr!(bytes)
     {new(uint256), rest}
   end
 end

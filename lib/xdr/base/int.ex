@@ -12,17 +12,13 @@ defmodule Stellar.XDR.Int32 do
   def new(int32), do: %__MODULE__{datum: int32}
 
   @impl true
-  def encode_xdr(int32) do
-    int32
-    |> XDR.Int.new()
-    |> XDR.Int.encode_xdr()
+  def encode_xdr(%__MODULE__{datum: int32}) do
+    XDR.Int.encode_xdr(%XDR.Int{datum: int32})
   end
 
   @impl true
-  def encode_xdr!(int32) do
-    int32
-    |> XDR.Int.new()
-    |> XDR.Int.encode_xdr!()
+  def encode_xdr!(%__MODULE__{datum: int32}) do
+    XDR.Int.encode_xdr!(%XDR.Int{datum: int32})
   end
 
   @impl true
@@ -58,17 +54,13 @@ defmodule Stellar.XDR.Int64 do
   def new(int64), do: %__MODULE__{datum: int64}
 
   @impl true
-  def encode_xdr(int64) do
-    int64
-    |> XDR.HyperInt.new()
-    |> XDR.HyperInt.encode_xdr()
+  def encode_xdr(%__MODULE__{datum: int64}) do
+    XDR.HyperInt.encode_xdr(%XDR.HyperInt{datum: int64})
   end
 
   @impl true
-  def encode_xdr!(int64) do
-    int64
-    |> XDR.HyperInt.new()
-    |> XDR.HyperInt.encode_xdr!()
+  def encode_xdr!(%__MODULE__{datum: int64}) do
+    XDR.HyperInt.encode_xdr!(%XDR.HyperInt{datum: int64})
   end
 
   @impl true

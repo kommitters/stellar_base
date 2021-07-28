@@ -4,28 +4,24 @@ defmodule Stellar.XDR.Opaque4 do
   """
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{opaque: binary(), length: integer()}
+  @type t :: %__MODULE__{opaque: binary()}
 
-  defstruct [:opaque, :length]
+  defstruct [:opaque]
 
   @length 4
   @opaque_spec XDR.FixedOpaque.new(nil, @length)
 
   @spec new(opaque :: binary()) :: t()
-  def new(opaque), do: %__MODULE__{opaque: opaque, length: @length}
+  def new(opaque), do: %__MODULE__{opaque: opaque}
 
   @impl true
-  def encode_xdr(opaque) do
-    opaque
-    |> XDR.FixedOpaque.new(@length)
-    |> XDR.FixedOpaque.encode_xdr()
+  def encode_xdr(%__MODULE__{opaque: opaque}) do
+    XDR.FixedOpaque.encode_xdr(%XDR.FixedOpaque{opaque: opaque, length: @length})
   end
 
   @impl true
-  def encode_xdr!(opaque) do
-    opaque
-    |> XDR.FixedOpaque.new(@length)
-    |> XDR.FixedOpaque.encode_xdr!()
+  def encode_xdr!(%__MODULE__{opaque: opaque}) do
+    XDR.FixedOpaque.encode_xdr!(%XDR.FixedOpaque{opaque: opaque, length: @length})
   end
 
   @impl true
@@ -53,28 +49,24 @@ defmodule Stellar.XDR.Opaque12 do
   """
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{opaque: binary(), length: integer()}
+  @type t :: %__MODULE__{opaque: binary()}
 
-  defstruct [:opaque, :length]
+  defstruct [:opaque]
 
   @length 12
   @opaque_spec XDR.FixedOpaque.new(nil, @length)
 
   @spec new(opaque :: binary()) :: t()
-  def new(opaque), do: %__MODULE__{opaque: opaque, length: @length}
+  def new(opaque), do: %__MODULE__{opaque: opaque}
 
   @impl true
-  def encode_xdr(opaque) do
-    opaque
-    |> XDR.FixedOpaque.new(@length)
-    |> XDR.FixedOpaque.encode_xdr()
+  def encode_xdr(%__MODULE__{opaque: opaque}) do
+    XDR.FixedOpaque.encode_xdr(%XDR.FixedOpaque{opaque: opaque, length: @length})
   end
 
   @impl true
-  def encode_xdr!(opaque) do
-    opaque
-    |> XDR.FixedOpaque.new(@length)
-    |> XDR.FixedOpaque.encode_xdr!()
+  def encode_xdr!(%__MODULE__{opaque: opaque}) do
+    XDR.FixedOpaque.encode_xdr!(%XDR.FixedOpaque{opaque: opaque, length: @length})
   end
 
   @impl true
@@ -113,17 +105,13 @@ defmodule Stellar.XDR.Opaque32 do
   def new(opaque), do: %__MODULE__{opaque: opaque, length: @length}
 
   @impl true
-  def encode_xdr(opaque) do
-    opaque
-    |> XDR.FixedOpaque.new(@length)
-    |> XDR.FixedOpaque.encode_xdr()
+  def encode_xdr(%__MODULE__{opaque: opaque}) do
+    XDR.FixedOpaque.encode_xdr(%XDR.FixedOpaque{opaque: opaque, length: @length})
   end
 
   @impl true
-  def encode_xdr!(opaque) do
-    opaque
-    |> XDR.FixedOpaque.new(@length)
-    |> XDR.FixedOpaque.encode_xdr!()
+  def encode_xdr!(%__MODULE__{opaque: opaque}) do
+    XDR.FixedOpaque.encode_xdr!(%XDR.FixedOpaque{opaque: opaque, length: @length})
   end
 
   @impl true
