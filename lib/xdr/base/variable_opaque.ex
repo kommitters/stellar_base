@@ -4,28 +4,24 @@ defmodule Stellar.XDR.VariableOpaque64 do
   """
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{opaque: binary(), max_size: integer()}
+  @type t :: %__MODULE__{opaque: binary()}
 
-  defstruct [:opaque, :max_size]
+  defstruct [:opaque]
 
   @max_size 64
   @opaque_spec XDR.VariableOpaque.new(nil, @max_size)
 
   @spec new(opaque :: binary()) :: t()
-  def new(opaque), do: %__MODULE__{opaque: opaque, max_size: @max_size}
+  def new(opaque), do: %__MODULE__{opaque: opaque}
 
   @impl true
-  def encode_xdr(opaque) do
-    opaque
-    |> XDR.VariableOpaque.new(@max_size)
-    |> XDR.VariableOpaque.encode_xdr()
+  def encode_xdr(%__MODULE__{opaque: opaque}) do
+    XDR.VariableOpaque.encode_xdr(%XDR.VariableOpaque{opaque: opaque, max_size: @max_size})
   end
 
   @impl true
-  def encode_xdr!(opaque) do
-    opaque
-    |> XDR.VariableOpaque.new(@max_size)
-    |> XDR.VariableOpaque.encode_xdr!()
+  def encode_xdr!(%__MODULE__{opaque: opaque}) do
+    XDR.VariableOpaque.encode_xdr!(%XDR.VariableOpaque{opaque: opaque, max_size: @max_size})
   end
 
   @impl true
