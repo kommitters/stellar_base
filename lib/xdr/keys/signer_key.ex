@@ -16,14 +16,13 @@ defmodule Stellar.XDR.SignerKey do
 
   defstruct [:signer_key, :type]
 
-  @spec new(type :: atom() | nil) :: t()
-  def new(signer_key, type \\ :SIGNER_KEY_TYPE_ED25519),
+  @spec new(public_key :: UInt256.t(), type :: SignerKeyType.t() | nil) :: t()
+  def new(%UInt256{} = signer_key, %SignerKeyType{} = type),
     do: %__MODULE__{signer_key: signer_key, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{signer_key: signer_key, type: type}) do
     type
-    |> SignerKeyType.new()
     |> XDR.Union.new(@arms, signer_key)
     |> XDR.Union.encode_xdr()
   end
@@ -31,7 +30,6 @@ defmodule Stellar.XDR.SignerKey do
   @impl true
   def encode_xdr!(%__MODULE__{signer_key: signer_key, type: type}) do
     type
-    |> SignerKeyType.new()
     |> XDR.Union.new(@arms, signer_key)
     |> XDR.Union.encode_xdr!()
   end
@@ -41,7 +39,7 @@ defmodule Stellar.XDR.SignerKey do
 
   def decode_xdr(bytes, spec) do
     case XDR.Union.decode_xdr(bytes, spec) do
-      {:ok, {{type, %UInt256{datum: key}}, rest}} -> {:ok, {new(key, type), rest}}
+      {:ok, {{type, key}, rest}} -> {:ok, {new(key, type), rest}}
       error -> error
     end
   end
@@ -50,7 +48,7 @@ defmodule Stellar.XDR.SignerKey do
   def decode_xdr!(bytes, spec \\ xdr_union_spec())
 
   def decode_xdr!(bytes, spec) do
-    {{type, %UInt256{datum: key}}, rest} = XDR.Union.decode_xdr!(bytes, spec)
+    {{type, key}, rest} = XDR.Union.decode_xdr!(bytes, spec)
     {new(key, type), rest}
   end
 
