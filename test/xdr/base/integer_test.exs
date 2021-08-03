@@ -23,11 +23,11 @@ defmodule Stellar.XDR.IntegerTest do
       ^binary = Int32.encode_xdr!(int32)
     end
 
-    test "decode_xdr/1", %{int32: int32, binary: binary} do
+    test "decode_xdr/2", %{int32: int32, binary: binary} do
       {:ok, {^int32, ""}} = Int32.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{int32: int32, binary: binary} do
+    test "decode_xdr!/2", %{int32: int32, binary: binary} do
       {^int32, ^binary} = Int32.decode_xdr!(binary <> binary)
     end
 
@@ -60,11 +60,11 @@ defmodule Stellar.XDR.IntegerTest do
       ^binary = Int64.encode_xdr!(int64)
     end
 
-    test "decode_xdr/1", %{int64: int64, binary: binary} do
+    test "decode_xdr/2", %{int64: int64, binary: binary} do
       {:ok, {^int64, ""}} = Int64.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{int64: int64, binary: binary} do
+    test "decode_xdr!/2", %{int64: int64, binary: binary} do
       {^int64, ^binary} = Int64.decode_xdr!(binary <> binary)
     end
   end
@@ -89,11 +89,11 @@ defmodule Stellar.XDR.IntegerTest do
       ^binary = UInt32.encode_xdr!(uint32)
     end
 
-    test "decode_xdr/1", %{uint32: uint32, binary: binary} do
+    test "decode_xdr/2", %{uint32: uint32, binary: binary} do
       {:ok, {^uint32, ""}} = UInt32.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{uint32: uint32, binary: binary} do
+    test "decode_xdr!/2", %{uint32: uint32, binary: binary} do
       {^uint32, ^binary} = UInt32.decode_xdr!(binary <> binary)
     end
 
@@ -126,11 +126,11 @@ defmodule Stellar.XDR.IntegerTest do
       ^binary = UInt64.encode_xdr!(uint64)
     end
 
-    test "decode_xdr/1", %{uint64: uint64, binary: binary} do
+    test "decode_xdr/2", %{uint64: uint64, binary: binary} do
       {:ok, {^uint64, ^binary}} = UInt64.decode_xdr(binary <> binary)
     end
 
-    test "decode_xdr!/1", %{uint64: uint64, binary: binary} do
+    test "decode_xdr!/2", %{uint64: uint64, binary: binary} do
       {^uint64, ""} = UInt64.decode_xdr!(binary)
     end
   end
@@ -161,11 +161,11 @@ defmodule Stellar.XDR.IntegerTest do
       ^binary = UInt256.encode_xdr!(uint256)
     end
 
-    test "decode_xdr/1", %{uint256: uint256, binary: binary} do
+    test "decode_xdr/2", %{uint256: uint256, binary: binary} do
       {:ok, {^uint256, ^binary}} = UInt256.decode_xdr(binary <> binary)
     end
 
-    test "decode_xdr!/1", %{uint256: uint256, binary: binary} do
+    test "decode_xdr!/2", %{uint256: uint256, binary: binary} do
       {^uint256, ""} = UInt256.decode_xdr!(binary)
     end
   end

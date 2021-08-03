@@ -24,11 +24,11 @@ defmodule Stellar.XDR.OpaqueTest do
       ^binary = Opaque4.encode_xdr!(opaque4)
     end
 
-    test "decode_xdr/1", %{opaque4: opaque4, binary: binary} do
+    test "decode_xdr/2", %{opaque4: opaque4, binary: binary} do
       {:ok, {^opaque4, ""}} = Opaque4.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{opaque4: opaque4, binary: binary} do
+    test "decode_xdr!/2", %{opaque4: opaque4, binary: binary} do
       {^opaque4, ""} = Opaque4.decode_xdr!(binary)
     end
 
@@ -58,11 +58,11 @@ defmodule Stellar.XDR.OpaqueTest do
       ^binary = Opaque12.encode_xdr!(opaque12)
     end
 
-    test "decode_xdr/1", %{opaque12: opaque12, binary: binary} do
+    test "decode_xdr/2", %{opaque12: opaque12, binary: binary} do
       {:ok, {^opaque12, ""}} = Opaque12.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{opaque12: opaque12, binary: binary} do
+    test "decode_xdr!/2", %{opaque12: opaque12, binary: binary} do
       {^opaque12, ""} = Opaque12.decode_xdr!(binary)
     end
 
@@ -92,11 +92,11 @@ defmodule Stellar.XDR.OpaqueTest do
       ^binary = Opaque32.encode_xdr!(opaque32)
     end
 
-    test "decode_xdr/1", %{opaque32: opaque32, binary: binary} do
+    test "decode_xdr/2", %{opaque32: opaque32, binary: binary} do
       {:ok, {^opaque32, ""}} = Opaque32.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{opaque32: opaque32, binary: binary} do
+    test "decode_xdr!/2", %{opaque32: opaque32, binary: binary} do
       {^opaque32, ""} = Opaque32.decode_xdr!(binary)
     end
 
@@ -128,11 +128,11 @@ defmodule Stellar.XDR.OpaqueTest do
       ^binary = VariableOpaque64.encode_xdr!(variable_opaque64)
     end
 
-    test "decode_xdr/1", %{variable_opaque64: variable_opaque64, binary: binary} do
+    test "decode_xdr/2", %{variable_opaque64: variable_opaque64, binary: binary} do
       {:ok, {^variable_opaque64, ""}} = VariableOpaque64.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{variable_opaque64: variable_opaque64, binary: binary} do
+    test "decode_xdr!/2", %{variable_opaque64: variable_opaque64, binary: binary} do
       {^variable_opaque64, ""} = VariableOpaque64.decode_xdr!(binary)
     end
 
@@ -165,11 +165,11 @@ defmodule Stellar.XDR.OpaqueTest do
       ^binary = Hash.encode_xdr!(hash)
     end
 
-    test "decode_xdr/1", %{hash: hash, binary: binary} do
+    test "decode_xdr/2", %{hash: hash, binary: binary} do
       {:ok, {^hash, ""}} = Hash.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{hash: hash, binary: binary} do
+    test "decode_xdr!/2", %{hash: hash, binary: binary} do
       {^hash, ""} = Hash.decode_xdr!(binary)
     end
 

@@ -24,11 +24,11 @@ defmodule Stellar.XDR.PublicKeyTypeTest do
       ^binary = PublicKeyType.encode_xdr!(xdr_type)
     end
 
-    test "decode_xdr/1", %{xdr_type: xdr_type, encoded_binary: binary} do
+    test "decode_xdr/2", %{xdr_type: xdr_type, encoded_binary: binary} do
       {:ok, {^xdr_type, ""}} = PublicKeyType.decode_xdr(binary)
     end
 
-    test "decode_xdr!/1", %{xdr_type: xdr_type, encoded_binary: binary} do
+    test "decode_xdr!/2", %{xdr_type: xdr_type, encoded_binary: binary} do
       {^xdr_type, ^binary} = PublicKeyType.decode_xdr!(binary <> binary)
     end
 
