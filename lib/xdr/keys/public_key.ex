@@ -48,8 +48,8 @@ defmodule Stellar.XDR.PublicKey do
     {new(key, type), rest}
   end
 
-  @spec union_spec :: XDR.Union.t()
-  def union_spec do
+  @spec union_spec() :: XDR.Union.t()
+  defp union_spec do
     :PUBLIC_KEY_TYPE_ED25519
     |> PublicKeyType.new()
     |> XDR.Union.new(@arms)
