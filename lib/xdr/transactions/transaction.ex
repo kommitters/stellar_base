@@ -2,6 +2,9 @@ defmodule Stellar.XDR.Transaction do
   @moduledoc """
   Representation of Stellar `Transaction` type.
   """
+
+  # [WIP] Operations types will be implemented in:
+  # https://github.com/kommitters/stellar_sdk/issues/12
   alias Stellar.XDR.{
     UInt32,
     MuxedAccount,
