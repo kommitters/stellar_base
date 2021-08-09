@@ -14,7 +14,7 @@ defmodule Stellar.Horizon do
 
   @spec network_config :: Keyword.t()
   def network_config do
-    network = Application.get_env(:stellar, :network, :public)
+    network = Application.get_env(:stellar_base, :network, :public)
 
     [
       network: network,
@@ -25,7 +25,7 @@ defmodule Stellar.Horizon do
 
   @spec http_client :: atom
   defp http_client do
-    Application.get_env(:stellar, :http_client, Stellar.Horizon.Hackney)
+    Application.get_env(:stellar_base, :http_client, Stellar.Horizon.Hackney)
   end
 
   @spec network_url(network :: atom) :: String.t()

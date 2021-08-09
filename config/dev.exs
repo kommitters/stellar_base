@@ -1,3 +1,3 @@
 use Mix.Config
 
-config :stellar, network: :test
+config :stellar_base, network: :test
