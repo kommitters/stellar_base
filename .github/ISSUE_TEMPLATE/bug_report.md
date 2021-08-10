@@ -9,6 +9,7 @@ assignees: ''
 
 ### Precheck
 
+<<<<<<< HEAD
 - [ ] Do a quick search and make sure the bug has not been reported yet.
 - [ ] Please disclose security vulnerabilities privately at info@kommit.co.
 - [ ] Finally, be nice and have fun!.
