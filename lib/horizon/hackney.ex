@@ -28,7 +28,7 @@ defmodule Stellar.Horizon.Hackney do
 
   @spec options(Keyword.t()) :: Keyword.t()
   defp options(options) do
-    config_options = Application.get_env(:stellar, :hackney_options, [])
+    config_options = Application.get_env(:stellar_base, :hackney_options, [])
 
     @default_options
     |> Keyword.merge(config_options)

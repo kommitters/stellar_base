@@ -6,7 +6,7 @@ defmodule Stellar.MixProject do
 
   def project do
     [
-      app: :stellar,
+      app: :stellar_base,
       version: @version,
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
