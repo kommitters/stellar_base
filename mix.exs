@@ -38,7 +38,10 @@ defmodule Stellar.MixProject do
     [
       {:elixir_xdr, "~> 0.1.5"},
       {:ed25519, "~> 1.3"},
-      {:crc, "~> 0.10.0"}
+      {:crc, "~> 0.10.0"},
+      {:excoveralls, "~> 0.14", only: :test},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 

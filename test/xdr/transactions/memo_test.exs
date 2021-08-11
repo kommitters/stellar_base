@@ -6,7 +6,7 @@ defmodule Stellar.XDR.MemoTest do
   describe "Memo" do
     setup do
       memo_type = MemoType.new(:MEMO_ID)
-      memo_id = UInt64.new(12345)
+      memo_id = UInt64.new(12_345)
 
       %{
         memo_type_id: :MEMO_ID,
