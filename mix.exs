@@ -40,7 +40,6 @@ defmodule Stellar.MixProject do
       {:ed25519, "~> 1.3"},
       {:crc, "~> 0.10.0"},
       {:excoveralls, "~> 0.14", only: :test},
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
