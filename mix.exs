@@ -15,15 +15,21 @@ defmodule Stellar.MixProject do
       description: description(),
       source_url: @github_url,
       package: package(),
-      docs: docs()
+      docs: docs(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {Stellar.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
