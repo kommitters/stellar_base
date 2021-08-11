@@ -22,7 +22,7 @@ defmodule Stellar.HorizonTest do
 
   describe "request/5" do
     setup do
-      on_exit(fn -> Application.put_env(:stellar, :network, :test) end)
+      on_exit(fn -> Application.put_env(:stellar_base, :network, :test) end)
     end
 
     test "success", %{body: body, headers: headers} do
@@ -64,18 +64,18 @@ defmodule Stellar.HorizonTest do
 
   describe "configuration" do
     setup do
-      on_exit(fn -> Application.put_env(:stellar, :network, :test) end)
+      on_exit(fn -> Application.put_env(:stellar_base, :network, :test) end)
     end
 
     test "config/0" do
-      Application.put_env(:stellar, :network, :public)
+      Application.put_env(:stellar_base, :network, :public)
 
       [network: :public, url: @network_url, passphrase: @network_passphrase] =
         Stellar.Horizon.network_config()
     end
 
     test "config/1" do
-      Application.put_env(:stellar, :network, :public)
+      Application.put_env(:stellar_base, :network, :public)
 
       assert Stellar.Horizon.network_config(:url) == @network_url
       assert Stellar.Horizon.network_config(:passphrase) == @network_passphrase
@@ -84,11 +84,11 @@ defmodule Stellar.HorizonTest do
 
   describe "custom HTTP client" do
     setup do
-      on_exit(fn -> Application.put_env(:stellar, :http_client, HackneyMock) end)
+      on_exit(fn -> Application.put_env(:stellar_base, :http_client, HackneyMock) end)
     end
 
     test "request/5", %{body: body} do
-      Application.put_env(:stellar, :http_client, HTTPoitionMock)
+      Application.put_env(:stellar_base, :http_client, HTTPoitionMock)
 
       HTTPoitionMock
       |> expect(:request, fn _method, _url, _body, _headers, _opts ->
