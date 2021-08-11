@@ -3,7 +3,7 @@ defmodule Stellar.Ed25519.StrKey do
   Functions to encode/decode Ed25519 keys.
   """
 
-  @spec encode!(data :: binary() | nil, version_bytes :: binary()) :: String.t()
+  @spec encode!(data :: binary() | nil, version_bytes :: integer()) :: String.t()
   def encode!(nil, _version_bytes), do: raise(ArgumentError, "cannot encode nil data")
 
   def encode!(data, version_bytes) do
@@ -15,7 +15,7 @@ defmodule Stellar.Ed25519.StrKey do
     |> Base.encode32(padding: false)
   end
 
-  @spec decode!(data :: String.t() | nil, version_bytes :: binary()) :: binary()
+  @spec decode!(data :: String.t() | nil, version_bytes :: integer()) :: binary()
   def decode!(nil, _version_bytes), do: raise(ArgumentError, "cannot decode nil data")
 
   def decode!(data, version_bytes) do

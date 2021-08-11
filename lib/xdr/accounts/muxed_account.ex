@@ -19,7 +19,7 @@ defmodule Stellar.XDR.MuxedAccount do
 
   defstruct [:type, :account]
 
-  @spec new(type :: UInt256.t(), account :: account()) :: t()
+  @spec new(type :: CryptoKeyType.t(), account :: account()) :: t()
   def new(%CryptoKeyType{identifier: identifier}, _account)
       when identifier not in ~w(KEY_TYPE_ED25519 KEY_TYPE_MUXED_ED25519)a,
       do: {:error, :invalid_key_type}

@@ -10,7 +10,7 @@ defmodule Stellar.XDR.AccountID do
 
   defstruct [:account_id]
 
-  @spec new(int32 :: integer()) :: t()
+  @spec new(account_id :: PublicKey.t()) :: t()
   def new(%PublicKey{} = account_id), do: %__MODULE__{account_id: account_id}
 
   @impl true
