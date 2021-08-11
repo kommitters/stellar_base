@@ -37,7 +37,9 @@ defmodule Stellar.KeyPairTest do
 
   describe "custom ed25519 module" do
     setup do
-      on_exit(fn -> Application.put_env(:stellar_base, :keypair_generator, Stellar.KeyPair.Default) end)
+      on_exit(fn ->
+        Application.put_env(:stellar_base, :keypair_generator, Stellar.KeyPair.Default)
+      end)
 
       %{
         public_key: "GC3NRDSKRPYPRK3RBCCHOCG3HYJRXTTHCGI7TTF6KGSJH27GSEFWBB5M",
