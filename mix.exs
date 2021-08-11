@@ -30,11 +30,9 @@ defmodule Stellar.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:hackney, "~> 1.17", optional: true},
       {:elixir_xdr, "~> 0.1.5"},
       {:ed25519, "~> 1.3"},
-      {:crc, "~> 0.10.0"},
-      {:mox, "~> 1.0", only: :test}
+      {:crc, "~> 0.10.0"}
     ]
   end
 
