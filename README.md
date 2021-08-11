@@ -45,7 +45,7 @@ Made with 💙 by [kommitters Open Source](https://kommit.co)
 [license]: https://github.com/kommitters/stellar_base/blob/master/LICENSE.md
 [coc]: https://github.com/kommitters/stellar_base/blob/master/CODE_OF_CONDUCT.md
 [changelog]: https://github.com/kommitters/stellar_base/blob/master/CHANGELOG.md
-[contributing]:https://github.com/kommitters/stellar_base/blob/master/CONTRIBUTING.md
+[contributing]: https://github.com/kommitters/stellar_base/blob/master/CONTRIBUTING.md
 [base]: https://github.com/kommitters/stellar_base
 [sdk]: https://github.com/kommitters/stellar_sdk
 [hex]: https://hex.pm/packages/stellar_base

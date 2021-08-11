@@ -71,7 +71,16 @@ defmodule Stellar.MixProject do
       source_ref: "v#{@version}",
       source_url: @github_url,
       canonical: "http://hexdocs.pm/stellar_base",
-      extras: ["README.md", "CHANGELOG.md", "CONTRIBUTING.md"]
+      extras: ["README.md", "CHANGELOG.md", "CONTRIBUTING.md"],
+      groups_for_modules: groups_for_modules()
+    ]
+  end
+
+  defp groups_for_modules do
+    [
+      "XDR Types": ~r/^Stellar\.XDR\./,
+      Ed25519: ~r/^Stellar\.Ed25519\./,
+      KeyPair: ~r/^Stellar\.KeyPair\./
     ]
   end
 end
