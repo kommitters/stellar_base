@@ -2,14 +2,14 @@
 
 ### **⚠️ Warning! This library is under active development**. Do not use it in production environments.
 
-`stellar_base` is an **Elixir library** that provides a complete set of functions to read, write, hash, and sign XDR primitive constructs used in [stellar-core](https://github.com/stellar/stellar-core).
+`stellar_base` is an **Elixir library** that provides a complete set of functions to read, write, hash, and sign XDR primitive constructs used in [stellar-core][stellar-core].
 
 This library is aimed at developers building Elixir applications on top of the Stellar network. Transactions constructed by this library may be submitted to any Horizon instance for processing onto the ledger, using any Stellar SDK client. The recommended client for Elixir programmers is [stellar_sdk][sdk].
 
 ## stellar_base vs stellar_sdk
 * `stellar_sdk` is a client library for interfacing with **Horizon** server REST endpoints to retrieve ledger information and submit transactions built with `stellar_base`.
 * `stellar_base` enables the construction, signing, and encoding of Stellar transactions.
-* Use the `stellar_base` library if are planning to build on top of it.
+* Use the `stellar_base` library if you are planning to build on top of it.
 
 ## Installation
 [Available in Hex][hex], add `stellar_base` to your list of dependencies in `mix.exs`:
@@ -23,7 +23,7 @@ end
 ```
 
 ## Development
-* Install an `elixir >= 1.10` version.
+* Install any Elixir version above 1.10.
 * Compile dependencies: `mix deps.get`.
 * Run tests: `mix test`.
 
@@ -49,3 +49,4 @@ Made with 💙 by [kommitters Open Source](https://kommit.co)
 [base]: https://github.com/kommitters/stellar_base
 [sdk]: https://github.com/kommitters/stellar_sdk
 [hex]: https://hex.pm/packages/stellar_base
+[stellar-core]: https://github.com/stellar/stellar-core

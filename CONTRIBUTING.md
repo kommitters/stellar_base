@@ -2,7 +2,7 @@
 
 First off, thanks for taking the time to contribute, it is encouraging! 🎉🙌
 
-We want to make it as easy as possible to contribute changes that help the [Stellar Base](https://github.com/kommitters/stellar_base) library and the [Stellar network](https://www.stellar.org/) to grow and thrive. There are a few guidelines that we ask contributors to follow so that we can merge your changes quickly.
+We want to make it as easy as possible to contribute changes that help the [Stellar Base][repo] library and the [Stellar network][stellar] to grow and thrive. There are a few guidelines that we ask contributors to follow so that we can merge your changes quickly.
 
 ## Getting started
 
@@ -12,9 +12,9 @@ We want to make it as easy as possible to contribute changes that help the [Stel
 * Fork the repository on GitHub.
 * Try to keep your local repository in a "rebased" state.
 * Set the project up.
-  * Install an `elixir >= 1.10` version.
-  * Compile the dependencies by running `mix deps.get`.
-  * Run the test suite `mix test`.
+  * Install any Elixir version above 1.10.
+  * Compile dependencies: `mix deps.get`.
+  * Run tests: `mix test`.
 
 ## Finding things to work on
 
@@ -44,21 +44,23 @@ Of course, feel free to create a new issue if you think something needs to be ad
   * Changes contributed via pull request should focus on a single issue at a time.
   * Rebase your local changes against the master branch. Resolve any conflicts that arise.
 
-At this point you're waiting on us. We like to at least comment on pull requests within three
+At this point, you're waiting on us. We like to at least comment on pull requests within three
 business days (typically, one business day). We may suggest some changes, improvements or
 alternatives.
 
 ## Additional resources
 
 * Explore the Stellar API
-* #get in touch: info@kommit.co | [@kommitters_oss](https://twitter.com/kommitters_oss) on twitter.
+* #get in touch: oss@kommit.co | [@kommitters_oss](https://twitter.com/kommitters_oss) on twitter.
 
 ## Acknowledgements
 
 This document is inspired by:
 * https://github.com/stellar/.github/edit/master/CONTRIBUTING.md
 
+[repo]: https://github.com/kommitters/stellar_base
 [coc]: https://github.com/kommitters/stellar_base/blob/master/CODE_OF_CONDUCT.md
 [commit-msg]: https://github.com/erlang/otp/wiki/Writing-good-commit-messages
 [good-first-issue]: https://github.com/kommitters/stellar_base/labels/%F0%9F%91%8B%20%20Good%20first%20issue
 [help-wanted]: https://github.com/kommitters/stellar_base/labels/%3Asos%3A%20Help%20wanted
+[stellar]: https://www.stellar.org/

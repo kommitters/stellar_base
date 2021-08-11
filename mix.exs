@@ -8,7 +8,7 @@ defmodule Stellar.MixProject do
     [
       app: :stellar_base,
       version: @version,
-      elixir: "~> 1.11",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Elixir Stellar Base",
@@ -39,7 +39,9 @@ defmodule Stellar.MixProject do
   end
 
   defp description do
-    "Elixir library to read, write, hash, and sign XDR primitive constructs used in the Stellar network."
+    """
+    Elixir library to read, write, hash, and sign XDR primitive constructs used in the Stellar network.
+    """
   end
 
   defp package do
@@ -48,8 +50,9 @@ defmodule Stellar.MixProject do
       files: ["lib", "config", "mix.exs", "README*", "LICENSE"],
       licenses: ["MIT"],
       links: %{
-        Changelog: "#{@github_url}/blob/master/CHANGELOG.md",
-        GitHub: @github_url
+        "Changelog" => "#{@github_url}/blob/master/CHANGELOG.md",
+        "GitHub" => @github_url,
+        "Sponsor" => "https://github.com/sponsors/kommitters"
       }
     ]
   end
