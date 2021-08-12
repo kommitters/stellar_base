@@ -37,6 +37,5 @@ jobs:
         run: mix test
       - name: Run Credo
         run: mix credo --strict
-      # Disabled until the repo is public
-      #- name: Run Excoveralls
-      #  run: mix coveralls.github
+      - name: Run Excoveralls
+        run: mix coveralls.github

@@ -1,4 +1,9 @@
 # Elixir Stellar Base
+![Build Badge](https://img.shields.io/github/workflow/status/kommitters/stellar_base/StellarBase%20CI/main?style=for-the-badge)
+[![Coverage Status](https://img.shields.io/coveralls/github/kommitters/stellar_base?style=for-the-badge)](https://coveralls.io/github/kommitters/stellar_base)
+[![Version Badge](https://img.shields.io/hexpm/v/stellar_base?style=for-the-badge)](https://hexdocs.pm/stellar_base)
+![Downloads Badge](https://img.shields.io/hexpm/dt/stellar_base?style=for-the-badge)
+[![License badge](https://img.shields.io/hexpm/l/stellar_base.svg?style=for-the-badge)](https://github.com/kommitters/stellar_base/blob/main/LICENSE.md)
 
 ### **⚠️ Warning! This library is under active development**. Do not use it in production environments.
 
@@ -42,10 +47,10 @@ This library is licensed under an MIT license. See [LICENSE][license] for detail
 ## Acknowledgements
 Made with 💙 by [kommitters Open Source](https://kommit.co)
 
-[license]: https://github.com/kommitters/stellar_base/blob/master/LICENSE.md
-[coc]: https://github.com/kommitters/stellar_base/blob/master/CODE_OF_CONDUCT.md
-[changelog]: https://github.com/kommitters/stellar_base/blob/master/CHANGELOG.md
-[contributing]: https://github.com/kommitters/stellar_base/blob/master/CONTRIBUTING.md
+[license]: https://github.com/kommitters/stellar_base/blob/main/LICENSE.md
+[coc]: https://github.com/kommitters/stellar_base/blob/main/CODE_OF_CONDUCT.md
+[changelog]: https://github.com/kommitters/stellar_base/blob/main/CHANGELOG.md
+[contributing]: https://github.com/kommitters/stellar_base/blob/main/CONTRIBUTING.md
 [base]: https://github.com/kommitters/stellar_base
 [sdk]: https://github.com/kommitters/stellar_sdk
 [hex]: https://hex.pm/packages/stellar_base
