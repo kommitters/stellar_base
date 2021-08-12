@@ -15,15 +15,21 @@ defmodule Stellar.MixProject do
       description: description(),
       source_url: @github_url,
       package: package(),
-      docs: docs()
+      docs: docs(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {Stellar.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
@@ -32,7 +38,10 @@ defmodule Stellar.MixProject do
     [
       {:elixir_xdr, "~> 0.1.5"},
       {:ed25519, "~> 1.3"},
-      {:crc, "~> 0.10.0"}
+      {:crc, "~> 0.10.0"},
+      {:excoveralls, "~> 0.14", only: :test, runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
     ]
   end
 
@@ -62,7 +71,16 @@ defmodule Stellar.MixProject do
       source_ref: "v#{@version}",
       source_url: @github_url,
       canonical: "http://hexdocs.pm/stellar_base",
-      extras: ["README.md", "CHANGELOG.md", "CONTRIBUTING.md"]
+      extras: ["README.md", "CHANGELOG.md", "CONTRIBUTING.md"],
+      groups_for_modules: groups_for_modules()
+    ]
+  end
+
+  defp groups_for_modules do
+    [
+      "XDR Types": ~r/^Stellar\.XDR\./,
+      Ed25519: ~r/^Stellar\.Ed25519\./,
+      KeyPair: ~r/^Stellar\.KeyPair\./
     ]
   end
 end
