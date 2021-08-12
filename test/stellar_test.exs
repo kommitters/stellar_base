@@ -1,2 +1,0 @@
-defmodule StellarTest do
-end
