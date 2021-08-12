@@ -10,20 +10,23 @@ defmodule Stellar.XDR.PublicKeyType do
 
   @type t :: %__MODULE__{identifier: atom()}
 
-  defstruct [:declarations, :identifier]
+  defstruct [:identifier]
 
   @spec new(type :: atom()) :: t()
-  def new(type \\ :PUBLIC_KEY_TYPE_ED25519),
-    do: %__MODULE__{identifier: type, declarations: @declarations}
+  def new(type \\ :PUBLIC_KEY_TYPE_ED25519), do: %__MODULE__{identifier: type}
 
   @impl true
   def encode_xdr(%__MODULE__{identifier: type}) do
-    XDR.Enum.encode_xdr(%XDR.Enum{declarations: @declarations, identifier: type})
+    @declarations
+    |> XDR.Enum.new(type)
+    |> XDR.Enum.encode_xdr()
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{identifier: type}) do
-    XDR.Enum.encode_xdr!(%XDR.Enum{declarations: @declarations, identifier: type})
+    @declarations
+    |> XDR.Enum.new(type)
+    |> XDR.Enum.encode_xdr!()
   end
 
   @impl true

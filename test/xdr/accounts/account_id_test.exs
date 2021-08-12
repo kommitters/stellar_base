@@ -12,7 +12,6 @@ defmodule Stellar.XDR.AccountIDTest do
               249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         },
         type: %PublicKeyType{
-          declarations: [PUBLIC_KEY_TYPE_ED25519: 0],
           identifier: :PUBLIC_KEY_TYPE_ED25519
         }
       }

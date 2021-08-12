@@ -6,21 +6,21 @@ defmodule Stellar.XDR.Hash do
 
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{hash: binary()}
+  @type t :: %__MODULE__{value: binary()}
 
-  defstruct [:hash]
+  defstruct [:value]
 
-  @spec new(hash :: binary()) :: t()
-  def new(hash), do: %__MODULE__{hash: hash}
+  @spec new(value :: binary()) :: t()
+  def new(value), do: %__MODULE__{value: value}
 
   @impl true
-  def encode_xdr(%__MODULE__{hash: hash}) do
-    Opaque32.encode_xdr(%Opaque32{opaque: hash})
+  def encode_xdr(%__MODULE__{value: value}) do
+    Opaque32.encode_xdr(%Opaque32{opaque: value})
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{hash: hash}) do
-    Opaque32.encode_xdr!(%Opaque32{opaque: hash})
+  def encode_xdr!(%__MODULE__{value: value}) do
+    Opaque32.encode_xdr!(%Opaque32{opaque: value})
   end
 
   @impl true
@@ -28,7 +28,7 @@ defmodule Stellar.XDR.Hash do
 
   def decode_xdr(bytes, _term) do
     case Opaque32.decode_xdr(bytes) do
-      {:ok, {%Opaque32{opaque: hash}, rest}} -> {:ok, {new(hash), rest}}
+      {:ok, {%Opaque32{opaque: value}, rest}} -> {:ok, {new(value), rest}}
       error -> error
     end
   end
@@ -37,7 +37,7 @@ defmodule Stellar.XDR.Hash do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    {%Opaque32{opaque: hash}, rest} = Opaque32.decode_xdr!(bytes)
-    {new(hash), rest}
+    {%Opaque32{opaque: value}, rest} = Opaque32.decode_xdr!(bytes)
+    {new(value), rest}
   end
 end

@@ -11,8 +11,6 @@ defmodule Stellar.XDR.MuxedAccount do
     KEY_TYPE_MUXED_ED25519: MuxedAccountMed25519
   ]
 
-  @union_spec XDR.Union.new(CryptoKeyType.new(nil), @arms)
-
   @type account :: UInt256.t() | MuxedAccountMed25519.t()
 
   @type t :: %__MODULE__{type: CryptoKeyType.t(), account: account()}
@@ -45,7 +43,7 @@ defmodule Stellar.XDR.MuxedAccount do
   end
 
   @impl true
-  def decode_xdr(bytes, spec \\ @union_spec)
+  def decode_xdr(bytes, spec \\ union_spec())
 
   def decode_xdr(bytes, spec) do
     case XDR.Union.decode_xdr(bytes, spec) do
@@ -55,7 +53,7 @@ defmodule Stellar.XDR.MuxedAccount do
   end
 
   @impl true
-  def decode_xdr!(bytes, spec \\ @union_spec)
+  def decode_xdr!(bytes, spec \\ union_spec())
 
   def decode_xdr!(bytes, spec) do
     case XDR.Union.decode_xdr!(bytes, spec) do
@@ -66,7 +64,8 @@ defmodule Stellar.XDR.MuxedAccount do
 
   @spec union_spec() :: XDR.Union.t()
   def union_spec do
-    enum_spec = CryptoKeyType.new(nil)
-    XDR.Union.new(enum_spec, @arms)
+    nil
+    |> CryptoKeyType.new()
+    |> XDR.Union.new(@arms)
   end
 end
