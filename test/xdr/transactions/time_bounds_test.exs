@@ -32,6 +32,10 @@ defmodule Stellar.XDR.TimeBoundsTest do
       {:ok, {^time_bounds, ""}} = TimeBounds.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = TimeBounds.decode_xdr(1234)
+    end
+
     test "decode_xdr!/2", %{time_bounds: time_bounds, binary: binary} do
       {^time_bounds, ^binary} = TimeBounds.decode_xdr!(binary <> binary)
     end

@@ -27,6 +27,10 @@ defmodule Stellar.XDR.TransactionExtTest do
       {:ok, {^transaction_ext, ""}} = TransactionExt.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = TransactionExt.decode_xdr(1234)
+    end
+
     test "decode_xdr!/2", %{transaction_ext: transaction_ext, binary: binary} do
       {^transaction_ext, ^binary} = TransactionExt.decode_xdr!(binary <> binary)
     end

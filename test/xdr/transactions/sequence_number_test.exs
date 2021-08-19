@@ -34,6 +34,10 @@ defmodule Stellar.XDR.SequenceNumberTest do
       {:ok, {^sequence_number, ""}} = SequenceNumber.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = SequenceNumber.decode_xdr(1234)
+    end
+
     test "decode_xdr!/2", %{sequence_number: sequence_number, binary: binary} do
       {^sequence_number, ^binary} = SequenceNumber.decode_xdr!(binary <> binary)
     end

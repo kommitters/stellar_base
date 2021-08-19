@@ -77,6 +77,10 @@ defmodule Stellar.XDR.MemoTest do
       {:ok, {^memo, ""}} = Memo.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = Memo.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{memo: memo, binary: binary} do
       {^memo, ^binary} = Memo.decode_xdr!(binary <> binary)
     end

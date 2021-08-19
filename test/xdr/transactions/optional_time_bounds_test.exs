@@ -32,6 +32,10 @@ defmodule Stellar.XDR.OptionalTimeBoundsTest do
       {:ok, {^optional_time_bounds, ""}} = OptionalTimeBounds.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = OptionalTimeBounds.decode_xdr(1234)
+    end
+
     test "decode_xdr/2 when time_bounds are not opted" do
       no_timebounds = <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>
 
@@ -41,6 +45,13 @@ defmodule Stellar.XDR.OptionalTimeBoundsTest do
 
     test "decode_xdr!/2", %{optional_time_bounds: optional_time_bounds, binary: binary} do
       {^optional_time_bounds, ^binary} = OptionalTimeBounds.decode_xdr!(binary <> binary)
+    end
+
+    test "decode_xdr!/2 when time_bounds are not opted" do
+      no_timebounds = <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>
+
+      {%Void{value: nil}, <<0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>} =
+        OptionalTimeBounds.decode_xdr!(no_timebounds)
     end
   end
 end
