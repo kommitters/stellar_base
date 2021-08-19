@@ -5,15 +5,15 @@
 ![Downloads Badge](https://img.shields.io/hexpm/dt/stellar_base?style=for-the-badge)
 [![License badge](https://img.shields.io/hexpm/l/stellar_base.svg?style=for-the-badge)](https://github.com/kommitters/stellar_base/blob/main/LICENSE.md)
 
-### **⚠️ Warning! This library is under active development**. Do not use it in production environments.
+### ⚠️ Warning! This library is under active development. DO NOT use it in production environments.
 
 `stellar_base` is an **Elixir library** that provides a complete set of functions to read, write, hash, and sign XDR primitive constructs used in [stellar-core][stellar-core].
 
 This library is aimed at developers building Elixir applications on top of the Stellar network. Transactions constructed by this library may be submitted to any Horizon instance for processing onto the ledger, using any Stellar SDK client. The recommended client for Elixir programmers is [stellar_sdk][sdk].
 
 ## stellar_base vs stellar_sdk
-* `stellar_sdk` is a client library for interfacing with **Horizon** server REST endpoints to retrieve ledger information and submit transactions built with `stellar_base`.
-* `stellar_base` enables the construction, signing, and encoding of Stellar transactions.
+* `stellar_sdk` is a high-level library that serves as server-side API for Horizon.
+* `stellar_base` is lower-level library for creating Stellar primitive constructs via XDR helpers and wrappers.
 * Use the `stellar_base` library if you are planning to build on top of it.
 
 ## Installation
