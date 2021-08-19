@@ -30,6 +30,10 @@ defmodule Stellar.XDR.VariableOpaque64Test do
       {:ok, {^variable_opaque64, ""}} = VariableOpaque64.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = VariableOpaque64.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{variable_opaque64: variable_opaque64, binary: binary} do
       {^variable_opaque64, ""} = VariableOpaque64.decode_xdr!(binary)
     end

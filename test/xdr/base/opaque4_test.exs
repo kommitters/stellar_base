@@ -28,6 +28,10 @@ defmodule Stellar.XDR.Opaque4Test do
       {:ok, {^opaque4, ""}} = Opaque4.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = Opaque4.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{opaque4: opaque4, binary: binary} do
       {^opaque4, ""} = Opaque4.decode_xdr!(binary)
     end

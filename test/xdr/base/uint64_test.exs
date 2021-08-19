@@ -27,6 +27,10 @@ defmodule Stellar.XDR.UInt64Test do
       {:ok, {^uint64, ^binary}} = UInt64.decode_xdr(binary <> binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = UInt64.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{uint64: uint64, binary: binary} do
       {^uint64, ""} = UInt64.decode_xdr!(binary)
     end
