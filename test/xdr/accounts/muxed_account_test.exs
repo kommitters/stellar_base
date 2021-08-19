@@ -27,6 +27,11 @@ defmodule Stellar.XDR.MuxedAccountTest do
       %MuxedAccount{account: ^ed25519_account} = MuxedAccount.new(type, ed25519_account)
     end
 
+    test "new/1 with an invalid account", %{ed25519_account: ed25519_account} do
+      type = CryptoKeyType.new(:KEY_TYPE_HASH_X)
+      {:error, :invalid_key_type} = MuxedAccount.new(type, ed25519_account)
+    end
+
     test "encode_xdr/1", %{muxed_account: muxed_account, encoded_binary: binary} do
       {:ok, ^binary} = MuxedAccount.encode_xdr(muxed_account)
     end
@@ -39,13 +44,20 @@ defmodule Stellar.XDR.MuxedAccountTest do
       {:ok, {^muxed_account, ""}} = MuxedAccount.decode_xdr(binary)
     end
 
-    test "decode_xdr!/2", %{muxed_account: muxed_account, encoded_binary: binary} do
-      {^muxed_account, ^binary} = MuxedAccount.decode_xdr!(binary <> binary)
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = MuxedAccount.decode_xdr(123)
     end
 
-    test "invalid ", %{ed25519_account: ed25519_account} do
-      type = CryptoKeyType.new(:KEY_TYPE_HASH_X)
-      {:error, :invalid_key_type} = MuxedAccount.new(type, ed25519_account)
+    test "decode_xdr!/2 with an invalid binary" do
+      assert_raise XDR.Error.Union,
+                   "The :identifier received by parameter must be a binary value, for example: <<0, 0, 0, 5>>",
+                   fn ->
+                     MuxedAccount.decode_xdr!(123)
+                   end
+    end
+
+    test "decode_xdr!/2", %{muxed_account: muxed_account, encoded_binary: binary} do
+      {^muxed_account, ^binary} = MuxedAccount.decode_xdr!(binary <> binary)
     end
   end
 

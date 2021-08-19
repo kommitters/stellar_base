@@ -41,6 +41,10 @@ defmodule Stellar.XDR.MuxedAccountMed25519Test do
       {:ok, {^muxed_account, ""}} = MuxedAccountMed25519.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = MuxedAccountMed25519.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{muxed_account: muxed_account, encoded_binary: binary} do
       {^muxed_account, ^binary} = MuxedAccountMed25519.decode_xdr!(binary <> binary)
     end
