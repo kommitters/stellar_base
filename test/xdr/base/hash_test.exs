@@ -20,6 +20,10 @@ defmodule Stellar.XDR.HashTest do
       {:ok, ^binary} = Hash.encode_xdr(hash)
     end
 
+    test "encode_xdr!/1 with an invalid hash length" do
+      {:error, :invalid_length} = Hash.encode_xdr(%Hash{value: <<0, 0, 4, 210, 33>>})
+    end
+
     test "encode_xdr!/1", %{hash: hash, binary: binary} do
       ^binary = Hash.encode_xdr!(hash)
     end
@@ -28,12 +32,12 @@ defmodule Stellar.XDR.HashTest do
       {:ok, {^hash, ""}} = Hash.decode_xdr(binary)
     end
 
-    test "decode_xdr!/2", %{hash: hash, binary: binary} do
-      {^hash, ""} = Hash.decode_xdr!(binary)
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = Hash.decode_xdr(123)
     end
 
-    test "invalid length" do
-      {:error, :invalid_length} = Hash.encode_xdr(%Hash{value: <<0, 0, 4, 210, 33>>})
+    test "decode_xdr!/2", %{hash: hash, binary: binary} do
+      {^hash, ""} = Hash.decode_xdr!(binary)
     end
   end
 end

@@ -34,6 +34,10 @@ defmodule Stellar.XDR.TimePointTest do
       {:ok, {^time_point, ""}} = TimePoint.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = TimePoint.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{time_point: time_point, binary: binary} do
       {^time_point, ^binary} = TimePoint.decode_xdr!(binary <> binary)
     end

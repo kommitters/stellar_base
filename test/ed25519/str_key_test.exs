@@ -38,6 +38,12 @@ defmodule Stellar.Ed25519.StrKeyTest do
   end
 
   describe "decode/2" do
+    test "nil data" do
+      assert_raise ArgumentError, "cannot decode nil data", fn ->
+        StrKey.decode!(nil, @pk_version_bytes)
+      end
+    end
+
     test "public key", %{public_key: public_key, public_key_binary: public_key_binary} do
       ^public_key_binary = StrKey.decode!(public_key, @pk_version_bytes)
     end
