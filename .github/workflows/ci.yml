@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - 'v*.*'
+      - 'v*.[0-9]'
   pull_request:
 
 jobs:
@@ -18,26 +18,56 @@ jobs:
     env:
       MIX_ENV: test
     steps:
-      - uses: actions/checkout@v2
-      - uses: erlef/setup-elixir@885971a72ed1f9240973bd92ab57af8c1aa68f24
+      - name: Checkout Github repo
+        uses: actions/checkout@v2
+
+      - name: Sets up an Erlang/OTP environment
+        uses: erlef/setup-elixir@885971a72ed1f9240973bd92ab57af8c1aa68f24
         with:
           otp-version: ${{ matrix.otp }}
           elixir-version: ${{ matrix.elixir }}
-      - uses: actions/cache@v2
+
+      - name: Set mix file hash
+        id: set_vars
+        run: |
+          mix_hash="${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}"
+          echo "::set-output name=mix_hash::$mix_hash"
+
+      - name: Cache dependecies
+        uses: actions/cache@v2
         with:
           path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          key: ${{ runner.os }}-mix-${{ steps.set_vars.outputs.mix_hash }}
           restore-keys: |
             ${{ runner.os }}-mix-
-      - name: Install Dependencies
+
+      - name: Cache PLT files
+        id: plt-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            priv/plts
+          key: plt-cache-${{ steps.set_vars.outputs.mix_hash }}
+          restore-keys: |
+            plt-cache-
+
+      - name: Install dependencies
         run: mix deps.get
-      - name: Check Formatting
+
+      - name: Check formatting
         run: mix format --check-formatted
-      - name: Run Tests
+
+      - name: Run tests
         run: mix test
-      - name: Run Credo
+
+      - name: Run credo
         run: mix credo --strict
-      - name: Run Excoveralls
+
+      - name: Run dialyzer
+        run: mix dialyzer --no-check --ignore-exit-status
+
+      - name: Run excoveralls
         run: mix coveralls.github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

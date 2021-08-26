@@ -4,7 +4,7 @@ defmodule Stellar.XDR.Void do
   """
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{value: none()}
+  @type t :: %__MODULE__{value: nil}
 
   defstruct [:value]
 

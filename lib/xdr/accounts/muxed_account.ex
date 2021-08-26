@@ -56,10 +56,8 @@ defmodule Stellar.XDR.MuxedAccount do
   def decode_xdr!(bytes, spec \\ union_spec())
 
   def decode_xdr!(bytes, spec) do
-    case XDR.Union.decode_xdr!(bytes, spec) do
-      {{type, account}, rest} -> {new(type, account), rest}
-      error -> error
-    end
+    {{type, account}, rest} = XDR.Union.decode_xdr!(bytes, spec)
+    {new(type, account), rest}
   end
 
   @spec union_spec() :: XDR.Union.t()

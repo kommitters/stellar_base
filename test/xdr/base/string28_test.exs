@@ -44,6 +44,10 @@ defmodule Stellar.XDR.String28Test do
       {:ok, {^string28, ""}} = String28.decode_xdr(binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = String28.decode_xdr(123)
+    end
+
     test "decode_xdr/2 an invalid binary" do
       assert_raise XDR.Error.VariableOpaque,
                    "The XDR has an invalid length, it must be less than byte-size of the rest",

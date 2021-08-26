@@ -20,7 +20,7 @@ defmodule Stellar.XDR.Memo do
 
   defstruct [:value, :type]
 
-  @spec new(value :: memo_value(), type :: MemoType.t() | nil) :: t()
+  @spec new(value :: memo_value(), type :: MemoType.t()) :: t()
   def new(value, %MemoType{} = type),
     do: %__MODULE__{value: value, type: type}
 

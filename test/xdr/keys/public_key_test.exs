@@ -46,6 +46,10 @@ defmodule Stellar.XDR.PublicKeyTest do
       {^xdr_type, ^binary} = PublicKey.decode_xdr!(binary <> binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = PublicKey.decode_xdr(123)
+    end
+
     test "invalid public key", %{key_type: key_type} do
       assert_raise XDR.Error.FixedOpaque,
                    "The length that is passed through parameters must be equal or less to the byte size of the XDR to complete",

@@ -12,7 +12,7 @@ defmodule Stellar.XDR.PublicKey do
 
   defstruct [:public_key, :type]
 
-  @spec new(public_key :: UInt256.t(), type :: PublicKeyType.t() | nil) :: t()
+  @spec new(public_key :: UInt256.t(), type :: PublicKeyType.t()) :: t()
   def new(%UInt256{} = public_key, %PublicKeyType{} = type),
     do: %__MODULE__{public_key: public_key, type: type}
 

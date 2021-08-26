@@ -33,6 +33,10 @@ defmodule Stellar.XDR.UInt256Test do
       {:ok, {^uint256, ^binary}} = UInt256.decode_xdr(binary <> binary)
     end
 
+    test "decode_xdr/2 with an invalid binary" do
+      {:error, :not_binary} = UInt256.decode_xdr(123)
+    end
+
     test "decode_xdr!/2", %{uint256: uint256, binary: binary} do
       {^uint256, ""} = UInt256.decode_xdr!(binary)
     end

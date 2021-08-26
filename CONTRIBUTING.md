@@ -51,7 +51,7 @@ alternatives.
 ## Additional resources
 
 * Explore the Stellar API
-* #get in touch: oss@kommit.co | [@kommitters_oss](https://twitter.com/kommitters_oss) on twitter.
+* #get in touch: [oss@kommit.co](mailto:oss@kommit.co) | [@kommitters_oss](https://twitter.com/kommitters_oss) on twitter.
 
 ## Acknowledgements
 
