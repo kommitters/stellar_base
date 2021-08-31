@@ -2,18 +2,20 @@ defmodule Stellar.XDR.OptionalTimeBounds do
   @moduledoc """
   Representation of Stellar `OptionalTimeBounds` type.
   """
-  alias Stellar.XDR.{TimeBounds, Void}
+  alias Stellar.XDR.TimeBounds
 
   @behaviour XDR.Declaration
 
   @optional_spec XDR.Optional.new(TimeBounds)
 
-  @type t :: %__MODULE__{time_bounds: TimeBounds.t()}
+  @type time_bounds :: TimeBounds.t() | nil
+
+  @type t :: %__MODULE__{time_bounds: time_bounds()}
 
   defstruct [:time_bounds]
 
-  @spec new(time_bounds :: TimeBounds.t()) :: t()
-  def new(%TimeBounds{} = time_bounds), do: %__MODULE__{time_bounds: time_bounds}
+  @spec new(time_bounds :: time_bounds()) :: t()
+  def new(time_bounds \\ nil), do: %__MODULE__{time_bounds: time_bounds}
 
   @impl true
   def encode_xdr(%__MODULE__{time_bounds: time_bounds}) do
@@ -38,7 +40,7 @@ defmodule Stellar.XDR.OptionalTimeBounds do
         {:ok, {new(time_bounds), rest}}
 
       {:ok, {nil, rest}} ->
-        {:ok, {Void.new(), rest}}
+        {:ok, {new(), rest}}
 
       error ->
         error
@@ -51,7 +53,7 @@ defmodule Stellar.XDR.OptionalTimeBounds do
   def decode_xdr!(bytes, optional_spec) do
     case XDR.Optional.decode_xdr!(bytes, optional_spec) do
       {%XDR.Optional{type: time_bounds}, rest} -> {new(time_bounds), rest}
-      {nil, rest} -> {Void.new(), rest}
+      {nil, rest} -> {new(), rest}
     end
   end
 end
