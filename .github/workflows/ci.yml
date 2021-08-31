@@ -67,7 +67,7 @@ jobs:
       - name: Run dialyzer
         run: mix dialyzer --no-check --ignore-exit-status
 
-      - name: Run excoveralls
-        run: mix coveralls.github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Run excoveralls
+      #   run: mix coveralls.github
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
