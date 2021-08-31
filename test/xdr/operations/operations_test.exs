@@ -46,23 +46,19 @@ defmodule Stellar.XDR.OperationsTest do
       operation = Operation.new(source_account, operation_body)
 
       %{
-        elements: [operation, operation],
-        operations: Operations.new([operation, operation]),
+        operations_list: [operation],
+        operations: Operations.new([operation]),
         binary:
-          <<0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53,
+          <<0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53,
             177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42,
             171, 210, 35, 0, 0, 0, 0, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222,
             53, 177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232,
-            42, 171, 210, 35, 0, 0, 0, 1, 42, 5, 242, 0, 0, 0, 0, 1, 0, 0, 0, 0, 18, 27, 249, 51,
-            160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78,
-            128, 109, 86, 239, 171, 232, 42, 171, 210, 35, 0, 0, 0, 0, 0, 0, 0, 0, 18, 27, 249,
-            51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242, 249, 40, 118,
-            78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35, 0, 0, 0, 1, 42, 5, 242, 0>>
+            42, 171, 210, 35, 0, 0, 0, 1, 42, 5, 242, 0>>
       }
     end
 
-    test "new/1", %{elements: elements} do
-      %Operations{operations: ^elements} = Operations.new(elements)
+    test "new/1", %{operations_list: operations_list} do
+      %Operations{operations: ^operations_list} = Operations.new(operations_list)
     end
 
     test "encode_xdr/1", %{operations: operations, binary: binary} do
