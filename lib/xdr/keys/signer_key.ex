@@ -54,7 +54,7 @@ defmodule Stellar.XDR.SignerKey do
 
   @spec union_spec() :: XDR.Union.t()
   defp union_spec do
-    :SIGNER_KEY_TYPE_ED25519
+    nil
     |> SignerKeyType.new()
     |> XDR.Union.new(@arms)
   end
