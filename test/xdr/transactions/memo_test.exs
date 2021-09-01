@@ -28,7 +28,7 @@ defmodule Stellar.XDR.MemoTest do
     test "encode_xdr/1 with an invalid type", %{memo_id: memo_id} do
       memo_type = MemoType.new(:MEMO_TESTER)
 
-      assert_raise XDR.Error.Enum,
+      assert_raise XDR.EnumError,
                    "The key which you try to encode doesn't belong to the current declarations",
                    fn ->
                      memo_id
@@ -47,7 +47,7 @@ defmodule Stellar.XDR.MemoTest do
     test "encode_xdr/1 a nil value" do
       memo_type = MemoType.new(:MEMO_HASH)
 
-      assert_raise XDR.Error.FixedOpaque,
+      assert_raise XDR.FixedOpaqueError,
                    "The value which you pass through parameters must be a binary value, for example: <<0, 0, 0, 5>>",
                    fn ->
                      nil
@@ -64,7 +64,7 @@ defmodule Stellar.XDR.MemoTest do
       memo_type = MemoType.new(:MEMO_ID)
       memo_id = String28.new("abcd1234")
 
-      assert_raise XDR.Error.HyperUInt,
+      assert_raise XDR.HyperUIntError,
                    "The value which you try to encode is not an integer",
                    fn ->
                      memo_id
