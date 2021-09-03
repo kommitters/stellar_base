@@ -8,8 +8,8 @@ defmodule Stellar.XDR.Void do
 
   defstruct [:value]
 
-  @spec new() :: t()
-  def new, do: %__MODULE__{}
+  @spec new(value :: nil) :: t()
+  def new(_val \\ nil), do: %__MODULE__{value: nil}
 
   @impl true
   def encode_xdr(%__MODULE__{}) do

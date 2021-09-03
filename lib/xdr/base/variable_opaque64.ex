@@ -9,6 +9,7 @@ defmodule Stellar.XDR.VariableOpaque64 do
   defstruct [:opaque]
 
   @max_size 64
+
   @opaque_spec XDR.VariableOpaque.new(nil, @max_size)
 
   @spec new(opaque :: binary()) :: t()
