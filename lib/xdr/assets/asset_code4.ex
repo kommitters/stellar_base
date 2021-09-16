@@ -29,7 +29,7 @@ defmodule Stellar.XDR.AssetCode4 do
     |> XDR.FixedOpaque.encode_xdr!()
   end
 
-  def encode_xdr!(_asset_code), do: raise(XDR.FixedOpaqueError, :invalid_length)
+  def encode_xdr!(_asset_code), do: raise(Stellar.XDR.AssetCode4Error, :invalid_length)
 
   @impl true
   def decode_xdr(bytes, term \\ nil)

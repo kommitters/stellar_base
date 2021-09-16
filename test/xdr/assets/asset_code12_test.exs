@@ -33,7 +33,7 @@ defmodule Stellar.XDR.AssetCode12Test do
     end
 
     test "encode_xdr!/1 with an invalid length" do
-      assert_raise XDR.FixedOpaqueError,
+      assert_raise Stellar.XDR.AssetCode12Error,
                    fn ->
                      "BTC2021000000000"
                      |> AssetCode12.new()

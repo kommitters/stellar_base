@@ -7,7 +7,7 @@ defmodule Stellar.XDR.AssetCode4Error do
 
   defexception [:message]
 
-  @spec exception(type :: atom()) :: t()
+  @spec exception(type :: atom()) :: no_return()
   def exception(:invalid_length),
     do: %__MODULE__{
       message:
@@ -23,7 +23,7 @@ defmodule Stellar.XDR.AssetCode12Error do
 
   defexception [:message]
 
-  @spec exception(type :: atom()) :: t()
+  @spec exception(type :: atom()) :: no_return()
   def exception(:invalid_length),
     do: %__MODULE__{
       message:
