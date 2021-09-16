@@ -8,7 +8,8 @@ defmodule Stellar.XDR.AssetCode4 do
 
   defstruct [:code, :length]
 
-  @length_range 1..4
+  @max_length 4
+  @length_range 1..@max_length
 
   @spec new(code :: String.t()) :: t()
   def new(code), do: %__MODULE__{code: code, length: byte_size(code)}
@@ -52,27 +53,20 @@ defmodule Stellar.XDR.AssetCode4 do
   end
 
   @spec opaque_spec(bytes :: binary()) :: XDR.FixedOpaque.t()
-  defp opaque_spec(bytes) do
-    opaque_length = length_from_binary(bytes, 4, 1)
-    XDR.FixedOpaque.new(nil, opaque_length)
-  end
+  defp opaque_spec(bytes), do: XDR.FixedOpaque.new(nil, length_from_binary(bytes, 1))
 
-  @spec length_from_binary(
-          bytes :: binary(),
-          binary_size :: non_neg_integer(),
-          acc :: non_neg_integer()
-        ) :: non_neg_integer()
-  defp length_from_binary(bytes, binary_size, acc)
-       when is_binary(bytes) and acc in @length_range do
-    <<_hd::binary-size(acc), rest::binary>> = bytes
+  @spec length_from_binary(bytes :: binary(), acc :: non_neg_integer()) :: non_neg_integer()
+  defp length_from_binary(<<opaque::binary-size(@max_length), _rest::binary>>, acc)
+       when acc in @length_range do
+    <<_hd::binary-size(acc), rest::binary>> = opaque
 
     residual_zero_bytes =
-      (binary_size - acc)
+      (@max_length - acc)
       |> (&List.duplicate(0, &1)).()
       |> to_string()
 
-    if residual_zero_bytes == rest, do: acc, else: length_from_binary(bytes, binary_size, acc + 1)
+    if residual_zero_bytes == rest, do: acc, else: length_from_binary(opaque, acc + 1)
   end
 
-  defp length_from_binary(_bytes, _acc, _binary_size), do: 4
+  defp length_from_binary(_bytes, _acc), do: @max_length
 end
