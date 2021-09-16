@@ -15,15 +15,15 @@ defmodule Stellar.XDR.AlphaNum12Test do
         |> (&PublicKey.new(pk_key, &1)).()
         |> AccountID.new()
 
-      asset_code = AssetCode12.new("BTCN2021")
+      asset_code = AssetCode12.new("BTCNEW000000")
 
       %{
         asset_code: asset_code,
         issuer: issuer,
         alpha_num12: AlphaNum12.new(asset_code, issuer),
         binary:
-          <<0, 0, 0, 8, 66, 84, 67, 78, 50, 48, 50, 49, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56,
-            85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155,
+          <<66, 84, 67, 78, 69, 87, 48, 48, 48, 48, 48, 48, 0, 0, 0, 0, 155, 142, 186, 248, 150,
+            56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155,
             117, 165, 56, 34, 114, 247, 89, 216>>
       }
     end

@@ -63,7 +63,8 @@ defmodule Stellar.XDR.AssetCode12 do
           binary_size :: non_neg_integer(),
           acc :: non_neg_integer()
         ) :: non_neg_integer()
-  defp length_from_binary(bytes, binary_size, acc) when is_binary(bytes) and acc in @length_range do
+  defp length_from_binary(bytes, binary_size, acc)
+       when is_binary(bytes) and acc in @length_range do
     <<_hd::binary-size(acc), rest::binary>> = bytes
 
     residual_zero_bytes =

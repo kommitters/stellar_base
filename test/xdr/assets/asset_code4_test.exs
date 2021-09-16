@@ -8,7 +8,7 @@ defmodule Stellar.XDR.AssetCode4Test do
       %{
         code: "BTCN",
         asset_code: AssetCode4.new("BTCN"),
-        binary: <<0, 0, 0, 4, 66, 84, 67, 78>>
+        binary: <<66, 84, 67, 78>>
       }
     end
 
@@ -32,6 +32,15 @@ defmodule Stellar.XDR.AssetCode4Test do
       ^binary = AssetCode4.encode_xdr!(asset_code)
     end
 
+    test "encode_xdr!/1 with an invalid length" do
+      assert_raise XDR.FixedOpaqueError,
+                   fn ->
+                     "BTC2021"
+                     |> AssetCode4.new()
+                     |> AssetCode4.encode_xdr!()
+                   end
+    end
+
     test "decode_xdr/2", %{asset_code: asset_code, binary: binary} do
       {:ok, {^asset_code, ""}} = AssetCode4.decode_xdr(binary)
     end
@@ -42,13 +51,6 @@ defmodule Stellar.XDR.AssetCode4Test do
 
     test "decode_xdr!/2", %{asset_code: asset_code, binary: binary} do
       {^asset_code, ""} = AssetCode4.decode_xdr!(binary)
-    end
-
-    test "decode_xdr!/2 with an invalid length" do
-      assert_raise XDR.VariableOpaqueError,
-                   fn ->
-                     AssetCode4.decode_xdr!(<<0, 0, 1, 4, 66, 84, 67, 78>>)
-                   end
     end
   end
 end
