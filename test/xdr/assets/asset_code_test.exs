@@ -12,7 +12,7 @@ defmodule Stellar.XDR.AssetCodeTest do
         asset: asset,
         asset_type: asset_type,
         asset_code: AssetCode.new(asset, asset_type),
-        binary: <<0, 0, 0, 1, 0, 0, 0, 4, 66, 84, 67, 78>>
+        binary: <<0, 0, 0, 1, 66, 84, 67, 78>>
       }
     end
 

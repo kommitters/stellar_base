@@ -20,7 +20,7 @@ defmodule Stellar.XDR.AssetsTest do
     setup do
       issuer = create_issuer("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
       asset1 = create_asset(:alpha_num4, code: "BTCN", issuer: issuer)
-      asset2 = create_asset(:alpha_num12, code: "BTCN2021", issuer: issuer)
+      asset2 = create_asset(:alpha_num12, code: "BTCNEW000000", issuer: issuer)
       assets_list = [asset1, asset2]
 
       %{
@@ -28,12 +28,11 @@ defmodule Stellar.XDR.AssetsTest do
         assets_list: assets_list,
         assets: Assets.new(assets_list),
         binary:
-          <<0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 4, 66, 84, 67, 78, 0, 0, 0, 0, 155, 142, 186, 248,
-            150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214,
-            155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 2, 0, 0, 0, 8, 66, 84, 67, 78, 50,
-            48, 50, 49, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
-            32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
-            216>>
+          <<0, 0, 0, 2, 0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85,
+            29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117,
+            165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 2, 66, 84, 67, 78, 69, 87, 48, 48, 48, 48,
+            48, 48, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32,
+            113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216>>
       }
     end
 
