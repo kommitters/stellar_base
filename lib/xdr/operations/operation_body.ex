@@ -3,16 +3,23 @@ defmodule Stellar.XDR.OperationBody do
   Representation of Stellar `OperationBody` type.
   """
   alias Stellar.XDR.OperationType
-  alias Stellar.XDR.Operations.CreateAccount
+
+  alias Stellar.XDR.Operations.{
+    CreateAccount,
+    ManageSellOffer,
+    Payment,
+    PathPaymentStrictReceive,
+    ManageSellOffer
+  }
 
   @behaviour XDR.Declaration
 
   # XDR types for Operations will be implemented in #49.
   @arms [
-    CREATE_ACCOUNT: CreateAccount
-    # PAYMENT: Payment
-    # PATH_PAYMENT_STRICT_RECEIVE: PathPaymentStrictReceive,
-    # MANAGE_SELL_OFFER: ManageSellOffer,
+    CREATE_ACCOUNT: CreateAccount,
+    PAYMENT: Payment,
+    PATH_PAYMENT_STRICT_RECEIVE: PathPaymentStrictReceive,
+    MANAGE_SELL_OFFER: ManageSellOffer
     # CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
     # SET_OPTIONS: SetOptions,
     # CHANGE_TRUST: ChangeTrust,

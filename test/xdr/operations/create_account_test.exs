@@ -4,7 +4,7 @@ defmodule Stellar.XDR.Operations.CreateAccountTest do
   alias Stellar.XDR.{AccountID, Int64, PublicKey, PublicKeyType, UInt256}
   alias Stellar.XDR.Operations.CreateAccount
 
-  describe "CreateAccount" do
+  describe "CreateAccount Operation" do
     setup do
       pk_key =
         UInt256.new(
