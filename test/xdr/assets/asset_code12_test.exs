@@ -41,8 +41,14 @@ defmodule Stellar.XDR.AssetCode12Test do
                    end
     end
 
-    test "decode_xdr/2", %{asset_code: asset_code, binary: binary} do
-      {:ok, {^asset_code, ""}} = AssetCode12.decode_xdr(binary)
+    test "decode_xdr/2 with a 12-bytes code" do
+      {:ok, {%AssetCode12{code: "BTCNEW2000"}, ""}} =
+        AssetCode12.decode_xdr(<<66, 84, 67, 78, 69, 87, 50, 48, 48, 48, 0, 0>>)
+    end
+
+    test "decode_xdr/2 with a 8-bytes code" do
+      {:ok, {%AssetCode12{code: "BTCNE"}, ""}} =
+        AssetCode12.decode_xdr(<<66, 84, 67, 78, 69, 0, 0, 0>>)
     end
 
     test "decode_xdr/2 with an invalid binary" do
