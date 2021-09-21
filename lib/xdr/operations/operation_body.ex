@@ -12,7 +12,8 @@ defmodule Stellar.XDR.OperationBody do
     PathPaymentStrictSend,
     ManageSellOffer,
     ManageBuyOffer,
-    CreatePassiveSellOffer
+    CreatePassiveSellOffer,
+    SetOptions
   }
 
   @behaviour XDR.Declaration
@@ -24,7 +25,7 @@ defmodule Stellar.XDR.OperationBody do
     PATH_PAYMENT_STRICT_RECEIVE: PathPaymentStrictReceive,
     MANAGE_SELL_OFFER: ManageSellOffer,
     CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
-    # SET_OPTIONS: SetOptions,
+    SET_OPTIONS: SetOptions,
     # CHANGE_TRUST: ChangeTrust,
     # ALLOW_TRUST: AllowTrust,
     # ACCOUNT_MERGE: AccountMerge,
