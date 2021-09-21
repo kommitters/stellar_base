@@ -2,14 +2,15 @@ defmodule Stellar.XDR.OptionalSignerTest do
   use ExUnit.Case
 
   alias Stellar.XDR.{Signer, OptionalSigner, SignerKey, SignerKeyType, UInt32, UInt256}
+  alias Stellar.Ed25519.PublicKey
 
   describe "OptionalSigner" do
     setup do
       signer_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519)
 
       signer_key =
-        "SBLCPVN5E3DLTPF7BAKBOFWNE4JHAOAW5NZG36WNJMEDD7VOIYZMIHTU"
-        |> Stellar.Ed25519.SecretSeed.decode!()
+        "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
+        |> PublicKey.decode!()
         |> UInt256.new()
         |> SignerKey.new(signer_type)
 
@@ -21,9 +22,8 @@ defmodule Stellar.XDR.OptionalSignerTest do
         optional_signer: OptionalSigner.new(signer),
         empty_signer: OptionalSigner.new(nil),
         binary:
-          <<0, 0, 0, 1, 0, 0, 0, 0, 86, 39, 213, 189, 38, 198, 185, 188, 191, 8, 20, 23, 22, 205,
-            39, 18, 112, 56, 22, 235, 114, 109, 250, 205, 75, 8, 49, 254, 174, 70, 50, 196, 0, 0,
-            0, 1>>
+          <<0, 0, 0, 1, 0, 0, 0, 0, 97, 85, 228, 156, 184, 154, 50, 219, 77, 220, 159, 67, 114, 72, 240, 253,
+            129, 13, 47, 71, 58, 206, 164, 246, 161, 143, 9, 2, 127, 137, 20, 131, 0, 0, 0, 1>>
       }
     end
 
