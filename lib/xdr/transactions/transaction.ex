@@ -3,45 +3,154 @@ defmodule Stellar.XDR.Transaction do
   Representation of Stellar `Transaction` type.
   """
 
-  # [WIP] Operations types will be implemented in:
-  # https://github.com/kommitters/stellar_sdk/issues/12
-  # alias Stellar.XDR.{
-  #   UInt32,
-  #   MuxedAccount,
-  #   SequenceNumber,
-  #   OptionalTimeBounds,
-  #   Memo,
-  #   Operations,
-  #   TransactionExt
-  # }
+  alias Stellar.XDR.{
+    UInt32,
+    MuxedAccount,
+    SequenceNumber,
+    OptionalTimeBounds,
+    Memo,
+    Operations,
+    TransactionExt
+  }
 
-  # @behaviour XDR.Declaration
+  @behaviour XDR.Declaration
 
-  # @struct_spec XDR.Struct.new(
-  #                source_account: MuxedAccount,
-  #                fee: UInt32,
-  #                seq_num: SequenceNumber,
-  #                time_bounds: OptionalTimeBounds,
-  #                memo: Memo,
-  #                # operations: Operations,
-  #                ext: TransactionExt
-  #              )
+  @struct_spec XDR.Struct.new(
+                 source_account: MuxedAccount,
+                 fee: UInt32,
+                 seq_num: SequenceNumber,
+                 time_bounds: OptionalTimeBounds,
+                 memo: Memo,
+                 operations: Operations,
+                 ext: TransactionExt
+               )
 
-  # defstruct [:source_account, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
+  @type t :: %__MODULE__{
+          source_account: MuxedAccount.t(),
+          fee: UInt32.t(),
+          seq_num: SequenceNumber.t(),
+          time_bounds: OptionalTimeBounds.t(),
+          memo: Memo.t(),
+          operations: Operations.t(),
+          ext: TransactionExt.t()
+        }
 
-  # @impl true
-  # def encode_xdr(%__MODULE__{}) do
-  # end
+  defstruct [:source_account, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
 
-  # @impl true
-  # def encode_xdr!(%__MODULE__{}) do
-  # end
+  @spec new(
+          source_account :: MuxedAccount.t(),
+          fee :: UInt32.t(),
+          seq_num :: SequenceNumber.t(),
+          time_bounds :: OptionalTimeBounds.t(),
+          memo :: Memo.t(),
+          operations :: Operations.t(),
+          ext :: TransactionExt.t()
+        ) :: t()
+  def new(
+        %MuxedAccount{} = source_account,
+        %UInt32{} = fee,
+        %SequenceNumber{} = seq_num,
+        %OptionalTimeBounds{} = time_bounds,
+        %Memo{} = memo,
+        %Operations{} = operations,
+        %TransactionExt{} = ext
+      ),
+      do: %__MODULE__{
+        source_account: source_account,
+        fee: fee,
+        seq_num: seq_num,
+        time_bounds: time_bounds,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }
 
-  # @impl true
-  # def decode_xdr(_bytes, _spec \\ @struct_spec) do
-  # end
+  @impl true
+  def encode_xdr(%__MODULE__{
+        source_account: source_account,
+        fee: fee,
+        seq_num: seq_num,
+        time_bounds: time_bounds,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }) do
+    [
+      source_account: source_account,
+      fee: fee,
+      seq_num: seq_num,
+      time_bounds: time_bounds,
+      memo: memo,
+      operations: operations,
+      ext: ext
+    ]
+    |> XDR.Struct.new()
+    |> XDR.Struct.encode_xdr()
+  end
 
-  # @impl true
-  # def decode_xdr!(_bytes, _spec \\ @struct_spec) do
-  # end
+  @impl true
+  def encode_xdr!(%__MODULE__{
+        source_account: source_account,
+        fee: fee,
+        seq_num: seq_num,
+        time_bounds: time_bounds,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }) do
+    [
+      source_account: source_account,
+      fee: fee,
+      seq_num: seq_num,
+      time_bounds: time_bounds,
+      memo: memo,
+      operations: operations,
+      ext: ext
+    ]
+    |> XDR.Struct.new()
+    |> XDR.Struct.encode_xdr!()
+  end
+
+  @impl true
+  def decode_xdr(bytes, struct \\ @struct_spec)
+
+  def decode_xdr(bytes, struct) do
+    case XDR.Struct.decode_xdr(bytes, struct) do
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            source_account: source_account,
+            fee: fee,
+            seq_num: seq_num,
+            time_bounds: time_bounds,
+            memo: memo,
+            operations: operations,
+            ext: ext
+          ]
+        }, rest}} ->
+        {:ok, {new(source_account, fee, seq_num, time_bounds, memo, operations, ext), rest}}
+
+      error ->
+        error
+    end
+  end
+
+  @impl true
+  def decode_xdr!(bytes, struct \\ @struct_spec)
+
+  def decode_xdr!(bytes, struct) do
+    {%XDR.Struct{
+       components: [
+         source_account: source_account,
+         fee: fee,
+         seq_num: seq_num,
+         time_bounds: time_bounds,
+         memo: memo,
+         operations: operations,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(source_account, fee, seq_num, time_bounds, memo, operations, ext), rest}
+  end
 end
