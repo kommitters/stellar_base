@@ -53,9 +53,9 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
 
   @impl true
   def encode_xdr(%__MODULE__{
+        destination: destination,
         send_asset: send_asset,
         send_max: send_max,
-        destination: destination,
         dest_asset: dest_asset,
         dest_amount: dest_amount,
         path: path
@@ -74,9 +74,9 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
 
   @impl true
   def encode_xdr!(%__MODULE__{
+        destination: destination,
         send_asset: send_asset,
         send_max: send_max,
-        destination: destination,
         dest_asset: dest_asset,
         dest_amount: dest_amount,
         path: path
