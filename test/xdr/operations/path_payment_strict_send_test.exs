@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveTest do
+defmodule Stellar.XDR.Operations.PathPaymentStrictSendTest do
   use ExUnit.Case
 
   alias Stellar.XDR.{
@@ -19,9 +19,9 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveTest do
     Void
   }
 
-  alias Stellar.XDR.Operations.PathPaymentStrictReceive
+  alias Stellar.XDR.Operations.PathPaymentStrictSend
 
-  describe "PathPaymentStrictReceive Operation" do
+  describe "PathPaymentStrictSend Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
@@ -46,7 +46,7 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveTest do
         |> AlphaNum4.new(issuer)
         |> Asset.new(AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4))
 
-      send_max = Int64.new(10_000_000)
+      send_amount = Int64.new(10_000_000)
 
       dest_asset =
         "BTCNEW2000"
@@ -54,7 +54,7 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveTest do
         |> AlphaNum12.new(issuer)
         |> Asset.new(AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM12))
 
-      dest_amount = Int64.new(9_000_000)
+      dest_min = Int64.new(9_000_000)
 
       path =
         Void.new()
@@ -62,21 +62,21 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveTest do
         |> (&Assets.new([&1])).()
 
       payment_strict =
-        PathPaymentStrictReceive.new(
+        PathPaymentStrictSend.new(
           send_asset,
-          send_max,
+          send_amount,
           destination,
           dest_asset,
-          dest_amount,
+          dest_min,
           path
         )
 
       %{
         send_asset: send_asset,
-        send_max: send_max,
+        send_amount: send_amount,
         destination: destination,
         dest_asset: dest_asset,
-        dest_amount: dest_amount,
+        dest_min: dest_min,
         path: path,
         payment_strict: payment_strict,
         binary:
@@ -93,41 +93,41 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveTest do
 
     test "new/1", %{
       send_asset: send_asset,
-      send_max: send_max,
+      send_amount: send_amount,
       destination: destination,
       dest_asset: dest_asset,
-      dest_amount: dest_amount,
+      dest_min: dest_min,
       path: path
     } do
-      %PathPaymentStrictReceive{send_asset: ^send_asset, destination: ^destination, path: ^path} =
-        PathPaymentStrictReceive.new(
+      %PathPaymentStrictSend{send_asset: ^send_asset, destination: ^destination, path: ^path} =
+        PathPaymentStrictSend.new(
           send_asset,
-          send_max,
+          send_amount,
           destination,
           dest_asset,
-          dest_amount,
+          dest_min,
           path
         )
     end
 
     test "encode_xdr/1", %{payment_strict: payment_strict, binary: binary} do
-      {:ok, ^binary} = PathPaymentStrictReceive.encode_xdr(payment_strict)
+      {:ok, ^binary} = PathPaymentStrictSend.encode_xdr(payment_strict)
     end
 
     test "encode_xdr!/1", %{payment_strict: payment_strict, binary: binary} do
-      ^binary = PathPaymentStrictReceive.encode_xdr!(payment_strict)
+      ^binary = PathPaymentStrictSend.encode_xdr!(payment_strict)
     end
 
     test "decode_xdr/2", %{payment_strict: payment_strict, binary: binary} do
-      {:ok, {^payment_strict, ""}} = PathPaymentStrictReceive.decode_xdr(binary)
+      {:ok, {^payment_strict, ""}} = PathPaymentStrictSend.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = PathPaymentStrictReceive.decode_xdr(123)
+      {:error, :not_binary} = PathPaymentStrictSend.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{payment_strict: payment_strict, binary: binary} do
-      {^payment_strict, ^binary} = PathPaymentStrictReceive.decode_xdr!(binary <> binary)
+      {^payment_strict, ^binary} = PathPaymentStrictSend.decode_xdr!(binary <> binary)
     end
   end
 end

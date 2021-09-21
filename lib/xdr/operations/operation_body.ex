@@ -9,7 +9,10 @@ defmodule Stellar.XDR.OperationBody do
     ManageSellOffer,
     Payment,
     PathPaymentStrictReceive,
-    ManageSellOffer
+    PathPaymentStrictSend,
+    ManageSellOffer,
+    ManageBuyOffer,
+    CreatePassiveSellOffer
   }
 
   @behaviour XDR.Declaration
@@ -19,8 +22,8 @@ defmodule Stellar.XDR.OperationBody do
     CREATE_ACCOUNT: CreateAccount,
     PAYMENT: Payment,
     PATH_PAYMENT_STRICT_RECEIVE: PathPaymentStrictReceive,
-    MANAGE_SELL_OFFER: ManageSellOffer
-    # CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
+    MANAGE_SELL_OFFER: ManageSellOffer,
+    CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
     # SET_OPTIONS: SetOptions,
     # CHANGE_TRUST: ChangeTrust,
     # ALLOW_TRUST: AllowTrust,
@@ -28,8 +31,8 @@ defmodule Stellar.XDR.OperationBody do
     # INFLATION: Inflation,
     # MANAGE_DATA:  ManageData,
     # BUMP_SEQUENCE:  BumpSequence,
-    # MANAGE_BUY_OFFER:  ManageBuyOffer,
-    # PATH_PAYMENT_STRICT_SEND:  PathPaymentStrictSend,
+    MANAGE_BUY_OFFER: ManageBuyOffer,
+    PATH_PAYMENT_STRICT_SEND: PathPaymentStrictSend
     # CREATE_CLAIMABLE_BALANCE:  CreateClaimableBalance,
     # CLAIM_CLAIMABLE_BALANCE:  ClaimClaimableBalance,
     # BEGIN_SPONSORING_FUTURE_RESERVES:  BeginSponsoringFutureReserves,

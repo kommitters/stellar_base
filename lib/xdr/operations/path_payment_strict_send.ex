@@ -1,6 +1,6 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
+defmodule Stellar.XDR.Operations.PathPaymentStrictSend do
   @moduledoc """
-  Representation of Stellar `PathPaymentStrictReceive` type.
+  Representation of Stellar `PathPaymentStrictSend` type.
   """
   alias Stellar.XDR.{Asset, Assets, Int64, MuxedAccount}
 
@@ -8,64 +8,64 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
 
   @struct_spec XDR.Struct.new(
                  send_asset: Asset,
-                 send_max: Int64,
+                 send_amount: Int64,
                  destination: MuxedAccount,
                  dest_asset: Asset,
-                 dest_amount: Int64,
+                 dest_min: Int64,
                  path: Assets
                )
 
   @type t :: %__MODULE__{
           send_asset: Asset.t(),
-          send_max: Int64.t(),
+          send_amount: Int64.t(),
           destination: MuxedAccount.t(),
           dest_asset: Asset.t(),
-          dest_amount: Int64.t(),
+          dest_min: Int64.t(),
           path: Assets.t()
         }
 
-  defstruct [:send_asset, :send_max, :destination, :dest_asset, :dest_amount, :path]
+  defstruct [:send_asset, :send_amount, :destination, :dest_asset, :dest_min, :path]
 
   @spec new(
           send_asset :: Asset.t(),
-          send_max :: Int64.t(),
+          send_amount :: Int64.t(),
           destination :: MuxedAccount.t(),
           dest_asset :: Asset.t(),
-          dest_amount :: Int64.t(),
+          dest_min :: Int64.t(),
           path :: Assets.t()
         ) :: t()
   def new(
         %Asset{} = send_asset,
-        %Int64{} = send_max,
+        %Int64{} = send_amount,
         %MuxedAccount{} = destination,
         %Asset{} = dest_asset,
-        %Int64{} = dest_amount,
+        %Int64{} = dest_min,
         %Assets{} = path
       ),
       do: %__MODULE__{
         send_asset: send_asset,
-        send_max: send_max,
+        send_amount: send_amount,
         destination: destination,
         dest_asset: dest_asset,
-        dest_amount: dest_amount,
+        dest_min: dest_min,
         path: path
       }
 
   @impl true
   def encode_xdr(%__MODULE__{
         send_asset: send_asset,
-        send_max: send_max,
+        send_amount: send_amount,
         destination: destination,
         dest_asset: dest_asset,
-        dest_amount: dest_amount,
+        dest_min: dest_min,
         path: path
       }) do
     [
       send_asset: send_asset,
-      send_max: send_max,
+      send_amount: send_amount,
       destination: destination,
       dest_asset: dest_asset,
-      dest_amount: dest_amount,
+      dest_min: dest_min,
       path: path
     ]
     |> XDR.Struct.new()
@@ -75,18 +75,18 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
   @impl true
   def encode_xdr!(%__MODULE__{
         send_asset: send_asset,
-        send_max: send_max,
+        send_amount: send_amount,
         destination: destination,
         dest_asset: dest_asset,
-        dest_amount: dest_amount,
+        dest_min: dest_min,
         path: path
       }) do
     [
       send_asset: send_asset,
-      send_max: send_max,
+      send_amount: send_amount,
       destination: destination,
       dest_asset: dest_asset,
-      dest_amount: dest_amount,
+      dest_min: dest_min,
       path: path
     ]
     |> XDR.Struct.new()
@@ -102,14 +102,14 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
        {%XDR.Struct{
           components: [
             send_asset: send_asset,
-            send_max: send_max,
+            send_amount: send_amount,
             destination: destination,
             dest_asset: dest_asset,
-            dest_amount: dest_amount,
+            dest_min: dest_min,
             path: path
           ]
         }, rest}} ->
-        {:ok, {new(send_asset, send_max, destination, dest_asset, dest_amount, path), rest}}
+        {:ok, {new(send_asset, send_amount, destination, dest_asset, dest_min, path), rest}}
 
       error ->
         error
@@ -123,14 +123,14 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceive do
     {%XDR.Struct{
        components: [
          send_asset: send_asset,
-         send_max: send_max,
+         send_amount: send_amount,
          destination: destination,
          dest_asset: dest_asset,
-         dest_amount: dest_amount,
+         dest_min: dest_min,
          path: path
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(send_asset, send_max, destination, dest_asset, dest_amount, path), rest}
+    {new(send_asset, send_amount, destination, dest_asset, dest_min, path), rest}
   end
 end
