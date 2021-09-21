@@ -1,6 +1,6 @@
-defmodule Stellar.XDR.String28 do
+defmodule Stellar.XDR.String32 do
   @moduledoc """
-  Representation of Stellar `String28` type.
+  Representation of Stellar `String32` type.
   """
   @behaviour XDR.Declaration
 
@@ -8,7 +8,7 @@ defmodule Stellar.XDR.String28 do
 
   defstruct [:value]
 
-  @max_length 28
+  @max_length 32
 
   @spec new(value :: String.t()) :: t()
   def new(value), do: %__MODULE__{value: value}
