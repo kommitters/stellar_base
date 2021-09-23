@@ -13,7 +13,8 @@ defmodule Stellar.XDR.OperationBody do
     ManageSellOffer,
     ManageBuyOffer,
     CreatePassiveSellOffer,
-    SetOptions
+    SetOptions,
+    ChangeTrust
   }
 
   @behaviour XDR.Declaration
@@ -26,7 +27,7 @@ defmodule Stellar.XDR.OperationBody do
     MANAGE_SELL_OFFER: ManageSellOffer,
     CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
     SET_OPTIONS: SetOptions,
-    # CHANGE_TRUST: ChangeTrust,
+    CHANGE_TRUST: ChangeTrust,
     # ALLOW_TRUST: AllowTrust,
     # ACCOUNT_MERGE: AccountMerge,
     # INFLATION: Inflation,
