@@ -15,14 +15,13 @@ defmodule Stellar.XDR.AssetTest do
   }
 
   setup_all do
-    pk_key =
+    key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
+
+    issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
       |> Stellar.Ed25519.PublicKey.decode!()
       |> UInt256.new()
-
-    issuer =
-      PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
-      |> (&PublicKey.new(pk_key, &1)).()
+      |> PublicKey.new(key_type)
       |> AccountID.new()
 
     {:ok, %{issuer: issuer}}
