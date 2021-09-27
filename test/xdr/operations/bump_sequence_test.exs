@@ -6,7 +6,7 @@ defmodule Stellar.XDR.Operations.BumpSequenceTest do
 
   describe "BumpSequence Operation" do
     setup do
-      sequence_number = SequenceNumber.new(12345)
+      sequence_number = SequenceNumber.new(12_345)
 
       %{
         bump_to: sequence_number,
