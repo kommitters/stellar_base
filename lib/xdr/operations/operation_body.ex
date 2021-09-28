@@ -2,7 +2,7 @@ defmodule Stellar.XDR.OperationBody do
   @moduledoc """
   Representation of Stellar `OperationBody` type.
   """
-  alias Stellar.XDR.OperationType
+  alias Stellar.XDR.{OperationType, Void}
 
   alias Stellar.XDR.Operations.{
     CreateAccount,
@@ -14,7 +14,11 @@ defmodule Stellar.XDR.OperationBody do
     ManageBuyOffer,
     CreatePassiveSellOffer,
     SetOptions,
-    ChangeTrust
+    ChangeTrust,
+    AllowTrust,
+    AccountMerge,
+    ManageData,
+    BumpSequence
   }
 
   @behaviour XDR.Declaration
@@ -28,11 +32,11 @@ defmodule Stellar.XDR.OperationBody do
     CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
     SET_OPTIONS: SetOptions,
     CHANGE_TRUST: ChangeTrust,
-    # ALLOW_TRUST: AllowTrust,
-    # ACCOUNT_MERGE: AccountMerge,
-    # INFLATION: Inflation,
-    # MANAGE_DATA:  ManageData,
-    # BUMP_SEQUENCE:  BumpSequence,
+    ALLOW_TRUST: AllowTrust,
+    ACCOUNT_MERGE: AccountMerge,
+    INFLATION: Void,
+    MANAGE_DATA: ManageData,
+    BUMP_SEQUENCE: BumpSequence,
     MANAGE_BUY_OFFER: ManageBuyOffer,
     PATH_PAYMENT_STRICT_SEND: PathPaymentStrictSend
     # CREATE_CLAIMABLE_BALANCE:  CreateClaimableBalance,
