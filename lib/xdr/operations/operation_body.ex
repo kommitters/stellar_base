@@ -23,7 +23,8 @@ defmodule Stellar.XDR.OperationBody do
     BeginSponsoringFutureReserves,
     Clawback,
     ClawbackClaimableBalance,
-    SetTrustLineFlags
+    SetTrustLineFlags,
+    LiquidityPoolDeposit
   }
 
   @behaviour XDR.Declaration
@@ -51,8 +52,8 @@ defmodule Stellar.XDR.OperationBody do
     # REVOKE_SPONSORSHIP: RevokeSponsorship,
     CLAWBACK: Clawback,
     CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
-    SET_TRUST_LINE_FLAGS: SetTrustLineFlags
-    # LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
+    SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
+    LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit
     # LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
   ]
 
