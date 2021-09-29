@@ -24,7 +24,8 @@ defmodule Stellar.XDR.OperationBody do
     Clawback,
     ClawbackClaimableBalance,
     SetTrustLineFlags,
-    LiquidityPoolDeposit
+    LiquidityPoolDeposit,
+    LiquidityPoolWithdraw
   }
 
   @behaviour XDR.Declaration
@@ -53,8 +54,8 @@ defmodule Stellar.XDR.OperationBody do
     CLAWBACK: Clawback,
     CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
     SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
-    LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit
-    # LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
+    LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
+    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
   ]
 
   @type operation :: any()

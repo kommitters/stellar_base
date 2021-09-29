@@ -6,6 +6,7 @@ defmodule Stellar.XDR.PoolIDTest do
   describe "PoolID" do
     setup do
       value = "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+
       %{
         value: value,
         pool_id: PoolID.new(value),
