@@ -18,7 +18,10 @@ defmodule Stellar.XDR.OperationBody do
     AllowTrust,
     AccountMerge,
     ManageData,
-    BumpSequence
+    BumpSequence,
+    ClaimClaimableBalance,
+    BeginSponsoringFutureReserves,
+    Clawback
   }
 
   @behaviour XDR.Declaration
@@ -38,16 +41,16 @@ defmodule Stellar.XDR.OperationBody do
     MANAGE_DATA: ManageData,
     BUMP_SEQUENCE: BumpSequence,
     MANAGE_BUY_OFFER: ManageBuyOffer,
-    PATH_PAYMENT_STRICT_SEND: PathPaymentStrictSend
-    # CREATE_CLAIMABLE_BALANCE:  CreateClaimableBalance,
-    # CLAIM_CLAIMABLE_BALANCE:  ClaimClaimableBalance,
-    # BEGIN_SPONSORING_FUTURE_RESERVES:  BeginSponsoringFutureReserves,
-    # END_SPONSORING_FUTURE_RESERVES:  EndSponsoringFutureReserves,
-    # REVOKE_SPONSORSHIP:  RevokeSponsorship,
-    # CLAWBACK:  Clawback,
-    # CLAWBACK_CLAIMABLE_BALANCE:  ClawbackClaimableBalance,
-    # SET_TRUST_LINE_FLAGS:  SetTrustLineFlags,
-    # LIQUIDITY_POOL_DEPOSIT:  LiquidityPoolDeposit,
+    PATH_PAYMENT_STRICT_SEND: PathPaymentStrictSend,
+    # CREATE_CLAIMABLE_BALANCE: CreateClaimableBalance,
+    CLAIM_CLAIMABLE_BALANCE: ClaimClaimableBalance,
+    BEGIN_SPONSORING_FUTURE_RESERVES: BeginSponsoringFutureReserves,
+    END_SPONSORING_FUTURE_RESERVES: Void,
+    # REVOKE_SPONSORSHIP: RevokeSponsorship,
+    CLAWBACK: Clawback
+    # CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
+    # SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
+    # LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
     # LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
   ]
 
