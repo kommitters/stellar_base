@@ -1,18 +1,19 @@
-defmodule Stellar.XDR.Asset do
+defmodule Stellar.XDR.TrustLineAsset do
   @moduledoc """
-  Representation of Stellar `Asset` type.
+  Representation of Stellar `TrustLineAsset` type.
   """
-  alias Stellar.XDR.{AlphaNum4, AlphaNum12, AssetType, Void}
+  alias Stellar.XDR.{AlphaNum4, AlphaNum12, AssetType, Void, PoolID}
 
   @behaviour XDR.Declaration
 
   @arms [
     ASSET_TYPE_NATIVE: Void,
     ASSET_TYPE_CREDIT_ALPHANUM4: AlphaNum4,
-    ASSET_TYPE_CREDIT_ALPHANUM12: AlphaNum12
+    ASSET_TYPE_CREDIT_ALPHANUM12: AlphaNum12,
+    ASSET_TYPE_POOL_SHARE: PoolID
   ]
 
-  @type asset :: AlphaNum4.t() | AlphaNum12.t() | Void.t()
+  @type asset :: AlphaNum4.t() | AlphaNum12.t() | Void.t() | PoolID.t()
 
   @type t :: %__MODULE__{asset: asset(), type: AssetType.t()}
 
