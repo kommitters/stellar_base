@@ -21,7 +21,11 @@ defmodule Stellar.XDR.OperationBody do
     BumpSequence,
     ClaimClaimableBalance,
     BeginSponsoringFutureReserves,
-    Clawback
+    Clawback,
+    ClawbackClaimableBalance,
+    SetTrustLineFlags,
+    LiquidityPoolDeposit,
+    LiquidityPoolWithdraw
   }
 
   @behaviour XDR.Declaration
@@ -47,11 +51,11 @@ defmodule Stellar.XDR.OperationBody do
     BEGIN_SPONSORING_FUTURE_RESERVES: BeginSponsoringFutureReserves,
     END_SPONSORING_FUTURE_RESERVES: Void,
     # REVOKE_SPONSORSHIP: RevokeSponsorship,
-    CLAWBACK: Clawback
-    # CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
-    # SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
-    # LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
-    # LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
+    CLAWBACK: Clawback,
+    CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
+    SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
+    LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
+    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
   ]
 
   @type operation :: any()
