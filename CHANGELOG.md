@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 (05.10.2021)
+* XDR types for Assets.
+* XDR types for Operations.
+* Ledger XDR-base types.
+* Increase test coverage.
+
 ## 0.1.1 (26.08.2021)
 * Increase test coverage.
 * Integrate Dialyzer.
