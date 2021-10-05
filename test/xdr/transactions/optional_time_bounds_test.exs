@@ -1,7 +1,7 @@
 defmodule Stellar.XDR.OptionalTimeBoundsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{Void, TimePoint, TimeBounds, OptionalTimeBounds}
+  alias Stellar.XDR.{TimePoint, TimeBounds, OptionalTimeBounds}
 
   describe "OptionalTimeBounds" do
     setup do
@@ -39,7 +39,9 @@ defmodule Stellar.XDR.OptionalTimeBoundsTest do
     test "decode_xdr/2 when time_bounds are not opted" do
       no_timebounds = <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>
 
-      {:ok, {%Void{value: nil}, <<0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>}} =
+      {:ok,
+       {%OptionalTimeBounds{time_bounds: nil},
+        <<0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>}} =
         OptionalTimeBounds.decode_xdr(no_timebounds)
     end
 
@@ -50,7 +52,8 @@ defmodule Stellar.XDR.OptionalTimeBoundsTest do
     test "decode_xdr!/2 when time_bounds are not opted" do
       no_timebounds = <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>
 
-      {%Void{value: nil}, <<0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>} =
+      {%OptionalTimeBounds{time_bounds: nil},
+       <<0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 65>>} =
         OptionalTimeBounds.decode_xdr!(no_timebounds)
     end
   end

@@ -31,7 +31,7 @@ defmodule Stellar.XDR.String28Test do
     end
 
     test "encode_xdr!/1 a string longer than 28-bytes" do
-      assert_raise XDR.Error.String,
+      assert_raise XDR.StringError,
                    "The length of the string exceeds the max length allowed",
                    fn ->
                      "Hello this is a very large test"
@@ -49,7 +49,7 @@ defmodule Stellar.XDR.String28Test do
     end
 
     test "decode_xdr/2 an invalid binary" do
-      assert_raise XDR.Error.VariableOpaque,
+      assert_raise XDR.VariableOpaqueError,
                    "The XDR has an invalid length, it must be less than byte-size of the rest",
                    fn ->
                      String28.decode_xdr(<<0, 0, 4, 210>>)

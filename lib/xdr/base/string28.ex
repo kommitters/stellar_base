@@ -1,6 +1,6 @@
 defmodule Stellar.XDR.String28 do
   @moduledoc """
-  Representation of Stellar `Text28` type.
+  Representation of Stellar `String28` type.
   """
   @behaviour XDR.Declaration
 

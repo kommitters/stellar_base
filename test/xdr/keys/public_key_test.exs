@@ -51,7 +51,7 @@ defmodule Stellar.XDR.PublicKeyTest do
     end
 
     test "invalid public key", %{key_type: key_type} do
-      assert_raise XDR.Error.FixedOpaque,
+      assert_raise XDR.FixedOpaqueError,
                    "The length that is passed through parameters must be equal or less to the byte size of the XDR to complete",
                    fn ->
                      %UInt256{datum: <<32, 0, 117>>}

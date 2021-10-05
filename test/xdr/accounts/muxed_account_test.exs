@@ -49,7 +49,7 @@ defmodule Stellar.XDR.MuxedAccountTest do
     end
 
     test "decode_xdr!/2 with an invalid binary" do
-      assert_raise XDR.Error.Union,
+      assert_raise XDR.UnionError,
                    "The :identifier received by parameter must be a binary value, for example: <<0, 0, 0, 5>>",
                    fn ->
                      MuxedAccount.decode_xdr!(123)

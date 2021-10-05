@@ -58,7 +58,7 @@ defmodule Stellar.XDR.Memo do
 
   @spec union_spec() :: XDR.Union.t()
   defp union_spec do
-    :MEMO_NONE
+    nil
     |> MemoType.new()
     |> XDR.Union.new(@arms)
   end
