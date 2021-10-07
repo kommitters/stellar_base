@@ -12,11 +12,15 @@ defmodule Stellar.Test.Utils do
     AssetCode4,
     AssetType,
     CryptoKeyType,
+    DecoratedSignature,
+    DecoratedSignatures,
     MuxedAccount,
     OperationBody,
     OperationType,
     PublicKey,
-    PublicKeyType
+    PublicKeyType,
+    Signature,
+    SignatureHint
   }
 
   alias Stellar.XDR.Operations.{Payment, Clawback}
@@ -63,7 +67,6 @@ defmodule Stellar.Test.Utils do
     |> AccountID.new()
   end
 
-  ## operations
   @spec payment_op_body(destination :: MuxedAccount.t(), asset :: Asset.t(), amount :: Int64.t()) ::
           OperationBody.t()
   def payment_op_body(destination, asset, amount) do
@@ -78,5 +81,21 @@ defmodule Stellar.Test.Utils do
     asset
     |> Clawback.new(from, amount)
     |> OperationBody.new(OperationType.new(:CLAWBACK))
+  end
+
+  @spec build_decorated_signatures(signatures :: list(binary())) :: DecoratedSignatures.t()
+  def build_decorated_signatures(signatures) do
+    signatures
+    |> Enum.map(&build_signature/1)
+    |> DecoratedSignatures.new()
+  end
+
+  @spec build_signature(secret_seed :: binary()) :: DecoratedSignatures.t()
+  def build_signature(<<_hint::binary-size(52), hint::binary-size(4)>> = secret_seed) do
+    signature = Signature.new(secret_seed)
+
+    hint
+    |> SignatureHint.new()
+    |> DecoratedSignature.new(signature)
   end
 end
