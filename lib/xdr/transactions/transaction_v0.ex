@@ -1,0 +1,165 @@
+defmodule Stellar.XDR.TransactionV0 do
+  @moduledoc """
+  Representation of Stellar `TransactionV0` type.
+
+  TransactionV0 is a transaction with the AccountID discriminant stripped off,
+  leaving a raw ed25519 public key to identify the source account. This is used
+  for backwards compatibility starting from the protocol 12/13 boundary.
+
+  If an "old-style" TransactionEnvelope containing a Transaction is parsed with this
+  XDR definition, it will be parsed as a "new-style" TransactionEnvelope
+  containing a TransactionV0.
+  """
+
+  alias Stellar.XDR.{
+    Memo,
+    OptionalTimeBounds,
+    Operations,
+    SequenceNumber,
+    TransactionExt,
+    UInt32,
+    UInt256
+  }
+
+  @behaviour XDR.Declaration
+
+  @struct_spec XDR.Struct.new(
+                 source_account_ed25519: UInt256,
+                 fee: UInt32,
+                 seq_num: SequenceNumber,
+                 time_bounds: OptionalTimeBounds,
+                 memo: Memo,
+                 operations: Operations,
+                 ext: TransactionExt
+               )
+
+  @type t :: %__MODULE__{
+          source_account_ed25519: UInt256.t(),
+          fee: UInt32.t(),
+          seq_num: SequenceNumber.t(),
+          time_bounds: OptionalTimeBounds.t(),
+          memo: Memo.t(),
+          operations: Operations.t(),
+          ext: TransactionExt.t()
+        }
+
+  defstruct [:source_account_ed25519, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
+
+  @spec new(
+          source_account_ed25519 :: UInt256.t(),
+          fee :: UInt32.t(),
+          seq_num :: SequenceNumber.t(),
+          time_bounds :: OptionalTimeBounds.t(),
+          memo :: Memo.t(),
+          operations :: Operations.t(),
+          ext :: TransactionExt.t()
+        ) :: t()
+  def new(
+        %UInt256{} = source_account_ed25519,
+        %UInt32{} = fee,
+        %SequenceNumber{} = seq_num,
+        %OptionalTimeBounds{} = time_bounds,
+        %Memo{} = memo,
+        %Operations{} = operations,
+        %TransactionExt{} = ext
+      ),
+      do: %__MODULE__{
+        source_account_ed25519: source_account_ed25519,
+        fee: fee,
+        seq_num: seq_num,
+        time_bounds: time_bounds,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }
+
+  @impl true
+  def encode_xdr(%__MODULE__{
+        source_account_ed25519: source_account_ed25519,
+        fee: fee,
+        seq_num: seq_num,
+        time_bounds: time_bounds,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }) do
+    [
+      source_account_ed25519: source_account_ed25519,
+      fee: fee,
+      seq_num: seq_num,
+      time_bounds: time_bounds,
+      memo: memo,
+      operations: operations,
+      ext: ext
+    ]
+    |> XDR.Struct.new()
+    |> XDR.Struct.encode_xdr()
+  end
+
+  @impl true
+  def encode_xdr!(%__MODULE__{
+        source_account_ed25519: source_account_ed25519,
+        fee: fee,
+        seq_num: seq_num,
+        time_bounds: time_bounds,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }) do
+    [
+      source_account_ed25519: source_account_ed25519,
+      fee: fee,
+      seq_num: seq_num,
+      time_bounds: time_bounds,
+      memo: memo,
+      operations: operations,
+      ext: ext
+    ]
+    |> XDR.Struct.new()
+    |> XDR.Struct.encode_xdr!()
+  end
+
+  @impl true
+  def decode_xdr(bytes, struct \\ @struct_spec)
+
+  def decode_xdr(bytes, struct) do
+    case XDR.Struct.decode_xdr(bytes, struct) do
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            source_account_ed25519: source_account_ed25519,
+            fee: fee,
+            seq_num: seq_num,
+            time_bounds: time_bounds,
+            memo: memo,
+            operations: operations,
+            ext: ext
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(source_account_ed25519, fee, seq_num, time_bounds, memo, operations, ext), rest}}
+
+      error ->
+        error
+    end
+  end
+
+  @impl true
+  def decode_xdr!(bytes, struct \\ @struct_spec)
+
+  def decode_xdr!(bytes, struct) do
+    {%XDR.Struct{
+       components: [
+         source_account_ed25519: source_account_ed25519,
+         fee: fee,
+         seq_num: seq_num,
+         time_bounds: time_bounds,
+         memo: memo,
+         operations: operations,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(source_account_ed25519, fee, seq_num, time_bounds, memo, operations, ext), rest}
+  end
+end
