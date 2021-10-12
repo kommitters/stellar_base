@@ -3,7 +3,6 @@ defmodule Stellar.Test.Utils do
   Utils functions for test constructions.
   """
   alias Stellar.XDR.{
-    UInt256,
     AccountID,
     AlphaNum12,
     AlphaNum4,
@@ -20,10 +19,29 @@ defmodule Stellar.Test.Utils do
     PublicKey,
     PublicKeyType,
     Signature,
-    SignatureHint
+    SignatureHint,
+    UInt256
   }
 
   alias Stellar.XDR.Operations.{Payment, Clawback}
+
+  @spec ed25519_public_key(pk_key :: binary()) :: UInt256.t()
+  def ed25519_public_key(pk_key) do
+    pk_key
+    |> Stellar.Ed25519.PublicKey.decode!()
+    |> UInt256.new()
+  end
+
+  @spec create_account_id(pk_key :: binary()) :: AccountID.t()
+  def create_account_id(pk_key) do
+    key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
+
+    pk_key
+    |> Stellar.Ed25519.PublicKey.decode!()
+    |> UInt256.new()
+    |> PublicKey.new(key_type)
+    |> AccountID.new()
+  end
 
   @spec create_muxed_account(pk_key :: binary()) :: MuxedAccount.t()
   def create_muxed_account(pk_key) do
@@ -38,7 +56,7 @@ defmodule Stellar.Test.Utils do
   @spec create_asset(type :: atom(), attributes :: Keyword.t()) :: Asset.t()
   def create_asset(:alpha_num4, code: code, issuer: issuer_pk_key) do
     asset_type = AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4)
-    issuer = create_issuer(issuer_pk_key)
+    issuer = create_account_id(issuer_pk_key)
 
     code
     |> AssetCode4.new()
@@ -48,23 +66,12 @@ defmodule Stellar.Test.Utils do
 
   def create_asset(:alpha_num12, code: code, issuer: issuer_pk_key) do
     asset_type = AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM12)
-    issuer = create_issuer(issuer_pk_key)
+    issuer = create_account_id(issuer_pk_key)
 
     code
     |> AssetCode12.new()
     |> AlphaNum12.new(issuer)
     |> Asset.new(asset_type)
-  end
-
-  @spec create_issuer(public_key :: String.t()) :: AccountID.t()
-  def create_issuer(public_key) do
-    key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
-
-    public_key
-    |> Stellar.Ed25519.PublicKey.decode!()
-    |> UInt256.new()
-    |> PublicKey.new(key_type)
-    |> AccountID.new()
   end
 
   @spec payment_op_body(destination :: MuxedAccount.t(), asset :: Asset.t(), amount :: Int64.t()) ::
