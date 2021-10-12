@@ -3,7 +3,6 @@ defmodule Stellar.XDR.ClaimAtom do
   Representation of Stellar `ClaimAtom` type.
   """
   alias Stellar.XDR.{
-    ClaimAtom,
     ClaimAtomType,
     ClaimLiquidityAtom,
     ClaimOfferAtom,
