@@ -32,7 +32,6 @@ defmodule Stellar.XDR.OperationBody do
 
   @behaviour XDR.Declaration
 
-  # XDR types for Operations will be implemented in #49.
   @arms [
     CREATE_ACCOUNT: CreateAccount,
     PAYMENT: Payment,
