@@ -38,7 +38,7 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictSendTest do
         |> Stellar.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
-      destination = CryptoKeyType.new(:KEY_TYPE_ED25519) |> MuxedAccount.new(pk_key)
+      destination = MuxedAccount.new(pk_key, CryptoKeyType.new(:KEY_TYPE_ED25519))
 
       send_asset =
         "BTCN"

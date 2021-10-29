@@ -39,7 +39,7 @@ defmodule Stellar.XDR.Operations.ClawbackTest do
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> Stellar.Ed25519.PublicKey.decode!()
         |> UInt256.new()
-        |> (&MuxedAccount.new(account_key_type, &1)).()
+        |> MuxedAccount.new(account_key_type)
 
       amount = Int64.new(10_000_000)
 

@@ -16,7 +16,7 @@ defmodule Stellar.XDR.MuxedAccountTest do
       %{
         type: type,
         ed25519_account: ed25519_account,
-        muxed_account: MuxedAccount.new(type, ed25519_account),
+        muxed_account: MuxedAccount.new(ed25519_account, type),
         encoded_binary:
           <<0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243,
             51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
@@ -24,12 +24,12 @@ defmodule Stellar.XDR.MuxedAccountTest do
     end
 
     test "new/1", %{type: type, ed25519_account: ed25519_account} do
-      %MuxedAccount{account: ^ed25519_account} = MuxedAccount.new(type, ed25519_account)
+      %MuxedAccount{account: ^ed25519_account} = MuxedAccount.new(ed25519_account, type)
     end
 
     test "new/1 with an invalid account", %{ed25519_account: ed25519_account} do
       type = CryptoKeyType.new(:KEY_TYPE_HASH_X)
-      {:error, :invalid_key_type} = MuxedAccount.new(type, ed25519_account)
+      {:error, :invalid_key_type} = MuxedAccount.new(ed25519_account, type)
     end
 
     test "encode_xdr/1", %{muxed_account: muxed_account, encoded_binary: binary} do
@@ -77,7 +77,7 @@ defmodule Stellar.XDR.MuxedAccountTest do
       %{
         type: type,
         med25519_account: med25519_account,
-        muxed_account: MuxedAccount.new(type, med25519_account),
+        muxed_account: MuxedAccount.new(med25519_account, type),
         encoded_binary:
           <<0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 123, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222,
             53, 177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232,
@@ -86,7 +86,7 @@ defmodule Stellar.XDR.MuxedAccountTest do
     end
 
     test "new/1", %{type: type, med25519_account: med25519_account} do
-      %MuxedAccount{account: ^med25519_account} = MuxedAccount.new(type, med25519_account)
+      %MuxedAccount{account: ^med25519_account} = MuxedAccount.new(med25519_account, type)
     end
 
     test "encode_xdr/1", %{muxed_account: muxed_account, encoded_binary: binary} do

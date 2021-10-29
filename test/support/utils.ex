@@ -50,7 +50,7 @@ defmodule Stellar.Test.Utils do
     pk_key
     |> Stellar.Ed25519.PublicKey.decode!()
     |> UInt256.new()
-    |> (&MuxedAccount.new(key_type, &1)).()
+    |> MuxedAccount.new(key_type)
   end
 
   @spec create_asset(type :: atom(), attributes :: Keyword.t()) :: Asset.t()
