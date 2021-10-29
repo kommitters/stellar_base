@@ -13,7 +13,7 @@ defmodule Stellar.XDR.OptionalMuxedAccountTest do
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )
 
-      muxed_account = MuxedAccount.new(type, ed25519_key)
+      muxed_account = MuxedAccount.new(ed25519_key, type)
 
       %{
         ed25519_key: ed25519_key,

@@ -11,7 +11,7 @@ defmodule Stellar.XDR.Operations.AccountMergeTest do
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> PublicKey.decode!()
         |> UInt256.new()
-        |> (&MuxedAccount.new(CryptoKeyType.new(:KEY_TYPE_ED25519), &1)).()
+        |> MuxedAccount.new(CryptoKeyType.new(:KEY_TYPE_ED25519))
 
       account_merge = AccountMerge.new(muxed_account)
 
