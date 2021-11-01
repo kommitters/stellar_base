@@ -4,7 +4,7 @@ defmodule Stellar.XDR.InnerTransactionResult do
   InnerTransactionResult must be binary compatible with TransactionResult.
   """
   alias Stellar.XDR.{Int64, TxResultV0}
-  alias Stellar.XDR.TransactionExt, as: Ext
+  alias Stellar.XDR.Ext
 
   @behaviour XDR.Declaration
 

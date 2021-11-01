@@ -12,11 +12,11 @@ defmodule Stellar.XDR.TransactionV0 do
   """
 
   alias Stellar.XDR.{
+    Ext,
     Memo,
     OptionalTimeBounds,
     Operations,
     SequenceNumber,
-    TransactionExt,
     UInt32,
     UInt256
   }
@@ -30,7 +30,7 @@ defmodule Stellar.XDR.TransactionV0 do
                  time_bounds: OptionalTimeBounds,
                  memo: Memo,
                  operations: Operations,
-                 ext: TransactionExt
+                 ext: Ext
                )
 
   @type t :: %__MODULE__{
@@ -40,7 +40,7 @@ defmodule Stellar.XDR.TransactionV0 do
           time_bounds: OptionalTimeBounds.t(),
           memo: Memo.t(),
           operations: Operations.t(),
-          ext: TransactionExt.t()
+          ext: Ext.t()
         }
 
   defstruct [:source_account_ed25519, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
@@ -52,7 +52,7 @@ defmodule Stellar.XDR.TransactionV0 do
           time_bounds :: OptionalTimeBounds.t(),
           memo :: Memo.t(),
           operations :: Operations.t(),
-          ext :: TransactionExt.t()
+          ext :: Ext.t()
         ) :: t()
   def new(
         %UInt256{} = source_account_ed25519,
@@ -61,7 +61,7 @@ defmodule Stellar.XDR.TransactionV0 do
         %OptionalTimeBounds{} = time_bounds,
         %Memo{} = memo,
         %Operations{} = operations,
-        %TransactionExt{} = ext
+        %Ext{} = ext
       ),
       do: %__MODULE__{
         source_account_ed25519: source_account_ed25519,

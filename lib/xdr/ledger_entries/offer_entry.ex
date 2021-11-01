@@ -8,7 +8,7 @@ defmodule Stellar.XDR.OfferEntry do
   For example an Offer is selling 10A where 1A is priced at 1.5B
   """
   alias Stellar.XDR.{AccountID, Asset, Int64, Price}
-  alias Stellar.XDR.TransactionExt, as: Ext
+  alias Stellar.XDR.Ext
 
   @behaviour XDR.Declaration
 

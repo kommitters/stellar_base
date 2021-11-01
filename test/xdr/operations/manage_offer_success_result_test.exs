@@ -8,6 +8,7 @@ defmodule Stellar.XDR.Operations.ManageOfferSuccessResultTest do
     ClaimAtomType,
     ClaimOfferAtom,
     ClaimAtomList,
+    Ext,
     Int32,
     Int64,
     OfferEntry,
@@ -15,8 +16,6 @@ defmodule Stellar.XDR.Operations.ManageOfferSuccessResultTest do
   }
 
   alias Stellar.XDR.Operations.{ManageOffer, ManageOfferEffect, ManageOfferSuccessResult}
-
-  alias Stellar.XDR.TransactionExt, as: Ext
 
   describe "ManageOfferSuccessResult" do
     setup do

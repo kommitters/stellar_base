@@ -5,6 +5,7 @@ defmodule Stellar.XDR.TransactionEnvelopeTest do
 
   alias Stellar.XDR.{
     EnvelopeType,
+    Ext,
     FeeBumpInnerTx,
     FeeBumpTransaction,
     FeeBumpTransactionEnvelope,
@@ -20,7 +21,6 @@ defmodule Stellar.XDR.TransactionEnvelopeTest do
     TimePoint,
     Transaction,
     TransactionV0,
-    TransactionExt,
     TransactionEnvelope,
     TransactionV0Envelope,
     TransactionV1Envelope,
@@ -51,7 +51,7 @@ defmodule Stellar.XDR.TransactionEnvelopeTest do
     operations = build_operations()
 
     # ext
-    ext = TransactionExt.new()
+    ext = Ext.new()
 
     {:ok,
      %{

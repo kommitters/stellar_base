@@ -3,9 +3,8 @@ defmodule Stellar.XDR.Operations.ManageOfferTest do
 
   import Stellar.Test.Utils
 
-  alias Stellar.XDR.{Int32, Int64, OfferEntry, Price}
+  alias Stellar.XDR.{Ext, Int32, Int64, OfferEntry, Price}
   alias Stellar.XDR.Operations.{ManageOffer, ManageOfferEffect}
-  alias Stellar.XDR.TransactionExt, as: Ext
 
   describe "ManageOffer" do
     setup do

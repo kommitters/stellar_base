@@ -3,8 +3,7 @@ defmodule Stellar.XDR.OfferEntryTest do
 
   import Stellar.Test.Utils
 
-  alias Stellar.XDR.{Int32, Int64, OfferEntry, Price}
-  alias Stellar.XDR.TransactionExt, as: Ext
+  alias Stellar.XDR.{Ext, Int32, Int64, OfferEntry, Price}
 
   describe "OfferEntry Operation" do
     setup do

@@ -5,6 +5,7 @@ defmodule Stellar.XDR.FeeBumpTransactionEnvelopeTest do
 
   alias Stellar.XDR.{
     EnvelopeType,
+    Ext,
     FeeBumpInnerTx,
     FeeBumpTransaction,
     FeeBumpTransactionEnvelope,
@@ -19,7 +20,6 @@ defmodule Stellar.XDR.FeeBumpTransactionEnvelopeTest do
     TimeBounds,
     TimePoint,
     Transaction,
-    TransactionExt,
     TransactionV1Envelope,
     UInt32,
     UInt64
@@ -120,7 +120,7 @@ defmodule Stellar.XDR.FeeBumpTransactionEnvelopeTest do
       |> TransactionV1Envelope.new(signatures)
       |> FeeBumpInnerTx.new(envelope_type)
 
-    ext = TransactionExt.new()
+    ext = Ext.new()
 
     FeeBumpTransaction.new(fee_source, fee, inner_tx, ext)
   end
@@ -147,7 +147,7 @@ defmodule Stellar.XDR.FeeBumpTransactionEnvelopeTest do
     # operations
     operations = build_operations()
 
-    ext = TransactionExt.new()
+    ext = Ext.new()
 
     Transaction.new(
       source_account,
