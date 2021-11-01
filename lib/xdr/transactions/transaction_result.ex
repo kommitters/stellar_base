@@ -2,8 +2,7 @@ defmodule Stellar.XDR.TransactionResult do
   @moduledoc """
   Representation of Stellar `TransactionResult` type.
   """
-  alias Stellar.XDR.{Int64, TxResult}
-  alias Stellar.XDR.TransactionExt, as: Ext
+  alias Stellar.XDR.{Ext, Int64, TxResult}
 
   @behaviour XDR.Declaration
 

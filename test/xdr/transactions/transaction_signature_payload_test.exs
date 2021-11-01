@@ -5,6 +5,7 @@ defmodule Stellar.XDR.TransactionSignaturePayloadTest do
 
   alias Stellar.XDR.{
     EnvelopeType,
+    Ext,
     Hash,
     Int64,
     Memo,
@@ -17,7 +18,6 @@ defmodule Stellar.XDR.TransactionSignaturePayloadTest do
     TimeBounds,
     TimePoint,
     Transaction,
-    TransactionExt,
     TransactionSignaturePayload,
     UInt32,
     UInt64
@@ -46,7 +46,7 @@ defmodule Stellar.XDR.TransactionSignaturePayloadTest do
       operations = build_operations()
 
       # ext
-      ext = TransactionExt.new()
+      ext = Ext.new()
 
       tagged_tx =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"

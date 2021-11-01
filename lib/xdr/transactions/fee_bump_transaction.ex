@@ -3,7 +3,7 @@ defmodule Stellar.XDR.FeeBumpTransaction do
   Representation of Stellar `FeeBumpTransaction` type.
   """
 
-  alias Stellar.XDR.{FeeBumpInnerTx, Int64, MuxedAccount, TransactionExt}
+  alias Stellar.XDR.{FeeBumpInnerTx, Int64, MuxedAccount, Ext}
 
   @behaviour XDR.Declaration
 
@@ -11,14 +11,14 @@ defmodule Stellar.XDR.FeeBumpTransaction do
                  fee_source: MuxedAccount,
                  fee: Int64,
                  inner_tx: FeeBumpInnerTx,
-                 ext: TransactionExt
+                 ext: Ext
                )
 
   @type t :: %__MODULE__{
           fee_source: MuxedAccount.t(),
           fee: Int64.t(),
           inner_tx: FeeBumpInnerTx.t(),
-          ext: TransactionExt.t()
+          ext: Ext.t()
         }
 
   defstruct [:fee_source, :fee, :inner_tx, :ext]
@@ -27,13 +27,13 @@ defmodule Stellar.XDR.FeeBumpTransaction do
           fee_source :: MuxedAccount.t(),
           fee :: Int64.t(),
           inner_tx :: FeeBumpInnerTx.t(),
-          ext :: TransactionExt.t()
+          ext :: Ext.t()
         ) :: t()
   def new(
         %MuxedAccount{} = fee_source,
         %Int64{} = fee,
         %FeeBumpInnerTx{} = inner_tx,
-        %TransactionExt{} = ext
+        %Ext{} = ext
       ),
       do: %__MODULE__{fee_source: fee_source, fee: fee, inner_tx: inner_tx, ext: ext}
 

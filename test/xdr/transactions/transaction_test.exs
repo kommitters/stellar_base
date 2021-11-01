@@ -4,6 +4,7 @@ defmodule Stellar.XDR.TransactionTest do
   import Stellar.Test.Utils
 
   alias Stellar.XDR.{
+    Ext,
     Int64,
     Memo,
     MemoType,
@@ -14,7 +15,6 @@ defmodule Stellar.XDR.TransactionTest do
     SequenceNumber,
     TimeBounds,
     TimePoint,
-    TransactionExt,
     Transaction,
     UInt32,
     UInt64
@@ -44,7 +44,7 @@ defmodule Stellar.XDR.TransactionTest do
       # operations
       operations = build_operations()
 
-      ext = TransactionExt.new()
+      ext = Ext.new()
 
       %{
         source_account: source_account,
