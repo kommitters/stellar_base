@@ -4,13 +4,13 @@ defmodule Stellar.XDR.Transaction do
   """
 
   alias Stellar.XDR.{
-    UInt32,
-    MuxedAccount,
-    SequenceNumber,
-    OptionalTimeBounds,
+    Ext,
     Memo,
+    MuxedAccount,
+    OptionalTimeBounds,
     Operations,
-    TransactionExt
+    SequenceNumber,
+    UInt32
   }
 
   @behaviour XDR.Declaration
@@ -22,7 +22,7 @@ defmodule Stellar.XDR.Transaction do
                  time_bounds: OptionalTimeBounds,
                  memo: Memo,
                  operations: Operations,
-                 ext: TransactionExt
+                 ext: Ext
                )
 
   @type t :: %__MODULE__{
@@ -32,7 +32,7 @@ defmodule Stellar.XDR.Transaction do
           time_bounds: OptionalTimeBounds.t(),
           memo: Memo.t(),
           operations: Operations.t(),
-          ext: TransactionExt.t()
+          ext: Ext.t()
         }
 
   defstruct [:source_account, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
@@ -44,7 +44,7 @@ defmodule Stellar.XDR.Transaction do
           time_bounds :: OptionalTimeBounds.t(),
           memo :: Memo.t(),
           operations :: Operations.t(),
-          ext :: TransactionExt.t()
+          ext :: Ext.t()
         ) :: t()
   def new(
         %MuxedAccount{} = source_account,
@@ -53,7 +53,7 @@ defmodule Stellar.XDR.Transaction do
         %OptionalTimeBounds{} = time_bounds,
         %Memo{} = memo,
         %Operations{} = operations,
-        %TransactionExt{} = ext
+        %Ext{} = ext
       ),
       do: %__MODULE__{
         source_account: source_account,

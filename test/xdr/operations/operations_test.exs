@@ -27,13 +27,13 @@ defmodule Stellar.XDR.OperationsTest do
         )
 
       source_account =
-        CryptoKeyType.new(:KEY_TYPE_ED25519)
-        |> MuxedAccount.new(pk_key)
+        pk_key
+        |> MuxedAccount.new(CryptoKeyType.new(:KEY_TYPE_ED25519))
         |> OptionalMuxedAccount.new()
 
       destination =
-        PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
-        |> (&PublicKey.new(pk_key, &1)).()
+        pk_key
+        |> PublicKey.new(PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519))
         |> AccountID.new()
 
       starting_balance = Int64.new(5_000_000_000)

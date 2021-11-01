@@ -13,19 +13,19 @@ defmodule Stellar.XDR.MuxedAccount do
 
   @type account :: UInt256.t() | MuxedAccountMed25519.t()
 
-  @type t :: %__MODULE__{type: CryptoKeyType.t(), account: account()}
+  @type t :: %__MODULE__{account: account(), type: CryptoKeyType.t()}
 
   defstruct [:type, :account]
 
-  @spec new(type :: CryptoKeyType.t(), account :: account()) :: t()
-  def new(%CryptoKeyType{identifier: identifier}, _account)
+  @spec new(account :: account(), type :: CryptoKeyType.t()) :: t()
+  def new(_account, %CryptoKeyType{identifier: identifier})
       when identifier not in ~w(KEY_TYPE_ED25519 KEY_TYPE_MUXED_ED25519)a,
       do: {:error, :invalid_key_type}
 
-  def new(%CryptoKeyType{} = type, %UInt256{} = account),
+  def new(%UInt256{} = account, %CryptoKeyType{} = type),
     do: %__MODULE__{type: type, account: account}
 
-  def new(%CryptoKeyType{} = type, %MuxedAccountMed25519{} = account),
+  def new(%MuxedAccountMed25519{} = account, %CryptoKeyType{} = type),
     do: %__MODULE__{type: type, account: account}
 
   @impl true
@@ -47,7 +47,7 @@ defmodule Stellar.XDR.MuxedAccount do
 
   def decode_xdr(bytes, spec) do
     case XDR.Union.decode_xdr(bytes, spec) do
-      {:ok, {{type, account}, rest}} -> {:ok, {new(type, account), rest}}
+      {:ok, {{type, account}, rest}} -> {:ok, {new(account, type), rest}}
       error -> error
     end
   end
@@ -57,7 +57,7 @@ defmodule Stellar.XDR.MuxedAccount do
 
   def decode_xdr!(bytes, spec) do
     {{type, account}, rest} = XDR.Union.decode_xdr!(bytes, spec)
-    {new(type, account), rest}
+    {new(account, type), rest}
   end
 
   @spec union_spec() :: XDR.Union.t()

@@ -36,7 +36,7 @@ defmodule Stellar.XDR.Operations.PaymentTest do
       |> Stellar.Ed25519.PublicKey.decode!()
       |> UInt256.new()
 
-    account = CryptoKeyType.new(:KEY_TYPE_ED25519) |> MuxedAccount.new(pk_key)
+    account = MuxedAccount.new(pk_key, CryptoKeyType.new(:KEY_TYPE_ED25519))
 
     {:ok, %{issuer: issuer, account: account}}
   end

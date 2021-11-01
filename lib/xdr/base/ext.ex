@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.TransactionExt do
+defmodule Stellar.XDR.Ext do
   @moduledoc """
   Representation of Stellar `Ext` type.
   """
