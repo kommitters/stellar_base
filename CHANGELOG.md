@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.3 (01.11.2021)
+* XDR types for Transactions and Transactions Envelopes.
+* XDR types for TransactionResults.
+* XDR types for OperationResults.
+* XDR types for DecoratedSignatures.
+* MuxedAccount and TransactionExt refactor.
+
 ## 0.1.2 (05.10.2021)
 * XDR types for Assets.
 * XDR types for Operations.
