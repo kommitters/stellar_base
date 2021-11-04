@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Ledger.LiquidityPool do
+defmodule StellarBase.XDR.Ledger.LiquidityPool do
   @moduledoc """
   Representation of Stellar Ledger `LiquidityPool` type.
   """
-  alias Stellar.XDR.PoolID
+  alias StellarBase.XDR.PoolID
 
   @behaviour XDR.Declaration
 

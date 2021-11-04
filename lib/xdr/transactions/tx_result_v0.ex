@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.TxResultV0 do
+defmodule StellarBase.XDR.TxResultV0 do
   @moduledoc """
   Representation of Stellar `TxResultV0` type.
   """
-  alias Stellar.XDR.{OperationResultList, TransactionResultCode, Void}
+  alias StellarBase.XDR.{OperationResultList, TransactionResultCode, Void}
 
   @behaviour XDR.Declaration
 

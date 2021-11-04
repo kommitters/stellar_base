@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.AllowTrustResultTest do
+defmodule StellarBase.XDR.Operations.AllowTrustResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{AllowTrustResult, AllowTrustResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{AllowTrustResult, AllowTrustResultCode}
 
   describe "AllowTrustResult" do
     setup do

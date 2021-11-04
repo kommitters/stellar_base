@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.ClaimAtomListTest do
+defmodule StellarBase.XDR.ClaimAtomListTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     ClaimAtom,
     ClaimAtomType,
     ClaimOfferAtom,

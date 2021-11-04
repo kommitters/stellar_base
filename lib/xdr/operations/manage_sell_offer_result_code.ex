@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.ManageSellOfferResultCode do
+defmodule StellarBase.XDR.Operations.ManageSellOfferResultCode do
   @moduledoc """
   Representation of Stellar `ManageSellOfferResultCode` type.
   """

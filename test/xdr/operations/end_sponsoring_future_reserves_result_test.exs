@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.EndSponsoringFutureReservesResultTest do
+defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
+  alias StellarBase.XDR.Void
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     EndSponsoringFutureReservesResult,
     EndSponsoringFutureReservesResultCode
   }

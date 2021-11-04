@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.SetTrustLineFlagsResultCodeTest do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Operations.SetTrustLineFlagsResultCode
+  alias StellarBase.XDR.Operations.SetTrustLineFlagsResultCode
 
   describe "SetTrustLineFlagsResultCode" do
     setup do

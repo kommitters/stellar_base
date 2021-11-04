@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Claimant do
+defmodule StellarBase.XDR.Claimant do
   @moduledoc """
   Representation of Stellar `PublicKey` type.
   """
-  alias Stellar.XDR.{ClaimantType, ClaimantV0}
+  alias StellarBase.XDR.{ClaimantType, ClaimantV0}
 
   @behaviour XDR.Declaration
 

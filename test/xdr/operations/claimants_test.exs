@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ClaimantsTest do
+defmodule StellarBase.XDR.ClaimantsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     Claimant,
     Claimants,
@@ -30,7 +30,7 @@ defmodule Stellar.XDR.ClaimantsTest do
 
       claimant1 =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
@@ -39,7 +39,7 @@ defmodule Stellar.XDR.ClaimantsTest do
 
       claimant2 =
         "GDP7PRVNX72M2G4J6CLZZXSYVEIRMFPB7SWPOY4CG22O5AFCOC2YEHGQ"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

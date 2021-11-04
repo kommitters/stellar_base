@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Opaque4 do
+defmodule StellarBase.XDR.Opaque4 do
   @moduledoc """
   Representation of Stellar `Opaque4` type.
   """

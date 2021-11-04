@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.ClaimOfferAtomV0 do
+defmodule StellarBase.XDR.ClaimOfferAtomV0 do
   @moduledoc """
   Representation of Stellar `ClaimOfferAtomV0` type.
 
@@ -9,7 +9,7 @@ defmodule Stellar.XDR.ClaimOfferAtomV0 do
   be parsed as a "new-style" ClaimAtom containing a ClaimOfferAtomV0.
   """
 
-  alias Stellar.XDR.{Asset, Int64, UInt256}
+  alias StellarBase.XDR.{Asset, Int64, UInt256}
 
   @behaviour XDR.Declaration
 

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.CreateAccount do
+defmodule StellarBase.XDR.Operations.CreateAccount do
   @moduledoc """
   Representation of Stellar `CreateAccount` type.
   """
-  alias Stellar.XDR.{AccountID, Int64}
+  alias StellarBase.XDR.{AccountID, Int64}
 
   @behaviour XDR.Declaration
 

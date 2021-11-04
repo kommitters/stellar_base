@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.LiquidityPoolDepositResultTest do
+defmodule StellarBase.XDR.Operations.LiquidityPoolDepositResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{LiquidityPoolDepositResult, LiquidityPoolDepositResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{LiquidityPoolDepositResult, LiquidityPoolDepositResultCode}
 
   describe "LiquidityPoolDepositResult" do
     setup do

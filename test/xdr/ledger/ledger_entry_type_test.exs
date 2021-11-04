@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.LedgerEntryTypeTest do
+defmodule StellarBase.XDR.LedgerEntryTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.LedgerEntryType
+  alias StellarBase.XDR.LedgerEntryType
 
   describe "Account LedgerEntryType" do
     setup do

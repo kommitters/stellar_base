@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.AllowTrustResultCode do
+defmodule StellarBase.XDR.Operations.AllowTrustResultCode do
   @moduledoc """
   Representation of Stellar `AllowTrustResultCode` type.
   """

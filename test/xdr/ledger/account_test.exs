@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Ledger.AccountTest do
+defmodule StellarBase.XDR.Ledger.AccountTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
 
-  alias Stellar.XDR.Ledger.Account
+  alias StellarBase.XDR.Ledger.Account
 
   describe "Ledger Account" do
     setup do
@@ -11,7 +11,7 @@ defmodule Stellar.XDR.Ledger.AccountTest do
 
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Assets.ErrorTest do
+defmodule StellarBase.XDR.Assets.ErrorTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AssetCode4Error, AssetCode12Error}
+  alias StellarBase.XDR.{AssetCode4Error, AssetCode12Error}
 
   describe "AssetCode4Error" do
     test "when receives :invalid_lenght" do

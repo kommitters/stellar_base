@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.SetTrustLineFlagsTest do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlagsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     Asset,
@@ -13,7 +13,7 @@ defmodule Stellar.XDR.Operations.SetTrustLineFlagsTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.SetTrustLineFlags
+  alias StellarBase.XDR.Operations.SetTrustLineFlags
 
   describe "SetTrustLineFlags Operation" do
     setup do
@@ -21,14 +21,14 @@ defmodule Stellar.XDR.Operations.SetTrustLineFlagsTest do
 
       trustor =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

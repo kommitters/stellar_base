@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OptionalMuxedAccount do
+defmodule StellarBase.XDR.OptionalMuxedAccount do
   @moduledoc """
   Representation of Stellar `OptionalMuxedAccount` type.
   """
-  alias Stellar.XDR.MuxedAccount
+  alias StellarBase.XDR.MuxedAccount
 
   @behaviour XDR.Declaration
 

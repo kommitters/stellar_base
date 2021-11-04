@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OperationResultListTest do
+defmodule StellarBase.XDR.OperationResultListTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     OperationInnerResult,
     OperationResult,
     OperationResultList,
@@ -10,7 +10,7 @@ defmodule Stellar.XDR.OperationResultListTest do
     Void
   }
 
-  alias Stellar.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
+  alias StellarBase.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
 
   describe "OperationResultList" do
     setup do

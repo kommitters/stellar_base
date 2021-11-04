@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Hash do
+defmodule StellarBase.XDR.Hash do
   @moduledoc """
   Representation of Stellar `Hash` type.
   """
-  alias Stellar.XDR.Opaque32
+  alias StellarBase.XDR.Opaque32
 
   @behaviour XDR.Declaration
 

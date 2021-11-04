@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.PoolID do
+defmodule StellarBase.XDR.PoolID do
   @moduledoc """
   Representation of Stellar `PoolID` type.
   """
-  alias Stellar.XDR.Hash
+  alias StellarBase.XDR.Hash
 
   @behaviour XDR.Declaration
 

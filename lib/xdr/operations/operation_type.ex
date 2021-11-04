@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.OperationType do
+defmodule StellarBase.XDR.OperationType do
   @moduledoc """
   Representation of Stellar `OperationType` type.
   """

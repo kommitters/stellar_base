@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.FeeBumpTransactionTest do
+defmodule StellarBase.XDR.Operations.FeeBumpTransactionTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     EnvelopeType,
     Ext,
     FeeBumpInnerTx,

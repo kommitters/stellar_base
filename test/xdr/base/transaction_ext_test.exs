@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ExtTest do
+defmodule StellarBase.XDR.ExtTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Ext
+  alias StellarBase.XDR.Ext
 
   describe "Ext" do
     setup do

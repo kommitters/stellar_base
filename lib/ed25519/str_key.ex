@@ -1,4 +1,4 @@
-defmodule Stellar.Ed25519.StrKey do
+defmodule StellarBase.Ed25519.StrKey do
   @moduledoc """
   Functions to encode/decode Ed25519 keys.
   """

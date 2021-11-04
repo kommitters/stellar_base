@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.RevokeSponsorshipResult do
+defmodule StellarBase.XDR.Operations.RevokeSponsorshipResult do
   @moduledoc """
   Representation of Stellar `RevokeSponsorshipResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.RevokeSponsorshipResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.RevokeSponsorshipResultCode
 
   @behaviour XDR.Declaration
 

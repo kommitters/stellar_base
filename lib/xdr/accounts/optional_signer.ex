@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OptionalSigner do
+defmodule StellarBase.XDR.OptionalSigner do
   @moduledoc """
   Representation of Stellar `OptionalSigner` type.
   """
-  alias Stellar.XDR.Signer
+  alias StellarBase.XDR.Signer
 
   @behaviour XDR.Declaration
 

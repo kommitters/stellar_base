@@ -1,8 +1,12 @@
-defmodule Stellar.XDR.Operations.CreateClaimableBalanceResultTest do
+defmodule StellarBase.XDR.Operations.CreateClaimableBalanceResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{ClaimableBalanceID, ClaimableBalanceIDType, Hash}
-  alias Stellar.XDR.Operations.{CreateClaimableBalanceResult, CreateClaimableBalanceResultCode}
+  alias StellarBase.XDR.{ClaimableBalanceID, ClaimableBalanceIDType, Hash}
+
+  alias StellarBase.XDR.Operations.{
+    CreateClaimableBalanceResult,
+    CreateClaimableBalanceResultCode
+  }
 
   describe "CreateClaimableBalanceResult" do
     setup do

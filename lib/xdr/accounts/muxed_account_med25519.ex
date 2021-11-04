@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.MuxedAccountMed25519 do
+defmodule StellarBase.XDR.MuxedAccountMed25519 do
   @moduledoc """
   Representation of Stellar `MuxedAccountMed25519` type.
   """
-  alias Stellar.XDR.{UInt64, UInt256}
+  alias StellarBase.XDR.{UInt64, UInt256}
 
   @behaviour XDR.Declaration
 

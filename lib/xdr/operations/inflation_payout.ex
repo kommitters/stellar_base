@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.InflationPayout do
+defmodule StellarBase.XDR.InflationPayout do
   @moduledoc """
   Representation of Stellar `InflationPayout` type.
   """
-  alias Stellar.XDR.{AccountID, Int64}
+  alias StellarBase.XDR.{AccountID, Int64}
 
   @behaviour XDR.Declaration
 

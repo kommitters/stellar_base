@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.OperationBody do
+defmodule StellarBase.XDR.OperationBody do
   @moduledoc """
   Representation of Stellar `OperationBody` type.
   """
-  alias Stellar.XDR.{OperationType, Void}
+  alias StellarBase.XDR.{OperationType, Void}
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     CreateAccount,
     ManageSellOffer,
     Payment,

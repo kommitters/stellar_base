@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.AllowTrustTest do
+defmodule StellarBase.XDR.Operations.AllowTrustTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     Asset,
@@ -13,7 +13,7 @@ defmodule Stellar.XDR.Operations.AllowTrustTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.AllowTrust
+  alias StellarBase.XDR.Operations.AllowTrust
 
   describe "AllowTrust Operation" do
     setup do
@@ -21,14 +21,14 @@ defmodule Stellar.XDR.Operations.AllowTrustTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()

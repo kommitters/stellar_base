@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.ClaimClaimableBalanceResultCode do
+defmodule StellarBase.XDR.Operations.ClaimClaimableBalanceResultCode do
   @moduledoc """
   Representation of Stellar `ClaimClaimableBalanceResultCode` type.
   """

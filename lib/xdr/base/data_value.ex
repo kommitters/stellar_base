@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.DataValue do
+defmodule StellarBase.XDR.DataValue do
   @moduledoc """
   Representation of Stellar `DataValue` type.
   """
-  alias Stellar.XDR.VariableOpaque64
+  alias StellarBase.XDR.VariableOpaque64
 
   @behaviour XDR.Declaration
 

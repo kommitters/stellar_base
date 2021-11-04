@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.CreateClaimableBalance do
+defmodule StellarBase.XDR.Operations.CreateClaimableBalance do
   @moduledoc """
   Representation of Stellar `CreateClaimableBalance` type.
   """
-  alias Stellar.XDR.{Asset, Int64, Claimants}
+  alias StellarBase.XDR.{Asset, Int64, Claimants}
 
   @behaviour XDR.Declaration
 

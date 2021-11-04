@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.ClaimAtom do
+defmodule StellarBase.XDR.ClaimAtom do
   @moduledoc """
   Representation of Stellar `ClaimAtom` type.
   """
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     ClaimAtomType,
     ClaimLiquidityAtom,
     ClaimOfferAtom,

@@ -1,10 +1,10 @@
-defmodule Stellar.Ed25519.SecretSeed do
+defmodule StellarBase.Ed25519.SecretSeed do
   @moduledoc """
   Encode/decode functions for Ed25519 secret seeds.
   """
   import Bitwise
 
-  alias Stellar.Ed25519.StrKey
+  alias StellarBase.Ed25519.StrKey
 
   # Secret keys starting with the letter S
   # 18 <<< 3: 144: S

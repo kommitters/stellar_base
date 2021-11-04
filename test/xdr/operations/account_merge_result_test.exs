@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.AccountMergeResultTest do
+defmodule StellarBase.XDR.Operations.AccountMergeResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Int64
-  alias Stellar.XDR.Operations.{AccountMergeResult, AccountMergeResultCode}
+  alias StellarBase.XDR.Int64
+  alias StellarBase.XDR.Operations.{AccountMergeResult, AccountMergeResultCode}
 
   describe "AccountMergeResult" do
     setup do

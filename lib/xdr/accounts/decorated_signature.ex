@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.DecoratedSignature do
+defmodule StellarBase.XDR.DecoratedSignature do
   @moduledoc """
   Representation of Stellar `DecoratedSignature` type.
   """
-  alias Stellar.XDR.{Signature, SignatureHint}
+  alias StellarBase.XDR.{Signature, SignatureHint}
 
   @behaviour XDR.Declaration
 

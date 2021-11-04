@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Ledger.LiquidityPoolTest do
+defmodule StellarBase.XDR.Ledger.LiquidityPoolTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{PoolID, Ledger.LiquidityPool}
+  alias StellarBase.XDR.{PoolID, Ledger.LiquidityPool}
 
   describe "Ledger LiquidityPool" do
     setup do

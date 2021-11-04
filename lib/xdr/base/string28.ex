@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.String28 do
+defmodule StellarBase.XDR.String28 do
   @moduledoc """
   Representation of Stellar `String28` type.
   """

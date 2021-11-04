@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.ClaimAtomList do
+defmodule StellarBase.XDR.ClaimAtomList do
   @moduledoc """
   Representation of a Stellar `ClaimAtomList` list.
   """
-  alias Stellar.XDR.ClaimAtom
+  alias StellarBase.XDR.ClaimAtom
 
   @behaviour XDR.Declaration
 

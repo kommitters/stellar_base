@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OptionalUInt32 do
+defmodule StellarBase.XDR.OptionalUInt32 do
   @moduledoc """
   Representation of Stellar `OptionalUInt32` type.
   """
-  alias Stellar.XDR.UInt32
+  alias StellarBase.XDR.UInt32
 
   @behaviour XDR.Declaration
 

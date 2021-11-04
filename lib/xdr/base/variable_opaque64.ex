@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.VariableOpaque64 do
+defmodule StellarBase.XDR.VariableOpaque64 do
   @moduledoc """
   Representation of Stellar `VariableOpaque64` type.
   """

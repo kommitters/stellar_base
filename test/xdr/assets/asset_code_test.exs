@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.AssetCodeTest do
+defmodule StellarBase.XDR.AssetCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AssetCode, AssetCode4, AssetType}
+  alias StellarBase.XDR.{AssetCode, AssetCode4, AssetType}
 
   describe "AssetCode" do
     setup do

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.SignerKey do
+defmodule StellarBase.XDR.SignerKey do
   @moduledoc """
   Representation of Stellar `SignerKey` type.
   """
-  alias Stellar.XDR.{UInt256, SignerKeyType}
+  alias StellarBase.XDR.{UInt256, SignerKeyType}
 
   @behaviour XDR.Declaration
 

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.TrustLineAsset do
+defmodule StellarBase.XDR.TrustLineAsset do
   @moduledoc """
   Representation of Stellar `TrustLineAsset` type.
   """
-  alias Stellar.XDR.{AlphaNum4, AlphaNum12, AssetType, Void, PoolID}
+  alias StellarBase.XDR.{AlphaNum4, AlphaNum12, AssetType, Void, PoolID}
 
   @behaviour XDR.Declaration
 

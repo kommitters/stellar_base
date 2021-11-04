@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ManageBuyOfferResult do
+defmodule StellarBase.XDR.Operations.ManageBuyOfferResult do
   @moduledoc """
   Representation of Stellar `ManageBuyOfferResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{ManageOfferSuccessResult, ManageBuyOfferResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{ManageOfferSuccessResult, ManageBuyOfferResultCode}
 
   @behaviour XDR.Declaration
 

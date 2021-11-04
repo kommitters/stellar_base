@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.FeeBumpInnerTx do
+defmodule StellarBase.XDR.FeeBumpInnerTx do
   @moduledoc """
   Representation of Stellar `FeeBumpInnerTx` type.
   """
-  alias Stellar.XDR.{EnvelopeType, TransactionV1Envelope}
+  alias StellarBase.XDR.{EnvelopeType, TransactionV1Envelope}
 
   @behaviour XDR.Declaration
 

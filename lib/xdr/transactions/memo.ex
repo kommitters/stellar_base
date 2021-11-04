@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Memo do
+defmodule StellarBase.XDR.Memo do
   @moduledoc """
   Representation of Stellar `Memo` type.
   """
-  alias Stellar.XDR.{Void, UInt64, Hash, MemoType, String28}
+  alias StellarBase.XDR.{Void, UInt64, Hash, MemoType, String28}
 
   @behaviour XDR.Declaration
 

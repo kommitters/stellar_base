@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ManageDataResult do
+defmodule StellarBase.XDR.Operations.ManageDataResult do
   @moduledoc """
   Representation of Stellar `ManageDataResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.ManageDataResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.ManageDataResultCode
 
   @behaviour XDR.Declaration
 

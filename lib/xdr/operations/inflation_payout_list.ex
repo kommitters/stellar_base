@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.InflationPayoutList do
+defmodule StellarBase.XDR.InflationPayoutList do
   @moduledoc """
   Representation of a Stellar `InflationPayoutList` list.
   """
-  alias Stellar.XDR.InflationPayout
+  alias StellarBase.XDR.InflationPayout
 
   @behaviour XDR.Declaration
 

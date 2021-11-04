@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.String32 do
+defmodule StellarBase.XDR.String32 do
   @moduledoc """
   Representation of Stellar `String32` type.
   """

@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.String28Test do
+defmodule StellarBase.XDR.String28Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.String28
+  alias StellarBase.XDR.String28
 
   describe "String28" do
     setup do

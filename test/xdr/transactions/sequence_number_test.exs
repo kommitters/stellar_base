@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.SequenceNumberTest do
+defmodule StellarBase.XDR.SequenceNumberTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.SequenceNumber
+  alias StellarBase.XDR.SequenceNumber
 
   describe "SequenceNumber" do
     setup do

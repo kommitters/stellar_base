@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.SequenceNumber do
+defmodule StellarBase.XDR.SequenceNumber do
   @moduledoc """
   Representation of Stellar `SequenceNumber` type.
   """
-  alias Stellar.XDR.UInt64
+  alias StellarBase.XDR.UInt64
 
   @behaviour XDR.Declaration
 

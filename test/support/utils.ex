@@ -1,8 +1,8 @@
-defmodule Stellar.Test.Utils do
+defmodule StellarBase.Test.Utils do
   @moduledoc """
   Utils functions for test constructions.
   """
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum12,
     AlphaNum4,
@@ -23,12 +23,12 @@ defmodule Stellar.Test.Utils do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.{Payment, Clawback}
+  alias StellarBase.XDR.Operations.{Payment, Clawback}
 
   @spec ed25519_public_key(pk_key :: binary()) :: UInt256.t()
   def ed25519_public_key(pk_key) do
     pk_key
-    |> Stellar.Ed25519.PublicKey.decode!()
+    |> StellarBase.Ed25519.PublicKey.decode!()
     |> UInt256.new()
   end
 
@@ -37,7 +37,7 @@ defmodule Stellar.Test.Utils do
     key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
     pk_key
-    |> Stellar.Ed25519.PublicKey.decode!()
+    |> StellarBase.Ed25519.PublicKey.decode!()
     |> UInt256.new()
     |> PublicKey.new(key_type)
     |> AccountID.new()
@@ -48,7 +48,7 @@ defmodule Stellar.Test.Utils do
     key_type = CryptoKeyType.new(:KEY_TYPE_ED25519)
 
     pk_key
-    |> Stellar.Ed25519.PublicKey.decode!()
+    |> StellarBase.Ed25519.PublicKey.decode!()
     |> UInt256.new()
     |> MuxedAccount.new(key_type)
   end

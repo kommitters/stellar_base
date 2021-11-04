@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.AssetType do
+defmodule StellarBase.XDR.AssetType do
   @moduledoc """
   Representation of Stellar `AssetType` type.
   """

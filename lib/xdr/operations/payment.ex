@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.Payment do
+defmodule StellarBase.XDR.Operations.Payment do
   @moduledoc """
   Representation of Stellar `Payment` type.
   """
-  alias Stellar.XDR.{Asset, Int64, MuxedAccount}
+  alias StellarBase.XDR.{Asset, Int64, MuxedAccount}
 
   @behaviour XDR.Declaration
 

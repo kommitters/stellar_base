@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.SimplePaymentResult do
+defmodule StellarBase.XDR.Operations.SimplePaymentResult do
   @moduledoc """
   Representation of Stellar `SimplePaymentResult` type.
   """
-  alias Stellar.XDR.{AccountID, Asset, Int64}
+  alias StellarBase.XDR.{AccountID, Asset, Int64}
 
   @behaviour XDR.Declaration
 

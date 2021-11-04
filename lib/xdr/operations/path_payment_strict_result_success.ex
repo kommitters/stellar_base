@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictResultSuccess do
+defmodule StellarBase.XDR.Operations.PathPaymentStrictResultSuccess do
   @moduledoc """
   Representation of Stellar `PathPaymentStrictResultSuccess` type.
   """
-  alias Stellar.XDR.ClaimAtomList
-  alias Stellar.XDR.Operations.SimplePaymentResult
+  alias StellarBase.XDR.ClaimAtomList
+  alias StellarBase.XDR.Operations.SimplePaymentResult
 
   @behaviour XDR.Declaration
 

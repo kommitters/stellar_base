@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.SetOptionsTest do
+defmodule StellarBase.XDR.Operations.SetOptionsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     OptionalAccountID,
     OptionalString32,
@@ -16,7 +16,7 @@ defmodule Stellar.XDR.Operations.SetOptionsTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.SetOptions
+  alias StellarBase.XDR.Operations.SetOptions
 
   describe "SetOptions Operation" do
     setup do
@@ -24,7 +24,7 @@ defmodule Stellar.XDR.Operations.SetOptionsTest do
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(account_type)
         |> AccountID.new()
@@ -34,7 +34,7 @@ defmodule Stellar.XDR.Operations.SetOptionsTest do
 
       signer =
         "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> SignerKey.new(signer_type)
         |> Signer.new(signer_weight)

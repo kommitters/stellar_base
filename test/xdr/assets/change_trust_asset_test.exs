@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ChangeTrustAssetTest do
+defmodule StellarBase.XDR.ChangeTrustAssetTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     Asset,
@@ -17,14 +17,14 @@ defmodule Stellar.XDR.ChangeTrustAssetTest do
     Void
   }
 
-  alias Stellar.XDR.LiquidityPoolConstantProductParameters, as: LiquidityPoolConstant
+  alias StellarBase.XDR.LiquidityPoolConstantProductParameters, as: LiquidityPoolConstant
 
   setup_all do
     key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
     issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-      |> Stellar.Ed25519.PublicKey.decode!()
+      |> StellarBase.Ed25519.PublicKey.decode!()
       |> UInt256.new()
       |> PublicKey.new(key_type)
       |> AccountID.new()

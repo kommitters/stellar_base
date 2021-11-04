@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.ClaimLiquidityAtomTest do
+defmodule StellarBase.XDR.ClaimLiquidityAtomTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{ClaimLiquidityAtom, Int64, PoolID}
+  alias StellarBase.XDR.{ClaimLiquidityAtom, Int64, PoolID}
 
   describe "ClaimLiquidityAtom" do
     setup do

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.LiquidityPoolConstantProductParameters do
+defmodule StellarBase.XDR.LiquidityPoolConstantProductParameters do
   @moduledoc """
   Representation of Stellar `LiquidityPoolConstantProductParameters` type.
   """
-  alias Stellar.XDR.{Asset, Int32}
+  alias StellarBase.XDR.{Asset, Int32}
 
   @behaviour XDR.Declaration
 

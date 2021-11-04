@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.SignatureTest do
+defmodule StellarBase.XDR.SignatureTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Signature
+  alias StellarBase.XDR.Signature
 
   describe "Signature" do
     setup do

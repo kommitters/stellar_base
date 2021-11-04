@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.BeginSponsoringFutureReservesResultCodeTest do
+defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReservesResultCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Operations.BeginSponsoringFutureReservesResultCode
+  alias StellarBase.XDR.Operations.BeginSponsoringFutureReservesResultCode
 
   describe "BeginSponsoringFutureReservesResultCode" do
     setup do

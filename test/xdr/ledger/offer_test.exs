@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Ledger.OfferTest do
+defmodule StellarBase.XDR.Ledger.OfferTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AccountID, Int64, PublicKey, PublicKeyType, UInt256}
-  alias Stellar.XDR.Ledger.Offer
+  alias StellarBase.XDR.{AccountID, Int64, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.Ledger.Offer
 
   describe "Ledger Offer" do
     setup do
@@ -10,7 +10,7 @@ defmodule Stellar.XDR.Ledger.OfferTest do
 
       seller_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

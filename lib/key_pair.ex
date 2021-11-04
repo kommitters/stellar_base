@@ -1,7 +1,7 @@
-defmodule Stellar.KeyPair do
+defmodule StellarBase.KeyPair do
   @moduledoc false
 
-  @behaviour Stellar.KeyPair.Spec
+  @behaviour StellarBase.KeyPair.Spec
 
   @impl true
   def random, do: current_impl().random()
@@ -10,6 +10,6 @@ defmodule Stellar.KeyPair do
   def from_secret(secret), do: current_impl().from_secret(secret)
 
   defp current_impl do
-    Application.get_env(:stellar_base, :keypair_generator, Stellar.KeyPair.Default)
+    Application.get_env(:stellar_base, :keypair_generator, StellarBase.KeyPair.Default)
   end
 end

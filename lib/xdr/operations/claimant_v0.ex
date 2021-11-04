@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.ClaimantV0 do
+defmodule StellarBase.XDR.ClaimantV0 do
   @moduledoc """
   Representation of Stellar `ClaimantV0` type.
   """
-  alias Stellar.XDR.{AccountID, ClaimPredicate}
+  alias StellarBase.XDR.{AccountID, ClaimPredicate}
 
   @behaviour XDR.Declaration
 

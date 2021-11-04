@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.SignerKeyType do
+defmodule StellarBase.XDR.SignerKeyType do
   @moduledoc """
   Representation of Stellar `SignerKeyType` type.
   """

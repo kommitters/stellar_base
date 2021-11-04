@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OptionalAccountID do
+defmodule StellarBase.XDR.OptionalAccountID do
   @moduledoc """
   Representation of Stellar `OptionalAccountID` type.
   """
-  alias Stellar.XDR.AccountID
+  alias StellarBase.XDR.AccountID
 
   @behaviour XDR.Declaration
 

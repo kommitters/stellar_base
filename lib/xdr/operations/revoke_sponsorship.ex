@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.RevokeSponsorship do
+defmodule StellarBase.XDR.Operations.RevokeSponsorship do
   @moduledoc """
   Representation of Stellar `RevokeSponsorship` type.
   """
-  alias Stellar.XDR.{LedgerKey, RevokeSponsorshipType}
-  alias Stellar.XDR.Ledger.Signer
+  alias StellarBase.XDR.{LedgerKey, RevokeSponsorshipType}
+  alias StellarBase.XDR.Ledger.Signer
 
   @behaviour XDR.Declaration
 

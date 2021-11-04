@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.PublicKey do
+defmodule StellarBase.XDR.PublicKey do
   @moduledoc """
   Representation of Stellar `PublicKey` type.
   """
-  alias Stellar.XDR.{UInt256, PublicKeyType}
+  alias StellarBase.XDR.{UInt256, PublicKeyType}
 
   @behaviour XDR.Declaration
 

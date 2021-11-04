@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.OperationInnerResult do
+defmodule StellarBase.XDR.Operations.OperationInnerResult do
   use ExUnit.Case
 
-  alias Stellar.XDR.{OperationInnerResult, OperationType, Void}
+  alias StellarBase.XDR.{OperationInnerResult, OperationType, Void}
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     ClawbackResult,
     ClawbackResultCode,
     CreateAccountResult,

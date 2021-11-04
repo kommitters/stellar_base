@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ClawbackClaimableBalanceResult do
+defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResult do
   @moduledoc """
   Representation of Stellar `ClawbackClaimableBalanceResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.ClawbackClaimableBalanceResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.ClawbackClaimableBalanceResultCode
 
   @behaviour XDR.Declaration
 

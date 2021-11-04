@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.MuxedAccountMed25519Test do
+defmodule StellarBase.XDR.MuxedAccountMed25519Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.{UInt64, UInt256, MuxedAccountMed25519}
+  alias StellarBase.XDR.{UInt64, UInt256, MuxedAccountMed25519}
 
-  describe "Stellar.XDR.MuxedAccountMed25519" do
+  describe "StellarBase.XDR.MuxedAccountMed25519" do
     setup do
       account_id =
         UInt256.new(
@@ -51,7 +51,7 @@ defmodule Stellar.XDR.MuxedAccountMed25519Test do
 
     test "invalid ed25519 value" do
       assert_raise FunctionClauseError,
-                   "no function clause matching in Stellar.XDR.MuxedAccountMed25519.new/2",
+                   "no function clause matching in StellarBase.XDR.MuxedAccountMed25519.new/2",
                    fn ->
                      account_derived_id = UInt64.new(123)
                      account_id = UInt64.new(321)

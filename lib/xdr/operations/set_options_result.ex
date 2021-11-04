@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.SetOptionsResult do
+defmodule StellarBase.XDR.Operations.SetOptionsResult do
   @moduledoc """
   Representation of Stellar `SetOptionsResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.SetOptionsResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.SetOptionsResultCode
 
   @behaviour XDR.Declaration
 

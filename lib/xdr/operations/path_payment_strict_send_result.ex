@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictSendResult do
+defmodule StellarBase.XDR.Operations.PathPaymentStrictSendResult do
   @moduledoc """
   Representation of Stellar `PathPaymentStrictSendResult` type.
   """
-  alias Stellar.XDR.{Asset, Void}
+  alias StellarBase.XDR.{Asset, Void}
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     PathPaymentStrictSendResultCode,
     PathPaymentStrictResultSuccess
   }

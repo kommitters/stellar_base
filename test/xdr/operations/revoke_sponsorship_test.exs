@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.RevokeSponsorshipTest do
+defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     LedgerEntryType,
     LedgerKey,
@@ -13,16 +13,16 @@ defmodule Stellar.XDR.Operations.RevokeSponsorshipTest do
     UInt256
   }
 
-  alias Stellar.XDR.Ledger.{Account, Signer}
-  alias Stellar.Ed25519.SecretSeed
-  alias Stellar.XDR.Operations.RevokeSponsorship
+  alias StellarBase.XDR.Ledger.{Account, Signer}
+  alias StellarBase.Ed25519.SecretSeed
+  alias StellarBase.XDR.Operations.RevokeSponsorship
 
   setup do
     pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
     account_id =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-      |> Stellar.Ed25519.PublicKey.decode!()
+      |> StellarBase.Ed25519.PublicKey.decode!()
       |> UInt256.new()
       |> PublicKey.new(pk_type)
       |> AccountID.new()

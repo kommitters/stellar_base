@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.CreateClaimableBalanceTest do
+defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     Asset,
@@ -20,7 +20,7 @@ defmodule Stellar.XDR.Operations.CreateClaimableBalanceTest do
     Void
   }
 
-  alias Stellar.XDR.Operations.CreateClaimableBalance
+  alias StellarBase.XDR.Operations.CreateClaimableBalance
 
   describe "CreateClaimableBalance Operation" do
     setup do
@@ -28,7 +28,7 @@ defmodule Stellar.XDR.Operations.CreateClaimableBalanceTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
@@ -105,7 +105,7 @@ defmodule Stellar.XDR.Operations.CreateClaimableBalanceTest do
     predicate = create_claim_predicate(claim_predicate_type)
 
     public_key
-    |> Stellar.Ed25519.PublicKey.decode!()
+    |> StellarBase.Ed25519.PublicKey.decode!()
     |> UInt256.new()
     |> PublicKey.new(pk_type)
     |> AccountID.new()

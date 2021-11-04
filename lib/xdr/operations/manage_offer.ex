@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ManageOffer do
+defmodule StellarBase.XDR.Operations.ManageOffer do
   @moduledoc """
   Representation of Stellar `ManageOffer` type.
   """
-  alias Stellar.XDR.{OfferEntry, Void}
-  alias Stellar.XDR.Operations.ManageOfferEffect
+  alias StellarBase.XDR.{OfferEntry, Void}
+  alias StellarBase.XDR.Operations.ManageOfferEffect
 
   @behaviour XDR.Declaration
 

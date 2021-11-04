@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OptionalSignerTest do
+defmodule StellarBase.XDR.OptionalSignerTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{Signer, OptionalSigner, SignerKey, SignerKeyType, UInt32, UInt256}
-  alias Stellar.Ed25519.PublicKey
+  alias StellarBase.XDR.{Signer, OptionalSigner, SignerKey, SignerKeyType, UInt32, UInt256}
+  alias StellarBase.Ed25519.PublicKey
 
   describe "OptionalSigner" do
     setup do

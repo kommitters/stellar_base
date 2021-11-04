@@ -1,13 +1,13 @@
-defmodule Stellar.XDR.AlphaNum4Test do
+defmodule StellarBase.XDR.AlphaNum4Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AccountID, AlphaNum4, AssetCode4, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, AlphaNum4, AssetCode4, PublicKey, PublicKeyType, UInt256}
 
   describe "AlphaNum4" do
     setup do
       pk_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
       issuer =

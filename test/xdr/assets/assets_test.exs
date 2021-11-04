@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.AssetsTest do
+defmodule StellarBase.XDR.AssetsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     AlphaNum12,
@@ -100,7 +100,7 @@ defmodule Stellar.XDR.AssetsTest do
   defp create_issuer(public_key) do
     pk_key =
       public_key
-      |> Stellar.Ed25519.PublicKey.decode!()
+      |> StellarBase.Ed25519.PublicKey.decode!()
       |> UInt256.new()
 
     PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
