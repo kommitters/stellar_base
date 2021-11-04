@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.EndSponsoringFutureReservesResultCode do
+defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultCode do
   @moduledoc """
   Representation of Stellar `EndSponsoringFutureReservesResultCode` type.
   """

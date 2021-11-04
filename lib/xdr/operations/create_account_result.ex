@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.CreateAccountResult do
+defmodule StellarBase.XDR.Operations.CreateAccountResult do
   @moduledoc """
   Representation of Stellar `CreateAccountResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.CreateAccountResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.CreateAccountResultCode
 
   @behaviour XDR.Declaration
 

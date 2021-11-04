@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveResultTest do
+defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     ClaimAtom,
     ClaimAtomType,
     ClaimOfferAtom,
@@ -11,7 +11,7 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictReceiveResultTest do
     Int64
   }
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     PathPaymentStrictReceiveResult,
     PathPaymentStrictReceiveResultCode,
     PathPaymentStrictResultSuccess,

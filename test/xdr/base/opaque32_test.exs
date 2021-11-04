@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Opaque32Test do
+defmodule StellarBase.XDR.Opaque32Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.Opaque32
+  alias StellarBase.XDR.Opaque32
 
   describe "Opaque32" do
     setup do

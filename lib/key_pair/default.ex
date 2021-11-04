@@ -1,11 +1,11 @@
-defmodule Stellar.KeyPair.Default do
+defmodule StellarBase.KeyPair.Default do
   @moduledoc """
   Functions for Ed25519 KeyPairs.
   """
 
-  alias Stellar.Ed25519.{PublicKey, SecretSeed}
+  alias StellarBase.Ed25519.{PublicKey, SecretSeed}
 
-  @behaviour Stellar.KeyPair.Spec
+  @behaviour StellarBase.KeyPair.Spec
 
   @impl true
   def random do

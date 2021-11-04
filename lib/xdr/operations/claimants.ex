@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Claimants do
+defmodule StellarBase.XDR.Claimants do
   @moduledoc """
   Representation of a Stellar `Claimants` list.
   """
-  alias Stellar.XDR.Claimant
+  alias StellarBase.XDR.Claimant
 
   @behaviour XDR.Declaration
 

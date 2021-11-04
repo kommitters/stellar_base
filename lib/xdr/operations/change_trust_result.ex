@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ChangeTrustResult do
+defmodule StellarBase.XDR.Operations.ChangeTrustResult do
   @moduledoc """
   Representation of Stellar `ChangeTrustResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.ChangeTrustResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.ChangeTrustResultCode
 
   @behaviour XDR.Declaration
 

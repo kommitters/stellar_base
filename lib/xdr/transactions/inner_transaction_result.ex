@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.InnerTransactionResult do
+defmodule StellarBase.XDR.InnerTransactionResult do
   @moduledoc """
   Representation of Stellar `InnerTransactionResult` type.
   InnerTransactionResult must be binary compatible with TransactionResult.
   """
-  alias Stellar.XDR.{Int64, TxResultV0}
-  alias Stellar.XDR.Ext
+  alias StellarBase.XDR.{Int64, TxResultV0}
+  alias StellarBase.XDR.Ext
 
   @behaviour XDR.Declaration
 

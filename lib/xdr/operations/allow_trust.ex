@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.AllowTrust do
+defmodule StellarBase.XDR.Operations.AllowTrust do
   @moduledoc """
   Representation of Stellar `AllowTrust` type.
   """
-  alias Stellar.XDR.{AccountID, Asset, UInt32}
+  alias StellarBase.XDR.{AccountID, Asset, UInt32}
 
   @behaviour XDR.Declaration
 

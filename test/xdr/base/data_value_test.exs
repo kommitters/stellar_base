@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.DataValueTest do
+defmodule StellarBase.XDR.DataValueTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.DataValue
+  alias StellarBase.XDR.DataValue
 
   describe "DataValue" do
     setup do

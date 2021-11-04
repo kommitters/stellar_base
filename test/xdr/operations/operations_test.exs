@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OperationsTest do
+defmodule StellarBase.XDR.OperationsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     CryptoKeyType,
     Int64,
@@ -16,7 +16,7 @@ defmodule Stellar.XDR.OperationsTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.CreateAccount
+  alias StellarBase.XDR.Operations.CreateAccount
 
   describe "Operations" do
     setup do

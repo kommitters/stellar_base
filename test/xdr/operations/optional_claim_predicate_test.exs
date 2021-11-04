@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OptionalClaimPredicateTest do
+defmodule StellarBase.XDR.OptionalClaimPredicateTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{ClaimPredicate, ClaimPredicateType, OptionalClaimPredicate, Void}
+  alias StellarBase.XDR.{ClaimPredicate, ClaimPredicateType, OptionalClaimPredicate, Void}
 
   describe "OptionalClaimPredicate" do
     setup do

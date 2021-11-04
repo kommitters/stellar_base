@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.InflationResultCode do
+defmodule StellarBase.XDR.Operations.InflationResultCode do
   @moduledoc """
   Representation of Stellar `InflationResultCode` type.
   """

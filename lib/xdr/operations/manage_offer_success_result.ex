@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ManageOfferSuccessResult do
+defmodule StellarBase.XDR.Operations.ManageOfferSuccessResult do
   @moduledoc """
   Representation of Stellar `ManageOfferSuccessResult` type.
   """
-  alias Stellar.XDR.ClaimAtomList
-  alias Stellar.XDR.Operations.ManageOffer
+  alias StellarBase.XDR.ClaimAtomList
+  alias StellarBase.XDR.Operations.ManageOffer
 
   @behaviour XDR.Declaration
 

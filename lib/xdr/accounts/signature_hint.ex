@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.SignatureHint do
+defmodule StellarBase.XDR.SignatureHint do
   @moduledoc """
   Representation of Stellar `SignatureHint` type.
   """
-  alias Stellar.XDR.Opaque4
+  alias StellarBase.XDR.Opaque4
 
   @behaviour XDR.Declaration
 

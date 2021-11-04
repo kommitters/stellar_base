@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.VariableOpaque64Test do
+defmodule StellarBase.XDR.VariableOpaque64Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.VariableOpaque64
+  alias StellarBase.XDR.VariableOpaque64
 
   describe "VariableOpaque64" do
     setup do

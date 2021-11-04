@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Opaque4Test do
+defmodule StellarBase.XDR.Opaque4Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.Opaque4
+  alias StellarBase.XDR.Opaque4
 
   describe "Opaque4" do
     setup do

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.ManageData do
+defmodule StellarBase.XDR.Operations.ManageData do
   @moduledoc """
   Representation of Stellar `ManageData` type.
   """
-  alias Stellar.XDR.{OptionalDataValue, String64}
+  alias StellarBase.XDR.{OptionalDataValue, String64}
 
   @behaviour XDR.Declaration
 

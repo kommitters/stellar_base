@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.CryptoKeyType do
+defmodule StellarBase.XDR.CryptoKeyType do
   @moduledoc """
   Representation of Stellar `CryptoKeyType` type.
   """

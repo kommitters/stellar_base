@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.TransactionResultCodeTest do
+defmodule StellarBase.XDR.TransactionResultCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.TransactionResultCode
+  alias StellarBase.XDR.TransactionResultCode
 
   describe "TransactionResultCode" do
     setup do

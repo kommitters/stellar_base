@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.ManageDataResultCode do
+defmodule StellarBase.XDR.Operations.ManageDataResultCode do
   @moduledoc """
   Representation of Stellar `ManageDataResultCode` type.
   """

@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.LiquidityPoolTypeTest do
+defmodule StellarBase.XDR.LiquidityPoolTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.LiquidityPoolType
+  alias StellarBase.XDR.LiquidityPoolType
 
   describe "LiquidityPoolType" do
     setup do

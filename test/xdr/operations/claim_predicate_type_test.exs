@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ClaimPredicateTypeTest do
+defmodule StellarBase.XDR.ClaimPredicateTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.ClaimPredicateType
+  alias StellarBase.XDR.ClaimPredicateType
 
   describe "Unconditional ClaimPredicateType" do
     setup do

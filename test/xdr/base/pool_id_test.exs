@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.PoolIDTest do
+defmodule StellarBase.XDR.PoolIDTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.PoolID
+  alias StellarBase.XDR.PoolID
 
   describe "PoolID" do
     setup do

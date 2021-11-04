@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.ClaimantType do
+defmodule StellarBase.XDR.ClaimantType do
   @moduledoc """
   Representation of Stellar `ClaimantType` type.
   """

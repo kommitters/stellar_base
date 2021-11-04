@@ -1,9 +1,9 @@
-defmodule Stellar.Ed25519.StrKeyTest do
+defmodule StellarBase.Ed25519.StrKeyTest do
   use ExUnit.Case
 
   import Bitwise
 
-  alias Stellar.Ed25519.StrKey
+  alias StellarBase.Ed25519.StrKey
 
   @pk_version_bytes 6 <<< 3
   @sk_version_bytes 18 <<< 3

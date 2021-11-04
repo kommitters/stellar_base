@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.ClaimableBalanceIDType do
+defmodule StellarBase.XDR.ClaimableBalanceIDType do
   @moduledoc """
   Representation of Stellar `ClaimableBalanceIDType` type.
   """

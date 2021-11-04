@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.TimeBoundsTest do
+defmodule StellarBase.XDR.TimeBoundsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{TimePoint, TimeBounds}
+  alias StellarBase.XDR.{TimePoint, TimeBounds}
 
   describe "TimeBounds" do
     setup do

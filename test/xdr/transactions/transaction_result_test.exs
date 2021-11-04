@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.TransactionResultTest do
+defmodule StellarBase.XDR.TransactionResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     Ext,
     Hash,
     InnerTransactionResult,
@@ -19,7 +19,7 @@ defmodule Stellar.XDR.TransactionResultTest do
     Void
   }
 
-  alias Stellar.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
+  alias StellarBase.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
 
   describe "InnerTransactionResult" do
     setup do

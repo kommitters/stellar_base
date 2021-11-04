@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Assets do
+defmodule StellarBase.XDR.Assets do
   @moduledoc """
   Representation of a Stellar `Assets` list.
   """
-  alias Stellar.XDR.Asset
+  alias StellarBase.XDR.Asset
 
   @behaviour XDR.Declaration
 

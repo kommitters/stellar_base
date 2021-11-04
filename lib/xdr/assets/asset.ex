@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Asset do
+defmodule StellarBase.XDR.Asset do
   @moduledoc """
   Representation of Stellar `Asset` type.
   """
-  alias Stellar.XDR.{AlphaNum4, AlphaNum12, AssetType, Void}
+  alias StellarBase.XDR.{AlphaNum4, AlphaNum12, AssetType, Void}
 
   @behaviour XDR.Declaration
 

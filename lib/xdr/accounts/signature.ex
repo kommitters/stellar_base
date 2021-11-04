@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Signature do
+defmodule StellarBase.XDR.Signature do
   @moduledoc """
   Representation of Stellar `Signature` type.
   """
-  alias Stellar.XDR.VariableOpaque64
+  alias StellarBase.XDR.VariableOpaque64
 
   @behaviour XDR.Declaration
 

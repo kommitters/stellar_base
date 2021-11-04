@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OperationResultCodeTest do
+defmodule StellarBase.XDR.OperationResultCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.OperationResultCode
+  alias StellarBase.XDR.OperationResultCode
 
   describe "OperationResultCode" do
     setup do

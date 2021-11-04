@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.AccountMerge do
+defmodule StellarBase.XDR.Operations.AccountMerge do
   @moduledoc """
   Representation of Stellar `AccountMerge` type.
   """
-  alias Stellar.XDR.MuxedAccount
+  alias StellarBase.XDR.MuxedAccount
 
   @behaviour XDR.Declaration
 

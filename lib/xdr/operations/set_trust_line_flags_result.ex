@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.SetTrustLineFlagsResult do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResult do
   @moduledoc """
   Representation of Stellar `SetTrustLineFlagsResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.SetTrustLineFlagsResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.SetTrustLineFlagsResultCode
 
   @behaviour XDR.Declaration
 

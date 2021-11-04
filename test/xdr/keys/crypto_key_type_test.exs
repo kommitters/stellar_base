@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.CryptoKeyTypeTest do
+defmodule StellarBase.XDR.CryptoKeyTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.CryptoKeyType
+  alias StellarBase.XDR.CryptoKeyType
 
   describe "CryptoKeyType" do
     setup do

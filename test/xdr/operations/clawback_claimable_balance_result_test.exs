@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ClawbackClaimableBalanceResultTest do
+defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
+  alias StellarBase.XDR.Void
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     ClawbackClaimableBalanceResult,
     ClawbackClaimableBalanceResultCode
   }

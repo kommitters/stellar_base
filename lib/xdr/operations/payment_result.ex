@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.PaymentResult do
+defmodule StellarBase.XDR.Operations.PaymentResult do
   @moduledoc """
   Representation of Stellar `PaymentResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.PaymentResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.PaymentResultCode
 
   @behaviour XDR.Declaration
 

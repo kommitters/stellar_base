@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.Clawback do
+defmodule StellarBase.XDR.Operations.Clawback do
   @moduledoc """
   Representation of Stellar `Clawback` type.
   """
-  alias Stellar.XDR.{Asset, Int64, MuxedAccount}
+  alias StellarBase.XDR.{Asset, Int64, MuxedAccount}
 
   @behaviour XDR.Declaration
 

@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.OfferEntry do
+defmodule StellarBase.XDR.OfferEntry do
   @moduledoc """
   Representation of Stellar `OfferEntry` type.
 
@@ -7,8 +7,8 @@ defmodule Stellar.XDR.OfferEntry do
 
   For example an Offer is selling 10A where 1A is priced at 1.5B
   """
-  alias Stellar.XDR.{AccountID, Asset, Int64, Price}
-  alias Stellar.XDR.Ext
+  alias StellarBase.XDR.{AccountID, Asset, Int64, Price}
+  alias StellarBase.XDR.Ext
 
   @behaviour XDR.Declaration
 

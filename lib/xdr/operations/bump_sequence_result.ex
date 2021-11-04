@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.BumpSequenceResult do
+defmodule StellarBase.XDR.Operations.BumpSequenceResult do
   @moduledoc """
   Representation of Stellar `BumpSequenceResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.BumpSequenceResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.BumpSequenceResultCode
 
   @behaviour XDR.Declaration
 

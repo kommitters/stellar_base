@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.ClaimOfferAtomTest do
+defmodule StellarBase.XDR.ClaimOfferAtomTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{ClaimOfferAtom, Int64}
+  alias StellarBase.XDR.{ClaimOfferAtom, Int64}
 
   describe "ClaimOfferAtom" do
     setup do

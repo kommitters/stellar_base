@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.UInt256 do
+defmodule StellarBase.XDR.UInt256 do
   @moduledoc """
   Representation of Stellar `UInt256` type.
   """
-  alias Stellar.XDR.Opaque32
+  alias StellarBase.XDR.Opaque32
 
   @behaviour XDR.Declaration
 

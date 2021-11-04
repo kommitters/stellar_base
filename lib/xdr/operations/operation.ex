@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operation do
+defmodule StellarBase.XDR.Operation do
   @moduledoc """
   Representation of Stellar `Operation` type.
   """
-  alias Stellar.XDR.{OptionalMuxedAccount, OperationBody}
+  alias StellarBase.XDR.{OptionalMuxedAccount, OperationBody}
 
   @behaviour XDR.Declaration
 

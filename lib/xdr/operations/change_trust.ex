@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.ChangeTrust do
+defmodule StellarBase.XDR.Operations.ChangeTrust do
   @moduledoc """
   Representation of Stellar `ChangeTrust` type.
   """
-  alias Stellar.XDR.{ChangeTrustAsset, Int64}
+  alias StellarBase.XDR.{ChangeTrustAsset, Int64}
 
   @behaviour XDR.Declaration
 

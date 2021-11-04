@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ClaimAtomTypeTest do
+defmodule StellarBase.XDR.ClaimAtomTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.ClaimAtomType
+  alias StellarBase.XDR.ClaimAtomType
 
   describe "ClaimAtomType" do
     setup do

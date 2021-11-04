@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.UInt256Test do
+defmodule StellarBase.XDR.UInt256Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.UInt256
+  alias StellarBase.XDR.UInt256
 
   describe "UInt256" do
     setup do

@@ -1,7 +1,7 @@
-defmodule Stellar.Ed25519.PublicKeyTest do
+defmodule StellarBase.Ed25519.PublicKeyTest do
   use ExUnit.Case
 
-  alias Stellar.Ed25519.PublicKey
+  alias StellarBase.Ed25519.PublicKey
 
   describe "PublicKey" do
     setup do

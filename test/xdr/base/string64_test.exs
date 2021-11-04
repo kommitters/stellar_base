@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.String64Test do
+defmodule StellarBase.XDR.String64Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.String64
+  alias StellarBase.XDR.String64
 
   describe "String64" do
     setup do

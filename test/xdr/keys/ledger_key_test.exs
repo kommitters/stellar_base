@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.LedgerKeyTest do
+defmodule StellarBase.XDR.LedgerKeyTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     Int64,
     LedgerEntryType,
@@ -12,14 +12,14 @@ defmodule Stellar.XDR.LedgerKeyTest do
     UInt256
   }
 
-  alias Stellar.XDR.Ledger.{Account, Data, Offer}
+  alias StellarBase.XDR.Ledger.{Account, Data, Offer}
 
   setup do
     pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
     account_id =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-      |> Stellar.Ed25519.PublicKey.decode!()
+      |> StellarBase.Ed25519.PublicKey.decode!()
       |> UInt256.new()
       |> PublicKey.new(pk_type)
       |> AccountID.new()

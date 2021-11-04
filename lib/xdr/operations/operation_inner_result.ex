@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.OperationInnerResult do
+defmodule StellarBase.XDR.OperationInnerResult do
   @moduledoc """
   Representation of Stellar `OperationInnerResult` type.
   """
-  alias Stellar.XDR.OperationType
+  alias StellarBase.XDR.OperationType
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     AccountMergeResult,
     AllowTrustResult,
     BeginSponsoringFutureReservesResult,

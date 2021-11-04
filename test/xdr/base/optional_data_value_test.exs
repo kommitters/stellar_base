@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OptionalDataValueTest do
+defmodule StellarBase.XDR.OptionalDataValueTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{DataValue, OptionalDataValue}
+  alias StellarBase.XDR.{DataValue, OptionalDataValue}
 
   describe "OptionalDataValue" do
     setup do

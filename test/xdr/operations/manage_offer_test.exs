@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.Operations.ManageOfferTest do
+defmodule StellarBase.XDR.Operations.ManageOfferTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{Ext, Int32, Int64, OfferEntry, Price}
-  alias Stellar.XDR.Operations.{ManageOffer, ManageOfferEffect}
+  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price}
+  alias StellarBase.XDR.Operations.{ManageOffer, ManageOfferEffect}
 
   describe "ManageOffer" do
     setup do

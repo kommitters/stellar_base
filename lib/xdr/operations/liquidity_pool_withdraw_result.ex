@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.LiquidityPoolWithdrawResult do
+defmodule StellarBase.XDR.Operations.LiquidityPoolWithdrawResult do
   @moduledoc """
   Representation of Stellar `LiquidityPoolWithdrawResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.LiquidityPoolWithdrawResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.LiquidityPoolWithdrawResultCode
 
   @behaviour XDR.Declaration
 

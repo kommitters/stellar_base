@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.InflationResult do
+defmodule StellarBase.XDR.Operations.InflationResult do
   @moduledoc """
   Representation of Stellar `InflationResult` type.
   """
-  alias Stellar.XDR.{InflationPayoutList, Void}
-  alias Stellar.XDR.Operations.InflationResultCode
+  alias StellarBase.XDR.{InflationPayoutList, Void}
+  alias StellarBase.XDR.Operations.InflationResultCode
 
   @behaviour XDR.Declaration
 

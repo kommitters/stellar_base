@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.TransactionSignaturePayloadTaggedTransactionTest do
+defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     EnvelopeType,
     Ext,
     FeeBumpInnerTx,
@@ -24,7 +24,7 @@ defmodule Stellar.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     UInt64
   }
 
-  alias Stellar.XDR.TransactionSignaturePayloadTaggedTransaction, as: TaggedTransaction
+  alias StellarBase.XDR.TransactionSignaturePayloadTaggedTransaction, as: TaggedTransaction
 
   setup do
     # Seq number

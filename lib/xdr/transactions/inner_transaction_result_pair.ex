@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.InnerTransactionResultPair do
+defmodule StellarBase.XDR.InnerTransactionResultPair do
   @moduledoc """
   Representation of Stellar `InnerTransactionResultPair` type.
   """
-  alias Stellar.XDR.{Hash, InnerTransactionResult}
+  alias StellarBase.XDR.{Hash, InnerTransactionResult}
 
   @behaviour XDR.Declaration
 

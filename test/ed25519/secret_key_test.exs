@@ -1,7 +1,7 @@
-defmodule Stellar.Ed25519.SecretSeedTest do
+defmodule StellarBase.Ed25519.SecretSeedTest do
   use ExUnit.Case
 
-  alias Stellar.Ed25519.SecretSeed
+  alias StellarBase.Ed25519.SecretSeed
 
   describe "PublicKey" do
     setup do

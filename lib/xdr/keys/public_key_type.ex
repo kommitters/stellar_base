@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.PublicKeyType do
+defmodule StellarBase.XDR.PublicKeyType do
   @moduledoc """
   Representation of Stellar `PublicKeyType` type.
   """

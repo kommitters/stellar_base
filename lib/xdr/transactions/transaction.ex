@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Transaction do
+defmodule StellarBase.XDR.Transaction do
   @moduledoc """
   Representation of Stellar `Transaction` type.
   """
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     Ext,
     Memo,
     MuxedAccount,

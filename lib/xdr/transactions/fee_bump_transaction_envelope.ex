@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.FeeBumpTransactionEnvelope do
+defmodule StellarBase.XDR.FeeBumpTransactionEnvelope do
   @moduledoc """
   Representation of Stellar `FeeBumpTransactionEnvelope` type.
   """
-  alias Stellar.XDR.{DecoratedSignatures, FeeBumpTransaction}
+  alias StellarBase.XDR.{DecoratedSignatures, FeeBumpTransaction}
 
   @behaviour XDR.Declaration
 

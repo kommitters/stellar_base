@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.SetOptionsResultCode do
+defmodule StellarBase.XDR.Operations.SetOptionsResultCode do
   @moduledoc """
   Representation of Stellar `SetOptionsResultCode` type.
   """

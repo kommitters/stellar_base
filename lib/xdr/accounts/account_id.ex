@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.AccountID do
+defmodule StellarBase.XDR.AccountID do
   @moduledoc """
   Representation of Stellar `AccountID` type.
   """
-  alias Stellar.XDR.PublicKey
+  alias StellarBase.XDR.PublicKey
 
   @behaviour XDR.Declaration
 

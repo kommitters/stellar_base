@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Ledger.TrustLineTest do
+defmodule StellarBase.XDR.Ledger.TrustLineTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     AssetCode4,
@@ -12,7 +12,7 @@ defmodule Stellar.XDR.Ledger.TrustLineTest do
     UInt256
   }
 
-  alias Stellar.XDR.Ledger.TrustLine
+  alias StellarBase.XDR.Ledger.TrustLine
 
   describe "Ledger TrustLine" do
     setup do
@@ -20,14 +20,14 @@ defmodule Stellar.XDR.Ledger.TrustLineTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

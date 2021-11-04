@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.SetTrustLineFlags do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlags do
   @moduledoc """
   Representation of Stellar `SetTrustLineFlags` type.
   """
-  alias Stellar.XDR.{AccountID, Asset, UInt32}
+  alias StellarBase.XDR.{AccountID, Asset, UInt32}
 
   @behaviour XDR.Declaration
 

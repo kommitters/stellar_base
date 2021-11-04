@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.AlphaNum12 do
+defmodule StellarBase.XDR.AlphaNum12 do
   @moduledoc """
   Representation of Stellar `AlphaNum12` type.
   """
-  alias Stellar.XDR.{AccountID, AssetCode12}
+  alias StellarBase.XDR.{AccountID, AssetCode12}
 
   @behaviour XDR.Declaration
 

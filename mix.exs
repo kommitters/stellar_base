@@ -1,4 +1,4 @@
-defmodule Stellar.MixProject do
+defmodule StellarBase.MixProject do
   use Mix.Project
 
   @github_url "https://github.com/kommitters/stellar_base"

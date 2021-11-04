@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.CreateAccountResultCode do
+defmodule StellarBase.XDR.Operations.CreateAccountResultCode do
   @moduledoc """
   Representation of Stellar `CreateAccountResultCode` type.
   """

@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.HashTest do
+defmodule StellarBase.XDR.HashTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Hash
+  alias StellarBase.XDR.Hash
 
   describe "Hash" do
     setup do

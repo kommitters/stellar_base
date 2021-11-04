@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.LedgerEntryType do
+defmodule StellarBase.XDR.LedgerEntryType do
   @moduledoc """
   Representation of Stellar `LedgerEntryType` type.
   """

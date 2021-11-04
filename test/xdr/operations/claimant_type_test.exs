@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ClaimantTypeTest do
+defmodule StellarBase.XDR.ClaimantTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.ClaimantType
+  alias StellarBase.XDR.ClaimantType
 
   describe "ClaimantType" do
     setup do
