@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0 (05.11.2021)
+* Replace main namespace from Stellar to StellarBase
+
 ## 0.1.3 (01.11.2021)
 * XDR types for Transactions and Transactions Envelopes.
 * XDR types for TransactionResults.
