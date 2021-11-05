@@ -10,6 +10,6 @@ defmodule Stellar.XDR.ThresholdsError do
   def exception(:invalid_thresholds_specification),
     do: %__MODULE__{
       message:
-        "Invalid thresholds specification. Thresholds must be provided in a keyword list specifying the master_weight, low, med and high thresholds respectively."
+        "Invalid thresholds specification. Thresholds must be provided as a keyword list -> master_weight: master_weight, low: low, med: med, high: high"
     }
 end

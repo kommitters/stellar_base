@@ -58,6 +58,7 @@ defmodule Stellar.XDR.SignersTest do
     end
   end
 
+  @spec create_signer(key :: String.t()) :: Signer.t()
   defp create_signer(key) do
     signer_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519)
 

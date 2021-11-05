@@ -8,26 +8,30 @@ defmodule Stellar.XDR.Thresholds do
   @behaviour XDR.Declaration
 
   @type thresholds :: [
-          master_weight: non_neg_integer(),
-          low: non_neg_integer(),
-          med: non_neg_integer(),
-          high: non_neg_integer()
+          master_weight: byte(),
+          low: byte(),
+          med: byte(),
+          high: byte()
         ]
 
-  @type t :: %__MODULE__{thresholds: thresholds}
+  @type t :: %__MODULE__{master_weight: byte(), low: byte(), med: byte(), high: byte()}
 
-  defstruct [:thresholds]
+  defstruct [:master_weight, :low, :med, :high]
 
-  @spec new(master_weight: byte(), low: byte(), med: byte(), high: byte()) :: t()
-  def new([master_weight: _master_weight, low: _low, med: _med, high: _high] = thresholds),
-    do: %__MODULE__{thresholds: thresholds}
+  @spec new(thresholds :: thresholds()) :: t()
+  def new(master_weight: master_weight, low: low, med: med, high: high),
+    do: %__MODULE__{master_weight: master_weight, low: low, med: med, high: high}
+
+  def new(_thresholds), do: {:error, :invalid_thresholds_specification}
 
   @impl true
   def encode_xdr(%__MODULE__{
-        thresholds:
-          [master_weight: _master_weight, low: _low, med: _med, high: _high] = thresholds
+        master_weight: master_weight,
+        low: low,
+        med: med,
+        high: high
       }) do
-    to_binary(thresholds)
+    <<master_weight::8, low::8, med::8, high::8>>
     |> Opaque4.new()
     |> Opaque4.encode_xdr()
   end
@@ -35,8 +39,8 @@ defmodule Stellar.XDR.Thresholds do
   def encode_xdr(_thresholds), do: {:error, :invalid_thresholds_specification}
 
   @impl true
-  def encode_xdr!(%__MODULE__{thresholds: thresholds}) do
-    to_binary(thresholds)
+  def encode_xdr!(%__MODULE__{master_weight: master_weight, low: low, med: med, high: high}) do
+    <<master_weight, low, med, high>>
     |> Opaque4.new()
     |> Opaque4.encode_xdr!()
   end
@@ -63,12 +67,6 @@ defmodule Stellar.XDR.Thresholds do
   def decode_xdr!(bytes, _spec) do
     {%Opaque4{opaque: thresholds}, rest} = Opaque4.decode_xdr!(bytes)
     {new(to_keyword_list(thresholds)), rest}
-  end
-
-  @spec to_binary(thresholds :: thresholds()) :: binary()
-  defp to_binary(thresholds) do
-    [master_weight: master_weight, low: low, med: med, high: high] = thresholds
-    <<master_weight, low, med, high>>
   end
 
   @spec to_keyword_list(thresholds :: binary()) :: thresholds()
