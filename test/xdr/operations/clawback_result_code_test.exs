@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.ClawbackResultCodeTest do
+defmodule StellarBase.XDR.Operations.ClawbackResultCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Operations.ClawbackResultCode
+  alias StellarBase.XDR.Operations.ClawbackResultCode
 
   describe "ClawbackResultCode" do
     setup do

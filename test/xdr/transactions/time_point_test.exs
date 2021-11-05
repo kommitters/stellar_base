@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.TimePointTest do
+defmodule StellarBase.XDR.TimePointTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.TimePoint
+  alias StellarBase.XDR.TimePoint
 
   describe "TimePoint" do
     setup do

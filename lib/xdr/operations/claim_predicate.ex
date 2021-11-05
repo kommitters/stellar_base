@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.ClaimPredicate do
+defmodule StellarBase.XDR.ClaimPredicate do
   @moduledoc """
   Representation of Stellar `ClaimPredicate` type.
   """
-  alias Stellar.XDR.{ClaimPredicateType, Int64, OptionalClaimPredicate, ClaimPredicates, Void}
+  alias StellarBase.XDR.{ClaimPredicateType, Int64, OptionalClaimPredicate, ClaimPredicates, Void}
 
   @behaviour XDR.Declaration
 

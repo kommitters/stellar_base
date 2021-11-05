@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.BeginSponsoringFutureReservesResult do
+defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReservesResult do
   @moduledoc """
   Representation of Stellar `BeginSponsoringFutureReservesResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.BeginSponsoringFutureReservesResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.BeginSponsoringFutureReservesResultCode
 
   @behaviour XDR.Declaration
 

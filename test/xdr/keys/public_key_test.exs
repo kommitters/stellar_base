@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.PublicKeyTest do
+defmodule StellarBase.XDR.PublicKeyTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{UInt256, PublicKey, PublicKeyType}
+  alias StellarBase.XDR.{UInt256, PublicKey, PublicKeyType}
 
   describe "PublicKey" do
     setup do

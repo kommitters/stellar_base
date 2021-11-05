@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.TransactionV0Test do
+defmodule StellarBase.XDR.TransactionV0Test do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     Ext,
     Int64,
     Memo,
@@ -21,7 +21,7 @@ defmodule Stellar.XDR.TransactionV0Test do
     UInt256
   }
 
-  alias Stellar.Ed25519.PublicKey, as: Ed25519
+  alias StellarBase.Ed25519.PublicKey, as: Ed25519
 
   describe "TransactionV0" do
     setup do

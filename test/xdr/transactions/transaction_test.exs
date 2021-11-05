@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.TransactionTest do
+defmodule StellarBase.XDR.TransactionTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     Ext,
     Int64,
     Memo,
@@ -20,7 +20,7 @@ defmodule Stellar.XDR.TransactionTest do
     UInt64
   }
 
-  alias Stellar.XDR.Transaction
+  alias StellarBase.XDR.Transaction
 
   describe "Transaction" do
     setup do

@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.RevokeSponsorshipTypeTest do
+defmodule StellarBase.XDR.RevokeSponsorshipTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.RevokeSponsorshipType
+  alias StellarBase.XDR.RevokeSponsorshipType
 
   describe "LedgerEntry RevokeSponsorshipType" do
     setup do

@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ClawbackResult do
+defmodule StellarBase.XDR.Operations.ClawbackResult do
   @moduledoc """
   Representation of Stellar `ClawbackResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.ClawbackResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.ClawbackResultCode
 
   @behaviour XDR.Declaration
 

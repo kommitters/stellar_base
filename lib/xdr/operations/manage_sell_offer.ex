@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.ManageSellOffer do
+defmodule StellarBase.XDR.Operations.ManageSellOffer do
   @moduledoc """
   Representation of Stellar `ManageSellOffer` type.
   """
-  alias Stellar.XDR.{Asset, Int64, Price}
+  alias StellarBase.XDR.{Asset, Int64, Price}
 
   @behaviour XDR.Declaration
 

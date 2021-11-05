@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OptionalString32 do
+defmodule StellarBase.XDR.OptionalString32 do
   @moduledoc """
   Representation of Stellar `OptionalString32` type.
   """
-  alias Stellar.XDR.String32
+  alias StellarBase.XDR.String32
 
   @behaviour XDR.Declaration
 

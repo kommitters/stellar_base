@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.ClaimAtomType do
+defmodule StellarBase.XDR.ClaimAtomType do
   @moduledoc """
   Representation of Stellar `ClaimAtomType` type.
   """

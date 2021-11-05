@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.AllowTrustResult do
+defmodule StellarBase.XDR.Operations.AllowTrustResult do
   @moduledoc """
   Representation of Stellar `AllowTrustResult` type.
   """
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.AllowTrustResultCode
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.AllowTrustResultCode
 
   @behaviour XDR.Declaration
 

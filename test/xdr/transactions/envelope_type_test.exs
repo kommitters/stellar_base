@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.EnvelopeTypeTest do
+defmodule StellarBase.XDR.EnvelopeTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.EnvelopeType
+  alias StellarBase.XDR.EnvelopeType
 
   describe "EnvelopeType" do
     setup do

@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.TransactionV0 do
+defmodule StellarBase.XDR.TransactionV0 do
   @moduledoc """
   Representation of Stellar `TransactionV0` type.
 
@@ -11,7 +11,7 @@ defmodule Stellar.XDR.TransactionV0 do
   containing a TransactionV0.
   """
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     Ext,
     Memo,
     OptionalTimeBounds,

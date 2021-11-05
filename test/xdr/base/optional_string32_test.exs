@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OptionalString32Test do
+defmodule StellarBase.XDR.OptionalString32Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.{String32, OptionalString32}
+  alias StellarBase.XDR.{String32, OptionalString32}
 
   describe "OptionalString32" do
     setup do

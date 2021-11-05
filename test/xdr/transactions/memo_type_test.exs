@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.MemoTypeTest do
+defmodule StellarBase.XDR.MemoTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.MemoType
+  alias StellarBase.XDR.MemoType
 
   describe "MemoType" do
     setup do

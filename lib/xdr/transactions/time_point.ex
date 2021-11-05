@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.TimePoint do
+defmodule StellarBase.XDR.TimePoint do
   @moduledoc """
   Representation of Stellar `TimePoint` type.
   """
-  alias Stellar.XDR.UInt64
+  alias StellarBase.XDR.UInt64
 
   @behaviour XDR.Declaration
 

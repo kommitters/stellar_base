@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.Operations.InflationResultTest do
+defmodule StellarBase.XDR.Operations.InflationResultTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{InflationPayout, InflationPayoutList, Int64}
-  alias Stellar.XDR.Operations.{InflationResult, InflationResultCode}
+  alias StellarBase.XDR.{InflationPayout, InflationPayoutList, Int64}
+  alias StellarBase.XDR.Operations.{InflationResult, InflationResultCode}
 
   describe "InflationResult" do
     setup do

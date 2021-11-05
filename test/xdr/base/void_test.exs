@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.VoidTest do
+defmodule StellarBase.XDR.VoidTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
+  alias StellarBase.XDR.Void
 
   describe "Void" do
     setup do

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.TransactionEnvelope do
+defmodule StellarBase.XDR.TransactionEnvelope do
   @moduledoc """
   Representation of Stellar `TransactionEnvelope` type.
   """
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     EnvelopeType,
     TransactionV0Envelope,
     TransactionV1Envelope,

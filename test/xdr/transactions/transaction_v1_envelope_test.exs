@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.TransactionV1EnvelopeTest do
+defmodule StellarBase.XDR.TransactionV1EnvelopeTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     Ext,
     Int64,
     Memo,

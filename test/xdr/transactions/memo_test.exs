@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.MemoTest do
+defmodule StellarBase.XDR.MemoTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{UInt64, Hash, String28, MemoType, Memo}
+  alias StellarBase.XDR.{UInt64, Hash, String28, MemoType, Memo}
 
   describe "Memo" do
     setup do

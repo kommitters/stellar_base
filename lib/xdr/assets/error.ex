@@ -1,6 +1,6 @@
-defmodule Stellar.XDR.AssetCode4Error do
+defmodule StellarBase.XDR.AssetCode4Error do
   @moduledoc """
-  Module to handle exceptions that may arise from the `Stellar.XDR.AssetCode4` implementation.
+  Module to handle exceptions that may arise from the `StellarBase.XDR.AssetCode4` implementation.
   """
 
   @type t :: %__MODULE__{message: String.t()}
@@ -15,9 +15,9 @@ defmodule Stellar.XDR.AssetCode4Error do
     }
 end
 
-defmodule Stellar.XDR.AssetCode12Error do
+defmodule StellarBase.XDR.AssetCode12Error do
   @moduledoc """
-  Module to handle exceptions that may arise from the `Stellar.XDR.AssetCode12` implementation.
+  Module to handle exceptions that may arise from the `StellarBase.XDR.AssetCode12` implementation.
   """
   @type t :: %__MODULE__{message: String.t()}
 

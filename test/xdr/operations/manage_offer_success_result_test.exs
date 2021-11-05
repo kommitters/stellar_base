@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ManageOfferSuccessResultTest do
+defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     ClaimAtom,
     ClaimAtomType,
     ClaimOfferAtom,
@@ -15,7 +15,7 @@ defmodule Stellar.XDR.Operations.ManageOfferSuccessResultTest do
     Price
   }
 
-  alias Stellar.XDR.Operations.{ManageOffer, ManageOfferEffect, ManageOfferSuccessResult}
+  alias StellarBase.XDR.Operations.{ManageOffer, ManageOfferEffect, ManageOfferSuccessResult}
 
   describe "ManageOfferSuccessResult" do
     setup do

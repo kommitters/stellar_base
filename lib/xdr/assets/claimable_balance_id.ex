@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.ClaimableBalanceID do
+defmodule StellarBase.XDR.ClaimableBalanceID do
   @moduledoc """
   Representation of Stellar `ClaimableBalanceID` type.
   """
-  alias Stellar.XDR.{ClaimableBalanceIDType, Hash}
+  alias StellarBase.XDR.{ClaimableBalanceIDType, Hash}
 
   @behaviour XDR.Declaration
 

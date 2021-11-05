@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.EnvelopeType do
+defmodule StellarBase.XDR.EnvelopeType do
   @moduledoc """
   Representation of Stellar `EnvelopeType` type.
   """

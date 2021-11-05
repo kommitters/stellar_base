@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.AssetTypeTest do
+defmodule StellarBase.XDR.AssetTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.AssetType
+  alias StellarBase.XDR.AssetType
 
   describe "AssetType" do
     setup do

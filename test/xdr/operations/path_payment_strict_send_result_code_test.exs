@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictSendResultCodeTest do
+defmodule StellarBase.XDR.Operations.PathPaymentStrictSendResultCodeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Operations.PathPaymentStrictSendResultCode
+  alias StellarBase.XDR.Operations.PathPaymentStrictSendResultCode
 
   describe "PathPaymentStrictSendResultCode" do
     setup do

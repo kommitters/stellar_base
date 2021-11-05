@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.ClawbackTest do
+defmodule StellarBase.XDR.Operations.ClawbackTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     Asset,
@@ -15,7 +15,7 @@ defmodule Stellar.XDR.Operations.ClawbackTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.Clawback
+  alias StellarBase.XDR.Operations.Clawback
 
   describe "Clawback Operation" do
     setup do
@@ -24,7 +24,7 @@ defmodule Stellar.XDR.Operations.ClawbackTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_issuer_type)
         |> AccountID.new()
@@ -37,7 +37,7 @@ defmodule Stellar.XDR.Operations.ClawbackTest do
 
       from =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> MuxedAccount.new(account_key_type)
 

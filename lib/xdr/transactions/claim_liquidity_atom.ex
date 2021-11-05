@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.ClaimLiquidityAtom do
+defmodule StellarBase.XDR.ClaimLiquidityAtom do
   @moduledoc """
   Representation of Stellar `ClaimLiquidityAtom` type.
   """
 
-  alias Stellar.XDR.{Asset, Int64, PoolID}
+  alias StellarBase.XDR.{Asset, Int64, PoolID}
 
   @behaviour XDR.Declaration
 

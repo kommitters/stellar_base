@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.AccountMergeResult do
+defmodule StellarBase.XDR.Operations.AccountMergeResult do
   @moduledoc """
   Representation of Stellar `AccountMergeResult` type.
   """
-  alias Stellar.XDR.{Int64, Void}
-  alias Stellar.XDR.Operations.AccountMergeResultCode
+  alias StellarBase.XDR.{Int64, Void}
+  alias StellarBase.XDR.Operations.AccountMergeResultCode
 
   @behaviour XDR.Declaration
 

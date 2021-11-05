@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.SetTrustLineFlagsResultCode do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultCode do
   @moduledoc """
   Representation of Stellar `SetTrustLineFlagsResultCode` type.
   """

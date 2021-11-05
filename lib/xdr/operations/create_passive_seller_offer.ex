@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.CreatePassiveSellOffer do
+defmodule StellarBase.XDR.Operations.CreatePassiveSellOffer do
   @moduledoc """
   Representation of Stellar `CreatePassiveSellOffer` type.
   """
-  alias Stellar.XDR.{Asset, Int64, Price}
+  alias StellarBase.XDR.{Asset, Int64, Price}
 
   @behaviour XDR.Declaration
 

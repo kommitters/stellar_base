@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictSendTest do
+defmodule StellarBase.XDR.Operations.PathPaymentStrictSendTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     AlphaNum12,
@@ -19,13 +19,13 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictSendTest do
     Void
   }
 
-  alias Stellar.XDR.Operations.PathPaymentStrictSend
+  alias StellarBase.XDR.Operations.PathPaymentStrictSend
 
   describe "PathPaymentStrictSend Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
       issuer =
@@ -35,7 +35,7 @@ defmodule Stellar.XDR.Operations.PathPaymentStrictSendTest do
 
       pk_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
       destination = MuxedAccount.new(pk_key, CryptoKeyType.new(:KEY_TYPE_ED25519))

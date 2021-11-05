@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.TransactionSignaturePayload do
+defmodule StellarBase.XDR.TransactionSignaturePayload do
   @moduledoc """
   Representation of Stellar `TransactionSignaturePayload` type.
   """
-  alias Stellar.XDR.Hash
-  alias Stellar.XDR.TransactionSignaturePayloadTaggedTransaction, as: TaggedTransaction
+  alias StellarBase.XDR.Hash
+  alias StellarBase.XDR.TransactionSignaturePayloadTaggedTransaction, as: TaggedTransaction
 
   @behaviour XDR.Declaration
 

@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.CreatePassiveSellOfferTest do
+defmodule StellarBase.XDR.Operations.CreatePassiveSellOfferTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     AlphaNum12,
@@ -17,13 +17,13 @@ defmodule Stellar.XDR.Operations.CreatePassiveSellOfferTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.CreatePassiveSellOffer
+  alias StellarBase.XDR.Operations.CreatePassiveSellOffer
 
   describe "CreatePassiveSellOffer Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
       issuer =

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.OperationResultList do
+defmodule StellarBase.XDR.OperationResultList do
   @moduledoc """
   Representation of a Stellar `OperationResultList` list.
   """
-  alias Stellar.XDR.OperationResult
+  alias StellarBase.XDR.OperationResult
 
   @behaviour XDR.Declaration
 

@@ -1,7 +1,7 @@
-defmodule Stellar.KeyPair.CannedEd25519 do
+defmodule StellarBase.KeyPair.CannedEd25519 do
   @moduledoc false
 
-  @behaviour Stellar.KeyPair.Spec
+  @behaviour StellarBase.KeyPair.Spec
 
   @public_key "GC3NRDSKRPYPRK3RBCCHOCG3HYJRXTTHCGI7TTF6KGSJH27GSEFWBB5M"
   @secret "SDOKIJIENHMYSALKQHHNDHOHPHBCSWRHAKJ6QHUCCABHF6ZREJG2BGJE"
@@ -13,24 +13,24 @@ defmodule Stellar.KeyPair.CannedEd25519 do
   def from_secret(_secret), do: {@public_key, @secret}
 end
 
-defmodule Stellar.KeyPairTest do
+defmodule StellarBase.KeyPairTest do
   use ExUnit.Case
 
   test "random/0" do
-    {public_key, secret} = Stellar.KeyPair.random()
+    {public_key, secret} = StellarBase.KeyPair.random()
     56 = String.length(public_key)
     56 = String.length(secret)
   end
 
   describe "from_secret/1" do
     test "success" do
-      {public_key, secret} = Stellar.KeyPair.random()
-      {^public_key, ^secret} = Stellar.KeyPair.from_secret(secret)
+      {public_key, secret} = StellarBase.KeyPair.random()
+      {^public_key, ^secret} = StellarBase.KeyPair.from_secret(secret)
     end
 
     test "bad secret" do
       assert_raise ArgumentError, "incorrect padding", fn ->
-        Stellar.KeyPair.from_secret("SCPTLAI")
+        StellarBase.KeyPair.from_secret("SCPTLAI")
       end
     end
   end
@@ -38,7 +38,7 @@ defmodule Stellar.KeyPairTest do
   describe "custom ed25519 module" do
     setup do
       on_exit(fn ->
-        Application.put_env(:stellar_base, :keypair_generator, Stellar.KeyPair.Default)
+        Application.put_env(:stellar_base, :keypair_generator, StellarBase.KeyPair.Default)
       end)
 
       %{
@@ -48,13 +48,13 @@ defmodule Stellar.KeyPairTest do
     end
 
     test "random/0", %{public_key: public_key, secret: secret} do
-      Application.put_env(:stellar_base, :keypair_generator, Stellar.KeyPair.CannedEd25519)
-      {^public_key, ^secret} = Stellar.KeyPair.random()
+      Application.put_env(:stellar_base, :keypair_generator, StellarBase.KeyPair.CannedEd25519)
+      {^public_key, ^secret} = StellarBase.KeyPair.random()
     end
 
     test "from_secret/1", %{public_key: public_key, secret: secret} do
-      Application.put_env(:stellar_base, :keypair_generator, Stellar.KeyPair.CannedEd25519)
-      {^public_key, ^secret} = Stellar.KeyPair.from_secret(secret)
+      Application.put_env(:stellar_base, :keypair_generator, StellarBase.KeyPair.CannedEd25519)
+      {^public_key, ^secret} = StellarBase.KeyPair.from_secret(secret)
     end
   end
 end

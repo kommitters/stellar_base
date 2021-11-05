@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OperationTypeTest do
+defmodule StellarBase.XDR.OperationTypeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.OperationType
+  alias StellarBase.XDR.OperationType
 
   describe "OperationType" do
     setup do

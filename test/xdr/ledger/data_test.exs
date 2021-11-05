@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Ledger.DataTest do
+defmodule StellarBase.XDR.Ledger.DataTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AccountID, PublicKey, PublicKeyType, String64, UInt256}
-  alias Stellar.XDR.Ledger.Data
+  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, String64, UInt256}
+  alias StellarBase.XDR.Ledger.Data
 
   describe "Ledger Data" do
     setup do
@@ -10,7 +10,7 @@ defmodule Stellar.XDR.Ledger.DataTest do
 
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

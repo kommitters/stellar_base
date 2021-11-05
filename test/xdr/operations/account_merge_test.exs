@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.AccountMergeTest do
+defmodule StellarBase.XDR.Operations.AccountMergeTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{CryptoKeyType, MuxedAccount, UInt256}
-  alias Stellar.Ed25519.PublicKey
-  alias Stellar.XDR.Operations.AccountMerge
+  alias StellarBase.XDR.{CryptoKeyType, MuxedAccount, UInt256}
+  alias StellarBase.Ed25519.PublicKey
+  alias StellarBase.XDR.Operations.AccountMerge
 
   describe "AccountMerge Operation" do
     setup do

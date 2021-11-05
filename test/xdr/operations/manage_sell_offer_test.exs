@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.ManageSellOfferTest do
+defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     AlphaNum12,
@@ -17,13 +17,13 @@ defmodule Stellar.XDR.Operations.ManageSellOfferTest do
     UInt256
   }
 
-  alias Stellar.XDR.Operations.ManageSellOffer
+  alias StellarBase.XDR.Operations.ManageSellOffer
 
   describe "ManageSellOffer Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
       issuer =

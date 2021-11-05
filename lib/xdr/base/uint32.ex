@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.UInt32 do
+defmodule StellarBase.XDR.UInt32 do
   @moduledoc """
   Representation of Stellar `UInt32` type.
   """

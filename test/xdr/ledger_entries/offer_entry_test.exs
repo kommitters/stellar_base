@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.OfferEntryTest do
+defmodule StellarBase.XDR.OfferEntryTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{Ext, Int32, Int64, OfferEntry, Price}
+  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price}
 
   describe "OfferEntry Operation" do
     setup do

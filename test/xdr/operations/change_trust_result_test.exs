@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.ChangeTrustResultTest do
+defmodule StellarBase.XDR.Operations.ChangeTrustResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{ChangeTrustResult, ChangeTrustResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{ChangeTrustResult, ChangeTrustResultCode}
 
   describe "ChangeTrustResult" do
     setup do

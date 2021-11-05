@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.DecoratedSignaturesTest do
+defmodule StellarBase.XDR.DecoratedSignaturesTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{DecoratedSignature, DecoratedSignatures, Signature, SignatureHint}
+  alias StellarBase.XDR.{DecoratedSignature, DecoratedSignatures, Signature, SignatureHint}
 
   describe "DecoratedSignatures" do
     setup do

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Ext do
+defmodule StellarBase.XDR.Ext do
   @moduledoc """
   Representation of Stellar `Ext` type.
   """
-  alias Stellar.XDR.Void
+  alias StellarBase.XDR.Void
 
   @behaviour XDR.Declaration
 

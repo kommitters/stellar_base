@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.SetTrustLineFlagsResultTest do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{SetTrustLineFlagsResult, SetTrustLineFlagsResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{SetTrustLineFlagsResult, SetTrustLineFlagsResultCode}
 
   describe "SetTrustLineFlagsResult" do
     setup do

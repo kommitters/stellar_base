@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.PathPaymentStrictSend do
+defmodule StellarBase.XDR.Operations.PathPaymentStrictSend do
   @moduledoc """
   Representation of Stellar `PathPaymentStrictSend` type.
   """
-  alias Stellar.XDR.{Asset, Assets, Int64, MuxedAccount}
+  alias StellarBase.XDR.{Asset, Assets, Int64, MuxedAccount}
 
   @behaviour XDR.Declaration
 

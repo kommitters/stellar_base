@@ -1,13 +1,13 @@
-defmodule Stellar.XDR.OptionalAccountIDTest do
+defmodule StellarBase.XDR.OptionalAccountIDTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AccountID, OptionalAccountID, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, OptionalAccountID, PublicKey, PublicKeyType, UInt256}
 
   describe "OptionalAccountID" do
     setup do
       public_key =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
 
       account_id =

@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Void do
+defmodule StellarBase.XDR.Void do
   @moduledoc """
   Representation of Stellar `Void` type.
   """

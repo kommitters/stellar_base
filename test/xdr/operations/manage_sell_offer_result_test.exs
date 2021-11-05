@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Operations.ManageSellOfferResultTest do
+defmodule StellarBase.XDR.Operations.ManageSellOfferResultTest do
   use ExUnit.Case
 
-  import Stellar.Test.Utils
+  import StellarBase.Test.Utils
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     ClaimAtom,
     ClaimAtomType,
     ClaimOfferAtom,
@@ -12,7 +12,7 @@ defmodule Stellar.XDR.Operations.ManageSellOfferResultTest do
     Void
   }
 
-  alias Stellar.XDR.Operations.{
+  alias StellarBase.XDR.Operations.{
     ManageSellOfferResult,
     ManageSellOfferResultCode,
     ManageOfferSuccessResult,

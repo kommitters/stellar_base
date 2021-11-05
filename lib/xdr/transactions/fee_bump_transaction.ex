@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.FeeBumpTransaction do
+defmodule StellarBase.XDR.FeeBumpTransaction do
   @moduledoc """
   Representation of Stellar `FeeBumpTransaction` type.
   """
 
-  alias Stellar.XDR.{FeeBumpInnerTx, Int64, MuxedAccount, Ext}
+  alias StellarBase.XDR.{FeeBumpInnerTx, Int64, MuxedAccount, Ext}
 
   @behaviour XDR.Declaration
 

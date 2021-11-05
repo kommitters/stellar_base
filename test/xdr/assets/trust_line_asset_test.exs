@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.TrustLineAssetTest do
+defmodule StellarBase.XDR.TrustLineAssetTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
     AlphaNum12,
@@ -20,7 +20,7 @@ defmodule Stellar.XDR.TrustLineAssetTest do
 
     issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-      |> Stellar.Ed25519.PublicKey.decode!()
+      |> StellarBase.Ed25519.PublicKey.decode!()
       |> UInt256.new()
       |> PublicKey.new(key_type)
       |> AccountID.new()

@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.AccountIDTest do
+defmodule StellarBase.XDR.AccountIDTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
 
-  describe "Stellar.XDR.AccountID" do
+  describe "StellarBase.XDR.AccountID" do
     setup do
       public_key = %PublicKey{
         public_key: %UInt256{
@@ -51,7 +51,7 @@ defmodule Stellar.XDR.AccountIDTest do
 
     test "invalid PublicKey" do
       assert_raise FunctionClauseError,
-                   "no function clause matching in Stellar.XDR.AccountID.new/1",
+                   "no function clause matching in StellarBase.XDR.AccountID.new/1",
                    fn ->
                      "SFDCVXGSGSG"
                      |> UInt256.new()

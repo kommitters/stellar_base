@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.ManageOfferEffect do
+defmodule StellarBase.XDR.Operations.ManageOfferEffect do
   @moduledoc """
   Representation of Stellar `ManageOfferEffect` type.
   """

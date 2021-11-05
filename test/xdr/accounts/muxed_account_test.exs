@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.MuxedAccountTest do
+defmodule StellarBase.XDR.MuxedAccountTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{UInt64, UInt256, MuxedAccount, MuxedAccountMed25519, CryptoKeyType}
+  alias StellarBase.XDR.{UInt64, UInt256, MuxedAccount, MuxedAccountMed25519, CryptoKeyType}
 
   describe "MuxedAccount" do
     setup do

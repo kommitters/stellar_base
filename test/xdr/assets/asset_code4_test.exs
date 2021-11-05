@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.AssetCode4Test do
+defmodule StellarBase.XDR.AssetCode4Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.AssetCode4
+  alias StellarBase.XDR.AssetCode4
 
   describe "AssetCode4" do
     setup do
@@ -33,7 +33,7 @@ defmodule Stellar.XDR.AssetCode4Test do
     end
 
     test "encode_xdr!/1 with an invalid length" do
-      assert_raise Stellar.XDR.AssetCode4Error,
+      assert_raise StellarBase.XDR.AssetCode4Error,
                    fn ->
                      "BTC2021"
                      |> AssetCode4.new()

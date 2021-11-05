@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.BumpSequenceResultCode do
+defmodule StellarBase.XDR.Operations.BumpSequenceResultCode do
   @moduledoc """
   Representation of Stellar `BumpSequenceResultCode` type.
   """

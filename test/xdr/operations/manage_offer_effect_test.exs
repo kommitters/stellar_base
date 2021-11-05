@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.ManageOfferEffectTest do
+defmodule StellarBase.XDR.Operations.ManageOfferEffectTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Operations.ManageOfferEffect
+  alias StellarBase.XDR.Operations.ManageOfferEffect
 
   describe "ManageOfferEffect" do
     setup do

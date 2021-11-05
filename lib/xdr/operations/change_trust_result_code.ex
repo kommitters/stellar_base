@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.Operations.ChangeTrustResultCode do
+defmodule StellarBase.XDR.Operations.ChangeTrustResultCode do
   @moduledoc """
   Representation of Stellar `ChangeTrustResultCode` type.
   """

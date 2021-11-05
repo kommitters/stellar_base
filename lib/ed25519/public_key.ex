@@ -1,10 +1,10 @@
-defmodule Stellar.Ed25519.PublicKey do
+defmodule StellarBase.Ed25519.PublicKey do
   @moduledoc """
   Encode/decode functions for Ed25519 public keys.
   """
   import Bitwise
 
-  alias Stellar.Ed25519.StrKey
+  alias StellarBase.Ed25519.StrKey
 
   # Public keys starting with the letter G
   # 6 <<< 3: 48: G

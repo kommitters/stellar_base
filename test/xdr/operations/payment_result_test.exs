@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.PaymentResultTest do
+defmodule StellarBase.XDR.Operations.PaymentResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{PaymentResult, PaymentResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{PaymentResult, PaymentResultCode}
 
   describe "PaymentResult" do
     setup do

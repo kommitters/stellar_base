@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.RevokeSponsorshipResultTest do
+defmodule StellarBase.XDR.Operations.RevokeSponsorshipResultTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Void
-  alias Stellar.XDR.Operations.{RevokeSponsorshipResult, RevokeSponsorshipResultCode}
+  alias StellarBase.XDR.Void
+  alias StellarBase.XDR.Operations.{RevokeSponsorshipResult, RevokeSponsorshipResultCode}
 
   describe "RevokeSponsorshipResult" do
     setup do

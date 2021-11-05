@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.PriceTest do
+defmodule StellarBase.XDR.PriceTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.{Int32, Price}
+  alias StellarBase.XDR.{Int32, Price}
 
   describe "Price" do
     setup do

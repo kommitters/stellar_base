@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Operations.ClaimantV0Test do
+defmodule StellarBase.XDR.Operations.ClaimantV0Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.{
+  alias StellarBase.XDR.{
     AccountID,
     ClaimantV0,
     ClaimPredicateType,
@@ -18,7 +18,7 @@ defmodule Stellar.XDR.Operations.ClaimantV0Test do
 
       destination =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> Stellar.Ed25519.PublicKey.decode!()
+        |> StellarBase.Ed25519.PublicKey.decode!()
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

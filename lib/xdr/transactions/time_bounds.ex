@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.TimeBounds do
+defmodule StellarBase.XDR.TimeBounds do
   @moduledoc """
   Representation of Stellar `TimeBounds` type.
   """
-  alias Stellar.XDR.TimePoint
+  alias StellarBase.XDR.TimePoint
 
   @behaviour XDR.Declaration
 

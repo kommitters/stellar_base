@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.OptionalUInt32Test do
+defmodule StellarBase.XDR.OptionalUInt32Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.{UInt32, OptionalUInt32}
+  alias StellarBase.XDR.{UInt32, OptionalUInt32}
 
   describe "OptionalUInt32" do
     setup do

@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Operations.SetOptions do
+defmodule StellarBase.XDR.Operations.SetOptions do
   @moduledoc """
   Representation of Stellar `SetOptions` type.
   """
-  alias Stellar.XDR.{OptionalAccountID, OptionalUInt32, OptionalString32, Signer}
+  alias StellarBase.XDR.{OptionalAccountID, OptionalUInt32, OptionalString32, Signer}
 
   @behaviour XDR.Declaration
 

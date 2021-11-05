@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.Int32Test do
+defmodule StellarBase.XDR.Int32Test do
   use ExUnit.Case
 
-  alias Stellar.XDR.Int32
+  alias StellarBase.XDR.Int32
 
   describe "Int32" do
     setup do

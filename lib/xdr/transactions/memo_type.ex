@@ -1,4 +1,4 @@
-defmodule Stellar.XDR.MemoType do
+defmodule StellarBase.XDR.MemoType do
   @moduledoc """
   Representation of Stellar `MemoType` type.
   """

@@ -1,10 +1,10 @@
-defmodule Stellar.XDR.LedgerKey do
+defmodule StellarBase.XDR.LedgerKey do
   @moduledoc """
   Representation of Stellar `LedgerEntry` type.
   """
-  alias Stellar.XDR.LedgerEntryType
+  alias StellarBase.XDR.LedgerEntryType
 
-  alias Stellar.XDR.Ledger.{Account, TrustLine, Offer, Data, ClaimableBalance, LiquidityPool}
+  alias StellarBase.XDR.Ledger.{Account, TrustLine, Offer, Data, ClaimableBalance, LiquidityPool}
 
   @behaviour XDR.Declaration
 
