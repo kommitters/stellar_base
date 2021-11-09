@@ -37,7 +37,6 @@ defmodule StellarBase.MixProject do
   defp deps do
     [
       {:elixir_xdr, "~> 0.2.0"},
-      {:ed25519, "~> 1.3"},
       {:crc, "~> 0.10.0"},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.14", only: :test, runtime: false},
