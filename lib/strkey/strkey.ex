@@ -63,7 +63,7 @@ defmodule StellarBase.StrKey do
     end
   end
 
-  @spec decode!(data :: data(), version :: integer()) :: binary() | no_return()
+  @spec decode!(data :: data(), version :: atom()) :: binary() | no_return()
   def decode!(data, version) do
     case decode(data, version) do
       {:ok, key} -> key
