@@ -2,14 +2,14 @@ defmodule StellarBase.XDR.Operations.AccountMergeTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{CryptoKeyType, MuxedAccount, UInt256}
-  alias StellarBase.Ed25519.PublicKey
   alias StellarBase.XDR.Operations.AccountMerge
+  alias StellarBase.StrKey
 
   describe "AccountMerge Operation" do
     setup do
       muxed_account =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> MuxedAccount.new(CryptoKeyType.new(:KEY_TYPE_ED25519))
 

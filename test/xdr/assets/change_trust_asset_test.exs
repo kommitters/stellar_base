@@ -17,6 +17,8 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
     Void
   }
 
+  alias StellarBase.StrKey
+
   alias StellarBase.XDR.LiquidityPoolConstantProductParameters, as: LiquidityPoolConstant
 
   setup_all do
@@ -24,7 +26,7 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
 
     issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-      |> StellarBase.Ed25519.PublicKey.decode!()
+      |> StrKey.decode!(:ed25519_public_key)
       |> UInt256.new()
       |> PublicKey.new(key_type)
       |> AccountID.new()

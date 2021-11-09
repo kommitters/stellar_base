@@ -16,6 +16,8 @@ defmodule StellarBase.XDR.LiquidityPoolParametersTest do
     Void
   }
 
+  alias StellarBase.StrKey
+
   alias StellarBase.XDR.LiquidityPoolConstantProductParameters, as: LiquidityPoolConstant
 
   describe "LiquidityPoolParameters" do
@@ -24,7 +26,7 @@ defmodule StellarBase.XDR.LiquidityPoolParametersTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()

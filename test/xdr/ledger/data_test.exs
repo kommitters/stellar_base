@@ -3,6 +3,7 @@ defmodule StellarBase.XDR.Ledger.DataTest do
 
   alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, String64, UInt256}
   alias StellarBase.XDR.Ledger.Data
+  alias StellarBase.StrKey
 
   describe "Ledger Data" do
     setup do
@@ -10,7 +11,7 @@ defmodule StellarBase.XDR.Ledger.DataTest do
 
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

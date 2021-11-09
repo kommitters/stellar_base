@@ -18,13 +18,15 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
 
   alias StellarBase.XDR.Operations.SetOptions
 
+  alias StellarBase.StrKey
+
   describe "SetOptions Operation" do
     setup do
       account_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(account_type)
         |> AccountID.new()
@@ -34,7 +36,7 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
 
       signer =
         "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> SignerKey.new(signer_type)
         |> Signer.new(signer_weight)

@@ -2,7 +2,8 @@ defmodule StellarBase.XDR.SignerTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{Signer, SignerKey, SignerKeyType, UInt32, UInt256}
-  alias StellarBase.Ed25519.PublicKey
+
+  alias StellarBase.StrKey
 
   describe "Signer" do
     setup do
@@ -10,7 +11,7 @@ defmodule StellarBase.XDR.SignerTest do
 
       signer_key =
         "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
-        |> PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> SignerKey.new(signer_type)
 

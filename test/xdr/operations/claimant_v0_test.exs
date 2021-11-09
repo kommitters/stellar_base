@@ -12,13 +12,15 @@ defmodule StellarBase.XDR.Operations.ClaimantV0Test do
     UInt256
   }
 
+  alias StellarBase.StrKey
+
   describe "ClaimantV0" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       destination =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

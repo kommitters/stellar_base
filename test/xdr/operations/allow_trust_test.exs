@@ -15,20 +15,22 @@ defmodule StellarBase.XDR.Operations.AllowTrustTest do
 
   alias StellarBase.XDR.Operations.AllowTrust
 
+  alias StellarBase.StrKey
+
   describe "AllowTrust Operation" do
     setup do
       key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
