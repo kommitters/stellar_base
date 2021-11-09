@@ -22,8 +22,6 @@ defmodule Stellar.XDR.Thresholds do
   def new(master_weight: master_weight, low: low, med: med, high: high),
     do: %__MODULE__{master_weight: master_weight, low: low, med: med, high: high}
 
-  def new(_thresholds), do: {:error, :invalid_thresholds_specification}
-
   @impl true
   def encode_xdr(%__MODULE__{
         master_weight: master_weight,
@@ -36,17 +34,12 @@ defmodule Stellar.XDR.Thresholds do
     |> Opaque4.encode_xdr()
   end
 
-  def encode_xdr(_thresholds), do: {:error, :invalid_thresholds_specification}
-
   @impl true
   def encode_xdr!(%__MODULE__{master_weight: master_weight, low: low, med: med, high: high}) do
     <<master_weight, low, med, high>>
     |> Opaque4.new()
     |> Opaque4.encode_xdr!()
   end
-
-  def encode_xdr!(_thresholds),
-    do: raise(Stellar.XDR.ThresholdsError, :invalid_thresholds_specification)
 
   @impl true
   def decode_xdr(bytes, spec \\ nil)

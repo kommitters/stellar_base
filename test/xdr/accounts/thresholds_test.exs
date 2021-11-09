@@ -8,25 +8,17 @@ defmodule Stellar.XDR.ThresholdsTest do
 
   describe "Thresholds" do
     setup do
-      master_weight = 128
-      low = 16
-      med = 32
-      high = 64
-      thresholds = Thresholds.new(master_weight: master_weight, low: low, med: med, high: high)
+      thresholds = Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
 
       %{
-        master_weight: master_weight,
-        low: low,
-        med: med,
-        high: high,
         thresholds: thresholds,
-        binary: <<master_weight, low, med, high>>
+        binary: <<128, 16, 32, 64>>
       }
     end
 
-    test "new/1", %{master_weight: master_weight, low: low, med: med, high: high} do
-      %Thresholds{master_weight: ^master_weight, low: ^low, med: ^med, high: ^high} =
-        Thresholds.new(master_weight: master_weight, low: low, med: med, high: high)
+    test "new/1" do
+      %Thresholds{master_weight: 128, low: 16, med: 32, high: 64} =
+        Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
     end
 
     test "encode_xdr/1", %{thresholds: thresholds, binary: binary} do
@@ -34,7 +26,10 @@ defmodule Stellar.XDR.ThresholdsTest do
     end
 
     test "encode_xdr/1 with invalid input" do
-      {:error, :invalid_thresholds_specification} = Thresholds.encode_xdr(123)
+      assert_raise FunctionClauseError,
+                   fn ->
+                     Thresholds.encode_xdr(123)
+                   end
     end
 
     test "encode_xdr!/1", %{thresholds: thresholds, binary: binary} do
@@ -42,8 +37,7 @@ defmodule Stellar.XDR.ThresholdsTest do
     end
 
     test "encode_xdr!/1 with invalid input" do
-      assert_raise ThresholdsError,
-                   "Invalid thresholds specification. Thresholds must be provided as a keyword list -> master_weight: master_weight, low: low, med: med, high: high",
+      assert_raise FunctionClauseError,
                    fn ->
                      Thresholds.encode_xdr!(123)
                    end
