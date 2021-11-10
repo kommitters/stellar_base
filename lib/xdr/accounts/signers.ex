@@ -1,8 +1,8 @@
-defmodule Stellar.XDR.Signers do
+defmodule StellarBase.XDR.Signers do
   @moduledoc """
   Representation of a Stellar `Signers` list.
   """
-  alias Stellar.XDR.Signer
+  alias StellarBase.XDR.Signer
 
   @behaviour XDR.Declaration
 

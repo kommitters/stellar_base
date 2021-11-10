@@ -1,7 +1,7 @@
-defmodule Stellar.XDR.ThresholdsTest do
+defmodule StellarBase.XDR.ThresholdsTest do
   use ExUnit.Case
 
-  alias Stellar.XDR.Thresholds
+  alias StellarBase.XDR.Thresholds
 
   describe "Thresholds" do
     setup do

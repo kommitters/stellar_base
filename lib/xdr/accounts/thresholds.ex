@@ -1,9 +1,9 @@
-defmodule Stellar.XDR.Thresholds do
+defmodule StellarBase.XDR.Thresholds do
   @moduledoc """
   Representation of an AccountEntry's Thresholds.
   Thresholds stores unsigned bytes: [weight of master|low|med|high]
   """
-  alias Stellar.XDR.Opaque4
+  alias StellarBase.XDR.Opaque4
 
   @behaviour XDR.Declaration
 
