@@ -16,6 +16,8 @@ defmodule StellarBase.XDR.ClaimantsTest do
     Void
   }
 
+  alias StellarBase.StrKey
+
   describe "Claimants" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -30,7 +32,7 @@ defmodule StellarBase.XDR.ClaimantsTest do
 
       claimant1 =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
@@ -39,7 +41,7 @@ defmodule StellarBase.XDR.ClaimantsTest do
 
       claimant2 =
         "GDP7PRVNX72M2G4J6CLZZXSYVEIRMFPB7SWPOY4CG22O5AFCOC2YEHGQ"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

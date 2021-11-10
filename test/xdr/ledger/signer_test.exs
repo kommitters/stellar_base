@@ -3,6 +3,7 @@ defmodule StellarBase.XDR.Ledger.SignerTest do
 
   alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, SignerKey, SignerKeyType, UInt256}
   alias StellarBase.XDR.Ledger.Signer
+  alias StellarBase.StrKey
 
   describe "Ledger Signer" do
     setup do
@@ -11,14 +12,14 @@ defmodule StellarBase.XDR.Ledger.SignerTest do
 
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       signer_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> SignerKey.new(signer_key_type)
 

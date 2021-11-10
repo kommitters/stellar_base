@@ -19,13 +19,15 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictSendTest do
     Void
   }
 
+  alias StellarBase.StrKey
+
   alias StellarBase.XDR.Operations.PathPaymentStrictSend
 
   describe "PathPaymentStrictSend Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
       issuer =
@@ -35,7 +37,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictSendTest do
 
       pk_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
       destination = MuxedAccount.new(pk_key, CryptoKeyType.new(:KEY_TYPE_ED25519))

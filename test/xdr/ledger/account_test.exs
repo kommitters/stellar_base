@@ -5,13 +5,15 @@ defmodule StellarBase.XDR.Ledger.AccountTest do
 
   alias StellarBase.XDR.Ledger.Account
 
+  alias StellarBase.StrKey
+
   describe "Ledger Account" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

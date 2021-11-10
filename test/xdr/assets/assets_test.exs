@@ -16,6 +16,8 @@ defmodule StellarBase.XDR.AssetsTest do
     UInt256
   }
 
+  alias StellarBase.StrKey
+
   describe "Assets" do
     setup do
       issuer = create_issuer("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
@@ -100,7 +102,7 @@ defmodule StellarBase.XDR.AssetsTest do
   defp create_issuer(public_key) do
     pk_key =
       public_key
-      |> StellarBase.Ed25519.PublicKey.decode!()
+      |> StrKey.decode!(:ed25519_public_key)
       |> UInt256.new()
 
     PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)

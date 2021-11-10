@@ -3,6 +3,7 @@ defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReservesTest do
 
   alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
   alias StellarBase.XDR.Operations.BeginSponsoringFutureReserves
+  alias StellarBase.StrKey
 
   describe "BeginSponsoringFutureReserves Operation" do
     setup do
@@ -10,7 +11,7 @@ defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReservesTest do
 
       sponsored_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()

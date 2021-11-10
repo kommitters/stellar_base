@@ -14,6 +14,8 @@ defmodule StellarBase.XDR.ClaimantTest do
     Void
   }
 
+  alias StellarBase.StrKey
+
   describe "Claimant" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -24,7 +26,7 @@ defmodule StellarBase.XDR.ClaimantTest do
 
       claimant_v0 =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

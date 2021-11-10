@@ -22,7 +22,7 @@ This library is aimed at developers building Elixir applications on top of the S
 ```elixir
 def deps do
   [
-    {:stellar_base, "~> 0.2.0"}
+    {:stellar_base, "~> 0.2.1"}
   ]
 end
 ```

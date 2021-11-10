@@ -29,7 +29,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     UInt256
   }
 
-  alias StellarBase.Ed25519.PublicKey, as: Ed25519
+  alias StellarBase.StrKey
 
   setup do
     # Seq number
@@ -75,7 +75,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     } do
       source_account_ed25519 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> Ed25519.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
       tx =

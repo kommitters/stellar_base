@@ -3,11 +3,13 @@ defmodule StellarBase.XDR.AlphaNum4Test do
 
   alias StellarBase.XDR.{AccountID, AlphaNum4, AssetCode4, PublicKey, PublicKeyType, UInt256}
 
+  alias StellarBase.StrKey
+
   describe "AlphaNum4" do
     setup do
       pk_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
       issuer =

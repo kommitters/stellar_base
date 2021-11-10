@@ -17,6 +17,8 @@ defmodule StellarBase.XDR.Operations.ClawbackTest do
 
   alias StellarBase.XDR.Operations.Clawback
 
+  alias StellarBase.StrKey
+
   describe "Clawback Operation" do
     setup do
       pk_issuer_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -24,7 +26,7 @@ defmodule StellarBase.XDR.Operations.ClawbackTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_issuer_type)
         |> AccountID.new()
@@ -37,7 +39,7 @@ defmodule StellarBase.XDR.Operations.ClawbackTest do
 
       from =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> MuxedAccount.new(account_key_type)
 
