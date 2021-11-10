@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.SignersTest do
     UInt256
   }
 
-  alias StellarBase.Ed25519.PublicKey
+  alias StellarBase.StrKey
 
   describe "Signers" do
     setup do
@@ -64,7 +64,7 @@ defmodule StellarBase.XDR.SignersTest do
 
     signer_key =
       key
-      |> PublicKey.decode!()
+      |> StrKey.decode!(:ed25519_public_key)
       |> UInt256.new()
       |> SignerKey.new(signer_type)
 
