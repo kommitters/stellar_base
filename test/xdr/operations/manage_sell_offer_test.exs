@@ -17,13 +17,15 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
     UInt256
   }
 
+  alias StellarBase.StrKey
+
   alias StellarBase.XDR.Operations.ManageSellOffer
 
   describe "ManageSellOffer Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
       issuer =

@@ -14,15 +14,15 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
   }
 
   alias StellarBase.XDR.Ledger.{Account, Signer}
-  alias StellarBase.Ed25519.SecretSeed
   alias StellarBase.XDR.Operations.RevokeSponsorship
+  alias StellarBase.StrKey
 
   setup do
     pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
     account_id =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-      |> StellarBase.Ed25519.PublicKey.decode!()
+      |> StrKey.decode!(:ed25519_public_key)
       |> UInt256.new()
       |> PublicKey.new(pk_type)
       |> AccountID.new()
@@ -93,7 +93,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
 
       signer_key =
         "SBZ3IBDFXTY2R47DOFOZLPNABQCABHD2FLZ3P6GM3P3CZEM6CB3ITLBD"
-        |> SecretSeed.decode!()
+        |> StrKey.decode!(:ed25519_secret_seed)
         |> UInt256.new()
         |> SignerKey.new(signer_key_type)
 

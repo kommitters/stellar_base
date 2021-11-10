@@ -20,6 +20,8 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
     Void
   }
 
+  alias StellarBase.StrKey
+
   alias StellarBase.XDR.Operations.CreateClaimableBalance
 
   describe "CreateClaimableBalance Operation" do
@@ -28,7 +30,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
@@ -105,7 +107,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
     predicate = create_claim_predicate(claim_predicate_type)
 
     public_key
-    |> StellarBase.Ed25519.PublicKey.decode!()
+    |> StrKey.decode!(:ed25519_public_key)
     |> UInt256.new()
     |> PublicKey.new(pk_type)
     |> AccountID.new()

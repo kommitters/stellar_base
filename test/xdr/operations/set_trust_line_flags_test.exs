@@ -15,20 +15,22 @@ defmodule StellarBase.XDR.Operations.SetTrustLineFlagsTest do
 
   alias StellarBase.XDR.Operations.SetTrustLineFlags
 
+  alias StellarBase.StrKey
+
   describe "SetTrustLineFlags Operation" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       trustor =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
-        |> StellarBase.Ed25519.PublicKey.decode!()
+        |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()

@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     UInt256
   }
 
-  alias StellarBase.Ed25519.PublicKey, as: Ed25519
+  alias StellarBase.StrKey
 
   describe "TransactionV0Envelope" do
     setup do
@@ -96,7 +96,7 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
   defp build_transaction_v0 do
     source_account_ed25519 =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
-      |> Ed25519.decode!()
+      |> StrKey.decode!(:ed25519_public_key)
       |> UInt256.new()
 
     fee = UInt32.new(100)
