@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 (10.11.2021)
+* Decouple ed25519 key-pair implementation from StellarBase.
+* XDR types for Thresholds and Signers.
+
 ## 0.2.0 (05.11.2021)
 * Replace main namespace from Stellar to StellarBase
 
