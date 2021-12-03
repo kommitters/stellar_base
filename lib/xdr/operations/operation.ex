@@ -6,28 +6,28 @@ defmodule StellarBase.XDR.Operation do
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(source_account: OptionalMuxedAccount, body: OperationBody)
+  @struct_spec XDR.Struct.new(body: OperationBody, source_account: OptionalMuxedAccount)
 
-  @type t :: %__MODULE__{source_account: OptionalMuxedAccount.t(), body: OperationBody.t()}
+  @type t :: %__MODULE__{body: OperationBody.t(), source_account: OptionalMuxedAccount.t()}
 
   defstruct [:source_account, :body]
 
-  @spec new(source_account :: OptionalMuxedAccount.t(), operation_body :: OperationBody.t()) ::
+  @spec new(operation_body :: OperationBody.t(), source_account :: OptionalMuxedAccount.t()) ::
           t()
-  def new(%OptionalMuxedAccount{} = source_account, %OperationBody{} = body) do
-    %__MODULE__{source_account: source_account, body: body}
+  def new(%OperationBody{} = body, %OptionalMuxedAccount{} = source_account) do
+    %__MODULE__{body: body, source_account: source_account}
   end
 
   @impl true
-  def encode_xdr(%__MODULE__{source_account: source_account, body: body}) do
-    [source_account: source_account, body: body]
+  def encode_xdr(%__MODULE__{body: body, source_account: source_account}) do
+    [body: body, source_account: source_account]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{source_account: source_account, body: body}) do
-    [source_account: source_account, body: body]
+  def encode_xdr!(%__MODULE__{body: body, source_account: source_account}) do
+    [body: body, source_account: source_account]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -37,8 +37,8 @@ defmodule StellarBase.XDR.Operation do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [source_account: source_account, body: body]}, rest}} ->
-        {:ok, {new(source_account, body), rest}}
+      {:ok, {%XDR.Struct{components: [body: body, source_account: source_account]}, rest}} ->
+        {:ok, {new(body, source_account), rest}}
 
       error ->
         error
@@ -49,9 +49,9 @@ defmodule StellarBase.XDR.Operation do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [source_account: source_account, body: body]}, rest} =
+    {%XDR.Struct{components: [body: body, source_account: source_account]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(source_account, body), rest}
+    {new(body, source_account), rest}
   end
 end

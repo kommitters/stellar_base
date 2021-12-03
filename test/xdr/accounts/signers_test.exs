@@ -45,6 +45,10 @@ defmodule StellarBase.XDR.SignersTest do
         |> Signers.encode_xdr()
     end
 
+    test "encode_xdr!/1", %{signers: signers, binary: binary} do
+      ^binary = Signers.encode_xdr!(signers)
+    end
+
     test "decode_xdr/2", %{signers: signers, binary: binary} do
       {:ok, {^signers, ""}} = Signers.decode_xdr(binary)
     end

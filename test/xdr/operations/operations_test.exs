@@ -43,17 +43,17 @@ defmodule StellarBase.XDR.OperationsTest do
         |> CreateAccount.new(starting_balance)
         |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
 
-      operation = Operation.new(source_account, operation_body)
+      operation = Operation.new(operation_body, source_account)
 
       %{
         operations_list: [operation],
         operations: Operations.new([operation]),
         binary:
-          <<0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53,
+          <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53,
             177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42,
-            171, 210, 35, 0, 0, 0, 0, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222,
-            53, 177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232,
-            42, 171, 210, 35, 0, 0, 0, 1, 42, 5, 242, 0>>
+            171, 210, 35, 0, 0, 0, 1, 42, 5, 242, 0, 0, 0, 0, 1, 0, 0, 0, 0, 18, 27, 249, 51, 160,
+            215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128,
+            109, 86, 239, 171, 232, 42, 171, 210, 35>>
       }
     end
 
