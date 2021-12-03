@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2 (3.12.2021)
+* Refactor Operation module.
+* XDR types for AccountEntryExtensionV2.
+
 ## 0.2.1 (10.11.2021)
 * Decouple ed25519 key-pair implementation from StellarBase.
 * XDR types for Thresholds and Signers.
