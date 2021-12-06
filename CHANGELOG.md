@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.3 (6.12.2021)
+* Keep the XDR struct components ordered to avoid binary data corruption.
+
 ## 0.2.2 (3.12.2021)
 * Refactor Operation module.
 * XDR types for AccountEntryExtensionV2.
