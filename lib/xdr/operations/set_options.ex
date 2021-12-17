@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.Operations.SetOptions do
   @moduledoc """
   Representation of Stellar `SetOptions` type.
   """
-  alias StellarBase.XDR.{OptionalAccountID, OptionalUInt32, OptionalString32, Signer}
+  alias StellarBase.XDR.{OptionalAccountID, OptionalUInt32, OptionalString32, OptionalSigner}
 
   @behaviour XDR.Declaration
 
@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.Operations.SetOptions do
                  med_threshold: OptionalUInt32,
                  high_threshold: OptionalUInt32,
                  home_domain: OptionalString32,
-                 signer: Signer
+                 signer: OptionalSigner
                )
 
   @type t :: %__MODULE__{
@@ -27,7 +27,7 @@ defmodule StellarBase.XDR.Operations.SetOptions do
           med_threshold: OptionalUInt32.t(),
           high_threshold: OptionalUInt32.t(),
           home_domain: OptionalString32.t(),
-          signer: Signer.t()
+          signer: OptionalSigner.t()
         }
 
   defstruct [
@@ -51,7 +51,7 @@ defmodule StellarBase.XDR.Operations.SetOptions do
           med_threshold :: OptionalUInt32.t(),
           high_threshold :: OptionalUInt32.t(),
           home_domain :: OptionalString32.t(),
-          signer :: Signer.t()
+          signer :: OptionalSigner.t()
         ) :: t()
   def new(
         %OptionalAccountID{} = inflation_dest,
@@ -62,7 +62,7 @@ defmodule StellarBase.XDR.Operations.SetOptions do
         %OptionalUInt32{} = med_threshold,
         %OptionalUInt32{} = high_threshold,
         %OptionalString32{} = home_domain,
-        %Signer{} = signer
+        %OptionalSigner{} = signer
       ),
       do: %__MODULE__{
         inflation_dest: inflation_dest,
