@@ -2,7 +2,7 @@ defmodule StellarBase.MixProject do
   use Mix.Project
 
   @github_url "https://github.com/kommitters/stellar_base"
-  @version "0.2.3"
+  @version "0.3.0"
 
   def project do
     [
@@ -78,9 +78,8 @@ defmodule StellarBase.MixProject do
 
   defp groups_for_modules do
     [
-      "XDR Types": ~r/^Stellar\.XDR\./,
-      Ed25519: ~r/^Stellar\.Ed25519\./,
-      KeyPair: ~r/^Stellar\.KeyPair\./
+      XDR: ~r/^StellarBase\.XDR\./,
+      StrKey: ~r/^StellarBase\.StrKey*/
     ]
   end
 end

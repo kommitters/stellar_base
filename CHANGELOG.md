@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 (17.12.2021)
+* XDR construction for HashIDPreimage.
+* Use OptionalSigner instead of  Signer in SetOptions operation.
+
 ## 0.2.3 (6.12.2021)
 * Keep the XDR struct components ordered to avoid binary data corruption.
 

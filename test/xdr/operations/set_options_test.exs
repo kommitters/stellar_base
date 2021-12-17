@@ -6,6 +6,7 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
     OptionalAccountID,
     OptionalString32,
     OptionalUInt32,
+    OptionalSigner,
     PublicKey,
     PublicKeyType,
     Signer,
@@ -40,6 +41,7 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
         |> UInt256.new()
         |> SignerKey.new(signer_type)
         |> Signer.new(signer_weight)
+        |> OptionalSigner.new()
 
       inflation_dest = OptionalAccountID.new(account_id)
       clear_flags = OptionalUInt32.new()
@@ -79,9 +81,9 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
             216, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
             1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 9, 107, 111, 109, 109,
-            105, 116, 46, 99, 111, 0, 0, 0, 0, 0, 0, 0, 97, 85, 228, 156, 184, 154, 50, 219, 77,
-            220, 159, 67, 114, 72, 240, 253, 129, 13, 47, 71, 58, 206, 164, 246, 161, 143, 9, 2,
-            127, 137, 20, 131, 0, 0, 0, 2>>
+            105, 116, 46, 99, 111, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 97, 85, 228, 156, 184, 154,
+            50, 219, 77, 220, 159, 67, 114, 72, 240, 253, 129, 13, 47, 71, 58, 206, 164, 246, 161,
+            143, 9, 2, 127, 137, 20, 131, 0, 0, 0, 2>>
       }
     end
 
