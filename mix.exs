@@ -78,8 +78,8 @@ defmodule StellarBase.MixProject do
 
   defp groups_for_modules do
     [
-      "XDR": ~r/^StellarBase\.XDR\./,
-      "StrKey": ~r/^StellarBase\.StrKey*/
+      XDR: ~r/^StellarBase\.XDR\./,
+      StrKey: ~r/^StellarBase\.StrKey*/
     ]
   end
 end
