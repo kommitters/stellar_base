@@ -3,17 +3,29 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipResultCodeTest do
 
   alias StellarBase.XDR.Operations.RevokeSponsorshipResultCode
 
+  @codes [
+    :REVOKE_SPONSORSHIP_SUCCESS,
+    :REVOKE_SPONSORSHIP_DOES_NOT_EXIST,
+    :REVOKE_SPONSORSHIP_NOT_SPONSOR,
+    :REVOKE_SPONSORSHIP_LOW_RESERVE,
+    :REVOKE_SPONSORSHIP_ONLY_TRANSFERABLE,
+    :REVOKE_SPONSORSHIP_MALFORMED
+  ]
+
   describe "RevokeSponsorshipResultCode" do
     setup do
       %{
-        code: :REVOKE_SPONSORSHIP_SUCCESS,
+        codes: @codes,
         result: RevokeSponsorshipResultCode.new(:REVOKE_SPONSORSHIP_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %RevokeSponsorshipResultCode{identifier: ^type} = RevokeSponsorshipResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %RevokeSponsorshipResultCode{identifier: ^type} =
+              RevokeSponsorshipResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

@@ -3,18 +3,31 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolDepositResultCodeTest do
 
   alias StellarBase.XDR.Operations.LiquidityPoolDepositResultCode
 
+  @codes [
+    :LIQUIDITY_POOL_DEPOSIT_SUCCESS,
+    :LIQUIDITY_POOL_DEPOSIT_MALFORMED,
+    :LIQUIDITY_POOL_DEPOSIT_NO_TRUST,
+    :LIQUIDITY_POOL_DEPOSIT_NOT_AUTHORIZED,
+    :LIQUIDITY_POOL_DEPOSIT_UNDERFUNDED,
+    :LIQUIDITY_POOL_DEPOSIT_LINE_FULL,
+    :LIQUIDITY_POOL_DEPOSIT_BAD_PRICE,
+    :LIQUIDITY_POOL_DEPOSIT_POOL_FULL
+  ]
+
   describe "LiquidityPoolDepositResultCode" do
     setup do
       %{
-        code: :LIQUIDITY_POOL_DEPOSIT_SUCCESS,
+        codes: @codes,
         result: LiquidityPoolDepositResultCode.new(:LIQUIDITY_POOL_DEPOSIT_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %LiquidityPoolDepositResultCode{identifier: ^type} =
-        LiquidityPoolDepositResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %LiquidityPoolDepositResultCode{identifier: ^type} =
+              LiquidityPoolDepositResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

@@ -3,18 +3,27 @@ defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResultCodeTest do
 
   alias StellarBase.XDR.Operations.ClawbackClaimableBalanceResultCode
 
+  @codes [
+    :CLAWBACK_CLAIMABLE_BALANCE_SUCCESS,
+    :CLAWBACK_CLAIMABLE_BALANCE_DOES_NOT_EXIST,
+    :CLAWBACK_CLAIMABLE_BALANCE_NOT_ISSUER,
+    :CLAWBACK_CLAIMABLE_BALANCE_NOT_CLAWBACK_ENABLED
+  ]
+
   describe "ClawbackClaimableBalanceResultCode" do
     setup do
       %{
-        code: :CLAWBACK_CLAIMABLE_BALANCE_SUCCESS,
+        codes: @codes,
         result: ClawbackClaimableBalanceResultCode.new(:CLAWBACK_CLAIMABLE_BALANCE_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %ClawbackClaimableBalanceResultCode{identifier: ^type} =
-        ClawbackClaimableBalanceResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %ClawbackClaimableBalanceResultCode{identifier: ^type} =
+              ClawbackClaimableBalanceResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

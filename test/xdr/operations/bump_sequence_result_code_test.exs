@@ -3,17 +3,23 @@ defmodule StellarBase.XDR.Operations.BumpSequenceResultCodeTest do
 
   alias StellarBase.XDR.Operations.BumpSequenceResultCode
 
+  @codes [
+    :BUMP_SEQUENCE_SUCCESS,
+    :BUMP_SEQUENCE_BAD_SEQ
+  ]
+
   describe "BumpSequenceResultCode" do
     setup do
       %{
-        code: :BUMP_SEQUENCE_SUCCESS,
+        codes: @codes,
         result: BumpSequenceResultCode.new(:BUMP_SEQUENCE_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %BumpSequenceResultCode{identifier: ^type} = BumpSequenceResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %BumpSequenceResultCode{identifier: ^type} = BumpSequenceResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

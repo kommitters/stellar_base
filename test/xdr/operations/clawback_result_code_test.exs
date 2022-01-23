@@ -3,17 +3,26 @@ defmodule StellarBase.XDR.Operations.ClawbackResultCodeTest do
 
   alias StellarBase.XDR.Operations.ClawbackResultCode
 
+  @codes [
+    :CLAWBACK_SUCCESS,
+    :CLAWBACK_MALFORMED,
+    :CLAWBACK_NOT_CLAWBACK_ENABLED,
+    :CLAWBACK_NO_TRUST,
+    :CLAWBACK_UNDERFUNDED
+  ]
+
   describe "ClawbackResultCode" do
     setup do
       %{
-        code: :CLAWBACK_SUCCESS,
+        codes: @codes,
         result: ClawbackResultCode.new(:CLAWBACK_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %ClawbackResultCode{identifier: ^type} = ClawbackResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %ClawbackResultCode{identifier: ^type} = ClawbackResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

@@ -3,17 +3,29 @@ defmodule StellarBase.XDR.Operations.AccountMergeResultCodeTest do
 
   alias StellarBase.XDR.Operations.AccountMergeResultCode
 
+  @codes [
+    :ACCOUNT_MERGE_SUCCESS,
+    :ACCOUNT_MERGE_MALFORMED,
+    :ACCOUNT_MERGE_NO_ACCOUNT,
+    :ACCOUNT_MERGE_IMMUTABLE_SET,
+    :ACCOUNT_MERGE_HAS_SUB_ENTRIES,
+    :ACCOUNT_MERGE_SEQNUM_TOO_FAR,
+    :ACCOUNT_MERGE_DEST_FULL,
+    :ACCOUNT_MERGE_IS_SPONSOR
+  ]
+
   describe "AccountMergeResultCode" do
     setup do
       %{
-        code: :ACCOUNT_MERGE_SUCCESS,
+        codes: @codes,
         result: AccountMergeResultCode.new(:ACCOUNT_MERGE_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %AccountMergeResultCode{identifier: ^type} = AccountMergeResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %AccountMergeResultCode{identifier: ^type} = AccountMergeResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

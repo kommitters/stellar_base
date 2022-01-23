@@ -3,17 +3,30 @@ defmodule StellarBase.XDR.Operations.ChangeTrustResultCodeTest do
 
   alias StellarBase.XDR.Operations.ChangeTrustResultCode
 
+  @codes [
+    :CHANGE_TRUST_SUCCESS,
+    :CHANGE_TRUST_MALFORMED,
+    :CHANGE_TRUST_NO_ISSUER,
+    :CHANGE_TRUST_INVALID_LIMIT,
+    :CHANGE_TRUST_LOW_RESERVE,
+    :CHANGE_TRUST_SELF_NOT_ALLOWED,
+    :CHANGE_TRUST_TRUST_LINE_MISSING,
+    :CHANGE_TRUST_CANNOT_DELETE,
+    :CHANGE_TRUST_NOT_AUTH_MAINTAIN_LIABILITIES
+  ]
+
   describe "ChangeTrustResultCode" do
     setup do
       %{
-        code: :CHANGE_TRUST_SUCCESS,
+        codes: @codes,
         result: ChangeTrustResultCode.new(:CHANGE_TRUST_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %ChangeTrustResultCode{identifier: ^type} = ChangeTrustResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %ChangeTrustResultCode{identifier: ^type} = ChangeTrustResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

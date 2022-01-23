@@ -3,17 +3,28 @@ defmodule StellarBase.XDR.Operations.AllowTrustResultCodeTest do
 
   alias StellarBase.XDR.Operations.AllowTrustResultCode
 
+  @codes [
+    :ALLOW_TRUST_SUCCESS,
+    :ALLOW_TRUST_MALFORMED,
+    :ALLOW_TRUST_NO_TRUST_LINE,
+    :ALLOW_TRUST_TRUST_NOT_REQUIRED,
+    :ALLOW_TRUST_CANT_REVOKE,
+    :ALLOW_TRUST_SELF_NOT_ALLOWED,
+    :ALLOW_TRUST_LOW_RESERVE
+  ]
+
   describe "AllowTrustResultCode" do
     setup do
       %{
-        code: :ALLOW_TRUST_SUCCESS,
+        codes: @codes,
         result: AllowTrustResultCode.new(:ALLOW_TRUST_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %AllowTrustResultCode{identifier: ^type} = AllowTrustResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %AllowTrustResultCode{identifier: ^type} = AllowTrustResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

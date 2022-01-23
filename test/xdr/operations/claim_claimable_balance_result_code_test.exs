@@ -3,18 +3,29 @@ defmodule StellarBase.XDR.Operations.ClaimClaimableBalanceResultCodeTest do
 
   alias StellarBase.XDR.Operations.ClaimClaimableBalanceResultCode
 
+  @codes [
+    :CLAIM_CLAIMABLE_BALANCE_SUCCESS,
+    :CLAIM_CLAIMABLE_BALANCE_DOES_NOT_EXIST,
+    :CLAIM_CLAIMABLE_BALANCE_CANNOT_CLAIM,
+    :CLAIM_CLAIMABLE_BALANCE_LINE_FULL,
+    :CLAIM_CLAIMABLE_BALANCE_NO_TRUST,
+    :CLAIM_CLAIMABLE_BALANCE_NOT_AUTHORIZED
+  ]
+
   describe "ClaimClaimableBalanceResultCode" do
     setup do
       %{
-        code: :CLAIM_CLAIMABLE_BALANCE_SUCCESS,
+        codes: @codes,
         result: ClaimClaimableBalanceResultCode.new(:CLAIM_CLAIMABLE_BALANCE_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %ClaimClaimableBalanceResultCode{identifier: ^type} =
-        ClaimClaimableBalanceResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %ClaimClaimableBalanceResultCode{identifier: ^type} =
+              ClaimClaimableBalanceResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

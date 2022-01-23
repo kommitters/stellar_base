@@ -3,19 +3,28 @@ defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReservesResultCodeTest
 
   alias StellarBase.XDR.Operations.BeginSponsoringFutureReservesResultCode
 
+  @codes [
+    :BEGIN_SPONSORING_FUTURE_RESERVES_SUCCESS,
+    :BEGIN_SPONSORING_FUTURE_RESERVES_MALFORMED,
+    :BEGIN_SPONSORING_FUTURE_RESERVES_ALREADY_SPONSORED,
+    :BEGIN_SPONSORING_FUTURE_RESERVES_RECURSIVE
+  ]
+
   describe "BeginSponsoringFutureReservesResultCode" do
     setup do
       %{
-        code: :BEGIN_SPONSORING_FUTURE_RESERVES_SUCCESS,
+        codes: @codes,
         result:
           BeginSponsoringFutureReservesResultCode.new(:BEGIN_SPONSORING_FUTURE_RESERVES_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %BeginSponsoringFutureReservesResultCode{identifier: ^type} =
-        BeginSponsoringFutureReservesResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %BeginSponsoringFutureReservesResultCode{identifier: ^type} =
+              BeginSponsoringFutureReservesResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

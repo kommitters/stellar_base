@@ -3,17 +3,28 @@ defmodule StellarBase.XDR.OperationResultCodeTest do
 
   alias StellarBase.XDR.OperationResultCode
 
+  @codes [
+    :opINNER,
+    :opBAD_AUTH,
+    :opNO_ACCOUNT,
+    :opNOT_SUPPORTED,
+    :opTOO_MANY_SUBENTRIES,
+    :opEXCEEDED_WORK_LIMIT,
+    :opTOO_MANY_SPONSORING
+  ]
+
   describe "OperationResultCode" do
     setup do
       %{
-        code: :opINNER,
+        codes: @codes,
         result: OperationResultCode.new(:opINNER),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %OperationResultCode{identifier: ^type} = OperationResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %OperationResultCode{identifier: ^type} = OperationResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

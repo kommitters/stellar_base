@@ -3,17 +3,29 @@ defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultCodeTest do
 
   alias StellarBase.XDR.Operations.SetTrustLineFlagsResultCode
 
+  @codes [
+    :SET_TRUST_LINE_FLAGS_SUCCESS,
+    :SET_TRUST_LINE_FLAGS_MALFORMED,
+    :SET_TRUST_LINE_FLAGS_NO_TRUST_LINE,
+    :SET_TRUST_LINE_FLAGS_CANT_REVOKE,
+    :SET_TRUST_LINE_FLAGS_INVALID_STATE,
+    :SET_TRUST_LINE_FLAGS_LOW_RESERVE
+  ]
+
   describe "SetTrustLineFlagsResultCode" do
     setup do
       %{
-        code: :SET_TRUST_LINE_FLAGS_SUCCESS,
+        codes: @codes,
         result: SetTrustLineFlagsResultCode.new(:SET_TRUST_LINE_FLAGS_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %SetTrustLineFlagsResultCode{identifier: ^type} = SetTrustLineFlagsResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %SetTrustLineFlagsResultCode{identifier: ^type} =
+              SetTrustLineFlagsResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

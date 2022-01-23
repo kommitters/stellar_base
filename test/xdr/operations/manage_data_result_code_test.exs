@@ -3,17 +3,26 @@ defmodule StellarBase.XDR.Operations.ManageDataResultCodeTest do
 
   alias StellarBase.XDR.Operations.ManageDataResultCode
 
+  @codes [
+    :MANAGE_DATA_SUCCESS,
+    :MANAGE_DATA_NOT_SUPPORTED_YET,
+    :MANAGE_DATA_NAME_NOT_FOUND,
+    :MANAGE_DATA_LOW_RESERVE,
+    :MANAGE_DATA_INVALID_NAME
+  ]
+
   describe "ManageDataResultCode" do
     setup do
       %{
-        code: :MANAGE_DATA_SUCCESS,
+        codes: @codes,
         result: ManageDataResultCode.new(:MANAGE_DATA_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %ManageDataResultCode{identifier: ^type} = ManageDataResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %ManageDataResultCode{identifier: ^type} = ManageDataResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

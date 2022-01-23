@@ -3,18 +3,29 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolWithdrawResultCodeTest do
 
   alias StellarBase.XDR.Operations.LiquidityPoolWithdrawResultCode
 
+  @codes [
+    :LIQUIDITY_POOL_WITHDRAW_SUCCESS,
+    :LIQUIDITY_POOL_WITHDRAW_MALFORMED,
+    :LIQUIDITY_POOL_WITHDRAW_NO_TRUST,
+    :LIQUIDITY_POOL_WITHDRAW_UNDERFUNDED,
+    :LIQUIDITY_POOL_WITHDRAW_LINE_FULL,
+    :LIQUIDITY_POOL_WITHDRAW_UNDER_MINIMUM
+  ]
+
   describe "LiquidityPoolWithdrawResultCode" do
     setup do
       %{
-        code: :LIQUIDITY_POOL_WITHDRAW_SUCCESS,
+        codes: @codes,
         result: LiquidityPoolWithdrawResultCode.new(:LIQUIDITY_POOL_WITHDRAW_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %LiquidityPoolWithdrawResultCode{identifier: ^type} =
-        LiquidityPoolWithdrawResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %LiquidityPoolWithdrawResultCode{identifier: ^type} =
+              LiquidityPoolWithdrawResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

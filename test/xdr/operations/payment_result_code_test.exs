@@ -3,17 +3,30 @@ defmodule StellarBase.XDR.Operations.PaymentResultCodeTest do
 
   alias StellarBase.XDR.Operations.PaymentResultCode
 
+  @codes [
+    :PAYMENT_SUCCESS,
+    :PAYMENT_MALFORMED,
+    :PAYMENT_UNDERFUNDED,
+    :PAYMENT_SRC_NO_TRUST,
+    :PAYMENT_SRC_NOT_AUTHORIZED,
+    :PAYMENT_NO_DESTINATION,
+    :PAYMENT_NO_TRUST,
+    :PAYMENT_NOT_AUTHORIZED,
+    :PAYMENT_LINE_FULL,
+    :PAYMENT_NO_ISSUER
+  ]
+
   describe "PaymentResultCode" do
     setup do
       %{
-        code: :PAYMENT_SUCCESS,
+        codes: @codes,
         result: PaymentResultCode.new(:PAYMENT_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %PaymentResultCode{identifier: ^type} = PaymentResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types, do: %PaymentResultCode{identifier: ^type} = PaymentResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

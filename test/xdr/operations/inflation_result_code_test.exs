@@ -3,17 +3,23 @@ defmodule StellarBase.XDR.Operations.InflationResultCodeTest do
 
   alias StellarBase.XDR.Operations.InflationResultCode
 
+  @codes [
+    :INFLATION_SUCCESS,
+    :INFLATION_NOT_TIME
+  ]
+
   describe "InflationResultCode" do
     setup do
       %{
-        code: :INFLATION_SUCCESS,
+        codes: @codes,
         result: InflationResultCode.new(:INFLATION_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %InflationResultCode{identifier: ^type} = InflationResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %InflationResultCode{identifier: ^type} = InflationResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

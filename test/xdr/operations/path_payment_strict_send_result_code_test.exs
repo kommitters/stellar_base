@@ -3,18 +3,36 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictSendResultCodeTest do
 
   alias StellarBase.XDR.Operations.PathPaymentStrictSendResultCode
 
+  @codes [
+    :PATH_PAYMENT_STRICT_SEND_SUCCESS,
+    :PATH_PAYMENT_STRICT_SEND_MALFORMED,
+    :PATH_PAYMENT_STRICT_SEND_UNDERFUNDED,
+    :PATH_PAYMENT_STRICT_SEND_SRC_NO_TRUST,
+    :PATH_PAYMENT_STRICT_SEND_SRC_NOT_AUTHORIZED,
+    :PATH_PAYMENT_STRICT_SEND_NO_DESTINATION,
+    :PATH_PAYMENT_STRICT_SEND_NO_TRUST,
+    :PATH_PAYMENT_STRICT_SEND_NOT_AUTHORIZED,
+    :PATH_PAYMENT_STRICT_SEND_LINE_FULL,
+    :PATH_PAYMENT_STRICT_SEND_NO_ISSUER,
+    :PATH_PAYMENT_STRICT_SEND_TOO_FEW_OFFERS,
+    :PATH_PAYMENT_STRICT_SEND_OFFER_CROSS_SELF,
+    :PATH_PAYMENT_STRICT_SEND_UNDER_DESTMIN
+  ]
+
   describe "PathPaymentStrictSendResultCode" do
     setup do
       %{
-        code: :PATH_PAYMENT_STRICT_SEND_SUCCESS,
+        codes: @codes,
         result: PathPaymentStrictSendResultCode.new(:PATH_PAYMENT_STRICT_SEND_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %PathPaymentStrictSendResultCode{identifier: ^type} =
-        PathPaymentStrictSendResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %PathPaymentStrictSendResultCode{identifier: ^type} =
+              PathPaymentStrictSendResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

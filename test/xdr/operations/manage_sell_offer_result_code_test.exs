@@ -3,17 +3,34 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferResultCodeTest do
 
   alias StellarBase.XDR.Operations.ManageSellOfferResultCode
 
+  @codes [
+    :MANAGE_SELL_OFFER_SUCCESS,
+    :MANAGE_SELL_OFFER_MALFORMED,
+    :MANAGE_SELL_OFFER_SELL_NO_TRUST,
+    :MANAGE_SELL_OFFER_BUY_NO_TRUST,
+    :MANAGE_SELL_OFFER_SELL_NOT_AUTHORIZED,
+    :MANAGE_SELL_OFFER_BUY_NOT_AUTHORIZED,
+    :MANAGE_SELL_OFFER_LINE_FULL,
+    :MANAGE_SELL_OFFER_UNDERFUNDED,
+    :MANAGE_SELL_OFFER_CROSS_SELF,
+    :MANAGE_SELL_OFFER_SELL_NO_ISSUER,
+    :MANAGE_SELL_OFFER_BUY_NO_ISSUER,
+    :MANAGE_SELL_OFFER_NOT_FOUND,
+    :MANAGE_SELL_OFFER_LOW_RESERVE
+  ]
+
   describe "ManageSellOfferResultCode" do
     setup do
       %{
-        code: :MANAGE_SELL_OFFER_SUCCESS,
+        codes: @codes,
         result: ManageSellOfferResultCode.new(:MANAGE_SELL_OFFER_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %ManageSellOfferResultCode{identifier: ^type} = ManageSellOfferResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %ManageSellOfferResultCode{identifier: ^type} = ManageSellOfferResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do

@@ -3,17 +3,26 @@ defmodule StellarBase.XDR.Operations.CreateAccountResultCodeTest do
 
   alias StellarBase.XDR.Operations.CreateAccountResultCode
 
+  @codes [
+    :CREATE_ACCOUNT_SUCCESS,
+    :CREATE_ACCOUNT_MALFORMED,
+    :CREATE_ACCOUNT_UNDERFUNDED,
+    :CREATE_ACCOUNT_LOW_RESERVE,
+    :CREATE_ACCOUNT_ALREADY_EXIST
+  ]
+
   describe "CreateAccountResultCode" do
     setup do
       %{
-        code: :CREATE_ACCOUNT_SUCCESS,
+        codes: @codes,
         result: CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{code: type} do
-      %CreateAccountResultCode{identifier: ^type} = CreateAccountResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do: %CreateAccountResultCode{identifier: ^type} = CreateAccountResultCode.new(type)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
