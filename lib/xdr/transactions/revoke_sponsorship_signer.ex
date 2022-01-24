@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.Ledger.Signer do
+defmodule StellarBase.XDR.RevokeSponsorshipSigner do
   @moduledoc """
-  Representation of Stellar Ledger `Signer` type.
+  Representation of Stellar `RevokeSponsorshipSigner` type.
   """
   alias StellarBase.XDR.{AccountID, SignerKey}
 

@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.Ledger.Offer do
+defmodule StellarBase.XDR.Offer do
   @moduledoc """
-  Representation of Stellar Ledger `Offer` type.
+  Representation of Stellar `Offer` type.
   """
   alias StellarBase.XDR.{AccountID, Int64}
 

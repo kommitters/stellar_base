@@ -3,16 +3,16 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorship do
   Representation of Stellar `RevokeSponsorship` type.
   """
   alias StellarBase.XDR.{LedgerKey, RevokeSponsorshipType}
-  alias StellarBase.XDR.Ledger.Signer
+  alias StellarBase.XDR.RevokeSponsorshipSigner
 
   @behaviour XDR.Declaration
 
   @arms [
     REVOKE_SPONSORSHIP_LEDGER_ENTRY: LedgerKey,
-    REVOKE_SPONSORSHIP_SIGNER: Signer
+    REVOKE_SPONSORSHIP_SIGNER: RevokeSponsorshipSigner
   ]
 
-  @type sponsorship :: LedgerKey.t() | Signer.t()
+  @type sponsorship :: LedgerKey.t() | RevokeSponsorshipSigner.t()
 
   @type t :: %__MODULE__{sponsorship: sponsorship(), type: RevokeSponsorshipType.t()}
 
