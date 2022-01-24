@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
     UInt256
   }
 
-  alias StellarBase.XDR.Ledger.{Account, Signer}
+  alias StellarBase.XDR.{Account, RevokeSponsorshipSigner}
   alias StellarBase.XDR.Operations.RevokeSponsorship
   alias StellarBase.StrKey
 
@@ -97,7 +97,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
         |> UInt256.new()
         |> SignerKey.new(signer_key_type)
 
-      signer = Signer.new(account_id, signer_key)
+      signer = RevokeSponsorshipSigner.new(account_id, signer_key)
 
       %{
         type: sponsorship_type,

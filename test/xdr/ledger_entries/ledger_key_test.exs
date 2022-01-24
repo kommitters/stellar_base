@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
     UInt256
   }
 
-  alias StellarBase.XDR.Ledger.{Account, Data, Offer}
+  alias StellarBase.XDR.{Account, Data, Offer}
 
   alias StellarBase.StrKey
 

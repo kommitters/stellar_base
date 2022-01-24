@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Ledger.TrustLineTest do
+defmodule StellarBase.XDR.TrustLineTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.Ledger.TrustLineTest do
     UInt256
   }
 
-  alias StellarBase.XDR.Ledger.TrustLine
+  alias StellarBase.XDR.TrustLine
 
   alias StellarBase.StrKey
 
