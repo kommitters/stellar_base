@@ -1,6 +1,9 @@
 # Changelog
 
-## 3.0.0 (17.12.2021)
+## 0.4.0 (26.01.2022)
+* Group XDR constructions as stellar-core does.
+
+## 0.3.0 (17.12.2021)
 * XDR construction for HashIDPreimage.
 * Use OptionalSigner instead of  Signer in SetOptions operation.
 
