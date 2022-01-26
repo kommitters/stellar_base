@@ -12,12 +12,20 @@ defmodule StellarBase.XDR.Operations.ClaimClaimableBalanceResultCodeTest do
     :CLAIM_CLAIMABLE_BALANCE_NOT_AUTHORIZED
   ]
 
+  @binaries [
+    <<0, 0, 0, 0>>,
+    <<255, 255, 255, 255>>,
+    <<255, 255, 255, 254>>,
+    <<255, 255, 255, 253>>,
+    <<255, 255, 255, 252>>
+  ]
+
   describe "ClaimClaimableBalanceResultCode" do
     setup do
       %{
         codes: @codes,
-        result: ClaimClaimableBalanceResultCode.new(:CLAIM_CLAIMABLE_BALANCE_SUCCESS),
-        binary: <<0, 0, 0, 0>>
+        results: @codes |> Enum.map(fn code -> ClaimClaimableBalanceResultCode.new(code) end),
+        binaries: @binaries
       }
     end
 
@@ -28,8 +36,9 @@ defmodule StellarBase.XDR.Operations.ClaimClaimableBalanceResultCodeTest do
               ClaimClaimableBalanceResultCode.new(type)
     end
 
-    test "encode_xdr/1", %{result: result, binary: binary} do
-      {:ok, ^binary} = ClaimClaimableBalanceResultCode.encode_xdr(result)
+    test "encode_xdr/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, ^binary} = ClaimClaimableBalanceResultCode.encode_xdr(result)
     end
 
     test "encode_xdr/1 with an invalid code" do
@@ -39,25 +48,30 @@ defmodule StellarBase.XDR.Operations.ClaimClaimableBalanceResultCodeTest do
         })
     end
 
-    test "encode_xdr!/1", %{result: result, binary: binary} do
-      ^binary = ClaimClaimableBalanceResultCode.encode_xdr!(result)
+    test "encode_xdr!/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: ^binary = ClaimClaimableBalanceResultCode.encode_xdr!(result)
     end
 
-    test "decode_xdr/2", %{result: result, binary: binary} do
-      {:ok, {^result, ""}} = ClaimClaimableBalanceResultCode.decode_xdr(binary)
+    test "decode_xdr/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, {^result, ""}} = ClaimClaimableBalanceResultCode.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid declaration" do
       {:error, :invalid_key} = ClaimClaimableBalanceResultCode.decode_xdr(<<1, 0, 0, 1>>)
     end
 
-    test "decode_xdr!/2", %{result: result, binary: binary} do
-      {^result, ^binary} = ClaimClaimableBalanceResultCode.decode_xdr!(binary <> binary)
+    test "decode_xdr!/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {^result, ^binary} = ClaimClaimableBalanceResultCode.decode_xdr!(binary <> binary)
     end
 
-    test "decode_xdr!/2 with an error code" do
-      {%ClaimClaimableBalanceResultCode{identifier: :CLAIM_CLAIMABLE_BALANCE_CANNOT_CLAIM}, ""} =
-        ClaimClaimableBalanceResultCode.decode_xdr!(<<255, 255, 255, 254>>)
+    test "decode_xdr!/2 with an error code", %{binaries: binaries} do
+      for binary <- binaries,
+          do:
+            {%ClaimClaimableBalanceResultCode{identifier: _}, ""} =
+              ClaimClaimableBalanceResultCode.decode_xdr!(binary)
     end
   end
 end

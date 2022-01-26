@@ -13,12 +13,22 @@ defmodule StellarBase.XDR.Operations.AllowTrustResultCodeTest do
     :ALLOW_TRUST_LOW_RESERVE
   ]
 
+  @binaries [
+    <<0, 0, 0, 0>>,
+    <<255, 255, 255, 255>>,
+    <<255, 255, 255, 254>>,
+    <<255, 255, 255, 253>>,
+    <<255, 255, 255, 252>>,
+    <<255, 255, 255, 251>>,
+    <<255, 255, 255, 250>>
+  ]
+
   describe "AllowTrustResultCode" do
     setup do
       %{
         codes: @codes,
-        result: AllowTrustResultCode.new(:ALLOW_TRUST_SUCCESS),
-        binary: <<0, 0, 0, 0>>
+        results: @codes |> Enum.map(fn code -> AllowTrustResultCode.new(code) end),
+        binaries: @binaries
       }
     end
 
@@ -27,8 +37,9 @@ defmodule StellarBase.XDR.Operations.AllowTrustResultCodeTest do
           do: %AllowTrustResultCode{identifier: ^type} = AllowTrustResultCode.new(type)
     end
 
-    test "encode_xdr/1", %{result: result, binary: binary} do
-      {:ok, ^binary} = AllowTrustResultCode.encode_xdr(result)
+    test "encode_xdr/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, ^binary} = AllowTrustResultCode.encode_xdr(result)
     end
 
     test "encode_xdr/1 with an invalid code" do
@@ -36,25 +47,29 @@ defmodule StellarBase.XDR.Operations.AllowTrustResultCodeTest do
         AllowTrustResultCode.encode_xdr(%AllowTrustResultCode{identifier: :TEST})
     end
 
-    test "encode_xdr!/1", %{result: result, binary: binary} do
-      ^binary = AllowTrustResultCode.encode_xdr!(result)
+    test "encode_xdr!/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: ^binary = AllowTrustResultCode.encode_xdr!(result)
     end
 
-    test "decode_xdr/2", %{result: result, binary: binary} do
-      {:ok, {^result, ""}} = AllowTrustResultCode.decode_xdr(binary)
+    test "decode_xdr/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, {^result, ""}} = AllowTrustResultCode.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid declaration" do
       {:error, :invalid_key} = AllowTrustResultCode.decode_xdr(<<1, 0, 0, 1>>)
     end
 
-    test "decode_xdr!/2", %{result: result, binary: binary} do
-      {^result, ^binary} = AllowTrustResultCode.decode_xdr!(binary <> binary)
+    test "decode_xdr!/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {^result, ^binary} = AllowTrustResultCode.decode_xdr!(binary <> binary)
     end
 
-    test "decode_xdr!/2 with an error code" do
-      {%AllowTrustResultCode{identifier: :ALLOW_TRUST_NO_TRUST_LINE}, ""} =
-        AllowTrustResultCode.decode_xdr!(<<255, 255, 255, 254>>)
+    test "decode_xdr!/2 with an error code", %{binaries: binaries} do
+      for binary <- binaries,
+          do:
+            {%AllowTrustResultCode{identifier: _}, ""} = AllowTrustResultCode.decode_xdr!(binary)
     end
   end
 end

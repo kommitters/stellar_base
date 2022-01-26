@@ -19,12 +19,28 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultCodeTest do
     :PATH_PAYMENT_STRICT_RECEIVE_OVER_SENDMAX
   ]
 
+  @binaries [
+    <<0, 0, 0, 0>>,
+    <<255, 255, 255, 255>>,
+    <<255, 255, 255, 254>>,
+    <<255, 255, 255, 253>>,
+    <<255, 255, 255, 252>>,
+    <<255, 255, 255, 251>>,
+    <<255, 255, 255, 250>>,
+    <<255, 255, 255, 249>>,
+    <<255, 255, 255, 248>>,
+    <<255, 255, 255, 247>>,
+    <<255, 255, 255, 246>>,
+    <<255, 255, 255, 245>>,
+    <<255, 255, 255, 244>>
+  ]
+
   describe "PathPaymentStrictReceiveResultCode" do
     setup do
       %{
         codes: @codes,
-        result: PathPaymentStrictReceiveResultCode.new(:PATH_PAYMENT_STRICT_RECEIVE_SUCCESS),
-        binary: <<0, 0, 0, 0>>
+        results: @codes |> Enum.map(fn code -> PathPaymentStrictReceiveResultCode.new(code) end),
+        binaries: @binaries
       }
     end
 
@@ -35,8 +51,9 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultCodeTest do
               PathPaymentStrictReceiveResultCode.new(type)
     end
 
-    test "encode_xdr/1", %{result: result, binary: binary} do
-      {:ok, ^binary} = PathPaymentStrictReceiveResultCode.encode_xdr(result)
+    test "encode_xdr/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, ^binary} = PathPaymentStrictReceiveResultCode.encode_xdr(result)
     end
 
     test "encode_xdr/1 with an invalid code" do
@@ -46,26 +63,32 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultCodeTest do
         })
     end
 
-    test "encode_xdr!/1", %{result: result, binary: binary} do
-      ^binary = PathPaymentStrictReceiveResultCode.encode_xdr!(result)
+    test "encode_xdr!/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: ^binary = PathPaymentStrictReceiveResultCode.encode_xdr!(result)
     end
 
-    test "decode_xdr/2", %{result: result, binary: binary} do
-      {:ok, {^result, ""}} = PathPaymentStrictReceiveResultCode.decode_xdr(binary)
+    test "decode_xdr/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, {^result, ""}} = PathPaymentStrictReceiveResultCode.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid declaration" do
       {:error, :invalid_key} = PathPaymentStrictReceiveResultCode.decode_xdr(<<1, 0, 0, 1>>)
     end
 
-    test "decode_xdr!/2", %{result: result, binary: binary} do
-      {^result, ^binary} = PathPaymentStrictReceiveResultCode.decode_xdr!(binary <> binary)
+    test "decode_xdr!/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do:
+            {^result, ^binary} = PathPaymentStrictReceiveResultCode.decode_xdr!(binary <> binary)
     end
 
-    test "decode_xdr!/2 with an error code" do
-      {%PathPaymentStrictReceiveResultCode{
-         identifier: :PATH_PAYMENT_STRICT_RECEIVE_SRC_NOT_AUTHORIZED
-       }, ""} = PathPaymentStrictReceiveResultCode.decode_xdr!(<<255, 255, 255, 252>>)
+    test "decode_xdr!/2 with an error code", %{binaries: binaries} do
+      for binary <- binaries,
+          do:
+            {%PathPaymentStrictReceiveResultCode{
+               identifier: _
+             }, ""} = PathPaymentStrictReceiveResultCode.decode_xdr!(binary)
     end
   end
 end
