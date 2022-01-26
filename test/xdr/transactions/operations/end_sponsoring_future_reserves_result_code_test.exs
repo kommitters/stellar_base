@@ -3,23 +3,36 @@ defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultCodeTest d
 
   alias StellarBase.XDR.Operations.EndSponsoringFutureReservesResultCode
 
+  @codes [
+    :END_SPONSORING_FUTURE_RESERVES_SUCCESS,
+    :END_SPONSORING_FUTURE_RESERVES_NOT_SPONSORED
+  ]
+
+  @binaries [
+    <<0, 0, 0, 0>>,
+    <<255, 255, 255, 255>>
+  ]
+
   describe "EndSponsoringFutureReservesResultCode" do
     setup do
       %{
-        code: :END_SPONSORING_FUTURE_RESERVES_SUCCESS,
-        result:
-          EndSponsoringFutureReservesResultCode.new(:END_SPONSORING_FUTURE_RESERVES_SUCCESS),
-        binary: <<0, 0, 0, 0>>
+        codes: @codes,
+        results:
+          @codes |> Enum.map(fn code -> EndSponsoringFutureReservesResultCode.new(code) end),
+        binaries: @binaries
       }
     end
 
-    test "new/1", %{code: type} do
-      %EndSponsoringFutureReservesResultCode{identifier: ^type} =
-        EndSponsoringFutureReservesResultCode.new(type)
+    test "new/1", %{codes: types} do
+      for type <- types,
+          do:
+            %EndSponsoringFutureReservesResultCode{identifier: ^type} =
+              EndSponsoringFutureReservesResultCode.new(type)
     end
 
-    test "encode_xdr/1", %{result: result, binary: binary} do
-      {:ok, ^binary} = EndSponsoringFutureReservesResultCode.encode_xdr(result)
+    test "encode_xdr/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, ^binary} = EndSponsoringFutureReservesResultCode.encode_xdr(result)
     end
 
     test "encode_xdr/1 with an invalid code" do
@@ -29,26 +42,33 @@ defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultCodeTest d
         })
     end
 
-    test "encode_xdr!/1", %{result: result, binary: binary} do
-      ^binary = EndSponsoringFutureReservesResultCode.encode_xdr!(result)
+    test "encode_xdr!/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: ^binary = EndSponsoringFutureReservesResultCode.encode_xdr!(result)
     end
 
-    test "decode_xdr/2", %{result: result, binary: binary} do
-      {:ok, {^result, ""}} = EndSponsoringFutureReservesResultCode.decode_xdr(binary)
+    test "decode_xdr/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, {^result, ""}} = EndSponsoringFutureReservesResultCode.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid declaration" do
       {:error, :invalid_key} = EndSponsoringFutureReservesResultCode.decode_xdr(<<1, 0, 0, 1>>)
     end
 
-    test "decode_xdr!/2", %{result: result, binary: binary} do
-      {^result, ^binary} = EndSponsoringFutureReservesResultCode.decode_xdr!(binary <> binary)
+    test "decode_xdr!/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do:
+            {^result, ^binary} =
+              EndSponsoringFutureReservesResultCode.decode_xdr!(binary <> binary)
     end
 
-    test "decode_xdr!/2 with an error code" do
-      {%EndSponsoringFutureReservesResultCode{
-         identifier: :END_SPONSORING_FUTURE_RESERVES_NOT_SPONSORED
-       }, ""} = EndSponsoringFutureReservesResultCode.decode_xdr!(<<255, 255, 255, 255>>)
+    test "decode_xdr!/2 with an error code", %{binaries: binaries} do
+      for binary <- binaries,
+          do:
+            {%EndSponsoringFutureReservesResultCode{
+               identifier: _
+             }, ""} = EndSponsoringFutureReservesResultCode.decode_xdr!(binary)
     end
   end
 end
