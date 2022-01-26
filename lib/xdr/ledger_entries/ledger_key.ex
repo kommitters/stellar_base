@@ -4,7 +4,7 @@ defmodule StellarBase.XDR.LedgerKey do
   """
   alias StellarBase.XDR.LedgerEntryType
 
-  alias StellarBase.XDR.Ledger.{Account, TrustLine, Offer, Data, ClaimableBalance, LiquidityPool}
+  alias StellarBase.XDR.{Account, TrustLine, Offer, Data, ClaimableBalance, LiquidityPool}
 
   @behaviour XDR.Declaration
 

@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Ledger.OfferTest do
+defmodule StellarBase.XDR.OfferTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{AccountID, Int64, PublicKey, PublicKeyType, UInt256}
-  alias StellarBase.XDR.Ledger.Offer
+  alias StellarBase.XDR.Offer
   alias StellarBase.StrKey
 
   describe "Ledger Offer" do

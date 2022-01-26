@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.Ledger.TrustLine do
+defmodule StellarBase.XDR.TrustLine do
   @moduledoc """
-  Representation of Stellar Ledger `TrustLine` type.
+  Representation of Stellar `TrustLine` type.
   """
   alias StellarBase.XDR.{AccountID, TrustLineAsset}
 
