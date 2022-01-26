@@ -1,7 +1,8 @@
 # Changelog
 
-## 0.4.0 (26.01.2022)
+## 0.4.0 (27.01.2022)
 * Group XDR constructions as stellar-core does.
+* Complement test cases for operation CodeResults modules.
 
 ## 0.3.0 (17.12.2021)
 * XDR construction for HashIDPreimage.
