@@ -1,6 +1,6 @@
 defmodule StellarBase.XDR.Price do
   @moduledoc """
-  Representation of Stellar `AlphaNum4` type.
+  Representation of Stellar `Price` type.
   """
   alias StellarBase.XDR.Int32
 
