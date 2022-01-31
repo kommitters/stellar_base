@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.Liabilities do
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(numerator: Int64, denominator: Int64)
+  @struct_spec XDR.Struct.new(buying: Int64, selling: Int64)
 
   @type t :: %__MODULE__{buying: Int64.t(), selling: Int64.t()}
 
