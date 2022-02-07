@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.OfferEntryTest do
   use ExUnit.Case
 
-  import StellarBase.Test.Utils
+  import StellarBase.Test.Utils, only: [create_account_id: 1, create_asset: 2]
 
   alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price}
 
