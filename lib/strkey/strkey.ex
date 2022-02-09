@@ -6,8 +6,19 @@ defmodule StellarBase.StrKey do
 
   alias StellarBase.StrKeyError
 
-  @type binary_data :: binary() | nil
   @type data :: String.t() | nil
+  @type binary_data :: binary() | nil
+  @type version_bytes :: integer()
+  @type checksum :: integer()
+  @type error :: {:error, atom()}
+  @type validation :: :ok | error()
+  @type decoded_components :: {:ok, {version_bytes(), binary(), checksum()}} | error()
+  @type version ::
+          :ed25519_public_key
+          | :ed25519_secret_seed
+          | :pre_auth_tx
+          | :sha256_hash
+          | :muxed_account
 
   @version_bytes [
     # Base32-encodes to 'G...'
@@ -22,7 +33,8 @@ defmodule StellarBase.StrKey do
     muxed_account: 12 <<< 3
   ]
 
-  @spec encode(data :: binary_data(), version :: atom()) :: {:ok, String.t()} | {:error, atom()}
+  @spec encode(data :: binary_data(), version :: version()) ::
+          {:ok, String.t()} | {:error, atom()}
   def encode(nil, _version), do: {:error, :invalid_binary}
 
   def encode(data, version) do
@@ -36,7 +48,7 @@ defmodule StellarBase.StrKey do
     |> (&{:ok, &1}).()
   end
 
-  @spec encode!(data :: binary_data(), version :: atom()) :: String.t() | no_return()
+  @spec encode!(data :: binary_data(), version :: version()) :: String.t() | no_return()
   def encode!(data, version) do
     case encode(data, version) do
       {:ok, key} -> key
@@ -44,22 +56,17 @@ defmodule StellarBase.StrKey do
     end
   end
 
-  @spec decode(data :: String.t(), version :: atom()) :: {:ok, binary()} | {:error, atom()}
-  def decode(nil, _version), do: {:error, :invalid_data}
+  @spec decode(data :: data(), version :: version()) :: {:ok, binary()} | error()
+  def decode(nil, _version), do: {:error, :cant_decode_nil_data}
 
   def decode(data, version) do
     version_bytes = Keyword.get(@version_bytes, version, :ed25519_public_key)
 
-    <<decoded_version_bytes::size(8), decoded_data::binary-size(32),
-      decoded_checksum::little-integer-size(16)>> = Base.decode32!(data)
-
-    checksum = CRC.crc(:crc_16_xmodem, <<version_bytes>> <> decoded_data)
-
-    with :ok <- validate_version_bytes(version_bytes, decoded_version_bytes),
-         :ok <- validate_checksum(checksum, decoded_checksum) do
+    with {:ok, {decoded_version_bytes, decoded_data, decoded_checksum}} <-
+           decode_components(data),
+         :ok <- validate_version_bytes(version_bytes, decoded_version_bytes),
+         :ok <- validate_checksum(decoded_data, version_bytes, decoded_checksum) do
       {:ok, decoded_data}
-    else
-      {:error, reason} -> {:error, reason}
     end
   end
 
@@ -71,12 +78,44 @@ defmodule StellarBase.StrKey do
     end
   end
 
-  @spec validate_version_bytes(version :: integer(), decoded_version :: integer()) ::
-          :ok | no_return()
-  defp validate_version_bytes(version, version), do: :ok
-  defp validate_version_bytes(_version, _decoded_version), do: {:error, :unmatched_version_byte}
+  @spec decode_components(data :: binary()) :: decoded_components()
+  defp decode_components(data) do
+    data
+    |> Base.decode32(padding: false)
+    |> validate_decoded_binary()
+  end
 
-  @spec validate_checksum(checksum :: integer(), decoded_checksum :: integer()) :: :ok
-  defp validate_checksum(checksum, checksum), do: :ok
-  defp validate_checksum(_checksum, _decoded_checksum), do: {:error, :invalid_checksum}
+  @spec validate_decoded_binary(data :: {:ok, binary()} | :error) :: decoded_components()
+  defp validate_decoded_binary(
+         {:ok,
+          <<version_bytes::size(8), data::binary-size(40), checksum::little-integer-size(16)>>}
+       ),
+       do: {:ok, {version_bytes, data, checksum}}
+
+  defp validate_decoded_binary(
+         {:ok,
+          <<version_bytes::size(8), data::binary-size(32), checksum::little-integer-size(16)>>}
+       ),
+       do: {:ok, {version_bytes, data, checksum}}
+
+  defp validate_decoded_binary(_decoded_data), do: {:error, :invalid_data_to_decode}
+
+  @spec validate_version_bytes(
+          version_bytes :: version_bytes(),
+          decoded_version :: version_bytes()
+        ) :: validation()
+  defp validate_version_bytes(version_bytes, version_bytes), do: :ok
+
+  defp validate_version_bytes(_version_bytes, _decoded_version_bytes),
+    do: {:error, :unmatched_version_bytes}
+
+  @spec validate_checksum(
+          decoded_data :: binary(),
+          version_bytes :: version_bytes(),
+          decoded_checksum :: checksum()
+        ) :: validation()
+  defp validate_checksum(decoded_data, version_bytes, decoded_checksum) do
+    checksum = CRC.crc(:crc_16_xmodem, <<version_bytes>> <> decoded_data)
+    if checksum == decoded_checksum, do: :ok, else: {:error, :invalid_checksum}
+  end
 end
