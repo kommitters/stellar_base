@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0 (09.02.2022)
+* Add support for encoding/decoding ed25519 muxed accounts.
+* XDR types for AccountFlags, TrustLineFlags, ThresholdIndexes and Liabilities.
+
 ## 0.4.0 (27.01.2022)
 * Group XDR constructions as stellar-core does.
 * Complement test cases for operation CodeResults modules.
