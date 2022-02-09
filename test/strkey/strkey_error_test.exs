@@ -9,9 +9,15 @@ defmodule StellarBase.StrKeyErrorTest do
     end
   end
 
-  test "invalid_data" do
+  test "nil_data" do
     assert_raise StrKeyError, "cannot decode nil data", fn ->
-      raise StrKeyError, :invalid_data
+      raise StrKeyError, :cant_decode_nil_data
+    end
+  end
+
+  test "invalid_data" do
+    assert_raise StrKeyError, "cannot decode data", fn ->
+      raise StrKeyError, :invalid_data_to_decode
     end
   end
 
@@ -22,8 +28,8 @@ defmodule StellarBase.StrKeyErrorTest do
   end
 
   test "unmatched_version_byte" do
-    assert_raise StrKeyError, "version byte does not match", fn ->
-      raise StrKeyError, :unmatched_version_byte
+    assert_raise StrKeyError, "version bytes does not match", fn ->
+      raise StrKeyError, :unmatched_version_bytes
     end
   end
 
