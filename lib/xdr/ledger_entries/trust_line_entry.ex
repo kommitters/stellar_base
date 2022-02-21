@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
   @moduledoc """
   Representation of Stellar `TrustLineEntry` type.
   """
-  alias StellarBase.XDR.{AccountID, TrustLineAsset, Int64, UInt32, Ext}
+  alias StellarBase.XDR.{AccountID, TrustLineAsset, Int64, UInt32, TrustLineEntryExt}
 
   @behaviour XDR.Declaration
 
@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
                  balance: Int64,
                  limit: Int64,
                  flags: UInt32,
-                 ext: Ext
+                 trust_line_entry_ext: TrustLineEntryExt
                )
 
   @type t :: %__MODULE__{
@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
           balance: Int64.t(),
           limit: Int64.t(),
           flags: UInt32.t(),
-          ext: Ext.t()
+          trust_line_entry_ext: TrustLineEntryExt.t()
         }
 
   defstruct [
@@ -30,7 +30,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
     :balance,
     :limit,
     :flags,
-    :ext
+    :trust_line_entry_ext
   ]
 
   @spec new(
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
           balance :: Int64.t(),
           limit :: Int64.t(),
           flags :: UInt32.t(),
-          ext :: Ext.t()
+          trust_line_entry_ext :: TrustLineEntryExt.t()
         ) :: t()
   def new(
         %AccountID{} = account_id,
@@ -47,7 +47,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
         %Int64{} = balance,
         %Int64{} = limit,
         %UInt32{} = flags,
-        %Ext{} = ext
+        %TrustLineEntryExt{} = trust_line_entry_ext
       ),
       do: %__MODULE__{
         account_id: account_id,
@@ -55,7 +55,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
         balance: balance,
         limit: limit,
         flags: flags,
-        ext: ext
+        trust_line_entry_ext: trust_line_entry_ext
       }
 
   @impl true
@@ -65,7 +65,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
         balance: balance,
         limit: limit,
         flags: flags,
-        ext: ext
+        trust_line_entry_ext: trust_line_entry_ext
       }) do
     [
       account_id: account_id,
@@ -73,7 +73,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
       balance: balance,
       limit: limit,
       flags: flags,
-      ext: ext
+      trust_line_entry_ext: trust_line_entry_ext
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
@@ -86,7 +86,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
         balance: balance,
         limit: limit,
         flags: flags,
-        ext: ext
+        trust_line_entry_ext: trust_line_entry_ext
       }) do
     [
       account_id: account_id,
@@ -94,7 +94,7 @@ defmodule StellarBase.XDR.TrustLineEntry do
       balance: balance,
       limit: limit,
       flags: flags,
-      ext: ext
+      trust_line_entry_ext: trust_line_entry_ext
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -113,10 +113,10 @@ defmodule StellarBase.XDR.TrustLineEntry do
             balance: balance,
             limit: limit,
             flags: flags,
-            ext: ext
+            trust_line_entry_ext: trust_line_entry_ext
           ]
         }, rest}} ->
-        {:ok, {new(account_id, asset, balance, limit, flags, ext), rest}}
+        {:ok, {new(account_id, asset, balance, limit, flags, trust_line_entry_ext), rest}}
 
       error ->
         error
@@ -134,10 +134,10 @@ defmodule StellarBase.XDR.TrustLineEntry do
          balance: balance,
          limit: limit,
          flags: flags,
-         ext: ext
+         trust_line_entry_ext: trust_line_entry_ext
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(account_id, asset, balance, limit, flags, ext), rest}
+    {new(account_id, asset, balance, limit, flags, trust_line_entry_ext), rest}
   end
 end
