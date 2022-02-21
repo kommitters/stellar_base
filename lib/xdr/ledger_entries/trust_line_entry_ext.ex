@@ -35,9 +35,6 @@ defmodule StellarBase.XDR.TrustLineEntryExt do
   end
 
   @impl true
-  @spec decode_xdr(binary, map) ::
-          {:error, :invalid_arm | :not_binary | :not_list}
-          | {:ok, {StellarBase.XDR.TrustLineEntryExt.t(), binary}}
   def decode_xdr(bytes, spec \\ union_spec())
 
   def decode_xdr(bytes, spec) do
@@ -48,7 +45,6 @@ defmodule StellarBase.XDR.TrustLineEntryExt do
   end
 
   @impl true
-  @spec decode_xdr!(binary, map) :: {StellarBase.XDR.TrustLineEntryExt.t(), binary}
   def decode_xdr!(bytes, spec \\ union_spec())
 
   def decode_xdr!(bytes, spec) do
@@ -58,7 +54,8 @@ defmodule StellarBase.XDR.TrustLineEntryExt do
 
   @spec union_spec() :: XDR.Union.t()
   defp union_spec do
-    XDR.Int.new(0)
+    0
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms)
   end
 end
