@@ -85,18 +85,6 @@ defmodule StellarBase.XDR.ClaimableBalanceEntry do
   end
 
   @impl true
-  @spec decode_xdr(any, any) ::
-          {:error, :not_binary | :not_list}
-          | {:ok,
-             {%{
-                :__struct__ => StellarBase.XDR.ClaimableBalanceEntry | XDR.Struct,
-                optional(:amount) => map,
-                optional(:asset) => map,
-                optional(:claimable_balance_entry_ext) => map,
-                optional(:claimable_balance_id) => map,
-                optional(:claimant) => map,
-                optional(:components) => list
-              }, binary}}
   def decode_xdr(bytes, struct \\ @struct_spec)
 
   def decode_xdr(bytes, struct) do
