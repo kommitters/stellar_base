@@ -2,7 +2,7 @@ defmodule StellarBase.MixProject do
   use Mix.Project
 
   @github_url "https://github.com/kommitters/stellar_base"
-  @version "0.5.0"
+  @version "0.6.0"
 
   def project do
     [
@@ -47,7 +47,7 @@ defmodule StellarBase.MixProject do
 
   defp description do
     """
-    Elixir library to read, write, hash, and sign XDR primitive constructs used in the Stellar network.
+    Low-level elixir library to read, write, hash, and sign XDR primitive constructs used in the Stellar network.
     """
   end
 
