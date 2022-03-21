@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.0 (21.03.2022)
+* XDR types for LedgerEntryExtension, ClaimableBalanceEntry, ClaimableBalanceFlags, DataEntry, TrustLineEntry and OfferEntryFlags.
+
 ## 0.5.0 (09.02.2022)
 * Add support for encoding/decoding ed25519 muxed accounts.
 * XDR types for AccountFlags, TrustLineFlags, ThresholdIndexes and Liabilities.
