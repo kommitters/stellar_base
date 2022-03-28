@@ -7,8 +7,7 @@ defmodule StellarBase.XDR.OfferEntry do
 
   For example an Offer is selling 10A where 1A is priced at 1.5B
   """
-  alias StellarBase.XDR.{AccountID, Asset, Int64, Price}
-  alias StellarBase.XDR.Ext
+  alias StellarBase.XDR.{AccountID, Asset, Int64, Price, UInt32, Ext}
 
   @behaviour XDR.Declaration
 
@@ -19,6 +18,7 @@ defmodule StellarBase.XDR.OfferEntry do
                  buying: Asset,
                  amount: Int64,
                  price: Price,
+                 flags: UInt32,
                  ext: Ext
                )
 
@@ -29,10 +29,11 @@ defmodule StellarBase.XDR.OfferEntry do
           buying: Asset.t(),
           amount: Int64.t(),
           price: Price.t(),
+          flags: UInt32.t(),
           ext: Ext.t()
         }
 
-  defstruct [:seller_id, :offer_id, :selling, :buying, :amount, :price, :ext]
+  defstruct [:seller_id, :offer_id, :selling, :buying, :amount, :price, :flags, :ext]
 
   @spec new(
           seller_id :: AccountID.t(),
@@ -41,6 +42,7 @@ defmodule StellarBase.XDR.OfferEntry do
           buying :: Asset.t(),
           amount :: Int64.t(),
           price :: Price.t(),
+          flags :: UInt32.t(),
           ext :: Ext.t()
         ) ::
           t()
@@ -51,6 +53,7 @@ defmodule StellarBase.XDR.OfferEntry do
         %Asset{} = buying,
         %Int64{} = amount,
         %Price{} = price,
+        %UInt32{} = flags,
         %Ext{} = ext
       ),
       do: %__MODULE__{
@@ -60,6 +63,7 @@ defmodule StellarBase.XDR.OfferEntry do
         buying: buying,
         amount: amount,
         price: price,
+        flags: flags,
         ext: ext
       }
 
@@ -71,6 +75,7 @@ defmodule StellarBase.XDR.OfferEntry do
         buying: buying,
         amount: amount,
         price: price,
+        flags: flags,
         ext: ext
       }) do
     [
@@ -80,6 +85,7 @@ defmodule StellarBase.XDR.OfferEntry do
       buying: buying,
       amount: amount,
       price: price,
+      flags: flags,
       ext: ext
     ]
     |> XDR.Struct.new()
@@ -94,6 +100,7 @@ defmodule StellarBase.XDR.OfferEntry do
         buying: buying,
         amount: amount,
         price: price,
+        flags: flags,
         ext: ext
       }) do
     [
@@ -103,6 +110,7 @@ defmodule StellarBase.XDR.OfferEntry do
       buying: buying,
       amount: amount,
       price: price,
+      flags: flags,
       ext: ext
     ]
     |> XDR.Struct.new()
@@ -123,10 +131,11 @@ defmodule StellarBase.XDR.OfferEntry do
             buying: buying,
             amount: amount,
             price: price,
+            flags: flags,
             ext: ext
           ]
         }, rest}} ->
-        {:ok, {new(seller_id, offer_id, selling, buying, amount, price, ext), rest}}
+        {:ok, {new(seller_id, offer_id, selling, buying, amount, price, flags, ext), rest}}
 
       error ->
         error
@@ -145,10 +154,11 @@ defmodule StellarBase.XDR.OfferEntry do
          buying: buying,
          amount: amount,
          price: price,
+         flags: flags,
          ext: ext
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(seller_id, offer_id, selling, buying, amount, price, ext), rest}
+    {new(seller_id, offer_id, selling, buying, amount, price, flags, ext), rest}
   end
 end

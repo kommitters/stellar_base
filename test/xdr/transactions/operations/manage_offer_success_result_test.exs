@@ -12,7 +12,8 @@ defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
     Int32,
     Int64,
     OfferEntry,
-    Price
+    Price,
+    UInt32
   }
 
   alias StellarBase.XDR.Operations.{ManageOffer, ManageOfferEffect, ManageOfferSuccessResult}
@@ -76,7 +77,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
             10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 2, 66, 84, 67, 78, 69, 87, 50,
             48, 50, 49, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154,
             124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227,
-            119, 0, 0, 0, 0, 0, 76, 75, 64, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0, 0>>
+            119, 0, 0, 0, 0, 0, 76, 75, 64, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0>>
       }
     end
 
@@ -112,6 +113,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
     offer_id = Int64.new(123_456)
     amount = Int64.new(5_000_000)
     price = Price.new(Int32.new(1), Int32.new(10))
+    flags = UInt32.new(1)
     ext = Ext.new()
 
     selling =
@@ -127,7 +129,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
       )
 
     seller_id
-    |> OfferEntry.new(offer_id, selling, buying, amount, price, ext)
+    |> OfferEntry.new(offer_id, selling, buying, amount, price, flags, ext)
     |> ManageOffer.new(ManageOfferEffect.new(:MANAGE_OFFER_CREATED))
   end
 end
