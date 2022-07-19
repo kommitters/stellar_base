@@ -19,10 +19,10 @@ jobs:
       MIX_ENV: test
     steps:
       - name: Checkout Github repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Sets up an Erlang/OTP environment
-        uses: erlef/setup-elixir@885971a72ed1f9240973bd92ab57af8c1aa68f24
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ matrix.otp }}
           elixir-version: ${{ matrix.elixir }}
@@ -34,7 +34,7 @@ jobs:
           echo "::set-output name=mix_hash::$mix_hash"
 
       - name: Cache dependecies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-mix-${{ steps.set_vars.outputs.mix_hash }}
@@ -43,7 +43,7 @@ jobs:
 
       - name: Cache PLT files
         id: plt-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
