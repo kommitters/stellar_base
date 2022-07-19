@@ -1,9 +1,9 @@
 name: StellarBase CD
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types:
+      [published]
 
 jobs:
   publish:
