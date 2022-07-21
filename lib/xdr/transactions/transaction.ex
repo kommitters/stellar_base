@@ -10,7 +10,8 @@ defmodule StellarBase.XDR.Transaction do
     OptionalTimeBounds,
     Operations,
     SequenceNumber,
-    UInt32
+    UInt32,
+    Preconditions
   }
 
   @behaviour XDR.Declaration
