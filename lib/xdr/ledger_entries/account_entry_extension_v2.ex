@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
   Representation of Stellar's ledger AccountEntryExtensionV2
   """
 
-  alias StellarBase.XDR.{UInt32, AccountIDList, Ext}
+  alias StellarBase.XDR.{UInt32, AccountIDList, Ext, AccountEntryExtensionV2Ext}
 
   @behaviour XDR.Declaration
 
@@ -11,7 +11,8 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
                  num_sponsored: UInt32,
                  num_sponsoring: UInt32,
                  signer_sponsoring_ids: AccountIDList,
-                 ext: Ext
+                 ext: Ext,
+                 account_entry_extension_v2_ext: AccountEntryExtensionV2Ext
                )
 
   @type t :: %__MODULE__{

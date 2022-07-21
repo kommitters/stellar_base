@@ -7,11 +7,10 @@ defmodule StellarBase.XDR.Transaction do
     Ext,
     Memo,
     MuxedAccount,
-    OptionalTimeBounds,
+    Preconditions,
     Operations,
     SequenceNumber,
-    UInt32,
-    Preconditions
+    UInt32
   }
 
   @behaviour XDR.Declaration
@@ -20,7 +19,7 @@ defmodule StellarBase.XDR.Transaction do
                  source_account: MuxedAccount,
                  fee: UInt32,
                  seq_num: SequenceNumber,
-                 time_bounds: OptionalTimeBounds,
+                 preconditions: Preconditions,
                  memo: Memo,
                  operations: Operations,
                  ext: Ext
@@ -30,19 +29,19 @@ defmodule StellarBase.XDR.Transaction do
           source_account: MuxedAccount.t(),
           fee: UInt32.t(),
           seq_num: SequenceNumber.t(),
-          time_bounds: OptionalTimeBounds.t(),
+          preconditions: Preconditions.t(),
           memo: Memo.t(),
           operations: Operations.t(),
           ext: Ext.t()
         }
 
-  defstruct [:source_account, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
+  defstruct [:source_account, :fee, :seq_num, :preconditions, :memo, :operations, :ext]
 
   @spec new(
           source_account :: MuxedAccount.t(),
           fee :: UInt32.t(),
           seq_num :: SequenceNumber.t(),
-          time_bounds :: OptionalTimeBounds.t(),
+          preconditions :: Preconditions.t(),
           memo :: Memo.t(),
           operations :: Operations.t(),
           ext :: Ext.t()
@@ -51,7 +50,7 @@ defmodule StellarBase.XDR.Transaction do
         %MuxedAccount{} = source_account,
         %UInt32{} = fee,
         %SequenceNumber{} = seq_num,
-        %OptionalTimeBounds{} = time_bounds,
+        %Preconditions{} = preconditions,
         %Memo{} = memo,
         %Operations{} = operations,
         %Ext{} = ext
@@ -60,7 +59,7 @@ defmodule StellarBase.XDR.Transaction do
         source_account: source_account,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext
@@ -71,7 +70,7 @@ defmodule StellarBase.XDR.Transaction do
         source_account: source_account,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext
@@ -80,7 +79,7 @@ defmodule StellarBase.XDR.Transaction do
       source_account: source_account,
       fee: fee,
       seq_num: seq_num,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       memo: memo,
       operations: operations,
       ext: ext
@@ -94,7 +93,7 @@ defmodule StellarBase.XDR.Transaction do
         source_account: source_account,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext
@@ -103,7 +102,7 @@ defmodule StellarBase.XDR.Transaction do
       source_account: source_account,
       fee: fee,
       seq_num: seq_num,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       memo: memo,
       operations: operations,
       ext: ext
@@ -123,13 +122,13 @@ defmodule StellarBase.XDR.Transaction do
             source_account: source_account,
             fee: fee,
             seq_num: seq_num,
-            time_bounds: time_bounds,
+            preconditions: preconditions,
             memo: memo,
             operations: operations,
             ext: ext
           ]
         }, rest}} ->
-        {:ok, {new(source_account, fee, seq_num, time_bounds, memo, operations, ext), rest}}
+        {:ok, {new(source_account, fee, seq_num, preconditions, memo, operations, ext), rest}}
 
       error ->
         error
@@ -145,13 +144,13 @@ defmodule StellarBase.XDR.Transaction do
          source_account: source_account,
          fee: fee,
          seq_num: seq_num,
-         time_bounds: time_bounds,
+         preconditions: preconditions,
          memo: memo,
          operations: operations,
          ext: ext
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(source_account, fee, seq_num, time_bounds, memo, operations, ext), rest}
+    {new(source_account, fee, seq_num, preconditions, memo, operations, ext), rest}
   end
 end
