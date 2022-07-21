@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1 (21.07.2022)
+* Add the flags property to the OfferEntry.
+* Add security policy to repository.
+
 ## 0.6.0 (21.03.2022)
 * XDR types for LedgerEntryExtension, ClaimableBalanceEntry, ClaimableBalanceFlags, DataEntry, TrustLineEntry and OfferEntryFlags.
 

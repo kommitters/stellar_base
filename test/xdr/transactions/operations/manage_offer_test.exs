@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferTest do
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price}
+  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price, UInt32}
   alias StellarBase.XDR.Operations.{ManageOffer, ManageOfferEffect}
 
   describe "ManageOffer" do
@@ -28,11 +28,13 @@ defmodule StellarBase.XDR.Operations.ManageOfferTest do
 
       price = Price.new(Int32.new(1), Int32.new(10))
 
+      flags = UInt32.new(1)
+
       ext = Ext.new()
 
       effect = ManageOfferEffect.new(:MANAGE_OFFER_CREATED)
 
-      offer = OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, ext)
+      offer = OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, flags, ext)
 
       %{
         effect: effect,
@@ -46,7 +48,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferTest do
             37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 2, 66, 84, 67, 78, 69, 87,
             50, 48, 50, 49, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149,
             154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2,
-            227, 119, 0, 0, 0, 0, 0, 76, 75, 64, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0, 0>>
+            227, 119, 0, 0, 0, 0, 0, 76, 75, 64, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0>>
       }
     end
 
