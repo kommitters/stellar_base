@@ -1,6 +1,6 @@
 defmodule StellarBase.XDR.LedgerBounds do
   @moduledoc """
-
+  Representation of Stellar `LedgerBounds` type.
   """
   alias StellarBase.XDR.UInt32
 

@@ -21,7 +21,9 @@ defmodule StellarBase.XDR.TxResultV0 do
     txINTERNAL_ERROR: Void,
     txNOT_SUPPORTED: Void,
     # txFEE_BUMP_INNER_FAILED is not included
-    txBAD_SPONSORSHIP: Void
+    txBAD_SPONSORSHIP: Void,
+    txBAD_MIN_SEQ_AGE_OR_GAP: Void,
+    txMALFORMED: Void
   ]
 
   @type t :: %__MODULE__{result: any(), code: TransactionResultCode.t()}

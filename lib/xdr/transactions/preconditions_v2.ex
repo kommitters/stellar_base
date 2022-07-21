@@ -1,8 +1,10 @@
 defmodule StellarBase.XDR.PreconditionsV2 do
   @moduledoc """
+  Representation of Stellar `PreconditionsV2` type.
 
+  PreconditionsV2 is a set of new optional preconditions for a transaction added in the CAP-21.
   """
-  alias StellarBase.XDR.{TimeBounds, LedgerBounds, SequenceNumber, UInt64, UInt32, ExtraSigners}
+  alias StellarBase.XDR.{TimeBounds, LedgerBounds, SequenceNumber, Duration, UInt32, ExtraSigners}
 
   @behaviour XDR.Declaration
 
@@ -10,7 +12,7 @@ defmodule StellarBase.XDR.PreconditionsV2 do
                  time_bounds: TimeBounds,
                  ledger_bounds: LedgerBounds,
                  min_seq_num: SequenceNumber,
-                 min_seq_age: UInt64,
+                 min_seq_age: Duration,
                  min_seq_ledger_gap: UInt32,
                  extra_signers: ExtraSigners
                )
@@ -19,7 +21,7 @@ defmodule StellarBase.XDR.PreconditionsV2 do
           time_bounds: TimeBounds.t(),
           ledger_bounds: LedgerBounds.t(),
           min_seq_num: SequenceNumber.t(),
-          min_seq_age: UInt64.t(),
+          min_seq_age: Duration.t(),
           min_seq_ledger_gap: UInt32.t(),
           extra_signers: ExtraSigners.t()
         }
@@ -37,7 +39,7 @@ defmodule StellarBase.XDR.PreconditionsV2 do
           time_bounds :: TimeBounds.t(),
           ledger_bounds :: LedgerBounds.t(),
           min_seq_num :: SequenceNumber.t(),
-          min_seq_age :: UInt64.t(),
+          min_seq_age :: Duration.t(),
           min_seq_ledger_gap :: UInt32.t(),
           extra_signers :: ExtraSigners.t()
         ) :: t()
@@ -45,7 +47,7 @@ defmodule StellarBase.XDR.PreconditionsV2 do
         %TimeBounds{} = time_bounds,
         %LedgerBounds{} = ledger_bounds,
         %SequenceNumber{} = min_seq_num,
-        %UInt64{} = min_seq_age,
+        %Duration{} = min_seq_age,
         %UInt32{} = min_seq_ledger_gap,
         %ExtraSigners{} = extra_signers
       ),

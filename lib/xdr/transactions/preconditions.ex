@@ -1,8 +1,7 @@
 defmodule StellarBase.XDR.Preconditions do
   @moduledoc """
-
+  Representation of Stellar `Preconditions` type.
   """
-
   alias StellarBase.XDR.{
     PreconditionType,
     TimeBounds,
