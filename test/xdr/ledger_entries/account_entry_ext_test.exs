@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
 
   @types [0, 1, 1]
 
-  describe "AccountEntry" do
+  describe "AccountEntryExt" do
     setup do
       buying = Int64.new(20)
       selling = Int64.new(10)
