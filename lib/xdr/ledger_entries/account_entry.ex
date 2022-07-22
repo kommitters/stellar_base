@@ -11,7 +11,8 @@ defmodule StellarBase.XDR.AccountEntry do
     OptionalAccountID,
     String32,
     Thresholds,
-    Signers
+    Signers,
+    AccountEntryExt
   }
 
   @behaviour XDR.Declaration
@@ -25,7 +26,8 @@ defmodule StellarBase.XDR.AccountEntry do
                  flags: UInt32,
                  home_domain: String32,
                  thresholds: Thresholds,
-                 signers: Signers
+                 signers: Signers,
+                 account_entry_ext: AccountEntryExt
                )
 
   @type t :: %__MODULE__{
@@ -37,7 +39,8 @@ defmodule StellarBase.XDR.AccountEntry do
           flags: UInt32.t(),
           home_domain: String32.t(),
           thresholds: Thresholds.t(),
-          signers: Signers.t()
+          signers: Signers.t(),
+          account_entry_ext: AccountEntryExt.t()
         }
 
   defstruct [
@@ -49,7 +52,8 @@ defmodule StellarBase.XDR.AccountEntry do
     :flags,
     :home_domain,
     :thresholds,
-    :signers
+    :signers,
+    :account_entry_ext
   ]
 
   @spec new(
@@ -61,7 +65,8 @@ defmodule StellarBase.XDR.AccountEntry do
           flags :: UInt32.t(),
           home_domain :: String32.t(),
           thresholds :: Thresholds.t(),
-          signers :: Signers.t()
+          signers :: Signers.t(),
+          account_entry_ext :: AccountEntryExt.t()
         ) :: t()
   def new(
         %AccountID{} = account_id,
@@ -72,7 +77,8 @@ defmodule StellarBase.XDR.AccountEntry do
         %UInt32{} = flags,
         %String32{} = home_domain,
         %Thresholds{} = thresholds,
-        %Signers{} = signers
+        %Signers{} = signers,
+        %AccountEntryExt{} = account_entry_ext
       ),
       do: %__MODULE__{
         account_id: account_id,
@@ -83,7 +89,8 @@ defmodule StellarBase.XDR.AccountEntry do
         flags: flags,
         home_domain: home_domain,
         thresholds: thresholds,
-        signers: signers
+        signers: signers,
+        account_entry_ext: account_entry_ext
       }
 
   @impl true
@@ -96,7 +103,8 @@ defmodule StellarBase.XDR.AccountEntry do
         flags: flags,
         home_domain: home_domain,
         thresholds: thresholds,
-        signers: signers
+        signers: signers,
+        account_entry_ext: account_entry_ext
       }) do
     [
       account_id: account_id,
@@ -107,7 +115,8 @@ defmodule StellarBase.XDR.AccountEntry do
       flags: flags,
       home_domain: home_domain,
       thresholds: thresholds,
-      signers: signers
+      signers: signers,
+      account_entry_ext: account_entry_ext
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
@@ -123,7 +132,8 @@ defmodule StellarBase.XDR.AccountEntry do
         flags: flags,
         home_domain: home_domain,
         thresholds: thresholds,
-        signers: signers
+        signers: signers,
+        account_entry_ext: account_entry_ext
       }) do
     [
       account_id: account_id,
@@ -134,7 +144,8 @@ defmodule StellarBase.XDR.AccountEntry do
       flags: flags,
       home_domain: home_domain,
       thresholds: thresholds,
-      signers: signers
+      signers: signers,
+      account_entry_ext: account_entry_ext
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -156,7 +167,8 @@ defmodule StellarBase.XDR.AccountEntry do
             flags: flags,
             home_domain: home_domain,
             thresholds: thresholds,
-            signers: signers
+            signers: signers,
+            account_entry_ext: account_entry_ext
           ]
         }, rest}} ->
         {:ok,
@@ -169,7 +181,8 @@ defmodule StellarBase.XDR.AccountEntry do
             flags,
             home_domain,
             thresholds,
-            signers
+            signers,
+            account_entry_ext
           ), rest}}
 
       error ->
@@ -191,7 +204,8 @@ defmodule StellarBase.XDR.AccountEntry do
          flags: flags,
          home_domain: home_domain,
          thresholds: thresholds,
-         signers: signers
+         signers: signers,
+         account_entry_ext: account_entry_ext
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
@@ -204,7 +218,8 @@ defmodule StellarBase.XDR.AccountEntry do
        flags,
        home_domain,
        thresholds,
-       signers
+       signers,
+       account_entry_ext
      ), rest}
   end
 end
