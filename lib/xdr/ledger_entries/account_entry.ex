@@ -3,7 +3,16 @@ defmodule StellarBase.XDR.AccountEntry do
   Representation of Stellar's ledger AccountEntry
   """
 
-  alias StellarBase.XDR.{AccountID, Int64, SequenceNumber, UInt32, String32, Thresholds, Signer}
+  alias StellarBase.XDR.{
+    AccountID,
+    Int64,
+    SequenceNumber,
+    UInt32,
+    OptionalAccountID,
+    String32,
+    Thresholds,
+    Signers
+  }
 
   @behaviour XDR.Declaration
 
@@ -12,11 +21,11 @@ defmodule StellarBase.XDR.AccountEntry do
                  balance: Int64,
                  seq_num: SequenceNumber,
                  num_sub_entries: UInt32,
-                 inflation_dest: AccountID,
+                 inflation_dest: OptionalAccountID,
                  flags: UInt32,
                  home_domain: String32,
                  thresholds: Thresholds,
-                 signers: Signer
+                 signers: Signers
                )
 
   @type t :: %__MODULE__{
@@ -24,11 +33,11 @@ defmodule StellarBase.XDR.AccountEntry do
           balance: Int64.t(),
           seq_num: SequenceNumber.t(),
           num_sub_entries: UInt32.t(),
-          inflation_dest: AccountID.t(),
+          inflation_dest: OptionalAccountID.t(),
           flags: UInt32.t(),
           home_domain: String32.t(),
           thresholds: Thresholds.t(),
-          signers: Signer.t()
+          signers: Signers.t()
         }
 
   defstruct [
@@ -48,22 +57,22 @@ defmodule StellarBase.XDR.AccountEntry do
           balance :: Int64.t(),
           seq_num :: SequenceNumber.t(),
           num_sub_entries :: UInt32.t(),
-          inflation_dest :: AccountID.t(),
+          inflation_dest :: OptionalAccountID.t(),
           flags :: UInt32.t(),
           home_domain :: String32.t(),
           thresholds :: Thresholds.t(),
-          signers :: Signer.t()
+          signers :: Signers.t()
         ) :: t()
   def new(
         %AccountID{} = account_id,
         %Int64{} = balance,
         %SequenceNumber{} = seq_num,
         %UInt32{} = num_sub_entries,
-        %AccountID{} = inflation_dest,
+        %OptionalAccountID{} = inflation_dest,
         %UInt32{} = flags,
         %String32{} = home_domain,
         %Thresholds{} = thresholds,
-        %Signer{} = signers
+        %Signers{} = signers
       ),
       do: %__MODULE__{
         account_id: account_id,
