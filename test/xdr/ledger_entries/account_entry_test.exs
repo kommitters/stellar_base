@@ -6,11 +6,14 @@ defmodule StellarBase.XDR.AccountEntryTest do
   alias StellarBase.StrKey
 
   alias StellarBase.XDR.{
+    AccountEntryExtensionV3,
+    AccountEntryExtensionV2Ext,
     AccountEntryExtensionV2,
     AccountEntryExtensionV1Ext,
     AccountEntryExtensionV1,
     AccountEntryExt,
     AccountEntry,
+    ExtensionPoint,
     OptionalAccountID,
     Int64,
     SequenceNumber,
@@ -22,13 +25,14 @@ defmodule StellarBase.XDR.AccountEntryTest do
     SignerKey,
     Signer,
     SignerKeyType,
+    TimePoint,
     AccountIDList,
     Liabilities,
-    Void,
-    Ext
+    Void
   }
 
-  @types [0, 1, 1]
+  @types_v1 [0, 1, 1, 1]
+  @types_v2 [0, 2, 2]
 
   describe "AccountEntry" do
     setup do
@@ -61,21 +65,39 @@ defmodule StellarBase.XDR.AccountEntryTest do
       selling = Int64.new(10)
       liabilities = Liabilities.new(buying, selling)
 
-      account_entry_extension_v1_ext_list =
+      extension_point = ExtensionPoint.new(Void.new(), 0)
+      seq_ledger = UInt32.new(10)
+      seq_time = TimePoint.new(12345)
+
+      account_entry_extension_v2_ext_list =
         [
           %{type: 0, value: Void.new()},
           %{
-            type: 2,
-            value:
-              AccountEntryExtensionV2.new(
-                UInt32.new(10),
-                UInt32.new(10),
-                create_account_id_list(),
-                Ext.new()
-              )
+            type: 3,
+            value: AccountEntryExtensionV3.new(extension_point, seq_ledger, seq_time)
           }
         ]
         |> Enum.map(fn %{type: type, value: value} ->
+          AccountEntryExtensionV2Ext.new(value, type)
+        end)
+
+      account_entry_extension_v2_list =
+        account_entry_extension_v2_ext_list
+        |> Enum.map(fn account_entry_extension_v2_ext ->
+          AccountEntryExtensionV2.new(
+            UInt32.new(10),
+            UInt32.new(10),
+            create_account_id_list(),
+            account_entry_extension_v2_ext
+          )
+        end)
+
+      values_v2 = [Void.new()] ++ account_entry_extension_v2_list
+
+      account_entry_extension_v1_ext_list =
+        values_v2
+        |> Enum.zip(@types_v2)
+        |> Enum.map(fn {value, type} ->
           AccountEntryExtensionV1Ext.new(value, type)
         end)
 
@@ -85,11 +107,11 @@ defmodule StellarBase.XDR.AccountEntryTest do
           AccountEntryExtensionV1.new(liabilities, account_entry_extension_v1_ext)
         end)
 
-      values = [Void.new()] ++ account_entry_extension_v1_list
+      values_v1 = [Void.new()] ++ account_entry_extension_v1_list
 
       account_entry_ext_list =
-        values
-        |> Enum.zip(@types)
+        values_v1
+        |> Enum.zip(@types_v1)
         |> Enum.map(fn {value, type} ->
           AccountEntryExt.new(value, type)
         end)
@@ -153,7 +175,21 @@ defmodule StellarBase.XDR.AccountEntryTest do
             0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32,
             113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0,
             0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221,
-            187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 0>>
+            187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 0>>,
+          <<0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16,
+            107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 0,
+            0, 0, 0, 5, 0, 0, 0, 0, 0, 188, 97, 78, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 0, 114, 213,
+            178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33,
+            210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 5, 0, 0, 0, 9, 107, 111,
+            109, 109, 105, 116, 46, 99, 111, 0, 0, 0, 128, 16, 32, 64, 0, 0, 0, 1, 0, 0, 0, 0, 97,
+            85, 228, 156, 184, 154, 50, 219, 77, 220, 159, 67, 114, 72, 240, 253, 129, 13, 47, 71,
+            58, 206, 164, 246, 161, 143, 9, 2, 127, 137, 20, 131, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0,
+            0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32,
+            113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0,
+            0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221,
+            187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 3, 0,
+            0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 48, 57>>
         ]
       }
     end

@@ -2,23 +2,24 @@ defmodule StellarBase.XDR.ExtensionPoint do
   @moduledoc """
   Representation of Stellar `ExtensionPoint` type.
   """
-  alias StellarBase.XDR.{Void}
+  alias StellarBase.XDR.Void
 
   @behaviour XDR.Declaration
 
   @arms %{0 => Void}
 
-  @type t :: %__MODULE__{extension_point: Void, type: non_neg_integer()}
+  @type t :: %__MODULE__{extension_point: Void.t(), type: non_neg_integer()}
 
   defstruct [:extension_point, :type]
 
-  @spec new(extension_point :: Void, type :: non_neg_integer()) :: t()
+  @spec new(extension_point :: Void.t(), type :: non_neg_integer()) :: t()
   def new(extension_point, type),
     do: %__MODULE__{extension_point: extension_point, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{extension_point: extension_point, type: type}) do
     type
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms, extension_point)
     |> XDR.Union.encode_xdr()
   end
@@ -26,6 +27,7 @@ defmodule StellarBase.XDR.ExtensionPoint do
   @impl true
   def encode_xdr!(%__MODULE__{extension_point: extension_point, type: type}) do
     type
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms, extension_point)
     |> XDR.Union.encode_xdr!()
   end

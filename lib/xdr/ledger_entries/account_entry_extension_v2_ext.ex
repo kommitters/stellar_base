@@ -1,4 +1,4 @@
-defmodule StelarBase.XDR.AccountEntryExtensionV2Ext do
+defmodule StellarBase.XDR.AccountEntryExtensionV2Ext do
   @moduledoc """
   Representation of Stellar `AccountEntryExtensionV2Ext` type.
   """

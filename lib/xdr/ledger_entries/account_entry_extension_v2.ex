@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
   Representation of Stellar's ledger AccountEntryExtensionV2
   """
 
-  alias StellarBase.XDR.{UInt32, AccountIDList, Ext, AccountEntryExtensionV2Ext}
+  alias StellarBase.XDR.{UInt32, AccountIDList, AccountEntryExtensionV2Ext}
 
   @behaviour XDR.Declaration
 
@@ -11,7 +11,6 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
                  num_sponsored: UInt32,
                  num_sponsoring: UInt32,
                  signer_sponsoring_ids: AccountIDList,
-                 ext: Ext,
                  account_entry_extension_v2_ext: AccountEntryExtensionV2Ext
                )
 
@@ -19,28 +18,33 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
           num_sponsored: UInt32.t(),
           num_sponsoring: UInt32.t(),
           signer_sponsoring_ids: AccountIDList.t(),
-          ext: Ext.t()
+          account_entry_extension_v2_ext: AccountEntryExtensionV2Ext.t()
         }
 
-  defstruct [:num_sponsored, :num_sponsoring, :signer_sponsoring_ids, :ext]
+  defstruct [
+    :num_sponsored,
+    :num_sponsoring,
+    :signer_sponsoring_ids,
+    :account_entry_extension_v2_ext
+  ]
 
   @spec new(
           num_sponsored :: UInt32.t(),
           num_sponsoring :: UInt32.t(),
           signer_sponsoring_ids :: AccountIDList.t(),
-          ext :: Ext.t()
+          account_entry_extension_v2_ext :: AccountEntryExtensionV2Ext.t()
         ) :: t()
   def new(
         %UInt32{} = num_sponsored,
         %UInt32{} = num_sponsoring,
         %AccountIDList{} = signer_sponsoring_ids,
-        %Ext{} = ext
+        %AccountEntryExtensionV2Ext{} = account_entry_extension_v2_ext
       ),
       do: %__MODULE__{
         num_sponsored: num_sponsored,
         num_sponsoring: num_sponsoring,
         signer_sponsoring_ids: signer_sponsoring_ids,
-        ext: ext
+        account_entry_extension_v2_ext: account_entry_extension_v2_ext
       }
 
   @impl true
@@ -48,13 +52,13 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
         num_sponsored: num_sponsored,
         num_sponsoring: num_sponsoring,
         signer_sponsoring_ids: signer_sponsoring_ids,
-        ext: ext
+        account_entry_extension_v2_ext: account_entry_extension_v2_ext
       }) do
     [
       num_sponsored: num_sponsored,
       num_sponsoring: num_sponsoring,
       signer_sponsoring_ids: signer_sponsoring_ids,
-      ext: ext
+      account_entry_extension_v2_ext: account_entry_extension_v2_ext
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
@@ -65,13 +69,13 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
         num_sponsored: num_sponsored,
         num_sponsoring: num_sponsoring,
         signer_sponsoring_ids: signer_sponsoring_ids,
-        ext: ext
+        account_entry_extension_v2_ext: account_entry_extension_v2_ext
       }) do
     [
       num_sponsored: num_sponsored,
       num_sponsoring: num_sponsoring,
       signer_sponsoring_ids: signer_sponsoring_ids,
-      ext: ext
+      account_entry_extension_v2_ext: account_entry_extension_v2_ext
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -88,10 +92,16 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
             num_sponsored: num_sponsored,
             num_sponsoring: num_sponsoring,
             signer_sponsoring_ids: signer_sponsoring_ids,
-            ext: ext
+            account_entry_extension_v2_ext: account_entry_extension_v2_ext
           ]
         }, rest}} ->
-        {:ok, {new(num_sponsored, num_sponsoring, signer_sponsoring_ids, ext), rest}}
+        {:ok,
+         {new(
+            num_sponsored,
+            num_sponsoring,
+            signer_sponsoring_ids,
+            account_entry_extension_v2_ext
+          ), rest}}
 
       error ->
         error
@@ -107,10 +117,11 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
          num_sponsored: num_sponsored,
          num_sponsoring: num_sponsoring,
          signer_sponsoring_ids: signer_sponsoring_ids,
-         ext: ext
+         account_entry_extension_v2_ext: account_entry_extension_v2_ext
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(num_sponsored, num_sponsoring, signer_sponsoring_ids, ext), rest}
+    {new(num_sponsored, num_sponsoring, signer_sponsoring_ids, account_entry_extension_v2_ext),
+     rest}
   end
 end

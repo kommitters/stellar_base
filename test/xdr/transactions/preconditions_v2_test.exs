@@ -1,4 +1,4 @@
-defmodule StelarBase.XDR.PreconditionsV2Test do
+defmodule StellarBase.XDR.PreconditionsV2Test do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
