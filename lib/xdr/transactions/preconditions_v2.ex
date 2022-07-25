@@ -4,26 +4,33 @@ defmodule StellarBase.XDR.PreconditionsV2 do
 
   PreconditionsV2 is a set of new optional preconditions for a transaction added in the CAP-21.
   """
-  alias StellarBase.XDR.{TimeBounds, LedgerBounds, SequenceNumber, Duration, UInt32, ExtraSigners}
+  alias StellarBase.XDR.{
+    OptionalTimeBounds,
+    OptionalLedgerBounds,
+    OptionalSequenceNumber,
+    Duration,
+    UInt32,
+    SignerKeyList
+  }
 
   @behaviour XDR.Declaration
 
   @struct_spec XDR.Struct.new(
-                 time_bounds: TimeBounds,
-                 ledger_bounds: LedgerBounds,
-                 min_seq_num: SequenceNumber,
+                 time_bounds: OptionalTimeBounds,
+                 ledger_bounds: OptionalLedgerBounds,
+                 min_seq_num: OptionalSequenceNumber,
                  min_seq_age: Duration,
                  min_seq_ledger_gap: UInt32,
-                 extra_signers: ExtraSigners
+                 extra_signers: SignerKeyList
                )
 
   @type t :: %__MODULE__{
-          time_bounds: TimeBounds.t(),
-          ledger_bounds: LedgerBounds.t(),
-          min_seq_num: SequenceNumber.t(),
+          time_bounds: OptionalTimeBounds.t(),
+          ledger_bounds: OptionalLedgerBounds.t(),
+          min_seq_num: OptionalSequenceNumber.t(),
           min_seq_age: Duration.t(),
           min_seq_ledger_gap: UInt32.t(),
-          extra_signers: ExtraSigners.t()
+          extra_signers: SignerKeyList.t()
         }
 
   defstruct [
@@ -36,20 +43,20 @@ defmodule StellarBase.XDR.PreconditionsV2 do
   ]
 
   @spec new(
-          time_bounds :: TimeBounds.t(),
-          ledger_bounds :: LedgerBounds.t(),
-          min_seq_num :: SequenceNumber.t(),
+          time_bounds :: OptionalTimeBounds.t(),
+          ledger_bounds :: OptionalLedgerBounds.t(),
+          min_seq_num :: OptionalSequenceNumber.t(),
           min_seq_age :: Duration.t(),
           min_seq_ledger_gap :: UInt32.t(),
-          extra_signers :: ExtraSigners.t()
+          extra_signers :: SignerKeyList.t()
         ) :: t()
   def new(
-        %TimeBounds{} = time_bounds,
-        %LedgerBounds{} = ledger_bounds,
-        %SequenceNumber{} = min_seq_num,
+        %OptionalTimeBounds{} = time_bounds,
+        %OptionalLedgerBounds{} = ledger_bounds,
+        %OptionalSequenceNumber{} = min_seq_num,
         %Duration{} = min_seq_age,
         %UInt32{} = min_seq_ledger_gap,
-        %ExtraSigners{} = extra_signers
+        %SignerKeyList{} = extra_signers
       ),
       do: %__MODULE__{
         time_bounds: time_bounds,

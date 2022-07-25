@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.ExtraSigners do
+defmodule StellarBase.XDR.SignerKeyList do
   @moduledoc """
-  Representation of a Stellar `SignerKey` list.
+  Representation of a Stellar `SignerKeyList` list.
   """
   alias StellarBase.XDR.SignerKey
 
