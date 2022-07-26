@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0 (26.07.2022)
+* Implement Stellar CAP-21.
+* Automate library release to Hex.pm.
+* Add XDR types for AccountEntry.
+* Add tests for ClaimableBalanceFlags.
+
 ## 0.6.1 (21.07.2022)
 * Add the flags property to the OfferEntry.
 * Add security policy to repository.
