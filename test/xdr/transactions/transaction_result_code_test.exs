@@ -19,7 +19,9 @@ defmodule StellarBase.XDR.TransactionResultCodeTest do
     :txINTERNAL_ERROR,
     :txNOT_SUPPORTED,
     :txFEE_BUMP_INNER_FAILED,
-    :txBAD_SPONSORSHIP
+    :txBAD_SPONSORSHIP,
+    :txBAD_MIN_SEQ_AGE_OR_GAP,
+    :txMALFORMED
   ]
 
   @binaries [
@@ -38,7 +40,9 @@ defmodule StellarBase.XDR.TransactionResultCodeTest do
     <<255, 255, 255, 245>>,
     <<255, 255, 255, 244>>,
     <<255, 255, 255, 243>>,
-    <<255, 255, 255, 242>>
+    <<255, 255, 255, 242>>,
+    <<255, 255, 255, 241>>,
+    <<255, 255, 255, 240>>
   ]
 
   describe "TransactionResultCode" do

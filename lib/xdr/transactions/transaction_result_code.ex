@@ -36,7 +36,11 @@ defmodule StellarBase.XDR.TransactionResultCode do
     # fee bump inner transaction failed
     txFEE_BUMP_INNER_FAILED: -13,
     # sponsorship not confirmed
-    txBAD_SPONSORSHIP: -14
+    txBAD_SPONSORSHIP: -14,
+    # minSeqAge or minSeqLedgerGap conditions not met
+    txBAD_MIN_SEQ_AGE_OR_GAP: -15,
+    # precondition is invalid
+    txMALFORMED: -16
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

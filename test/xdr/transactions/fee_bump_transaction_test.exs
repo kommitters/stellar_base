@@ -14,7 +14,8 @@ defmodule StellarBase.XDR.Operations.FeeBumpTransactionTest do
     Operation,
     Operations,
     OptionalMuxedAccount,
-    OptionalTimeBounds,
+    Preconditions,
+    PreconditionType,
     SequenceNumber,
     TimeBounds,
     TimePoint,
@@ -118,11 +119,12 @@ defmodule StellarBase.XDR.Operations.FeeBumpTransactionTest do
     fee = UInt32.new(100)
     seq_num = SequenceNumber.new(12_345_678)
 
-    # time bounds
+    # preconditions
     min_time = TimePoint.new(123)
     max_time = TimePoint.new(321)
     time_bounds = TimeBounds.new(min_time, max_time)
-    op_time_bounds = OptionalTimeBounds.new(time_bounds)
+    precondition_type = PreconditionType.new(:PRECOND_TIME)
+    preconditions = Preconditions.new(time_bounds, precondition_type)
 
     # memo
     memo_type = MemoType.new(:MEMO_ID)
@@ -138,7 +140,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpTransactionTest do
       source_account,
       fee,
       seq_num,
-      op_time_bounds,
+      preconditions,
       memo,
       operations,
       ext
