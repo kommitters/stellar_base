@@ -86,18 +86,19 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
       values: account_entry_extension_v1_ext_list,
       binaries: binaries
     } do
-      for {account_entry_extension_v1, binary} <-
+      for {account_entry_extension_v1_ext, binary} <-
             Enum.zip(account_entry_extension_v1_ext_list, binaries),
-          do: {:ok, ^binary} = AccountEntryExtensionV1Ext.encode_xdr(account_entry_extension_v1)
+          do:
+            {:ok, ^binary} = AccountEntryExtensionV1Ext.encode_xdr(account_entry_extension_v1_ext)
     end
 
     test "encode_xdr!/1", %{
       values: account_entry_extension_v1_ext_list,
       binaries: binaries
     } do
-      for {account_entry_extension_v1, binary} <-
+      for {account_entry_extension_v1_ext, binary} <-
             Enum.zip(account_entry_extension_v1_ext_list, binaries),
-          do: ^binary = AccountEntryExtensionV1Ext.encode_xdr!(account_entry_extension_v1)
+          do: ^binary = AccountEntryExtensionV1Ext.encode_xdr!(account_entry_extension_v1_ext)
     end
 
     test "decode_xdr/1", %{

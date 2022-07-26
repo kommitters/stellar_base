@@ -18,6 +18,8 @@ defmodule StellarBase.XDR.ExtensionPoint do
 
   @impl true
   def encode_xdr(%__MODULE__{extension_point: extension_point, type: type}) do
+    IO.inspect(extension_point)
+
     type
     |> XDR.Int.new()
     |> XDR.Union.new(@arms, extension_point)
