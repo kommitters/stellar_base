@@ -5,7 +5,7 @@ defmodule StellarBaseXdr.Transactions.OptionalSequenceNumberTest do
 
   describe "OptionalSequenceNumber" do
     setup do
-      sequence_number = SequenceNumber.new(12345)
+      sequence_number = SequenceNumber.new(12_345)
 
       %{
         sequence_number: sequence_number,

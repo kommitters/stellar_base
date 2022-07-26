@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV3Test do
     setup do
       extension_point = ExtensionPoint.new(Void.new(), 0)
       seq_ledger = UInt32.new(10)
-      seq_time = TimePoint.new(12345)
+      seq_time = TimePoint.new(12_345)
 
       %{
         ext: extension_point,
