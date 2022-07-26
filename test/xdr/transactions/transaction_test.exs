@@ -11,7 +11,8 @@ defmodule StellarBase.XDR.TransactionTest do
     Operation,
     Operations,
     OptionalMuxedAccount,
-    OptionalTimeBounds,
+    Preconditions,
+    PreconditionType,
     SequenceNumber,
     TimeBounds,
     TimePoint,
@@ -24,17 +25,22 @@ defmodule StellarBase.XDR.TransactionTest do
 
   describe "Transaction" do
     setup do
+      precondition_type = PreconditionType.new(:PRECOND_TIME)
+
       source_account =
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
       fee = UInt32.new(100)
       seq_num = SequenceNumber.new(12_345_678)
 
-      # time bounds
+      # preconditions
       min_time = TimePoint.new(123)
       max_time = TimePoint.new(321)
-      time_bounds = TimeBounds.new(min_time, max_time)
-      op_time_bounds = OptionalTimeBounds.new(time_bounds)
+
+      preconditions =
+        min_time
+        |> TimeBounds.new(max_time)
+        |> Preconditions.new(precondition_type)
 
       # memo
       memo_type = MemoType.new(:MEMO_ID)
@@ -50,7 +56,7 @@ defmodule StellarBase.XDR.TransactionTest do
         source_account: source_account,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: op_time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext,
@@ -59,7 +65,7 @@ defmodule StellarBase.XDR.TransactionTest do
             source_account,
             fee,
             seq_num,
-            op_time_bounds,
+            preconditions,
             memo,
             operations,
             ext
@@ -91,7 +97,7 @@ defmodule StellarBase.XDR.TransactionTest do
       fee: fee,
       seq_num: seq_num,
       memo: memo,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       operations: operations,
       ext: ext
     } do
@@ -99,7 +105,7 @@ defmodule StellarBase.XDR.TransactionTest do
         source_account: ^source_account,
         operations: ^operations,
         memo: ^memo
-      } = Transaction.new(source_account, fee, seq_num, time_bounds, memo, operations, ext)
+      } = Transaction.new(source_account, fee, seq_num, preconditions, memo, operations, ext)
     end
 
     test "encode_xdr/1", %{transaction: transaction, binary: binary} do

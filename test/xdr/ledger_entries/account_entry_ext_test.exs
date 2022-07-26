@@ -8,15 +8,19 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
     AccountEntryExtensionV1,
     AccountEntryExtensionV1Ext,
     AccountEntryExtensionV2,
+    AccountEntryExtensionV2Ext,
+    AccountEntryExtensionV3,
     AccountIDList,
-    Ext,
+    ExtensionPoint,
     Int64,
     Liabilities,
+    TimePoint,
     UInt32,
     Void
   }
 
-  @types [0, 1, 1]
+  @types_v1 [0, 1, 1, 1]
+  @types_v2 [0, 2, 2]
 
   describe "AccountEntryExt" do
     setup do
@@ -24,21 +28,39 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
       selling = Int64.new(10)
       liabilities = Liabilities.new(buying, selling)
 
-      account_entry_extension_v1_ext_list =
+      extension_point = ExtensionPoint.new(Void.new(), 0)
+      seq_ledger = UInt32.new(10)
+      seq_time = TimePoint.new(12_345)
+
+      account_entry_extension_v2_ext_list =
         [
           %{type: 0, value: Void.new()},
           %{
-            type: 2,
-            value:
-              AccountEntryExtensionV2.new(
-                UInt32.new(10),
-                UInt32.new(10),
-                create_account_id_list(),
-                Ext.new()
-              )
+            type: 3,
+            value: AccountEntryExtensionV3.new(extension_point, seq_ledger, seq_time)
           }
         ]
         |> Enum.map(fn %{type: type, value: value} ->
+          AccountEntryExtensionV2Ext.new(value, type)
+        end)
+
+      account_entry_extension_v2_list =
+        account_entry_extension_v2_ext_list
+        |> Enum.map(fn account_entry_extension_v2_ext ->
+          AccountEntryExtensionV2.new(
+            UInt32.new(10),
+            UInt32.new(10),
+            create_account_id_list(),
+            account_entry_extension_v2_ext
+          )
+        end)
+
+      values_v2 = [Void.new()] ++ account_entry_extension_v2_list
+
+      account_entry_extension_v1_ext_list =
+        values_v2
+        |> Enum.zip(@types_v2)
+        |> Enum.map(fn {value, type} ->
           AccountEntryExtensionV1Ext.new(value, type)
         end)
 
@@ -48,18 +70,18 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
           AccountEntryExtensionV1.new(liabilities, account_entry_extension_v1_ext)
         end)
 
-      values = [Void.new()] ++ account_entry_extension_v1_list
+      values_v1 = [Void.new()] ++ account_entry_extension_v1_list
 
       account_entry_ext_list =
-        values
-        |> Enum.zip(@types)
+        values_v1
+        |> Enum.zip(@types_v1)
         |> Enum.map(fn {value, type} ->
           AccountEntryExt.new(value, type)
         end)
 
       %{
-        types: @types,
-        values: values,
+        types: @types_v1,
+        values: values_v1,
         account_entry_ext_list: account_entry_ext_list,
         binaries: [
           <<0, 0, 0, 0>>,
@@ -69,7 +91,13 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
             164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34,
             114, 247, 89, 216, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149,
             154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2,
-            227, 119, 0, 0, 0, 0>>
+            227, 119, 0, 0, 0, 0>>,
+          <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 10,
+            0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158,
+            164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34,
+            114, 247, 89, 216, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149,
+            154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2,
+            227, 119, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 48, 57>>
         ]
       }
     end
