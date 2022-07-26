@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.OfferEntryTest do
 
   import StellarBase.Test.Utils, only: [create_account_id: 1, create_asset: 2]
 
-  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price}
+  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price, UInt32}
 
   describe "OfferEntry Operation" do
     setup do
@@ -27,6 +27,8 @@ defmodule StellarBase.XDR.OfferEntryTest do
 
       price = Price.new(Int32.new(1), Int32.new(10))
 
+      flags = UInt32.new(1)
+
       ext = Ext.new()
 
       %{
@@ -36,8 +38,10 @@ defmodule StellarBase.XDR.OfferEntryTest do
         buying: buying,
         amount: amount,
         price: price,
+        flags: flags,
         ext: ext,
-        offer_entry: OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, ext),
+        offer_entry:
+          OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, flags, ext),
         binary:
           <<0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16,
             107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 0,
@@ -46,7 +50,7 @@ defmodule StellarBase.XDR.OfferEntryTest do
             25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 2, 66, 84, 67, 78, 69, 87, 50, 48, 50,
             49, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
             205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,
-            0, 0, 0, 0, 0, 76, 75, 64, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0, 0>>
+            0, 0, 0, 0, 0, 76, 75, 64, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0>>
       }
     end
 
@@ -57,6 +61,7 @@ defmodule StellarBase.XDR.OfferEntryTest do
       buying: buying,
       amount: amount,
       price: price,
+      flags: flags,
       ext: ext
     } do
       %OfferEntry{
@@ -64,8 +69,11 @@ defmodule StellarBase.XDR.OfferEntryTest do
         offer_id: ^offer_id,
         selling: ^selling,
         buying: ^buying,
-        amount: ^amount
-      } = OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, ext)
+        amount: ^amount,
+        price: ^price,
+        flags: ^flags,
+        ext: ^ext
+      } = OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, flags, ext)
     end
 
     test "encode_xdr/1", %{offer_entry: offer_entry, binary: binary} do
