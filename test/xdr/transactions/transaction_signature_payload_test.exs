@@ -10,10 +10,11 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTest do
     Int64,
     Memo,
     MemoType,
-    OptionalTimeBounds,
     OptionalMuxedAccount,
     Operation,
     Operations,
+    Preconditions,
+    PreconditionType,
     SequenceNumber,
     TimeBounds,
     TimePoint,
@@ -35,7 +36,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTest do
       min_time = TimePoint.new(123)
       max_time = TimePoint.new(321)
       time_bounds = TimeBounds.new(min_time, max_time)
-      op_time_bounds = OptionalTimeBounds.new(time_bounds)
+      precondition_type = PreconditionType.new(:PRECOND_TIME)
+      preconditions = Preconditions.new(time_bounds, precondition_type)
 
       # memo
       memo_type = MemoType.new(:MEMO_ID)
@@ -51,7 +53,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTest do
       tagged_tx =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> create_muxed_account()
-        |> Transaction.new(fee, seq_num, op_time_bounds, memo, operations, ext)
+        |> Transaction.new(fee, seq_num, preconditions, memo, operations, ext)
         |> TaggedTransaction.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
 
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")

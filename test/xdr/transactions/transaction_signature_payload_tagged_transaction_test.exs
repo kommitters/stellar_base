@@ -11,7 +11,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     Int64,
     Memo,
     MemoType,
-    OptionalTimeBounds,
+    PreconditionType,
+    Preconditions,
     OptionalMuxedAccount,
     Operation,
     Operations,
@@ -35,7 +36,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     min_time = TimePoint.new(123)
     max_time = TimePoint.new(321)
     time_bounds = TimeBounds.new(min_time, max_time)
-    op_time_bounds = OptionalTimeBounds.new(time_bounds)
+    precondition_type = PreconditionType.new(:PRECOND_TIME)
+    preconditions = Preconditions.new(time_bounds, precondition_type)
 
     # memo
     memo_type = MemoType.new(:MEMO_ID)
@@ -52,7 +54,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
      %{
        fee: fee,
        seq_num: seq_num,
-       time_bounds: op_time_bounds,
+       preconditions: preconditions,
        memo: memo,
        operations: operations,
        ext: ext
@@ -63,7 +65,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     setup %{
       fee: fee,
       seq_num: seq_num,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       memo: memo,
       operations: operations,
       ext: ext
@@ -76,7 +78,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
           source_account,
           fee,
           seq_num,
-          time_bounds,
+          preconditions,
           memo,
           operations,
           ext
@@ -140,7 +142,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     setup %{
       fee: fee,
       seq_num: seq_num,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       memo: memo,
       operations: operations,
       ext: ext
@@ -153,7 +155,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
           source_account,
           fee,
           seq_num,
-          time_bounds,
+          preconditions,
           memo,
           operations,
           ext

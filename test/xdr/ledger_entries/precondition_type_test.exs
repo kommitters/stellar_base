@@ -16,6 +16,10 @@ defmodule StellarBase.XDR.PreconditionTypeTest do
       %PreconditionType{identifier: ^type} = PreconditionType.new(:PRECOND_TIME)
     end
 
+    test "new/1  with default type" do
+      %PreconditionType{identifier: :PRECOND_NONE} = PreconditionType.new()
+    end
+
     test "encode_xdr/1", %{xdr_type: xdr_type, encoded_binary: binary} do
       {:ok, ^binary} = PreconditionType.encode_xdr(xdr_type)
     end
