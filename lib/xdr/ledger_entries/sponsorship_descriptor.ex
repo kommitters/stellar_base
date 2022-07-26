@@ -2,33 +2,33 @@ defmodule StellarBase.XDR.SponsorshipDescriptor do
   @moduledoc """
   Representation of Stellar `SponsorshipDescriptor` type.
   """
-  alias StellarBase.XDR.AccountID
+  alias StellarBase.XDR.OptionalAccountID
 
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{sponsorship_descriptor: AccountID.t()}
+  @type t :: %__MODULE__{sponsorship_descriptor: OptionalAccountID.t()}
 
   defstruct [:sponsorship_descriptor]
 
-  @spec new(sponsorship_descriptor :: AccountID.t()) :: t()
+  @spec new(sponsorship_descriptor :: OptionalAccountID.t()) :: t()
   def new(sponsorship_descriptor), do: %__MODULE__{sponsorship_descriptor: sponsorship_descriptor}
 
   @impl true
   def encode_xdr(%__MODULE__{sponsorship_descriptor: sponsorship_descriptor}) do
-    AccountID.encode_xdr(sponsorship_descriptor)
+    OptionalAccountID.encode_xdr(sponsorship_descriptor)
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{sponsorship_descriptor: sponsorship_descriptor}) do
-    AccountID.encode_xdr!(sponsorship_descriptor)
+    OptionalAccountID.encode_xdr!(sponsorship_descriptor)
   end
 
   @impl true
   def decode_xdr(bytes, term \\ nil)
 
   def decode_xdr(bytes, _term) do
-    case AccountID.decode_xdr(bytes) do
-      {:ok, {%AccountID{} = sponsorship_descriptor, rest}} ->
+    case OptionalAccountID.decode_xdr(bytes) do
+      {:ok, {%OptionalAccountID{} = sponsorship_descriptor, rest}} ->
         {:ok, {new(sponsorship_descriptor), rest}}
 
       error ->
@@ -40,7 +40,7 @@ defmodule StellarBase.XDR.SponsorshipDescriptor do
   def decode_xdr!(bytes, term \\ nil)
 
   def decode_xdr!(bytes, _term) do
-    {%AccountID{} = sponsorship_descriptor, rest} = AccountID.decode_xdr!(bytes)
+    {%OptionalAccountID{} = sponsorship_descriptor, rest} = OptionalAccountID.decode_xdr!(bytes)
     {new(sponsorship_descriptor), rest}
   end
 end

@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.AccountIDList do
 
   @array_type AccountID
 
-  @array_spec %{type: @array_type, max_lengtha: @max_length}
+  @array_spec %{type: @array_type, max_length: @max_length}
 
   @type t :: %__MODULE__{account_ids: list(AccountID.t())}
 

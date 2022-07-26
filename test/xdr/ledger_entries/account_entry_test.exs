@@ -15,6 +15,8 @@ defmodule StellarBase.XDR.AccountEntryTest do
     AccountEntry,
     ExtensionPoint,
     OptionalAccountID,
+    SponsorshipDescriptorList,
+    SponsorshipDescriptor,
     Int64,
     SequenceNumber,
     UInt32,
@@ -26,7 +28,6 @@ defmodule StellarBase.XDR.AccountEntryTest do
     Signer,
     SignerKeyType,
     TimePoint,
-    AccountIDList,
     Liabilities,
     Void
   }
@@ -87,7 +88,7 @@ defmodule StellarBase.XDR.AccountEntryTest do
           AccountEntryExtensionV2.new(
             UInt32.new(10),
             UInt32.new(10),
-            create_account_id_list(),
+            create_sponsorship_descriptor_list(),
             account_entry_extension_v2_ext
           )
         end)
@@ -172,10 +173,11 @@ defmodule StellarBase.XDR.AccountEntryTest do
             85, 228, 156, 184, 154, 50, 219, 77, 220, 159, 67, 114, 72, 240, 253, 129, 13, 47, 71,
             58, 206, 164, 246, 161, 143, 9, 2, 127, 137, 20, 131, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0,
             0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0,
-            0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32,
-            113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0,
-            0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221,
-            187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 0>>,
+            0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247,
+            67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
+            216, 0, 0, 0, 1, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154,
+            124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227,
+            119, 0, 0, 0, 0>>,
           <<0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16,
             107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 0,
             0, 0, 0, 5, 0, 0, 0, 0, 0, 188, 97, 78, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 0, 114, 213,
@@ -185,11 +187,11 @@ defmodule StellarBase.XDR.AccountEntryTest do
             85, 228, 156, 184, 154, 50, 219, 77, 220, 159, 67, 114, 72, 240, 253, 129, 13, 47, 71,
             58, 206, 164, 246, 161, 143, 9, 2, 127, 137, 20, 131, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0,
             0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0,
-            0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32,
-            113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0,
-            0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221,
-            187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 3, 0,
-            0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 48, 57>>
+            0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247,
+            67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
+            216, 0, 0, 0, 1, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154,
+            124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227,
+            119, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 48, 57>>
         ]
       }
     end
@@ -259,12 +261,21 @@ defmodule StellarBase.XDR.AccountEntryTest do
     end
   end
 
-  @spec create_account_id_list() :: AccountIDList.t()
-  defp create_account_id_list do
-    account_id_1 = create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
-    account_id_2 = create_account_id("GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD")
+  @spec create_sponsorship_descriptor_list() :: SponsorshipDescriptorList.t()
+  defp create_sponsorship_descriptor_list do
+    sponsorship_descriptor_1 =
+      "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
+      |> create_account_id()
+      |> OptionalAccountID.new()
+      |> SponsorshipDescriptor.new()
 
-    [account_id_1, account_id_2]
-    |> AccountIDList.new()
+    sponsorship_descriptor_2 =
+      "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
+      |> create_account_id()
+      |> OptionalAccountID.new()
+      |> SponsorshipDescriptor.new()
+
+    [sponsorship_descriptor_1, sponsorship_descriptor_2]
+    |> SponsorshipDescriptorList.new()
   end
 end
