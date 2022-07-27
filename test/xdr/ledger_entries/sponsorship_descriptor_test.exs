@@ -14,7 +14,7 @@ defmodule StellarBase.XDR.SponsorshipDescriptorTest do
 
       %{
         account_id: account_id,
-        sponsorship_descriptor: account_id |> SponsorshipDescriptor.new(),
+        sponsorship_descriptor: SponsorshipDescriptor.new(account_id),
         binary:
           <<0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,

@@ -150,7 +150,6 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Test do
       |> OptionalAccountID.new()
       |> SponsorshipDescriptor.new()
 
-    [sponsorship_descriptor_1, sponsorship_descriptor_2]
-    |> SponsorshipDescriptorList.new()
+    SponsorshipDescriptorList.new([sponsorship_descriptor_1, sponsorship_descriptor_2])
   end
 end
