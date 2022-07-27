@@ -7,7 +7,8 @@ defmodule StellarBase.XDR.SignerKeyType do
   @declarations [
     SIGNER_KEY_TYPE_ED25519: 0,
     SIGNER_KEY_TYPE_PRE_AUTH_TX: 1,
-    SIGNER_KEY_TYPE_HASH_X: 2
+    SIGNER_KEY_TYPE_HASH_X: 2,
+    SIGNER_KEY_TYPE_ED25519_SIGNED_PAYLOAD: 3
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}
