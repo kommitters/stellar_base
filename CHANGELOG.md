@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 (27.07.2022)
+* Implement Stellar CAP-40.
+* Add XDR types for SponsorshipDescriptorList.
+* Update SponsorshipDescriptor implementation.
+* Update AccountEntryExtensionV2 implementation.
+
 ## 0.7.0 (26.07.2022)
 * Implement Stellar CAP-21.
 * Automate library release to Hex.pm.
