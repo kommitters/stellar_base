@@ -3,21 +3,21 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
   Representation of Stellar's ledger AccountEntryExtensionV2
   """
 
-  alias StellarBase.XDR.{UInt32, AccountIDList, AccountEntryExtensionV2Ext}
+  alias StellarBase.XDR.{UInt32, SponsorshipDescriptorList, AccountEntryExtensionV2Ext}
 
   @behaviour XDR.Declaration
 
   @struct_spec XDR.Struct.new(
                  num_sponsored: UInt32,
                  num_sponsoring: UInt32,
-                 signer_sponsoring_ids: AccountIDList,
+                 signer_sponsoring_ids: SponsorshipDescriptorList,
                  account_entry_extension_v2_ext: AccountEntryExtensionV2Ext
                )
 
   @type t :: %__MODULE__{
           num_sponsored: UInt32.t(),
           num_sponsoring: UInt32.t(),
-          signer_sponsoring_ids: AccountIDList.t(),
+          signer_sponsoring_ids: SponsorshipDescriptorList.t(),
           account_entry_extension_v2_ext: AccountEntryExtensionV2Ext.t()
         }
 
@@ -31,13 +31,13 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
   @spec new(
           num_sponsored :: UInt32.t(),
           num_sponsoring :: UInt32.t(),
-          signer_sponsoring_ids :: AccountIDList.t(),
+          signer_sponsoring_ids :: SponsorshipDescriptorList.t(),
           account_entry_extension_v2_ext :: AccountEntryExtensionV2Ext.t()
         ) :: t()
   def new(
         %UInt32{} = num_sponsored,
         %UInt32{} = num_sponsoring,
-        %AccountIDList{} = signer_sponsoring_ids,
+        %SponsorshipDescriptorList{} = signer_sponsoring_ids,
         %AccountEntryExtensionV2Ext{} = account_entry_extension_v2_ext
       ),
       do: %__MODULE__{

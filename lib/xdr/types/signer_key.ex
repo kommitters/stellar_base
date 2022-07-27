@@ -2,14 +2,15 @@ defmodule StellarBase.XDR.SignerKey do
   @moduledoc """
   Representation of Stellar `SignerKey` type.
   """
-  alias StellarBase.XDR.{UInt256, SignerKeyType}
+  alias StellarBase.XDR.{UInt256, SignerKeyType, SignerKeyEd25519SignedPayload}
 
   @behaviour XDR.Declaration
 
   @arms [
     SIGNER_KEY_TYPE_ED25519: UInt256,
     SIGNER_KEY_TYPE_PRE_AUTH_TX: UInt256,
-    SIGNER_KEY_TYPE_HASH_X: UInt256
+    SIGNER_KEY_TYPE_HASH_X: UInt256,
+    SIGNER_KEY_TYPE_ED25519_SIGNED_PAYLOAD: SignerKeyEd25519SignedPayload
   ]
 
   @type t :: %__MODULE__{signer_key: UInt256.t(), type: SignerKeyType.t()}
