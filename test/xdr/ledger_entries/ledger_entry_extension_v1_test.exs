@@ -6,12 +6,17 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1Test do
   alias StellarBase.XDR.{
     SponsorshipDescriptor,
     Ext,
-    LedgerEntryExtensionV1
+    LedgerEntryExtensionV1,
+    OptionalAccountID
   }
 
   describe "LedgerEntryExtensionV1" do
     setup do
-      account_id = create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
+      account_id =
+        "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
+        |> create_account_id()
+        |> OptionalAccountID.new()
+
       sponsoring_id = account_id |> SponsorshipDescriptor.new()
       ext = Ext.new()
       ledger_entry_extension_v1 = LedgerEntryExtensionV1.new(sponsoring_id, ext)
@@ -21,9 +26,9 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1Test do
         ext: ext,
         ledger_entry_extension_v1: ledger_entry_extension_v1,
         binary:
-          <<0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16,
-            107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0,
-            0>>
+          <<0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
+            32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
+            216, 0, 0, 0, 0>>
       }
     end
 

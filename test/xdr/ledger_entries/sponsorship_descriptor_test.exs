@@ -3,18 +3,22 @@ defmodule StellarBase.XDR.SponsorshipDescriptorTest do
 
   import StellarBase.Test.Utils, only: [create_account_id: 1]
 
-  alias StellarBase.XDR.SponsorshipDescriptor
+  alias StellarBase.XDR.{SponsorshipDescriptor, OptionalAccountID}
 
   describe "SponsorshipDescriptor" do
     setup do
-      account_id = create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
+      account_id =
+        "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
+        |> create_account_id()
+        |> OptionalAccountID.new()
 
       %{
         account_id: account_id,
-        sponsorship_descriptor: account_id |> SponsorshipDescriptor.new(),
+        sponsorship_descriptor: SponsorshipDescriptor.new(account_id),
         binary:
-          <<0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16,
-            107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216>>
+          <<0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
+            32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
+            216>>
       }
     end
 
