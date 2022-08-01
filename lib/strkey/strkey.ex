@@ -19,6 +19,7 @@ defmodule StellarBase.StrKey do
           | :pre_auth_tx
           | :sha256_hash
           | :muxed_account
+          | :signed_payload
 
   @version_bytes [
     # Base32-encodes to 'G...'
@@ -30,7 +31,9 @@ defmodule StellarBase.StrKey do
     # Base32-encodes to 'X...'
     sha256_hash: 23 <<< 3,
     # Base32-encodes to 'M...'
-    muxed_account: 12 <<< 3
+    muxed_account: 12 <<< 3,
+    # Base32-encodes to 'P...'
+    signed_payload: 15 <<< 3
   ]
 
   @spec encode(data :: binary_data(), version :: version()) ::
@@ -97,6 +100,16 @@ defmodule StellarBase.StrKey do
           <<version_bytes::size(8), data::binary-size(32), checksum::little-integer-size(16)>>}
        ),
        do: {:ok, {version_bytes, data, checksum}}
+
+  defp validate_decoded_binary({:ok, binary})
+       when byte_size(binary) >= 43 and byte_size(binary) <= 103 do
+    data_size = byte_size(binary) - 3
+
+    <<version_bytes::size(8), data::binary-size(data_size), checksum::little-integer-size(16)>> =
+      binary
+
+    {:ok, {version_bytes, data, checksum}}
+  end
 
   defp validate_decoded_binary(_decoded_data), do: {:error, :invalid_data_to_decode}
 

@@ -13,12 +13,14 @@ defmodule StellarBase.XDR.SignerKey do
     SIGNER_KEY_TYPE_ED25519_SIGNED_PAYLOAD: SignerKeyEd25519SignedPayload
   ]
 
-  @type t :: %__MODULE__{signer_key: UInt256.t(), type: SignerKeyType.t()}
+  @type signer_key :: UInt256.t() | SignerKeyEd25519SignedPayload.t()
+
+  @type t :: %__MODULE__{signer_key: signer_key(), type: SignerKeyType.t()}
 
   defstruct [:signer_key, :type]
 
-  @spec new(signer_key :: UInt256.t(), type :: SignerKeyType.t()) :: t()
-  def new(%UInt256{} = signer_key, %SignerKeyType{} = type),
+  @spec new(signer_key :: signer_key(), type :: SignerKeyType.t()) :: t()
+  def new(signer_key, %SignerKeyType{} = type),
     do: %__MODULE__{signer_key: signer_key, type: type}
 
   @impl true
