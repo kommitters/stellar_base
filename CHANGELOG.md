@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1 (02.08.2022)
+* Add `SignerKeyEd25519SignedPayload` to the signer_key param in the SignerKey structure.
+* Add `signer_payload` version to the arms of the `StrKey`.
+
 ## 0.8.0 (27.07.2022)
 * Implement Stellar CAP-40.
 * Add XDR types for SponsorshipDescriptorList.
