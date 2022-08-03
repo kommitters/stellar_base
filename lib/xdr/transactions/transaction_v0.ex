@@ -14,11 +14,12 @@ defmodule StellarBase.XDR.TransactionV0 do
   alias StellarBase.XDR.{
     Ext,
     Memo,
-    OptionalTimeBounds,
+    Preconditions,
     Operations,
     SequenceNumber,
     UInt32,
-    UInt256
+    UInt256,
+    Preconditions
   }
 
   @behaviour XDR.Declaration
@@ -27,7 +28,7 @@ defmodule StellarBase.XDR.TransactionV0 do
                  source_account_ed25519: UInt256,
                  fee: UInt32,
                  seq_num: SequenceNumber,
-                 time_bounds: OptionalTimeBounds,
+                 preconditions: Preconditions,
                  memo: Memo,
                  operations: Operations,
                  ext: Ext
@@ -37,19 +38,19 @@ defmodule StellarBase.XDR.TransactionV0 do
           source_account_ed25519: UInt256.t(),
           fee: UInt32.t(),
           seq_num: SequenceNumber.t(),
-          time_bounds: OptionalTimeBounds.t(),
+          preconditions: Preconditions.t(),
           memo: Memo.t(),
           operations: Operations.t(),
           ext: Ext.t()
         }
 
-  defstruct [:source_account_ed25519, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
+  defstruct [:source_account_ed25519, :fee, :seq_num, :preconditions, :memo, :operations, :ext]
 
   @spec new(
           source_account_ed25519 :: UInt256.t(),
           fee :: UInt32.t(),
           seq_num :: SequenceNumber.t(),
-          time_bounds :: OptionalTimeBounds.t(),
+          preconditions :: Preconditions.t(),
           memo :: Memo.t(),
           operations :: Operations.t(),
           ext :: Ext.t()
@@ -58,7 +59,7 @@ defmodule StellarBase.XDR.TransactionV0 do
         %UInt256{} = source_account_ed25519,
         %UInt32{} = fee,
         %SequenceNumber{} = seq_num,
-        %OptionalTimeBounds{} = time_bounds,
+        %Preconditions{} = preconditions,
         %Memo{} = memo,
         %Operations{} = operations,
         %Ext{} = ext
@@ -67,7 +68,7 @@ defmodule StellarBase.XDR.TransactionV0 do
         source_account_ed25519: source_account_ed25519,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext
@@ -78,7 +79,7 @@ defmodule StellarBase.XDR.TransactionV0 do
         source_account_ed25519: source_account_ed25519,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext
@@ -87,7 +88,7 @@ defmodule StellarBase.XDR.TransactionV0 do
       source_account_ed25519: source_account_ed25519,
       fee: fee,
       seq_num: seq_num,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       memo: memo,
       operations: operations,
       ext: ext
@@ -101,7 +102,7 @@ defmodule StellarBase.XDR.TransactionV0 do
         source_account_ed25519: source_account_ed25519,
         fee: fee,
         seq_num: seq_num,
-        time_bounds: time_bounds,
+        preconditions: preconditions,
         memo: memo,
         operations: operations,
         ext: ext
@@ -110,7 +111,7 @@ defmodule StellarBase.XDR.TransactionV0 do
       source_account_ed25519: source_account_ed25519,
       fee: fee,
       seq_num: seq_num,
-      time_bounds: time_bounds,
+      preconditions: preconditions,
       memo: memo,
       operations: operations,
       ext: ext
@@ -130,14 +131,14 @@ defmodule StellarBase.XDR.TransactionV0 do
             source_account_ed25519: source_account_ed25519,
             fee: fee,
             seq_num: seq_num,
-            time_bounds: time_bounds,
+            preconditions: preconditions,
             memo: memo,
             operations: operations,
             ext: ext
           ]
         }, rest}} ->
         {:ok,
-         {new(source_account_ed25519, fee, seq_num, time_bounds, memo, operations, ext), rest}}
+         {new(source_account_ed25519, fee, seq_num, preconditions, memo, operations, ext), rest}}
 
       error ->
         error
@@ -153,13 +154,13 @@ defmodule StellarBase.XDR.TransactionV0 do
          source_account_ed25519: source_account_ed25519,
          fee: fee,
          seq_num: seq_num,
-         time_bounds: time_bounds,
+         preconditions: preconditions,
          memo: memo,
          operations: operations,
          ext: ext
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(source_account_ed25519, fee, seq_num, time_bounds, memo, operations, ext), rest}
+    {new(source_account_ed25519, fee, seq_num, preconditions, memo, operations, ext), rest}
   end
 end

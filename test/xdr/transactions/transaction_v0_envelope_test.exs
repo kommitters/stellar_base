@@ -8,10 +8,11 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     Int64,
     Memo,
     MemoType,
-    OptionalTimeBounds,
     OptionalMuxedAccount,
     Operation,
     Operations,
+    Preconditions,
+    PreconditionType,
     SequenceNumber,
     TimeBounds,
     TimePoint,
@@ -102,11 +103,15 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     fee = UInt32.new(100)
     seq_num = SequenceNumber.new(12_345_678)
 
-    # time bounds
+    # preconditions
+    precondition_type = PreconditionType.new(:PRECOND_TIME)
     min_time = TimePoint.new(123)
     max_time = TimePoint.new(321)
-    time_bounds = TimeBounds.new(min_time, max_time)
-    op_time_bounds = OptionalTimeBounds.new(time_bounds)
+
+    preconditions =
+      min_time
+      |> TimeBounds.new(max_time)
+      |> Preconditions.new(precondition_type)
 
     # memo
     memo_type = MemoType.new(:MEMO_ID)
@@ -122,7 +127,7 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
       source_account_ed25519,
       fee,
       seq_num,
-      op_time_bounds,
+      preconditions,
       memo,
       operations,
       ext

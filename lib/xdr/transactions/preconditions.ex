@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.Preconditions do
   ]
 
   @type preconditions ::
-          Void | TimeBounds.t() | PreconditionsV2.t()
+          Void.t() | TimeBounds.t() | PreconditionsV2.t()
 
   @type t :: %__MODULE__{preconditions: preconditions(), type: PreconditionType.t()}
 
