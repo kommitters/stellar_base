@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.2 (08.08.2022)
+* Add scorecards actions
+
 ## 0.8.1 (02.08.2022)
 * Add `SignerKeyEd25519SignedPayload` to the signer_key param in the SignerKey structure.
 * Add `signer_payload` version to the arms of the `StrKey`.
