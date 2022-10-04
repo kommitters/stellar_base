@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.3 (04.10.2022)
+* Fix preconditions typespec.
+
 ## 0.8.2 (08.08.2022)
 * Add scorecards actions
 
