@@ -22,7 +22,7 @@ You should only use **`stellar_base`** if you are planning to build on top of it
 ```elixir
 def deps do
   [
-    {:stellar_base, "~> 0.8.2"}
+    {:stellar_base, "~> 0.8.3"}
   ]
 end
 ```
