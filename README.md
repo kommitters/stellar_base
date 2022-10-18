@@ -3,6 +3,8 @@
 [![Version Badge](https://img.shields.io/hexpm/v/stellar_base?style=for-the-badge)](https://hexdocs.pm/stellar_base)
 ![Downloads Badge](https://img.shields.io/hexpm/dt/stellar_base?style=for-the-badge)
 [![License badge](https://img.shields.io/hexpm/l/stellar_base.svg?style=for-the-badge)](https://github.com/kommitters/stellar_base/blob/main/LICENSE.md)
+[![OpenSSF Best Practices](https://img.shields.io/cii/summary/6461?label=openssf%20best%20practices&style=for-the-badge)](https://bestpractices.coreinfrastructure.org/projects/6461)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/stellar_base?label=openssf%20scorecard&style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/stellar_base)
 
 # Elixir Stellar Base
 
@@ -22,7 +24,7 @@ You should only use **`stellar_base`** if you are planning to build on top of it
 ```elixir
 def deps do
   [
-    {:stellar_base, "~> 0.8.3"}
+    {:stellar_base, "~> 0.8.4"}
   ]
 end
 ```

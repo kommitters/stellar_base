@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.4 (18.10.2022)
+* Include OpenSSF BestPractices & Scorecard badges in README.
+
 ## 0.8.3 (04.10.2022)
 * Fix preconditions typespec.
 
