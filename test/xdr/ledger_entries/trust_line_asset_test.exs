@@ -102,9 +102,9 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
         asset_type: asset_type,
         asset: TrustLineAsset.new(alpha_num12, asset_type),
         binary:
-          <<0, 0, 0, 2, 66, 84, 67, 78, 50, 48, 50, 49, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56,
-            85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155,
-            117, 165, 56, 34, 114, 247, 89, 216>>
+          <<0, 0, 0, 2, 66, 84, 67, 78, 50, 48, 50, 49, 0, 0, 0, 0, 0, 0, 0, 0, 155, 142, 186,
+            248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179,
+            214, 155, 117, 165, 56, 34, 114, 247, 89, 216>>
       }
     end
 
@@ -134,7 +134,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     end
 
     test "decode_xdr/2", %{asset: asset, binary: binary} do
-      {:ok, {^asset, ""}} = TrustLineAsset.decode_xdr(binary)
+      {:ok, {^asset, <<0, 0, 0, 5>>}} = TrustLineAsset.decode_xdr(binary) |> IO.inspect()
     end
 
     test "decode_xdr/2 with an invalid binary" do

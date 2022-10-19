@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.AssetCode12 do
   @impl true
   def encode_xdr(%__MODULE__{code: code, length: length}) when length in @length_range do
     code
-    |> XDR.FixedOpaque.new(length)
+    |> build_opaque(length)
     |> XDR.FixedOpaque.encode_xdr()
   end
 
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.AssetCode12 do
   @impl true
   def encode_xdr!(%__MODULE__{code: code, length: length}) when length in @length_range do
     code
-    |> XDR.FixedOpaque.new(length)
+    |> build_opaque(length)
     |> XDR.FixedOpaque.encode_xdr!()
   end
 
@@ -50,6 +50,13 @@ defmodule StellarBase.XDR.AssetCode12 do
       XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(bytes))
 
     {new(code), rest}
+  end
+
+  @spec build_opaque(code :: binary(), length :: non_neg_integer()) :: XDR.FixedOpaque.t()
+  defp build_opaque(code, length) do
+    zeros = 12 - byte_size(code)
+    bin = <<code::binary, 0::zeros*8>>
+    XDR.FixedOpaque.new(bin, length + zeros)
   end
 
   @spec opaque_spec(bytes :: binary()) :: XDR.FixedOpaque.t()
