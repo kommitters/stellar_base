@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.5 (25.10.2022)
+* Enable ExCoveralls with parallel builds.
+
 ## 0.8.4 (18.10.2022)
 * Include OpenSSF BestPractices & Scorecard badges in README.
 
