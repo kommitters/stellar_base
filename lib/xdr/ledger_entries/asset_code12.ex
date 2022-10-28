@@ -45,8 +45,8 @@ defmodule StellarBase.XDR.AssetCode12 do
   @impl true
   def decode_xdr!(bytes, term \\ nil)
 
-  def decode_xdr!(bytes, _term) do
-    {%XDR.FixedOpaque{opaque: code}, rest} =
+  def decode_xdr!(<<bytes::binary-size(12), rest::binary>>, _term) do
+    {%XDR.FixedOpaque{opaque: code}, _rest} =
       XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(bytes))
 
     {new(code), rest}

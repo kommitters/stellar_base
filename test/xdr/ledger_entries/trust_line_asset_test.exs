@@ -134,7 +134,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     end
 
     test "decode_xdr/2", %{asset: asset, binary: binary} do
-      {:ok, {^asset, <<0, 0, 0, 5>>}} = TrustLineAsset.decode_xdr(binary) |> IO.inspect()
+      {:ok, {^asset, ""}} = TrustLineAsset.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
