@@ -63,11 +63,6 @@ defmodule StellarBase.XDR.AssetCode12 do
   defp opaque_spec(bytes), do: XDR.FixedOpaque.new(nil, length_from_binary(bytes, 5))
 
   @spec length_from_binary(bytes :: binary(), acc :: non_neg_integer()) :: non_neg_integer()
-  defp length_from_binary(<<bytes::binary-size(8)>>, acc) do
-    opaque = bytes <> <<0, 0, 0, 0>>
-    length_from_binary(opaque, acc)
-  end
-
   defp length_from_binary(<<opaque::binary-size(@max_length), _rest::binary>>, acc)
        when acc in @length_range do
     <<_hd::binary-size(acc), rest::binary>> = opaque
