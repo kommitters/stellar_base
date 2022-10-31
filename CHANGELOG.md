@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.6 (31.10.2022)
+* Fix wrong binary encoding in the `AssetCode12` module.
+
 ## 0.8.5 (25.10.2022)
 * Enable ExCoveralls with parallel builds.
 
