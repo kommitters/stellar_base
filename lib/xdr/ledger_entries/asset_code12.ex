@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.AssetCode12 do
   @impl true
   def encode_xdr(%__MODULE__{code: code, length: length}) when length in @length_range do
     code
-    |> XDR.FixedOpaque.new(length)
+    |> build_opaque(length)
     |> XDR.FixedOpaque.encode_xdr()
   end
 
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.AssetCode12 do
   @impl true
   def encode_xdr!(%__MODULE__{code: code, length: length}) when length in @length_range do
     code
-    |> XDR.FixedOpaque.new(length)
+    |> build_opaque(length)
     |> XDR.FixedOpaque.encode_xdr!()
   end
 
@@ -45,22 +45,24 @@ defmodule StellarBase.XDR.AssetCode12 do
   @impl true
   def decode_xdr!(bytes, term \\ nil)
 
-  def decode_xdr!(bytes, _term) do
-    {%XDR.FixedOpaque{opaque: code}, rest} =
+  def decode_xdr!(<<bytes::binary-size(12), rest::binary>>, _term) do
+    {%XDR.FixedOpaque{opaque: code}, _rest} =
       XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(bytes))
 
     {new(code), rest}
+  end
+
+  @spec build_opaque(code :: binary(), length :: non_neg_integer()) :: XDR.FixedOpaque.t()
+  defp build_opaque(code, length) do
+    zeros = @max_length - length
+    bin = <<code::binary, 0::zeros*8>>
+    XDR.FixedOpaque.new(bin, @max_length)
   end
 
   @spec opaque_spec(bytes :: binary()) :: XDR.FixedOpaque.t()
   defp opaque_spec(bytes), do: XDR.FixedOpaque.new(nil, length_from_binary(bytes, 5))
 
   @spec length_from_binary(bytes :: binary(), acc :: non_neg_integer()) :: non_neg_integer()
-  defp length_from_binary(<<bytes::binary-size(8)>>, acc) do
-    opaque = bytes <> <<0, 0, 0, 0>>
-    length_from_binary(opaque, acc)
-  end
-
   defp length_from_binary(<<opaque::binary-size(@max_length), _rest::binary>>, acc)
        when acc in @length_range do
     <<_hd::binary-size(acc), rest::binary>> = opaque
