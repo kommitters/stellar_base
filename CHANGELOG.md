@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.7 (31.10.2022)
+* Bump `ossf/scorecard-action` to v2.0.6.
+
 ## 0.8.6 (31.10.2022)
 * Fix wrong binary encoding in the `AssetCode12` module.
 
