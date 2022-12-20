@@ -1,4 +1,4 @@
-![Build Badge](https://img.shields.io/github/workflow/status/kommitters/stellar_base/StellarBase%20CI/main?style=for-the-badge)
+![Build Badge](https://img.shields.io/github/actions/workflow/status/kommitters/stellar_base/ci.yml?branch=main&style=for-the-badge)
 [![Coverage Status](https://img.shields.io/coveralls/github/kommitters/stellar_base?style=for-the-badge)](https://coveralls.io/github/kommitters/stellar_base)
 [![Version Badge](https://img.shields.io/hexpm/v/stellar_base?style=for-the-badge)](https://hexdocs.pm/stellar_base)
 ![Downloads Badge](https://img.shields.io/hexpm/dt/stellar_base?style=for-the-badge)
@@ -24,7 +24,7 @@ You should only use **`stellar_base`** if you are planning to build on top of it
 ```elixir
 def deps do
   [
-    {:stellar_base, "~> 0.8.7"}
+    {:stellar_base, "~> 0.8.8"}
   ]
 end
 ```
