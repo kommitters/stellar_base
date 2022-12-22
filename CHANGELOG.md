@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.9 (22.12.2022)
+* Harden GitHub Actions.
+
 ## 0.8.8 (20.12.2022)
 * Update build badge and lock to ubuntu-20.04.
 
