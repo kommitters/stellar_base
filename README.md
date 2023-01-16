@@ -1,3 +1,6 @@
+# Elixir Stellar Base
+
+![stability-beta](https://img.shields.io/badge/stability-beta-33bbff.svg?style=for-the-badge)
 ![Build Badge](https://img.shields.io/github/actions/workflow/status/kommitters/stellar_base/ci.yml?branch=main&style=for-the-badge)
 [![Coverage Status](https://img.shields.io/coveralls/github/kommitters/stellar_base?style=for-the-badge)](https://coveralls.io/github/kommitters/stellar_base)
 [![Version Badge](https://img.shields.io/hexpm/v/stellar_base?style=for-the-badge)](https://hexdocs.pm/stellar_base)
@@ -6,7 +9,6 @@
 [![OpenSSF Best Practices](https://img.shields.io/cii/summary/6461?label=openssf%20best%20practices&style=for-the-badge)](https://bestpractices.coreinfrastructure.org/projects/6461)
 [![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/stellar_base?label=openssf%20scorecard&style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/stellar_base)
 
-# Elixir Stellar Base
 
 **`stellar_base`** is an **Elixir library** that provides a complete set of functions to read, write, hash, and sign XDR constructs used in [stellar-core][stellar-core].
 
