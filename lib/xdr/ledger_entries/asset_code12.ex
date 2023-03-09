@@ -56,7 +56,7 @@ defmodule StellarBase.XDR.AssetCode12 do
   @spec build_opaque(code :: binary(), length :: non_neg_integer()) :: XDR.FixedOpaque.t()
   defp build_opaque(code, length) do
     zeros = @max_length - length
-    bin = <<code::binary, 0::zeros*8>>
+    bin = <<code::binary, 0::zeros()*8>>
     XDR.FixedOpaque.new(bin, @max_length)
   end
 
