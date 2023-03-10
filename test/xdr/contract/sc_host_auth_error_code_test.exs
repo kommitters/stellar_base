@@ -45,5 +45,4 @@ defmodule StellarBase.XDR.SCHostAuthErrorCodeTest do
       {:error, :invalid_key} =
         SCHostAuthErrorCode.encode_xdr(%SCHostAuthErrorCode{identifier: :HOST_TEST})
     end
-  end
 end
