@@ -3,7 +3,6 @@ defmodule StellarBase.XDR.SCStatusTest do
 
   alias StellarBase.XDR.SCStatus
   alias StellarBase.XDR.SCStatusType
-  alias StellarBase.XDR.SCStatusTest
 
   alias StellarBase.XDR.{
     SCUnknownErrorCode,
@@ -18,8 +17,6 @@ defmodule StellarBase.XDR.SCStatusTest do
     UInt32,
     Void
   }
-
-  alias StellarBase.StrKey
 
   describe "SCStatus" do
     setup do
