@@ -3,8 +3,6 @@ defmodule StellarBase.XDR.Int128PartsTest do
 
   alias StellarBase.XDR.{Int128Parts, UInt64}
 
-  alias StellarBase.StrKey
-
   describe "Int128Parts" do
     setup do
       lo = UInt64.new(3312)

@@ -19,23 +19,23 @@ defmodule StellarBase.XDR.SCMapTest do
       val2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
       scmap_entry2 = SCMapEntry.new(key2, val2)
 
-      scmap_list = [scmap_entry1, scmap_entry2]
+      scmap_entries = [scmap_entry1, scmap_entry2]
 
       %{
-        scmap_list: scmap_list,
-        claimants: SCMap.new(scmap_list),
+        scmap_entries: scmap_entries,
+        scmap: SCMap.new(scmap_entries),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 
-    test "new/1", %{scmap_list: scmap_list} do
-      %SCMap{claimants: ^scmap_list} = SCMap.new(scmap_list)
+    test "new/1", %{scmap_entries: scmap_entries} do
+      %SCMap{scmap_entries: ^scmap_entries} = SCMap.new(scmap_entries)
     end
 
-    test "encode_xdr/1", %{claimants: claimants, binary: binary} do
-      {:ok, ^binary} = SCMap.encode_xdr(claimants)
+    test "encode_xdr/1", %{scmap: scmap, binary: binary} do
+      {:ok, ^binary} = SCMap.encode_xdr(scmap)
     end
 
     test "encode_xdr/1 with invalid elements" do
@@ -45,20 +45,20 @@ defmodule StellarBase.XDR.SCMapTest do
         |> SCMap.encode_xdr()
     end
 
-    test "encode_xdr!/1", %{claimants: claimants, binary: binary} do
-      ^binary = SCMap.encode_xdr!(claimants)
+    test "encode_xdr!/1", %{scmap: scmap, binary: binary} do
+      ^binary = SCMap.encode_xdr!(scmap)
     end
 
-    test "decode_xdr/2", %{claimants: claimants, binary: binary} do
-      {:ok, {^claimants, ""}} = SCMap.decode_xdr(binary)
+    test "decode_xdr/2", %{scmap: scmap, binary: binary} do
+      {:ok, {^scmap, ""}} = SCMap.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
       {:error, :not_binary} = SCMap.decode_xdr(123)
     end
 
-    test "decode_xdr!/2", %{claimants: claimants, binary: binary} do
-      {^claimants, ^binary} = SCMap.decode_xdr!(binary <> binary)
+    test "decode_xdr!/2", %{scmap: scmap, binary: binary} do
+      {^scmap, ^binary} = SCMap.decode_xdr!(binary <> binary)
     end
   end
 end

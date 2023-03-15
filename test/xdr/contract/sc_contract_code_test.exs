@@ -1,18 +1,7 @@
 defmodule StellarBase.XDR.SCContractCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SCContractCode
-  alias StellarBase.XDR.SCContractCodeType
-
-  alias StellarBase.XDR.{
-    AccountID,
-    PublicKey,
-    PublicKeyType,
-    UInt256,
-    Hash
-  }
-
-  alias StellarBase.StrKey
+  alias StellarBase.XDR.{SCContractCode, SCContractCodeType, Hash}
 
   describe "SCContractCode" do
     setup do
