@@ -4,11 +4,11 @@ defmodule StellarBase.XDR.SCValTest do
   alias StellarBase.XDR.{
     Int64,
     Int32,
+    OptionalSCObject,
     UInt32,
     UInt64,
     SCValType,
     SCStatic,
-    # SCV_OBJECT,
     SCStatus,
     SCStatusType,
     SCUnknownErrorCode,
@@ -40,11 +40,11 @@ defmodule StellarBase.XDR.SCValTest do
           sc_code: SCStatic.new(:SCS_TRUE),
           binary: <<0, 0, 0, 3, 0, 0, 0, 1>>
         },
-        #  %{
-        #   val_type: SCValType.new(:SCV_OBJECT),
-        #   sc_code: UInt32.new(3),
-        #   binary: <<0, 0, 0, 4, 0, 0, 0, 3>>
-        # },
+        %{
+          val_type: SCValType.new(:SCV_OBJECT),
+          sc_code: OptionalSCObject.new(nil),
+          binary: <<0, 0, 0, 4, 0, 0, 0, 0>>
+        },
         %{
           val_type: SCValType.new(:SCV_SYMBOL),
           sc_code: SCSymbol.new("World"),

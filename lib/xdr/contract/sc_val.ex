@@ -5,24 +5,23 @@ defmodule StellarBase.XDR.SCVal do
   alias StellarBase.XDR.{
     Int64,
     Int32,
+    OptionalSCObject,
     UInt32,
     UInt64,
     SCValType,
     SCStatic,
-    # SCV_OBJECT,
     SCStatus,
     SCSymbol
   }
 
   @behaviour XDR.Declaration
 
-  # cambiar por codes?
   @arms [
     SCV_U63: Int64,
     SCV_U32: UInt32,
     SCV_I32: Int32,
     SCV_STATIC: SCStatic,
-    # SCV_OBJECT: SCObject,
+    SCV_OBJECT: OptionalSCObject,
     SCV_SYMBOL: SCSymbol,
     SCV_BITSET: UInt64,
     SCV_STATUS: SCStatus
@@ -33,7 +32,7 @@ defmodule StellarBase.XDR.SCVal do
           | UInt32.t()
           | Int32.t()
           | SCStatic.t()
-          # | SCObject.t()
+          | OptionalSCObject.t()
           | SCSymbol.t()
           | UInt64.t()
           | SCStatus.t()
