@@ -31,10 +31,12 @@ defmodule StellarBase.XDR.String1024Test do
     end
 
     test "encode_xdr!/1 a string longer than 1024-bytes" do
+      bits = 1025 * 8
+
       assert_raise XDR.StringError,
                    "The length of the string exceeds the max length allowed",
                    fn ->
-                     <<84::size(1025 * 8)>>
+                     <<84::size(bits)>>
                      |> String1024.new()
                      |> String1024.encode_xdr!()
                    end
