@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.SCSpecEntryKindTest do
     setup do
       %{
         types: @types,
-        results: Enum.map(@types, fn type -> SCSpecEntryKind.new(type) end),
+        results: Enum.map(@types, &SCSpecEntryKind.new/1),
         binaries: @binaries
       }
     end

@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0KindTest do
     setup do
       %{
         types: @types,
-        results: Enum.map(@types, fn type -> SCSpecUDTUnionCaseV0Kind.new(type) end),
+        results: Enum.map(@types, &SCSpecUDTUnionCaseV0Kind.new/1),
         binaries: @binaries
       }
     end
