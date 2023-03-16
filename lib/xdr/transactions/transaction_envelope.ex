@@ -25,8 +25,7 @@ defmodule StellarBase.XDR.TransactionEnvelope do
   defstruct [:envelope, :type]
 
   @spec new(envelope :: envelope(), type :: EnvelopeType.t()) :: t()
-  def new(envelope, %EnvelopeType{} = type),
-    do: %__MODULE__{envelope: envelope, type: type}
+  def new(envelope, %EnvelopeType{} = type), do: %__MODULE__{envelope: envelope, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{envelope: envelope, type: type}) do

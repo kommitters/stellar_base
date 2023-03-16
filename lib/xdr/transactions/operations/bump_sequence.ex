@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.Operations.BumpSequence do
   defstruct [:bump_to]
 
   @spec new(bump_to :: SequenceNumber.t()) :: t()
-  def new(%SequenceNumber{} = bump_to),
-    do: %__MODULE__{bump_to: bump_to}
+  def new(%SequenceNumber{} = bump_to), do: %__MODULE__{bump_to: bump_to}
 
   @impl true
   def encode_xdr(%__MODULE__{bump_to: bump_to}) do

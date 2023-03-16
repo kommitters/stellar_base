@@ -30,8 +30,7 @@ defmodule StellarBase.XDR.LedgerKey do
   defstruct [:entry, :type]
 
   @spec new(entry :: entry(), type :: LedgerEntryType.t()) :: t()
-  def new(entry, %LedgerEntryType{} = type),
-    do: %__MODULE__{entry: entry, type: type}
+  def new(entry, %LedgerEntryType{} = type), do: %__MODULE__{entry: entry, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{entry: entry, type: type}) do

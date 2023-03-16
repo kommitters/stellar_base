@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.ClaimableBalance do
   defstruct [:balance_id]
 
   @spec new(balance_id :: ClaimableBalanceID.t()) :: t()
-  def new(%ClaimableBalanceID{} = balance_id),
-    do: %__MODULE__{balance_id: balance_id}
+  def new(%ClaimableBalanceID{} = balance_id), do: %__MODULE__{balance_id: balance_id}
 
   @impl true
   def encode_xdr(%__MODULE__{balance_id: balance_id}) do

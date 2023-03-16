@@ -64,8 +64,7 @@ defmodule StellarBase.XDR.OperationInnerResult do
   defstruct [:result, :type]
 
   @spec new(result :: any(), type :: OperationType.t()) :: t()
-  def new(result, %OperationType{} = type),
-    do: %__MODULE__{result: result, type: type}
+  def new(result, %OperationType{} = type), do: %__MODULE__{result: result, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{result: result, type: type}) do

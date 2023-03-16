@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.LiquidityPool do
   defstruct [:liquidity_pool_id]
 
   @spec new(liquidity_pool_id :: PoolID.t()) :: t()
-  def new(%PoolID{} = liquidity_pool_id),
-    do: %__MODULE__{liquidity_pool_id: liquidity_pool_id}
+  def new(%PoolID{} = liquidity_pool_id), do: %__MODULE__{liquidity_pool_id: liquidity_pool_id}
 
   @impl true
   def encode_xdr(%__MODULE__{liquidity_pool_id: liquidity_pool_id}) do

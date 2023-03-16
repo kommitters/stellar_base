@@ -17,8 +17,7 @@ defmodule StellarBase.XDR.SCUnknownErrorCode do
   defstruct [:identifier]
 
   @spec new(type :: atom()) :: t()
-  def new(type \\ :UNKNOWN_ERROR_GENERAL),
-    do: %__MODULE__{identifier: type}
+  def new(type \\ :UNKNOWN_ERROR_GENERAL), do: %__MODULE__{identifier: type}
 
   @impl true
   def encode_xdr(%__MODULE__{identifier: type}) do

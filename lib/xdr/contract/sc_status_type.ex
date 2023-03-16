@@ -25,8 +25,7 @@ defmodule StellarBase.XDR.SCStatusType do
   defstruct [:identifier]
 
   @spec new(type :: atom()) :: t()
-  def new(type \\ :SST_OK),
-    do: %__MODULE__{identifier: type}
+  def new(type \\ :SST_OK), do: %__MODULE__{identifier: type}
 
   @impl true
   def encode_xdr(%__MODULE__{identifier: type}) do

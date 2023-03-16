@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReserves do
   defstruct [:sponsored_id]
 
   @spec new(sponsored_id :: AccountID.t()) :: t()
-  def new(%AccountID{} = sponsored_id),
-    do: %__MODULE__{sponsored_id: sponsored_id}
+  def new(%AccountID{} = sponsored_id), do: %__MODULE__{sponsored_id: sponsored_id}
 
   @impl true
   def encode_xdr(%__MODULE__{sponsored_id: sponsored_id}) do
