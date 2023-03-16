@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSpecType do
   @moduledoc """
   Representation of Stellar `SCSpecType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.String30 do
   @moduledoc """
   Representation of Stellar `String30` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{value: String.t()}

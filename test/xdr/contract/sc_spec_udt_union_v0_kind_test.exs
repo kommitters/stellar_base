@@ -33,7 +33,8 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0KindTest do
     end
 
     test "encode_xdr/1 with an invalid code" do
-      {:error, :invalid_key} = SCSpecUDTUnionCaseV0Kind.encode_xdr(%SCSpecUDTUnionCaseV0Kind{identifier: :TEST})
+      {:error, :invalid_key} =
+        SCSpecUDTUnionCaseV0Kind.encode_xdr(%SCSpecUDTUnionCaseV0Kind{identifier: :TEST})
     end
 
     test "encode_xdr!/1", %{results: results, binaries: binaries} do
@@ -57,7 +58,9 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0KindTest do
 
     test "decode_xdr!/2 with an error code", %{binaries: binaries} do
       for binary <- binaries,
-          do: {%SCSpecUDTUnionCaseV0Kind{identifier: _}, ""} = SCSpecUDTUnionCaseV0Kind.decode_xdr!(binary)
+          do:
+            {%SCSpecUDTUnionCaseV0Kind{identifier: _}, ""} =
+              SCSpecUDTUnionCaseV0Kind.decode_xdr!(binary)
     end
   end
 end

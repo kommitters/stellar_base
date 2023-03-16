@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
   @moduledoc """
   Representation of Stellar `SCSpecUDTUnionCaseVoidV0` type.
   """
+
   alias StellarBase.XDR.{String1024, String60}
 
   @behaviour XDR.Declaration
@@ -16,8 +17,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
   defstruct [:doc, :name]
 
   @spec new(doc :: String1024.t(), name :: String60.t()) :: t()
-  def new(%String1024{} = doc, %String60{} = name),
-    do: %__MODULE__{doc: doc, name: name}
+  def new(%String1024{} = doc, %String60{} = name), do: %__MODULE__{doc: doc, name: name}
 
   @impl true
   def encode_xdr(%__MODULE__{doc: doc, name: name}) do

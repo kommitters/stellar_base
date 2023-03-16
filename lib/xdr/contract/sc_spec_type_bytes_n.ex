@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
   @moduledoc """
   Representation of Stellar `SCSpecTypeBytesN` type.
   """
+
   alias StellarBase.XDR.UInt32
 
   @behaviour XDR.Declaration
@@ -13,8 +14,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
   defstruct [:number]
 
   @spec new(number :: UInt32.t()) :: t()
-  def new(%UInt32{} = number),
-    do: %__MODULE__{number: number}
+  def new(%UInt32{} = number), do: %__MODULE__{number: number}
 
   @impl true
   def encode_xdr(%__MODULE__{number: number}) do

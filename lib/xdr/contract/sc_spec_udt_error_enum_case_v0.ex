@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSpecUDTErrorEnumCaseV0 do
   @moduledoc """
   Representation of Stellar `SCSpecUDTErrorEnumCaseV0` type.
   """
+
   alias StellarBase.XDR.{String1024, String60, UInt32}
 
   @behaviour XDR.Declaration

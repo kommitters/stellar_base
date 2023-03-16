@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSpecTypeUDT do
   @moduledoc """
   Representation of Stellar `SCSpecTypeUDT` type.
   """
+
   alias StellarBase.XDR.String60
 
   @behaviour XDR.Declaration
@@ -13,8 +14,7 @@ defmodule StellarBase.XDR.SCSpecTypeUDT do
   defstruct [:name]
 
   @spec new(name :: String60.t()) :: t()
-  def new(%String60{} = name),
-    do: %__MODULE__{name: name}
+  def new(%String60{} = name), do: %__MODULE__{name: name}
 
   @impl true
   def encode_xdr(%__MODULE__{name: name}) do

@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0Kind do
   @moduledoc """
   Representation of Stellar `SCSpecUDTUnionCaseV0Kind` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

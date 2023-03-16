@@ -6,6 +6,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesNTest do
   describe "SCSpecTypeBytesN" do
     setup do
       number = UInt32.new(4_294_967_295)
+
       %{
         number: number,
         sc_spec_type_bytes_n: SCSpecTypeBytesN.new(number),
