@@ -56,7 +56,6 @@ defmodule StellarBase.XDR.SCObjectTest do
       contract_code = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
       sc_contract_code_type = SCContractCodeType.new(:SCCONTRACT_CODE_WASM_REF)
 
-
       discriminants = [
         %{
           sc_object_type: SCObjectType.new(:SCO_VEC),

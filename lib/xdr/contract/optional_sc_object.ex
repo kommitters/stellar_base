@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.OptionalSCObject do
   @moduledoc """
   Representation of Stellar `OptionalSCObject` type.
   """
+
   alias StellarBase.XDR.SCObject
 
   @behaviour XDR.Declaration

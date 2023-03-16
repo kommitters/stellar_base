@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCStatus do
   @moduledoc """
   Representation of Stellar `SCStatus` type.
   """
+
   alias StellarBase.XDR.{
     SCUnknownErrorCode,
     SCHostValErrorCode,
@@ -49,8 +50,7 @@ defmodule StellarBase.XDR.SCStatus do
   defstruct [:code, :type]
 
   @spec new(code :: code(), type :: SCStatusType.t()) :: t()
-  def new(code, %SCStatusType{} = type),
-    do: %__MODULE__{code: code, type: type}
+  def new(code, %SCStatusType{} = type), do: %__MODULE__{code: code, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{code: code, type: type}) do

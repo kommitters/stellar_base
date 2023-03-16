@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCVal do
   @moduledoc """
   Representation of Stellar `SCVal` type.
   """
+
   alias StellarBase.XDR.{
     Int64,
     Int32,
@@ -42,8 +43,7 @@ defmodule StellarBase.XDR.SCVal do
   defstruct [:code, :type]
 
   @spec new(code :: code(), type :: SCValType.t()) :: t()
-  def new(code, %SCValType{} = type),
-    do: %__MODULE__{code: code, type: type}
+  def new(code, %SCValType{} = type), do: %__MODULE__{code: code, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{code: code, type: type}) do

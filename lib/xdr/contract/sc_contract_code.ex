@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCContractCode do
   @moduledoc """
   Representation of Stellar `SCContractCode` type.
   """
+
   alias StellarBase.XDR.{Hash, SCContractCodeType, Void}
 
   @behaviour XDR.Declaration

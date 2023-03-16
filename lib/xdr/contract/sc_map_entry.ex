@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCMapEntry do
   @moduledoc """
   Representation of Stellar `SCMapEntry` type.
   """
+
   alias StellarBase.XDR.{SCVal}
 
   @behaviour XDR.Declaration
@@ -13,8 +14,7 @@ defmodule StellarBase.XDR.SCMapEntry do
   defstruct [:key, :val]
 
   @spec new(key :: SCVal.t(), val :: SCVal.t()) :: t()
-  def new(%SCVal{} = key, %SCVal{} = val),
-    do: %__MODULE__{key: key, val: val}
+  def new(%SCVal{} = key, %SCVal{} = val), do: %__MODULE__{key: key, val: val}
 
   @impl true
   def encode_xdr(%__MODULE__{key: key, val: val}) do

@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCObjectType do
   @moduledoc """
   Representation of Stellar `SCObjectType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

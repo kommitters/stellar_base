@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCMap do
   @moduledoc """
   Representation of a Stellar `SCMap` list.
   """
+
   alias StellarBase.XDR.SCMapEntry
 
   @behaviour XDR.Declaration

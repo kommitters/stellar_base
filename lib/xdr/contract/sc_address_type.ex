@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCAddressType do
   @moduledoc """
   Representation of Stellar `SCAddressType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

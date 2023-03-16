@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Int128Parts do
   @moduledoc """
   Representation of Stellar `Int128Parts` type.
   """
+
   alias StellarBase.XDR.{UInt64}
 
   @behaviour XDR.Declaration
@@ -13,8 +14,7 @@ defmodule StellarBase.XDR.Int128Parts do
   defstruct [:lo, :hi]
 
   @spec new(lo :: UInt64.t(), hi :: UInt64.t()) :: t()
-  def new(%UInt64{} = lo, %UInt64{} = hi),
-    do: %__MODULE__{lo: lo, hi: hi}
+  def new(%UInt64{} = lo, %UInt64{} = hi), do: %__MODULE__{lo: lo, hi: hi}
 
   @impl true
   def encode_xdr(%__MODULE__{lo: lo, hi: hi}) do

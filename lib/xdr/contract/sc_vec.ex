@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCVec do
   @moduledoc """
   Representation of Stellar `SCVec` list.
   """
+
   alias StellarBase.XDR.SCVal
 
   @behaviour XDR.Declaration

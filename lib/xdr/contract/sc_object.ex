@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCObject do
   @moduledoc """
   Representation of Stellar `SCObjectStellarBase.XDR.SCObject` type.
   """
+
   alias StellarBase.XDR.{
     Int128Parts,
     Int64,
@@ -44,8 +45,7 @@ defmodule StellarBase.XDR.SCObject do
   defstruct [:sc_object, :type]
 
   @spec new(sc_object :: sc_object(), type :: SCObjectType.t()) :: t()
-  def new(sc_object, %SCObjectType{} = type),
-    do: %__MODULE__{sc_object: sc_object, type: type}
+  def new(sc_object, %SCObjectType{} = type), do: %__MODULE__{sc_object: sc_object, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{sc_object: sc_object, type: type}) do

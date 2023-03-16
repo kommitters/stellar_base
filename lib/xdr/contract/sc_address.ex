@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCAddress do
   @moduledoc """
   Representation of Stellar `SCAddress` type.
   """
+
   alias StellarBase.XDR.{AccountID, Hash, SCAddressType}
 
   @behaviour XDR.Declaration
