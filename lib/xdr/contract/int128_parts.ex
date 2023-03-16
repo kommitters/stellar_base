@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.Int128Parts do
   Representation of Stellar `Int128Parts` type.
   """
 
-  alias StellarBase.XDR.{UInt64}
+  alias StellarBase.XDR.UInt64
 
   @behaviour XDR.Declaration
 

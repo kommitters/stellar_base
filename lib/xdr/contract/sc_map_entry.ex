@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SCMapEntry do
   Representation of Stellar `SCMapEntry` type.
   """
 
-  alias StellarBase.XDR.{SCVal}
+  alias StellarBase.XDR.SCVal
 
   @behaviour XDR.Declaration
 
