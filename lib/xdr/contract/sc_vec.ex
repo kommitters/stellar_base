@@ -13,23 +13,23 @@ defmodule StellarBase.XDR.SCVec do
 
   @array_spec %{type: @array_type, max_length: @max_length}
 
-  @type t :: %__MODULE__{scvals: list(SCVal.t())}
+  @type t :: %__MODULE__{sc_vals: list(SCVal.t())}
 
-  defstruct [:scvals]
+  defstruct [:sc_vals]
 
-  @spec new(scvals :: list(SCVal.t())) :: t()
-  def new(scvals), do: %__MODULE__{scvals: scvals}
+  @spec new(sc_vals :: list(SCVal.t())) :: t()
+  def new(sc_vals), do: %__MODULE__{sc_vals: sc_vals}
 
   @impl true
-  def encode_xdr(%__MODULE__{scvals: scvals}) do
-    scvals
+  def encode_xdr(%__MODULE__{sc_vals: sc_vals}) do
+    sc_vals
     |> XDR.VariableArray.new(@array_type, @max_length)
     |> XDR.VariableArray.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{scvals: scvals}) do
-    scvals
+  def encode_xdr!(%__MODULE__{sc_vals: sc_vals}) do
+    sc_vals
     |> XDR.VariableArray.new(@array_type, @max_length)
     |> XDR.VariableArray.encode_xdr!()
   end
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.SCVec do
 
   def decode_xdr(bytes, spec) do
     case XDR.VariableArray.decode_xdr(bytes, spec) do
-      {:ok, {scvals, rest}} -> {:ok, {new(scvals), rest}}
+      {:ok, {sc_vals, rest}} -> {:ok, {new(sc_vals), rest}}
       error -> error
     end
   end
@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.SCVec do
   def decode_xdr!(bytes, spec \\ @array_spec)
 
   def decode_xdr!(bytes, spec) do
-    {scvals, rest} = XDR.VariableArray.decode_xdr!(bytes, spec)
-    {new(scvals), rest}
+    {sc_vals, rest} = XDR.VariableArray.decode_xdr!(bytes, spec)
+    {new(sc_vals), rest}
   end
 end

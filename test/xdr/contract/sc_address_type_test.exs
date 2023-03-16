@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SCAddressTypeTest do
     setup do
       %{
         codes: @codes,
-        results: @codes |> Enum.map(fn code -> SCAddressType.new(code) end),
+        results: Enum.map(@codes, &SCAddressType.new/1),
         binaries: @binaries
       }
     end

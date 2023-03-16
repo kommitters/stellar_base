@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.SCVal do
     SCV_STATUS: SCStatus
   ]
 
-  @type code ::
+  @type value ::
           Int64.t()
           | UInt32.t()
           | Int32.t()
@@ -38,24 +38,24 @@ defmodule StellarBase.XDR.SCVal do
           | UInt64.t()
           | SCStatus.t()
 
-  @type t :: %__MODULE__{code: code(), type: SCValType.t()}
+  @type t :: %__MODULE__{value: value(), type: SCValType.t()}
 
-  defstruct [:code, :type]
+  defstruct [:value, :type]
 
-  @spec new(code :: code(), type :: SCValType.t()) :: t()
-  def new(code, %SCValType{} = type), do: %__MODULE__{code: code, type: type}
+  @spec new(value :: value(), type :: SCValType.t()) :: t()
+  def new(value, %SCValType{} = type), do: %__MODULE__{value: value, type: type}
 
   @impl true
-  def encode_xdr(%__MODULE__{code: code, type: type}) do
+  def encode_xdr(%__MODULE__{value: value, type: type}) do
     type
-    |> XDR.Union.new(@arms, code)
+    |> XDR.Union.new(@arms, value)
     |> XDR.Union.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{code: code, type: type}) do
+  def encode_xdr!(%__MODULE__{value: value, type: type}) do
     type
-    |> XDR.Union.new(@arms, code)
+    |> XDR.Union.new(@arms, value)
     |> XDR.Union.encode_xdr!()
   end
 
@@ -64,7 +64,7 @@ defmodule StellarBase.XDR.SCVal do
 
   def decode_xdr(bytes, spec) do
     case XDR.Union.decode_xdr(bytes, spec) do
-      {:ok, {{type, code}, rest}} -> {:ok, {new(code, type), rest}}
+      {:ok, {{type, value}, rest}} -> {:ok, {new(value, type), rest}}
       error -> error
     end
   end
@@ -73,8 +73,8 @@ defmodule StellarBase.XDR.SCVal do
   def decode_xdr!(bytes, spec \\ union_spec())
 
   def decode_xdr!(bytes, spec) do
-    {{type, code}, rest} = XDR.Union.decode_xdr!(bytes, spec)
-    {new(code, type), rest}
+    {{type, value}, rest} = XDR.Union.decode_xdr!(bytes, spec)
+    {new(value, type), rest}
   end
 
   @spec union_spec() :: XDR.Union.t()

@@ -24,20 +24,20 @@ defmodule StellarBase.XDR.SCObjectType do
 
   defstruct [:identifier]
 
-  @spec new(code :: atom()) :: t()
-  def new(code), do: %__MODULE__{identifier: code}
+  @spec new(type :: atom()) :: t()
+  def new(type), do: %__MODULE__{identifier: type}
 
   @impl true
-  def encode_xdr(%__MODULE__{identifier: code}) do
+  def encode_xdr(%__MODULE__{identifier: type}) do
     @declarations
-    |> XDR.Enum.new(code)
+    |> XDR.Enum.new(type)
     |> XDR.Enum.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{identifier: code}) do
+  def encode_xdr!(%__MODULE__{identifier: type}) do
     @declarations
-    |> XDR.Enum.new(code)
+    |> XDR.Enum.new(type)
     |> XDR.Enum.encode_xdr!()
   end
 
@@ -46,7 +46,7 @@ defmodule StellarBase.XDR.SCObjectType do
 
   def decode_xdr(bytes, spec) do
     case XDR.Enum.decode_xdr(bytes, spec) do
-      {:ok, {%XDR.Enum{identifier: code}, rest}} -> {:ok, {new(code), rest}}
+      {:ok, {%XDR.Enum{identifier: type}, rest}} -> {:ok, {new(type), rest}}
       error -> error
     end
   end
@@ -55,7 +55,7 @@ defmodule StellarBase.XDR.SCObjectType do
   def decode_xdr!(bytes, spec \\ @enum_spec)
 
   def decode_xdr!(bytes, spec) do
-    {%XDR.Enum{identifier: code}, rest} = XDR.Enum.decode_xdr!(bytes, spec)
-    {new(code), rest}
+    {%XDR.Enum{identifier: type}, rest} = XDR.Enum.decode_xdr!(bytes, spec)
+    {new(type), rest}
   end
 end

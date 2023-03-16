@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SCContractCodeTypeTest do
     setup do
       %{
         codes: @codes,
-        results: @codes |> Enum.map(fn code -> SCContractCodeType.new(code) end),
+        results: Enum.map(@codes, &SCContractCodeType.new/1),
         binaries: @binaries
       }
     end

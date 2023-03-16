@@ -13,18 +13,18 @@ defmodule StellarBase.XDR.SCVecTest do
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_U63))
       scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
 
-      scvals = [scval1, scval2]
+      sc_vals = [scval1, scval2]
 
       %{
-        scvals: scvals,
-        scvec: SCVec.new(scvals),
+        sc_vals: sc_vals,
+        scvec: SCVec.new(sc_vals),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 
-    test "new/1", %{scvals: scvals} do
-      %SCVec{scvals: ^scvals} = SCVec.new(scvals)
+    test "new/1", %{sc_vals: sc_vals} do
+      %SCVec{sc_vals: ^sc_vals} = SCVec.new(sc_vals)
     end
 
     test "encode_xdr/1", %{scvec: scvec, binary: binary} do

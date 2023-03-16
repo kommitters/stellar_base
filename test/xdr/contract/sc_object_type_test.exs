@@ -33,7 +33,7 @@ defmodule StellarBase.XDR.SCObjectTypeTest do
     setup do
       %{
         codes: @codes,
-        results: @codes |> Enum.map(fn code -> SCObjectType.new(code) end),
+        results: Enum.map(@codes, &SCObjectType.new/1),
         binaries: @binaries
       }
     end

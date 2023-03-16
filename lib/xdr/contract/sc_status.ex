@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.SCStatus do
           | SCHostAuthErrorCode.t()
           | SCStatusType.t()
           | UInt32.t()
-          | Void
+          | Void.t()
 
   @type t :: %__MODULE__{code: code(), type: SCStatusType.t()}
 
