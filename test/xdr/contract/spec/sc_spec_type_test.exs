@@ -57,7 +57,7 @@ defmodule StellarBase.XDR.SCSpecTypeTest do
     setup do
       %{
         types: @types,
-        results: @types |> Enum.map(fn type -> SCSpecType.new(type) end),
+        results: Enum.map(@types, fn type -> SCSpecType.new(type) end),
         binaries: @binaries
       }
     end
