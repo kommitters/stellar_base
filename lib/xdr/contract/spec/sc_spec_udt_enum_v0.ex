@@ -1,6 +1,6 @@
 defmodule StellarBase.XDR.SCSpecUDTEnumV0 do
   @moduledoc """
-  Representation of Stellar's ledger SCSpecUDTEnumV0
+  Representation of Stellar `SCSpecUDTEnumV0` type.
   """
 
   alias StellarBase.XDR.{String1024, String80, String60, SCSpecUDTEnumCaseV0List}
@@ -35,43 +35,18 @@ defmodule StellarBase.XDR.SCSpecUDTEnumV0 do
         %String60{} = name,
         %SCSpecUDTEnumCaseV0List{} = cases
       ),
-      do: %__MODULE__{
-        doc: doc,
-        lib: lib,
-        name: name,
-        cases: cases
-      }
+      do: %__MODULE__{doc: doc, lib: lib, name: name, cases: cases}
 
   @impl true
-  def encode_xdr(%__MODULE__{
-        doc: doc,
-        lib: lib,
-        name: name,
-        cases: cases
-      }) do
-    [
-      doc: doc,
-      lib: lib,
-      name: name,
-      cases: cases
-    ]
+  def encode_xdr(%__MODULE__{doc: doc, lib: lib, name: name, cases: cases}) do
+    [doc: doc, lib: lib, name: name, cases: cases]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{
-        doc: doc,
-        lib: lib,
-        name: name,
-        cases: cases
-      }) do
-    [
-      doc: doc,
-      lib: lib,
-      name: name,
-      cases: cases
-    ]
+  def encode_xdr!(%__MODULE__{doc: doc, lib: lib, name: name, cases: cases}) do
+    [doc: doc, lib: lib, name: name, cases: cases]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -83,20 +58,9 @@ defmodule StellarBase.XDR.SCSpecUDTEnumV0 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok,
        {%XDR.Struct{
-          components: [
-            doc: doc,
-            lib: lib,
-            name: name,
-            cases: cases
-          ]
+          components: [doc: doc, lib: lib, name: name, cases: cases]
         }, rest}} ->
-        {:ok,
-         {new(
-            doc,
-            lib,
-            name,
-            cases
-          ), rest}}
+        {:ok, {new(doc, lib, name, cases), rest}}
 
       error ->
         error
@@ -108,12 +72,7 @@ defmodule StellarBase.XDR.SCSpecUDTEnumV0 do
 
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{
-       components: [
-         doc: doc,
-         lib: lib,
-         name: name,
-         cases: cases
-       ]
+       components: [doc: doc, lib: lib, name: name, cases: cases]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
     {new(doc, lib, name, cases), rest}
