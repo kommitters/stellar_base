@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SCSpecEntryKindTest do
 
   alias StellarBase.XDR.SCSpecEntryKind
 
-  @codes [
+  @types [
     :SC_SPEC_ENTRY_FUNCTION_V0,
     :SC_SPEC_ENTRY_UDT_STRUCT_V0,
     :SC_SPEC_ENTRY_UDT_UNION_V0,
@@ -22,13 +22,13 @@ defmodule StellarBase.XDR.SCSpecEntryKindTest do
   describe "SCSpecEntryKind" do
     setup do
       %{
-        codes: @codes,
-        results: @codes |> Enum.map(fn code -> SCSpecEntryKind.new(code) end),
+        types: @types,
+        results: @types |> Enum.map(fn type -> SCSpecEntryKind.new(type) end),
         binaries: @binaries
       }
     end
 
-    test "new/1", %{codes: types} do
+    test "new/1", %{types: types} do
       for type <- types,
           do: %SCSpecEntryKind{identifier: ^type} = SCSpecEntryKind.new(type)
     end
@@ -38,7 +38,7 @@ defmodule StellarBase.XDR.SCSpecEntryKindTest do
           do: {:ok, ^binary} = SCSpecEntryKind.encode_xdr(result)
     end
 
-    test "encode_xdr/1 with an invalid code" do
+    test "encode_xdr/1 with an invalid type" do
       {:error, :invalid_key} = SCSpecEntryKind.encode_xdr(%SCSpecEntryKind{identifier: :TEST})
     end
 
@@ -61,7 +61,7 @@ defmodule StellarBase.XDR.SCSpecEntryKindTest do
           do: {^result, ^binary} = SCSpecEntryKind.decode_xdr!(binary <> binary)
     end
 
-    test "decode_xdr!/2 with an error code", %{binaries: binaries} do
+    test "decode_xdr!/2 with an error type", %{binaries: binaries} do
       for binary <- binaries,
           do: {%SCSpecEntryKind{identifier: _}, ""} = SCSpecEntryKind.decode_xdr!(binary)
     end
