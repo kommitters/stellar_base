@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
   @moduledoc """
   Representation of Stellar `SCSpecTypeBytesN` type.
   """
-  alias StellarBase.XDR.{UInt32}
+  alias StellarBase.XDR.UInt32
 
   @behaviour XDR.Declaration
 
