@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.EnvelopeType do
   @moduledoc """
   Representation of Stellar `EnvelopeType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

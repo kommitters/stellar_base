@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimAtomType do
   @moduledoc """
   Representation of Stellar `ClaimAtomType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

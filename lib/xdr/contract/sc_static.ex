@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCStatic do
   @moduledoc """
   Representation of Stellar `SCStatic` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

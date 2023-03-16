@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.MemoType do
   @moduledoc """
   Representation of Stellar `MemoType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

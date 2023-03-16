@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryExt do
   @moduledoc """
   Representation of Stellar `ClaimableBalanceEntryExt` type.
   """
+
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{Void, ClaimableBalanceEntryExtV1}

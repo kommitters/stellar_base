@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCStatusType do
   @moduledoc """
   Representation of Stellar `SCStatusType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

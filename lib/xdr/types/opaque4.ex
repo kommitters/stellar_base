@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Opaque4 do
   @moduledoc """
   Representation of Stellar `Opaque4` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{opaque: binary()}

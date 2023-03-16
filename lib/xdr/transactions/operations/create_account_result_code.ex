@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.CreateAccountResultCode do
   @moduledoc """
   Representation of Stellar `CreateAccountResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

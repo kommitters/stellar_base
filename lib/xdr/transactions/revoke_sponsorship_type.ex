@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipType do
   @moduledoc """
   Representation of Stellar `RevokeSponsorshipType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

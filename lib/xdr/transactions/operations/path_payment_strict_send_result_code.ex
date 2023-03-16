@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictSendResultCode do
   @moduledoc """
   Representation of Stellar `PathPaymentStrictSendResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

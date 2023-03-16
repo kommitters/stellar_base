@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.AccountEntryExt do
   @moduledoc """
   Representation of Stellar `AccountEntryExt` type.
   """
+
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{Void, AccountEntryExtensionV1}

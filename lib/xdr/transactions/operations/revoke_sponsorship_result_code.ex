@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipResultCode do
   @moduledoc """
   Representation of Stellar `RevokeSponsorshipResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

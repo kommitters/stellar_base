@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.LiquidityPoolType do
   @moduledoc """
   Representation of Stellar `LiquidityPoolType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [LIQUIDITY_POOL_CONSTANT_PRODUCT: 0]

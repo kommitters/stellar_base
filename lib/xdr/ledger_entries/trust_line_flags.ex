@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.TrustLineFlags do
   @moduledoc """
   Representation of Stellar `TrustLineFlags` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

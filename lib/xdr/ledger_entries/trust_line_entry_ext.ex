@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.TrustLineEntryExt do
   @moduledoc """
   Representation of Stellar `TrustLineEntryExt` type.
   """
+
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{Void, TrustLineEntryExtV1}

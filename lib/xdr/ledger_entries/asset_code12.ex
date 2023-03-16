@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.AssetCode12 do
   @moduledoc """
   Representation of Stellar `AssetCode12` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{code: String.t(), length: non_neg_integer()}

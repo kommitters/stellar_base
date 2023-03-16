@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SCSymbol do
   @moduledoc """
   Representation of Stellar `SCSymbol` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{value: String.t()}

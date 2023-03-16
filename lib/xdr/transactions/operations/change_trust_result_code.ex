@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.ChangeTrustResultCode do
   @moduledoc """
   Representation of Stellar `ChangeTrustResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

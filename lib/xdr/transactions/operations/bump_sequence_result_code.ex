@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.BumpSequenceResultCode do
   @moduledoc """
   Representation of Stellar `BumpSequenceResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

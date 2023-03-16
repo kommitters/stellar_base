@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.LedgerEntryType do
   @moduledoc """
   Representation of Stellar `LedgerEntryType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

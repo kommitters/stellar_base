@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.UInt32 do
   @moduledoc """
   Representation of Stellar `UInt32` type.
   """
+
   @behaviour XDR.Declaration
 
   defstruct [:datum]
