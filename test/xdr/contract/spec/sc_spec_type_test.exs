@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SCSpecTypeTest do
 
   alias StellarBase.XDR.SCSpecType
 
-  @codes [
+  @types [
     :SC_SPEC_TYPE_VAL,
     :SC_SPEC_TYPE_U32,
     :SC_SPEC_TYPE_I32,
@@ -56,13 +56,13 @@ defmodule StellarBase.XDR.SCSpecTypeTest do
   describe "SCSpecType" do
     setup do
       %{
-        codes: @codes,
-        results: @codes |> Enum.map(fn code -> SCSpecType.new(code) end),
+        types: @types,
+        results: @types |> Enum.map(fn type -> SCSpecType.new(type) end),
         binaries: @binaries
       }
     end
 
-    test "new/1", %{codes: types} do
+    test "new/1", %{types: types} do
       for type <- types,
           do: %SCSpecType{identifier: ^type} = SCSpecType.new(type)
     end
@@ -72,7 +72,7 @@ defmodule StellarBase.XDR.SCSpecTypeTest do
           do: {:ok, ^binary} = SCSpecType.encode_xdr(result)
     end
 
-    test "encode_xdr/1 with an invalid code" do
+    test "encode_xdr/1 with an invalid type" do
       {:error, :invalid_key} = SCSpecType.encode_xdr(%SCSpecType{identifier: :TEST})
     end
 
@@ -95,7 +95,7 @@ defmodule StellarBase.XDR.SCSpecTypeTest do
           do: {^result, ^binary} = SCSpecType.decode_xdr!(binary <> binary)
     end
 
-    test "decode_xdr!/2 with an error code", %{binaries: binaries} do
+    test "decode_xdr!/2 with an error type", %{binaries: binaries} do
       for binary <- binaries,
           do: {%SCSpecType{identifier: _}, ""} = SCSpecType.decode_xdr!(binary)
     end
