@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SCValTypeTest do
+defmodule StellarBase.XDR.SCEnvMetaKindTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.SCEnvMetaKind
