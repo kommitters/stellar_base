@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.ExtensionPoint do
   defstruct [:extension_point, :type]
 
   @spec new(extension_point :: Void.t(), type :: non_neg_integer()) :: t()
-  def new(extension_point, type),
-    do: %__MODULE__{extension_point: extension_point, type: type}
+  def new(extension_point, type), do: %__MODULE__{extension_point: extension_point, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{extension_point: extension_point, type: type}) do

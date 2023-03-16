@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultCode do
   @moduledoc """
   Representation of Stellar `EndSponsoringFutureReservesResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

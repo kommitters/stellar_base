@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryExt do
   @moduledoc """
   Representation of Stellar `ClaimableBalanceEntryExt` type.
   """
+
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{Void, ClaimableBalanceEntryExtV1}
@@ -15,8 +16,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryExt do
   defstruct [:value, :type]
 
   @spec new(value :: value(), type :: non_neg_integer()) :: t()
-  def new(value, type),
-    do: %__MODULE__{value: value, type: type}
+  def new(value, type), do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do

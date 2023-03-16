@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.MemoType do
   @moduledoc """
   Representation of Stellar `MemoType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [
@@ -19,8 +20,7 @@ defmodule StellarBase.XDR.MemoType do
   defstruct [:identifier]
 
   @spec new(type :: atom()) :: t()
-  def new(type \\ :MEMO_NONE),
-    do: %__MODULE__{identifier: type}
+  def new(type \\ :MEMO_NONE), do: %__MODULE__{identifier: type}
 
   @impl true
   def encode_xdr(%__MODULE__{identifier: type}) do

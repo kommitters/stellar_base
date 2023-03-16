@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceResultCode do
   @moduledoc """
   Representation of Stellar `CreateClaimableBalanceResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

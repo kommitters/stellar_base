@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.CryptoKeyType do
   @moduledoc """
   Representation of Stellar `CryptoKeyType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

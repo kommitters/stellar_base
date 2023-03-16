@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.AccountMergeResultCode do
   @moduledoc """
   Representation of Stellar `AccountMergeResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

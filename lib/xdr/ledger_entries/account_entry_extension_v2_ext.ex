@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Ext do
   @moduledoc """
   Representation of Stellar `AccountEntryExtensionV2Ext` type.
   """
+
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{Void, AccountEntryExtensionV3}
@@ -15,8 +16,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Ext do
   defstruct [:value, :type]
 
   @spec new(value :: value(), type :: non_neg_integer()) :: t()
-  def new(value, type),
-    do: %__MODULE__{value: value, type: type}
+  def new(value, type), do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do

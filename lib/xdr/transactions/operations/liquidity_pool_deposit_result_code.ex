@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolDepositResultCode do
   @moduledoc """
   Representation of Stellar `LiquidityPoolDepositResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

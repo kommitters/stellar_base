@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.OperationType do
   @moduledoc """
   Representation of Stellar `OperationType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

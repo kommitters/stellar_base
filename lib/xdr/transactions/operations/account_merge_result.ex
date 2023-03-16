@@ -16,8 +16,7 @@ defmodule StellarBase.XDR.Operations.AccountMergeResult do
   defstruct [:result, :code]
 
   @spec new(result :: result(), code :: AccountMergeResultCode.t()) :: t()
-  def new(result, %AccountMergeResultCode{} = code),
-    do: %__MODULE__{result: result, code: code}
+  def new(result, %AccountMergeResultCode{} = code), do: %__MODULE__{result: result, code: code}
 
   @impl true
   def encode_xdr(%__MODULE__{result: result, code: code}) do

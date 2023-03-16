@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimableBalanceFlags do
   @moduledoc """
   Representation of Stellar `ClaimableBalanceFlags` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

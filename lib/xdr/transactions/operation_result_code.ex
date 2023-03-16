@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.OperationResultCode do
   @moduledoc """
   Representation of Stellar `OperationResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

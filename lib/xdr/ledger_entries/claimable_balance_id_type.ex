@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimableBalanceIDType do
   @moduledoc """
   Representation of Stellar `ClaimableBalanceIDType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [CLAIMABLE_BALANCE_ID_TYPE_V0: 0]

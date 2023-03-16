@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.PublicKeyType do
   @moduledoc """
   Representation of Stellar `PublicKeyType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [PUBLIC_KEY_TYPE_ED25519: 0]

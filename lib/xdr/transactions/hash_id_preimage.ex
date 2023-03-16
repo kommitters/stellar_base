@@ -18,8 +18,7 @@ defmodule StellarBase.XDR.HashIDPreimage do
   defstruct [:hash_id, :type]
 
   @spec new(hash_id :: hash_id(), type :: EnvelopeType.t()) :: t()
-  def new(hash_id, %EnvelopeType{} = type),
-    do: %__MODULE__{hash_id: hash_id, type: type}
+  def new(hash_id, %EnvelopeType{} = type), do: %__MODULE__{hash_id: hash_id, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{hash_id: hash_id, type: type}) do

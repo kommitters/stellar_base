@@ -18,8 +18,7 @@ defmodule StellarBase.XDR.Operations.ManageOffer do
   defstruct [:offer, :effect]
 
   @spec new(offer :: any(), effect :: ManageOfferEffect.t()) :: t()
-  def new(offer, %ManageOfferEffect{} = effect),
-    do: %__MODULE__{offer: offer, effect: effect}
+  def new(offer, %ManageOfferEffect{} = effect), do: %__MODULE__{offer: offer, effect: effect}
 
   @impl true
   def encode_xdr(%__MODULE__{offer: offer, effect: effect}) do

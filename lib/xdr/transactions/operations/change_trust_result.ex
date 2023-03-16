@@ -14,8 +14,7 @@ defmodule StellarBase.XDR.Operations.ChangeTrustResult do
   defstruct [:result, :code]
 
   @spec new(result :: any(), code :: ChangeTrustResultCode.t()) :: t()
-  def new(result, %ChangeTrustResultCode{} = code),
-    do: %__MODULE__{result: result, code: code}
+  def new(result, %ChangeTrustResultCode{} = code), do: %__MODULE__{result: result, code: code}
 
   @impl true
   def encode_xdr(%__MODULE__{result: result, code: code}) do

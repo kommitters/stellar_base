@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.ClawbackResultCode do
   @moduledoc """
   Representation of Stellar `ClawbackResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

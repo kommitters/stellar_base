@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultCode do
   @moduledoc """
   Representation of Stellar `SetTrustLineFlagsResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

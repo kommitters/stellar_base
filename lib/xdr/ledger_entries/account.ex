@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.Account do
   defstruct [:account_id]
 
   @spec new(account_id :: AccountID.t()) :: t()
-  def new(%AccountID{} = account_id),
-    do: %__MODULE__{account_id: account_id}
+  def new(%AccountID{} = account_id), do: %__MODULE__{account_id: account_id}
 
   @impl true
   def encode_xdr(%__MODULE__{account_id: account_id}) do
