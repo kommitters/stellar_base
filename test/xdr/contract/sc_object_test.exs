@@ -174,42 +174,5 @@ defmodule StellarBase.XDR.SCObjectTest do
         {^xdr, ""} = SCObject.decode_xdr!(binary)
       end
     end
-
-    # test "new/1", %{sc_address: sc_address, sc_object_type: sc_object_type} do
-    #   %SCObject{sc_address: ^sc_address, type: ^sc_object_type} =
-    #     SCObject.new(sc_address, sc_object_type)
-    # end
-
-    # test "encode_xdr/1", %{sc_object: sc_object, binary: binary} do
-    #   {:ok, ^binary} = SCObject.encode_xdr(sc_object)
-    # end
-
-    # test "encode_xdr/1 with an invalid type", %{sc_address: sc_address} do
-    #   sc_object_type = SCObjectType.new(:NEW_ADDRESS)
-
-    #   assert_raise XDR.EnumError,
-    #                "The key which you try to encode doesn't belong to the current declarations",
-    #                fn ->
-    #                  sc_address
-    #                  |> SCObject.new(sc_object_type)
-    #                  |> SCObject.encode_xdr()
-    #                end
-    # end
-
-    # test "encode_xdr!/1", %{sc_object: sc_object, binary: binary} do
-    #   ^binary = SCObject.encode_xdr!(sc_object)
-    # end
-
-    # test "decode_xdr/2", %{sc_object: sc_object, binary: binary} do
-    #   {:ok, {^sc_object, ""}} = SCObject.decode_xdr(binary)
-    # end
-
-    # test "decode_xdr/2 with an invalid binary" do
-    #   {:error, :not_binary} = SCObject.decode_xdr(123)
-    # end
-
-    # test "decode_xdr!/2", %{sc_object: sc_object, binary: binary} do
-    #   {^sc_object, ^binary} = SCObject.decode_xdr!(binary <> binary)
-    # end
   end
 end
