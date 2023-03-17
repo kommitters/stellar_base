@@ -5,20 +5,20 @@ defmodule StellarBase.XDR.SCSpecTypeResultTest do
 
   describe "SCSpecTypeResult" do
     setup do
-      okType = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
-      errorType = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      ok_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      error_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
 
       %{
-        okType: okType,
-        errorType: errorType,
-        sc_spec_type_map: SCSpecTypeResult.new(okType, errorType),
+        ok_type: ok_type,
+        error_type: error_type,
+        sc_spec_type_map: SCSpecTypeResult.new(ok_type, error_type),
         binary: <<0, 0, 0, 0, 0, 0, 0, 0>>
       }
     end
 
-    test "new/2", %{okType: okType, errorType: errorType} do
-      %SCSpecTypeResult{okType: ^okType, errorType: ^errorType} =
-        SCSpecTypeResult.new(okType, errorType)
+    test "new/2", %{ok_type: ok_type, error_type: error_type} do
+      %SCSpecTypeResult{ok_type: ^ok_type, error_type: ^error_type} =
+        SCSpecTypeResult.new(ok_type, error_type)
     end
 
     test "encode_xdr/1", %{

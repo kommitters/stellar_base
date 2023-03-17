@@ -7,29 +7,29 @@ defmodule StellarBase.XDR.SCSpecTypeMap do
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(keyType: SCSpecTypeDef, valueType: SCSpecTypeDef)
+  @struct_spec XDR.Struct.new(key_type: SCSpecTypeDef, value_type: SCSpecTypeDef)
 
-  @type keyType :: SCSpecTypeDef.t()
-  @type valueType :: SCSpecTypeDef.t()
+  @type key_type :: SCSpecTypeDef.t()
+  @type value_type :: SCSpecTypeDef.t()
 
-  @type t :: %__MODULE__{keyType: keyType(), valueType: valueType()}
+  @type t :: %__MODULE__{key_type: key_type(), value_type: value_type()}
 
-  defstruct [:keyType, :valueType]
+  defstruct [:key_type, :value_type]
 
-  @spec new(keyType :: SCSpecTypeDef.t(), valueType :: SCSpecTypeDef.t()) :: t()
-  def new(%SCSpecTypeDef{} = keyType, %SCSpecTypeDef{} = valueType),
-    do: %__MODULE__{keyType: keyType, valueType: valueType}
+  @spec new(key_type :: key_type(), value_type :: value_type()) :: t()
+  def new(%SCSpecTypeDef{} = key_type, %SCSpecTypeDef{} = value_type),
+    do: %__MODULE__{key_type: key_type, value_type: value_type}
 
   @impl true
-  def encode_xdr(%__MODULE__{keyType: keyType, valueType: valueType}) do
-    [keyType: keyType, valueType: valueType]
+  def encode_xdr(%__MODULE__{key_type: key_type, value_type: value_type}) do
+    [key_type: key_type, value_type: value_type]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{keyType: keyType, valueType: valueType}) do
-    [keyType: keyType, valueType: valueType]
+  def encode_xdr!(%__MODULE__{key_type: key_type, value_type: value_type}) do
+    [key_type: key_type, value_type: value_type]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -39,8 +39,8 @@ defmodule StellarBase.XDR.SCSpecTypeMap do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [keyType: keyType, valueType: valueType]}, rest}} ->
-        {:ok, {new(keyType, valueType), rest}}
+      {:ok, {%XDR.Struct{components: [key_type: key_type, value_type: value_type]}, rest}} ->
+        {:ok, {new(key_type, value_type), rest}}
 
       error ->
         error
@@ -51,9 +51,9 @@ defmodule StellarBase.XDR.SCSpecTypeMap do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [keyType: keyType, valueType: valueType]}, rest} =
+    {%XDR.Struct{components: [key_type: key_type, value_type: value_type]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(keyType, valueType), rest}
+    {new(key_type, value_type), rest}
   end
 end

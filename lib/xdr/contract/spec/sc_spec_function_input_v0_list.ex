@@ -13,24 +13,24 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0List do
 
   @array_spec %{type: @array_type, max_length: @max_length}
 
-  @type t :: %__MODULE__{input_list: list(SCSpecFunctionInputV0.t())}
+  @type t :: %__MODULE__{inputs: list(SCSpecFunctionInputV0.t())}
 
-  defstruct [:input_list]
+  defstruct [:inputs]
 
-  @spec new(input_list :: list(SCSpecTypeDef.t())) :: t()
-  def new(input_list),
-    do: %__MODULE__{input_list: input_list}
+  @spec new(inputs :: list(SCSpecFunctionInputV0.t())) :: t()
+  def new(inputs),
+    do: %__MODULE__{inputs: inputs}
 
   @impl true
-  def encode_xdr(%__MODULE__{input_list: input_list}) do
-    input_list
+  def encode_xdr(%__MODULE__{inputs: inputs}) do
+    inputs
     |> XDR.VariableArray.new(@array_type, @max_length)
     |> XDR.VariableArray.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{input_list: input_list}) do
-    input_list
+  def encode_xdr!(%__MODULE__{inputs: inputs}) do
+    inputs
     |> XDR.VariableArray.new(@array_type, @max_length)
     |> XDR.VariableArray.encode_xdr!()
   end
@@ -40,8 +40,8 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0List do
 
   def decode_xdr(bytes, spec) do
     case XDR.VariableArray.decode_xdr(bytes, spec) do
-      {:ok, {input_list, rest}} ->
-        {:ok, {new(input_list), rest}}
+      {:ok, {inputs, rest}} ->
+        {:ok, {new(inputs), rest}}
 
       error ->
         error
@@ -52,7 +52,7 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0List do
   def decode_xdr!(bytes, spec \\ @array_spec)
 
   def decode_xdr!(bytes, spec) do
-    {input_list, rest} = XDR.VariableArray.decode_xdr!(bytes, spec)
-    {new(input_list), rest}
+    {inputs, rest} = XDR.VariableArray.decode_xdr!(bytes, spec)
+    {new(inputs), rest}
   end
 end

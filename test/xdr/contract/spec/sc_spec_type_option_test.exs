@@ -5,17 +5,17 @@ defmodule StellarBase.XDR.SCSpecTypeOptionTest do
 
   describe "SCSpecTypeOption" do
     setup do
-      valueType = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      value_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
 
       %{
-        valueType: valueType,
-        sc_spec_type_map: SCSpecTypeOption.new(valueType),
+        value_type: value_type,
+        sc_spec_type_map: SCSpecTypeOption.new(value_type),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{valueType: valueType} do
-      %SCSpecTypeOption{valueType: ^valueType} = SCSpecTypeOption.new(valueType)
+    test "new/1", %{value_type: value_type} do
+      %SCSpecTypeOption{value_type: ^value_type} = SCSpecTypeOption.new(value_type)
     end
 
     test "encode_xdr/1", %{sc_spec_type_map: sc_spec_type_map, binary: binary} do

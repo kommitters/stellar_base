@@ -5,17 +5,17 @@ defmodule StellarBase.XDR.SCSpecTypeSetTest do
 
   describe "SCSpecTypeSet" do
     setup do
-      elementType = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      element_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
 
       %{
-        elementType: elementType,
-        sc_spec_type_map: SCSpecTypeSet.new(elementType),
+        element_type: element_type,
+        sc_spec_type_map: SCSpecTypeSet.new(element_type),
         binary: <<0, 0, 0, 0>>
       }
     end
 
-    test "new/1", %{elementType: elementType} do
-      %SCSpecTypeSet{elementType: ^elementType} = SCSpecTypeSet.new(elementType)
+    test "new/1", %{element_type: element_type} do
+      %SCSpecTypeSet{element_type: ^element_type} = SCSpecTypeSet.new(element_type)
     end
 
     test "encode_xdr/1", %{sc_spec_type_map: sc_spec_type_map, binary: binary} do

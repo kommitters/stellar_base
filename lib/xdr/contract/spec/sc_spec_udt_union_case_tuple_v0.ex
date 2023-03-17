@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseTupleV0 do
 
   defstruct [:doc, :name, :type]
 
-  @spec new(doc :: String1024.t(), name :: String60.t(), type :: SCSpecTypeDef12.t()) :: t()
+  @spec new(doc :: doc(), name :: name(), type :: type()) :: t()
   def new(%String1024{} = doc, %String60{} = name, %SCSpecTypeDef12{} = type),
     do: %__MODULE__{doc: doc, name: name, type: type}
 

@@ -5,20 +5,20 @@ defmodule StellarBase.XDR.SCSpecTypeMapTest do
 
   describe "SCSpecTypeMap" do
     setup do
-      keyType = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
-      valueType = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      key_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      value_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
 
       %{
-        keyType: keyType,
-        valueType: valueType,
-        sc_spec_type_map: SCSpecTypeMap.new(keyType, valueType),
+        key_type: key_type,
+        value_type: value_type,
+        sc_spec_type_map: SCSpecTypeMap.new(key_type, value_type),
         binary: <<0, 0, 0, 0, 0, 0, 0, 0>>
       }
     end
 
-    test "new/2", %{keyType: keyType, valueType: valueType} do
-      %SCSpecTypeMap{keyType: ^keyType, valueType: ^valueType} =
-        SCSpecTypeMap.new(keyType, valueType)
+    test "new/2", %{key_type: key_type, value_type: value_type} do
+      %SCSpecTypeMap{key_type: ^key_type, value_type: ^value_type} =
+        SCSpecTypeMap.new(key_type, value_type)
     end
 
     test "encode_xdr/1", %{

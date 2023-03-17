@@ -43,21 +43,23 @@ defmodule StellarBase.XDR.SCSpecTypeDef do
   ]
 
   @type code ::
-          SCSpecTypeVec
-          | SCSpecTypeMap
-          | SCSpecTypeSet
-          | SCSpecTypeTuple
-          | SCSpecTypeBytesN
-          | SCSpecTypeUDT
-          | SCSpecTypeOption
-          | SCSpecTypeResult
-          | Void
+          SCSpecTypeVec.t()
+          | SCSpecTypeMap.t()
+          | SCSpecTypeSet.t()
+          | SCSpecTypeTuple.t()
+          | SCSpecTypeBytesN.t()
+          | SCSpecTypeUDT.t()
+          | SCSpecTypeOption.t()
+          | SCSpecTypeResult.t()
+          | Void.t()
 
-  @type t :: %__MODULE__{code: code(), type: SCSpecType.t()}
+  @type type :: SCSpecType.t()
+
+  @type t :: %__MODULE__{code: code(), type: type()}
 
   defstruct [:code, :type]
 
-  @spec new(code :: code(), type :: SCSpecType.t()) :: t()
+  @spec new(code :: code(), type :: type()) :: t()
   def new(code, %SCSpecType{} = type), do: %__MODULE__{code: code, type: type}
 
   @impl true

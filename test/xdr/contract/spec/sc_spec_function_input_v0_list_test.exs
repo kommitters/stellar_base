@@ -27,12 +27,11 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
           SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
         )
 
-      input_list = [sc_spec_function_input_v01, sc_spec_function_input_v02]
+      inputs = [sc_spec_function_input_v01, sc_spec_function_input_v02]
 
       %{
-        input_list: input_list,
-        sponsorship_descriptor_list:
-          SCSpecFunctionInputV0List.new([sc_spec_function_input_v01, sc_spec_function_input_v02]),
+        inputs: inputs,
+        sponsorship_descriptor_list: inputs |> SCSpecFunctionInputV0List.new(),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 26, 72, 101, 108, 108, 111, 32, 116, 104, 101, 114, 101, 32, 116,
             104, 105, 115, 32, 105, 115, 32, 97, 32, 116, 101, 115, 116, 0, 0, 0, 0, 0, 11, 72,
@@ -43,9 +42,8 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
       }
     end
 
-    test "new/1", %{input_list: input_list} do
-      %SCSpecFunctionInputV0List{input_list: ^input_list} =
-        SCSpecFunctionInputV0List.new(input_list)
+    test "new/1", %{inputs: inputs} do
+      %SCSpecFunctionInputV0List{inputs: ^inputs} = SCSpecFunctionInputV0List.new(inputs)
     end
 
     test "encode_xdr/1", %{

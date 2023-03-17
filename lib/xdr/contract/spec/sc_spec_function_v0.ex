@@ -28,9 +28,7 @@ defmodule StellarBase.XDR.SCSpecFunctionV0 do
 
   defstruct [:doc, :name, :inputs, :outputs]
 
-  @spec new(doc :: String1024.t(), name :: SCSymbol.t(), inputs :: SCSpecFunctionInputV0List.t(),
-          outputs: SCSpecTypeDef1.t()
-        ) :: t()
+  @spec new(doc :: doc(), name :: name(), inputs :: inputs(), outputs: outputs()) :: t()
   @spec new(
           StellarBase.XDR.String1024.t(),
           StellarBase.XDR.SCSymbol.t(),

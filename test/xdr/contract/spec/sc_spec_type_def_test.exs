@@ -88,7 +88,8 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
         },
         %{
           sc_code:
-            SCSpecTypeOption.new(SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))),
+            SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+            |> SCSpecTypeOption.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_OPTION),
           binary: <<0, 0, 3, 232, 0, 0, 0, 0>>
         },
@@ -103,13 +104,18 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
         },
         %{
           sc_code:
-            SCSpecTypeVec.new(SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))),
+            SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+            |> SCSpecTypeVec.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_VEC),
           binary: <<0, 0, 3, 234, 0, 0, 0, 0>>
         },
         %{
           sc_code:
-            SCSpecTypeSet.new(SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))),
+            SCSpecTypeDef.new(
+              Void.new(),
+              SCSpecType.new(:SC_SPEC_TYPE_VAL)
+            )
+            |> SCSpecTypeSet.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_SET),
           binary: <<0, 0, 3, 235, 0, 0, 0, 0>>
         },
@@ -124,12 +130,11 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
         },
         %{
           sc_code:
-            SCSpecTypeTuple.new(
-              SCSpecTypeDef12.new([
-                SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL)),
-                SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_U128))
-              ])
-            ),
+            SCSpecTypeDef12.new([
+              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL)),
+              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_U128))
+            ])
+            |> SCSpecTypeTuple.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_TUPLE),
           binary: <<0, 0, 3, 237, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 5>>
         },

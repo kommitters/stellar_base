@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0 do
 
   defstruct [:doc, :name, :type]
 
-  @spec new(doc :: String1024.t(), name :: String30.t(), type :: SCSpecTypeDef.t()) :: t()
+  @spec new(doc :: doc(), name :: name(), type :: type()) :: t()
   def new(%String1024{} = doc, %String30{} = name, %SCSpecTypeDef{} = type),
     do: %__MODULE__{doc: doc, name: name, type: type}
 
