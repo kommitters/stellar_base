@@ -14,7 +14,9 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0Test do
     setup do
       doc = String1024.new("Hello there this is a test")
       name = String30.new("Hello there")
-      type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      code = Void.new()
+      type_val = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      type = SCSpecTypeDef.new(code, type_val)
 
       %{
         doc: doc,

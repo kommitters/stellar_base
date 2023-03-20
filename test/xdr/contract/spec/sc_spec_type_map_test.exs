@@ -5,8 +5,12 @@ defmodule StellarBase.XDR.SCSpecTypeMapTest do
 
   describe "SCSpecTypeMap" do
     setup do
-      key_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
-      value_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      code = Void.new()
+      type = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      sc_spec_type_def = SCSpecTypeDef.new(code, type)
+
+      key_type = sc_spec_type_def
+      value_type = sc_spec_type_def
 
       %{
         key_type: key_type,

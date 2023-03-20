@@ -5,7 +5,10 @@ defmodule StellarBase.XDR.SCSpecTypeOptionTest do
 
   describe "SCSpecTypeOption" do
     setup do
-      value_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      code = Void.new()
+      type = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+
+      value_type = SCSpecTypeDef.new(code, type)
 
       %{
         value_type: value_type,

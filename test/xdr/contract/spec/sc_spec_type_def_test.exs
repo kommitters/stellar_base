@@ -20,6 +20,12 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
 
   describe "SCSpecTypeDef" do
     setup do
+      code = Void.new()
+      type_val = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      type_u128 = SCSpecType.new(:SC_SPEC_TYPE_U128)
+      sc_spec_type_def_1 = SCSpecTypeDef.new(code, type_val)
+      sc_spec_type_def_2 = SCSpecTypeDef.new(code, type_u128)
+
       discriminants = [
         %{
           status_type: SCSpecType.new(:SC_SPEC_TYPE_VAL),
@@ -88,7 +94,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
         },
         %{
           sc_code:
-            SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+            sc_spec_type_def_1
             |> SCSpecTypeOption.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_OPTION),
           binary: <<0, 0, 3, 232, 0, 0, 0, 0>>
@@ -96,43 +102,38 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
         %{
           sc_code:
             SCSpecTypeResult.new(
-              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL)),
-              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_U128))
+              sc_spec_type_def_1,
+              sc_spec_type_def_2
             ),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_RESULT),
           binary: <<0, 0, 3, 233, 0, 0, 0, 0, 0, 0, 0, 5>>
         },
         %{
           sc_code:
-            SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+            sc_spec_type_def_1
             |> SCSpecTypeVec.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_VEC),
           binary: <<0, 0, 3, 234, 0, 0, 0, 0>>
         },
         %{
           sc_code:
-            SCSpecTypeDef.new(
-              Void.new(),
-              SCSpecType.new(:SC_SPEC_TYPE_VAL)
-            )
+            sc_spec_type_def_1
             |> SCSpecTypeSet.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_SET),
           binary: <<0, 0, 3, 235, 0, 0, 0, 0>>
         },
         %{
           sc_code:
-            SCSpecTypeMap.new(
-              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL)),
-              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_U128))
-            ),
+            sc_spec_type_def_1
+            |> SCSpecTypeMap.new(sc_spec_type_def_2),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_MAP),
           binary: <<0, 0, 3, 236, 0, 0, 0, 0, 0, 0, 0, 5>>
         },
         %{
           sc_code:
             SCSpecTypeDef12.new([
-              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL)),
-              SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_U128))
+              sc_spec_type_def_1,
+              sc_spec_type_def_2
             ])
             |> SCSpecTypeTuple.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_TUPLE),

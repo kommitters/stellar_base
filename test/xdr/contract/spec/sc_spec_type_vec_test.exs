@@ -5,7 +5,10 @@ defmodule StellarBase.XDR.SCSpecTypeVecTest do
 
   describe "SCSpecTypeVec" do
     setup do
-      element_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      code = Void.new()
+      type = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+
+      element_type = SCSpecTypeDef.new(code, type)
 
       %{
         element_type: element_type,

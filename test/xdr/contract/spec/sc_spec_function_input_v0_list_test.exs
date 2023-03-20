@@ -13,32 +13,38 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
 
   describe "SCSpecFunctionInputV0List" do
     setup do
-      sc_spec_function_input_v01 =
+      doc = String1024.new("Hello there this is a test")
+      name = String30.new("Hello there")
+      code = Void.new()
+      type = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      sc_spec_type_def = SCSpecTypeDef.new(code, type)
+
+      sc_spec_function_input_v0_1 =
         SCSpecFunctionInputV0.new(
-          String1024.new("Hello there this is a test"),
-          String30.new("Hello there"),
-          SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+          doc,
+          name,
+          sc_spec_type_def
         )
 
-      sc_spec_function_input_v02 =
+      sc_spec_function_input_v0_2 =
         SCSpecFunctionInputV0.new(
-          String1024.new("Hello there this is a test 1"),
-          String30.new("Hello there 1"),
-          SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+          doc,
+          name,
+          sc_spec_type_def
         )
 
-      inputs = [sc_spec_function_input_v01, sc_spec_function_input_v02]
+      inputs = [sc_spec_function_input_v0_1, sc_spec_function_input_v0_2]
 
       %{
         inputs: inputs,
-        sponsorship_descriptor_list: inputs |> SCSpecFunctionInputV0List.new(),
+        sponsorship_descriptor_list: SCSpecFunctionInputV0List.new(inputs),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 26, 72, 101, 108, 108, 111, 32, 116, 104, 101, 114, 101, 32, 116,
             104, 105, 115, 32, 105, 115, 32, 97, 32, 116, 101, 115, 116, 0, 0, 0, 0, 0, 11, 72,
-            101, 108, 108, 111, 32, 116, 104, 101, 114, 101, 0, 0, 0, 0, 0, 0, 0, 0, 28, 72, 101,
+            101, 108, 108, 111, 32, 116, 104, 101, 114, 101, 0, 0, 0, 0, 0, 0, 0, 0, 26, 72, 101,
             108, 108, 111, 32, 116, 104, 101, 114, 101, 32, 116, 104, 105, 115, 32, 105, 115, 32,
-            97, 32, 116, 101, 115, 116, 32, 49, 0, 0, 0, 13, 72, 101, 108, 108, 111, 32, 116, 104,
-            101, 114, 101, 32, 49, 0, 0, 0, 0, 0, 0, 0>>
+            97, 32, 116, 101, 115, 116, 0, 0, 0, 0, 0, 11, 72, 101, 108, 108, 111, 32, 116, 104,
+            101, 114, 101, 0, 0, 0, 0, 0>>
       }
     end
 

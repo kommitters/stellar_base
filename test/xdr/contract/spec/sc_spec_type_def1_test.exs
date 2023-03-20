@@ -5,7 +5,9 @@ defmodule StellarBase.XDR.SCSpecTypeDef1Test do
 
   describe "SCSpecTypeDef1" do
     setup do
-      sc_spec_type_def1 = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      code = Void.new()
+      type = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      sc_spec_type_def1 = SCSpecTypeDef.new(code, type)
 
       sc_spec_type_defs = [sc_spec_type_def1]
 

@@ -15,12 +15,13 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseTupleV0Test do
     setup do
       doc = String1024.new("Hello there this is a test")
       name = String60.new("Hello there")
+      code = Void.new()
+      type_val = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      type_u128 = SCSpecType.new(:SC_SPEC_TYPE_U128)
+      sc_spec_type_def1 = SCSpecTypeDef.new(code, type_val)
+      sc_spec_type_def2 = SCSpecTypeDef.new(code, type_u128)
 
-      type =
-        SCSpecTypeDef12.new([
-          SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL)),
-          SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_U128))
-        ])
+      type = SCSpecTypeDef12.new([sc_spec_type_def1, sc_spec_type_def2])
 
       %{
         doc: doc,

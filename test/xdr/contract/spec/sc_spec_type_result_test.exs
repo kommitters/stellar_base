@@ -5,8 +5,11 @@ defmodule StellarBase.XDR.SCSpecTypeResultTest do
 
   describe "SCSpecTypeResult" do
     setup do
-      ok_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
-      error_type = SCSpecTypeDef.new(Void.new(), SCSpecType.new(:SC_SPEC_TYPE_VAL))
+      code = Void.new()
+      type = SCSpecType.new(:SC_SPEC_TYPE_VAL)
+      sc_spec_type_def = SCSpecTypeDef.new(code, type)
+      ok_type = sc_spec_type_def
+      error_type = sc_spec_type_def
 
       %{
         ok_type: ok_type,
