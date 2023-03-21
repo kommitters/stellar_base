@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.ConfigSettingLedgerKey do
+defmodule StellarBase.XDR.LedgerKeyConfigSetting do
   @moduledoc """
-  Representation of Stellar `ConfigSettingLedgerKey` type.
+  Representation of Stellar `LedgerKeyConfigSetting` type.
   """
 
   alias StellarBase.XDR.ConfigSettingID
