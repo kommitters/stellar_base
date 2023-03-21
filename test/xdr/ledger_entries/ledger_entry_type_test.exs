@@ -3,120 +3,74 @@ defmodule StellarBase.XDR.LedgerEntryTypeTest do
 
   alias StellarBase.XDR.LedgerEntryType
 
-  describe "Account LedgerEntryType" do
+  @types [
+    :ACCOUNT,
+    :TRUSTLINE,
+    :OFFER,
+    :DATA,
+    :CLAIMABLE_BALANCE,
+    :LIQUIDITY_POOL,
+    :CONTRACT_DATA,
+    :CONTRACT_CODE,
+    :CONFIG_SETTING
+  ]
+
+  @binaries [
+    <<0, 0, 0, 0>>,
+    <<0, 0, 0, 1>>,
+    <<0, 0, 0, 2>>,
+    <<0, 0, 0, 3>>,
+    <<0, 0, 0, 4>>,
+    <<0, 0, 0, 5>>,
+    <<0, 0, 0, 6>>,
+    <<0, 0, 0, 7>>
+  ]
+
+  describe "LedgerEntryType" do
     setup do
       %{
-        binary: <<0, 0, 0, 0>>,
-        identifier: :ACCOUNT,
-        entry_type: LedgerEntryType.new(:ACCOUNT)
+        types: @types,
+        results: Enum.map(@types, &LedgerEntryType.new/1),
+        binaries: @binaries
       }
     end
 
-    test "new/1", %{identifier: type} do
-      %LedgerEntryType{identifier: ^type} = LedgerEntryType.new(type)
+    test "new/1", %{types: types} do
+      for type <- types,
+          do: %LedgerEntryType{identifier: ^type} = LedgerEntryType.new(type)
     end
 
-    test "encode_xdr/1", %{entry_type: entry_type, binary: binary} do
-      {:ok, ^binary} = LedgerEntryType.encode_xdr(entry_type)
+    test "encode_xdr/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, ^binary} = LedgerEntryType.encode_xdr(result)
     end
 
-    test "encode_xdr!/1", %{entry_type: entry_type, binary: binary} do
-      ^binary = LedgerEntryType.encode_xdr!(entry_type)
+    test "encode_xdr/1 with an invalid type" do
+      {:error, :invalid_key} = LedgerEntryType.encode_xdr(%LedgerEntryType{identifier: :TEST})
     end
 
-    test "decode_xdr/2", %{entry_type: entry_type, binary: binary} do
-      {:ok, {^entry_type, ""}} = LedgerEntryType.decode_xdr(binary)
+    test "encode_xdr!/1", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: ^binary = LedgerEntryType.encode_xdr!(result)
     end
 
-    test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = LedgerEntryType.decode_xdr(123)
+    test "decode_xdr/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {:ok, {^result, ""}} = LedgerEntryType.decode_xdr(binary)
     end
 
-    test "decode_xdr!/2", %{entry_type: entry_type, binary: binary} do
-      {^entry_type, ^binary} = LedgerEntryType.decode_xdr!(binary <> binary)
+    test "decode_xdr/2 with an invalid declaration" do
+      {:error, :invalid_key} = LedgerEntryType.decode_xdr(<<1, 0, 0, 1>>)
     end
 
-    test "invalid identifier" do
-      {:error, :invalid_key} =
-        LedgerEntryType.encode_xdr(%LedgerEntryType{identifier: SECRET_KEY_TYPE_ED25519})
-    end
-  end
-
-  describe "TrustLine LedgerEntryType" do
-    setup do
-      %{
-        binary: <<0, 0, 0, 1>>,
-        identifier: :TRUSTLINE,
-        entry_type: LedgerEntryType.new(:TRUSTLINE)
-      }
+    test "decode_xdr!/2", %{results: results, binaries: binaries} do
+      for {result, binary} <- Enum.zip(results, binaries),
+          do: {^result, ^binary} = LedgerEntryType.decode_xdr!(binary <> binary)
     end
 
-    test "new/1", %{identifier: type} do
-      %LedgerEntryType{identifier: ^type} = LedgerEntryType.new(type)
-    end
-
-    test "encode_xdr/1", %{entry_type: entry_type, binary: binary} do
-      {:ok, ^binary} = LedgerEntryType.encode_xdr(entry_type)
-    end
-
-    test "encode_xdr!/1", %{entry_type: entry_type, binary: binary} do
-      ^binary = LedgerEntryType.encode_xdr!(entry_type)
-    end
-
-    test "decode_xdr/2", %{entry_type: entry_type, binary: binary} do
-      {:ok, {^entry_type, ""}} = LedgerEntryType.decode_xdr(binary)
-    end
-
-    test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = LedgerEntryType.decode_xdr(123)
-    end
-
-    test "decode_xdr!/2", %{entry_type: entry_type, binary: binary} do
-      {^entry_type, ^binary} = LedgerEntryType.decode_xdr!(binary <> binary)
-    end
-
-    test "invalid identifier" do
-      {:error, :invalid_key} =
-        LedgerEntryType.encode_xdr(%LedgerEntryType{identifier: SECRET_KEY_TYPE_ED25519})
-    end
-  end
-
-  describe "Offer LedgerEntryType" do
-    setup do
-      %{
-        binary: <<0, 0, 0, 2>>,
-        identifier: :OFFER,
-        entry_type: LedgerEntryType.new(:OFFER)
-      }
-    end
-
-    test "new/1", %{identifier: type} do
-      %LedgerEntryType{identifier: ^type} = LedgerEntryType.new(type)
-    end
-
-    test "encode_xdr/1", %{entry_type: entry_type, binary: binary} do
-      {:ok, ^binary} = LedgerEntryType.encode_xdr(entry_type)
-    end
-
-    test "encode_xdr!/1", %{entry_type: entry_type, binary: binary} do
-      ^binary = LedgerEntryType.encode_xdr!(entry_type)
-    end
-
-    test "decode_xdr/2", %{entry_type: entry_type, binary: binary} do
-      {:ok, {^entry_type, ""}} = LedgerEntryType.decode_xdr(binary)
-    end
-
-    test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = LedgerEntryType.decode_xdr(123)
-    end
-
-    test "decode_xdr!/2", %{entry_type: entry_type, binary: binary} do
-      {^entry_type, ^binary} = LedgerEntryType.decode_xdr!(binary <> binary)
-    end
-
-    test "invalid identifier" do
-      {:error, :invalid_key} =
-        LedgerEntryType.encode_xdr(%LedgerEntryType{identifier: SECRET_KEY_TYPE_ED25519})
+    test "decode_xdr!/2 with an error type", %{binaries: binaries} do
+      for binary <- binaries,
+          do: {%LedgerEntryType{identifier: _}, ""} = LedgerEntryType.decode_xdr!(binary)
     end
   end
 end

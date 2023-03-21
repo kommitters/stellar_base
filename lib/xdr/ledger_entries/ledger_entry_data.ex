@@ -1,46 +1,47 @@
-defmodule StellarBase.XDR.LedgerKey do
+defmodule StellarBase.XDR.LedgerEntryData do
   @moduledoc """
-  Representation of Stellar `LedgerEntry` type.
+  Representation of Stellar `LedgerEntryData` type.
   """
 
-  alias StellarBase.XDR.LedgerEntryType
-
   alias StellarBase.XDR.{
-    Account,
-    TrustLine,
-    Offer,
-    Data,
+    AccountEntry,
+    TrustLineEntry,
+    OfferEntry,
+    DataEntry,
     ClaimableBalance,
     LiquidityPool,
-    ContractData,
-    ContractCode,
-    LedgerKeyConfigSetting
+    ContractDataEntry,
+    ContractCodeEntry,
+    ConfigSettingEntry,
+    ClaimableBalanceEntry,
+    LiquidityPoolEntry,
+    LedgerEntryType
   }
 
   @behaviour XDR.Declaration
 
   @arms [
-    ACCOUNT: Account,
-    TRUSTLINE: TrustLine,
-    OFFER: Offer,
-    DATA: Data,
+    ACCOUNT: AccountEntry,
+    TRUSTLINE: TrustLineEntry,
+    OFFER: OfferEntry,
+    DATA: DataEntry,
     CLAIMABLE_BALANCE: ClaimableBalance,
     LIQUIDITY_POOL: LiquidityPool,
-    CONTRACT_DATA: ContractData,
-    CONTRACT_CODE: ContractCode,
-    CONFIG_SETTING: LedgerKeyConfigSetting
+    CONTRACT_DATA: ContractDataEntry,
+    CONTRACT_CODE: ContractCodeEntry,
+    CONFIG_SETTING: ConfigSettingEntry
   ]
 
   @type entry ::
-          Account.t()
-          | TrustLine.t()
-          | Offer.t()
-          | Data.t()
-          | ClaimableBalance.t()
-          | LiquidityPool.t()
-          | ContractData.t()
-          | ContractCode.t()
-          | LedgerKeyConfigSetting.t()
+          AccountEntry.t()
+          | TrustLineEntry.t()
+          | OfferEntry.t()
+          | DataEntry.t()
+          | ClaimableBalanceEntry.t()
+          | LiquidityPoolEntry.t()
+          | ContractDataEntry.t()
+          | ContractCodeEntry.t()
+          | ConfigSettingEntry.t()
 
   @type t :: %__MODULE__{entry: entry(), type: LedgerEntryType.t()}
 
