@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SCSpecTypeDef1 do
+defmodule StellarBase.XDR.SCSpecTypeDefList12 do
   @moduledoc """
   Representation of a Stellar `SCSpecTypeDef` list.
   """
@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.SCSpecTypeDef1 do
 
   @behaviour XDR.Declaration
 
-  @max_length 1
+  @max_length 12
 
   @array_type SCSpecTypeDef
 

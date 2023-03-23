@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.SCEnvMetaEntryTest do
     end
 
     test "new/1", %{entry: entry, meta_entry_kind: meta_entry_kind} do
-      %SCEnvMetaEntry{entry: ^entry, type: ^meta_entry_kind} =
+      %SCEnvMetaEntry{entry: ^entry, kind: ^meta_entry_kind} =
         SCEnvMetaEntry.new(entry, meta_entry_kind)
     end
 

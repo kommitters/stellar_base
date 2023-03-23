@@ -13,23 +13,23 @@ defmodule StellarBase.XDR.SCEnvMetaEntry do
 
   @type entry :: UInt64.t()
 
-  @type t :: %__MODULE__{entry: entry(), type: SCEnvMetaKind.t()}
+  @type t :: %__MODULE__{entry: entry(), kind: SCEnvMetaKind.t()}
 
-  defstruct [:entry, :type]
+  defstruct [:entry, :kind]
 
-  @spec new(entry :: entry(), type :: SCEnvMetaKind.t()) :: t()
-  def new(entry, %SCEnvMetaKind{} = type), do: %__MODULE__{entry: entry, type: type}
+  @spec new(entry :: entry(), kind :: SCEnvMetaKind.t()) :: t()
+  def new(entry, %SCEnvMetaKind{} = kind), do: %__MODULE__{entry: entry, kind: kind}
 
   @impl true
-  def encode_xdr(%__MODULE__{entry: entry, type: type}) do
-    type
+  def encode_xdr(%__MODULE__{entry: entry, kind: kind}) do
+    kind
     |> XDR.Union.new(@arms, entry)
     |> XDR.Union.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{entry: entry, type: type}) do
-    type
+  def encode_xdr!(%__MODULE__{entry: entry, kind: kind}) do
+    kind
     |> XDR.Union.new(@arms, entry)
     |> XDR.Union.encode_xdr!()
   end
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.SCEnvMetaEntry do
 
   def decode_xdr(bytes, spec) do
     case XDR.Union.decode_xdr(bytes, spec) do
-      {:ok, {{type, entry}, rest}} -> {:ok, {new(entry, type), rest}}
+      {:ok, {{kind, entry}, rest}} -> {:ok, {new(entry, kind), rest}}
       error -> error
     end
   end
@@ -48,8 +48,8 @@ defmodule StellarBase.XDR.SCEnvMetaEntry do
   def decode_xdr!(bytes, spec \\ union_spec())
 
   def decode_xdr!(bytes, spec) do
-    {{type, entry}, rest} = XDR.Union.decode_xdr!(bytes, spec)
-    {new(entry, type), rest}
+    {{kind, entry}, rest} = XDR.Union.decode_xdr!(bytes, spec)
+    {new(entry, kind), rest}
   end
 
   @spec union_spec() :: XDR.Union.t()

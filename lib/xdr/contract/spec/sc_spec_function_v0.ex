@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SCSpecFunctionV0 do
   Representation of Stellar `SCSpecFunctionV0` type.
   """
 
-  alias StellarBase.XDR.{SCSpecTypeDef1, String1024, SCSymbol, SCSpecFunctionInputV0List}
+  alias StellarBase.XDR.{SCSpecTypeDefList1, String1024, SCSymbol, SCSpecFunctionInputV0List}
 
   @behaviour XDR.Declaration
 
@@ -11,13 +11,13 @@ defmodule StellarBase.XDR.SCSpecFunctionV0 do
                  doc: String1024,
                  name: SCSymbol,
                  inputs: SCSpecFunctionInputV0List,
-                 outputs: SCSpecTypeDef1
+                 outputs: SCSpecTypeDefList1
                )
 
   @type doc :: String1024.t()
   @type name :: SCSymbol.t()
   @type inputs :: SCSpecFunctionInputV0List.t()
-  @type outputs :: SCSpecTypeDef1.t()
+  @type outputs :: SCSpecTypeDefList1.t()
 
   @type t :: %__MODULE__{
           doc: doc(),
@@ -28,12 +28,12 @@ defmodule StellarBase.XDR.SCSpecFunctionV0 do
 
   defstruct [:doc, :name, :inputs, :outputs]
 
-  @spec new(doc :: doc(), name :: name(), inputs :: inputs(), outputs: outputs()) :: t()
+  @spec new(doc :: doc(), name :: name(), inputs :: inputs(), outputs :: outputs()) :: t()
   def new(
         %String1024{} = doc,
         %SCSymbol{} = name,
         %SCSpecFunctionInputV0List{} = inputs,
-        %SCSpecTypeDef1{} = outputs
+        %SCSpecTypeDefList1{} = outputs
       ),
       do: %__MODULE__{doc: doc, name: name, inputs: inputs, outputs: outputs}
 

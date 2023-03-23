@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.SCSpecTypeTupleTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{SCSpecType, SCSpecTypeDef, SCSpecTypeTuple, SCSpecTypeDef12, Void}
+  alias StellarBase.XDR.{SCSpecType, SCSpecTypeDef, SCSpecTypeTuple, SCSpecTypeDefList12, Void}
 
   describe "SCSpecTypeTuple" do
     setup do
@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.SCSpecTypeTupleTest do
       sc_spec_type_def_1 = SCSpecTypeDef.new(code, type_val)
       sc_spec_type_def_2 = SCSpecTypeDef.new(code, type_u128)
 
-      value_types = SCSpecTypeDef12.new([sc_spec_type_def_1, sc_spec_type_def_2])
+      value_types = SCSpecTypeDefList12.new([sc_spec_type_def_1, sc_spec_type_def_2])
 
       %{
         value_types: value_types,

@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.SCSpecFunctionV0Test do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    SCSpecTypeDef1,
+    SCSpecTypeDefList1,
     String1024,
     SCSymbol,
     SCSpecFunctionInputV0List,
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.SCSpecFunctionV0Test do
         ])
 
       outputs =
-        SCSpecTypeDef1.new([
+        SCSpecTypeDefList1.new([
           type
         ])
 

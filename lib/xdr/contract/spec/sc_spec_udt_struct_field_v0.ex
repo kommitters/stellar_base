@@ -1,25 +1,33 @@
-defmodule StellarBase.XDR.SCSpecUDTUnionCaseTupleV0 do
+defmodule StellarBase.XDR.SCSpecUDTStructFieldV0 do
   @moduledoc """
-  Representation of Stellar `SCSpecUDTUnionCaseTupleV0` type.
+  Representation of Stellar `SCSpecUDTStructFieldV0` type.
   """
 
-  alias StellarBase.XDR.{SCSpecTypeDefList12, String60, String1024}
+  alias StellarBase.XDR.{String1024, String30, SCSpecTypeDef}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(doc: String1024, name: String60, type: SCSpecTypeDefList12)
+  @struct_spec XDR.Struct.new(
+                 doc: String1024,
+                 name: String30,
+                 type: SCSpecTypeDef
+               )
 
   @type doc :: String1024.t()
-  @type name :: String60.t()
-  @type type :: SCSpecTypeDefList12.t()
+  @type name :: String30.t()
+  @type type :: SCSpecTypeDef.t()
 
   @type t :: %__MODULE__{doc: doc(), name: name(), type: type()}
 
   defstruct [:doc, :name, :type]
 
   @spec new(doc :: doc(), name :: name(), type :: type()) :: t()
-  def new(%String1024{} = doc, %String60{} = name, %SCSpecTypeDefList12{} = type),
-    do: %__MODULE__{doc: doc, name: name, type: type}
+  def new(
+        %String1024{} = doc,
+        %String30{} = name,
+        %SCSpecTypeDef{} = type
+      ),
+      do: %__MODULE__{doc: doc, name: name, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{doc: doc, name: name, type: type}) do
