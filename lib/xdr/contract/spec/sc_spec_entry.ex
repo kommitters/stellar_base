@@ -1,6 +1,6 @@
 defmodule StellarBase.XDR.SCSpecEntry do
   @moduledoc """
-  Representation of Stellar `SCSpecEntry` kind.
+  Representation of Stellar `SCSpecEntry` type.
   """
 
   alias StellarBase.XDR.{

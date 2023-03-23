@@ -1,6 +1,6 @@
 defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0 do
   @moduledoc """
-  Representation of Stellar `SCSpecUDTUnionCaseV0` kind.
+  Representation of Stellar `SCSpecUDTUnionCaseV0` type.
   """
 
   alias StellarBase.XDR.{
@@ -16,9 +16,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0 do
     SC_SPEC_UDT_UNION_CASE_TUPLE_V0: SCSpecUDTUnionCaseTupleV0
   ]
 
-  @type code ::
-          SCSpecUDTUnionCaseVoidV0.t()
-          | SCSpecUDTUnionCaseTupleV0.t()
+  @type code :: SCSpecUDTUnionCaseVoidV0.t() | SCSpecUDTUnionCaseTupleV0.t()
 
   @type kind :: SCSpecUDTUnionCaseV0Kind.t()
 

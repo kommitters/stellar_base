@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SCSpecUDTUnionCaseV050 do
+defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0List do
   @moduledoc """
   Representation of a Stellar `SCSpecUDTUnionCaseV0` list.
   """

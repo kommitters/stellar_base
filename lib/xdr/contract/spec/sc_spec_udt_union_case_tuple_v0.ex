@@ -3,22 +3,22 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseTupleV0 do
   Representation of Stellar `SCSpecUDTUnionCaseTupleV0` type.
   """
 
-  alias StellarBase.XDR.{SCSpecTypeDef12, String60, String1024}
+  alias StellarBase.XDR.{SCSpecTypeDefList12, String60, String1024}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(doc: String1024, name: String60, type: SCSpecTypeDef12)
+  @struct_spec XDR.Struct.new(doc: String1024, name: String60, type: SCSpecTypeDefList12)
 
   @type doc :: String1024.t()
   @type name :: String60.t()
-  @type type :: SCSpecTypeDef12.t()
+  @type type :: SCSpecTypeDefList12.t()
 
   @type t :: %__MODULE__{doc: doc(), name: name(), type: type()}
 
   defstruct [:doc, :name, :type]
 
   @spec new(doc :: doc(), name :: name(), type :: type()) :: t()
-  def new(%String1024{} = doc, %String60{} = name, %SCSpecTypeDef12{} = type),
+  def new(%String1024{} = doc, %String60{} = name, %SCSpecTypeDefList12{} = type),
     do: %__MODULE__{doc: doc, name: name, type: type}
 
   @impl true

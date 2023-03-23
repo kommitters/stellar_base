@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.SCSpecUDTStructV0Test do
     String60,
     String30,
     String80,
-    SCSpecUDTStructFieldV040,
+    SCSpecUDTStructFieldV0List,
     SCSpecUDTStructFieldV0,
     SCSpecUDTStructV0,
     SCSpecType,
@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.SCSpecUDTStructV0Test do
       field = SCSpecUDTStructFieldV0.new(doc, name_udt_struct_field, type)
       udt_struct_fields = [field, field]
 
-      fields = SCSpecUDTStructFieldV040.new(udt_struct_fields)
+      fields = SCSpecUDTStructFieldV0List.new(udt_struct_fields)
 
       %{
         doc: doc,

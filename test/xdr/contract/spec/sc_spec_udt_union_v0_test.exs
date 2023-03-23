@@ -5,7 +5,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionV0Test do
     String1024,
     String60,
     String80,
-    SCSpecUDTUnionCaseV050,
+    SCSpecUDTUnionCaseV0List,
     SCSpecUDTUnionCaseVoidV0,
     SCSpecUDTUnionCaseV0Kind,
     SCSpecUDTUnionCaseV0,
@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionV0Test do
       udt_union_case = SCSpecUDTUnionCaseV0.new(code, kind)
       udt_union_cases = [udt_union_case, udt_union_case]
 
-      cases = SCSpecUDTUnionCaseV050.new(udt_union_cases)
+      cases = SCSpecUDTUnionCaseV0List.new(udt_union_cases)
 
       %{
         doc: doc,

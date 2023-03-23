@@ -9,7 +9,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0Test do
     String1024,
     String60,
     Void,
-    SCSpecTypeDef12,
+    SCSpecTypeDefList12,
     SCSpecTypeDef,
     SCSpecType
   }
@@ -24,7 +24,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0Test do
       sc_spec_type_def1 = SCSpecTypeDef.new(code, type_val)
       sc_spec_type_def2 = SCSpecTypeDef.new(code, type_u128)
 
-      type = SCSpecTypeDef12.new([sc_spec_type_def1, sc_spec_type_def2])
+      type = SCSpecTypeDefList12.new([sc_spec_type_def1, sc_spec_type_def2])
 
       discriminants = [
         %{

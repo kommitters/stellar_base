@@ -3,20 +3,20 @@ defmodule StellarBase.XDR.SCSpecTypeTuple do
   Representation of Stellar `SCSpecTypeTuple` type.
   """
 
-  alias StellarBase.XDR.SCSpecTypeDef12
+  alias StellarBase.XDR.SCSpecTypeDefList12
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(value_types: SCSpecTypeDef12)
+  @struct_spec XDR.Struct.new(value_types: SCSpecTypeDefList12)
 
-  @type value_types :: SCSpecTypeDef12.t()
+  @type value_types :: SCSpecTypeDefList12.t()
 
   @type t :: %__MODULE__{value_types: value_types()}
 
   defstruct [:value_types]
 
   @spec new(value_types :: value_types()) :: t()
-  def new(%SCSpecTypeDef12{} = value_types),
+  def new(%SCSpecTypeDefList12{} = value_types),
     do: %__MODULE__{value_types: value_types}
 
   @impl true

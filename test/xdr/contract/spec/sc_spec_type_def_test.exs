@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
     SCSpecTypeUDT,
     SCSpecTypeOption,
     SCSpecTypeResult,
-    SCSpecTypeDef12,
+    SCSpecTypeDefList12,
     UInt32,
     Void,
     String60
@@ -131,7 +131,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
         },
         %{
           sc_code:
-            SCSpecTypeDef12.new([
+            SCSpecTypeDefList12.new([
               sc_spec_type_def_1,
               sc_spec_type_def_2
             ])

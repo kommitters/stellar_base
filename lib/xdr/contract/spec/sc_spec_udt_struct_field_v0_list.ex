@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SCSpecUDTStructFieldV040 do
+defmodule StellarBase.XDR.SCSpecUDTStructFieldV0List do
   @moduledoc """
   Representation of a Stellar `SCSpecUDTStructFieldV0` list.
   """

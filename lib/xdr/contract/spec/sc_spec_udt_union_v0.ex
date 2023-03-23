@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionV0 do
   Representation of Stellar `SCSpecUDTUnionV0` type.
   """
 
-  alias StellarBase.XDR.{String80, String1024, String60, SCSpecUDTUnionCaseV050}
+  alias StellarBase.XDR.{String80, String1024, String60, SCSpecUDTUnionCaseV0List}
 
   @behaviour XDR.Declaration
 
@@ -11,13 +11,13 @@ defmodule StellarBase.XDR.SCSpecUDTUnionV0 do
                  doc: String1024,
                  lib: String80,
                  name: String60,
-                 cases: SCSpecUDTUnionCaseV050
+                 cases: SCSpecUDTUnionCaseV0List
                )
 
   @type doc :: String1024.t()
   @type lib :: String80.t()
   @type name :: String60.t()
-  @type cases :: SCSpecUDTUnionCaseV050.t()
+  @type cases :: SCSpecUDTUnionCaseV0List.t()
 
   @type t :: %__MODULE__{doc: doc(), lib: lib(), name: name(), cases: cases()}
 
@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionV0 do
         %String1024{} = doc,
         %String80{} = lib,
         %String60{} = name,
-        %SCSpecUDTUnionCaseV050{} = cases
+        %SCSpecUDTUnionCaseV0List{} = cases
       ),
       do: %__MODULE__{doc: doc, lib: lib, name: name, cases: cases}
 
