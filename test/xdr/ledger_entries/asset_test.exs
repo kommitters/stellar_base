@@ -33,10 +33,7 @@ defmodule StellarBase.XDR.AssetTest do
     setup %{issuer: issuer} do
       asset_type = AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4)
 
-      alpha_num4 =
-        "BTCN"
-        |> AssetCode4.new()
-        |> AlphaNum4.new(issuer)
+      alpha_num4 = "BTCN" |> AssetCode4.new() |> AlphaNum4.new(issuer)
 
       %{
         alpha_num4: alpha_num4,
