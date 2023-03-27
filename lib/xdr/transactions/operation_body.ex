@@ -27,7 +27,8 @@ defmodule StellarBase.XDR.OperationBody do
     ClawbackClaimableBalance,
     SetTrustLineFlags,
     LiquidityPoolDeposit,
-    LiquidityPoolWithdraw
+    LiquidityPoolWithdraw,
+    InvokeHostFunctionOp
   }
 
   @behaviour XDR.Declaration
@@ -56,7 +57,8 @@ defmodule StellarBase.XDR.OperationBody do
     CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
     SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
     LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
-    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
+    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw,
+    INVOKE_HOST_FUNCTION: InvokeHostFunctionOp
   ]
 
   @type operation :: any()
