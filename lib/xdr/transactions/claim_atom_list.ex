@@ -6,9 +6,11 @@ defmodule StellarBase.XDR.ClaimAtomList do
 
   @behaviour XDR.Declaration
 
+  @max_length 4_294_967_295
+
   @array_type ClaimAtom
 
-  @array_spec %{type: @array_type}
+  @array_spec %{type: @array_type, max_length: @max_length}
 
   @type t :: %__MODULE__{offers: list(ClaimAtom.t())}
 
@@ -20,14 +22,14 @@ defmodule StellarBase.XDR.ClaimAtomList do
   @impl true
   def encode_xdr(%__MODULE__{offers: offers}) do
     offers
-    |> XDR.VariableArray.new(@array_type)
+    |> XDR.VariableArray.new(@array_type, @max_length)
     |> XDR.VariableArray.encode_xdr()
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{offers: offers}) do
     offers
-    |> XDR.VariableArray.new(@array_type)
+    |> XDR.VariableArray.new(@array_type, @max_length)
     |> XDR.VariableArray.encode_xdr!()
   end
 
