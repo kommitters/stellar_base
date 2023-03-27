@@ -3,9 +3,6 @@ defmodule StellarBase.XDR.ContractIDTest do
 
   alias StellarBase.XDR.{
     Asset,
-    ContractIDPublicKey,
-    ContractPublicKey,
-    ContractIDPublicKeyType,
     ContractIDType,
     ContractID,
     UInt256,
@@ -15,7 +12,7 @@ defmodule StellarBase.XDR.ContractIDTest do
     AssetCode4,
     AlphaNum4,
     Signature,
-    Ed25519KeyWithSignature,
+    FromEd25519PublicKey,
     PublicKeyType
   }
 
@@ -39,41 +36,54 @@ defmodule StellarBase.XDR.ContractIDTest do
 
       asset = Asset.new(alpha_num4, asset_type)
 
-      ## ContractPublicKey
+      ## FromEd25519PublicKey
       key =
         "GCVILYTXYXYHZIBYEF4BSLATAP3CPZMW23NE6DUL7I6LCCDUNFBQFAVR"
         |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
       signature = Signature.new("SAPVVUQ2G755KGQOOY5A3AGTMWCCQQTJMGSXAUKMFT45OFCL7NCSTRWI")
-      ed25519_key_with_signature = Ed25519KeyWithSignature.new(signature, key)
-      contract_id_public_key_type = ContractIDPublicKeyType.new(:CONTRACT_ID_PUBLIC_KEY_ED25519)
+      salt =
+        UInt256.new(
+          <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
+            108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+        )
+      from_ed25519_public_key = FromEd25519PublicKey.new(key, signature, salt)
 
-      contract_id_public_key =
-        ContractIDPublicKey.new(ed25519_key_with_signature, contract_id_public_key_type)
-
-      contract_public_key = ContractPublicKey.new(contract_id_public_key, key)
+      ##Uint256
+      salt_case =
+        "GCJCFK7GZEOXVAWWOWYFTR5C5IZAQBYV5HIJUGVZPUBDJNRFVXXZEHHV"
+        |> StrKey.decode!(:ed25519_public_key)
+        |> UInt256.new()
 
       discriminants = [
         %{
-          contract_id_type: ContractIDType.new(:CONTRACT_ID_FROM_PUBLIC_KEY),
-          contract_id: contract_public_key,
+          contract_id_type: ContractIDType.new(:CONTRACT_ID_FROM_SOURCE_ACCOUNT),
+          contract_id: salt_case,
           binary:
-            <<0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 56, 83, 65, 80, 86, 86, 85, 81, 50, 71, 55, 53, 53,
-              75, 71, 81, 79, 79, 89, 53, 65, 51, 65, 71, 84, 77, 87, 67, 67, 81, 81, 84, 74, 77,
-              71, 83, 88, 65, 85, 75, 77, 70, 84, 52, 53, 79, 70, 67, 76, 55, 78, 67, 83, 84, 82,
-              87, 73, 170, 133, 226, 119, 197, 240, 124, 160, 56, 33, 120, 25, 44, 19, 3, 246, 39,
-              229, 150, 214, 218, 79, 14, 139, 250, 60, 177, 8, 116, 105, 67, 2, 170, 133, 226,
-              119, 197, 240, 124, 160, 56, 33, 120, 25, 44, 19, 3, 246, 39, 229, 150, 214, 218,
-              79, 14, 139, 250, 60, 177, 8, 116, 105, 67, 2>>
+            <<0, 0, 0, 0, 146, 34, 171, 230, 201, 29, 122, 130, 214, 117, 176, 89, 199,
+              162, 234, 50, 8, 7, 21, 233, 208, 154, 26, 185, 125, 2, 52, 182, 37, 173,
+              239, 146>>
+        },
+        %{
+          contract_id_type: ContractIDType.new(:CONTRACT_ID_FROM_ED25519_PUBLIC_KEY),
+          contract_id: from_ed25519_public_key,
+          binary:
+            <<0, 0, 0, 1, 170, 133, 226, 119, 197, 240, 124, 160, 56, 33, 120, 25, 44, 19,
+              3, 246, 39, 229, 150, 214, 218, 79, 14, 139, 250, 60, 177, 8, 116, 105, 67,
+              2, 0, 0, 0, 56, 83, 65, 80, 86, 86, 85, 81, 50, 71, 55, 53, 53, 75, 71, 81,
+              79, 79, 89, 53, 65, 51, 65, 71, 84, 77, 87, 67, 67, 81, 81, 84, 74, 77, 71,
+              83, 88, 65, 85, 75, 77, 70, 84, 52, 53, 79, 70, 67, 76, 55, 78, 67, 83, 84,
+              82, 87, 73, 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1,
+              0, 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
         },
         %{
           contract_id_type: ContractIDType.new(:CONTRACT_ID_FROM_ASSET),
           contract_id: asset,
           binary:
-            <<0, 0, 0, 1, 0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85,
-              29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117,
-              165, 56, 34, 114, 247, 89, 216>>
+            <<0, 0, 0, 2, 0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0, 155, 142, 186, 248, 150,
+              56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179,
+              214, 155, 117, 165, 56, 34, 114, 247, 89, 216>>
         }
       ]
 

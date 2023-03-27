@@ -6,8 +6,9 @@ defmodule StellarBase.XDR.ContractIDType do
   @behaviour XDR.Declaration
 
   @declarations [
-    CONTRACT_ID_FROM_PUBLIC_KEY: 0,
-    CONTRACT_ID_FROM_ASSET: 1
+    CONTRACT_ID_FROM_SOURCE_ACCOUNT: 0,
+    CONTRACT_ID_FROM_ED25519_PUBLIC_KEY: 1,
+    CONTRACT_ID_FROM_ASSET: 2
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}
@@ -17,7 +18,7 @@ defmodule StellarBase.XDR.ContractIDType do
   defstruct [:identifier]
 
   @spec new(type :: atom()) :: t()
-  def new(type \\ :CONTRACT_ID_FROM_PUBLIC_KEY), do: %__MODULE__{identifier: type}
+  def new(type \\ :CONTRACT_ID_FROM_SOURCE_ACCOUNT), do: %__MODULE__{identifier: type}
 
   @impl true
   def encode_xdr(%__MODULE__{identifier: type}) do

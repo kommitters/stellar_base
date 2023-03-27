@@ -1,49 +1,55 @@
-defmodule StellarBase.XDR.Ed25519KeyWithSignature do
+defmodule StellarBase.XDR.FromEd25519PublicKey do
   @moduledoc """
-  Representation of Stellar `Ed25519KeyWithSignature` type.
+  Representation of Stellar `FromEd25519PublicKey` type.
   """
   alias StellarBase.XDR.{Signature, UInt256}
 
   @behaviour XDR.Declaration
 
   @struct_spec XDR.Struct.new(
+                 key: UInt256,
                  signature: Signature,
-                 key: UInt256
+                 salt: UInt256
                )
 
   @type t :: %__MODULE__{
+          key: UInt256.t(),
           signature: Signature.t(),
-          key: UInt256.t()
+          salt: UInt256.t()
         }
 
-  defstruct [:signature, :key]
+  defstruct [:key, :signature, :salt]
 
   @spec new(
+          key :: UInt256.t(),
           signature :: Signature.t(),
-          key :: UInt256.t()
+          salt :: UInt256.t()
         ) :: t()
-  def new(%Signature{} = signature, %UInt256{} = key),
+  def new(%UInt256{} = key, %Signature{} = signature, %UInt256{} = salt),
     do: %__MODULE__{
+      key: key,
       signature: signature,
-      key: key
+      salt: salt
     }
 
   @impl true
   def encode_xdr(%__MODULE__{
+        key: key,
         signature: signature,
-        key: key
+        salt: salt
       }) do
-    [signature: signature, key: key]
+    [key: key, signature: signature, salt: salt]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{
+        key: key,
         signature: signature,
-        key: key
+        salt: salt
       }) do
-    [signature: signature, key: key]
+    [key: key, signature: signature, salt: salt]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -56,11 +62,12 @@ defmodule StellarBase.XDR.Ed25519KeyWithSignature do
       {:ok,
        {%XDR.Struct{
           components: [
+            key: key,
             signature: signature,
-            key: key
+            salt: salt
           ]
         }, rest}} ->
-        {:ok, {new(signature, key), rest}}
+        {:ok, {new(key, signature, salt), rest}}
 
       error ->
         error
@@ -73,11 +80,12 @@ defmodule StellarBase.XDR.Ed25519KeyWithSignature do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{
        components: [
+         key: key,
          signature: signature,
-         key: key
+         salt: salt
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(signature, key), rest}
+    {new(key, signature, salt), rest}
   end
 end

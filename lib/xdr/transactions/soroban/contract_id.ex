@@ -3,16 +3,17 @@ defmodule StellarBase.XDR.ContractID do
   Representation of Stellar `ContractID` type.
   """
 
-  alias StellarBase.XDR.{Asset, ContractPublicKey, ContractIDType}
+  alias StellarBase.XDR.{Asset, ContractIDType, UInt256, FromEd25519PublicKey}
 
   @behaviour XDR.Declaration
 
   @arms [
-    CONTRACT_ID_FROM_PUBLIC_KEY: ContractPublicKey,
+    CONTRACT_ID_FROM_SOURCE_ACCOUNT: UInt256,
+    CONTRACT_ID_FROM_ED25519_PUBLIC_KEY: FromEd25519PublicKey,
     CONTRACT_ID_FROM_ASSET: Asset
   ]
 
-  @type contract_id :: ContractPublicKey.t() | Asset.t()
+  @type contract_id :: UInt256.t() | Asset.t() | FromEd25519PublicKey.t()
 
   @type t :: %__MODULE__{contract_id: contract_id(), type: ContractIDType.t()}
 

@@ -6,9 +6,9 @@ defmodule StellarBase.XDR.ContractIDTypeTest do
   describe "ContractIDType" do
     setup do
       %{
-        binary: <<0, 0, 0, 1>>,
+        binary: <<0, 0, 0, 2>>,
         identifier: :CONTRACT_ID_FROM_ASSET,
-        default_identifier: :CONTRACT_ID_FROM_PUBLIC_KEY,
+        default_identifier: :CONTRACT_ID_FROM_SOURCE_ACCOUNT,
         xdr_type: ContractIDType.new(:CONTRACT_ID_FROM_ASSET)
       }
     end

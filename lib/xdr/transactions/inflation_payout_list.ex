@@ -6,11 +6,9 @@ defmodule StellarBase.XDR.InflationPayoutList do
 
   @behaviour XDR.Declaration
 
-  @max_length 100
-
   @array_type InflationPayout
 
-  @array_spec %{type: @array_type, max_length: @max_length}
+  @array_spec %{type: @array_type}
 
   @type t :: %__MODULE__{payouts: list(InflationPayout.t())}
 
@@ -22,14 +20,14 @@ defmodule StellarBase.XDR.InflationPayoutList do
   @impl true
   def encode_xdr(%__MODULE__{payouts: payouts}) do
     payouts
-    |> XDR.VariableArray.new(@array_type, @max_length)
+    |> XDR.VariableArray.new(@array_type)
     |> XDR.VariableArray.encode_xdr()
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{payouts: payouts}) do
     payouts
-    |> XDR.VariableArray.new(@array_type, @max_length)
+    |> XDR.VariableArray.new(@array_type)
     |> XDR.VariableArray.encode_xdr!()
   end
 
