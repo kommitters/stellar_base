@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.OperationInnerResult do
   @moduledoc """
   Representation of Stellar `OperationInnerResult` type.
   """
-  alias StellarBase.XDR.OperationType
+  alias StellarBase.XDR.{InvokeHostFunctionResult, OperationType}
 
   alias StellarBase.XDR.Operations.{
     AccountMergeResult,
@@ -56,7 +56,8 @@ defmodule StellarBase.XDR.OperationInnerResult do
     CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalanceResult,
     SET_TRUST_LINE_FLAGS: SetTrustLineFlagsResult,
     LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDepositResult,
-    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdrawResult
+    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdrawResult,
+    INVOKE_HOST_FUNCTION: InvokeHostFunctionResult
   ]
 
   @type t :: %__MODULE__{result: any(), type: OperationType.t()}
