@@ -1,16 +1,12 @@
-defmodule StellarBase.XDR.EnvelopeContractAuth do
+defmodule StellarBase.XDR.HashIDPreimageContractAuth do
   @moduledoc """
-  Representation of Stellar `EnvelopeContractAuth` type.
+  Representation of Stellar `HashIDPreimageContractAuth` type.
   """
   alias StellarBase.XDR.{Hash, UInt64, AuthorizedInvocation}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(
-                 network_id: Hash,
-                 nonce: UInt64,
-                 invocation: AuthorizedInvocation
-               )
+  @struct_spec XDR.Struct.new(network_id: Hash, nonce: UInt64, invocation: AuthorizedInvocation)
 
   @type t :: %__MODULE__{
           network_id: Hash.t(),
@@ -25,44 +21,19 @@ defmodule StellarBase.XDR.EnvelopeContractAuth do
           nonce :: UInt64.t(),
           invocation :: AuthorizedInvocation.t()
         ) :: t()
-  def new(
-        %Hash{} = network_id,
-        %UInt64{} = nonce,
-        %AuthorizedInvocation{} = invocation
-      ) do
-    %__MODULE__{
-      network_id: network_id,
-      nonce: nonce,
-      invocation: invocation
-    }
-  end
+  def new(%Hash{} = network_id, %UInt64{} = nonce, %AuthorizedInvocation{} = invocation),
+    do: %__MODULE__{network_id: network_id, nonce: nonce, invocation: invocation}
 
   @impl true
-  def encode_xdr(%__MODULE__{
-        network_id: network_id,
-        nonce: nonce,
-        invocation: invocation
-      }) do
-    [
-      network_id: network_id,
-      nonce: nonce,
-      invocation: invocation
-    ]
+  def encode_xdr(%__MODULE__{network_id: network_id, nonce: nonce, invocation: invocation}) do
+    [network_id: network_id, nonce: nonce, invocation: invocation]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{
-        network_id: network_id,
-        nonce: nonce,
-        invocation: invocation
-      }) do
-    [
-      network_id: network_id,
-      nonce: nonce,
-      invocation: invocation
-    ]
+  def encode_xdr!(%__MODULE__{network_id: network_id, nonce: nonce, invocation: invocation}) do
+    [network_id: network_id, nonce: nonce, invocation: invocation]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end

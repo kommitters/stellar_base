@@ -1,15 +1,15 @@
-defmodule StellarBase.XDR.EnvelopeCreateContractArgsTest do
+defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    EnvelopeCreateContractArgs,
+    HashIDPreimageCreateContractArgs,
     Hash,
     UInt256,
     SCContractCode,
     SCContractCodeType
   }
 
-  describe "EnvelopeCreateContractArgs" do
+  describe "HashIDPreimageCreateContractArgs" do
     setup do
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
@@ -27,7 +27,8 @@ defmodule StellarBase.XDR.EnvelopeCreateContractArgsTest do
         network_id: network_id,
         source: source,
         salt: salt,
-        source_contract_id: EnvelopeCreateContractArgs.new(network_id, source, salt),
+        hash_id_preimage_create_contract_args:
+          HashIDPreimageCreateContractArgs.new(network_id, source, salt),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83,
@@ -42,37 +43,47 @@ defmodule StellarBase.XDR.EnvelopeCreateContractArgsTest do
       source: source,
       salt: salt
     } do
-      %EnvelopeCreateContractArgs{
+      %HashIDPreimageCreateContractArgs{
         network_id: ^network_id,
         source: ^source,
         salt: ^salt
-      } = EnvelopeCreateContractArgs.new(network_id, source, salt)
+      } = HashIDPreimageCreateContractArgs.new(network_id, source, salt)
     end
 
-    test "encode_xdr/1", %{source_contract_id: source_contract_id, binary: binary} do
-      {:ok, ^binary} = EnvelopeCreateContractArgs.encode_xdr(source_contract_id)
+    test "encode_xdr/1", %{
+      hash_id_preimage_create_contract_args: hash_id_preimage_create_contract_args,
+      binary: binary
+    } do
+      {:ok, ^binary} =
+        HashIDPreimageCreateContractArgs.encode_xdr(hash_id_preimage_create_contract_args)
     end
 
     test "encode_xdr!/1", %{
-      source_contract_id: source_contract_id,
+      hash_id_preimage_create_contract_args: hash_id_preimage_create_contract_args,
       binary: binary
     } do
-      ^binary = EnvelopeCreateContractArgs.encode_xdr!(source_contract_id)
+      ^binary =
+        HashIDPreimageCreateContractArgs.encode_xdr!(hash_id_preimage_create_contract_args)
     end
 
-    test "decode_xdr/2", %{source_contract_id: source_contract_id, binary: binary} do
-      {:ok, {^source_contract_id, ""}} = EnvelopeCreateContractArgs.decode_xdr(binary)
+    test "decode_xdr/2", %{
+      hash_id_preimage_create_contract_args: hash_id_preimage_create_contract_args,
+      binary: binary
+    } do
+      {:ok, {^hash_id_preimage_create_contract_args, ""}} =
+        HashIDPreimageCreateContractArgs.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = EnvelopeCreateContractArgs.decode_xdr(123)
+      {:error, :not_binary} = HashIDPreimageCreateContractArgs.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
-      source_contract_id: source_contract_id,
+      hash_id_preimage_create_contract_args: hash_id_preimage_create_contract_args,
       binary: binary
     } do
-      {^source_contract_id, ""} = EnvelopeCreateContractArgs.decode_xdr!(binary)
+      {^hash_id_preimage_create_contract_args, ""} =
+        HashIDPreimageCreateContractArgs.decode_xdr!(binary)
     end
   end
 end

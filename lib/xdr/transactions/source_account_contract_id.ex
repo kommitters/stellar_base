@@ -6,63 +6,26 @@ defmodule StellarBase.XDR.SourceAccountContractID do
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(
-                 network_id: Hash,
-                 source_account: AccountID,
-                 salt: UInt256
-               )
+  @struct_spec XDR.Struct.new(network_id: Hash, source_account: AccountID, salt: UInt256)
 
-  @type t :: %__MODULE__{
-          network_id: Hash.t(),
-          source_account: AccountID.t(),
-          salt: UInt256.t()
-        }
+  @type t :: %__MODULE__{network_id: Hash.t(), source_account: AccountID.t(), salt: UInt256.t()}
 
   defstruct [:network_id, :source_account, :salt]
 
-  @spec new(
-          network_id :: Hash.t(),
-          source_account :: AccountID.t(),
-          salt :: UInt256.t()
-        ) :: t()
-  def new(
-        %Hash{} = network_id,
-        %AccountID{} = source_account,
-        %UInt256{} = salt
-      ) do
-    %__MODULE__{
-      network_id: network_id,
-      source_account: source_account,
-      salt: salt
-    }
-  end
+  @spec new(network_id :: Hash.t(), source_account :: AccountID.t(), salt :: UInt256.t()) :: t()
+  def new(%Hash{} = network_id, %AccountID{} = source_account, %UInt256{} = salt),
+    do: %__MODULE__{network_id: network_id, source_account: source_account, salt: salt}
 
   @impl true
-  def encode_xdr(%__MODULE__{
-        network_id: network_id,
-        source_account: source_account,
-        salt: salt
-      }) do
-    [
-      network_id: network_id,
-      source_account: source_account,
-      salt: salt
-    ]
+  def encode_xdr(%__MODULE__{network_id: network_id, source_account: source_account, salt: salt}) do
+    [network_id: network_id, source_account: source_account, salt: salt]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{
-        network_id: network_id,
-        source_account: source_account,
-        salt: salt
-      }) do
-    [
-      network_id: network_id,
-      source_account: source_account,
-      salt: salt
-    ]
+  def encode_xdr!(%__MODULE__{network_id: network_id, source_account: source_account, salt: salt}) do
+    [network_id: network_id, source_account: source_account, salt: salt]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end

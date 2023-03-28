@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.EnvelopeContractAuthTest do
+defmodule StellarBase.XDR.HashIDPreimageContractAuthTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    EnvelopeContractAuth,
+    HashIDPreimageContractAuth,
     Hash,
     UInt64,
     AuthorizedInvocation,
@@ -14,7 +14,7 @@ defmodule StellarBase.XDR.EnvelopeContractAuthTest do
     Int64
   }
 
-  describe "EnvelopeContractAuth" do
+  describe "HashIDPreimageContractAuth" do
     setup do
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
@@ -48,7 +48,8 @@ defmodule StellarBase.XDR.EnvelopeContractAuthTest do
         network_id: network_id,
         nonce: nonce,
         invocation: invocation,
-        envelope_contract_auth: EnvelopeContractAuth.new(network_id, nonce, invocation),
+        hash_id_preimage_contract_auth:
+          HashIDPreimageContractAuth.new(network_id, nonce, invocation),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 255, 255, 255, 255, 255, 255, 255, 255,
@@ -73,37 +74,43 @@ defmodule StellarBase.XDR.EnvelopeContractAuthTest do
       nonce: nonce,
       invocation: invocation
     } do
-      %EnvelopeContractAuth{
+      %HashIDPreimageContractAuth{
         network_id: ^network_id,
         nonce: ^nonce,
         invocation: ^invocation
-      } = EnvelopeContractAuth.new(network_id, nonce, invocation)
+      } = HashIDPreimageContractAuth.new(network_id, nonce, invocation)
     end
 
-    test "encode_xdr/1", %{envelope_contract_auth: envelope_contract_auth, binary: binary} do
-      {:ok, ^binary} = EnvelopeContractAuth.encode_xdr(envelope_contract_auth)
+    test "encode_xdr/1", %{
+      hash_id_preimage_contract_auth: hash_id_preimage_contract_auth,
+      binary: binary
+    } do
+      {:ok, ^binary} = HashIDPreimageContractAuth.encode_xdr(hash_id_preimage_contract_auth)
     end
 
     test "encode_xdr!/1", %{
-      envelope_contract_auth: envelope_contract_auth,
+      hash_id_preimage_contract_auth: hash_id_preimage_contract_auth,
       binary: binary
     } do
-      ^binary = EnvelopeContractAuth.encode_xdr!(envelope_contract_auth)
+      ^binary = HashIDPreimageContractAuth.encode_xdr!(hash_id_preimage_contract_auth)
     end
 
-    test "decode_xdr/2", %{envelope_contract_auth: envelope_contract_auth, binary: binary} do
-      {:ok, {^envelope_contract_auth, ""}} = EnvelopeContractAuth.decode_xdr(binary)
+    test "decode_xdr/2", %{
+      hash_id_preimage_contract_auth: hash_id_preimage_contract_auth,
+      binary: binary
+    } do
+      {:ok, {^hash_id_preimage_contract_auth, ""}} = HashIDPreimageContractAuth.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = EnvelopeContractAuth.decode_xdr(123)
+      {:error, :not_binary} = HashIDPreimageContractAuth.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
-      envelope_contract_auth: envelope_contract_auth,
+      hash_id_preimage_contract_auth: hash_id_preimage_contract_auth,
       binary: binary
     } do
-      {^envelope_contract_auth, ""} = EnvelopeContractAuth.decode_xdr!(binary)
+      {^hash_id_preimage_contract_auth, ""} = HashIDPreimageContractAuth.decode_xdr!(binary)
     end
   end
 end

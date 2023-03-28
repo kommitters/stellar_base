@@ -6,63 +6,26 @@ defmodule StellarBase.XDR.StructContractID do
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(
-                 network_id: Hash,
-                 contract_id: Hash,
-                 salt: UInt256
-               )
+  @struct_spec XDR.Struct.new(network_id: Hash, contract_id: Hash, salt: UInt256)
 
-  @type t :: %__MODULE__{
-          network_id: Hash.t(),
-          contract_id: Hash.t(),
-          salt: UInt256.t()
-        }
+  @type t :: %__MODULE__{network_id: Hash.t(), contract_id: Hash.t(), salt: UInt256.t()}
 
   defstruct [:network_id, :contract_id, :salt]
 
-  @spec new(
-          network_id :: Hash.t(),
-          contract_id :: Hash.t(),
-          salt :: UInt256.t()
-        ) :: t()
-  def new(
-        %Hash{} = network_id,
-        %Hash{} = contract_id,
-        %UInt256{} = salt
-      ) do
-    %__MODULE__{
-      network_id: network_id,
-      contract_id: contract_id,
-      salt: salt
-    }
-  end
+  @spec new(network_id :: Hash.t(), contract_id :: Hash.t(), salt :: UInt256.t()) :: t()
+  def new(%Hash{} = network_id, %Hash{} = contract_id, %UInt256{} = salt),
+    do: %__MODULE__{network_id: network_id, contract_id: contract_id, salt: salt}
 
   @impl true
-  def encode_xdr(%__MODULE__{
-        network_id: network_id,
-        contract_id: contract_id,
-        salt: salt
-      }) do
-    [
-      network_id: network_id,
-      contract_id: contract_id,
-      salt: salt
-    ]
+  def encode_xdr(%__MODULE__{network_id: network_id, contract_id: contract_id, salt: salt}) do
+    [network_id: network_id, contract_id: contract_id, salt: salt]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{
-        network_id: network_id,
-        contract_id: contract_id,
-        salt: salt
-      }) do
-    [
-      network_id: network_id,
-      contract_id: contract_id,
-      salt: salt
-    ]
+  def encode_xdr!(%__MODULE__{network_id: network_id, contract_id: contract_id, salt: salt}) do
+    [network_id: network_id, contract_id: contract_id, salt: salt]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end

@@ -10,8 +10,8 @@ defmodule StellarBase.XDR.HashIDPreimage do
     StructContractID,
     FromAsset,
     SourceAccountContractID,
-    EnvelopeCreateContractArgs,
-    EnvelopeContractAuth
+    HashIDPreimageCreateContractArgs,
+    HashIDPreimageContractAuth
   }
 
   @behaviour XDR.Declaration
@@ -23,8 +23,8 @@ defmodule StellarBase.XDR.HashIDPreimage do
     ENVELOPE_TYPE_CONTRACT_ID_FROM_CONTRACT: StructContractID,
     ENVELOPE_TYPE_CONTRACT_ID_FROM_ASSET: FromAsset,
     ENVELOPE_TYPE_CONTRACT_ID_FROM_SOURCE_ACCOUNT: SourceAccountContractID,
-    ENVELOPE_TYPE_CREATE_CONTRACT_ARGS: EnvelopeCreateContractArgs,
-    ENVELOPE_TYPE_CONTRACT_AUTH: EnvelopeContractAuth
+    ENVELOPE_TYPE_CREATE_CONTRACT_ARGS: HashIDPreimageCreateContractArgs,
+    ENVELOPE_TYPE_CONTRACT_AUTH: HashIDPreimageContractAuth
   ]
 
   @type hash_id ::
@@ -34,8 +34,8 @@ defmodule StellarBase.XDR.HashIDPreimage do
           | StructContractID.t()
           | FromAsset.t()
           | SourceAccountContractID.t()
-          | EnvelopeCreateContractArgs.t()
-          | EnvelopeContractAuth.t()
+          | HashIDPreimageCreateContractArgs.t()
+          | HashIDPreimageContractAuth.t()
 
   @type t :: %__MODULE__{hash_id: hash_id(), type: EnvelopeType.t()}
 
