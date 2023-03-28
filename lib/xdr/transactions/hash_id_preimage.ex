@@ -2,16 +2,40 @@ defmodule StellarBase.XDR.HashIDPreimage do
   @moduledoc """
   Representation of Stellar `HashIDPreimage` type.
   """
-  alias StellarBase.XDR.{EnvelopeType, OperationID, RevokeID}
+  alias StellarBase.XDR.{
+    EnvelopeType,
+    OperationID,
+    RevokeID,
+    Ed25519ContractID,
+    StructContractID,
+    FromAsset,
+    SourceAccountContractID,
+    EnvelopeCreateContractArgs,
+    EnvelopeContractAuth
+  }
 
   @behaviour XDR.Declaration
 
   @arms [
     ENVELOPE_TYPE_OP_ID: OperationID,
-    ENVELOPE_TYPE_POOL_REVOKE_OP_ID: RevokeID
+    ENVELOPE_TYPE_POOL_REVOKE_OP_ID: RevokeID,
+    ENVELOPE_TYPE_CONTRACT_ID_FROM_ED25519: Ed25519ContractID,
+    ENVELOPE_TYPE_CONTRACT_ID_FROM_CONTRACT: StructContractID,
+    ENVELOPE_TYPE_CONTRACT_ID_FROM_ASSET: FromAsset,
+    ENVELOPE_TYPE_CONTRACT_ID_FROM_SOURCE_ACCOUNT: SourceAccountContractID,
+    ENVELOPE_TYPE_CREATE_CONTRACT_ARGS: EnvelopeCreateContractArgs,
+    ENVELOPE_TYPE_CONTRACT_AUTH: EnvelopeContractAuth
   ]
 
-  @type hash_id :: OperationID.t() | RevokeID.t()
+  @type hash_id ::
+          OperationID.t()
+          | RevokeID.t()
+          | Ed25519ContractID.t()
+          | StructContractID.t()
+          | FromAsset.t()
+          | SourceAccountContractID.t()
+          | EnvelopeCreateContractArgs.t()
+          | EnvelopeContractAuth.t()
 
   @type t :: %__MODULE__{hash_id: hash_id(), type: EnvelopeType.t()}
 
