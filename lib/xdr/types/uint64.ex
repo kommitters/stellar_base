@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.UInt64 do
   @moduledoc """
   Representation of Stellar `UInt64` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{datum: non_neg_integer()}

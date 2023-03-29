@@ -20,8 +20,7 @@ defmodule StellarBase.XDR.TrustLineAsset do
   defstruct [:asset, :type]
 
   @spec new(asset :: asset(), type :: AssetType.t()) :: t()
-  def new(asset, %AssetType{} = type),
-    do: %__MODULE__{asset: asset, type: type}
+  def new(asset, %AssetType{} = type), do: %__MODULE__{asset: asset, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{asset: asset, type: type}) do

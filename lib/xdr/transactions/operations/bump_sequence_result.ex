@@ -14,8 +14,7 @@ defmodule StellarBase.XDR.Operations.BumpSequenceResult do
   defstruct [:result, :code]
 
   @spec new(result :: any(), code :: BumpSequenceResultCode.t()) :: t()
-  def new(result, %BumpSequenceResultCode{} = code),
-    do: %__MODULE__{result: result, code: code}
+  def new(result, %BumpSequenceResultCode{} = code), do: %__MODULE__{result: result, code: code}
 
   @impl true
   def encode_xdr(%__MODULE__{result: result, code: code}) do

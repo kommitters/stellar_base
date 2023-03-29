@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.OfferEntryFlags do
   @moduledoc """
   Representation of Stellar `OfferEntryFlags` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferEffect do
   @moduledoc """
   Representation of Stellar `ManageOfferEffect` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.ManageDataResultCode do
   @moduledoc """
   Representation of Stellar `ManageDataResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

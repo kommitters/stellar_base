@@ -27,7 +27,8 @@ defmodule StellarBase.XDR.OperationBody do
     ClawbackClaimableBalance,
     SetTrustLineFlags,
     LiquidityPoolDeposit,
-    LiquidityPoolWithdraw
+    LiquidityPoolWithdraw,
+    InvokeHostFunctionOp
   }
 
   @behaviour XDR.Declaration
@@ -56,7 +57,8 @@ defmodule StellarBase.XDR.OperationBody do
     CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
     SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
     LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
-    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw
+    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw,
+    INVOKE_HOST_FUNCTION: InvokeHostFunctionOp
   ]
 
   @type operation :: any()
@@ -66,8 +68,7 @@ defmodule StellarBase.XDR.OperationBody do
   defstruct [:operation, :type]
 
   @spec new(operation :: operation(), type :: OperationType.t()) :: t()
-  def new(operation, %OperationType{} = type),
-    do: %__MODULE__{operation: operation, type: type}
+  def new(operation, %OperationType{} = type), do: %__MODULE__{operation: operation, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{operation: operation, type: type}) do

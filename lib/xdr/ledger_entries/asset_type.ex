@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.AssetType do
   @moduledoc """
   Representation of Stellar `AssetType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

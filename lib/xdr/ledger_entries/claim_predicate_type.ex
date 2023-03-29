@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimPredicateType do
   @moduledoc """
   Representation of Stellar `ClaimPredicateType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

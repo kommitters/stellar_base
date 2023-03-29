@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Void do
   @moduledoc """
   Representation of Stellar `Void` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{value: nil}

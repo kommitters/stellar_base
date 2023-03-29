@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.InflationResultCode do
   @moduledoc """
   Representation of Stellar `InflationResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

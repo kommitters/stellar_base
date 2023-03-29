@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.AccountFlags do
   @moduledoc """
   Representation of Stellar `AccountFlags` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

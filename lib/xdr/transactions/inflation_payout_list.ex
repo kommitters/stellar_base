@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.InflationPayoutList do
 
   @behaviour XDR.Declaration
 
-  @max_length 100
+  @max_length 4_294_967_295
 
   @array_type InflationPayout
 

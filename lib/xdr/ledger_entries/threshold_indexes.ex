@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ThresholdIndexes do
   @moduledoc """
   Representation of Stellar `ThresholdIndexes` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

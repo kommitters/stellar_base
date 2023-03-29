@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Int32 do
   @moduledoc """
   Representation of Stellar `Int32` type.
   """
+
   @behaviour XDR.Declaration
 
   @type t :: %__MODULE__{datum: integer()}

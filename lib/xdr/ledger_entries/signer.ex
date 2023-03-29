@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.Signer do
   defstruct [:key, :weight]
 
   @spec new(key :: SignerKey.t(), weight :: UInt32.t()) :: t()
-  def new(%SignerKey{} = key, %UInt32{} = weight),
-    do: %__MODULE__{key: key, weight: weight}
+  def new(%SignerKey{} = key, %UInt32{} = weight), do: %__MODULE__{key: key, weight: weight}
 
   @impl true
   def encode_xdr(%__MODULE__{key: key, weight: weight}) do

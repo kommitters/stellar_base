@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.OperationType do
   @moduledoc """
   Representation of Stellar `OperationType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [
@@ -28,7 +29,8 @@ defmodule StellarBase.XDR.OperationType do
     CLAWBACK_CLAIMABLE_BALANCE: 20,
     SET_TRUST_LINE_FLAGS: 21,
     LIQUIDITY_POOL_DEPOSIT: 22,
-    LIQUIDITY_POOL_WITHDRAW: 23
+    LIQUIDITY_POOL_WITHDRAW: 23,
+    INVOKE_HOST_FUNCTION: 24
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

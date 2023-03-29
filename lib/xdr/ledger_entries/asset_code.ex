@@ -18,8 +18,7 @@ defmodule StellarBase.XDR.AssetCode do
   defstruct [:asset, :type]
 
   @spec new(asset :: asset_code(), type :: AssetType.t()) :: t()
-  def new(asset, %AssetType{} = type),
-    do: %__MODULE__{asset: asset, type: type}
+  def new(asset, %AssetType{} = type), do: %__MODULE__{asset: asset, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{asset: asset, type: type}) do

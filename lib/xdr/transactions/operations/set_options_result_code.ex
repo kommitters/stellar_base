@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.SetOptionsResultCode do
   @moduledoc """
   Representation of Stellar `SetOptionsResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

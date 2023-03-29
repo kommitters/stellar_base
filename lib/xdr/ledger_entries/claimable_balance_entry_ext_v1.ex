@@ -13,8 +13,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryExtV1 do
   defstruct [:ext, :flags]
 
   @spec new(ext :: Ext.t(), flags :: UInt32.t()) :: t()
-  def new(%Ext{} = ext, %UInt32{} = flags),
-    do: %__MODULE__{ext: ext, flags: flags}
+  def new(%Ext{} = ext, %UInt32{} = flags), do: %__MODULE__{ext: ext, flags: flags}
 
   @impl true
   def encode_xdr(%__MODULE__{ext: ext, flags: flags}) do

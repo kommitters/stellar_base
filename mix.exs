@@ -2,7 +2,7 @@ defmodule StellarBase.MixProject do
   use Mix.Project
 
   @github_url "https://github.com/kommitters/stellar_base"
-  @version "0.8.11"
+  @version "0.9.0"
 
   def project do
     [
@@ -39,7 +39,7 @@ defmodule StellarBase.MixProject do
       {:elixir_xdr, "~> 0.3.0"},
       {:crc, "~> 0.10.0"},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.15", only: :test, runtime: false},
+      {:excoveralls, "~> 0.16", only: :test, runtime: false},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.29", only: :dev, runtime: false}
     ]

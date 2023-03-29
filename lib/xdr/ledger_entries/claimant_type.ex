@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.ClaimantType do
   @moduledoc """
   Representation of Stellar `ClaimantType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [CLAIMANT_TYPE_V0: 0]

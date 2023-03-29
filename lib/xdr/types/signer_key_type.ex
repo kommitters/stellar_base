@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.SignerKeyType do
   @moduledoc """
   Representation of Stellar `SignerKeyType` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

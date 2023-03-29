@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.Operations.ManageBuyOfferResultCode do
   @moduledoc """
   Representation of Stellar `ManageBuyOfferResultCode` type.
   """
+
   @behaviour XDR.Declaration
 
   @declarations [

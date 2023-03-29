@@ -2,9 +2,20 @@ defmodule StellarBase.XDR.LedgerKey do
   @moduledoc """
   Representation of Stellar `LedgerEntry` type.
   """
+
   alias StellarBase.XDR.LedgerEntryType
 
-  alias StellarBase.XDR.{Account, TrustLine, Offer, Data, ClaimableBalance, LiquidityPool}
+  alias StellarBase.XDR.{
+    Account,
+    TrustLine,
+    Offer,
+    Data,
+    ClaimableBalance,
+    LiquidityPool,
+    ContractData,
+    ContractCode,
+    LedgerKeyConfigSetting
+  }
 
   @behaviour XDR.Declaration
 
@@ -14,7 +25,10 @@ defmodule StellarBase.XDR.LedgerKey do
     OFFER: Offer,
     DATA: Data,
     CLAIMABLE_BALANCE: ClaimableBalance,
-    LIQUIDITY_POOL: LiquidityPool
+    LIQUIDITY_POOL: LiquidityPool,
+    CONTRACT_DATA: ContractData,
+    CONTRACT_CODE: ContractCode,
+    CONFIG_SETTING: LedgerKeyConfigSetting
   ]
 
   @type entry ::
@@ -24,14 +38,16 @@ defmodule StellarBase.XDR.LedgerKey do
           | Data.t()
           | ClaimableBalance.t()
           | LiquidityPool.t()
+          | ContractData.t()
+          | ContractCode.t()
+          | LedgerKeyConfigSetting.t()
 
   @type t :: %__MODULE__{entry: entry(), type: LedgerEntryType.t()}
 
   defstruct [:entry, :type]
 
   @spec new(entry :: entry(), type :: LedgerEntryType.t()) :: t()
-  def new(entry, %LedgerEntryType{} = type),
-    do: %__MODULE__{entry: entry, type: type}
+  def new(entry, %LedgerEntryType{} = type), do: %__MODULE__{entry: entry, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{entry: entry, type: type}) do

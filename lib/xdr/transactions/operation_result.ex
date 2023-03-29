@@ -15,8 +15,7 @@ defmodule StellarBase.XDR.OperationResult do
   defstruct [:result, :code]
 
   @spec new(result :: result(), code :: OperationResultCode.t()) :: t()
-  def new(result, %OperationResultCode{} = code),
-    do: %__MODULE__{result: result, code: code}
+  def new(result, %OperationResultCode{} = code), do: %__MODULE__{result: result, code: code}
 
   @impl true
   def encode_xdr(%__MODULE__{result: result, code: code}) do
