@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0 (29.03.2023)
+* Add [CAP-0046 support](https://github.com/kommitters/stellar_base/issues/223) in the XDR version: [df18148747e807618acf4639db41c4fd6f0be9fc](https://github.com/stellar/stellar-xdr/commit/df18148747e807618acf4639db41c4fd6f0be9fc) which corresponds to the [Soroban Preview 7](https://soroban.stellar.org/docs/reference/releases#preview-7-february-16th-2023)
+* Update all dependencies
+
 ## 0.8.11 (16.01.2023)
 * Update all dependencies.
 * Block egress traffic in GitHub Actions.
