@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.OperationBody do
     SetTrustLineFlags,
     LiquidityPoolDeposit,
     LiquidityPoolWithdraw,
-    InvokeHostFunctionOp
+    InvokeHostFunction
   }
 
   @behaviour XDR.Declaration
@@ -58,7 +58,7 @@ defmodule StellarBase.XDR.OperationBody do
     SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
     LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
     LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw,
-    INVOKE_HOST_FUNCTION: InvokeHostFunctionOp
+    INVOKE_HOST_FUNCTION: InvokeHostFunction
   ]
 
   @type operation :: any()

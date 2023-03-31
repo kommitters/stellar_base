@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.InvokeHostFunctionOp do
+defmodule StellarBase.XDR.Operations.InvokeHostFunction do
   @moduledoc """
-  Representation of Stellar `InvokeHostFunctionOp` type.
+  Representation of Stellar `InvokeHostFunction` type.
   """
 
   alias StellarBase.XDR.{ContractAuthList, LedgerFootprint, HostFunction}
