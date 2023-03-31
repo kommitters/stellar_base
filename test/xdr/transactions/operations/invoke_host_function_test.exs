@@ -1,8 +1,7 @@
-defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
+defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    InvokeHostFunctionOp,
     SCVal,
     SCValType,
     SCVec,
@@ -38,9 +37,11 @@ defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
     UInt64
   }
 
+  alias StellarBase.XDR.Operations.InvokeHostFunction
+
   alias StellarBase.StrKey
 
-  describe "InvokeHostFunctionOp" do
+  describe "InvokeHostFunction" do
     setup do
       ## HostFunction
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_U63))
@@ -99,7 +100,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
         host_function: host_function,
         footprint: footprint,
         auth: auth_list,
-        invoke_host_function_op: InvokeHostFunctionOp.new(host_function, footprint, auth_list),
+        invoke_host_function_op: InvokeHostFunction.new(host_function, footprint, auth_list),
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154,
@@ -124,40 +125,40 @@ defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
     end
 
     test "new/1", %{host_function: host_function, footprint: footprint, auth: auth} do
-      %InvokeHostFunctionOp{host_function: ^host_function, footprint: ^footprint, auth: ^auth} =
-        InvokeHostFunctionOp.new(host_function, footprint, auth)
+      %InvokeHostFunction{host_function: ^host_function, footprint: ^footprint, auth: ^auth} =
+        InvokeHostFunction.new(host_function, footprint, auth)
     end
 
     test "encode_xdr/1", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      {:ok, ^binary} = InvokeHostFunctionOp.encode_xdr(invoke_host_function_op)
+      {:ok, ^binary} = InvokeHostFunction.encode_xdr(invoke_host_function_op)
     end
 
     test "encode_xdr!/1", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      ^binary = InvokeHostFunctionOp.encode_xdr!(invoke_host_function_op)
+      ^binary = InvokeHostFunction.encode_xdr!(invoke_host_function_op)
     end
 
     test "decode_xdr/2", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      {:ok, {^invoke_host_function_op, ""}} = InvokeHostFunctionOp.decode_xdr(binary)
+      {:ok, {^invoke_host_function_op, ""}} = InvokeHostFunction.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = InvokeHostFunctionOp.decode_xdr(123)
+      {:error, :not_binary} = InvokeHostFunction.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      {^invoke_host_function_op, ^binary} = InvokeHostFunctionOp.decode_xdr!(binary <> binary)
+      {^invoke_host_function_op, ^binary} = InvokeHostFunction.decode_xdr!(binary <> binary)
     end
   end
 end
