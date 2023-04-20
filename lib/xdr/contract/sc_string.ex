@@ -1,6 +1,6 @@
-defmodule StellarBase.XDR.SCSymbol do
+defmodule StellarBase.XDR.SCString do
   @moduledoc """
-  Representation of Stellar `SCSymbol` type.
+  Representation of Stellar `SCString` type.
   """
 
   @behaviour XDR.Declaration
@@ -9,7 +9,7 @@ defmodule StellarBase.XDR.SCSymbol do
 
   defstruct [:value]
 
-  @max_length 32
+  @max_length 256_000
 
   @spec new(value :: String.t()) :: t()
   def new(value), do: %__MODULE__{value: value}
