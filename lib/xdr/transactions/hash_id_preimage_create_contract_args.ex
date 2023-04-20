@@ -2,18 +2,23 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
   @moduledoc """
   Representation of Stellar `HashIDPreimageCreateContractArgs` type.
   """
-  alias StellarBase.XDR.{Hash, SCContractCode, UInt256}
+  alias StellarBase.XDR.{Hash, SCContractExecutable, UInt256}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(network_id: Hash, source: SCContractCode, salt: UInt256)
+  @struct_spec XDR.Struct.new(network_id: Hash, source: SCContractExecutable, salt: UInt256)
 
-  @type t :: %__MODULE__{network_id: Hash.t(), source: SCContractCode.t(), salt: UInt256.t()}
+  @type t :: %__MODULE__{
+          network_id: Hash.t(),
+          source: SCContractExecutable.t(),
+          salt: UInt256.t()
+        }
 
   defstruct [:network_id, :source, :salt]
 
-  @spec new(network_id :: Hash.t(), source :: SCContractCode.t(), salt :: UInt256.t()) :: t()
-  def new(%Hash{} = network_id, %SCContractCode{} = source, %UInt256{} = salt),
+  @spec new(network_id :: Hash.t(), source :: SCContractExecutable.t(), salt :: UInt256.t()) ::
+          t()
+  def new(%Hash{} = network_id, %SCContractExecutable{} = source, %UInt256{} = salt),
     do: %__MODULE__{network_id: network_id, source: source, salt: salt}
 
   @impl true

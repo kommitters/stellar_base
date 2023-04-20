@@ -1,13 +1,13 @@
-defmodule StellarBase.XDR.SCContractCodeType do
+defmodule StellarBase.XDR.SCContractExecutableType do
   @moduledoc """
-  Representation of Stellar `SCContractCodeType` type.
+  Representation of Stellar `SCContractExecutableType` type.
   """
 
   @behaviour XDR.Declaration
 
   @declarations [
-    SCCONTRACT_CODE_WASM_REF: 0,
-    SCCONTRACT_CODE_TOKEN: 1
+    SCCONTRACT_EXECUTABLE_WASM_REF: 0,
+    SCCONTRACT_EXECUTABLE_TOKEN: 1
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}
