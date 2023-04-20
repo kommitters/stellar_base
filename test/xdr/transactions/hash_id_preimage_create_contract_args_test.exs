@@ -5,17 +5,17 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
     HashIDPreimageCreateContractArgs,
     Hash,
     UInt256,
-    SCContractCode,
-    SCContractCodeType
+    SCContractExecutable,
+    SCContractExecutableType
   }
 
   describe "HashIDPreimageCreateContractArgs" do
     setup do
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
-      contract_code = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWK")
-      sc_contract_code_type = SCContractCodeType.new(:SCCONTRACT_CODE_WASM_REF)
-      source = SCContractCode.new(contract_code, sc_contract_code_type)
+      contract_executable = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWK")
+      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
+      source = SCContractExecutable.new(contract_executable, sc_contract_executable_type)
 
       salt =
         UInt256.new(

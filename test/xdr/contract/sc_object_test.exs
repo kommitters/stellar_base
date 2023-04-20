@@ -14,8 +14,8 @@ defmodule StellarBase.XDR.SCObjectTest do
     SCVec,
     SCMap,
     SCMapEntry,
-    SCContractCodeType,
-    SCContractCode,
+    SCContractExecutableType,
+    SCContractExecutable,
     Hash,
     UInt64,
     Int128Parts,
@@ -52,9 +52,9 @@ defmodule StellarBase.XDR.SCObjectTest do
 
       sc_address_type = SCAddressType.new(:SC_ADDRESS_TYPE_ACCOUNT)
 
-      ## SCContractCode structs
-      contract_code = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-      sc_contract_code_type = SCContractCodeType.new(:SCCONTRACT_CODE_WASM_REF)
+      ## SCContractExecutable structs
+      contract_executable = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
 
       discriminants = [
         %{
@@ -98,7 +98,7 @@ defmodule StellarBase.XDR.SCObjectTest do
         },
         %{
           sc_object_type: SCObjectType.new(:SCO_CONTRACT_CODE),
-          sc_object: SCContractCode.new(contract_code, sc_contract_code_type),
+          sc_object: SCContractExecutable.new(contract_executable, sc_contract_executable_type),
           binary:
             <<0, 0, 0, 7, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
               52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78>>

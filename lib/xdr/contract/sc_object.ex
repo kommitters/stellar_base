@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.SCObject do
     Int128Parts,
     Int64,
     SCAddress,
-    SCContractCode,
+    SCContractExecutable,
     SCMap,
     SCObjectType,
     SCVec,
@@ -25,7 +25,7 @@ defmodule StellarBase.XDR.SCObject do
     SCO_U128: Int128Parts,
     SCO_I128: Int128Parts,
     SCO_BYTES: VariableOpaque256000,
-    SCO_CONTRACT_CODE: SCContractCode,
+    SCO_CONTRACT_CODE: SCContractExecutable,
     SCO_ADDRESS: SCAddress,
     SCO_NONCE_KEY: SCAddress
   ]
@@ -37,7 +37,7 @@ defmodule StellarBase.XDR.SCObject do
           | Int64.t()
           | Int128Parts.t()
           | VariableOpaque256000.t()
-          | SCContractCode.t()
+          | SCContractExecutable.t()
           | SCAddress.t()
 
   @type t :: %__MODULE__{sc_object: sc_object(), type: SCObjectType.t()}

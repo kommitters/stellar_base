@@ -5,8 +5,8 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
     ContractID,
     ContractIDType,
     CreateContractArgs,
-    SCContractCode,
-    SCContractCodeType,
+    SCContractExecutable,
+    SCContractExecutableType,
     Hash,
     UInt256
   }
@@ -15,11 +15,12 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
 
   describe "CreateContractArgs" do
     setup do
-      # SCContractCode
-      contract_code = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-      sc_contract_code_type = SCContractCodeType.new(:SCCONTRACT_CODE_WASM_REF)
+      # SCContractExecutable
+      contract_executable = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
 
-      sc_contract_code = SCContractCode.new(contract_code, sc_contract_code_type)
+      sc_contract_executable =
+        SCContractExecutable.new(contract_executable, sc_contract_executable_type)
 
       # ContractID
       salt =
@@ -31,9 +32,9 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
       contract_id = ContractID.new(salt, contract_id_type)
 
       %{
-        sc_contract_code: sc_contract_code,
+        sc_contract_executable: sc_contract_executable,
         contract_id: contract_id,
-        create_contract_args: CreateContractArgs.new(contract_id, sc_contract_code),
+        create_contract_args: CreateContractArgs.new(contract_id, sc_contract_executable),
         binary:
           <<0, 0, 0, 0, 146, 34, 171, 230, 201, 29, 122, 130, 214, 117, 176, 89, 199, 162, 234,
             50, 8, 7, 21, 233, 208, 154, 26, 185, 125, 2, 52, 182, 37, 173, 239, 146, 0, 0, 0, 0,
@@ -42,9 +43,9 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
       }
     end
 
-    test "new/1", %{contract_id: contract_id, sc_contract_code: sc_contract_code} do
-      %CreateContractArgs{contract_id: ^contract_id, source: ^sc_contract_code} =
-        CreateContractArgs.new(contract_id, sc_contract_code)
+    test "new/1", %{contract_id: contract_id, sc_contract_executable: sc_contract_executable} do
+      %CreateContractArgs{contract_id: ^contract_id, source: ^sc_contract_executable} =
+        CreateContractArgs.new(contract_id, sc_contract_executable)
     end
 
     test "encode_xdr/1", %{create_contract_args: create_contract_args, binary: binary} do

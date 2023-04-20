@@ -12,8 +12,8 @@ defmodule StellarBase.XDR.HostFunctionTest do
     SCVec,
     InstallContractCodeArgs,
     Hash,
-    SCContractCodeType,
-    SCContractCode,
+    SCContractExecutableType,
+    SCContractExecutable,
     UInt256,
     ContractIDType,
     ContractID
@@ -30,11 +30,12 @@ defmodule StellarBase.XDR.HostFunctionTest do
       sc_vec = SCVec.new(sc_vals)
 
       ## CreateContractArgs
-      # SCContractCode
-      contract_code = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-      sc_contract_code_type = SCContractCodeType.new(:SCCONTRACT_CODE_WASM_REF)
+      # SCContractExecutable
+      contract_executable = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
 
-      sc_contract_code = SCContractCode.new(contract_code, sc_contract_code_type)
+      sc_contract_executable =
+        SCContractExecutable.new(contract_executable, sc_contract_executable_type)
 
       # ContractID
       salt =
@@ -45,7 +46,7 @@ defmodule StellarBase.XDR.HostFunctionTest do
       contract_id_type = ContractIDType.new(:CONTRACT_ID_FROM_SOURCE_ACCOUNT)
       contract_id = ContractID.new(salt, contract_id_type)
 
-      create_contract_args = CreateContractArgs.new(contract_id, sc_contract_code)
+      create_contract_args = CreateContractArgs.new(contract_id, sc_contract_executable)
 
       ## InstallContractCodeArgs
       code = VariableOpaque256000.new("GCIZ3GSM5")
