@@ -24,7 +24,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
       void = Void.new()
 
       int_64 = Int64.new(3)
-      scval_type = SCValType.new(:SCV_U63)
+      scval_type = SCValType.new(:SCV_I64)
       scval = SCVal.new(int_64, scval_type)
 
       discriminants = [
@@ -33,7 +33,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
           invoke_host_function_result_code: invoke_host_function_result_success,
           invoke_host_function_result:
             InvokeHostFunctionResult.new(scval, invoke_host_function_result_success),
-          binary: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3>>
+          binary: <<0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3>>
         },
         %{
           value: void,

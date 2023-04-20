@@ -24,8 +24,8 @@ defmodule StellarBase.XDR.HostFunctionTest do
   describe "HostFunction" do
     setup do
       ## SCVec
-      scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_U63))
-      scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
+      scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
+      scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       sc_vals = [scval1, scval2]
       sc_vec = SCVec.new(sc_vals)
 
@@ -57,7 +57,7 @@ defmodule StellarBase.XDR.HostFunctionTest do
           host_function_type: HostFunctionType.new(:HOST_FUNCTION_TYPE_INVOKE_CONTRACT),
           host_function: sc_vec,
           binary:
-            <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0,
+            <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0,
               0, 0, 0, 2>>
         },
         %{

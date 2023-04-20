@@ -10,8 +10,8 @@ defmodule StellarBase.XDR.SCVecTest do
 
   describe "SCVec" do
     setup do
-      scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_U63))
-      scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
+      scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
+      scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
 
       sc_vals = [scval1, scval2]
 
@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.SCVecTest do
         sc_vals: sc_vals,
         scvec: SCVec.new(sc_vals),
         binary:
-          <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2>>
+          <<0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 
