@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefList12Test do
     setup do
       code = Void.new()
       type_val = SCSpecType.new(:SC_SPEC_TYPE_VAL)
-      type_u128 = SCSpecType.new(:SC_SPEC_TYPE_U128)
+      type_u128 = SCSpecType.new(:SC_SPEC_TYPE_I32)
       sc_spec_type_def1 = SCSpecTypeDef.new(code, type_val)
       sc_spec_type_def2 = SCSpecTypeDef.new(code, type_u128)
 
