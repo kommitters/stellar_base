@@ -11,12 +11,12 @@ defmodule StellarBase.XDR.SCMapTest do
 
   describe "SCMap" do
     setup do
-      key1 = SCVal.new(Int64.new(1), SCValType.new(:SCV_U63))
-      val1 = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
+      key1 = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+      val1 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       scmap_entry1 = SCMapEntry.new(key1, val1)
 
-      key2 = SCVal.new(Int64.new(1), SCValType.new(:SCV_U63))
-      val2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
+      key2 = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+      val2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       scmap_entry2 = SCMapEntry.new(key2, val2)
 
       scmap_entries = [scmap_entry1, scmap_entry2]
@@ -25,8 +25,8 @@ defmodule StellarBase.XDR.SCMapTest do
         scmap_entries: scmap_entries,
         scmap: SCMap.new(scmap_entries),
         binary:
-          <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2>>
+          <<0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+            0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 
