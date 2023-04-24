@@ -1,11 +1,11 @@
-defmodule StellarBase.XDR.SCContractCodeTypeTest do
+defmodule StellarBase.XDR.SCContractExecutableTypeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SCContractCodeType
+  alias StellarBase.XDR.SCContractExecutableType
 
   @codes [
-    :SCCONTRACT_CODE_WASM_REF,
-    :SCCONTRACT_CODE_TOKEN
+    :SCCONTRACT_EXECUTABLE_WASM_REF,
+    :SCCONTRACT_EXECUTABLE_TOKEN
   ]
 
   @binaries [
@@ -13,52 +13,54 @@ defmodule StellarBase.XDR.SCContractCodeTypeTest do
     <<0, 0, 0, 1>>
   ]
 
-  describe "SCContractCodeType" do
+  describe "SCContractExecutableType" do
     setup do
       %{
         codes: @codes,
-        results: Enum.map(@codes, &SCContractCodeType.new/1),
+        results: Enum.map(@codes, &SCContractExecutableType.new/1),
         binaries: @binaries
       }
     end
 
     test "new/1", %{codes: types} do
       for type <- types,
-          do: %SCContractCodeType{identifier: ^type} = SCContractCodeType.new(type)
+          do: %SCContractExecutableType{identifier: ^type} = SCContractExecutableType.new(type)
     end
 
     test "encode_xdr/1", %{results: results, binaries: binaries} do
       for {result, binary} <- Enum.zip(results, binaries),
-          do: {:ok, ^binary} = SCContractCodeType.encode_xdr(result)
+          do: {:ok, ^binary} = SCContractExecutableType.encode_xdr(result)
     end
 
     test "encode_xdr/1 with an invalid code" do
       {:error, :invalid_key} =
-        SCContractCodeType.encode_xdr(%SCContractCodeType{identifier: :TEST})
+        SCContractExecutableType.encode_xdr(%SCContractExecutableType{identifier: :TEST})
     end
 
     test "encode_xdr!/1", %{results: results, binaries: binaries} do
       for {result, binary} <- Enum.zip(results, binaries),
-          do: ^binary = SCContractCodeType.encode_xdr!(result)
+          do: ^binary = SCContractExecutableType.encode_xdr!(result)
     end
 
     test "decode_xdr/2", %{results: results, binaries: binaries} do
       for {result, binary} <- Enum.zip(results, binaries),
-          do: {:ok, {^result, ""}} = SCContractCodeType.decode_xdr(binary)
+          do: {:ok, {^result, ""}} = SCContractExecutableType.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid declaration" do
-      {:error, :invalid_key} = SCContractCodeType.decode_xdr(<<1, 0, 0, 1>>)
+      {:error, :invalid_key} = SCContractExecutableType.decode_xdr(<<1, 0, 0, 1>>)
     end
 
     test "decode_xdr!/2", %{results: results, binaries: binaries} do
       for {result, binary} <- Enum.zip(results, binaries),
-          do: {^result, ^binary} = SCContractCodeType.decode_xdr!(binary <> binary)
+          do: {^result, ^binary} = SCContractExecutableType.decode_xdr!(binary <> binary)
     end
 
     test "decode_xdr!/2 with an error code", %{binaries: binaries} do
       for binary <- binaries,
-          do: {%SCContractCodeType{identifier: _}, ""} = SCContractCodeType.decode_xdr!(binary)
+          do:
+            {%SCContractExecutableType{identifier: _}, ""} =
+              SCContractExecutableType.decode_xdr!(binary)
     end
   end
 end

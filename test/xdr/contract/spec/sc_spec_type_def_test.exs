@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
     setup do
       code = Void.new()
       type_val = SCSpecType.new(:SC_SPEC_TYPE_VAL)
-      type_u128 = SCSpecType.new(:SC_SPEC_TYPE_U128)
+      type_u128 = SCSpecType.new(:SC_SPEC_TYPE_I32)
       sc_spec_type_def_1 = SCSpecTypeDef.new(code, type_val)
       sc_spec_type_def_2 = SCSpecTypeDef.new(code, type_u128)
 
@@ -33,64 +33,89 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
           binary: <<0, 0, 0, 0>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_U32),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_BOOL),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 1>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_I32),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_VOID),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 2>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_U64),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_STATUS),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 3>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_I64),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_U32),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 4>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_U128),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_I32),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 5>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_I128),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_U64),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 6>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_BOOL),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_I64),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 7>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_SYMBOL),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_TIMEPOINT),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 8>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_BITSET),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_DURATION),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 9>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_STATUS),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_U128),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 10>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_BYTES),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_I128),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 11>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_ADDRESS),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_U256),
+          sc_code: Void.new(),
+          binary: <<0, 0, 0, 12>>
+        },
+        %{
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_I256),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 13>>
+        },
+        %{
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_BYTES),
+          sc_code: Void.new(),
+          binary: <<0, 0, 0, 14>>
+        },
+        %{
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_STRING),
+          sc_code: Void.new(),
+          binary: <<0, 0, 0, 16>>
+        },
+        %{
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_SYMBOL),
+          sc_code: Void.new(),
+          binary: <<0, 0, 0, 17>>
+        },
+        %{
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_ADDRESS),
+          sc_code: Void.new(),
+          binary: <<0, 0, 0, 19>>
         },
         %{
           sc_code:

@@ -4,39 +4,75 @@ defmodule StellarBase.XDR.SCVal do
   """
 
   alias StellarBase.XDR.{
+    Bool,
+    Duration,
+    Int128Parts,
     Int64,
     Int32,
-    OptionalSCObject,
+    UInt256,
     UInt32,
     UInt64,
+    SCAddress,
+    SCBytes,
+    SCContractExecutable,
+    SCNonceKey,
     SCValType,
-    SCStatic,
     SCStatus,
-    SCSymbol
+    SCString,
+    SCSymbol,
+    TimePoint,
+    OptionalSCVec,
+    OptionalSCMap,
+    Void
   }
 
   @behaviour XDR.Declaration
 
   @arms [
-    SCV_U63: Int64,
+    SCV_BOOL: Bool,
+    SCV_VOID: Void,
+    SCV_STATUS: SCStatus,
     SCV_U32: UInt32,
     SCV_I32: Int32,
-    SCV_STATIC: SCStatic,
-    SCV_OBJECT: OptionalSCObject,
+    SCV_U64: UInt64,
+    SCV_I64: Int64,
+    SCV_TIMEPOINT: TimePoint,
+    SCV_DURATION: Duration,
+    SCV_U128: Int128Parts,
+    SCV_I128: Int128Parts,
+    SCV_U256: UInt256,
+    SCV_I256: UInt256,
+    SCV_BYTES: SCBytes,
+    SCV_STRING: SCString,
     SCV_SYMBOL: SCSymbol,
-    SCV_BITSET: UInt64,
-    SCV_STATUS: SCStatus
+    SCV_VEC: OptionalSCVec,
+    SCV_MAP: OptionalSCMap,
+    SCV_CONTRACT_EXECUTABLE: SCContractExecutable,
+    SCV_ADDRESS: SCAddress,
+    SCV_LEDGER_KEY_CONTRACT_EXECUTABLE: Void,
+    SCV_LEDGER_KEY_NONCE: SCNonceKey
   ]
 
   @type value ::
-          Int64.t()
+          Bool.t()
+          | Void.t()
+          | SCStatus.t()
           | UInt32.t()
           | Int32.t()
-          | SCStatic.t()
-          | OptionalSCObject.t()
-          | SCSymbol.t()
           | UInt64.t()
-          | SCStatus.t()
+          | Int64.t()
+          | TimePoint.t()
+          | Duration.t()
+          | Int128Parts.t()
+          | UInt256.t()
+          | SCBytes.t()
+          | SCString.t()
+          | SCSymbol.t()
+          | OptionalSCVec.t()
+          | OptionalSCMap.t()
+          | SCContractExecutable.t()
+          | SCAddress.t()
+          | SCNonceKey.t()
 
   @type t :: %__MODULE__{value: value(), type: SCValType.t()}
 

@@ -7,9 +7,9 @@ defmodule StellarBase.XDR.SCValTypeTest do
     setup do
       %{
         binary: <<0, 0, 0, 1>>,
-        identifier: :SCV_U32,
-        default_identifier: :SCV_U63,
-        xdr_type: SCValType.new(:SCV_U32)
+        identifier: :SCV_VOID,
+        default_identifier: :SCV_BOOL,
+        xdr_type: SCValType.new(:SCV_VOID)
       }
     end
 

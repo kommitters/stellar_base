@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0 (24.04.2023)
+
+* Add [Soroban Preview 8](https://soroban.stellar.org/docs/reference/releases#preview-8-april-4th-2023) Support in the XDR version: [7356dc237ee0db5626561c129fb3fa4beaabbac6](https://github.com/stellar/stellar-xdr/commit/7356dc237ee0db5626561c129fb3fa4beaabbac6) with its respective [Preview 8 changes](https://github.com/stellar/stellar-xdr/compare/df18148747e807618acf4639db41c4fd6f0be9fc...7356dc237ee0db5626561c129fb3fa4beaabbac6#diff-891b3a6e0eb8f9ac887a8129e2c821931837fb42224200ee78cce639eeb61c15).
+
 ## 0.9.1 (31.03.2023)
 * Update boundary for InvokeHostFuntion, from `StellarBase.XDR.InvokeHostFunctionOp` to `StellarBase.XDR.Operations.InvokeHostFunction`.
 

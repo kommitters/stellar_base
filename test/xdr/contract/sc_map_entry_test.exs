@@ -5,14 +5,14 @@ defmodule StellarBase.XDR.SCMapEntryTest do
 
   describe "SCMapEntry" do
     setup do
-      key = SCVal.new(Int64.new(1), SCValType.new(:SCV_U63))
-      val = SCVal.new(Int64.new(2), SCValType.new(:SCV_U63))
+      key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+      val = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
 
       %{
         key: key,
         val: val,
         scmap_entry: SCMapEntry.new(key, val),
-        binary: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2>>
+        binary: <<0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 

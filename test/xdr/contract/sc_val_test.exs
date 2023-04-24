@@ -1,59 +1,73 @@
 defmodule StellarBase.XDR.SCValTest do
   use ExUnit.Case
 
+  alias StellarBase.StrKey
+
   alias StellarBase.XDR.{
-    Int64,
+    AccountID,
+    Bool,
+    Duration,
+    Hash,
     Int32,
-    OptionalSCObject,
-    UInt32,
-    UInt64,
+    Int64,
+    Int128Parts,
+    SCAddress,
+    SCAddressType,
+    OptionalSCMap,
+    OptionalSCVec,
+    PublicKeyType,
+    PublicKey,
+    SCBytes,
+    SCNonceKey,
+    SCContractExecutable,
+    SCContractExecutableType,
+    SCVal,
     SCValType,
-    SCStatic,
     SCStatus,
     SCStatusType,
-    SCUnknownErrorCode,
+    SCString,
     SCSymbol,
-    SCVal,
-    SCValType
+    SCUnknownErrorCode,
+    TimePoint,
+    UInt256,
+    UInt32,
+    UInt64,
+    Void
   }
 
   describe "SCVal" do
     setup do
+      # SCAddress
+      pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
+
+      account_id =
+        "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
+        |> StrKey.decode!(:ed25519_public_key)
+        |> UInt256.new()
+        |> PublicKey.new(pk_type)
+        |> AccountID.new()
+
+      sc_address_type = SCAddressType.new(:SC_ADDRESS_TYPE_ACCOUNT)
+      sc_address = SCAddress.new(account_id, sc_address_type)
+
+      # SCContractExecutable
+      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
+
+      sc_contract_executable =
+        "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+        |> Hash.new()
+        |> SCContractExecutable.new(sc_contract_executable_type)
+
       discriminants = [
         %{
-          val_type: SCValType.new(:SCV_U63),
-          value: Int64.new(2),
-          binary: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2>>
+          val_type: SCValType.new(:SCV_BOOL),
+          value: Bool.new(true),
+          binary: <<0, 0, 0, 0, 0, 0, 0, 1>>
         },
         %{
-          val_type: SCValType.new(:SCV_U32),
-          value: UInt32.new(2),
-          binary: <<0, 0, 0, 1, 0, 0, 0, 2>>
-        },
-        %{
-          val_type: SCValType.new(:SCV_I32),
-          value: Int32.new(3),
-          binary: <<0, 0, 0, 2, 0, 0, 0, 3>>
-        },
-        %{
-          val_type: SCValType.new(:SCV_STATIC),
-          value: SCStatic.new(:SCS_TRUE),
-          binary: <<0, 0, 0, 3, 0, 0, 0, 1>>
-        },
-        %{
-          val_type: SCValType.new(:SCV_OBJECT),
-          value: OptionalSCObject.new(nil),
-          binary: <<0, 0, 0, 4, 0, 0, 0, 0>>
-        },
-        %{
-          val_type: SCValType.new(:SCV_SYMBOL),
-          value: SCSymbol.new("World"),
-          binary: <<0, 0, 0, 5, 0, 0, 0, 5, 87, 111, 114, 108, 100, 0, 0, 0>>
-        },
-        %{
-          val_type: SCValType.new(:SCV_BITSET),
-          value: UInt64.new(4),
-          binary: <<0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 4>>
+          val_type: SCValType.new(:SCV_VOID),
+          value: Void.new(),
+          binary: <<0, 0, 0, 1>>
         },
         %{
           val_type: SCValType.new(:SCV_STATUS),
@@ -62,7 +76,122 @@ defmodule StellarBase.XDR.SCValTest do
               SCUnknownErrorCode.new(:UNKNOWN_ERROR_GENERAL),
               SCStatusType.new(:SST_UNKNOWN_ERROR)
             ),
-          binary: <<0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0>>
+          binary: <<0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_U32),
+          value: UInt32.new(2),
+          binary: <<0, 0, 0, 3, 0, 0, 0, 2>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_I32),
+          value: Int32.new(2),
+          binary: <<0, 0, 0, 4, 0, 0, 0, 2>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_U64),
+          value: UInt64.new(4),
+          binary: <<0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_I64),
+          value: Int64.new(4),
+          binary: <<0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 4>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_TIMEPOINT),
+          value: TimePoint.new(1234),
+          binary: <<0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 4, 210>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_DURATION),
+          value: Duration.new(1234),
+          binary: <<0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 4, 210>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_U128),
+          value: Int128Parts.new(UInt64.new(3312), UInt64.new(3313)),
+          binary: <<0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_I128),
+          value: Int128Parts.new(UInt64.new(3312), UInt64.new(3313)),
+          binary: <<0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_U256),
+          value:
+            UInt256.new(
+              <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
+                108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+            ),
+          binary:
+            <<0, 0, 0, 11, 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0,
+              72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_I256),
+          value:
+            UInt256.new(
+              <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
+                108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+            ),
+          binary:
+            <<0, 0, 0, 12, 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0,
+              72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_BYTES),
+          value: SCBytes.new("GCIZ3GSM5"),
+          binary: <<0, 0, 0, 13, 0, 0, 0, 9, 71, 67, 73, 90, 51, 71, 83, 77, 53, 0, 0, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_STRING),
+          value: SCString.new("Hello"),
+          binary: <<0, 0, 0, 14, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_SYMBOL),
+          value: SCSymbol.new("World"),
+          binary: <<0, 0, 0, 15, 0, 0, 0, 5, 87, 111, 114, 108, 100, 0, 0, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_VEC),
+          value: OptionalSCVec.new(nil),
+          binary: <<0, 0, 0, 16, 0, 0, 0, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_MAP),
+          value: OptionalSCMap.new(nil),
+          binary: <<0, 0, 0, 17, 0, 0, 0, 0>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_CONTRACT_EXECUTABLE),
+          value: sc_contract_executable,
+          binary:
+            <<0, 0, 0, 18, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
+              52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_ADDRESS),
+          value: sc_address,
+          binary:
+            <<0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
+              149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
+              138, 2, 227, 119>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_LEDGER_KEY_CONTRACT_EXECUTABLE),
+          value: Void.new(),
+          binary: <<0, 0, 0, 20>>
+        },
+        %{
+          val_type: SCValType.new(:SCV_LEDGER_KEY_NONCE),
+          value: SCNonceKey.new(sc_address),
+          binary:
+            <<0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
+              149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
+              138, 2, 227, 119>>
         }
       ]
 

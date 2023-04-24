@@ -2,18 +2,18 @@ defmodule StellarBase.XDR.CreateContractArgs do
   @moduledoc """
   Representation of Stellar `CreateContractArgs` type.
   """
-  alias StellarBase.XDR.{ContractID, SCContractCode}
+  alias StellarBase.XDR.{ContractID, SCContractExecutable}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(contract_id: ContractID, source: SCContractCode)
+  @struct_spec XDR.Struct.new(contract_id: ContractID, source: SCContractExecutable)
 
-  @type t :: %__MODULE__{contract_id: ContractID.t(), source: SCContractCode.t()}
+  @type t :: %__MODULE__{contract_id: ContractID.t(), source: SCContractExecutable.t()}
 
   defstruct [:contract_id, :source]
 
-  @spec new(contract_id :: ContractID.t(), source :: SCContractCode.t()) :: t()
-  def new(%ContractID{} = contract_id, %SCContractCode{} = source),
+  @spec new(contract_id :: ContractID.t(), source :: SCContractExecutable.t()) :: t()
+  def new(%ContractID{} = contract_id, %SCContractExecutable{} = source),
     do: %__MODULE__{contract_id: contract_id, source: source}
 
   @impl true
