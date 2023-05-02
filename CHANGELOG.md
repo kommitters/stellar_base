@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.2 (02.05.2023)
+
+* Add missing version_byte type in strkey.
+
 ## 0.10.1 (02.05.2023)
 
 * Add missing contract version_byte in StrKey.
