@@ -29,6 +29,7 @@ jobs:
           allowed-endpoints: >
             coveralls.io:443
             github.com:443
+            repo.hex.pm:443
             builds.hex.pm:443
 
       - name: Checkout Github repo
