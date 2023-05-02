@@ -11,6 +11,7 @@ defmodule StellarBase.StrKeyTest do
       pre_auth_tx: "TBAUEQ2EIVDEOSCJJJFUYTKOJ5IFCUSTKRAUEQ2EIVDEOSCJJJAUCYSF",
       signed_payload:
         "PA7QYNF7SOWQ3GLR2BGMZEHXAVIRZA4KVWLTJJFC7MGXUA74P7UJUAAAAAQACAQDAQCQMBYIBEFAWDANBYHRAEISCMKBKFQXDAMRUGY4DUPB6IBZGM",
+      contract: "CCEMOFO5TE7FGOAJOA3RDHPC6RW3CFXRVIGOFQPFE4ZGOKA2QEA636SN",
       ed25519_public_key_binary:
         <<140, 41, 54, 138, 42, 205, 199, 107, 245, 247, 190, 85, 36, 15, 30, 168, 67, 63, 52,
           183, 198, 97, 56, 146, 34, 127, 90, 21, 230, 0, 172, 89>>,
@@ -27,7 +28,10 @@ defmodule StellarBase.StrKeyTest do
         <<63, 12, 52, 191, 147, 173, 13, 153, 113, 208, 76, 204, 144, 247, 5, 81, 28, 131, 138,
           173, 151, 52, 164, 162, 251, 13, 122, 3, 252, 127, 232, 154, 0, 0, 0, 32, 1, 2, 3, 4, 5,
           6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
-          29, 30, 31, 32>>
+          29, 30, 31, 32>>,
+      contract_binary:
+        <<136, 199, 21, 221, 153, 62, 83, 56, 9, 112, 55, 17, 157, 226, 244, 109, 177, 22, 241,
+          170, 12, 226, 193, 229, 39, 50, 103, 40, 26, 129, 1, 237>>
     }
   end
 
@@ -54,6 +58,10 @@ defmodule StellarBase.StrKeyTest do
 
     test "signed_payload", %{signed_payload: signed_payload, signed_payload_binary: binary} do
       {:ok, ^signed_payload} = StrKey.encode(binary, :signed_payload)
+    end
+
+    test "contract", %{contract: contract, contract_binary: binary} do
+      {:ok, ^contract} = StrKey.encode(binary, :contract)
     end
   end
 
@@ -83,6 +91,10 @@ defmodule StellarBase.StrKeyTest do
     test "signed_payload", %{signed_payload: signed_payload, signed_payload_binary: binary} do
       ^signed_payload = StrKey.encode!(binary, :signed_payload)
     end
+
+    test "contract", %{contract: contract, contract_binary: binary} do
+      ^contract = StrKey.encode!(binary, :contract)
+    end
   end
 
   describe "decode/2" do
@@ -108,6 +120,10 @@ defmodule StellarBase.StrKeyTest do
 
     test "signed_payload", %{signed_payload: signed_payload, signed_payload_binary: binary} do
       {:ok, ^binary} = StrKey.decode(signed_payload, :signed_payload)
+    end
+
+    test "contract", %{contract: contract, contract_binary: binary} do
+      {:ok, ^binary} = StrKey.decode(contract, :contract)
     end
 
     test "invalid version byte", %{muxed_account: muxed_account} do
@@ -148,6 +164,10 @@ defmodule StellarBase.StrKeyTest do
 
     test "signed_payload", %{signed_payload: signed_payload, signed_payload_binary: binary} do
       ^binary = StrKey.decode!(signed_payload, :signed_payload)
+    end
+
+    test "contract", %{contract: contract, contract_binary: binary} do
+      ^binary = StrKey.decode!(contract, :contract)
     end
 
     test "invalid version byte", %{muxed_account: muxed_account} do
