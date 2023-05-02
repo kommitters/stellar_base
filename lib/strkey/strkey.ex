@@ -33,7 +33,9 @@ defmodule StellarBase.StrKey do
     # Base32-encodes to 'M...'
     muxed_account: 12 <<< 3,
     # Base32-encodes to 'P...'
-    signed_payload: 15 <<< 3
+    signed_payload: 15 <<< 3,
+    # Base32-encodes to 'C...'
+    contract: 2 <<< 3
   ]
 
   @spec encode(data :: binary_data(), version :: version()) ::
