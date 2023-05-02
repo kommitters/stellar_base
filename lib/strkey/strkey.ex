@@ -20,6 +20,7 @@ defmodule StellarBase.StrKey do
           | :sha256_hash
           | :muxed_account
           | :signed_payload
+          | :contract
 
   @version_bytes [
     # Base32-encodes to 'G...'
