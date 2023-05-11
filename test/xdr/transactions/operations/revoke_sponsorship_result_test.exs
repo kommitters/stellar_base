@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.RevokeSponsorshipResultTest do
+defmodule StellarBase.XDR.RevokeSponsorshipResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{RevokeSponsorshipResult, RevokeSponsorshipResultCode}
+  alias StellarBase.XDR.{RevokeSponsorshipResult, RevokeSponsorshipResultCode}
 
   describe "RevokeSponsorshipResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %RevokeSponsorshipResult{code: ^code, result: ^value} =
+      %RevokeSponsorshipResult{value: ^code, type: ^value} =
         RevokeSponsorshipResult.new(value, code)
     end
 
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%RevokeSponsorshipResult{
-         code: %RevokeSponsorshipResultCode{identifier: :REVOKE_SPONSORSHIP_NOT_SPONSOR}
+         value: %RevokeSponsorshipResultCode{identifier: :REVOKE_SPONSORSHIP_NOT_SPONSOR}
        }, ""} = RevokeSponsorshipResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

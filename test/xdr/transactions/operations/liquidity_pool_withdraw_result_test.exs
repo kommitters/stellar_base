@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.LiquidityPoolWithdrawResultTest do
+defmodule StellarBase.XDR.LiquidityPoolWithdrawResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{LiquidityPoolWithdrawResult, LiquidityPoolWithdrawResultCode}
+  alias StellarBase.XDR.{LiquidityPoolWithdrawResult, LiquidityPoolWithdrawResultCode}
 
   describe "LiquidityPoolWithdrawResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolWithdrawResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %LiquidityPoolWithdrawResult{code: ^code, result: ^value} =
+      %LiquidityPoolWithdrawResult{value: ^code, type: ^value} =
         LiquidityPoolWithdrawResult.new(value, code)
     end
 
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolWithdrawResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%LiquidityPoolWithdrawResult{
-         code: %LiquidityPoolWithdrawResultCode{identifier: :LIQUIDITY_POOL_WITHDRAW_NO_TRUST}
+         value: %LiquidityPoolWithdrawResultCode{identifier: :LIQUIDITY_POOL_WITHDRAW_NO_TRUST}
        }, ""} = LiquidityPoolWithdrawResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

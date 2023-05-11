@@ -14,11 +14,11 @@ defmodule StellarBase.XDR.PreconditionsTest do
     Preconditions,
     SequenceNumber,
     SignerKey,
-    SignerKeyList,
+    SignerKeyList2,
     SignerKeyType,
     TimeBounds,
     TimePoint,
-    UInt32
+    Uint32
   }
 
   describe "Precondition Time Bound" do
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.PreconditionsTest do
     end
 
     test "new/1", %{time_bounds: time_bounds, precondition_type: precondition_type} do
-      %Preconditions{preconditions: ^time_bounds, type: ^precondition_type} =
+      %Preconditions{value: ^time_bounds, type: ^precondition_type} =
         Preconditions.new(time_bounds, precondition_type)
     end
 
@@ -83,8 +83,8 @@ defmodule StellarBase.XDR.PreconditionsTest do
 
       min_time = TimePoint.new(123)
       max_time = TimePoint.new(321)
-      min_ledger = UInt32.new(123)
-      max_ledger = UInt32.new(321)
+      min_ledger = Uint32.new(123)
+      max_ledger = Uint32.new(321)
 
       signer_key_1 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -113,8 +113,8 @@ defmodule StellarBase.XDR.PreconditionsTest do
         |> OptionalSequenceNumber.new()
 
       min_seq_age = Duration.new(1234)
-      min_seq_ledger_gap = UInt32.new(4_294_967_295)
-      extra_signers = SignerKeyList.new(signer_keys)
+      min_seq_ledger_gap = Uint32.new(4_294_967_295)
+      extra_signers = SignerKeyList2.new(signer_keys)
 
       preconditions_v2 =
         PreconditionsV2.new(
@@ -147,7 +147,7 @@ defmodule StellarBase.XDR.PreconditionsTest do
     end
 
     test "new/1", %{preconditions: preconditions, precondition_type: precondition_type} do
-      %Preconditions{preconditions: ^preconditions, type: ^precondition_type} =
+      %Preconditions{value: ^preconditions, type: ^precondition_type} =
         Preconditions.new(preconditions, precondition_type)
     end
 

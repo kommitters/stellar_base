@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.DataEntryTest do
     PublicKey,
     PublicKeyType,
     String64,
-    UInt256,
+    Uint256,
     DataValue,
     Ext,
     DataEntry
@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.DataEntryTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 

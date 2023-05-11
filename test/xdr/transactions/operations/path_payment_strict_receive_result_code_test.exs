@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultCodeTest do
+defmodule StellarBase.XDR.PathPaymentStrictReceiveResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.PathPaymentStrictReceiveResultCode
+  alias StellarBase.XDR.PathPaymentStrictReceiveResultCode
 
   @codes [
     :PATH_PAYMENT_STRICT_RECEIVE_SUCCESS,

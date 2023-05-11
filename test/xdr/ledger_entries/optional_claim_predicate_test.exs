@@ -16,12 +16,12 @@ defmodule StellarBase.XDR.OptionalClaimPredicateTest do
     end
 
     test "new/1", %{optional_predicate: optional_predicate} do
-      %OptionalClaimPredicate{predicate: ^optional_predicate} =
+      %OptionalClaimPredicate{claim_predicate: ^optional_predicate} =
         OptionalClaimPredicate.new(optional_predicate)
     end
 
     test "new/1 no predicate opted" do
-      %OptionalClaimPredicate{predicate: nil} = OptionalClaimPredicate.new(nil)
+      %OptionalClaimPredicate{claim_predicate: nil} = OptionalClaimPredicate.new(nil)
     end
 
     test "encode_xdr/1", %{optional_predicate: optional_predicate, binary: binary} do
@@ -45,7 +45,7 @@ defmodule StellarBase.XDR.OptionalClaimPredicateTest do
     end
 
     test "decode_xdr/2 when predicate is not opted" do
-      {:ok, {%OptionalClaimPredicate{predicate: nil}, ""}} =
+      {:ok, {%OptionalClaimPredicate{claim_predicate: nil}, ""}} =
         OptionalClaimPredicate.decode_xdr(<<0, 0, 0, 0>>)
     end
 
@@ -54,7 +54,7 @@ defmodule StellarBase.XDR.OptionalClaimPredicateTest do
     end
 
     test "decode_xdr!/2 when ClaimPredicate is not opted" do
-      {%OptionalClaimPredicate{predicate: nil}, ""} =
+      {%OptionalClaimPredicate{claim_predicate: nil}, ""} =
         OptionalClaimPredicate.decode_xdr!(<<0, 0, 0, 0>>)
     end
   end

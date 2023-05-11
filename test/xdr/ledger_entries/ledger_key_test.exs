@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
     PublicKey,
     PublicKeyType,
     String64,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.XDR.{Account, Data, Offer}
@@ -24,7 +24,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
     account_id =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
       |> PublicKey.new(pk_type)
       |> AccountID.new()
 
@@ -71,7 +71,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
 
   test "new/1", %{discriminants: discriminants} do
     for %{type: type, ledger_key_data: ledger_key_data} <- discriminants do
-      %LedgerKey{entry: ^ledger_key_data, type: ^type} = LedgerKey.new(ledger_key_data, type)
+      %LedgerKey{value: ^ledger_key_data, type: ^type} = LedgerKey.new(ledger_key_data, type)
     end
   end
 

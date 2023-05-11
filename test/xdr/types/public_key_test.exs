@@ -1,14 +1,14 @@
 defmodule StellarBase.XDR.PublicKeyTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{UInt256, PublicKey, PublicKeyType}
+  alias StellarBase.XDR.{Uint256, PublicKey, PublicKeyType}
 
   describe "PublicKey" do
     setup do
       key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
-      public_key = %UInt256{
-        datum:
+      public_key = %Uint256{
+        value:
           <<32, 0, 117, 126, 234, 229, 131, 252, 80, 221, 102, 159, 151, 103, 58, 204, 37, 236,
             114, 88, 35, 172, 115, 250, 246, 199, 223, 49, 173, 49, 229, 9>>
       }
@@ -54,7 +54,7 @@ defmodule StellarBase.XDR.PublicKeyTest do
       assert_raise XDR.FixedOpaqueError,
                    "The length that is passed through parameters must be equal or less to the byte size of the XDR to complete",
                    fn ->
-                     %UInt256{datum: <<32, 0, 117>>}
+                     %Uint256{value: <<32, 0, 117>>}
                      |> PublicKey.new(key_type)
                      |> PublicKey.encode_xdr()
                    end

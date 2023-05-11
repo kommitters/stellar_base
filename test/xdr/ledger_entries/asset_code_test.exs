@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.AssetCodeTest do
     end
 
     test "new/1", %{asset: asset, asset_type: asset_type} do
-      %AssetCode{asset: ^asset, type: ^asset_type} = AssetCode.new(asset, asset_type)
+      %AssetCode{value: ^asset, type: ^asset_type} = AssetCode.new(asset, asset_type)
     end
 
     test "encode_xdr/1", %{asset_code: asset_code, binary: binary} do

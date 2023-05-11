@@ -24,7 +24,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
     end
 
     test "new/1", %{predicate: predicate, predicate_type: predicate_type} do
-      %ClaimPredicate{predicate: ^predicate, type: ^predicate_type} =
+      %ClaimPredicate{value: ^predicate, type: ^predicate_type} =
         ClaimPredicate.new(predicate, predicate_type)
     end
 
@@ -71,7 +71,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
     end
 
     test "new/1", %{predicate: predicate, predicate_type: predicate_type} do
-      %ClaimPredicate{predicate: ^predicate, type: ^predicate_type} =
+      %ClaimPredicate{value: ^predicate, type: ^predicate_type} =
         ClaimPredicate.new(predicate, predicate_type)
     end
 
@@ -118,7 +118,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
     end
 
     test "new/1", %{predicate: predicate, predicate_type: predicate_type} do
-      %ClaimPredicate{predicate: ^predicate, type: ^predicate_type} =
+      %ClaimPredicate{value: ^predicate, type: ^predicate_type} =
         ClaimPredicate.new(predicate, predicate_type)
     end
 
@@ -161,7 +161,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
     end
 
     test "new/1", %{predicate: predicate, predicate_type: predicate_type} do
-      %ClaimPredicate{predicate: ^predicate, type: ^predicate_type} =
+      %ClaimPredicate{value: ^predicate, type: ^predicate_type} =
         ClaimPredicate.new(predicate, predicate_type)
     end
 
@@ -200,7 +200,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
     end
 
     test "new/1", %{predicate: predicate, predicate_type: predicate_type} do
-      %ClaimPredicate{predicate: ^predicate, type: ^predicate_type} =
+      %ClaimPredicate{value: ^predicate, type: ^predicate_type} =
         ClaimPredicate.new(predicate, predicate_type)
     end
 

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.CreatePassiveSellOfferTest do
+defmodule StellarBase.XDR.CreatePassiveSellOfferOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -14,19 +14,19 @@ defmodule StellarBase.XDR.Operations.CreatePassiveSellOfferTest do
     Price,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.Operations.CreatePassiveSellOffer
+  alias StellarBase.XDR.CreatePassiveSellOfferOp
 
-  describe "CreatePassiveSellOffer Operation" do
+  describe "CreatePassiveSellOfferOp Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       issuer =
         PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.Operations.CreatePassiveSellOfferTest do
       amount = Int64.new(10_000_000)
       price = Price.new(Int32.new(1), Int32.new(10))
 
-      passive_sell_offer = CreatePassiveSellOffer.new(asset1, asset2, amount, price)
+      passive_sell_offer = CreatePassiveSellOfferOp.new(asset1, asset2, amount, price)
 
       %{
         selling: asset1,
@@ -67,28 +67,28 @@ defmodule StellarBase.XDR.Operations.CreatePassiveSellOfferTest do
     end
 
     test "new/1", %{selling: selling, buying: buying, amount: amount, price: price} do
-      %CreatePassiveSellOffer{selling: ^selling, buying: ^buying, amount: ^amount} =
-        CreatePassiveSellOffer.new(selling, buying, amount, price)
+      %CreatePassiveSellOfferOp{selling: ^selling, buying: ^buying, amount: ^amount} =
+        CreatePassiveSellOfferOp.new(selling, buying, amount, price)
     end
 
     test "encode_xdr/1", %{passive_sell_offer: passive_sell_offer, binary: binary} do
-      {:ok, ^binary} = CreatePassiveSellOffer.encode_xdr(passive_sell_offer)
+      {:ok, ^binary} = CreatePassiveSellOfferOp.encode_xdr(passive_sell_offer)
     end
 
     test "encode_xdr!/1", %{passive_sell_offer: passive_sell_offer, binary: binary} do
-      ^binary = CreatePassiveSellOffer.encode_xdr!(passive_sell_offer)
+      ^binary = CreatePassiveSellOfferOp.encode_xdr!(passive_sell_offer)
     end
 
     test "decode_xdr/2", %{passive_sell_offer: passive_sell_offer, binary: binary} do
-      {:ok, {^passive_sell_offer, ""}} = CreatePassiveSellOffer.decode_xdr(binary)
+      {:ok, {^passive_sell_offer, ""}} = CreatePassiveSellOfferOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = CreatePassiveSellOffer.decode_xdr(123)
+      {:error, :not_binary} = CreatePassiveSellOfferOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{passive_sell_offer: passive_sell_offer, binary: binary} do
-      {^passive_sell_offer, ^binary} = CreatePassiveSellOffer.decode_xdr!(binary <> binary)
+      {^passive_sell_offer, ^binary} = CreatePassiveSellOfferOp.decode_xdr!(binary <> binary)
     end
   end
 end

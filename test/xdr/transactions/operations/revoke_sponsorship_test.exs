@@ -1,20 +1,20 @@
-defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
+defmodule StellarBase.XDR.RevokeSponsorshipOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
     AccountID,
     LedgerEntryType,
     LedgerKey,
-    RevokeSponsorshipType,
+    RevokeSponsorshipOpType,
     PublicKey,
     PublicKeyType,
     SignerKey,
     SignerKeyType,
-    UInt256
+    Uint256
   }
 
-  alias StellarBase.XDR.{Account, RevokeSponsorshipSigner}
-  alias StellarBase.XDR.Operations.RevokeSponsorship
+  alias StellarBase.XDR.{Account, RevokeSponsorshipOpSigner}
+  alias StellarBase.XDR.RevokeSponsorshipOp
   alias StellarBase.StrKey
 
   setup do
@@ -23,16 +23,16 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
     account_id =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
       |> PublicKey.new(pk_type)
       |> AccountID.new()
 
     {:ok, %{account_id: account_id}}
   end
 
-  describe "LedgerKey RevokeSponsorship" do
+  describe "LedgerKey RevokeSponsorshipOp" do
     setup %{account_id: account_id} do
-      sponsorship_type = RevokeSponsorshipType.new(:REVOKE_SPONSORSHIP_LEDGER_ENTRY)
+      sponsorship_type = RevokeSponsorshipOpType.new(:REVOKE_SPONSORSHIP_LEDGER_ENTRY)
 
       ledger_key =
         account_id
@@ -42,7 +42,7 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
       %{
         type: sponsorship_type,
         ledger_key: ledger_key,
-        revoke_sponsorship: RevokeSponsorship.new(ledger_key, sponsorship_type),
+        revoke_sponsorship: RevokeSponsorshipOp.new(ledger_key, sponsorship_type),
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
             149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
@@ -51,28 +51,28 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
     end
 
     test "new/1", %{ledger_key: ledger_key, type: sponsorship_type} do
-      %RevokeSponsorship{sponsorship: ^ledger_key, type: ^sponsorship_type} =
-        RevokeSponsorship.new(ledger_key, sponsorship_type)
+      %RevokeSponsorshipOp{value: ^ledger_key, type: ^sponsorship_type} =
+        RevokeSponsorshipOp.new(ledger_key, sponsorship_type)
     end
 
     test "encode_xdr/1", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      {:ok, ^binary} = RevokeSponsorship.encode_xdr(revoke_sponsorship)
+      {:ok, ^binary} = RevokeSponsorshipOp.encode_xdr(revoke_sponsorship)
     end
 
     test "encode_xdr!/1", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      ^binary = RevokeSponsorship.encode_xdr!(revoke_sponsorship)
+      ^binary = RevokeSponsorshipOp.encode_xdr!(revoke_sponsorship)
     end
 
     test "decode_xdr/2", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      {:ok, {^revoke_sponsorship, ""}} = RevokeSponsorship.decode_xdr(binary)
+      {:ok, {^revoke_sponsorship, ""}} = RevokeSponsorshipOp.decode_xdr(binary)
     end
 
     test "decode_xdr!/2", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      {^revoke_sponsorship, ^binary} = RevokeSponsorship.decode_xdr!(binary <> binary)
+      {^revoke_sponsorship, ^binary} = RevokeSponsorshipOp.decode_xdr!(binary <> binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = RevokeSponsorship.decode_xdr(123)
+      {:error, :not_binary} = RevokeSponsorshipOp.decode_xdr(123)
     end
 
     test "invalid identifier", %{ledger_key: ledger_key} do
@@ -80,29 +80,29 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
                    "The key which you try to encode doesn't belong to the current declarations",
                    fn ->
                      ledger_key
-                     |> RevokeSponsorship.new(RevokeSponsorshipType.new(:TEST))
-                     |> RevokeSponsorship.encode_xdr()
+                     |> RevokeSponsorshipOp.new(RevokeSponsorshipOpType.new(:TEST))
+                     |> RevokeSponsorshipOp.encode_xdr()
                    end
     end
   end
 
-  describe "Signer RevokeSponsorship" do
+  describe "Signer RevokeSponsorshipOp" do
     setup %{account_id: account_id} do
-      sponsorship_type = RevokeSponsorshipType.new(:REVOKE_SPONSORSHIP_SIGNER)
+      sponsorship_type = RevokeSponsorshipOpType.new(:REVOKE_SPONSORSHIP_SIGNER)
       signer_key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519)
 
       signer_key =
         "SBZ3IBDFXTY2R47DOFOZLPNABQCABHD2FLZ3P6GM3P3CZEM6CB3ITLBD"
         |> StrKey.decode!(:ed25519_secret_seed)
-        |> UInt256.new()
+        |> Uint256.new()
         |> SignerKey.new(signer_key_type)
 
-      signer = RevokeSponsorshipSigner.new(account_id, signer_key)
+      signer = RevokeSponsorshipOpSigner.new(account_id, signer_key)
 
       %{
         type: sponsorship_type,
         signer: signer,
-        revoke_sponsorship: RevokeSponsorship.new(signer, sponsorship_type),
+        revoke_sponsorship: RevokeSponsorshipOp.new(signer, sponsorship_type),
         binary:
           <<0, 0, 0, 1, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
             205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,
@@ -112,24 +112,24 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
     end
 
     test "new/1", %{signer: signer, type: sponsorship_type} do
-      %RevokeSponsorship{sponsorship: ^signer, type: ^sponsorship_type} =
-        RevokeSponsorship.new(signer, sponsorship_type)
+      %RevokeSponsorshipOp{value: ^signer, type: ^sponsorship_type} =
+        RevokeSponsorshipOp.new(signer, sponsorship_type)
     end
 
     test "encode_xdr/1", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      {:ok, ^binary} = RevokeSponsorship.encode_xdr(revoke_sponsorship)
+      {:ok, ^binary} = RevokeSponsorshipOp.encode_xdr(revoke_sponsorship)
     end
 
     test "encode_xdr!/1", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      ^binary = RevokeSponsorship.encode_xdr!(revoke_sponsorship)
+      ^binary = RevokeSponsorshipOp.encode_xdr!(revoke_sponsorship)
     end
 
     test "decode_xdr/2", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      {:ok, {^revoke_sponsorship, ""}} = RevokeSponsorship.decode_xdr(binary)
+      {:ok, {^revoke_sponsorship, ""}} = RevokeSponsorshipOp.decode_xdr(binary)
     end
 
     test "decode_xdr!/2", %{revoke_sponsorship: revoke_sponsorship, binary: binary} do
-      {^revoke_sponsorship, ^binary} = RevokeSponsorship.decode_xdr!(binary <> binary)
+      {^revoke_sponsorship, ^binary} = RevokeSponsorshipOp.decode_xdr!(binary <> binary)
     end
   end
 end

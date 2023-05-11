@@ -1,10 +1,10 @@
-defmodule StellarBase.XDR.SourceAccountContractIDTest do
+defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractIDTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    SourceAccountContractID,
+    HashIDPreimageSourceAccountContractID,
     Hash,
-    UInt256,
+    Uint256,
     AccountID,
     PublicKey,
     PublicKeyType
@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.SourceAccountContractIDTest do
 
   alias StellarBase.StrKey
 
-  describe "SourceAccountContractID" do
+  describe "HashIDPreimageSourceAccountContractID" do
     setup do
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
@@ -21,12 +21,12 @@ defmodule StellarBase.XDR.SourceAccountContractIDTest do
       source_account =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       salt =
-        UInt256.new(
+        Uint256.new(
           <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
             108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
         )
@@ -35,7 +35,7 @@ defmodule StellarBase.XDR.SourceAccountContractIDTest do
         network_id: network_id,
         source_account: source_account,
         salt: salt,
-        source_account_contract_id: SourceAccountContractID.new(network_id, source_account, salt),
+        source_account_contract_id: HashIDPreimageSourceAccountContractID.new(network_id, source_account, salt),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27,
@@ -51,37 +51,37 @@ defmodule StellarBase.XDR.SourceAccountContractIDTest do
       source_account: source_account,
       salt: salt
     } do
-      %SourceAccountContractID{
+      %HashIDPreimageSourceAccountContractID{
         network_id: ^network_id,
         source_account: ^source_account,
         salt: ^salt
-      } = SourceAccountContractID.new(network_id, source_account, salt)
+      } = HashIDPreimageSourceAccountContractID.new(network_id, source_account, salt)
     end
 
     test "encode_xdr/1", %{source_account_contract_id: source_account_contract_id, binary: binary} do
-      {:ok, ^binary} = SourceAccountContractID.encode_xdr(source_account_contract_id)
+      {:ok, ^binary} = HashIDPreimageSourceAccountContractID.encode_xdr(source_account_contract_id)
     end
 
     test "encode_xdr!/1", %{
       source_account_contract_id: source_account_contract_id,
       binary: binary
     } do
-      ^binary = SourceAccountContractID.encode_xdr!(source_account_contract_id)
+      ^binary = HashIDPreimageSourceAccountContractID.encode_xdr!(source_account_contract_id)
     end
 
     test "decode_xdr/2", %{source_account_contract_id: source_account_contract_id, binary: binary} do
-      {:ok, {^source_account_contract_id, ""}} = SourceAccountContractID.decode_xdr(binary)
+      {:ok, {^source_account_contract_id, ""}} = HashIDPreimageSourceAccountContractID.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = SourceAccountContractID.decode_xdr(123)
+      {:error, :not_binary} = HashIDPreimageSourceAccountContractID.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
       source_account_contract_id: source_account_contract_id,
       binary: binary
     } do
-      {^source_account_contract_id, ""} = SourceAccountContractID.decode_xdr!(binary)
+      {^source_account_contract_id, ""} = HashIDPreimageSourceAccountContractID.decode_xdr!(binary)
     end
   end
 end

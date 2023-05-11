@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.ExtensionPointTest do
     end
 
     test "new/1", %{void: void, extension_point_type: extension_point_type} do
-      %ExtensionPoint{extension_point: ^void} = ExtensionPoint.new(void, extension_point_type)
+      %ExtensionPoint{value: ^void} = ExtensionPoint.new(void, extension_point_type)
     end
 
     test "encode_xdr/1", %{extension_point: extension_point, binary: binary} do

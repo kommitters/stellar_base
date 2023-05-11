@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     PublicKey,
     PublicKeyType,
     TrustLineAsset,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
       |> PublicKey.new(key_type)
       |> AccountID.new()
 
@@ -51,7 +51,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     end
 
     test "new/1", %{alpha_num4: alpha_num4, asset_type: asset_type} do
-      %TrustLineAsset{asset: ^alpha_num4, type: ^asset_type} =
+      %TrustLineAsset{value: ^alpha_num4, type: ^asset_type} =
         TrustLineAsset.new(alpha_num4, asset_type)
     end
 
@@ -109,7 +109,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     end
 
     test "new/1", %{alpha_num12: alpha_num12, asset_type: asset_type} do
-      %TrustLineAsset{asset: ^alpha_num12, type: ^asset_type} =
+      %TrustLineAsset{value: ^alpha_num12, type: ^asset_type} =
         TrustLineAsset.new(alpha_num12, asset_type)
     end
 
@@ -163,7 +163,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     end
 
     test "new/1", %{pool_id: pool_id, asset_type: asset_type} do
-      %TrustLineAsset{asset: ^pool_id, type: ^asset_type} =
+      %TrustLineAsset{value: ^pool_id, type: ^asset_type} =
         TrustLineAsset.new(pool_id, asset_type)
     end
 

@@ -1,11 +1,11 @@
-defmodule StellarBase.XDR.Operations.SetOptionsTest do
+defmodule StellarBase.XDR.SetOptionsOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
     AccountID,
     OptionalAccountID,
     OptionalString32,
-    OptionalUInt32,
+    OptionalUint32,
     OptionalSigner,
     PublicKey,
     PublicKeyType,
@@ -13,47 +13,47 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
     SignerKey,
     SignerKeyType,
     String32,
-    UInt32,
-    UInt256
+    Uint32,
+    Uint256
   }
 
-  alias StellarBase.XDR.Operations.SetOptions
+  alias StellarBase.XDR.SetOptionsOp
 
   alias StellarBase.StrKey
 
-  describe "SetOptions Operation" do
+  describe "SetOptionsOp Operation" do
     setup do
       account_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(account_type)
         |> AccountID.new()
 
       signer_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519)
-      signer_weight = UInt32.new(2)
+      signer_weight = Uint32.new(2)
 
       signer =
         "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> SignerKey.new(signer_type)
         |> Signer.new(signer_weight)
         |> OptionalSigner.new()
 
       inflation_dest = OptionalAccountID.new(account_id)
-      clear_flags = OptionalUInt32.new()
-      set_flags = OptionalUInt32.new()
-      master_weight = OptionalUInt32.new(UInt32.new(4))
-      low_threshold = OptionalUInt32.new(UInt32.new(1))
-      med_threshold = OptionalUInt32.new(UInt32.new(2))
-      high_threshold = OptionalUInt32.new(UInt32.new(3))
+      clear_flags = OptionalUint32.new()
+      set_flags = OptionalUint32.new()
+      master_weight = OptionalUint32.new(Uint32.new(4))
+      low_threshold = OptionalUint32.new(Uint32.new(1))
+      med_threshold = OptionalUint32.new(Uint32.new(2))
+      high_threshold = OptionalUint32.new(Uint32.new(3))
       home_domain = OptionalString32.new(String32.new("kommit.co"))
 
       set_options =
-        SetOptions.new(
+        SetOptionsOp.new(
           inflation_dest,
           clear_flags,
           set_flags,
@@ -98,8 +98,8 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
       home_domain: home_domain,
       signer: signer
     } do
-      %SetOptions{inflation_dest: ^inflation_dest, clear_flags: ^clear_flags, signer: ^signer} =
-        SetOptions.new(
+      %SetOptionsOp{inflation_dest: ^inflation_dest, clear_flags: ^clear_flags, signer: ^signer} =
+        SetOptionsOp.new(
           inflation_dest,
           clear_flags,
           set_flags,
@@ -113,23 +113,23 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
     end
 
     test "encode_xdr/1", %{set_options: set_options, binary: binary} do
-      {:ok, ^binary} = SetOptions.encode_xdr(set_options)
+      {:ok, ^binary} = SetOptionsOp.encode_xdr(set_options)
     end
 
     test "encode_xdr!/1", %{set_options: set_options, binary: binary} do
-      ^binary = SetOptions.encode_xdr!(set_options)
+      ^binary = SetOptionsOp.encode_xdr!(set_options)
     end
 
     test "decode_xdr/2", %{set_options: set_options, binary: binary} do
-      {:ok, {^set_options, ""}} = SetOptions.decode_xdr(binary)
+      {:ok, {^set_options, ""}} = SetOptionsOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = SetOptions.decode_xdr(123)
+      {:error, :not_binary} = SetOptionsOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{set_options: set_options, binary: binary} do
-      {^set_options, ^binary} = SetOptions.decode_xdr!(binary <> binary)
+      {^set_options, ^binary} = SetOptionsOp.decode_xdr!(binary <> binary)
     end
   end
 end

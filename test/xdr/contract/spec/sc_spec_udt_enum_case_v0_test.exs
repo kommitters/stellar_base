@@ -1,13 +1,13 @@
 defmodule StellarBase.XDR.SCSpecUDTEnumCaseV0Test do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{String1024, String60, SCSpecUDTEnumCaseV0, UInt32}
+  alias StellarBase.XDR.{String1024, String60, SCSpecUDTEnumCaseV0, Uint32}
 
   describe "SCSpecUDTEnumCaseV0" do
     setup do
       doc = String1024.new("Hello there this is a test")
       name = String60.new("Hello there")
-      value = UInt32.new(4_294_967_295)
+      value = Uint32.new(4_294_967_295)
 
       %{
         doc: doc,

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
+defmodule StellarBase.XDR.PathPaymentStrictReceiveOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -15,20 +15,20 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
     MuxedAccount,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.Operations.PathPaymentStrictReceive
+  alias StellarBase.XDR.PathPaymentStrictReceiveOp
 
-  describe "PathPaymentStrictReceive Operation" do
+  describe "PathPaymentStrictReceiveOp Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       issuer =
         PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -38,7 +38,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
       pk_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       destination = MuxedAccount.new(pk_key, CryptoKeyType.new(:KEY_TYPE_ED25519))
 
@@ -64,7 +64,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
         |> (&Assets.new([&1])).()
 
       payment_strict =
-        PathPaymentStrictReceive.new(
+        PathPaymentStrictReceiveOp.new(
           send_asset,
           send_max,
           destination,
@@ -101,8 +101,8 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
       dest_amount: dest_amount,
       path: path
     } do
-      %PathPaymentStrictReceive{send_asset: ^send_asset, destination: ^destination, path: ^path} =
-        PathPaymentStrictReceive.new(
+      %PathPaymentStrictReceiveOp{send_asset: ^send_asset, destination: ^destination, path: ^path} =
+        PathPaymentStrictReceiveOp.new(
           send_asset,
           send_max,
           destination,
@@ -113,23 +113,23 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
     end
 
     test "encode_xdr/1", %{payment_strict: payment_strict, binary: binary} do
-      {:ok, ^binary} = PathPaymentStrictReceive.encode_xdr(payment_strict)
+      {:ok, ^binary} = PathPaymentStrictReceiveOp.encode_xdr(payment_strict)
     end
 
     test "encode_xdr!/1", %{payment_strict: payment_strict, binary: binary} do
-      ^binary = PathPaymentStrictReceive.encode_xdr!(payment_strict)
+      ^binary = PathPaymentStrictReceiveOp.encode_xdr!(payment_strict)
     end
 
     test "decode_xdr/2", %{payment_strict: payment_strict, binary: binary} do
-      {:ok, {^payment_strict, ""}} = PathPaymentStrictReceive.decode_xdr(binary)
+      {:ok, {^payment_strict, ""}} = PathPaymentStrictReceiveOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = PathPaymentStrictReceive.decode_xdr(123)
+      {:error, :not_binary} = PathPaymentStrictReceiveOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{payment_strict: payment_strict, binary: binary} do
-      {^payment_strict, ^binary} = PathPaymentStrictReceive.decode_xdr!(binary <> binary)
+      {^payment_strict, ^binary} = PathPaymentStrictReceiveOp.decode_xdr!(binary <> binary)
     end
   end
 end

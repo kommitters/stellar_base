@@ -11,10 +11,10 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     Int64,
     LedgerEntryType,
     LedgerEntryData,
-    UInt256,
+    Uint256,
     OptionalAccountID,
     SignerKeyType,
-    UInt32,
+    Uint32,
     SignerKey,
     Signer,
     SequenceNumber,
@@ -55,19 +55,19 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       |> OptionalAccountID.new()
 
     signer_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519)
-    signer_weight = UInt32.new(2)
+    signer_weight = Uint32.new(2)
 
     signer =
       "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
       |> SignerKey.new(signer_type)
       |> Signer.new(signer_weight)
 
     balance = Int64.new(5)
     seq_num = SequenceNumber.new(12_345_678)
-    num_sub_entries = UInt32.new(5)
-    flags = UInt32.new(5)
+    num_sub_entries = Uint32.new(5)
+    flags = Uint32.new(5)
     home_domain = String32.new("kommit.co")
     thresholds = Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
     signers = Signers.new([signer])
@@ -210,7 +210,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
 
   test "new/1", %{discriminants: discriminants} do
     for %{type: type, ledger_entry_data: ledger_entry_data} <- discriminants do
-      %LedgerEntryData{entry: ^ledger_entry_data, type: ^type} =
+      %LedgerEntryData{value: ^ledger_entry_data, type: ^type} =
         LedgerEntryData.new(ledger_entry_data, type)
     end
   end

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.AllowTrustTest do
+defmodule StellarBase.XDR.AllowTrustOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -9,29 +9,29 @@ defmodule StellarBase.XDR.Operations.AllowTrustTest do
     AssetType,
     PublicKey,
     PublicKeyType,
-    UInt32,
-    UInt256
+    Uint32,
+    Uint256
   }
 
-  alias StellarBase.XDR.Operations.AllowTrust
+  alias StellarBase.XDR.AllowTrustOp
 
   alias StellarBase.StrKey
 
-  describe "AllowTrust Operation" do
+  describe "AllowTrustOp Operation" do
     setup do
       key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
@@ -41,9 +41,9 @@ defmodule StellarBase.XDR.Operations.AllowTrustTest do
         |> AlphaNum4.new(issuer)
         |> Asset.new(AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4))
 
-      authorize = UInt32.new(1)
+      authorize = Uint32.new(1)
 
-      allow_trust = AllowTrust.new(account_id, asset, authorize)
+      allow_trust = AllowTrustOp.new(account_id, asset, authorize)
 
       %{
         trustor: account_id,
@@ -60,28 +60,28 @@ defmodule StellarBase.XDR.Operations.AllowTrustTest do
     end
 
     test "new/1", %{trustor: trustor, asset: asset, authorize: authorize} do
-      %AllowTrust{trustor: ^trustor, asset_code: ^asset, authorize: ^authorize} =
-        AllowTrust.new(trustor, asset, authorize)
+      %AllowTrustOp{trustor: ^trustor, asset: ^asset, authorize: ^authorize} =
+        AllowTrustOp.new(trustor, asset, authorize)
     end
 
     test "encode_xdr/1", %{allow_trust: allow_trust, binary: binary} do
-      {:ok, ^binary} = AllowTrust.encode_xdr(allow_trust)
+      {:ok, ^binary} = AllowTrustOp.encode_xdr(allow_trust)
     end
 
     test "encode_xdr!/1", %{allow_trust: allow_trust, binary: binary} do
-      ^binary = AllowTrust.encode_xdr!(allow_trust)
+      ^binary = AllowTrustOp.encode_xdr!(allow_trust)
     end
 
     test "decode_xdr/2", %{allow_trust: allow_trust, binary: binary} do
-      {:ok, {^allow_trust, ""}} = AllowTrust.decode_xdr(binary)
+      {:ok, {^allow_trust, ""}} = AllowTrustOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = AllowTrust.decode_xdr(123)
+      {:error, :not_binary} = AllowTrustOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{allow_trust: allow_trust, binary: binary} do
-      {^allow_trust, ^binary} = AllowTrust.decode_xdr!(binary <> binary)
+      {^allow_trust, ^binary} = AllowTrustOp.decode_xdr!(binary <> binary)
     end
   end
 end

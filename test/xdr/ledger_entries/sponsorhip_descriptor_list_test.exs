@@ -3,9 +3,9 @@ defmodule StellarBase.XDR.SponsorhipDescriptorListTest do
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{SponsorshipDescriptorList, OptionalAccountID, SponsorshipDescriptor}
+  alias StellarBase.XDR.{SponsorshipDescriptorList20, OptionalAccountID, SponsorshipDescriptor}
 
-  describe "SponsorshipDescriptorList" do
+  describe "SponsorshipDescriptorList20" do
     setup do
       sponsorship_descriptor_1 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.SponsorhipDescriptorListTest do
 
       %{
         sponsorship_descriptors: sponsorship_descriptors,
-        sponsorship_descriptor_list: SponsorshipDescriptorList.new(sponsorship_descriptors),
+        sponsorship_descriptor_list: SponsorshipDescriptorList20.new(sponsorship_descriptors),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158,
             164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34,
@@ -34,46 +34,46 @@ defmodule StellarBase.XDR.SponsorhipDescriptorListTest do
     end
 
     test "new/1", %{sponsorship_descriptors: sponsorship_descriptors} do
-      %SponsorshipDescriptorList{sponsorship_descriptors: ^sponsorship_descriptors} =
-        SponsorshipDescriptorList.new(sponsorship_descriptors)
+      %SponsorshipDescriptorList20{items: ^sponsorship_descriptors} =
+        SponsorshipDescriptorList20.new(sponsorship_descriptors)
     end
 
     test "encode_xdr/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      {:ok, ^binary} = SponsorshipDescriptorList.encode_xdr(sponsorship_descriptor_list)
+      {:ok, ^binary} = SponsorshipDescriptorList20.encode_xdr(sponsorship_descriptor_list)
     end
 
     test "encode_xdr!/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      ^binary = SponsorshipDescriptorList.encode_xdr!(sponsorship_descriptor_list)
+      ^binary = SponsorshipDescriptorList20.encode_xdr!(sponsorship_descriptor_list)
     end
 
     test "decode_xdr/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      {:ok, {^sponsorship_descriptor_list, ""}} = SponsorshipDescriptorList.decode_xdr(binary)
+      {:ok, {^sponsorship_descriptor_list, ""}} = SponsorshipDescriptorList20.decode_xdr(binary)
     end
 
     test "decode_xdr/1 with an invalid binary" do
-      {:error, :not_binary} = SponsorshipDescriptorList.decode_xdr(123)
+      {:error, :not_binary} = SponsorshipDescriptorList20.decode_xdr(123)
     end
 
     test "decode_xdr!/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      {^sponsorship_descriptor_list, ""} = SponsorshipDescriptorList.decode_xdr!(binary)
+      {^sponsorship_descriptor_list, ""} = SponsorshipDescriptorList20.decode_xdr!(binary)
     end
 
     test "decode_xdr!/1 with an invalid binary" do
       assert_raise XDR.VariableArrayError,
                    "The value which you pass through parameters must be a binary value, for example: <<0, 0, 0, 5>>",
-                   fn -> SponsorshipDescriptorList.decode_xdr!(123) end
+                   fn -> SponsorshipDescriptorList20.decode_xdr!(123) end
     end
   end
 end

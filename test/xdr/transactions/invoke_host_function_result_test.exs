@@ -57,7 +57,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
     test "new/1", %{discriminants: discriminants} do
       for %{value: value, invoke_host_function_result_code: invoke_host_function_result_code} <-
             discriminants do
-        %InvokeHostFunctionResult{value: ^value, code: ^invoke_host_function_result_code} =
+        %InvokeHostFunctionResult{value: ^value, type: ^invoke_host_function_result_code} =
           InvokeHostFunctionResult.new(value, invoke_host_function_result_code)
       end
     end

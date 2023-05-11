@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
+defmodule StellarBase.XDR.SCSpecFunctionInputV0List10Test do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -8,10 +8,10 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
     String1024,
     SCSpecType,
     SCSpecFunctionInputV0,
-    SCSpecFunctionInputV0List
+    SCSpecFunctionInputV0List10
   }
 
-  describe "SCSpecFunctionInputV0List" do
+  describe "SCSpecFunctionInputV0List10" do
     setup do
       doc = String1024.new("Hello there this is a test")
       name = String30.new("Hello there")
@@ -37,7 +37,7 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
 
       %{
         inputs: inputs,
-        sponsorship_descriptor_list: SCSpecFunctionInputV0List.new(inputs),
+        sponsorship_descriptor_list: SCSpecFunctionInputV0List10.new(inputs),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 26, 72, 101, 108, 108, 111, 32, 116, 104, 101, 114, 101, 32, 116,
             104, 105, 115, 32, 105, 115, 32, 97, 32, 116, 101, 115, 116, 0, 0, 0, 0, 0, 11, 72,
@@ -49,45 +49,45 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0ListTest do
     end
 
     test "new/1", %{inputs: inputs} do
-      %SCSpecFunctionInputV0List{inputs: ^inputs} = SCSpecFunctionInputV0List.new(inputs)
+      %SCSpecFunctionInputV0List10{items: ^inputs} = SCSpecFunctionInputV0List10.new(inputs)
     end
 
     test "encode_xdr/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      {:ok, ^binary} = SCSpecFunctionInputV0List.encode_xdr(sponsorship_descriptor_list)
+      {:ok, ^binary} = SCSpecFunctionInputV0List10.encode_xdr(sponsorship_descriptor_list)
     end
 
     test "encode_xdr!/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      ^binary = SCSpecFunctionInputV0List.encode_xdr!(sponsorship_descriptor_list)
+      ^binary = SCSpecFunctionInputV0List10.encode_xdr!(sponsorship_descriptor_list)
     end
 
     test "decode_xdr/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      {:ok, {^sponsorship_descriptor_list, ""}} = SCSpecFunctionInputV0List.decode_xdr(binary)
+      {:ok, {^sponsorship_descriptor_list, ""}} = SCSpecFunctionInputV0List10.decode_xdr(binary)
     end
 
     test "decode_xdr/1 with an invalid binary" do
-      {:error, :not_binary} = SCSpecFunctionInputV0List.decode_xdr(123)
+      {:error, :not_binary} = SCSpecFunctionInputV0List10.decode_xdr(123)
     end
 
     test "decode_xdr!/1", %{
       sponsorship_descriptor_list: sponsorship_descriptor_list,
       binary: binary
     } do
-      {^sponsorship_descriptor_list, ""} = SCSpecFunctionInputV0List.decode_xdr!(binary)
+      {^sponsorship_descriptor_list, ""} = SCSpecFunctionInputV0List10.decode_xdr!(binary)
     end
 
     test "decode_xdr!/1 with an invalid binary" do
       assert_raise XDR.VariableArrayError,
                    "The value which you pass through parameters must be a binary value, for example: <<0, 0, 0, 5>>",
-                   fn -> SCSpecFunctionInputV0List.decode_xdr!(123) end
+                   fn -> SCSpecFunctionInputV0List10.decode_xdr!(123) end
     end
   end
 end

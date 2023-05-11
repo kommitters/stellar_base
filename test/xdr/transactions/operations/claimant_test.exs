@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.ClaimantTest do
     ClaimPredicate,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
@@ -27,7 +27,7 @@ defmodule StellarBase.XDR.ClaimantTest do
       claimant_v0 =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
         |> ClaimantV0.new(claim_predicate)
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.ClaimantTest do
     end
 
     test "new/1", %{claimant_v0: claimant_v0, claimant_type: claimant_type} do
-      %Claimant{claimant: ^claimant_v0, type: ^claimant_type} =
+      %Claimant{value: ^claimant_v0, type: ^claimant_type} =
         Claimant.new(claimant_v0, claimant_type)
     end
 

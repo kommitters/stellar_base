@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.DurationTest do
     end
 
     test "new/1" do
-      %Duration{value: 1234} = Duration.new(1234)
+      %Duration{duration: 1234} = Duration.new(1234)
     end
 
     test "encode_xdr/1", %{duration: duration, binary: binary} do

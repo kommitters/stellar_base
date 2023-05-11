@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.AlphaNum12Test do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{AccountID, AlphaNum12, AssetCode12, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, AlphaNum12, AssetCode12, PublicKey, PublicKeyType, Uint256}
 
   alias StellarBase.StrKey
 
@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.AlphaNum12Test do
       pk_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       issuer =
         PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)

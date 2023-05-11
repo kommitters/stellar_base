@@ -10,10 +10,10 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
     AccountEntryExtensionV3,
     ExtensionPoint,
     OptionalAccountID,
-    SponsorshipDescriptorList,
+    SponsorshipDescriptorList20,
     SponsorshipDescriptor,
     TimePoint,
-    UInt32,
+    Uint32,
     Void
   }
 
@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
   describe "AccountEntryExtensionV1Ext" do
     setup do
       extension_point = ExtensionPoint.new(Void.new(), 0)
-      seq_ledger = UInt32.new(10)
+      seq_ledger = Uint32.new(10)
       seq_time = TimePoint.new(12_345)
 
       account_entry_extension_v2_ext_list =
@@ -41,8 +41,8 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
         account_entry_extension_v2_ext_list
         |> Enum.map(fn account_entry_extension_v2_ext ->
           AccountEntryExtensionV2.new(
-            UInt32.new(10),
-            UInt32.new(10),
+            Uint32.new(10),
+            Uint32.new(10),
             create_sponsorship_descriptor_list(),
             account_entry_extension_v2_ext
           )
@@ -129,7 +129,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
     end
   end
 
-  @spec create_sponsorship_descriptor_list() :: SponsorshipDescriptorList.t()
+  @spec create_sponsorship_descriptor_list() :: SponsorshipDescriptorList20.t()
   defp create_sponsorship_descriptor_list do
     sponsorship_descriptor_1 =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -143,6 +143,6 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
       |> OptionalAccountID.new()
       |> SponsorshipDescriptor.new()
 
-    SponsorshipDescriptorList.new([sponsorship_descriptor_1, sponsorship_descriptor_2])
+    SponsorshipDescriptorList20.new([sponsorship_descriptor_1, sponsorship_descriptor_2])
   end
 end

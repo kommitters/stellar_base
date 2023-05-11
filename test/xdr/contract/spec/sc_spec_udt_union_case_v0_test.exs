@@ -51,7 +51,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0Test do
 
     test "new/2", %{discriminants: discriminants} do
       for %{status_kind: status_kind, sc_code: sc_code} <- discriminants do
-        %SCSpecUDTUnionCaseV0{code: ^sc_code, kind: ^status_kind} =
+        %SCSpecUDTUnionCaseV0{value: ^sc_code, type: ^status_kind} =
           SCSpecUDTUnionCaseV0.new(sc_code, status_kind)
       end
     end

@@ -1,10 +1,10 @@
-defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceTest do
+defmodule StellarBase.XDR.ClawbackClaimableBalanceOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{ClaimableBalanceID, ClaimableBalanceIDType, Hash}
-  alias StellarBase.XDR.Operations.ClawbackClaimableBalance
+  alias StellarBase.XDR.ClawbackClaimableBalanceOp
 
-  describe "ClawbackClaimableBalance Operation" do
+  describe "ClawbackClaimableBalanceOp Operation" do
     setup do
       balance_id_type = ClaimableBalanceIDType.new(:CLAIMABLE_BALANCE_ID_TYPE_V0)
       balance_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceTest do
 
       %{
         claimable_balance_id: claimable_balance_id,
-        clawback_claimable_balance: ClawbackClaimableBalance.new(claimable_balance_id),
+        clawback_claimable_balance: ClawbackClaimableBalanceOp.new(claimable_balance_id),
         binary:
           <<0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80,
             54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78>>
@@ -20,27 +20,27 @@ defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceTest do
     end
 
     test "new/1", %{claimable_balance_id: claimable_balance_id} do
-      %ClawbackClaimableBalance{balance_id: ^claimable_balance_id} =
-        ClawbackClaimableBalance.new(claimable_balance_id)
+      %ClawbackClaimableBalanceOp{balance_id: ^claimable_balance_id} =
+        ClawbackClaimableBalanceOp.new(claimable_balance_id)
     end
 
     test "encode_xdr/1", %{clawback_claimable_balance: clawback_claimable_balance, binary: binary} do
-      {:ok, ^binary} = ClawbackClaimableBalance.encode_xdr(clawback_claimable_balance)
+      {:ok, ^binary} = ClawbackClaimableBalanceOp.encode_xdr(clawback_claimable_balance)
     end
 
     test "encode_xdr!/1", %{
       clawback_claimable_balance: clawback_claimable_balance,
       binary: binary
     } do
-      ^binary = ClawbackClaimableBalance.encode_xdr!(clawback_claimable_balance)
+      ^binary = ClawbackClaimableBalanceOp.encode_xdr!(clawback_claimable_balance)
     end
 
     test "decode_xdr/2", %{clawback_claimable_balance: clawback_claimable_balance, binary: binary} do
-      {:ok, {^clawback_claimable_balance, ""}} = ClawbackClaimableBalance.decode_xdr(binary)
+      {:ok, {^clawback_claimable_balance, ""}} = ClawbackClaimableBalanceOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = ClawbackClaimableBalance.decode_xdr(123)
+      {:error, :not_binary} = ClawbackClaimableBalanceOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceTest do
       binary: binary
     } do
       {^clawback_claimable_balance, ^binary} =
-        ClawbackClaimableBalance.decode_xdr!(binary <> binary)
+        ClawbackClaimableBalanceOp.decode_xdr!(binary <> binary)
     end
   end
 end

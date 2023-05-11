@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PathPaymentStrictResultSuccessTest do
+defmodule StellarBase.XDR.PathPaymentStrictReceiveResultSuccessTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
@@ -11,9 +11,9 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictResultSuccessTest do
     Int64
   }
 
-  alias StellarBase.XDR.Operations.{PathPaymentStrictResultSuccess, SimplePaymentResult}
+  alias StellarBase.XDR.{PathPaymentStrictReceiveResultSuccess, SimplePaymentResult}
 
-  describe "PathPaymentStrictResultSuccessTest" do
+  describe "PathPaymentStrictReceiveResultSuccessTest" do
     setup do
       destination = create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
@@ -57,7 +57,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictResultSuccessTest do
       %{
         offers: offers,
         last_payment: last_payment,
-        path_payment_result: PathPaymentStrictResultSuccess.new(offers, last_payment),
+        path_payment_result: PathPaymentStrictReceiveResultSuccess.new(offers, last_payment),
         binary:
           <<0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158,
             164, 247, 67, 32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34,
@@ -76,29 +76,29 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictResultSuccessTest do
     end
 
     test "new/1", %{offers: offers, last_payment: last_payment} do
-      %PathPaymentStrictResultSuccess{offers: ^offers, last: ^last_payment} =
-        PathPaymentStrictResultSuccess.new(offers, last_payment)
+      %PathPaymentStrictReceiveResultSuccess{offers: ^offers, last: ^last_payment} =
+        PathPaymentStrictReceiveResultSuccess.new(offers, last_payment)
     end
 
     test "encode_xdr/1", %{path_payment_result: path_payment_result, binary: binary} do
-      {:ok, ^binary} = PathPaymentStrictResultSuccess.encode_xdr(path_payment_result)
+      {:ok, ^binary} = PathPaymentStrictReceiveResultSuccess.encode_xdr(path_payment_result)
     end
 
     test "encode_xdr!/1", %{path_payment_result: path_payment_result, binary: binary} do
-      ^binary = PathPaymentStrictResultSuccess.encode_xdr!(path_payment_result)
+      ^binary = PathPaymentStrictReceiveResultSuccess.encode_xdr!(path_payment_result)
     end
 
     test "decode_xdr/2", %{path_payment_result: path_payment_result, binary: binary} do
-      {:ok, {^path_payment_result, ""}} = PathPaymentStrictResultSuccess.decode_xdr(binary)
+      {:ok, {^path_payment_result, ""}} = PathPaymentStrictReceiveResultSuccess.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = PathPaymentStrictResultSuccess.decode_xdr(123)
+      {:error, :not_binary} = PathPaymentStrictReceiveResultSuccess.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{path_payment_result: path_payment_result, binary: binary} do
       {^path_payment_result, ^binary} =
-        PathPaymentStrictResultSuccess.decode_xdr!(binary <> binary)
+        PathPaymentStrictReceiveResultSuccess.decode_xdr!(binary <> binary)
     end
   end
 end

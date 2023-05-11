@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.Int128PartsTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{Int128Parts, UInt64}
+  alias StellarBase.XDR.{Int128Parts, Uint64}
 
   describe "Int128Parts" do
     setup do
-      lo = UInt64.new(3312)
-      hi = UInt64.new(3313)
+      lo = Uint64.new(3312)
+      hi = Uint64.new(3313)
 
       %{
         lo: lo,

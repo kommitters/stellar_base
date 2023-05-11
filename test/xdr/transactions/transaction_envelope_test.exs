@@ -26,16 +26,16 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     TransactionEnvelope,
     TransactionV0Envelope,
     TransactionV1Envelope,
-    UInt32,
-    UInt64,
-    UInt256
+    Uint32,
+    Uint64,
+    Uint256
   }
 
   alias StellarBase.StrKey
 
   setup do
     # Seq number
-    fee = UInt32.new(100)
+    fee = Uint32.new(100)
     seq_num = SequenceNumber.new(12_345_678)
 
     # time bounds
@@ -50,7 +50,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
 
     # memo
     memo_type = MemoType.new(:MEMO_ID)
-    memo_id = UInt64.new(12_345)
+    memo_id = Uint64.new(12_345)
     memo = Memo.new(memo_id, memo_type)
 
     # operations
@@ -83,7 +83,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
       source_account_ed25519 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       tx =
         TransactionV0.new(
@@ -139,7 +139,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     end
 
     test "new/1", %{tx_envelope: tx_envelope, envelope_type: envelope_type} do
-      %TransactionEnvelope{envelope: ^tx_envelope, type: ^envelope_type} =
+      %TransactionEnvelope{value: ^tx_envelope, type: ^envelope_type} =
         TransactionEnvelope.new(tx_envelope, envelope_type)
     end
 
@@ -230,7 +230,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     end
 
     test "new/1", %{tx_envelope: tx_envelope, envelope_type: envelope_type} do
-      %TransactionEnvelope{envelope: ^tx_envelope, type: ^envelope_type} =
+      %TransactionEnvelope{value: ^tx_envelope, type: ^envelope_type} =
         TransactionEnvelope.new(tx_envelope, envelope_type)
     end
 
@@ -330,7 +330,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     end
 
     test "new/1", %{tx_envelope: tx_envelope, envelope_type: envelope_type} do
-      %TransactionEnvelope{envelope: ^tx_envelope, type: ^envelope_type} =
+      %TransactionEnvelope{value: ^tx_envelope, type: ^envelope_type} =
         TransactionEnvelope.new(tx_envelope, envelope_type)
     end
 

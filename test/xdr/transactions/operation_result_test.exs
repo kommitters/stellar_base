@@ -9,7 +9,7 @@ defmodule StellarBase.XDR.OperationResultTest do
     Void
   }
 
-  alias StellarBase.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
+  alias StellarBase.XDR.{CreateAccountResult, CreateAccountResultCode}
 
   describe "OperationResult" do
     setup do
@@ -29,7 +29,7 @@ defmodule StellarBase.XDR.OperationResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %OperationResult{code: ^code, result: ^value} = OperationResult.new(value, code)
+      %OperationResult{value: ^code, type: ^value} = OperationResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -59,7 +59,7 @@ defmodule StellarBase.XDR.OperationResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%OperationResult{
-         code: %OperationResultCode{identifier: :opNO_ACCOUNT}
+         value: %OperationResultCode{identifier: :opNO_ACCOUNT}
        }, ""} = OperationResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

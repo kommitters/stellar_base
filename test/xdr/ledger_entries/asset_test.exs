@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.AssetTest do
     AssetType,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.AssetTest do
     issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
       |> PublicKey.new(key_type)
       |> AccountID.new()
 

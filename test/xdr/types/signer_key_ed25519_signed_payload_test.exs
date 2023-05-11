@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.SignerKeyEd25519SignedPayloadTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{SignerKeyEd25519SignedPayload, UInt256, VariableOpaque64}
+  alias StellarBase.XDR.{SignerKeyEd25519SignedPayload, Uint256, VariableOpaque64}
 
   describe "Ed25519 Signed Payload" do
     setup do
       ed25519 =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )

@@ -1,10 +1,10 @@
-defmodule StellarBase.XDR.ClaimantsTest do
+defmodule StellarBase.XDR.ClaimantList10Test do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
     AccountID,
     Claimant,
-    Claimants,
+    ClaimantList10,
     ClaimantType,
     ClaimantV0,
     ClaimPredicateType,
@@ -12,13 +12,13 @@ defmodule StellarBase.XDR.ClaimantsTest do
     Int64,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
   alias StellarBase.StrKey
 
-  describe "Claimants" do
+  describe "ClaimantList10" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
@@ -33,7 +33,7 @@ defmodule StellarBase.XDR.ClaimantsTest do
       claimant1 =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
         |> ClaimantV0.new(claim_predicate1)
@@ -42,7 +42,7 @@ defmodule StellarBase.XDR.ClaimantsTest do
       claimant2 =
         "GDP7PRVNX72M2G4J6CLZZXSYVEIRMFPB7SWPOY4CG22O5AFCOC2YEHGQ"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
         |> ClaimantV0.new(claim_predicate2)
@@ -52,7 +52,7 @@ defmodule StellarBase.XDR.ClaimantsTest do
 
       %{
         claimants_list: claimants_list,
-        claimants: Claimants.new(claimants_list),
+        claimants: ClaimantList10.new(claimants_list),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
             149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
@@ -63,34 +63,34 @@ defmodule StellarBase.XDR.ClaimantsTest do
     end
 
     test "new/1", %{claimants_list: claimants_list} do
-      %Claimants{claimants: ^claimants_list} = Claimants.new(claimants_list)
+      %ClaimantList10{items: ^claimants_list} = ClaimantList10.new(claimants_list)
     end
 
     test "encode_xdr/1", %{claimants: claimants, binary: binary} do
-      {:ok, ^binary} = Claimants.encode_xdr(claimants)
+      {:ok, ^binary} = ClaimantList10.encode_xdr(claimants)
     end
 
     test "encode_xdr/1 with invalid elements" do
       {:error, :not_list} =
         %{elements: nil}
-        |> Claimants.new()
-        |> Claimants.encode_xdr()
+        |> ClaimantList10.new()
+        |> ClaimantList10.encode_xdr()
     end
 
     test "encode_xdr!/1", %{claimants: claimants, binary: binary} do
-      ^binary = Claimants.encode_xdr!(claimants)
+      ^binary = ClaimantList10.encode_xdr!(claimants)
     end
 
     test "decode_xdr/2", %{claimants: claimants, binary: binary} do
-      {:ok, {^claimants, ""}} = Claimants.decode_xdr(binary)
+      {:ok, {^claimants, ""}} = ClaimantList10.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = Claimants.decode_xdr(123)
+      {:error, :not_binary} = ClaimantList10.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{claimants: claimants, binary: binary} do
-      {^claimants, ^binary} = Claimants.decode_xdr!(binary <> binary)
+      {^claimants, ^binary} = ClaimantList10.decode_xdr!(binary <> binary)
     end
   end
 end

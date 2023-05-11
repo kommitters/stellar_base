@@ -29,9 +29,9 @@ defmodule StellarBase.XDR.SCValTest do
     SCSymbol,
     SCUnknownErrorCode,
     TimePoint,
-    UInt256,
-    UInt32,
-    UInt64,
+    Uint256,
+    Uint32,
+    Uint64,
     Void
   }
 
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.SCValTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
@@ -80,7 +80,7 @@ defmodule StellarBase.XDR.SCValTest do
         },
         %{
           val_type: SCValType.new(:SCV_U32),
-          value: UInt32.new(2),
+          value: Uint32.new(2),
           binary: <<0, 0, 0, 3, 0, 0, 0, 2>>
         },
         %{
@@ -90,7 +90,7 @@ defmodule StellarBase.XDR.SCValTest do
         },
         %{
           val_type: SCValType.new(:SCV_U64),
-          value: UInt64.new(4),
+          value: Uint64.new(4),
           binary: <<0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4>>
         },
         %{
@@ -110,18 +110,18 @@ defmodule StellarBase.XDR.SCValTest do
         },
         %{
           val_type: SCValType.new(:SCV_U128),
-          value: Int128Parts.new(UInt64.new(3312), UInt64.new(3313)),
+          value: Int128Parts.new(Uint64.new(3312), Uint64.new(3313)),
           binary: <<0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241>>
         },
         %{
           val_type: SCValType.new(:SCV_I128),
-          value: Int128Parts.new(UInt64.new(3312), UInt64.new(3313)),
+          value: Int128Parts.new(Uint64.new(3312), Uint64.new(3313)),
           binary: <<0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241>>
         },
         %{
           val_type: SCValType.new(:SCV_U256),
           value:
-            UInt256.new(
+            Uint256.new(
               <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
                 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
             ),
@@ -132,7 +132,7 @@ defmodule StellarBase.XDR.SCValTest do
         %{
           val_type: SCValType.new(:SCV_I256),
           value:
-            UInt256.new(
+            Uint256.new(
               <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
                 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
             ),

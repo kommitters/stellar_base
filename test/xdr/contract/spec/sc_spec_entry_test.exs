@@ -12,14 +12,14 @@ defmodule StellarBase.XDR.SCSpecEntryTest do
     SCSpecUDTUnionCaseVoidV0,
     SCSpecUDTUnionCaseV0Kind,
     SCSpecUDTUnionCaseV0,
-    SCSpecUDTUnionCaseV0List,
+    SCSpecUDTUnionCaseV0List50,
     SCSpecType,
     SCSpecTypeDef,
     Void,
-    UInt32,
+    Uint32,
     SCSpecUDTEnumCaseV0,
-    SCSpecUDTEnumCaseV0List,
-    SCSpecUDTErrorEnumCaseV0List,
+    SCSpecUDTEnumCaseV0List50,
+    SCSpecUDTErrorEnumCaseV0List50,
     SCSpecUDTErrorEnumCaseV0,
     String1024,
     String80,
@@ -27,10 +27,10 @@ defmodule StellarBase.XDR.SCSpecEntryTest do
     String30,
     SCSymbol,
     SCSpecFunctionInputV0,
-    SCSpecFunctionInputV0List,
+    SCSpecFunctionInputV0List10,
     SCSpecTypeDefList1,
     SCSpecUDTStructFieldV0,
-    SCSpecUDTStructFieldV0List
+    SCSpecUDTStructFieldV0List40
   }
 
   describe "SCSpecEntry" do
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.SCSpecEntryTest do
       code = Void.new()
       type_val = SCSpecType.new(:SC_SPEC_TYPE_VAL)
       type = SCSpecTypeDef.new(code, type_val)
-      value = UInt32.new(4_294_967_295)
+      value = Uint32.new(4_294_967_295)
 
       # SCSpecFunctionV0
       sc_spec_function_input_v0_1 =
@@ -61,7 +61,7 @@ defmodule StellarBase.XDR.SCSpecEntryTest do
         )
 
       inputs =
-        SCSpecFunctionInputV0List.new([
+        SCSpecFunctionInputV0List10.new([
           sc_spec_function_input_v0_1,
           sc_spec_function_input_v0_2
         ])
@@ -74,22 +74,22 @@ defmodule StellarBase.XDR.SCSpecEntryTest do
       # SCSpecUDTStructV0
       field = SCSpecUDTStructFieldV0.new(doc, string_name_30, type)
       udt_struct_fields = [field, field]
-      fields = SCSpecUDTStructFieldV0List.new(udt_struct_fields)
+      fields = SCSpecUDTStructFieldV0List40.new(udt_struct_fields)
 
       # SCSpecUDTUnionV0
       udt_union_v0_code = SCSpecUDTUnionCaseVoidV0.new(doc, string_name_60)
       kind = SCSpecUDTUnionCaseV0Kind.new(:SC_SPEC_UDT_UNION_CASE_VOID_V0)
       udt_union_case = SCSpecUDTUnionCaseV0.new(udt_union_v0_code, kind)
       udt_union_cases = [udt_union_case, udt_union_case]
-      union_cases = SCSpecUDTUnionCaseV0List.new(udt_union_cases)
+      union_cases = SCSpecUDTUnionCaseV0List50.new(udt_union_cases)
 
       # SCSpecUDTEnumV0
       sc_spec_udt_enum_case_v0 = [SCSpecUDTEnumCaseV0.new(doc, string_name_60, value)]
-      enum_cases = SCSpecUDTEnumCaseV0List.new(sc_spec_udt_enum_case_v0)
+      enum_cases = SCSpecUDTEnumCaseV0List50.new(sc_spec_udt_enum_case_v0)
 
       # SCSpecUDTErrorEnumV0
       sc_spec_udt_error_enum_case_v0 = [SCSpecUDTErrorEnumCaseV0.new(doc, string_name_60, value)]
-      enum_error_cases = SCSpecUDTErrorEnumCaseV0List.new(sc_spec_udt_error_enum_case_v0)
+      enum_error_cases = SCSpecUDTErrorEnumCaseV0List50.new(sc_spec_udt_error_enum_case_v0)
 
       discriminants = [
         %{
@@ -172,7 +172,7 @@ defmodule StellarBase.XDR.SCSpecEntryTest do
 
     test "new/2", %{discriminants: discriminants} do
       for %{status_kind: status_kind, sc_code: sc_code} <- discriminants do
-        %SCSpecEntry{code: ^sc_code, kind: ^status_kind} = SCSpecEntry.new(sc_code, status_kind)
+        %SCSpecEntry{value: ^sc_code, type: ^status_kind} = SCSpecEntry.new(sc_code, status_kind)
       end
     end
 

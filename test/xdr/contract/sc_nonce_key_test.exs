@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.SCNonceKeyTest do
     PublicKey,
     SCAddressType,
     SCAddress,
-    UInt256
+    Uint256
   }
 
   describe "SCNonceKey" do
@@ -20,7 +20,7 @@ defmodule StellarBase.XDR.SCNonceKeyTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 

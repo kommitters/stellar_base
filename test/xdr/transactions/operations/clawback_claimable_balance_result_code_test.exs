@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResultCodeTest do
+defmodule StellarBase.XDR.ClawbackClaimableBalanceResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.ClawbackClaimableBalanceResultCode
+  alias StellarBase.XDR.ClawbackClaimableBalanceResultCode
 
   @codes [
     :CLAWBACK_CLAIMABLE_BALANCE_SUCCESS,

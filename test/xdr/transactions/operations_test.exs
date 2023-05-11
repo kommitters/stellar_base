@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.OperationsTest do
+defmodule StellarBase.XDR.OperationList100Test do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -7,21 +7,21 @@ defmodule StellarBase.XDR.OperationsTest do
     Int64,
     MuxedAccount,
     Operation,
-    Operations,
+    OperationList100,
     OperationBody,
     OperationType,
     OptionalMuxedAccount,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
-  alias StellarBase.XDR.Operations.CreateAccount
+  alias StellarBase.XDR.CreateAccount
 
-  describe "Operations" do
+  describe "OperationList100" do
     setup do
       pk_key =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )
@@ -47,7 +47,7 @@ defmodule StellarBase.XDR.OperationsTest do
 
       %{
         operations_list: [operation],
-        operations: Operations.new([operation]),
+        operations: OperationList100.new([operation]),
         binary:
           <<0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53,
             177, 115, 224, 92, 243, 51, 242, 249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42,
@@ -58,34 +58,34 @@ defmodule StellarBase.XDR.OperationsTest do
     end
 
     test "new/1", %{operations_list: operations_list} do
-      %Operations{operations: ^operations_list} = Operations.new(operations_list)
+      %OperationList100{items: ^operations_list} = OperationList100.new(operations_list)
     end
 
     test "encode_xdr/1", %{operations: operations, binary: binary} do
-      {:ok, ^binary} = Operations.encode_xdr(operations)
+      {:ok, ^binary} = OperationList100.encode_xdr(operations)
     end
 
     test "encode_xdr/1 with invalid elements" do
       {:error, :not_list} =
         %{elements: nil}
-        |> Operations.new()
-        |> Operations.encode_xdr()
+        |> OperationList100.new()
+        |> OperationList100.encode_xdr()
     end
 
     test "encode_xdr!/1", %{operations: operations, binary: binary} do
-      ^binary = Operations.encode_xdr!(operations)
+      ^binary = OperationList100.encode_xdr!(operations)
     end
 
     test "decode_xdr/2", %{operations: operations, binary: binary} do
-      {:ok, {^operations, ""}} = Operations.decode_xdr(binary)
+      {:ok, {^operations, ""}} = OperationList100.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = Operations.decode_xdr(123)
+      {:error, :not_binary} = OperationList100.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{operations: operations, binary: binary} do
-      {^operations, ^binary} = Operations.decode_xdr!(binary <> binary)
+      {^operations, ^binary} = OperationList100.decode_xdr!(binary <> binary)
     end
   end
 end

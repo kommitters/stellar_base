@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.PoolIDTest do
     end
 
     test "new/1", %{value: value} do
-      %PoolID{value: ^value} = PoolID.new(value)
+      %PoolID{pool_id: ^value} = PoolID.new(value)
     end
 
     test "encode_xdr/1", %{pool_id: pool_id, binary: binary} do
@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.PoolIDTest do
     end
 
     test "encode_xdr!/1 with an invalid PoolID length" do
-      {:error, :invalid_length} = PoolID.encode_xdr(%PoolID{value: <<0, 0, 4, 210, 33>>})
+      {:error, :invalid_length} = PoolID.encode_xdr(%PoolID{pool_id: <<0, 0, 4, 210, 33>>})
     end
 
     test "encode_xdr!/1", %{pool_id: pool_id, binary: binary} do

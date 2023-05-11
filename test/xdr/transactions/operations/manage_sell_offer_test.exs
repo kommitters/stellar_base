@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
+defmodule StellarBase.XDR.ManageSellOfferOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -14,19 +14,19 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
     Price,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.Operations.ManageSellOffer
+  alias StellarBase.XDR.ManageSellOfferOp
 
-  describe "ManageSellOffer Operation" do
+  describe "ManageSellOfferOp Operation" do
     setup do
       pk_issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       issuer =
         PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -49,7 +49,7 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
       price = Price.new(Int32.new(1), Int32.new(10))
       offer_id = Int64.new(0)
 
-      manage_sell_offer = ManageSellOffer.new(asset1, asset2, amount, price, offer_id)
+      manage_sell_offer = ManageSellOfferOp.new(asset1, asset2, amount, price, offer_id)
 
       %{
         selling: asset1,
@@ -75,28 +75,28 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
       price: price,
       offer_id: offer_id
     } do
-      %ManageSellOffer{selling: ^selling, buying: ^buying, amount: ^amount} =
-        ManageSellOffer.new(selling, buying, amount, price, offer_id)
+      %ManageSellOfferOp{selling: ^selling, buying: ^buying, amount: ^amount} =
+        ManageSellOfferOp.new(selling, buying, amount, price, offer_id)
     end
 
     test "encode_xdr/1", %{manage_sell_offer: manage_sell_offer, binary: binary} do
-      {:ok, ^binary} = ManageSellOffer.encode_xdr(manage_sell_offer)
+      {:ok, ^binary} = ManageSellOfferOp.encode_xdr(manage_sell_offer)
     end
 
     test "encode_xdr!/1", %{manage_sell_offer: manage_sell_offer, binary: binary} do
-      ^binary = ManageSellOffer.encode_xdr!(manage_sell_offer)
+      ^binary = ManageSellOfferOp.encode_xdr!(manage_sell_offer)
     end
 
     test "decode_xdr/2", %{manage_sell_offer: manage_sell_offer, binary: binary} do
-      {:ok, {^manage_sell_offer, ""}} = ManageSellOffer.decode_xdr(binary)
+      {:ok, {^manage_sell_offer, ""}} = ManageSellOfferOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = ManageSellOffer.decode_xdr(123)
+      {:error, :not_binary} = ManageSellOfferOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{manage_sell_offer: manage_sell_offer, binary: binary} do
-      {^manage_sell_offer, ^binary} = ManageSellOffer.decode_xdr!(binary <> binary)
+      {^manage_sell_offer, ^binary} = ManageSellOfferOp.decode_xdr!(binary <> binary)
     end
   end
 end

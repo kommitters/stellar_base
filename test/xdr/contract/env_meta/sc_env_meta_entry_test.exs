@@ -4,13 +4,13 @@ defmodule StellarBase.XDR.SCEnvMetaEntryTest do
   alias StellarBase.XDR.{
     SCEnvMetaEntry,
     SCEnvMetaKind,
-    UInt64
+    Uint64
   }
 
   describe "SCEnvMetaEntry" do
     setup do
       meta_entry_kind = SCEnvMetaKind.new(:SC_ENV_META_KIND_INTERFACE_VERSION)
-      entry = UInt64.new(3312)
+      entry = Uint64.new(3312)
 
       %{
         entry: entry,
@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.SCEnvMetaEntryTest do
     end
 
     test "new/1", %{entry: entry, meta_entry_kind: meta_entry_kind} do
-      %SCEnvMetaEntry{entry: ^entry, kind: ^meta_entry_kind} =
+      %SCEnvMetaEntry{value: ^entry, type: ^meta_entry_kind} =
         SCEnvMetaEntry.new(entry, meta_entry_kind)
     end
 

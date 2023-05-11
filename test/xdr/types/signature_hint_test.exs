@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.SignatureHintTest do
     end
 
     test "new/1", %{hint: hint} do
-      %SignatureHint{hint: ^hint} = SignatureHint.new(hint)
+      %SignatureHint{value: ^hint} = SignatureHint.new(hint)
     end
 
     test "encode_xdr/1", %{signature_hint: signature_hint, binary: binary} do

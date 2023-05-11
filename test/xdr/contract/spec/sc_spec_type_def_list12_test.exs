@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefList12Test do
     end
 
     test "new/1", %{sc_spec_type_defs: sc_spec_type_defs} do
-      %SCSpecTypeDefList12{sc_spec_type_defs: ^sc_spec_type_defs} =
+      %SCSpecTypeDefList12{items: ^sc_spec_type_defs} =
         SCSpecTypeDefList12.new(sc_spec_type_defs)
     end
 

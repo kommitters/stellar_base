@@ -1,14 +1,14 @@
 defmodule StellarBase.XDR.MuxedAccountTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{UInt64, UInt256, MuxedAccount, MuxedAccountMed25519, CryptoKeyType}
+  alias StellarBase.XDR.{Uint64, Uint256, MuxedAccount, MuxedAccountMed25519, CryptoKeyType}
 
   describe "MuxedAccount" do
     setup do
       type = CryptoKeyType.new(:KEY_TYPE_ED25519)
 
       ed25519_account =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )
@@ -24,7 +24,7 @@ defmodule StellarBase.XDR.MuxedAccountTest do
     end
 
     test "new/1", %{type: type, ed25519_account: ed25519_account} do
-      %MuxedAccount{account: ^ed25519_account} = MuxedAccount.new(ed25519_account, type)
+      %MuxedAccount{value: ^ed25519_account} = MuxedAccount.new(ed25519_account, type)
     end
 
     test "new/1 with an invalid account", %{ed25519_account: ed25519_account} do
@@ -64,10 +64,10 @@ defmodule StellarBase.XDR.MuxedAccountTest do
   describe "med25519 MuxedAccount" do
     setup do
       type = CryptoKeyType.new(:KEY_TYPE_MUXED_ED25519)
-      med25519_derived_id = UInt64.new(123)
+      med25519_derived_id = Uint64.new(123)
 
       med25519_account_id =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )
@@ -86,7 +86,7 @@ defmodule StellarBase.XDR.MuxedAccountTest do
     end
 
     test "new/1", %{type: type, med25519_account: med25519_account} do
-      %MuxedAccount{account: ^med25519_account} = MuxedAccount.new(med25519_account, type)
+      %MuxedAccount{value: ^med25519_account} = MuxedAccount.new(med25519_account, type)
     end
 
     test "encode_xdr/1", %{muxed_account: muxed_account, encoded_binary: binary} do

@@ -1,10 +1,10 @@
-defmodule StellarBase.XDR.Operations.SimplePaymentResultTest do
+defmodule StellarBase.XDR.SimplePaymentResultTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.Int64
-  alias StellarBase.XDR.Operations.SimplePaymentResult
+  alias StellarBase.XDR.SimplePaymentResult
 
   describe "SimplePaymentResult" do
     setup do

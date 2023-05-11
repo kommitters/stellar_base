@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.OptionalSignerTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{Signer, OptionalSigner, SignerKey, SignerKeyType, UInt32, UInt256}
+  alias StellarBase.XDR.{Signer, OptionalSigner, SignerKey, SignerKeyType, Uint32, Uint256}
 
   alias StellarBase.StrKey
 
@@ -12,10 +12,10 @@ defmodule StellarBase.XDR.OptionalSignerTest do
       signer_key =
         "GBQVLZE4XCNDFW2N3SPUG4SI6D6YCDJPI45M5JHWUGHQSAT7REKIGCNQ"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> SignerKey.new(signer_type)
 
-      weight = UInt32.new(1)
+      weight = Uint32.new(1)
 
       signer = Signer.new(signer_key, weight)
 

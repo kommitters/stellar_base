@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.ManageDataResultTest do
+defmodule StellarBase.XDR.ManageDataResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{ManageDataResult, ManageDataResultCode}
+  alias StellarBase.XDR.{ManageDataResult, ManageDataResultCode}
 
   describe "ManageDataResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.ManageDataResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ManageDataResult{code: ^code, result: ^value} = ManageDataResult.new(value, code)
+      %ManageDataResult{value: ^code, type: ^value} = ManageDataResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.Operations.ManageDataResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ManageDataResult{
-         code: %ManageDataResultCode{identifier: :MANAGE_DATA_NAME_NOT_FOUND}
+         value: %ManageDataResultCode{identifier: :MANAGE_DATA_NAME_NOT_FOUND}
        }, ""} = ManageDataResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

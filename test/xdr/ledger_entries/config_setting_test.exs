@@ -1,11 +1,11 @@
 defmodule StellarBase.XDR.ConfigSettingTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{ConfigSetting, ConfigSettingType, UInt32}
+  alias StellarBase.XDR.{ConfigSetting, ConfigSettingType, Uint32}
 
   describe "ConfigSetting" do
     setup do
-      value = UInt32.new(4_545_234)
+      value = Uint32.new(4_545_234)
       type = ConfigSettingType.new(:CONFIG_SETTING_TYPE_UINT32)
 
       %{

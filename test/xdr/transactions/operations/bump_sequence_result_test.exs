@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.BumpSequenceResultTest do
+defmodule StellarBase.XDR.BumpSequenceResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{BumpSequenceResult, BumpSequenceResultCode}
+  alias StellarBase.XDR.{BumpSequenceResult, BumpSequenceResultCode}
 
   describe "BumpSequenceResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.BumpSequenceResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %BumpSequenceResult{code: ^code, result: ^value} = BumpSequenceResult.new(value, code)
+      %BumpSequenceResult{value: ^code, type: ^value} = BumpSequenceResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.Operations.BumpSequenceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%BumpSequenceResult{
-         code: %BumpSequenceResultCode{identifier: :BUMP_SEQUENCE_BAD_SEQ}
+        value: %BumpSequenceResultCode{identifier: :BUMP_SEQUENCE_BAD_SEQ}
        }, ""} = BumpSequenceResult.decode_xdr!(<<255, 255, 255, 255>>)
     end
 

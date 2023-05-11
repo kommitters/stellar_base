@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.ManageBuyOfferResultTest do
+defmodule StellarBase.XDR.ManageBuyOfferResultTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.Operations.ManageBuyOfferResultTest do
     Void
   }
 
-  alias StellarBase.XDR.Operations.{
+  alias StellarBase.XDR.{
     ManageBuyOfferResult,
     ManageBuyOfferResultCode,
     ManageOfferSuccessResult,
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.Operations.ManageBuyOfferResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ManageBuyOfferResult{code: ^code, result: ^value} = ManageBuyOfferResult.new(value, code)
+      %ManageBuyOfferResult{value: ^code, type: ^value} = ManageBuyOfferResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -73,7 +73,7 @@ defmodule StellarBase.XDR.Operations.ManageBuyOfferResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ManageBuyOfferResult{
-         code: %ManageBuyOfferResultCode{identifier: :MANAGE_BUY_OFFER_SELL_NO_TRUST}
+         value: %ManageBuyOfferResultCode{identifier: :MANAGE_BUY_OFFER_SELL_NO_TRUST}
        }, ""} = ManageBuyOfferResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

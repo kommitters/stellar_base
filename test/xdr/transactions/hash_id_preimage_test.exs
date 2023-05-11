@@ -10,13 +10,13 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
     PoolID,
     RevokeID,
     SequenceNumber,
-    UInt32
+    Uint32
   }
 
   setup do
     account_id = create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
     seq_number = SequenceNumber.new(123_456)
-    op_num = UInt32.new(123_456)
+    op_num = Uint32.new(123_456)
 
     {:ok,
      %{
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
     end
 
     test "new/1", %{operation_id: operation_id, envelope_type: envelope_type} do
-      %HashIDPreimage{hash_id: ^operation_id, type: ^envelope_type} =
+      %HashIDPreimage{value: ^operation_id, type: ^envelope_type} =
         HashIDPreimage.new(operation_id, envelope_type)
     end
 
@@ -97,7 +97,7 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
     end
 
     test "new/1", %{revoke_id: revoke_id, envelope_type: envelope_type} do
-      %HashIDPreimage{hash_id: ^revoke_id, type: ^envelope_type} =
+      %HashIDPreimage{value: ^revoke_id, type: ^envelope_type} =
         HashIDPreimage.new(revoke_id, envelope_type)
     end
 

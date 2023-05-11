@@ -1,9 +1,9 @@
-defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResultTest do
+defmodule StellarBase.XDR.ClawbackClaimableBalanceResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
 
-  alias StellarBase.XDR.Operations.{
+  alias StellarBase.XDR.{
     ClawbackClaimableBalanceResult,
     ClawbackClaimableBalanceResultCode
   }
@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ClawbackClaimableBalanceResult{code: ^code, result: ^value} =
+      %ClawbackClaimableBalanceResult{value: ^code, type: ^value} =
         ClawbackClaimableBalanceResult.new(value, code)
     end
 
@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ClawbackClaimableBalanceResult{
-         code: %ClawbackClaimableBalanceResultCode{
+        value: %ClawbackClaimableBalanceResultCode{
            identifier: :CLAWBACK_CLAIMABLE_BALANCE_NOT_ISSUER
          }
        }, ""} = ClawbackClaimableBalanceResult.decode_xdr!(<<255, 255, 255, 254>>)

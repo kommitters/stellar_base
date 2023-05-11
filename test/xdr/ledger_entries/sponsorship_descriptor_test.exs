@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.SponsorshipDescriptorTest do
     end
 
     test "new/1", %{sponsorship_descriptor: sponsorship_descriptor} do
-      %SponsorshipDescriptor{sponsorship_descriptor: ^sponsorship_descriptor} =
+      %SponsorshipDescriptor{account_id: ^sponsorship_descriptor} =
         SponsorshipDescriptor.new(sponsorship_descriptor)
     end
 

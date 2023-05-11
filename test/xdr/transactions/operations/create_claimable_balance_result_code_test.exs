@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.CreateClaimableBalanceResultCodeTest do
+defmodule StellarBase.XDR.CreateClaimableBalanceResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.CreateClaimableBalanceResultCode
+  alias StellarBase.XDR.CreateClaimableBalanceResultCode
 
   @codes [
     :CREATE_CLAIMABLE_BALANCE_SUCCESS,

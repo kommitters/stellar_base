@@ -5,7 +5,7 @@ defmodule StellarBase.XDR.ContractIDTest do
     Asset,
     ContractIDType,
     ContractID,
-    UInt256,
+    Uint256,
     PublicKey,
     AccountID,
     AssetType,
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.ContractIDTest do
       issuer =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
@@ -40,12 +40,12 @@ defmodule StellarBase.XDR.ContractIDTest do
       key =
         "GCVILYTXYXYHZIBYEF4BSLATAP3CPZMW23NE6DUL7I6LCCDUNFBQFAVR"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       signature = Signature.new("SAPVVUQ2G755KGQOOY5A3AGTMWCCQQTJMGSXAUKMFT45OFCL7NCSTRWI")
 
       salt =
-        UInt256.new(
+        Uint256.new(
           <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
             108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
         )
@@ -56,7 +56,7 @@ defmodule StellarBase.XDR.ContractIDTest do
       salt_case =
         "GCJCFK7GZEOXVAWWOWYFTR5C5IZAQBYV5HIJUGVZPUBDJNRFVXXZEHHV"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       discriminants = [
         %{
@@ -94,7 +94,7 @@ defmodule StellarBase.XDR.ContractIDTest do
     test "new/1", %{discriminants: discriminants} do
       for %{contract_id_type: contract_id_type, contract_id: contract_id} <-
             discriminants do
-        %ContractID{contract_id: ^contract_id, type: ^contract_id_type} =
+        %ContractID{value: ^contract_id, type: ^contract_id_type} =
           ContractID.new(contract_id, contract_id_type)
       end
     end

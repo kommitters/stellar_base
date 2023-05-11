@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.OfferEntryTest do
 
   import StellarBase.Test.Utils, only: [create_account_id: 1, create_asset: 2]
 
-  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price, UInt32}
+  alias StellarBase.XDR.{Ext, Int32, Int64, OfferEntry, Price, Uint32}
 
   describe "OfferEntry Operation" do
     setup do
@@ -27,7 +27,7 @@ defmodule StellarBase.XDR.OfferEntryTest do
 
       price = Price.new(Int32.new(1), Int32.new(10))
 
-      flags = UInt32.new(1)
+      flags = Uint32.new(1)
 
       ext = Ext.new()
 

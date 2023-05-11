@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.AccountMergeResultTest do
+defmodule StellarBase.XDR.AccountMergeResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Int64
-  alias StellarBase.XDR.Operations.{AccountMergeResult, AccountMergeResultCode}
+  alias StellarBase.XDR.{AccountMergeResult, AccountMergeResultCode}
 
   describe "AccountMergeResult" do
     setup do
@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.Operations.AccountMergeResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %AccountMergeResult{code: ^code, result: ^value} = AccountMergeResult.new(value, code)
+      %AccountMergeResult{value: ^code, type: ^value} = AccountMergeResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.Operations.AccountMergeResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%AccountMergeResult{
-         code: %AccountMergeResultCode{identifier: :ACCOUNT_MERGE_NO_ACCOUNT}
+        value: %AccountMergeResultCode{identifier: :ACCOUNT_MERGE_NO_ACCOUNT}
        }, ""} = AccountMergeResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

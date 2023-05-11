@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.ChangeTrustResultTest do
+defmodule StellarBase.XDR.ChangeTrustResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{ChangeTrustResult, ChangeTrustResultCode}
+  alias StellarBase.XDR.{ChangeTrustResult, ChangeTrustResultCode}
 
   describe "ChangeTrustResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.ChangeTrustResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ChangeTrustResult{code: ^code, result: ^value} = ChangeTrustResult.new(value, code)
+      %ChangeTrustResult{value: ^code, type: ^value} = ChangeTrustResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.Operations.ChangeTrustResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ChangeTrustResult{
-         code: %ChangeTrustResultCode{identifier: :CHANGE_TRUST_NO_ISSUER}
+        value: %ChangeTrustResultCode{identifier: :CHANGE_TRUST_NO_ISSUER}
        }, ""} = ChangeTrustResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.SignatureTest do
     end
 
     test "new/1", %{secret: secret} do
-      %Signature{signature: ^secret} = Signature.new(secret)
+      %Signature{value: ^secret} = Signature.new(secret)
     end
 
     test "encode_xdr/1", %{signature: signature, binary: binary} do

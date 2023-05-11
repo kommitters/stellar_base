@@ -54,7 +54,7 @@ defmodule StellarBase.XDR.AuthorizedInvocationListTest do
     end
 
     test "new/1", %{sub_invocations: sub_invocations} do
-      %AuthorizedInvocationList{sub_invocations: ^sub_invocations} =
+      %AuthorizedInvocationList{items: ^sub_invocations} =
         AuthorizedInvocationList.new(sub_invocations)
     end
 

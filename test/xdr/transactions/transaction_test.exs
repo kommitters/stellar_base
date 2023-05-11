@@ -17,8 +17,8 @@ defmodule StellarBase.XDR.TransactionTest do
     TimeBounds,
     TimePoint,
     Transaction,
-    UInt32,
-    UInt64
+    Uint32,
+    Uint64
   }
 
   alias StellarBase.XDR.Transaction
@@ -30,7 +30,7 @@ defmodule StellarBase.XDR.TransactionTest do
       source_account =
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
-      fee = UInt32.new(100)
+      fee = Uint32.new(100)
       seq_num = SequenceNumber.new(12_345_678)
 
       # preconditions
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.TransactionTest do
 
       # memo
       memo_type = MemoType.new(:MEMO_ID)
-      memo_id = UInt64.new(12_345)
+      memo_id = Uint64.new(12_345)
       memo = Memo.new(memo_id, memo_type)
 
       # operations

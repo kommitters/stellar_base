@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.LiquidityPoolParametersTest do
     LiquidityPoolParameters,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
@@ -27,7 +27,7 @@ defmodule StellarBase.XDR.LiquidityPoolParametersTest do
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
@@ -57,7 +57,7 @@ defmodule StellarBase.XDR.LiquidityPoolParametersTest do
     end
 
     test "new/1", %{liquidity_type: liquidity_type, liquidity_product: liquidity_product} do
-      %LiquidityPoolParameters{type: ^liquidity_type, product: ^liquidity_product} =
+      %LiquidityPoolParameters{value: ^liquidity_type, type: ^liquidity_product} =
         LiquidityPoolParameters.new(liquidity_product, liquidity_type)
     end
 

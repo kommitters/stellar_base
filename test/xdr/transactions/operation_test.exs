@@ -12,15 +12,15 @@ defmodule StellarBase.XDR.OperationTest do
     OptionalMuxedAccount,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
-  alias StellarBase.XDR.Operations.CreateAccount
+  alias StellarBase.XDR.CreateAccount
 
   describe "Operation" do
     setup do
       pk_key =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )

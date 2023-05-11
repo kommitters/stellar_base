@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.InflationPayoutListTest do
     end
 
     test "new/1", %{payouts: payouts} do
-      %InflationPayoutList{payouts: ^payouts} = InflationPayoutList.new(payouts)
+      %InflationPayoutList{items: ^payouts} = InflationPayoutList.new(payouts)
     end
 
     test "encode_xdr/1", %{inflation_payout_list: inflation_payout_list, binary: binary} do

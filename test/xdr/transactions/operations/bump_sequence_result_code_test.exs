@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.BumpSequenceResultCodeTest do
+defmodule StellarBase.XDR.BumpSequenceResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.BumpSequenceResultCode
+  alias StellarBase.XDR.BumpSequenceResultCode
 
   @codes [
     :BUMP_SEQUENCE_SUCCESS,

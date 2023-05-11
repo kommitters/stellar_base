@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.ManageBuyOfferResultCodeTest do
+defmodule StellarBase.XDR.ManageBuyOfferResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.ManageBuyOfferResultCode
+  alias StellarBase.XDR.ManageBuyOfferResultCode
 
   @codes [
     :MANAGE_BUY_OFFER_SUCCESS,

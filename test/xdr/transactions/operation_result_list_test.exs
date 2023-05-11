@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.OperationResultListTest do
     Void
   }
 
-  alias StellarBase.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
+  alias StellarBase.XDR.{CreateAccountResult, CreateAccountResultCode}
 
   describe "OperationResultList" do
     setup do
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.OperationResultListTest do
     end
 
     test "new/1", %{results: results} do
-      %OperationResultList{operations: ^results} = OperationResultList.new(results)
+      %OperationResultList{items: ^results} = OperationResultList.new(results)
     end
 
     test "encode_xdr/1", %{op_result_list: op_result_list, binary: binary} do

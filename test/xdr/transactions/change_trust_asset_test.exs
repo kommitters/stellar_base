@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
     LiquidityPoolParameters,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
@@ -27,7 +27,7 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
     issuer =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
       |> PublicKey.new(key_type)
       |> AccountID.new()
 
@@ -54,7 +54,7 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
     end
 
     test "new/1", %{asset: asset, asset_type: asset_type} do
-      %ChangeTrustAsset{asset: ^asset, type: ^asset_type} =
+      %ChangeTrustAsset{value: ^asset, type: ^asset_type} =
         ChangeTrustAsset.new(asset, asset_type)
     end
 
@@ -107,7 +107,7 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
     end
 
     test "new/1", %{asset: asset, asset_type: asset_type} do
-      %ChangeTrustAsset{asset: ^asset, type: ^asset_type} =
+      %ChangeTrustAsset{value: ^asset, type: ^asset_type} =
         ChangeTrustAsset.new(asset, asset_type)
     end
 
@@ -151,7 +151,7 @@ defmodule StellarBase.XDR.ChangeTrustAssetTest do
     end
 
     test "new/1", %{asset: asset, asset_type: asset_type} do
-      %ChangeTrustAsset{asset: ^asset, type: ^asset_type} =
+      %ChangeTrustAsset{value: ^asset, type: ^asset_type} =
         ChangeTrustAsset.new(asset, asset_type)
     end
 

@@ -1,9 +1,9 @@
-defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultTest do
+defmodule StellarBase.XDR.EndSponsoringFutureReservesResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
 
-  alias StellarBase.XDR.Operations.{
+  alias StellarBase.XDR.{
     EndSponsoringFutureReservesResult,
     EndSponsoringFutureReservesResultCode
   }
@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %EndSponsoringFutureReservesResult{code: ^code, result: ^value} =
+      %EndSponsoringFutureReservesResult{value: ^code, type: ^value} =
         EndSponsoringFutureReservesResult.new(value, code)
     end
 
@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.Operations.EndSponsoringFutureReservesResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%EndSponsoringFutureReservesResult{
-         code: %EndSponsoringFutureReservesResultCode{
+        value: %EndSponsoringFutureReservesResultCode{
            identifier: :END_SPONSORING_FUTURE_RESERVES_NOT_SPONSORED
          }
        }, ""} = EndSponsoringFutureReservesResult.decode_xdr!(<<255, 255, 255, 255>>)

@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.ClaimableBalanceIDTest do
     end
 
     test "new/1", %{balance_id: balance_id, balance_id_type: balance_id_type} do
-      %ClaimableBalanceID{claimable_balance_id: ^balance_id, type: ^balance_id_type} =
+      %ClaimableBalanceID{value: ^balance_id, type: ^balance_id_type} =
         ClaimableBalanceID.new(balance_id, balance_id_type)
     end
 

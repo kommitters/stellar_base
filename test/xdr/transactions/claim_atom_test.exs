@@ -81,7 +81,7 @@ defmodule StellarBase.XDR.ClaimAtomTest do
     end
 
     test "new/1", %{claim_offer_atom: claim_offer_atom, claim_atom_type: claim_atom_type} do
-      %ClaimAtom{claim_atom: ^claim_offer_atom, type: ^claim_atom_type} =
+      %ClaimAtom{value: ^claim_offer_atom, type: ^claim_atom_type} =
         ClaimAtom.new(claim_offer_atom, claim_atom_type)
     end
 
@@ -146,7 +146,7 @@ defmodule StellarBase.XDR.ClaimAtomTest do
     end
 
     test "new/1", %{claim_offer_atom: claim_offer_atom, claim_atom_type: claim_atom_type} do
-      %ClaimAtom{claim_atom: ^claim_offer_atom, type: ^claim_atom_type} =
+      %ClaimAtom{value: ^claim_offer_atom, type: ^claim_atom_type} =
         ClaimAtom.new(claim_offer_atom, claim_atom_type)
     end
 
@@ -203,7 +203,7 @@ defmodule StellarBase.XDR.ClaimAtomTest do
     end
 
     test "new/1", %{claim_offer_atom: claim_offer_atom, claim_atom_type: claim_atom_type} do
-      %ClaimAtom{claim_atom: ^claim_offer_atom, type: ^claim_atom_type} =
+      %ClaimAtom{value: ^claim_offer_atom, type: ^claim_atom_type} =
         ClaimAtom.new(claim_offer_atom, claim_atom_type)
     end
 

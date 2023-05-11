@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.MemoTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{UInt64, Hash, String28, MemoType, Memo}
+  alias StellarBase.XDR.{Uint64, Hash, String28, MemoType, Memo}
 
   describe "Memo" do
     setup do
       memo_type = MemoType.new(:MEMO_ID)
-      memo_id = UInt64.new(12_345)
+      memo_id = Uint64.new(12_345)
 
       %{
         memo_type_id: :MEMO_ID,

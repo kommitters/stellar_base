@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.PriceTest do
     end
 
     test "new/1", %{numerator: numerator, denominator: denominator} do
-      %Price{numerator: ^numerator, denominator: ^denominator} = Price.new(numerator, denominator)
+      %Price{n: ^numerator, d: ^denominator} = Price.new(numerator, denominator)
     end
 
     test "encode_xdr/1", %{price: price, binary: binary} do

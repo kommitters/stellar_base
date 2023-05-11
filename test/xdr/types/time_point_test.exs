@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.TimePointTest do
     end
 
     test "new/1" do
-      %TimePoint{value: 1234} = TimePoint.new(1234)
+      %TimePoint{time_point: 1234} = TimePoint.new(1234)
     end
 
     test "encode_xdr/1", %{time_point: time_point, binary: binary} do

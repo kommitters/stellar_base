@@ -14,7 +14,7 @@ defmodule StellarBase.XDR.HostFunctionTest do
     Hash,
     SCContractExecutableType,
     SCContractExecutable,
-    UInt256,
+    Uint256,
     ContractIDType,
     ContractID
   }
@@ -41,7 +41,7 @@ defmodule StellarBase.XDR.HostFunctionTest do
       salt =
         "GCJCFK7GZEOXVAWWOWYFTR5C5IZAQBYV5HIJUGVZPUBDJNRFVXXZEHHV"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       contract_id_type = ContractIDType.new(:CONTRACT_ID_FROM_SOURCE_ACCOUNT)
       contract_id = ContractID.new(salt, contract_id_type)
@@ -82,7 +82,7 @@ defmodule StellarBase.XDR.HostFunctionTest do
     test "new/1", %{discriminants: discriminants} do
       for %{host_function_type: host_function_type, host_function: host_function} <-
             discriminants do
-        %HostFunction{host_function: ^host_function, type: ^host_function_type} =
+        %HostFunction{value: ^host_function, type: ^host_function_type} =
           HostFunction.new(host_function, host_function_type)
       end
     end

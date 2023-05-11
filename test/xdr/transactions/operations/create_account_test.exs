@@ -1,13 +1,13 @@
-defmodule StellarBase.XDR.Operations.CreateAccountTest do
+defmodule StellarBase.XDR.CreateAccountOpTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{AccountID, Int64, PublicKey, PublicKeyType, UInt256}
-  alias StellarBase.XDR.Operations.CreateAccount
+  alias StellarBase.XDR.{AccountID, Int64, PublicKey, PublicKeyType, Uint256}
+  alias StellarBase.XDR.CreateAccountOp
 
-  describe "CreateAccount Operation" do
+  describe "CreateAccountOp Operation" do
     setup do
       pk_key =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )
@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.Operations.CreateAccountTest do
 
       starting_balance = Int64.new(5_000_000_000)
 
-      create_account = CreateAccount.new(destination, starting_balance)
+      create_account = CreateAccountOp.new(destination, starting_balance)
 
       %{
         destination: destination,
@@ -33,28 +33,28 @@ defmodule StellarBase.XDR.Operations.CreateAccountTest do
     end
 
     test "new/1", %{destination: destination, starting_balance: starting_balance} do
-      %CreateAccount{destination: ^destination, starting_balance: ^starting_balance} =
-        CreateAccount.new(destination, starting_balance)
+      %CreateAccountOp{destination: ^destination, starting_balance: ^starting_balance} =
+        CreateAccountOp.new(destination, starting_balance)
     end
 
     test "encode_xdr/1", %{create_account: create_account, binary: binary} do
-      {:ok, ^binary} = CreateAccount.encode_xdr(create_account)
+      {:ok, ^binary} = CreateAccountOp.encode_xdr(create_account)
     end
 
     test "encode_xdr!/1", %{create_account: create_account, binary: binary} do
-      ^binary = CreateAccount.encode_xdr!(create_account)
+      ^binary = CreateAccountOp.encode_xdr!(create_account)
     end
 
     test "decode_xdr/2", %{create_account: create_account, binary: binary} do
-      {:ok, {^create_account, ""}} = CreateAccount.decode_xdr(binary)
+      {:ok, {^create_account, ""}} = CreateAccountOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = CreateAccount.decode_xdr(123)
+      {:error, :not_binary} = CreateAccountOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{create_account: create_account, binary: binary} do
-      {^create_account, ^binary} = CreateAccount.decode_xdr!(binary <> binary)
+      {^create_account, ^binary} = CreateAccountOp.decode_xdr!(binary <> binary)
     end
   end
 end

@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.SetOptionsResultCodeTest do
+defmodule StellarBase.XDR.SetOptionsResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.SetOptionsResultCode
+  alias StellarBase.XDR.SetOptionsResultCode
 
   @codes [
     :SET_OPTIONS_SUCCESS,

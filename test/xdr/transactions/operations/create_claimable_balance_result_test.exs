@@ -1,9 +1,9 @@
-defmodule StellarBase.XDR.Operations.CreateClaimableBalanceResultTest do
+defmodule StellarBase.XDR.CreateClaimableBalanceResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{ClaimableBalanceID, ClaimableBalanceIDType, Hash}
 
-  alias StellarBase.XDR.Operations.{
+  alias StellarBase.XDR.{
     CreateClaimableBalanceResult,
     CreateClaimableBalanceResultCode
   }
@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %CreateClaimableBalanceResult{code: ^code, result: ^value} =
+      %CreateClaimableBalanceResult{value: ^code, type: ^value} =
         CreateClaimableBalanceResult.new(value, code)
     end
 
@@ -59,7 +59,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%CreateClaimableBalanceResult{
-         code: %CreateClaimableBalanceResultCode{
+        value: %CreateClaimableBalanceResultCode{
            identifier: :CREATE_CLAIMABLE_BALANCE_LOW_RESERVE
          }
        }, ""} = CreateClaimableBalanceResult.decode_xdr!(<<255, 255, 255, 254>>)

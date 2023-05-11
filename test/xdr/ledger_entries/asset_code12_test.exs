@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.AssetCode12Test do
     end
 
     test "new/1", %{code: code} do
-      %AssetCode12{code: ^code} = AssetCode12.new(code)
+      %AssetCode12{value: ^code} = AssetCode12.new(code)
       12 = String.length(code)
     end
 
@@ -42,12 +42,12 @@ defmodule StellarBase.XDR.AssetCode12Test do
     end
 
     test "decode_xdr/2 with a 12-bytes code" do
-      {:ok, {%AssetCode12{code: "BTCNEW2000"}, ""}} =
+      {:ok, {%AssetCode12{value: "BTCNEW2000"}, ""}} =
         AssetCode12.decode_xdr(<<66, 84, 67, 78, 69, 87, 50, 48, 48, 48, 0, 0>>)
     end
 
     test "decode_xdr/2 with a 8-bytes code" do
-      {:ok, {%AssetCode12{code: "BTCNE"}, <<0, 0, 0, 0>>}} =
+      {:ok, {%AssetCode12{value: "BTCNE"}, <<0, 0, 0, 0>>}} =
         AssetCode12.decode_xdr(<<66, 84, 67, 78, 69, 0, 0, 0, 0, 0, 0, 0>>)
     end
 

@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.OptionalAccountIDTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{AccountID, OptionalAccountID, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, OptionalAccountID, PublicKey, PublicKeyType, Uint256}
 
   alias StellarBase.StrKey
 
@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.OptionalAccountIDTest do
       public_key =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       account_id =
         PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)

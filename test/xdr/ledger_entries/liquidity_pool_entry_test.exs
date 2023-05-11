@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.LiquidityPoolEntryTest do
+defmodule StellarBase.XDR.LiquidityPoolEntryTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolEntryTest do
     PoolID,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
@@ -30,7 +30,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolEntryTest do
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 

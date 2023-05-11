@@ -9,8 +9,8 @@ defmodule StellarBase.XDR.OptionalAddressWithNonceTest do
     SCAddress,
     SCAddressType,
     OptionalAddressWithNonce,
-    UInt64,
-    UInt256
+    Uint64,
+    Uint256
   }
 
   alias StellarBase.StrKey
@@ -23,12 +23,12 @@ defmodule StellarBase.XDR.OptionalAddressWithNonceTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       sc_address = SCAddress.new(account_id, sc_address_type)
-      nonce = UInt64.new(123)
+      nonce = Uint64.new(123)
 
       address_with_nonce = AddressWithNonce.new(sc_address, nonce)
 

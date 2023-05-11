@@ -1,14 +1,14 @@
 defmodule StellarBase.XDR.OptionalMuxedAccountTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{CryptoKeyType, MuxedAccount, OptionalMuxedAccount, UInt256}
+  alias StellarBase.XDR.{CryptoKeyType, MuxedAccount, OptionalMuxedAccount, Uint256}
 
   describe "OptionalMuxedAccount" do
     setup do
       type = CryptoKeyType.new(:KEY_TYPE_ED25519)
 
       ed25519_key =
-        UInt256.new(
+        Uint256.new(
           <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
             249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         )
@@ -27,12 +27,12 @@ defmodule StellarBase.XDR.OptionalMuxedAccountTest do
     end
 
     test "new/1", %{optional_muxed_account: optional_muxed_account} do
-      %OptionalMuxedAccount{source_account: ^optional_muxed_account} =
+      %OptionalMuxedAccount{muxed_account: ^optional_muxed_account} =
         OptionalMuxedAccount.new(optional_muxed_account)
     end
 
     test "new/1 no source_account opted" do
-      %OptionalMuxedAccount{source_account: nil} = OptionalMuxedAccount.new(nil)
+      %OptionalMuxedAccount{muxed_account: nil} = OptionalMuxedAccount.new(nil)
     end
 
     test "encode_xdr/1", %{optional_muxed_account: optional_muxed_account, binary: binary} do
@@ -56,7 +56,7 @@ defmodule StellarBase.XDR.OptionalMuxedAccountTest do
     end
 
     test "decode_xdr/2 when source_account is not opted" do
-      {:ok, {%OptionalMuxedAccount{source_account: nil}, ""}} =
+      {:ok, {%OptionalMuxedAccount{muxed_account: nil}, ""}} =
         OptionalMuxedAccount.decode_xdr(<<0, 0, 0, 0>>)
     end
 
@@ -65,7 +65,7 @@ defmodule StellarBase.XDR.OptionalMuxedAccountTest do
     end
 
     test "decode_xdr!/2 when source_account is not opted" do
-      {%OptionalMuxedAccount{source_account: nil}, ""} =
+      {%OptionalMuxedAccount{muxed_account: nil}, ""} =
         OptionalMuxedAccount.decode_xdr!(<<0, 0, 0, 0>>)
     end
   end

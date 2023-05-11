@@ -1,11 +1,11 @@
 defmodule StellarBase.XDR.SCSpecTypeBytesNTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{SCSpecTypeBytesN, UInt32}
+  alias StellarBase.XDR.{SCSpecTypeBytesN, Uint32}
 
   describe "SCSpecTypeBytesN" do
     setup do
-      number = UInt32.new(4_294_967_295)
+      number = Uint32.new(4_294_967_295)
 
       %{
         number: number,
@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesNTest do
     end
 
     test "new/1", %{number: number} do
-      %SCSpecTypeBytesN{number: ^number} = SCSpecTypeBytesN.new(number)
+      %SCSpecTypeBytesN{n: ^number} = SCSpecTypeBytesN.new(number)
     end
 
     test "encode_xdr/1", %{sc_spec_type_bytes_n: sc_spec_type_bytes_n, binary: binary} do

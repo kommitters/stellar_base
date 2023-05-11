@@ -1,10 +1,10 @@
-defmodule StellarBase.XDR.Operations.InflationResultTest do
+defmodule StellarBase.XDR.InflationResultTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{InflationPayout, InflationPayoutList, Int64}
-  alias StellarBase.XDR.Operations.{InflationResult, InflationResultCode}
+  alias StellarBase.XDR.{InflationResult, InflationResultCode}
 
   describe "InflationResult" do
     setup do
@@ -32,7 +32,7 @@ defmodule StellarBase.XDR.Operations.InflationResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %InflationResult{code: ^code, result: ^value} = InflationResult.new(value, code)
+      %InflationResult{value: ^code, type: ^value} = InflationResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -62,7 +62,7 @@ defmodule StellarBase.XDR.Operations.InflationResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%InflationResult{
-         code: %InflationResultCode{identifier: :INFLATION_NOT_TIME}
+         value: %InflationResultCode{identifier: :INFLATION_NOT_TIME}
        }, ""} = InflationResult.decode_xdr!(<<255, 255, 255, 255>>)
     end
 

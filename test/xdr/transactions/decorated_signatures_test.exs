@@ -1,9 +1,9 @@
-defmodule StellarBase.XDR.DecoratedSignaturesTest do
+defmodule StellarBase.XDR.DecoratedSignatureList20Test do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{DecoratedSignature, DecoratedSignatures, Signature, SignatureHint}
+  alias StellarBase.XDR.{DecoratedSignature, DecoratedSignatureList20, Signature, SignatureHint}
 
-  describe "DecoratedSignatures" do
+  describe "DecoratedSignatureList20" do
     setup do
       signatures =
         [
@@ -20,7 +20,7 @@ defmodule StellarBase.XDR.DecoratedSignaturesTest do
 
       %{
         signatures: signatures,
-        decorated_signatures: DecoratedSignatures.new(signatures),
+        decorated_signatures: DecoratedSignatureList20.new(signatures),
         binary:
           <<0, 0, 0, 2, 84, 82, 87, 73, 0, 0, 0, 56, 83, 65, 80, 86, 86, 85, 81, 50, 71, 55, 53,
             53, 75, 71, 81, 79, 79, 89, 53, 65, 51, 65, 71, 84, 77, 87, 67, 67, 81, 81, 84, 74,
@@ -33,27 +33,27 @@ defmodule StellarBase.XDR.DecoratedSignaturesTest do
     end
 
     test "new/1", %{signatures: signatures} do
-      %DecoratedSignatures{signatures: ^signatures} = DecoratedSignatures.new(signatures)
+      %DecoratedSignatureList20{items: ^signatures} = DecoratedSignatureList20.new(signatures)
     end
 
     test "encode_xdr/1", %{decorated_signatures: decorated_signatures, binary: binary} do
-      {:ok, ^binary} = DecoratedSignatures.encode_xdr(decorated_signatures)
+      {:ok, ^binary} = DecoratedSignatureList20.encode_xdr(decorated_signatures)
     end
 
     test "encode_xdr!/1", %{decorated_signatures: decorated_signatures, binary: binary} do
-      ^binary = DecoratedSignatures.encode_xdr!(decorated_signatures)
+      ^binary = DecoratedSignatureList20.encode_xdr!(decorated_signatures)
     end
 
     test "decode_xdr/2", %{decorated_signatures: decorated_signatures, binary: binary} do
-      {:ok, {^decorated_signatures, ""}} = DecoratedSignatures.decode_xdr(binary)
+      {:ok, {^decorated_signatures, ""}} = DecoratedSignatureList20.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = DecoratedSignatures.decode_xdr(1234)
+      {:error, :not_binary} = DecoratedSignatureList20.decode_xdr(1234)
     end
 
     test "decode_xdr!/2", %{decorated_signatures: decorated_signatures, binary: binary} do
-      {^decorated_signatures, ^binary} = DecoratedSignatures.decode_xdr!(binary <> binary)
+      {^decorated_signatures, ^binary} = DecoratedSignatureList20.decode_xdr!(binary <> binary)
     end
   end
 end

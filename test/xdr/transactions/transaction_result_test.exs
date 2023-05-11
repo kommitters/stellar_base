@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.TransactionResultTest do
     Void
   }
 
-  alias StellarBase.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
+  alias StellarBase.XDR.{CreateAccountResult, CreateAccountResultCode}
 
   describe "InnerTransactionResult" do
     setup do

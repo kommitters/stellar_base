@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     TimePoint,
     Transaction,
     TransactionV1Envelope,
-    UInt32,
-    UInt64
+    Uint32,
+    Uint64
   }
 
   alias StellarBase.XDR.TransactionSignaturePayloadTaggedTransaction, as: TaggedTransaction
 
   setup do
     # Seq number
-    fee = UInt32.new(100)
+    fee = Uint32.new(100)
     seq_num = SequenceNumber.new(12_345_678)
 
     # time bounds
@@ -41,7 +41,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
 
     # memo
     memo_type = MemoType.new(:MEMO_ID)
-    memo_id = UInt64.new(12_345)
+    memo_id = Uint64.new(12_345)
     memo = Memo.new(memo_id, memo_type)
 
     # operations
@@ -113,7 +113,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     end
 
     test "new/1", %{tx: tx, envelope_type: envelope_type} do
-      %TaggedTransaction{transaction: ^tx, type: ^envelope_type} =
+      %TaggedTransaction{value: ^tx, type: ^envelope_type} =
         TaggedTransaction.new(tx, envelope_type)
     end
 
@@ -210,7 +210,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     end
 
     test "new/1", %{tx: tx, envelope_type: envelope_type} do
-      %TaggedTransaction{transaction: ^tx, type: ^envelope_type} =
+      %TaggedTransaction{value: ^tx, type: ^envelope_type} =
         TaggedTransaction.new(tx, envelope_type)
     end
 

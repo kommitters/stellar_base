@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.CreateAccountResultCodeTest do
+defmodule StellarBase.XDR.CreateAccountResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.CreateAccountResultCode
+  alias StellarBase.XDR.CreateAccountResultCode
 
   @codes [
     :CREATE_ACCOUNT_SUCCESS,

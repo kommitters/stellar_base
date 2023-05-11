@@ -1,13 +1,13 @@
 defmodule StellarBase.XDR.AccountIDTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
+  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, Uint256}
 
   describe "StellarBase.XDR.AccountID" do
     setup do
       public_key = %PublicKey{
-        public_key: %UInt256{
-          datum:
+        value: %Uint256{
+          value:
             <<18, 27, 249, 51, 160, 215, 152, 50, 153, 222, 53, 177, 115, 224, 92, 243, 51, 242,
               249, 40, 118, 78, 128, 109, 86, 239, 171, 232, 42, 171, 210, 35>>
         },
@@ -54,7 +54,7 @@ defmodule StellarBase.XDR.AccountIDTest do
                    "no function clause matching in StellarBase.XDR.AccountID.new/1",
                    fn ->
                      "SFDCVXGSGSG"
-                     |> UInt256.new()
+                     |> Uint256.new()
                      |> AccountID.new()
                    end
     end

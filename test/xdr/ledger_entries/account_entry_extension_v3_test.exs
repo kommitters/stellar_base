@@ -5,14 +5,14 @@ defmodule StellarBase.XDR.AccountEntryExtensionV3Test do
     AccountEntryExtensionV3,
     ExtensionPoint,
     TimePoint,
-    UInt32,
+    Uint32,
     Void
   }
 
   describe "AccountEntryExtensionV3" do
     setup do
       extension_point = ExtensionPoint.new(Void.new(), 0)
-      seq_ledger = UInt32.new(10)
+      seq_ledger = Uint32.new(10)
       seq_time = TimePoint.new(12_345)
 
       %{

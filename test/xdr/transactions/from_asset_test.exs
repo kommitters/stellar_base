@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.FromAssetTest do
+defmodule StellarBase.XDR.HashIDPreimageFromAssetTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    FromAsset,
+    HashIDPreimageFromAsset,
     Hash,
     Asset,
     AssetCode4,
@@ -10,13 +10,13 @@ defmodule StellarBase.XDR.FromAssetTest do
     AssetType,
     AccountID,
     PublicKey,
-    UInt256,
+    Uint256,
     PublicKeyType
   }
 
   alias StellarBase.StrKey
 
-  describe "FromAsset" do
+  describe "HashIDPreimageFromAsset" do
     setup do
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
@@ -25,7 +25,7 @@ defmodule StellarBase.XDR.FromAssetTest do
       issuer =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
@@ -37,7 +37,7 @@ defmodule StellarBase.XDR.FromAssetTest do
       %{
         network_id: network_id,
         asset: asset,
-        from_asset: FromAsset.new(network_id, asset),
+        from_asset: HashIDPreimageFromAsset.new(network_id, asset),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0,
@@ -50,30 +50,30 @@ defmodule StellarBase.XDR.FromAssetTest do
       network_id: network_id,
       asset: asset
     } do
-      %FromAsset{
+      %HashIDPreimageFromAsset{
         network_id: ^network_id,
         asset: ^asset
-      } = FromAsset.new(network_id, asset)
+      } = HashIDPreimageFromAsset.new(network_id, asset)
     end
 
     test "encode_xdr/1", %{from_asset: from_asset, binary: binary} do
-      {:ok, ^binary} = FromAsset.encode_xdr(from_asset)
+      {:ok, ^binary} = HashIDPreimageFromAsset.encode_xdr(from_asset)
     end
 
     test "encode_xdr!/1", %{from_asset: from_asset, binary: binary} do
-      ^binary = FromAsset.encode_xdr!(from_asset)
+      ^binary = HashIDPreimageFromAsset.encode_xdr!(from_asset)
     end
 
     test "decode_xdr/2", %{from_asset: from_asset, binary: binary} do
-      {:ok, {^from_asset, ""}} = FromAsset.decode_xdr(binary)
+      {:ok, {^from_asset, ""}} = HashIDPreimageFromAsset.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = FromAsset.decode_xdr(123)
+      {:error, :not_binary} = HashIDPreimageFromAsset.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{from_asset: from_asset, binary: binary} do
-      {^from_asset, ""} = FromAsset.decode_xdr!(binary)
+      {^from_asset, ""} = HashIDPreimageFromAsset.decode_xdr!(binary)
     end
   end
 end

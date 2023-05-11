@@ -20,18 +20,18 @@ defmodule StellarBase.Test.Utils do
     PublicKeyType,
     Signature,
     SignatureHint,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.Operations.{Payment, Clawback}
+  alias StellarBase.XDR.{Payment, Clawback}
 
-  @spec ed25519_public_key(pk_key :: binary()) :: UInt256.t()
+  @spec ed25519_public_key(pk_key :: binary()) :: Uint256.t()
   def ed25519_public_key(pk_key) do
     pk_key
     |> StrKey.decode!(:ed25519_public_key)
-    |> UInt256.new()
+    |> Uint256.new()
   end
 
   @spec create_account_id(pk_key :: binary()) :: AccountID.t()
@@ -40,7 +40,7 @@ defmodule StellarBase.Test.Utils do
 
     pk_key
     |> StrKey.decode!(:ed25519_public_key)
-    |> UInt256.new()
+    |> Uint256.new()
     |> PublicKey.new(key_type)
     |> AccountID.new()
   end
@@ -51,7 +51,7 @@ defmodule StellarBase.Test.Utils do
 
     pk_key
     |> StrKey.decode!(:ed25519_public_key)
-    |> UInt256.new()
+    |> Uint256.new()
     |> MuxedAccount.new(key_type)
   end
 
@@ -80,7 +80,7 @@ defmodule StellarBase.Test.Utils do
           OperationBody.t()
   def payment_op_body(destination, asset, amount) do
     destination
-    |> Payment.new(asset, amount)
+    |> PaymentOp.new(asset, amount)
     |> OperationBody.new(OperationType.new(:PAYMENT))
   end
 

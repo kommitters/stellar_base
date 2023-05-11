@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultTest do
+defmodule StellarBase.XDR.PathPaymentStrictReceiveResultTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultTest do
     Int64
   }
 
-  alias StellarBase.XDR.Operations.{
+  alias StellarBase.XDR.{
     PathPaymentStrictReceiveResult,
     PathPaymentStrictReceiveResultCode,
     PathPaymentStrictResultSuccess,
@@ -85,7 +85,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %PathPaymentStrictReceiveResult{code: ^code, result: ^value} =
+      %PathPaymentStrictReceiveResult{value: ^code, type: ^value} =
         PathPaymentStrictReceiveResult.new(value, code)
     end
 
@@ -114,7 +114,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%PathPaymentStrictReceiveResult{
-         code: %PathPaymentStrictReceiveResultCode{
+         value: %PathPaymentStrictReceiveResultCode{
            identifier: :PATH_PAYMENT_STRICT_RECEIVE_SRC_NOT_AUTHORIZED
          }
        }, ""} = PathPaymentStrictReceiveResult.decode_xdr!(<<255, 255, 255, 252>>)

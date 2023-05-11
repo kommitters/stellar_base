@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.AssetCode4Test do
     end
 
     test "new/1", %{code: code} do
-      %AssetCode4{code: ^code} = AssetCode4.new(code)
+      %AssetCode4{value: ^code} = AssetCode4.new(code)
       4 = String.length(code)
     end
 

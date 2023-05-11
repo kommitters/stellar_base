@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
+defmodule StellarBase.XDR.FeeBumpTransactionInnerTxTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
   alias StellarBase.XDR.{
     EnvelopeType,
     Ext,
-    FeeBumpInnerTx,
+    FeeBumpTransactionInnerTx,
     Int64,
     Memo,
     MemoType,
@@ -20,11 +20,11 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
     TimePoint,
     Transaction,
     TransactionV1Envelope,
-    UInt32,
-    UInt64
+    Uint32,
+    Uint64
   }
 
-  describe "FeeBumpInnerTx" do
+  describe "FeeBumpTransactionInnerTx" do
     setup do
       transaction_v1 = build_transaction_v1()
 
@@ -41,7 +41,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
       %{
         envelope_type: envelope_type,
         tx_envelope: tx_envelope,
-        fee_bump_inner_tx: FeeBumpInnerTx.new(tx_envelope, envelope_type),
+        fee_bump_inner_tx: FeeBumpTransactionInnerTx.new(tx_envelope, envelope_type),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
@@ -71,28 +71,30 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
     end
 
     test "new/1", %{tx_envelope: tx_envelope, envelope_type: envelope_type} do
-      %FeeBumpInnerTx{envelope: ^tx_envelope, type: ^envelope_type} =
-        FeeBumpInnerTx.new(tx_envelope, envelope_type)
+      %FeeBumpTransactionInnerTx{
+        value: ^tx_envelope,
+        type: ^envelope_type
+      } = FeeBumpTransactionInnerTx.new(tx_envelope, envelope_type)
     end
 
     test "encode_xdr/1", %{fee_bump_inner_tx: fee_bump_inner_tx, binary: binary} do
-      {:ok, ^binary} = FeeBumpInnerTx.encode_xdr(fee_bump_inner_tx)
+      {:ok, ^binary} = FeeBumpTransactionInnerTx.encode_xdr(fee_bump_inner_tx)
     end
 
     test "encode_xdr!/1", %{fee_bump_inner_tx: fee_bump_inner_tx, binary: binary} do
-      ^binary = FeeBumpInnerTx.encode_xdr!(fee_bump_inner_tx)
+      ^binary = FeeBumpTransactionInnerTx.encode_xdr!(fee_bump_inner_tx)
     end
 
     test "decode_xdr/2", %{fee_bump_inner_tx: fee_bump_inner_tx, binary: binary} do
-      {:ok, {^fee_bump_inner_tx, ""}} = FeeBumpInnerTx.decode_xdr(binary)
+      {:ok, {^fee_bump_inner_tx, ""}} = FeeBumpTransactionInnerTx.decode_xdr(binary)
     end
 
     test "decode_xdr!/2", %{fee_bump_inner_tx: fee_bump_inner_tx, binary: binary} do
-      {^fee_bump_inner_tx, ^binary} = FeeBumpInnerTx.decode_xdr!(binary <> binary)
+      {^fee_bump_inner_tx, ^binary} = FeeBumpTransactionInnerTx.decode_xdr!(binary <> binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = FeeBumpInnerTx.decode_xdr(123)
+      {:error, :not_binary} = FeeBumpTransactionInnerTx.decode_xdr(123)
     end
 
     test "invalid identifier", %{envelope_type: envelope_type} do
@@ -100,8 +102,8 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
                    "The key which you try to encode doesn't belong to the current declarations",
                    fn ->
                      envelope_type
-                     |> FeeBumpInnerTx.new(EnvelopeType.new(:TEST))
-                     |> FeeBumpInnerTx.encode_xdr()
+                     |> FeeBumpTransactionInnerTx.new(EnvelopeType.new(:TEST))
+                     |> FeeBumpTransactionInnerTx.encode_xdr()
                    end
     end
   end
@@ -111,7 +113,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
     source_account =
       create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
-    fee = UInt32.new(100)
+    fee = Uint32.new(100)
     seq_num = SequenceNumber.new(12_345_678)
 
     # preconditions
@@ -123,7 +125,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
 
     # memo
     memo_type = MemoType.new(:MEMO_ID)
-    memo_id = UInt64.new(12_345)
+    memo_id = Uint64.new(12_345)
     memo = Memo.new(memo_id, memo_type)
 
     # operations

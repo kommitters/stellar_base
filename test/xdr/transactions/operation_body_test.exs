@@ -8,15 +8,15 @@ defmodule StellarBase.XDR.OperationBodyTest do
     OperationBody,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
-  alias StellarBase.XDR.Operations.CreateAccount
+  alias StellarBase.XDR.CreateAccount
 
   describe "OperationBody" do
     setup do
       pk_key =
-        UInt256.new(
+        Uint256.new(
           <<32, 0, 117, 126, 234, 229, 131, 252, 80, 221, 102, 159, 151, 103, 58, 204, 37, 236,
             114, 88, 35, 172, 115, 250, 246, 199, 223, 49, 173, 49, 229, 9>>
         )
@@ -46,7 +46,7 @@ defmodule StellarBase.XDR.OperationBodyTest do
     end
 
     test "new/1", %{operation: operation, operation_type: operation_type} do
-      %OperationBody{operation: ^operation, type: ^operation_type} =
+      %OperationBody{value: ^operation, type: ^operation_type} =
         OperationBody.new(operation, operation_type)
     end
 

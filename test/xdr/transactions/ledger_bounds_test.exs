@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.LedgerBoundsTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{UInt32, LedgerBounds}
+  alias StellarBase.XDR.{Uint32, LedgerBounds}
 
   describe "LedgerBounds" do
     setup do
-      min_ledger = UInt32.new(123)
-      max_ledger = UInt32.new(321)
+      min_ledger = Uint32.new(123)
+      max_ledger = Uint32.new(321)
 
       %{
         min_ledger: min_ledger,

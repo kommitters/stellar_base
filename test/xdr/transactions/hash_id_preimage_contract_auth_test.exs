@@ -4,7 +4,7 @@ defmodule StellarBase.XDR.HashIDPreimageContractAuthTest do
   alias StellarBase.XDR.{
     HashIDPreimageContractAuth,
     Hash,
-    UInt64,
+    Uint64,
     AuthorizedInvocation,
     AuthorizedInvocationList,
     SCSymbol,
@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.HashIDPreimageContractAuthTest do
     setup do
       network_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
-      nonce = UInt64.new(18_446_744_073_709_551_615)
+      nonce = Uint64.new(18_446_744_073_709_551_615)
 
       contract_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWK")
       function_name = SCSymbol.new("Hello")

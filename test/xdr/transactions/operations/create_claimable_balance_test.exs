@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
+defmodule StellarBase.XDR.CreateClaimableBalanceOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -16,22 +16,22 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
     Int64,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.Operations.CreateClaimableBalance
+  alias StellarBase.XDR.CreateClaimableBalanceOp
 
-  describe "CreateClaimableBalance Operation" do
+  describe "CreateClaimableBalanceOp Operation" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
@@ -61,7 +61,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
         asset: asset,
         amount: amount,
         claimants: claimants,
-        claimable_balance: CreateClaimableBalance.new(asset, amount, claimants),
+        claimable_balance: CreateClaimableBalanceOp.new(asset, amount, claimants),
         binary:
           <<0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
             149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
@@ -75,28 +75,28 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
     end
 
     test "new/1", %{asset: asset, amount: amount, claimants: claimants} do
-      %CreateClaimableBalance{asset: ^asset, amount: ^amount, claimants: ^claimants} =
-        CreateClaimableBalance.new(asset, amount, claimants)
+      %CreateClaimableBalanceOp{asset: ^asset, amount: ^amount, claimants: ^claimants} =
+        CreateClaimableBalanceOp.new(asset, amount, claimants)
     end
 
     test "encode_xdr/1", %{claimable_balance: claimable_balance, binary: binary} do
-      {:ok, ^binary} = CreateClaimableBalance.encode_xdr(claimable_balance)
+      {:ok, ^binary} = CreateClaimableBalanceOp.encode_xdr(claimable_balance)
     end
 
     test "encode_xdr!/1", %{claimable_balance: claimable_balance, binary: binary} do
-      ^binary = CreateClaimableBalance.encode_xdr!(claimable_balance)
+      ^binary = CreateClaimableBalanceOp.encode_xdr!(claimable_balance)
     end
 
     test "decode_xdr/2", %{claimable_balance: claimable_balance, binary: binary} do
-      {:ok, {^claimable_balance, ""}} = CreateClaimableBalance.decode_xdr(binary)
+      {:ok, {^claimable_balance, ""}} = CreateClaimableBalanceOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = CreateClaimableBalance.decode_xdr(123)
+      {:error, :not_binary} = CreateClaimableBalanceOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{claimable_balance: claimable_balance, binary: binary} do
-      {^claimable_balance, ^binary} = CreateClaimableBalance.decode_xdr!(binary <> binary)
+      {^claimable_balance, ^binary} = CreateClaimableBalanceOp.decode_xdr!(binary <> binary)
     end
   end
 
@@ -108,7 +108,7 @@ defmodule StellarBase.XDR.Operations.CreateClaimableBalanceTest do
 
     public_key
     |> StrKey.decode!(:ed25519_public_key)
-    |> UInt256.new()
+    |> Uint256.new()
     |> PublicKey.new(pk_type)
     |> AccountID.new()
     |> ClaimantV0.new(predicate)

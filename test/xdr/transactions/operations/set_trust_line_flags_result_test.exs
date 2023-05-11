@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultTest do
+defmodule StellarBase.XDR.SetTrustLineFlagsResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{SetTrustLineFlagsResult, SetTrustLineFlagsResultCode}
+  alias StellarBase.XDR.{SetTrustLineFlagsResult, SetTrustLineFlagsResultCode}
 
   describe "SetTrustLineFlagsResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %SetTrustLineFlagsResult{code: ^code, result: ^value} =
+      %SetTrustLineFlagsResult{value: ^code, type: ^value} =
         SetTrustLineFlagsResult.new(value, code)
     end
 
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.Operations.SetTrustLineFlagsResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%SetTrustLineFlagsResult{
-         code: %SetTrustLineFlagsResultCode{identifier: :SET_TRUST_LINE_FLAGS_NO_TRUST_LINE}
+         value: %SetTrustLineFlagsResultCode{identifier: :SET_TRUST_LINE_FLAGS_NO_TRUST_LINE}
        }, ""} = SetTrustLineFlagsResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

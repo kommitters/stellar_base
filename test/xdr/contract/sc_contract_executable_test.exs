@@ -25,7 +25,7 @@ defmodule StellarBase.XDR.SCContractExecutableTest do
       sc_contract_executable_type: sc_contract_executable_type
     } do
       %SCContractExecutable{
-        contract_executable: ^contract_executable,
+        value: ^contract_executable,
         type: ^sc_contract_executable_type
       } = SCContractExecutable.new(contract_executable, sc_contract_executable_type)
     end

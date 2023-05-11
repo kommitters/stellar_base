@@ -16,11 +16,11 @@ defmodule StellarBase.XDR.OptionalString32Test do
     end
 
     test "new/1", %{optional_string32: optional_string32} do
-      %OptionalString32{value: ^optional_string32} = OptionalString32.new(optional_string32)
+      %OptionalString32{string32: ^optional_string32} = OptionalString32.new(optional_string32)
     end
 
     test "new/1 no String32 opted" do
-      %OptionalString32{value: nil} = OptionalString32.new(nil)
+      %OptionalString32{string32: nil} = OptionalString32.new(nil)
     end
 
     test "encode_xdr/1", %{optional_string32: optional_string32, binary: binary} do
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.OptionalString32Test do
     end
 
     test "decode_xdr/2 when String32 is not opted" do
-      {:ok, {%OptionalString32{value: nil}, ""}} = OptionalString32.decode_xdr(<<0, 0, 0, 0>>)
+      {:ok, {%OptionalString32{string32: nil}, ""}} = OptionalString32.decode_xdr(<<0, 0, 0, 0>>)
     end
 
     test "decode_xdr!/2", %{optional_string32: optional_string32, binary: binary} do
@@ -52,7 +52,7 @@ defmodule StellarBase.XDR.OptionalString32Test do
     end
 
     test "decode_xdr!/2 when String32 is not opted" do
-      {%OptionalString32{value: nil}, ""} = OptionalString32.decode_xdr!(<<0, 0, 0, 0>>)
+      {%OptionalString32{string32: nil}, ""} = OptionalString32.decode_xdr!(<<0, 0, 0, 0>>)
     end
   end
 end

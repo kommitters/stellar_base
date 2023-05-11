@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
+defmodule StellarBase.XDR.ManageOfferSuccessResultTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
@@ -13,10 +13,10 @@ defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
     Int64,
     OfferEntry,
     Price,
-    UInt32
+    Uint32
   }
 
-  alias StellarBase.XDR.Operations.{ManageOffer, ManageOfferEffect, ManageOfferSuccessResult}
+  alias StellarBase.XDR.{ManageOffer, ManageOfferEffect, ManageOfferSuccessResult}
 
   describe "ManageOfferSuccessResult" do
     setup do
@@ -113,7 +113,7 @@ defmodule StellarBase.XDR.Operations.ManageOfferSuccessResultTest do
     offer_id = Int64.new(123_456)
     amount = Int64.new(5_000_000)
     price = Price.new(Int32.new(1), Int32.new(10))
-    flags = UInt32.new(1)
+    flags = Uint32.new(1)
     ext = Ext.new()
 
     selling =

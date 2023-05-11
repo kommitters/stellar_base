@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PaymentTest do
+defmodule StellarBase.XDR.PaymentOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -14,19 +14,19 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
     MuxedAccount,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.Operations.Payment
+  alias StellarBase.XDR.PaymentOp
 
   setup_all do
     pk_issuer =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
 
     issuer =
       PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -36,19 +36,19 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
     pk_key =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
       |> StrKey.decode!(:ed25519_public_key)
-      |> UInt256.new()
+      |> Uint256.new()
 
     account = MuxedAccount.new(pk_key, CryptoKeyType.new(:KEY_TYPE_ED25519))
 
     {:ok, %{issuer: issuer, account: account}}
   end
 
-  describe "NativeAsset Payment Operation" do
+  describe "NativeAsset PaymentOp Operation" do
     setup %{account: account} do
       asset_type = AssetType.new(:ASSET_TYPE_NATIVE)
       asset = Asset.new(Void.new(), asset_type)
       amount = Int64.new(1_000_000)
-      payment = Payment.new(account, asset, amount)
+      payment = PaymentOp.new(account, asset, amount)
 
       %{
         asset: asset,
@@ -62,31 +62,31 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
     end
 
     test "new/1", %{account: account, asset: asset, amount: amount} do
-      %Payment{destination: ^account, asset: ^asset} = Payment.new(account, asset, amount)
+      %PaymentOp{destination: ^account, asset: ^asset} = PaymentOp.new(account, asset, amount)
     end
 
     test "encode_xdr/1", %{payment: payment, binary: binary} do
-      {:ok, ^binary} = Payment.encode_xdr(payment)
+      {:ok, ^binary} = PaymentOp.encode_xdr(payment)
     end
 
     test "encode_xdr!/1", %{payment: payment, binary: binary} do
-      ^binary = Payment.encode_xdr!(payment)
+      ^binary = PaymentOp.encode_xdr!(payment)
     end
 
     test "decode_xdr/2", %{payment: payment, binary: binary} do
-      {:ok, {^payment, ""}} = Payment.decode_xdr(binary)
+      {:ok, {^payment, ""}} = PaymentOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = Payment.decode_xdr(123)
+      {:error, :not_binary} = PaymentOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{payment: payment, binary: binary} do
-      {^payment, ^binary} = Payment.decode_xdr!(binary <> binary)
+      {^payment, ^binary} = PaymentOp.decode_xdr!(binary <> binary)
     end
   end
 
-  describe "AlphaNum4 Asset Payment Operation" do
+  describe "AlphaNum4 Asset PaymentOp Operation" do
     setup %{account: account, issuer: issuer} do
       asset_type = AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4)
 
@@ -97,7 +97,7 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
         |> Asset.new(asset_type)
 
       amount = Int64.new(1_000_000)
-      payment = Payment.new(account, asset, amount)
+      payment = PaymentOp.new(account, asset, amount)
 
       %{
         asset: asset,
@@ -113,27 +113,27 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
     end
 
     test "new/1", %{account: account, asset: asset, amount: amount} do
-      %Payment{destination: ^account, asset: ^asset} = Payment.new(account, asset, amount)
+      %PaymentOp{destination: ^account, asset: ^asset} = PaymentOp.new(account, asset, amount)
     end
 
     test "encode_xdr/1", %{payment: payment, binary: binary} do
-      {:ok, ^binary} = Payment.encode_xdr(payment)
+      {:ok, ^binary} = PaymentOp.encode_xdr(payment)
     end
 
     test "encode_xdr!/1", %{payment: payment, binary: binary} do
-      ^binary = Payment.encode_xdr!(payment)
+      ^binary = PaymentOp.encode_xdr!(payment)
     end
 
     test "decode_xdr/2", %{payment: payment, binary: binary} do
-      {:ok, {^payment, ""}} = Payment.decode_xdr(binary)
+      {:ok, {^payment, ""}} = PaymentOp.decode_xdr(binary)
     end
 
     test "decode_xdr!/2", %{payment: payment, binary: binary} do
-      {^payment, ^binary} = Payment.decode_xdr!(binary <> binary)
+      {^payment, ^binary} = PaymentOp.decode_xdr!(binary <> binary)
     end
   end
 
-  describe "AlphaNum12 Asset Payment Operation" do
+  describe "AlphaNum12 Asset PaymentOp Operation" do
     setup %{account: account, issuer: issuer} do
       asset_type = AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM12)
 
@@ -144,7 +144,7 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
         |> Asset.new(asset_type)
 
       amount = Int64.new(1_000_000)
-      payment = Payment.new(account, asset, amount)
+      payment = PaymentOp.new(account, asset, amount)
 
       %{
         asset: asset,
@@ -160,23 +160,23 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
     end
 
     test "new/1", %{account: account, asset: asset, amount: amount} do
-      %Payment{destination: ^account, asset: ^asset} = Payment.new(account, asset, amount)
+      %PaymentOp{destination: ^account, asset: ^asset} = PaymentOp.new(account, asset, amount)
     end
 
     test "encode_xdr/1", %{payment: payment, binary: binary} do
-      {:ok, ^binary} = Payment.encode_xdr(payment)
+      {:ok, ^binary} = PaymentOp.encode_xdr(payment)
     end
 
     test "encode_xdr!/1", %{payment: payment, binary: binary} do
-      ^binary = Payment.encode_xdr!(payment)
+      ^binary = PaymentOp.encode_xdr!(payment)
     end
 
     test "decode_xdr/2", %{payment: payment, binary: binary} do
-      {:ok, {^payment, ""}} = Payment.decode_xdr(binary)
+      {:ok, {^payment, ""}} = PaymentOp.decode_xdr(binary)
     end
 
     test "decode_xdr!/2", %{payment: payment, binary: binary} do
-      {^payment, ^binary} = Payment.decode_xdr!(binary <> binary)
+      {^payment, ^binary} = PaymentOp.decode_xdr!(binary <> binary)
     end
   end
 end

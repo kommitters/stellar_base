@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.ChangeTrustResultCodeTest do
+defmodule StellarBase.XDR.ChangeTrustResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.ChangeTrustResultCode
+  alias StellarBase.XDR.ChangeTrustResultCode
 
   @codes [
     :CHANGE_TRUST_SUCCESS,

@@ -1,9 +1,9 @@
-defmodule StellarBase.XDR.RevokeIDTest do
+defmodule StellarBase.XDR.HashIDPreimageRevokeIDTest do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{RevokeID, PoolID, SequenceNumber, UInt32}
+  alias StellarBase.XDR.{HashIDPreimageRevokeID, PoolID, SequenceNumber, Uint32}
 
   describe "OperationID" do
     setup do
@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.RevokeIDTest do
         create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
       seq_number = SequenceNumber.new(123_456)
-      op_num = UInt32.new(123_456)
+      op_num = Uint32.new(123_456)
       pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
       asset =
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.RevokeIDTest do
         op_num: op_num,
         pool_id: pool_id,
         asset: asset,
-        revoke_id: RevokeID.new(source_account, seq_number, op_num, pool_id, asset),
+        revoke_id: HashIDPreimageRevokeID.new(source_account, seq_number, op_num, pool_id, asset),
         binary:
           <<0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16,
             107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 0,
@@ -45,32 +45,32 @@ defmodule StellarBase.XDR.RevokeIDTest do
       pool_id: pool_id,
       asset: asset
     } do
-      %RevokeID{
+      %HashIDPreimageRevokeID{
         source_account: ^source_account,
-        sequence_number: ^seq_number,
+        seq_num: ^seq_number,
         liquidity_pool_id: ^pool_id,
         asset: ^asset
-      } = RevokeID.new(source_account, seq_number, op_num, pool_id, asset)
+      } = HashIDPreimageRevokeID.new(source_account, seq_number, op_num, pool_id, asset)
     end
 
     test "encode_xdr/1", %{revoke_id: revoke_id, binary: binary} do
-      {:ok, ^binary} = RevokeID.encode_xdr(revoke_id)
+      {:ok, ^binary} = HashIDPreimageRevokeID.encode_xdr(revoke_id)
     end
 
     test "encode_xdr!/1", %{revoke_id: revoke_id, binary: binary} do
-      ^binary = RevokeID.encode_xdr!(revoke_id)
+      ^binary = HashIDPreimageRevokeID.encode_xdr!(revoke_id)
     end
 
     test "decode_xdr/2", %{revoke_id: revoke_id, binary: binary} do
-      {:ok, {^revoke_id, ""}} = RevokeID.decode_xdr(binary)
+      {:ok, {^revoke_id, ""}} = HashIDPreimageRevokeID.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = RevokeID.decode_xdr(123)
+      {:error, :not_binary} = HashIDPreimageRevokeID.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{revoke_id: revoke_id, binary: binary} do
-      {^revoke_id, ""} = RevokeID.decode_xdr!(binary)
+      {^revoke_id, ""} = HashIDPreimageRevokeID.decode_xdr!(binary)
     end
   end
 end

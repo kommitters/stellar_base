@@ -4,27 +4,27 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Test do
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{
-    UInt32,
+    Uint32,
     AccountEntryExtensionV2,
     AccountEntryExtensionV2Ext,
     AccountEntryExtensionV3,
     OptionalAccountID,
-    SponsorshipDescriptorList,
+    SponsorshipDescriptorList20,
     SponsorshipDescriptor,
     ExtensionPoint,
-    UInt32,
+    Uint32,
     TimePoint,
     Void
   }
 
   describe "AccountEntryExtensionV2" do
     setup do
-      num_sponsored = UInt32.new(5)
-      num_sponsoring = UInt32.new(5)
+      num_sponsored = Uint32.new(5)
+      num_sponsoring = Uint32.new(5)
       signer_sponsoring_ids = create_sponsorship_descriptor_list()
 
       extension_point = ExtensionPoint.new(Void.new(), 0)
-      seq_ledger = UInt32.new(10)
+      seq_ledger = Uint32.new(10)
       seq_time = TimePoint.new(12_345)
 
       account_entry_extension_v2_ext_list =
@@ -83,8 +83,8 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Test do
             %AccountEntryExtensionV2{
               num_sponsored: ^num_sponsored,
               num_sponsoring: ^num_sponsoring,
-              signer_sponsoring_ids: ^signer_sponsoring_ids,
-              account_entry_extension_v2_ext: ^account_entry_extension_v2_ext
+              signer_sponsoring_i_ds: ^signer_sponsoring_ids,
+              ext: ^account_entry_extension_v2_ext
             } =
               AccountEntryExtensionV2.new(
                 num_sponsored,
@@ -136,7 +136,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Test do
     end
   end
 
-  @spec create_sponsorship_descriptor_list() :: SponsorshipDescriptorList.t()
+  @spec create_sponsorship_descriptor_list() :: SponsorshipDescriptorList20.t()
   defp create_sponsorship_descriptor_list do
     sponsorship_descriptor_1 =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -150,6 +150,6 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2Test do
       |> OptionalAccountID.new()
       |> SponsorshipDescriptor.new()
 
-    SponsorshipDescriptorList.new([sponsorship_descriptor_1, sponsorship_descriptor_2])
+    SponsorshipDescriptorList20.new([sponsorship_descriptor_1, sponsorship_descriptor_2])
   end
 end

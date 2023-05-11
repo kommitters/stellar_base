@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.PaymentResultCodeTest do
+defmodule StellarBase.XDR.PaymentResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.PaymentResultCode
+  alias StellarBase.XDR.PaymentResultCode
 
   @codes [
     :PAYMENT_SUCCESS,

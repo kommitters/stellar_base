@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.InflationResultCodeTest do
+defmodule StellarBase.XDR.InflationResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.InflationResultCode
+  alias StellarBase.XDR.InflationResultCode
 
   @codes [
     :INFLATION_SUCCESS,

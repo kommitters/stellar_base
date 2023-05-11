@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.TransactionV0Test do
     TimeBounds,
     TimePoint,
     TransactionV0,
-    UInt32,
-    UInt64,
-    UInt256
+    Uint32,
+    Uint64,
+    Uint256
   }
 
   alias StellarBase.StrKey
@@ -28,9 +28,9 @@ defmodule StellarBase.XDR.TransactionV0Test do
       source_account_ed25519 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
-      fee = UInt32.new(100)
+      fee = Uint32.new(100)
       seq_num = SequenceNumber.new(12_345_678)
 
       # time bounds
@@ -41,7 +41,7 @@ defmodule StellarBase.XDR.TransactionV0Test do
 
       # memo
       memo_type = MemoType.new(:MEMO_ID)
-      memo_id = UInt64.new(12_345)
+      memo_id = Uint64.new(12_345)
       memo = Memo.new(memo_id, memo_type)
 
       # operations

@@ -1,11 +1,11 @@
-defmodule StellarBase.XDR.RevokeSponsorshipSignerTest do
+defmodule StellarBase.XDR.RevokeSponsorshipOpSignerTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, SignerKey, SignerKeyType, UInt256}
-  alias StellarBase.XDR.RevokeSponsorshipSigner
+  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, SignerKey, SignerKeyType, Uint256}
+  alias StellarBase.XDR.RevokeSponsorshipOpSigner
   alias StellarBase.StrKey
 
-  describe "RevokeSponsorshipSigner" do
+  describe "RevokeSponsorshipOpSigner" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
       signer_key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_PRE_AUTH_TX)
@@ -13,20 +13,20 @@ defmodule StellarBase.XDR.RevokeSponsorshipSignerTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
       signer_key =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> SignerKey.new(signer_key_type)
 
       %{
         account_id: account_id,
         signer_key: signer_key,
-        signer: RevokeSponsorshipSigner.new(account_id, signer_key),
+        signer: RevokeSponsorshipOpSigner.new(account_id, signer_key),
         binary:
           <<0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198,
             221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0,
@@ -36,28 +36,28 @@ defmodule StellarBase.XDR.RevokeSponsorshipSignerTest do
     end
 
     test "new/1", %{account_id: account_id, signer_key: signer_key} do
-      %RevokeSponsorshipSigner{account_id: ^account_id, signer_key: ^signer_key} =
-        RevokeSponsorshipSigner.new(account_id, signer_key)
+      %RevokeSponsorshipOpSigner{account_id: ^account_id, signer_key: ^signer_key} =
+        RevokeSponsorshipOpSigner.new(account_id, signer_key)
     end
 
     test "encode_xdr/1", %{signer: signer, binary: binary} do
-      {:ok, ^binary} = RevokeSponsorshipSigner.encode_xdr(signer)
+      {:ok, ^binary} = RevokeSponsorshipOpSigner.encode_xdr(signer)
     end
 
     test "encode_xdr!/1", %{signer: signer, binary: binary} do
-      ^binary = RevokeSponsorshipSigner.encode_xdr!(signer)
+      ^binary = RevokeSponsorshipOpSigner.encode_xdr!(signer)
     end
 
     test "decode_xdr/2", %{signer: signer, binary: binary} do
-      {:ok, {^signer, ""}} = RevokeSponsorshipSigner.decode_xdr(binary)
+      {:ok, {^signer, ""}} = RevokeSponsorshipOpSigner.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = RevokeSponsorshipSigner.decode_xdr(123)
+      {:error, :not_binary} = RevokeSponsorshipOpSigner.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{signer: signer, binary: binary} do
-      {^signer, ^binary} = RevokeSponsorshipSigner.decode_xdr!(binary <> binary)
+      {^signer, ^binary} = RevokeSponsorshipOpSigner.decode_xdr!(binary <> binary)
     end
   end
 end

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.LiquidityPoolConstantProductParametersTest do
+defmodule StellarBase.XDR.LiquidityPoolConstantProductParametersTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolConstantProductParametersTest 
     Int32,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
@@ -25,7 +25,7 @@ defmodule StellarBase.XDR.Operations.LiquidityPoolConstantProductParametersTest 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 

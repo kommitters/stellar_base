@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.CreateAccountResultTest do
+defmodule StellarBase.XDR.CreateAccountResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.Operations.{CreateAccountResult, CreateAccountResultCode}
+  alias StellarBase.XDR.{CreateAccountResult, CreateAccountResultCode}
 
   describe "CreateAccountResult" do
     setup do
@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.Operations.CreateAccountResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %CreateAccountResult{code: ^code, result: ^value} = CreateAccountResult.new(value, code)
+      %CreateAccountResult{value: ^code, type: ^value} = CreateAccountResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.Operations.CreateAccountResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%CreateAccountResult{
-         code: %CreateAccountResultCode{identifier: :CREATE_ACCOUNT_UNDERFUNDED}
+        value: %CreateAccountResultCode{identifier: :CREATE_ACCOUNT_UNDERFUNDED}
        }, ""} = CreateAccountResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

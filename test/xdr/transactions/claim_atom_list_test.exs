@@ -63,7 +63,7 @@ defmodule StellarBase.XDR.ClaimAtomListTest do
     end
 
     test "new/1", %{offers: offers} do
-      %ClaimAtomList{offers: ^offers} = ClaimAtomList.new(offers)
+      %ClaimAtomList{items: ^offers} = ClaimAtomList.new(offers)
     end
 
     test "encode_xdr/1", %{claim_atom_list: claim_atom_list, binary: binary} do

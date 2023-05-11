@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.SignerKeyTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    UInt256,
+    Uint256,
     SignerKey,
     SignerKeyType,
     VariableOpaque64,
@@ -13,8 +13,8 @@ defmodule StellarBase.XDR.SignerKeyTest do
     setup do
       key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_PRE_AUTH_TX)
 
-      signer_key = %UInt256{
-        datum:
+      signer_key = %Uint256{
+        value:
           <<212, 0, 101, 81, 198, 125, 231, 7, 52, 169, 69, 41, 203, 220, 194, 236, 237, 53, 66,
             44, 182, 180, 40, 82, 226, 20, 174, 51, 61, 35, 235, 218>>
       }
@@ -60,7 +60,7 @@ defmodule StellarBase.XDR.SignerKeyTest do
       assert_raise XDR.FixedOpaqueError,
                    "The length that is passed through parameters must be equal or less to the byte size of the XDR to complete",
                    fn ->
-                     %UInt256{datum: <<32, 0, 117>>}
+                     %Uint256{value: <<32, 0, 117>>}
                      |> SignerKey.new(key_type)
                      |> SignerKey.encode_xdr()
                    end
@@ -71,8 +71,8 @@ defmodule StellarBase.XDR.SignerKeyTest do
     setup do
       key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519_SIGNED_PAYLOAD)
 
-      ed25519 = %UInt256{
-        datum:
+      ed25519 = %Uint256{
+        value:
           <<212, 0, 101, 81, 198, 125, 231, 7, 52, 169, 69, 41, 203, 220, 194, 236, 237, 53, 66,
             44, 182, 180, 40, 82, 226, 20, 174, 51, 61, 35, 235, 218>>
       }
@@ -126,8 +126,8 @@ defmodule StellarBase.XDR.SignerKeyTest do
                    "The length that is passed through parameters must be equal or less to the byte size of the XDR to complete",
                    fn ->
                      %SignerKeyEd25519SignedPayload{
-                       ed25519: %UInt256{
-                         datum: <<32, 0, 117>>
+                       ed25519: %Uint256{
+                         value: <<32, 0, 117>>
                        },
                        payload: %VariableOpaque64{
                          opaque: "0102030405060708090a0b"

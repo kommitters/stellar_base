@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.Operations.ManageDataResultCodeTest do
+defmodule StellarBase.XDR.ManageDataResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Operations.ManageDataResultCode
+  alias StellarBase.XDR.ManageDataResultCode
 
   @codes [
     :MANAGE_DATA_SUCCESS,

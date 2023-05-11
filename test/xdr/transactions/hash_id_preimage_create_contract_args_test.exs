@@ -4,7 +4,7 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
   alias StellarBase.XDR.{
     HashIDPreimageCreateContractArgs,
     Hash,
-    UInt256,
+    Uint256,
     SCContractExecutable,
     SCContractExecutableType
   }
@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
       source = SCContractExecutable.new(contract_executable, sc_contract_executable_type)
 
       salt =
-        UInt256.new(
+        Uint256.new(
           <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
             108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
         )

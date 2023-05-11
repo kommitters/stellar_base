@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
     SCSpecTypeOption,
     SCSpecTypeResult,
     SCSpecTypeDefList12,
-    UInt32,
+    Uint32,
     Void,
     String60
   }
@@ -165,7 +165,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
           binary: <<0, 0, 3, 237, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 5>>
         },
         %{
-          sc_code: SCSpecTypeBytesN.new(UInt32.new(1)),
+          sc_code: SCSpecTypeBytesN.new(Uint32.new(1)),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_BYTES_N),
           binary: <<0, 0, 3, 238, 0, 0, 0, 1>>
         },
@@ -181,7 +181,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
 
     test "new/2", %{discriminants: discriminants} do
       for %{status_type: status_type, sc_code: sc_code} <- discriminants do
-        %SCSpecTypeDef{code: ^sc_code, type: ^status_type} =
+        %SCSpecTypeDef{value: ^sc_code, type: ^status_type} =
           SCSpecTypeDef.new(sc_code, status_type)
       end
     end

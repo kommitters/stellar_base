@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.Operations.ConstantProductTest do
+defmodule StellarBase.XDR.LiquidityPoolEntryConstantProductTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    ConstantProduct,
+    LiquidityPoolEntryConstantProduct,
     LiquidityPoolConstantProductParameters,
     Int64,
     AccountID,
@@ -13,20 +13,20 @@ defmodule StellarBase.XDR.Operations.ConstantProductTest do
     Int32,
     PublicKey,
     PublicKeyType,
-    UInt256,
+    Uint256,
     Void
   }
 
   alias StellarBase.StrKey
 
-  describe "ConstantProduct" do
+  describe "LiquidityPoolEntryConstantProduct" do
     setup do
       key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       issuer =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(key_type)
         |> AccountID.new()
 
@@ -53,7 +53,7 @@ defmodule StellarBase.XDR.Operations.ConstantProductTest do
         total_pool_shares: total_pool_shares,
         pool_shares_trust_line_count: pool_shares_trust_line_count,
         constant_product:
-          ConstantProduct.new(
+          LiquidityPoolEntryConstantProduct.new(
             params,
             reserve_a,
             reserve_b,
@@ -75,14 +75,14 @@ defmodule StellarBase.XDR.Operations.ConstantProductTest do
       total_pool_shares: total_pool_shares,
       pool_shares_trust_line_count: pool_shares_trust_line_count
     } do
-      %ConstantProduct{
+      %LiquidityPoolEntryConstantProduct{
         params: ^params,
         reserve_a: ^reserve_a,
         reserve_b: ^reserve_b,
         total_pool_shares: ^total_pool_shares,
         pool_shares_trust_line_count: ^pool_shares_trust_line_count
       } =
-        ConstantProduct.new(
+        LiquidityPoolEntryConstantProduct.new(
           params,
           reserve_a,
           reserve_b,
@@ -92,23 +92,24 @@ defmodule StellarBase.XDR.Operations.ConstantProductTest do
     end
 
     test "encode_xdr/1", %{constant_product: constant_product, binary: binary} do
-      {:ok, ^binary} = ConstantProduct.encode_xdr(constant_product)
+      {:ok, ^binary} = LiquidityPoolEntryConstantProduct.encode_xdr(constant_product)
     end
 
     test "encode_xdr!/1", %{constant_product: constant_product, binary: binary} do
-      ^binary = ConstantProduct.encode_xdr!(constant_product)
+      ^binary = LiquidityPoolEntryConstantProduct.encode_xdr!(constant_product)
     end
 
     test "decode_xdr/2", %{constant_product: constant_product, binary: binary} do
-      {:ok, {^constant_product, ""}} = ConstantProduct.decode_xdr(binary)
+      {:ok, {^constant_product, ""}} = LiquidityPoolEntryConstantProduct.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = ConstantProduct.decode_xdr(123)
+      {:error, :not_binary} = LiquidityPoolEntryConstantProduct.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{constant_product: constant_product, binary: binary} do
-      {^constant_product, ^binary} = ConstantProduct.decode_xdr!(binary <> binary)
+      {^constant_product, ^binary} =
+        LiquidityPoolEntryConstantProduct.decode_xdr!(binary <> binary)
     end
   end
 end

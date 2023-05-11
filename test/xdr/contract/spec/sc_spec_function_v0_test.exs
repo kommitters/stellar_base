@@ -5,7 +5,7 @@ defmodule StellarBase.XDR.SCSpecFunctionV0Test do
     SCSpecTypeDefList1,
     String1024,
     SCSymbol,
-    SCSpecFunctionInputV0List,
+    SCSpecFunctionInputV0List10,
     SCSpecFunctionInputV0,
     SCSpecTypeDef,
     SCSpecFunctionV0,
@@ -38,7 +38,7 @@ defmodule StellarBase.XDR.SCSpecFunctionV0Test do
         )
 
       inputs =
-        SCSpecFunctionInputV0List.new([
+        SCSpecFunctionInputV0List10.new([
           sc_spec_function_input_v0_1,
           sc_spec_function_input_v0_2
         ])

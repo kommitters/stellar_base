@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.LedgerFootprintTest do
     LedgerKeyList,
     PublicKey,
     PublicKeyType,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.LedgerFootprintTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 

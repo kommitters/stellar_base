@@ -8,7 +8,7 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
     SCContractExecutable,
     SCContractExecutableType,
     Hash,
-    UInt256
+    Uint256
   }
 
   alias StellarBase.StrKey
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
       salt =
         "GCJCFK7GZEOXVAWWOWYFTR5C5IZAQBYV5HIJUGVZPUBDJNRFVXXZEHHV"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
 
       contract_id_type = ContractIDType.new(:CONTRACT_ID_FROM_SOURCE_ACCOUNT)
       contract_id = ContractID.new(salt, contract_id_type)

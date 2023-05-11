@@ -2,10 +2,10 @@ defmodule StellarBase.XDR.SCSpecUDTErrorEnumV0Test do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    UInt32,
+    Uint32,
     SCSpecUDTErrorEnumV0,
     SCSpecUDTErrorEnumCaseV0,
-    SCSpecUDTErrorEnumCaseV0List,
+    SCSpecUDTErrorEnumCaseV0List50,
     String60,
     String80,
     String1024
@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.SCSpecUDTErrorEnumV0Test do
       doc = String1024.new("Hello there")
       lib = String80.new("Hello there")
       name = String60.new("Hello there")
-      value = UInt32.new(4_294_967_295)
+      value = Uint32.new(4_294_967_295)
       sc_spec_udt_error_enum_case_v0 = [SCSpecUDTErrorEnumCaseV0.new(doc, name, value)]
-      cases = SCSpecUDTErrorEnumCaseV0List.new(sc_spec_udt_error_enum_case_v0)
+      cases = SCSpecUDTErrorEnumCaseV0List50.new(sc_spec_udt_error_enum_case_v0)
 
       %{
         doc: doc,

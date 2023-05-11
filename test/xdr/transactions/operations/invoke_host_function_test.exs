@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
+defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -10,7 +10,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
     HostFunction,
     PublicKeyType,
     LedgerEntryType,
-    UInt256,
+    Uint256,
     PublicKey,
     Account,
     LedgerKey,
@@ -34,14 +34,14 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
     SCValType,
     SCVec,
     OptionalAddressWithNonce,
-    UInt64
+    Uint64
   }
 
-  alias StellarBase.XDR.Operations.InvokeHostFunction
+  alias StellarBase.XDR.InvokeHostFunctionOp
 
   alias StellarBase.StrKey
 
-  describe "InvokeHostFunction" do
+  describe "InvokeHostFunctionOp" do
     setup do
       ## HostFunction
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
@@ -58,7 +58,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
       account_id =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> StrKey.decode!(:ed25519_public_key)
-        |> UInt256.new()
+        |> Uint256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
 
@@ -76,7 +76,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
       # AddressWithNonce
       sc_address_type = SCAddressType.new(:SC_ADDRESS_TYPE_ACCOUNT)
       sc_address = SCAddress.new(account_id, sc_address_type)
-      nonce = UInt64.new(123)
+      nonce = Uint64.new(123)
 
       address_with_nonce =
         sc_address |> AddressWithNonce.new(nonce) |> OptionalAddressWithNonce.new()
@@ -100,7 +100,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
         host_function: host_function,
         footprint: footprint,
         auth: auth_list,
-        invoke_host_function_op: InvokeHostFunction.new(host_function, footprint, auth_list),
+        invoke_host_function_op: InvokeHostFunctionOp.new(host_function, footprint, auth_list),
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0,
             0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154,
@@ -125,40 +125,40 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
     end
 
     test "new/1", %{host_function: host_function, footprint: footprint, auth: auth} do
-      %InvokeHostFunction{host_function: ^host_function, footprint: ^footprint, auth: ^auth} =
-        InvokeHostFunction.new(host_function, footprint, auth)
+      %InvokeHostFunctionOp{function: ^host_function, footprint: ^footprint, auth: ^auth} =
+        InvokeHostFunctionOp.new(host_function, footprint, auth)
     end
 
     test "encode_xdr/1", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      {:ok, ^binary} = InvokeHostFunction.encode_xdr(invoke_host_function_op)
+      {:ok, ^binary} = InvokeHostFunctionOp.encode_xdr(invoke_host_function_op)
     end
 
     test "encode_xdr!/1", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      ^binary = InvokeHostFunction.encode_xdr!(invoke_host_function_op)
+      ^binary = InvokeHostFunctionOp.encode_xdr!(invoke_host_function_op)
     end
 
     test "decode_xdr/2", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      {:ok, {^invoke_host_function_op, ""}} = InvokeHostFunction.decode_xdr(binary)
+      {:ok, {^invoke_host_function_op, ""}} = InvokeHostFunctionOp.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = InvokeHostFunction.decode_xdr(123)
+      {:error, :not_binary} = InvokeHostFunctionOp.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
       invoke_host_function_op: invoke_host_function_op,
       binary: binary
     } do
-      {^invoke_host_function_op, ^binary} = InvokeHostFunction.decode_xdr!(binary <> binary)
+      {^invoke_host_function_op, ^binary} = InvokeHostFunctionOp.decode_xdr!(binary <> binary)
     end
   end
 end

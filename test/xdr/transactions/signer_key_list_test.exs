@@ -1,11 +1,11 @@
-defmodule StellarBase.XDR.SignerKeyListTest do
+defmodule StellarBase.XDR.SignerKeyList2Test do
   use ExUnit.Case
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{SignerKeyList, SignerKey, SignerKeyType}
+  alias StellarBase.XDR.{SignerKeyList2, SignerKey, SignerKeyType}
 
-  describe "SignerKeyList" do
+  describe "SignerKeyList2" do
     setup do
       key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_PRE_AUTH_TX)
 
@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.SignerKeyListTest do
 
       %{
         signer_keys: signer_keys,
-        signer_key_list: SignerKeyList.new(signer_keys),
+        signer_key_list: SignerKeyList2.new(signer_keys),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 1, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
@@ -33,33 +33,33 @@ defmodule StellarBase.XDR.SignerKeyListTest do
     end
 
     test "new/1", %{signer_keys: signer_keys} do
-      %SignerKeyList{signer_keys: ^signer_keys} = SignerKeyList.new(signer_keys)
+      %SignerKeyList2{items: ^signer_keys} = SignerKeyList2.new(signer_keys)
     end
 
     test "encode_xdr/1", %{signer_key_list: signer_key_list, binary: binary} do
-      {:ok, ^binary} = SignerKeyList.encode_xdr(signer_key_list)
+      {:ok, ^binary} = SignerKeyList2.encode_xdr(signer_key_list)
     end
 
     test "encode_xdr!/1", %{signer_key_list: signer_key_list, binary: binary} do
-      ^binary = SignerKeyList.encode_xdr!(signer_key_list)
+      ^binary = SignerKeyList2.encode_xdr!(signer_key_list)
     end
 
     test "decode_xdr/1", %{signer_key_list: signer_key_list, binary: binary} do
-      {:ok, {^signer_key_list, ""}} = SignerKeyList.decode_xdr(binary)
+      {:ok, {^signer_key_list, ""}} = SignerKeyList2.decode_xdr(binary)
     end
 
     test "decode_xdr/1 with an invalid binary" do
-      {:error, :not_binary} = SignerKeyList.decode_xdr(123)
+      {:error, :not_binary} = SignerKeyList2.decode_xdr(123)
     end
 
     test "decode_xdr!/1", %{signer_key_list: signer_key_list, binary: binary} do
-      {^signer_key_list, ""} = SignerKeyList.decode_xdr!(binary)
+      {^signer_key_list, ""} = SignerKeyList2.decode_xdr!(binary)
     end
 
     test "decode_xdr!/1 with an invalid binary" do
       assert_raise XDR.VariableArrayError,
                    "The value which you pass through parameters must be a binary value, for example: <<0, 0, 0, 5>>",
-                   fn -> SignerKeyList.decode_xdr!(123) end
+                   fn -> SignerKeyList2.decode_xdr!(123) end
     end
   end
 end
