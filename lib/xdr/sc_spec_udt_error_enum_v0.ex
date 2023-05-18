@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.SCSpecUDTErrorEnumV0 do
     cases: SCSpecUDTErrorEnumCaseV0List50
   )
 
-  @type type_doc :: String1024.t()
-  @type type_lib :: String80.t()
-  @type type_name :: String60.t()
-  @type type_cases :: SCSpecUDTErrorEnumCaseV0List50.t()
+  @type doc_type :: String1024.t()
+  @type lib_type :: String80.t()
+  @type name_type :: String60.t()
+  @type cases_type :: SCSpecUDTErrorEnumCaseV0List50.t()
 
-  @type t :: %__MODULE__{doc: type_doc(), lib: type_lib(), name: type_name(), cases: type_cases()}
+  @type t :: %__MODULE__{doc: doc_type(), lib: lib_type(), name: name_type(), cases: cases_type()}
 
   defstruct [:doc, :lib, :name, :cases]
 
-  @spec new(doc :: type_doc(), lib :: type_lib(), name :: type_name(), cases :: type_cases()) :: t()
+  @spec new(doc :: doc_type(), lib :: lib_type(), name :: name_type(), cases :: cases_type()) :: t()
   def new(
     %String1024{} = doc,
     %String80{} = lib,

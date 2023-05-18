@@ -27,18 +27,18 @@ defmodule StellarBase.XDR.TrustLineEntry do
     ext: TrustLineEntryExt
   )
 
-  @type type_account_id :: AccountID.t()
-  @type type_asset :: TrustLineAsset.t()
-  @type type_balance :: Int64.t()
-  @type type_limit :: Int64.t()
-  @type type_flags :: Uint32.t()
-  @type type_ext :: TrustLineEntryExt.t()
+  @type account_id_type :: AccountID.t()
+  @type asset_type :: TrustLineAsset.t()
+  @type balance_type :: Int64.t()
+  @type limit_type :: Int64.t()
+  @type flags_type :: Uint32.t()
+  @type ext_type :: TrustLineEntryExt.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id(), asset: type_asset(), balance: type_balance(), limit: type_limit(), flags: type_flags(), ext: type_ext()}
+  @type t :: %__MODULE__{account_id: account_id_type(), asset: asset_type(), balance: balance_type(), limit: limit_type(), flags: flags_type(), ext: ext_type()}
 
   defstruct [:account_id, :asset, :balance, :limit, :flags, :ext]
 
-  @spec new(account_id :: type_account_id(), asset :: type_asset(), balance :: type_balance(), limit :: type_limit(), flags :: type_flags(), ext :: type_ext()) :: t()
+  @spec new(account_id :: account_id_type(), asset :: asset_type(), balance :: balance_type(), limit :: limit_type(), flags :: flags_type(), ext :: ext_type()) :: t()
   def new(
     %AccountID{} = account_id,
     %TrustLineAsset{} = asset,

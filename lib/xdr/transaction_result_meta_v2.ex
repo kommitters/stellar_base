@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.TransactionResultMetaV2 do
     tx_apply_processing: TransactionMeta
   )
 
-  @type type_result :: TransactionResultPairV2.t()
-  @type type_fee_processing :: LedgerEntryChanges.t()
-  @type type_tx_apply_processing :: TransactionMeta.t()
+  @type result_type :: TransactionResultPairV2.t()
+  @type fee_processing_type :: LedgerEntryChanges.t()
+  @type tx_apply_processing_type :: TransactionMeta.t()
 
-  @type t :: %__MODULE__{result: type_result(), fee_processing: type_fee_processing(), tx_apply_processing: type_tx_apply_processing()}
+  @type t :: %__MODULE__{result: result_type(), fee_processing: fee_processing_type(), tx_apply_processing: tx_apply_processing_type()}
 
   defstruct [:result, :fee_processing, :tx_apply_processing]
 
-  @spec new(result :: type_result(), fee_processing :: type_fee_processing(), tx_apply_processing :: type_tx_apply_processing()) :: t()
+  @spec new(result :: result_type(), fee_processing :: fee_processing_type(), tx_apply_processing :: tx_apply_processing_type()) :: t()
   def new(
     %TransactionResultPairV2{} = result,
     %LedgerEntryChanges{} = fee_processing,

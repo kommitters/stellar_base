@@ -26,18 +26,18 @@ defmodule StellarBase.XDR.SCPStatementPrepare do
     n_h: Uint32
   )
 
-  @type type_quorum_set_hash :: Hash.t()
-  @type type_ballot :: SCPBallot.t()
-  @type type_prepared :: OptionalSCPBallot.t()
-  @type type_prepared_prime :: OptionalSCPBallot.t()
-  @type type_n_c :: Uint32.t()
-  @type type_n_h :: Uint32.t()
+  @type quorum_set_hash_type :: Hash.t()
+  @type ballot_type :: SCPBallot.t()
+  @type prepared_type :: OptionalSCPBallot.t()
+  @type prepared_prime_type :: OptionalSCPBallot.t()
+  @type n_c_type :: Uint32.t()
+  @type n_h_type :: Uint32.t()
 
-  @type t :: %__MODULE__{quorum_set_hash: type_quorum_set_hash(), ballot: type_ballot(), prepared: type_prepared(), prepared_prime: type_prepared_prime(), n_c: type_n_c(), n_h: type_n_h()}
+  @type t :: %__MODULE__{quorum_set_hash: quorum_set_hash_type(), ballot: ballot_type(), prepared: prepared_type(), prepared_prime: prepared_prime_type(), n_c: n_c_type(), n_h: n_h_type()}
 
   defstruct [:quorum_set_hash, :ballot, :prepared, :prepared_prime, :n_c, :n_h]
 
-  @spec new(quorum_set_hash :: type_quorum_set_hash(), ballot :: type_ballot(), prepared :: type_prepared(), prepared_prime :: type_prepared_prime(), n_c :: type_n_c(), n_h :: type_n_h()) :: t()
+  @spec new(quorum_set_hash :: quorum_set_hash_type(), ballot :: ballot_type(), prepared :: prepared_type(), prepared_prime :: prepared_prime_type(), n_c :: n_c_type(), n_h :: n_h_type()) :: t()
   def new(
     %Hash{} = quorum_set_hash,
     %SCPBallot{} = ballot,

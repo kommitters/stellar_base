@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.AlphaNum4 do
     issuer: AccountID
   )
 
-  @type type_asset_code :: AssetCode4.t()
-  @type type_issuer :: AccountID.t()
+  @type asset_code_type :: AssetCode4.t()
+  @type issuer_type :: AccountID.t()
 
-  @type t :: %__MODULE__{asset_code: type_asset_code(), issuer: type_issuer()}
+  @type t :: %__MODULE__{asset_code: asset_code_type(), issuer: issuer_type()}
 
   defstruct [:asset_code, :issuer]
 
-  @spec new(asset_code :: type_asset_code(), issuer :: type_issuer()) :: t()
+  @spec new(asset_code :: asset_code_type(), issuer :: issuer_type()) :: t()
   def new(
     %AssetCode4{} = asset_code,
     %AccountID{} = issuer

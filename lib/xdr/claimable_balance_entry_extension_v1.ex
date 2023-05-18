@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryExtensionV1 do
     flags: Uint32
   )
 
-  @type type_ext :: ClaimableBalanceEntryExtensionV1Ext.t()
-  @type type_flags :: Uint32.t()
+  @type ext_type :: ClaimableBalanceEntryExtensionV1Ext.t()
+  @type flags_type :: Uint32.t()
 
-  @type t :: %__MODULE__{ext: type_ext(), flags: type_flags()}
+  @type t :: %__MODULE__{ext: ext_type(), flags: flags_type()}
 
   defstruct [:ext, :flags]
 
-  @spec new(ext :: type_ext(), flags :: type_flags()) :: t()
+  @spec new(ext :: ext_type(), flags :: flags_type()) :: t()
   def new(
     %ClaimableBalanceEntryExtensionV1Ext{} = ext,
     %Uint32{} = flags

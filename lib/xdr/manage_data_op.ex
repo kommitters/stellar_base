@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.ManageDataOp do
     data_value: OptionalDataValue
   )
 
-  @type type_data_name :: String64.t()
-  @type type_data_value :: OptionalDataValue.t()
+  @type data_name_type :: String64.t()
+  @type data_value_type :: OptionalDataValue.t()
 
-  @type t :: %__MODULE__{data_name: type_data_name(), data_value: type_data_value()}
+  @type t :: %__MODULE__{data_name: data_name_type(), data_value: data_value_type()}
 
   defstruct [:data_name, :data_value]
 
-  @spec new(data_name :: type_data_name(), data_value :: type_data_value()) :: t()
+  @spec new(data_name :: data_name_type(), data_value :: data_value_type()) :: t()
   def new(
     %String64{} = data_name,
     %OptionalDataValue{} = data_value

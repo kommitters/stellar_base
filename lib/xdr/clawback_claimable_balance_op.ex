@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.ClawbackClaimableBalanceOp do
     balance_id: ClaimableBalanceID
   )
 
-  @type type_balance_id :: ClaimableBalanceID.t()
+  @type balance_id_type :: ClaimableBalanceID.t()
 
-  @type t :: %__MODULE__{balance_id: type_balance_id()}
+  @type t :: %__MODULE__{balance_id: balance_id_type()}
 
   defstruct [:balance_id]
 
-  @spec new(balance_id :: type_balance_id()) :: t()
+  @spec new(balance_id :: balance_id_type()) :: t()
   def new(
     %ClaimableBalanceID{} = balance_id
   ),

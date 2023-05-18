@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.Signer do
     weight: Uint32
   )
 
-  @type type_key :: SignerKey.t()
-  @type type_weight :: Uint32.t()
+  @type key_type :: SignerKey.t()
+  @type weight_type :: Uint32.t()
 
-  @type t :: %__MODULE__{key: type_key(), weight: type_weight()}
+  @type t :: %__MODULE__{key: key_type(), weight: weight_type()}
 
   defstruct [:key, :weight]
 
-  @spec new(key :: type_key(), weight :: type_weight()) :: t()
+  @spec new(key :: key_type(), weight :: weight_type()) :: t()
   def new(
     %SignerKey{} = key,
     %Uint32{} = weight

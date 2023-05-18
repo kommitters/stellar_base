@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
     n: Uint32
   )
 
-  @type type_n :: Uint32.t()
+  @type n_type :: Uint32.t()
 
-  @type t :: %__MODULE__{n: type_n()}
+  @type t :: %__MODULE__{n: n_type()}
 
   defstruct [:n]
 
-  @spec new(n :: type_n()) :: t()
+  @spec new(n :: n_type()) :: t()
   def new(
     %Uint32{} = n
   ),

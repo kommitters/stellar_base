@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.ManageOfferSuccessResult do
     offer: ManageOfferSuccessResultOffer
   )
 
-  @type type_offers_claimed :: ClaimAtomList.t()
-  @type type_offer :: ManageOfferSuccessResultOffer.t()
+  @type offers_claimed_type :: ClaimAtomList.t()
+  @type offer_type :: ManageOfferSuccessResultOffer.t()
 
-  @type t :: %__MODULE__{offers_claimed: type_offers_claimed(), offer: type_offer()}
+  @type t :: %__MODULE__{offers_claimed: offers_claimed_type(), offer: offer_type()}
 
   defstruct [:offers_claimed, :offer]
 
-  @spec new(offers_claimed :: type_offers_claimed(), offer :: type_offer()) :: t()
+  @spec new(offers_claimed :: offers_claimed_type(), offer :: offer_type()) :: t()
   def new(
     %ClaimAtomList{} = offers_claimed,
     %ManageOfferSuccessResultOffer{} = offer

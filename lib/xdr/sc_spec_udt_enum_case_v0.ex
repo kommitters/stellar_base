@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.SCSpecUDTEnumCaseV0 do
     value: Uint32
   )
 
-  @type type_doc :: String1024.t()
-  @type type_name :: String60.t()
-  @type type_value :: Uint32.t()
+  @type doc_type :: String1024.t()
+  @type name_type :: String60.t()
+  @type value_type :: Uint32.t()
 
-  @type t :: %__MODULE__{doc: type_doc(), name: type_name(), value: type_value()}
+  @type t :: %__MODULE__{doc: doc_type(), name: name_type(), value: value_type()}
 
   defstruct [:doc, :name, :value]
 
-  @spec new(doc :: type_doc(), name :: type_name(), value :: type_value()) :: t()
+  @spec new(doc :: doc_type(), name :: name_type(), value :: value_type()) :: t()
   def new(
     %String1024{} = doc,
     %String60{} = name,

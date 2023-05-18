@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.SCSpecFunctionV0 do
     outputs: SCSpecTypeDefList1
   )
 
-  @type type_doc :: String1024.t()
-  @type type_name :: SCSymbol.t()
-  @type type_inputs :: SCSpecFunctionInputV0List10.t()
-  @type type_outputs :: SCSpecTypeDefList1.t()
+  @type doc_type :: String1024.t()
+  @type name_type :: SCSymbol.t()
+  @type inputs_type :: SCSpecFunctionInputV0List10.t()
+  @type outputs_type :: SCSpecTypeDefList1.t()
 
-  @type t :: %__MODULE__{doc: type_doc(), name: type_name(), inputs: type_inputs(), outputs: type_outputs()}
+  @type t :: %__MODULE__{doc: doc_type(), name: name_type(), inputs: inputs_type(), outputs: outputs_type()}
 
   defstruct [:doc, :name, :inputs, :outputs]
 
-  @spec new(doc :: type_doc(), name :: type_name(), inputs :: type_inputs(), outputs :: type_outputs()) :: t()
+  @spec new(doc :: doc_type(), name :: name_type(), inputs :: inputs_type(), outputs :: outputs_type()) :: t()
   def new(
     %String1024{} = doc,
     %SCSymbol{} = name,

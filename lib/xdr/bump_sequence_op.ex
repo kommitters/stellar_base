@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.BumpSequenceOp do
     bump_to: SequenceNumber
   )
 
-  @type type_bump_to :: SequenceNumber.t()
+  @type bump_to_type :: SequenceNumber.t()
 
-  @type t :: %__MODULE__{bump_to: type_bump_to()}
+  @type t :: %__MODULE__{bump_to: bump_to_type()}
 
   defstruct [:bump_to]
 
-  @spec new(bump_to :: type_bump_to()) :: t()
+  @spec new(bump_to :: bump_to_type()) :: t()
   def new(
     %SequenceNumber{} = bump_to
   ),

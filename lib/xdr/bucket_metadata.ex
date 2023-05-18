@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.BucketMetadata do
     ext: BucketMetadataExt
   )
 
-  @type type_ledger_version :: Uint32.t()
-  @type type_ext :: BucketMetadataExt.t()
+  @type ledger_version_type :: Uint32.t()
+  @type ext_type :: BucketMetadataExt.t()
 
-  @type t :: %__MODULE__{ledger_version: type_ledger_version(), ext: type_ext()}
+  @type t :: %__MODULE__{ledger_version: ledger_version_type(), ext: ext_type()}
 
   defstruct [:ledger_version, :ext]
 
-  @spec new(ledger_version :: type_ledger_version(), ext :: type_ext()) :: t()
+  @spec new(ledger_version :: ledger_version_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = ledger_version,
     %BucketMetadataExt{} = ext

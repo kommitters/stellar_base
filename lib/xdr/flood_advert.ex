@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.FloodAdvert do
     tx_hashes: TxAdvertVector
   )
 
-  @type type_tx_hashes :: TxAdvertVector.t()
+  @type tx_hashes_type :: TxAdvertVector.t()
 
-  @type t :: %__MODULE__{tx_hashes: type_tx_hashes()}
+  @type t :: %__MODULE__{tx_hashes: tx_hashes_type()}
 
   defstruct [:tx_hashes]
 
-  @spec new(tx_hashes :: type_tx_hashes()) :: t()
+  @spec new(tx_hashes :: tx_hashes_type()) :: t()
   def new(
     %TxAdvertVector{} = tx_hashes
   ),

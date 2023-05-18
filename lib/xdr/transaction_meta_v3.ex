@@ -29,19 +29,19 @@ defmodule StellarBase.XDR.TransactionMetaV3 do
     diagnostic_events: OperationDiagnosticEventsList
   )
 
-  @type type_tx_changes_before :: LedgerEntryChanges.t()
-  @type type_operations :: OperationMetaList.t()
-  @type type_tx_changes_after :: LedgerEntryChanges.t()
-  @type type_events :: OperationEventsList.t()
-  @type type_tx_result :: TransactionResult.t()
-  @type type_hashes :: HashFixedList.t()
-  @type type_diagnostic_events :: OperationDiagnosticEventsList.t()
+  @type tx_changes_before_type :: LedgerEntryChanges.t()
+  @type operations_type :: OperationMetaList.t()
+  @type tx_changes_after_type :: LedgerEntryChanges.t()
+  @type events_type :: OperationEventsList.t()
+  @type tx_result_type :: TransactionResult.t()
+  @type hashes_type :: HashFixedList.t()
+  @type diagnostic_events_type :: OperationDiagnosticEventsList.t()
 
-  @type t :: %__MODULE__{tx_changes_before: type_tx_changes_before(), operations: type_operations(), tx_changes_after: type_tx_changes_after(), events: type_events(), tx_result: type_tx_result(), hashes: type_hashes(), diagnostic_events: type_diagnostic_events()}
+  @type t :: %__MODULE__{tx_changes_before: tx_changes_before_type(), operations: operations_type(), tx_changes_after: tx_changes_after_type(), events: events_type(), tx_result: tx_result_type(), hashes: hashes_type(), diagnostic_events: diagnostic_events_type()}
 
   defstruct [:tx_changes_before, :operations, :tx_changes_after, :events, :tx_result, :hashes, :diagnostic_events]
 
-  @spec new(tx_changes_before :: type_tx_changes_before(), operations :: type_operations(), tx_changes_after :: type_tx_changes_after(), events :: type_events(), tx_result :: type_tx_result(), hashes :: type_hashes(), diagnostic_events :: type_diagnostic_events()) :: t()
+  @spec new(tx_changes_before :: tx_changes_before_type(), operations :: operations_type(), tx_changes_after :: tx_changes_after_type(), events :: events_type(), tx_result :: tx_result_type(), hashes :: hashes_type(), diagnostic_events :: diagnostic_events_type()) :: t()
   def new(
     %LedgerEntryChanges{} = tx_changes_before,
     %OperationMetaList{} = operations,

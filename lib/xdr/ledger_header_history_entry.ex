@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.LedgerHeaderHistoryEntry do
     ext: LedgerHeaderHistoryEntryExt
   )
 
-  @type type_hash :: Hash.t()
-  @type type_header :: LedgerHeader.t()
-  @type type_ext :: LedgerHeaderHistoryEntryExt.t()
+  @type hash_type :: Hash.t()
+  @type header_type :: LedgerHeader.t()
+  @type ext_type :: LedgerHeaderHistoryEntryExt.t()
 
-  @type t :: %__MODULE__{hash: type_hash(), header: type_header(), ext: type_ext()}
+  @type t :: %__MODULE__{hash: hash_type(), header: header_type(), ext: ext_type()}
 
   defstruct [:hash, :header, :ext]
 
-  @spec new(hash :: type_hash(), header :: type_header(), ext :: type_ext()) :: t()
+  @spec new(hash :: hash_type(), header :: header_type(), ext :: ext_type()) :: t()
   def new(
     %Hash{} = hash,
     %LedgerHeader{} = header,

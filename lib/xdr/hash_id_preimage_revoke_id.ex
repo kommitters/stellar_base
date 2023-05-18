@@ -26,17 +26,17 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeID do
     asset: Asset
   )
 
-  @type type_source_account :: AccountID.t()
-  @type type_seq_num :: SequenceNumber.t()
-  @type type_op_num :: Uint32.t()
-  @type type_liquidity_pool_id :: PoolID.t()
-  @type type_asset :: Asset.t()
+  @type source_account_type :: AccountID.t()
+  @type seq_num_type :: SequenceNumber.t()
+  @type op_num_type :: Uint32.t()
+  @type liquidity_pool_id_type :: PoolID.t()
+  @type asset_type :: Asset.t()
 
-  @type t :: %__MODULE__{source_account: type_source_account(), seq_num: type_seq_num(), op_num: type_op_num(), liquidity_pool_id: type_liquidity_pool_id(), asset: type_asset()}
+  @type t :: %__MODULE__{source_account: source_account_type(), seq_num: seq_num_type(), op_num: op_num_type(), liquidity_pool_id: liquidity_pool_id_type(), asset: asset_type()}
 
   defstruct [:source_account, :seq_num, :op_num, :liquidity_pool_id, :asset]
 
-  @spec new(source_account :: type_source_account(), seq_num :: type_seq_num(), op_num :: type_op_num(), liquidity_pool_id :: type_liquidity_pool_id(), asset :: type_asset()) :: t()
+  @spec new(source_account :: source_account_type(), seq_num :: seq_num_type(), op_num :: op_num_type(), liquidity_pool_id :: liquidity_pool_id_type(), asset :: asset_type()) :: t()
   def new(
     %AccountID{} = source_account,
     %SequenceNumber{} = seq_num,

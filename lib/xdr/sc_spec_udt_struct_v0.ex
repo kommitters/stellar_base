@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.SCSpecUDTStructV0 do
     fields: SCSpecUDTStructFieldV0List40
   )
 
-  @type type_doc :: String1024.t()
-  @type type_lib :: String80.t()
-  @type type_name :: String60.t()
-  @type type_fields :: SCSpecUDTStructFieldV0List40.t()
+  @type doc_type :: String1024.t()
+  @type lib_type :: String80.t()
+  @type name_type :: String60.t()
+  @type fields_type :: SCSpecUDTStructFieldV0List40.t()
 
-  @type t :: %__MODULE__{doc: type_doc(), lib: type_lib(), name: type_name(), fields: type_fields()}
+  @type t :: %__MODULE__{doc: doc_type(), lib: lib_type(), name: name_type(), fields: fields_type()}
 
   defstruct [:doc, :lib, :name, :fields]
 
-  @spec new(doc :: type_doc(), lib :: type_lib(), name :: type_name(), fields :: type_fields()) :: t()
+  @spec new(doc :: doc_type(), lib :: lib_type(), name :: name_type(), fields :: fields_type()) :: t()
   def new(
     %String1024{} = doc,
     %String80{} = lib,

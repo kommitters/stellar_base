@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.DiagnosticEvent do
     event: ContractEvent
   )
 
-  @type type_in_successful_contract_call :: Bool.t()
-  @type type_event :: ContractEvent.t()
+  @type in_successful_contract_call_type :: Bool.t()
+  @type event_type :: ContractEvent.t()
 
-  @type t :: %__MODULE__{in_successful_contract_call: type_in_successful_contract_call(), event: type_event()}
+  @type t :: %__MODULE__{in_successful_contract_call: in_successful_contract_call_type(), event: event_type()}
 
   defstruct [:in_successful_contract_call, :event]
 
-  @spec new(in_successful_contract_call :: type_in_successful_contract_call(), event :: type_event()) :: t()
+  @spec new(in_successful_contract_call :: in_successful_contract_call_type(), event :: event_type()) :: t()
   def new(
     %Bool{} = in_successful_contract_call,
     %ContractEvent{} = event

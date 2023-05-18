@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.Error do
     msg: String100
   )
 
-  @type type_code :: ErrorCode.t()
-  @type type_msg :: String100.t()
+  @type code_type :: ErrorCode.t()
+  @type msg_type :: String100.t()
 
-  @type t :: %__MODULE__{code: type_code(), msg: type_msg()}
+  @type t :: %__MODULE__{code: code_type(), msg: msg_type()}
 
   defstruct [:code, :msg]
 
-  @spec new(code :: type_code(), msg :: type_msg()) :: t()
+  @spec new(code :: code_type(), msg :: msg_type()) :: t()
   def new(
     %ErrorCode{} = code,
     %String100{} = msg

@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.ClawbackOp do
     amount: Int64
   )
 
-  @type type_asset :: Asset.t()
-  @type type_from :: MuxedAccount.t()
-  @type type_amount :: Int64.t()
+  @type asset_type :: Asset.t()
+  @type from_type :: MuxedAccount.t()
+  @type amount_type :: Int64.t()
 
-  @type t :: %__MODULE__{asset: type_asset(), from: type_from(), amount: type_amount()}
+  @type t :: %__MODULE__{asset: asset_type(), from: from_type(), amount: amount_type()}
 
   defstruct [:asset, :from, :amount]
 
-  @spec new(asset :: type_asset(), from :: type_from(), amount :: type_amount()) :: t()
+  @spec new(asset :: asset_type(), from :: from_type(), amount :: amount_type()) :: t()
   def new(
     %Asset{} = asset,
     %MuxedAccount{} = from,

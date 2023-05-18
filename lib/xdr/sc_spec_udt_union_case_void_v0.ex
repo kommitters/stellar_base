@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
     name: String60
   )
 
-  @type type_doc :: String1024.t()
-  @type type_name :: String60.t()
+  @type doc_type :: String1024.t()
+  @type name_type :: String60.t()
 
-  @type t :: %__MODULE__{doc: type_doc(), name: type_name()}
+  @type t :: %__MODULE__{doc: doc_type(), name: name_type()}
 
   defstruct [:doc, :name]
 
-  @spec new(doc :: type_doc(), name :: type_name()) :: t()
+  @spec new(doc :: doc_type(), name :: name_type()) :: t()
   def new(
     %String1024{} = doc,
     %String60{} = name

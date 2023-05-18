@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.OperationEvents do
     events: ContractEventList
   )
 
-  @type type_events :: ContractEventList.t()
+  @type events_type :: ContractEventList.t()
 
-  @type t :: %__MODULE__{events: type_events()}
+  @type t :: %__MODULE__{events: events_type()}
 
   defstruct [:events]
 
-  @spec new(events :: type_events()) :: t()
+  @spec new(events :: events_type()) :: t()
   def new(
     %ContractEventList{} = events
   ),

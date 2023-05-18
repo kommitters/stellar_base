@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.ContractCodeEntry do
     code: VariableOpaque256000
   )
 
-  @type type_ext :: ExtensionPoint.t()
-  @type type_hash :: Hash.t()
-  @type type_code :: VariableOpaque256000.t()
+  @type ext_type :: ExtensionPoint.t()
+  @type hash_type :: Hash.t()
+  @type code_type :: VariableOpaque256000.t()
 
-  @type t :: %__MODULE__{ext: type_ext(), hash: type_hash(), code: type_code()}
+  @type t :: %__MODULE__{ext: ext_type(), hash: hash_type(), code: code_type()}
 
   defstruct [:ext, :hash, :code]
 
-  @spec new(ext :: type_ext(), hash :: type_hash(), code :: type_code()) :: t()
+  @spec new(ext :: ext_type(), hash :: hash_type(), code :: code_type()) :: t()
   def new(
     %ExtensionPoint{} = ext,
     %Hash{} = hash,

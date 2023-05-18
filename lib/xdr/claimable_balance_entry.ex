@@ -26,17 +26,17 @@ defmodule StellarBase.XDR.ClaimableBalanceEntry do
     ext: ClaimableBalanceEntryExt
   )
 
-  @type type_balance_id :: ClaimableBalanceID.t()
-  @type type_claimants :: ClaimantList10.t()
-  @type type_asset :: Asset.t()
-  @type type_amount :: Int64.t()
-  @type type_ext :: ClaimableBalanceEntryExt.t()
+  @type balance_id_type :: ClaimableBalanceID.t()
+  @type claimants_type :: ClaimantList10.t()
+  @type asset_type :: Asset.t()
+  @type amount_type :: Int64.t()
+  @type ext_type :: ClaimableBalanceEntryExt.t()
 
-  @type t :: %__MODULE__{balance_id: type_balance_id(), claimants: type_claimants(), asset: type_asset(), amount: type_amount(), ext: type_ext()}
+  @type t :: %__MODULE__{balance_id: balance_id_type(), claimants: claimants_type(), asset: asset_type(), amount: amount_type(), ext: ext_type()}
 
   defstruct [:balance_id, :claimants, :asset, :amount, :ext]
 
-  @spec new(balance_id :: type_balance_id(), claimants :: type_claimants(), asset :: type_asset(), amount :: type_amount(), ext :: type_ext()) :: t()
+  @spec new(balance_id :: balance_id_type(), claimants :: claimants_type(), asset :: asset_type(), amount :: amount_type(), ext :: ext_type()) :: t()
   def new(
     %ClaimableBalanceID{} = balance_id,
     %ClaimantList10{} = claimants,

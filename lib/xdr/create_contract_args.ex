@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.CreateContractArgs do
     source: SCContractExecutable
   )
 
-  @type type_contract_id :: ContractID.t()
-  @type type_source :: SCContractExecutable.t()
+  @type contract_id_type :: ContractID.t()
+  @type source_type :: SCContractExecutable.t()
 
-  @type t :: %__MODULE__{contract_id: type_contract_id(), source: type_source()}
+  @type t :: %__MODULE__{contract_id: contract_id_type(), source: source_type()}
 
   defstruct [:contract_id, :source]
 
-  @spec new(contract_id :: type_contract_id(), source :: type_source()) :: t()
+  @spec new(contract_id :: contract_id_type(), source :: source_type()) :: t()
   def new(
     %ContractID{} = contract_id,
     %SCContractExecutable{} = source

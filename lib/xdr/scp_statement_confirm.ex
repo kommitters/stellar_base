@@ -24,17 +24,17 @@ defmodule StellarBase.XDR.SCPStatementConfirm do
     quorum_set_hash: Hash
   )
 
-  @type type_ballot :: SCPBallot.t()
-  @type type_n_prepared :: Uint32.t()
-  @type type_n_commit :: Uint32.t()
-  @type type_n_h :: Uint32.t()
-  @type type_quorum_set_hash :: Hash.t()
+  @type ballot_type :: SCPBallot.t()
+  @type n_prepared_type :: Uint32.t()
+  @type n_commit_type :: Uint32.t()
+  @type n_h_type :: Uint32.t()
+  @type quorum_set_hash_type :: Hash.t()
 
-  @type t :: %__MODULE__{ballot: type_ballot(), n_prepared: type_n_prepared(), n_commit: type_n_commit(), n_h: type_n_h(), quorum_set_hash: type_quorum_set_hash()}
+  @type t :: %__MODULE__{ballot: ballot_type(), n_prepared: n_prepared_type(), n_commit: n_commit_type(), n_h: n_h_type(), quorum_set_hash: quorum_set_hash_type()}
 
   defstruct [:ballot, :n_prepared, :n_commit, :n_h, :quorum_set_hash]
 
-  @spec new(ballot :: type_ballot(), n_prepared :: type_n_prepared(), n_commit :: type_n_commit(), n_h :: type_n_h(), quorum_set_hash :: type_quorum_set_hash()) :: t()
+  @spec new(ballot :: ballot_type(), n_prepared :: n_prepared_type(), n_commit :: n_commit_type(), n_h :: n_h_type(), quorum_set_hash :: quorum_set_hash_type()) :: t()
   def new(
     %SCPBallot{} = ballot,
     %Uint32{} = n_prepared,

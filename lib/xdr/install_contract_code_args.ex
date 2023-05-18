@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.InstallContractCodeArgs do
     code: VariableOpaque256000
   )
 
-  @type type_code :: VariableOpaque256000.t()
+  @type code_type :: VariableOpaque256000.t()
 
-  @type t :: %__MODULE__{code: type_code()}
+  @type t :: %__MODULE__{code: code_type()}
 
   defstruct [:code]
 
-  @spec new(code :: type_code()) :: t()
+  @spec new(code :: code_type()) :: t()
   def new(
     %VariableOpaque256000{} = code
   ),

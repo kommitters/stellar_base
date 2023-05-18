@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerKeyContractData do
     key: SCVal
   )
 
-  @type type_contract_id :: Hash.t()
-  @type type_key :: SCVal.t()
+  @type contract_id_type :: Hash.t()
+  @type key_type :: SCVal.t()
 
-  @type t :: %__MODULE__{contract_id: type_contract_id(), key: type_key()}
+  @type t :: %__MODULE__{contract_id: contract_id_type(), key: key_type()}
 
   defstruct [:contract_id, :key]
 
-  @spec new(contract_id :: type_contract_id(), key :: type_key()) :: t()
+  @spec new(contract_id :: contract_id_type(), key :: key_type()) :: t()
   def new(
     %Hash{} = contract_id,
     %SCVal{} = key

@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOp do
     claimants: ClaimantList10
   )
 
-  @type type_asset :: Asset.t()
-  @type type_amount :: Int64.t()
-  @type type_claimants :: ClaimantList10.t()
+  @type asset_type :: Asset.t()
+  @type amount_type :: Int64.t()
+  @type claimants_type :: ClaimantList10.t()
 
-  @type t :: %__MODULE__{asset: type_asset(), amount: type_amount(), claimants: type_claimants()}
+  @type t :: %__MODULE__{asset: asset_type(), amount: amount_type(), claimants: claimants_type()}
 
   defstruct [:asset, :amount, :claimants]
 
-  @spec new(asset :: type_asset(), amount :: type_amount(), claimants :: type_claimants()) :: t()
+  @spec new(asset :: asset_type(), amount :: amount_type(), claimants :: claimants_type()) :: t()
   def new(
     %Asset{} = asset,
     %Int64{} = amount,

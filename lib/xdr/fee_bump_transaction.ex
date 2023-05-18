@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.FeeBumpTransaction do
     ext: FeeBumpTransactionExt
   )
 
-  @type type_fee_source :: MuxedAccount.t()
-  @type type_fee :: Int64.t()
-  @type type_inner_tx :: FeeBumpTransactionInnerTx.t()
-  @type type_ext :: FeeBumpTransactionExt.t()
+  @type fee_source_type :: MuxedAccount.t()
+  @type fee_type :: Int64.t()
+  @type inner_tx_type :: FeeBumpTransactionInnerTx.t()
+  @type ext_type :: FeeBumpTransactionExt.t()
 
-  @type t :: %__MODULE__{fee_source: type_fee_source(), fee: type_fee(), inner_tx: type_inner_tx(), ext: type_ext()}
+  @type t :: %__MODULE__{fee_source: fee_source_type(), fee: fee_type(), inner_tx: inner_tx_type(), ext: ext_type()}
 
   defstruct [:fee_source, :fee, :inner_tx, :ext]
 
-  @spec new(fee_source :: type_fee_source(), fee :: type_fee(), inner_tx :: type_inner_tx(), ext :: type_ext()) :: t()
+  @spec new(fee_source :: fee_source_type(), fee :: fee_type(), inner_tx :: inner_tx_type(), ext :: ext_type()) :: t()
   def new(
     %MuxedAccount{} = fee_source,
     %Int64{} = fee,

@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.SCPNomination do
     accepted: ValueList
   )
 
-  @type type_quorum_set_hash :: Hash.t()
-  @type type_votes :: ValueList.t()
-  @type type_accepted :: ValueList.t()
+  @type quorum_set_hash_type :: Hash.t()
+  @type votes_type :: ValueList.t()
+  @type accepted_type :: ValueList.t()
 
-  @type t :: %__MODULE__{quorum_set_hash: type_quorum_set_hash(), votes: type_votes(), accepted: type_accepted()}
+  @type t :: %__MODULE__{quorum_set_hash: quorum_set_hash_type(), votes: votes_type(), accepted: accepted_type()}
 
   defstruct [:quorum_set_hash, :votes, :accepted]
 
-  @spec new(quorum_set_hash :: type_quorum_set_hash(), votes :: type_votes(), accepted :: type_accepted()) :: t()
+  @spec new(quorum_set_hash :: quorum_set_hash_type(), votes :: votes_type(), accepted :: accepted_type()) :: t()
   def new(
     %Hash{} = quorum_set_hash,
     %ValueList{} = votes,

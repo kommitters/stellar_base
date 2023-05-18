@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TransactionV0Envelope do
     signatures: DecoratedSignatureList20
   )
 
-  @type type_tx :: TransactionV0.t()
-  @type type_signatures :: DecoratedSignatureList20.t()
+  @type tx_type :: TransactionV0.t()
+  @type signatures_type :: DecoratedSignatureList20.t()
 
-  @type t :: %__MODULE__{tx: type_tx(), signatures: type_signatures()}
+  @type t :: %__MODULE__{tx: tx_type(), signatures: signatures_type()}
 
   defstruct [:tx, :signatures]
 
-  @spec new(tx :: type_tx(), signatures :: type_signatures()) :: t()
+  @spec new(tx :: tx_type(), signatures :: signatures_type()) :: t()
   def new(
     %TransactionV0{} = tx,
     %DecoratedSignatureList20{} = signatures

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerKeyTrustLine do
     asset: TrustLineAsset
   )
 
-  @type type_account_id :: AccountID.t()
-  @type type_asset :: TrustLineAsset.t()
+  @type account_id_type :: AccountID.t()
+  @type asset_type :: TrustLineAsset.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id(), asset: type_asset()}
+  @type t :: %__MODULE__{account_id: account_id_type(), asset: asset_type()}
 
   defstruct [:account_id, :asset]
 
-  @spec new(account_id :: type_account_id(), asset :: type_asset()) :: t()
+  @spec new(account_id :: account_id_type(), asset :: asset_type()) :: t()
   def new(
     %AccountID{} = account_id,
     %TrustLineAsset{} = asset

@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.SCPStatement do
     pledges: SCPStatementPledges
   )
 
-  @type type_node_id :: NodeID.t()
-  @type type_slot_index :: Uint64.t()
-  @type type_pledges :: SCPStatementPledges.t()
+  @type node_id_type :: NodeID.t()
+  @type slot_index_type :: Uint64.t()
+  @type pledges_type :: SCPStatementPledges.t()
 
-  @type t :: %__MODULE__{node_id: type_node_id(), slot_index: type_slot_index(), pledges: type_pledges()}
+  @type t :: %__MODULE__{node_id: node_id_type(), slot_index: slot_index_type(), pledges: pledges_type()}
 
   defstruct [:node_id, :slot_index, :pledges]
 
-  @spec new(node_id :: type_node_id(), slot_index :: type_slot_index(), pledges :: type_pledges()) :: t()
+  @spec new(node_id :: node_id_type(), slot_index :: slot_index_type(), pledges :: pledges_type()) :: t()
   def new(
     %NodeID{} = node_id,
     %Uint64{} = slot_index,

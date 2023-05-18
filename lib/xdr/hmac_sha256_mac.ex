@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.HmacSha256Mac do
     mac: Opaque32
   )
 
-  @type type_mac :: Opaque32.t()
+  @type mac_type :: Opaque32.t()
 
-  @type t :: %__MODULE__{mac: type_mac()}
+  @type t :: %__MODULE__{mac: mac_type()}
 
   defstruct [:mac]
 
-  @spec new(mac :: type_mac()) :: t()
+  @spec new(mac :: mac_type()) :: t()
   def new(
     %Opaque32{} = mac
   ),

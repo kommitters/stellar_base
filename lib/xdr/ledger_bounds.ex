@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.LedgerBounds do
     max_ledger: Uint32
   )
 
-  @type type_min_ledger :: Uint32.t()
-  @type type_max_ledger :: Uint32.t()
+  @type min_ledger_type :: Uint32.t()
+  @type max_ledger_type :: Uint32.t()
 
-  @type t :: %__MODULE__{min_ledger: type_min_ledger(), max_ledger: type_max_ledger()}
+  @type t :: %__MODULE__{min_ledger: min_ledger_type(), max_ledger: max_ledger_type()}
 
   defstruct [:min_ledger, :max_ledger]
 
-  @spec new(min_ledger :: type_min_ledger(), max_ledger :: type_max_ledger()) :: t()
+  @spec new(min_ledger :: min_ledger_type(), max_ledger :: max_ledger_type()) :: t()
   def new(
     %Uint32{} = min_ledger,
     %Uint32{} = max_ledger

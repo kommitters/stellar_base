@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.OperationDiagnosticEvents do
     events: DiagnosticEventList
   )
 
-  @type type_events :: DiagnosticEventList.t()
+  @type events_type :: DiagnosticEventList.t()
 
-  @type t :: %__MODULE__{events: type_events()}
+  @type t :: %__MODULE__{events: events_type()}
 
   defstruct [:events]
 
-  @spec new(events :: type_events()) :: t()
+  @spec new(events :: events_type()) :: t()
   def new(
     %DiagnosticEventList{} = events
   ),

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerSCPMessages do
     messages: SCPEnvelopeList
   )
 
-  @type type_ledger_seq :: Uint32.t()
-  @type type_messages :: SCPEnvelopeList.t()
+  @type ledger_seq_type :: Uint32.t()
+  @type messages_type :: SCPEnvelopeList.t()
 
-  @type t :: %__MODULE__{ledger_seq: type_ledger_seq(), messages: type_messages()}
+  @type t :: %__MODULE__{ledger_seq: ledger_seq_type(), messages: messages_type()}
 
   defstruct [:ledger_seq, :messages]
 
-  @spec new(ledger_seq :: type_ledger_seq(), messages :: type_messages()) :: t()
+  @spec new(ledger_seq :: ledger_seq_type(), messages :: messages_type()) :: t()
   def new(
     %Uint32{} = ledger_seq,
     %SCPEnvelopeList{} = messages

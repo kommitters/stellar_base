@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TxSetComponentTxsMaybeDiscountedFee do
     txs: TransactionEnvelopeList
   )
 
-  @type type_base_fee :: OptionalInt64.t()
-  @type type_txs :: TransactionEnvelopeList.t()
+  @type base_fee_type :: OptionalInt64.t()
+  @type txs_type :: TransactionEnvelopeList.t()
 
-  @type t :: %__MODULE__{base_fee: type_base_fee(), txs: type_txs()}
+  @type t :: %__MODULE__{base_fee: base_fee_type(), txs: txs_type()}
 
   defstruct [:base_fee, :txs]
 
-  @spec new(base_fee :: type_base_fee(), txs :: type_txs()) :: t()
+  @spec new(base_fee :: base_fee_type(), txs :: txs_type()) :: t()
   def new(
     %OptionalInt64{} = base_fee,
     %TransactionEnvelopeList{} = txs

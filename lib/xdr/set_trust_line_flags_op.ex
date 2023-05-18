@@ -23,16 +23,16 @@ defmodule StellarBase.XDR.SetTrustLineFlagsOp do
     set_flags: Uint32
   )
 
-  @type type_trustor :: AccountID.t()
-  @type type_asset :: Asset.t()
-  @type type_clear_flags :: Uint32.t()
-  @type type_set_flags :: Uint32.t()
+  @type trustor_type :: AccountID.t()
+  @type asset_type :: Asset.t()
+  @type clear_flags_type :: Uint32.t()
+  @type set_flags_type :: Uint32.t()
 
-  @type t :: %__MODULE__{trustor: type_trustor(), asset: type_asset(), clear_flags: type_clear_flags(), set_flags: type_set_flags()}
+  @type t :: %__MODULE__{trustor: trustor_type(), asset: asset_type(), clear_flags: clear_flags_type(), set_flags: set_flags_type()}
 
   defstruct [:trustor, :asset, :clear_flags, :set_flags]
 
-  @spec new(trustor :: type_trustor(), asset :: type_asset(), clear_flags :: type_clear_flags(), set_flags :: type_set_flags()) :: t()
+  @spec new(trustor :: trustor_type(), asset :: asset_type(), clear_flags :: clear_flags_type(), set_flags :: set_flags_type()) :: t()
   def new(
     %AccountID{} = trustor,
     %Asset{} = asset,

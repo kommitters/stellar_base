@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.InnerTransactionResult do
     ext: InnerTransactionResultExt
   )
 
-  @type type_fee_charged :: Int64.t()
-  @type type_result :: InnerTransactionResultResult.t()
-  @type type_ext :: InnerTransactionResultExt.t()
+  @type fee_charged_type :: Int64.t()
+  @type result_type :: InnerTransactionResultResult.t()
+  @type ext_type :: InnerTransactionResultExt.t()
 
-  @type t :: %__MODULE__{fee_charged: type_fee_charged(), result: type_result(), ext: type_ext()}
+  @type t :: %__MODULE__{fee_charged: fee_charged_type(), result: result_type(), ext: ext_type()}
 
   defstruct [:fee_charged, :result, :ext]
 
-  @spec new(fee_charged :: type_fee_charged(), result :: type_result(), ext :: type_ext()) :: t()
+  @spec new(fee_charged :: fee_charged_type(), result :: result_type(), ext :: ext_type()) :: t()
   def new(
     %Int64{} = fee_charged,
     %InnerTransactionResultResult{} = result,

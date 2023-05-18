@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.StellarValue do
     ext: StellarValueExt
   )
 
-  @type type_tx_set_hash :: Hash.t()
-  @type type_close_time :: TimePoint.t()
-  @type type_upgrades :: UpgradeTypeList6.t()
-  @type type_ext :: StellarValueExt.t()
+  @type tx_set_hash_type :: Hash.t()
+  @type close_time_type :: TimePoint.t()
+  @type upgrades_type :: UpgradeTypeList6.t()
+  @type ext_type :: StellarValueExt.t()
 
-  @type t :: %__MODULE__{tx_set_hash: type_tx_set_hash(), close_time: type_close_time(), upgrades: type_upgrades(), ext: type_ext()}
+  @type t :: %__MODULE__{tx_set_hash: tx_set_hash_type(), close_time: close_time_type(), upgrades: upgrades_type(), ext: ext_type()}
 
   defstruct [:tx_set_hash, :close_time, :upgrades, :ext]
 
-  @spec new(tx_set_hash :: type_tx_set_hash(), close_time :: type_close_time(), upgrades :: type_upgrades(), ext :: type_ext()) :: t()
+  @spec new(tx_set_hash :: tx_set_hash_type(), close_time :: close_time_type(), upgrades :: upgrades_type(), ext :: ext_type()) :: t()
   def new(
     %Hash{} = tx_set_hash,
     %TimePoint{} = close_time,

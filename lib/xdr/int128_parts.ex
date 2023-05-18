@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.Int128Parts do
     hi: Uint64
   )
 
-  @type type_lo :: Uint64.t()
-  @type type_hi :: Uint64.t()
+  @type lo_type :: Uint64.t()
+  @type hi_type :: Uint64.t()
 
-  @type t :: %__MODULE__{lo: type_lo(), hi: type_hi()}
+  @type t :: %__MODULE__{lo: lo_type(), hi: hi_type()}
 
   defstruct [:lo, :hi]
 
-  @spec new(lo :: type_lo(), hi :: type_hi()) :: t()
+  @spec new(lo :: lo_type(), hi :: hi_type()) :: t()
   def new(
     %Uint64{} = lo,
     %Uint64{} = hi

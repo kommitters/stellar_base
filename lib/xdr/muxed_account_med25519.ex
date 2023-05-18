@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.MuxedAccountMed25519 do
     ed25519: Uint256
   )
 
-  @type type_id :: Uint64.t()
-  @type type_ed25519 :: Uint256.t()
+  @type id_type :: Uint64.t()
+  @type ed25519_type :: Uint256.t()
 
-  @type t :: %__MODULE__{id: type_id(), ed25519: type_ed25519()}
+  @type t :: %__MODULE__{id: id_type(), ed25519: ed25519_type()}
 
   defstruct [:id, :ed25519]
 
-  @spec new(id :: type_id(), ed25519 :: type_ed25519()) :: t()
+  @spec new(id :: id_type(), ed25519 :: ed25519_type()) :: t()
   def new(
     %Uint64{} = id,
     %Uint256{} = ed25519

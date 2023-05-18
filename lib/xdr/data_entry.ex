@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.DataEntry do
     ext: DataEntryExt
   )
 
-  @type type_account_id :: AccountID.t()
-  @type type_data_name :: String64.t()
-  @type type_data_value :: DataValue.t()
-  @type type_ext :: DataEntryExt.t()
+  @type account_id_type :: AccountID.t()
+  @type data_name_type :: String64.t()
+  @type data_value_type :: DataValue.t()
+  @type ext_type :: DataEntryExt.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id(), data_name: type_data_name(), data_value: type_data_value(), ext: type_ext()}
+  @type t :: %__MODULE__{account_id: account_id_type(), data_name: data_name_type(), data_value: data_value_type(), ext: ext_type()}
 
   defstruct [:account_id, :data_name, :data_value, :ext]
 
-  @spec new(account_id :: type_account_id(), data_name :: type_data_name(), data_value :: type_data_value(), ext :: type_ext()) :: t()
+  @spec new(account_id :: account_id_type(), data_name :: data_name_type(), data_value :: data_value_type(), ext :: ext_type()) :: t()
   def new(
     %AccountID{} = account_id,
     %String64{} = data_name,

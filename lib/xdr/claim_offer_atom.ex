@@ -25,18 +25,18 @@ defmodule StellarBase.XDR.ClaimOfferAtom do
     amount_bought: Int64
   )
 
-  @type type_seller_id :: AccountID.t()
-  @type type_offer_id :: Int64.t()
-  @type type_asset_sold :: Asset.t()
-  @type type_amount_sold :: Int64.t()
-  @type type_asset_bought :: Asset.t()
-  @type type_amount_bought :: Int64.t()
+  @type seller_id_type :: AccountID.t()
+  @type offer_id_type :: Int64.t()
+  @type asset_sold_type :: Asset.t()
+  @type amount_sold_type :: Int64.t()
+  @type asset_bought_type :: Asset.t()
+  @type amount_bought_type :: Int64.t()
 
-  @type t :: %__MODULE__{seller_id: type_seller_id(), offer_id: type_offer_id(), asset_sold: type_asset_sold(), amount_sold: type_amount_sold(), asset_bought: type_asset_bought(), amount_bought: type_amount_bought()}
+  @type t :: %__MODULE__{seller_id: seller_id_type(), offer_id: offer_id_type(), asset_sold: asset_sold_type(), amount_sold: amount_sold_type(), asset_bought: asset_bought_type(), amount_bought: amount_bought_type()}
 
   defstruct [:seller_id, :offer_id, :asset_sold, :amount_sold, :asset_bought, :amount_bought]
 
-  @spec new(seller_id :: type_seller_id(), offer_id :: type_offer_id(), asset_sold :: type_asset_sold(), amount_sold :: type_amount_sold(), asset_bought :: type_asset_bought(), amount_bought :: type_amount_bought()) :: t()
+  @spec new(seller_id :: seller_id_type(), offer_id :: offer_id_type(), asset_sold :: asset_sold_type(), amount_sold :: amount_sold_type(), asset_bought :: asset_bought_type(), amount_bought :: amount_bought_type()) :: t()
   def new(
     %AccountID{} = seller_id,
     %Int64{} = offer_id,

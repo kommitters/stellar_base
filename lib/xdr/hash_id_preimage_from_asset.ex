@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.HashIDPreimageFromAsset do
     asset: Asset
   )
 
-  @type type_network_id :: Hash.t()
-  @type type_asset :: Asset.t()
+  @type network_id_type :: Hash.t()
+  @type asset_type :: Asset.t()
 
-  @type t :: %__MODULE__{network_id: type_network_id(), asset: type_asset()}
+  @type t :: %__MODULE__{network_id: network_id_type(), asset: asset_type()}
 
   defstruct [:network_id, :asset]
 
-  @spec new(network_id :: type_network_id(), asset :: type_asset()) :: t()
+  @spec new(network_id :: network_id_type(), asset :: asset_type()) :: t()
   def new(
     %Hash{} = network_id,
     %Asset{} = asset

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LiquidityPoolEntry do
     body: LiquidityPoolEntryBody
   )
 
-  @type type_liquidity_pool_id :: PoolID.t()
-  @type type_body :: LiquidityPoolEntryBody.t()
+  @type liquidity_pool_id_type :: PoolID.t()
+  @type body_type :: LiquidityPoolEntryBody.t()
 
-  @type t :: %__MODULE__{liquidity_pool_id: type_liquidity_pool_id(), body: type_body()}
+  @type t :: %__MODULE__{liquidity_pool_id: liquidity_pool_id_type(), body: body_type()}
 
   defstruct [:liquidity_pool_id, :body]
 
-  @spec new(liquidity_pool_id :: type_liquidity_pool_id(), body :: type_body()) :: t()
+  @spec new(liquidity_pool_id :: liquidity_pool_id_type(), body :: body_type()) :: t()
   def new(
     %PoolID{} = liquidity_pool_id,
     %LiquidityPoolEntryBody{} = body

@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.TransactionResultSet do
     results: TransactionResultPairList
   )
 
-  @type type_results :: TransactionResultPairList.t()
+  @type results_type :: TransactionResultPairList.t()
 
-  @type t :: %__MODULE__{results: type_results()}
+  @type t :: %__MODULE__{results: results_type()}
 
   defstruct [:results]
 
-  @spec new(results :: type_results()) :: t()
+  @spec new(results :: results_type()) :: t()
   def new(
     %TransactionResultPairList{} = results
   ),

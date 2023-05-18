@@ -22,16 +22,16 @@ defmodule StellarBase.XDR.LiquidityPoolWithdrawOp do
     min_amount_b: Int64
   )
 
-  @type type_liquidity_pool_id :: PoolID.t()
-  @type type_amount :: Int64.t()
-  @type type_min_amount_a :: Int64.t()
-  @type type_min_amount_b :: Int64.t()
+  @type liquidity_pool_id_type :: PoolID.t()
+  @type amount_type :: Int64.t()
+  @type min_amount_a_type :: Int64.t()
+  @type min_amount_b_type :: Int64.t()
 
-  @type t :: %__MODULE__{liquidity_pool_id: type_liquidity_pool_id(), amount: type_amount(), min_amount_a: type_min_amount_a(), min_amount_b: type_min_amount_b()}
+  @type t :: %__MODULE__{liquidity_pool_id: liquidity_pool_id_type(), amount: amount_type(), min_amount_a: min_amount_a_type(), min_amount_b: min_amount_b_type()}
 
   defstruct [:liquidity_pool_id, :amount, :min_amount_a, :min_amount_b]
 
-  @spec new(liquidity_pool_id :: type_liquidity_pool_id(), amount :: type_amount(), min_amount_a :: type_min_amount_a(), min_amount_b :: type_min_amount_b()) :: t()
+  @spec new(liquidity_pool_id :: liquidity_pool_id_type(), amount :: amount_type(), min_amount_a :: min_amount_a_type(), min_amount_b :: min_amount_b_type()) :: t()
   def new(
     %PoolID{} = liquidity_pool_id,
     %Int64{} = amount,

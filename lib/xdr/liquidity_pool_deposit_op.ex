@@ -24,17 +24,17 @@ defmodule StellarBase.XDR.LiquidityPoolDepositOp do
     max_price: Price
   )
 
-  @type type_liquidity_pool_id :: PoolID.t()
-  @type type_max_amount_a :: Int64.t()
-  @type type_max_amount_b :: Int64.t()
-  @type type_min_price :: Price.t()
-  @type type_max_price :: Price.t()
+  @type liquidity_pool_id_type :: PoolID.t()
+  @type max_amount_a_type :: Int64.t()
+  @type max_amount_b_type :: Int64.t()
+  @type min_price_type :: Price.t()
+  @type max_price_type :: Price.t()
 
-  @type t :: %__MODULE__{liquidity_pool_id: type_liquidity_pool_id(), max_amount_a: type_max_amount_a(), max_amount_b: type_max_amount_b(), min_price: type_min_price(), max_price: type_max_price()}
+  @type t :: %__MODULE__{liquidity_pool_id: liquidity_pool_id_type(), max_amount_a: max_amount_a_type(), max_amount_b: max_amount_b_type(), min_price: min_price_type(), max_price: max_price_type()}
 
   defstruct [:liquidity_pool_id, :max_amount_a, :max_amount_b, :min_price, :max_price]
 
-  @spec new(liquidity_pool_id :: type_liquidity_pool_id(), max_amount_a :: type_max_amount_a(), max_amount_b :: type_max_amount_b(), min_price :: type_min_price(), max_price :: type_max_price()) :: t()
+  @spec new(liquidity_pool_id :: liquidity_pool_id_type(), max_amount_a :: max_amount_a_type(), max_amount_b :: max_amount_b_type(), min_price :: min_price_type(), max_price :: max_price_type()) :: t()
   def new(
     %PoolID{} = liquidity_pool_id,
     %Int64{} = max_amount_a,

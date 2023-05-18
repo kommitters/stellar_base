@@ -28,18 +28,18 @@ defmodule StellarBase.XDR.PreconditionsV2 do
     extra_signers: SignerKeyList2
   )
 
-  @type type_time_bounds :: OptionalTimeBounds.t()
-  @type type_ledger_bounds :: OptionalLedgerBounds.t()
-  @type type_min_seq_num :: OptionalSequenceNumber.t()
-  @type type_min_seq_age :: Duration.t()
-  @type type_min_seq_ledger_gap :: Uint32.t()
-  @type type_extra_signers :: SignerKeyList2.t()
+  @type time_bounds_type :: OptionalTimeBounds.t()
+  @type ledger_bounds_type :: OptionalLedgerBounds.t()
+  @type min_seq_num_type :: OptionalSequenceNumber.t()
+  @type min_seq_age_type :: Duration.t()
+  @type min_seq_ledger_gap_type :: Uint32.t()
+  @type extra_signers_type :: SignerKeyList2.t()
 
-  @type t :: %__MODULE__{time_bounds: type_time_bounds(), ledger_bounds: type_ledger_bounds(), min_seq_num: type_min_seq_num(), min_seq_age: type_min_seq_age(), min_seq_ledger_gap: type_min_seq_ledger_gap(), extra_signers: type_extra_signers()}
+  @type t :: %__MODULE__{time_bounds: time_bounds_type(), ledger_bounds: ledger_bounds_type(), min_seq_num: min_seq_num_type(), min_seq_age: min_seq_age_type(), min_seq_ledger_gap: min_seq_ledger_gap_type(), extra_signers: extra_signers_type()}
 
   defstruct [:time_bounds, :ledger_bounds, :min_seq_num, :min_seq_age, :min_seq_ledger_gap, :extra_signers]
 
-  @spec new(time_bounds :: type_time_bounds(), ledger_bounds :: type_ledger_bounds(), min_seq_num :: type_min_seq_num(), min_seq_age :: type_min_seq_age(), min_seq_ledger_gap :: type_min_seq_ledger_gap(), extra_signers :: type_extra_signers()) :: t()
+  @spec new(time_bounds :: time_bounds_type(), ledger_bounds :: ledger_bounds_type(), min_seq_num :: min_seq_num_type(), min_seq_age :: min_seq_age_type(), min_seq_ledger_gap :: min_seq_ledger_gap_type(), extra_signers :: extra_signers_type()) :: t()
   def new(
     %OptionalTimeBounds{} = time_bounds,
     %OptionalLedgerBounds{} = ledger_bounds,

@@ -21,13 +21,13 @@ defmodule StellarBase.XDR.DontHave do
   )
 
   @type type_type :: MessageType.t()
-  @type type_req_hash :: Uint256.t()
+  @type req_hash_type :: Uint256.t()
 
-  @type t :: %__MODULE__{type: type_type(), req_hash: type_req_hash()}
+  @type t :: %__MODULE__{type: type_type(), req_hash: req_hash_type()}
 
   defstruct [:type, :req_hash]
 
-  @spec new(type :: type_type(), req_hash :: type_req_hash()) :: t()
+  @spec new(type :: type_type(), req_hash :: req_hash_type()) :: t()
   def new(
     %MessageType{} = type,
     %Uint256{} = req_hash

@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.Liabilities do
     selling: Int64
   )
 
-  @type type_buying :: Int64.t()
-  @type type_selling :: Int64.t()
+  @type buying_type :: Int64.t()
+  @type selling_type :: Int64.t()
 
-  @type t :: %__MODULE__{buying: type_buying(), selling: type_selling()}
+  @type t :: %__MODULE__{buying: buying_type(), selling: selling_type()}
 
   defstruct [:buying, :selling]
 
-  @spec new(buying :: type_buying(), selling :: type_selling()) :: t()
+  @spec new(buying :: buying_type(), selling :: selling_type()) :: t()
   def new(
     %Int64{} = buying,
     %Int64{} = selling

@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.PaymentOp do
     amount: Int64
   )
 
-  @type type_destination :: MuxedAccount.t()
-  @type type_asset :: Asset.t()
-  @type type_amount :: Int64.t()
+  @type destination_type :: MuxedAccount.t()
+  @type asset_type :: Asset.t()
+  @type amount_type :: Int64.t()
 
-  @type t :: %__MODULE__{destination: type_destination(), asset: type_asset(), amount: type_amount()}
+  @type t :: %__MODULE__{destination: destination_type(), asset: asset_type(), amount: amount_type()}
 
   defstruct [:destination, :asset, :amount]
 
-  @spec new(destination :: type_destination(), asset :: type_asset(), amount :: type_amount()) :: t()
+  @spec new(destination :: destination_type(), asset :: asset_type(), amount :: amount_type()) :: t()
   def new(
     %MuxedAccount{} = destination,
     %Asset{} = asset,

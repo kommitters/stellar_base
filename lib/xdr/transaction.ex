@@ -30,19 +30,19 @@ defmodule StellarBase.XDR.Transaction do
     ext: TransactionExt
   )
 
-  @type type_source_account :: MuxedAccount.t()
-  @type type_fee :: Uint32.t()
-  @type type_seq_num :: SequenceNumber.t()
-  @type type_cond :: Preconditions.t()
-  @type type_memo :: Memo.t()
-  @type type_operations :: OperationList100.t()
-  @type type_ext :: TransactionExt.t()
+  @type source_account_type :: MuxedAccount.t()
+  @type fee_type :: Uint32.t()
+  @type seq_num_type :: SequenceNumber.t()
+  @type cond_type :: Preconditions.t()
+  @type memo_type :: Memo.t()
+  @type operations_type :: OperationList100.t()
+  @type ext_type :: TransactionExt.t()
 
-  @type t :: %__MODULE__{source_account: type_source_account(), fee: type_fee(), seq_num: type_seq_num(), cond: type_cond(), memo: type_memo(), operations: type_operations(), ext: type_ext()}
+  @type t :: %__MODULE__{source_account: source_account_type(), fee: fee_type(), seq_num: seq_num_type(), cond: cond_type(), memo: memo_type(), operations: operations_type(), ext: ext_type()}
 
   defstruct [:source_account, :fee, :seq_num, :cond, :memo, :operations, :ext]
 
-  @spec new(source_account :: type_source_account(), fee :: type_fee(), seq_num :: type_seq_num(), cond :: type_cond(), memo :: type_memo(), operations :: type_operations(), ext :: type_ext()) :: t()
+  @spec new(source_account :: source_account_type(), fee :: fee_type(), seq_num :: seq_num_type(), cond :: cond_type(), memo :: memo_type(), operations :: operations_type(), ext :: ext_type()) :: t()
   def new(
     %MuxedAccount{} = source_account,
     %Uint32{} = fee,

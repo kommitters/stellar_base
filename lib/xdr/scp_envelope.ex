@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.SCPEnvelope do
     signature: Signature
   )
 
-  @type type_statement :: SCPStatement.t()
-  @type type_signature :: Signature.t()
+  @type statement_type :: SCPStatement.t()
+  @type signature_type :: Signature.t()
 
-  @type t :: %__MODULE__{statement: type_statement(), signature: type_signature()}
+  @type t :: %__MODULE__{statement: statement_type(), signature: signature_type()}
 
   defstruct [:statement, :signature]
 
-  @spec new(statement :: type_statement(), signature :: type_signature()) :: t()
+  @spec new(statement :: statement_type(), signature :: signature_type()) :: t()
   def new(
     %SCPStatement{} = statement,
     %Signature{} = signature

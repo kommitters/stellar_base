@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerKeyOffer do
     offer_id: Int64
   )
 
-  @type type_seller_id :: AccountID.t()
-  @type type_offer_id :: Int64.t()
+  @type seller_id_type :: AccountID.t()
+  @type offer_id_type :: Int64.t()
 
-  @type t :: %__MODULE__{seller_id: type_seller_id(), offer_id: type_offer_id()}
+  @type t :: %__MODULE__{seller_id: seller_id_type(), offer_id: offer_id_type()}
 
   defstruct [:seller_id, :offer_id]
 
-  @spec new(seller_id :: type_seller_id(), offer_id :: type_offer_id()) :: t()
+  @spec new(seller_id :: seller_id_type(), offer_id :: offer_id_type()) :: t()
   def new(
     %AccountID{} = seller_id,
     %Int64{} = offer_id

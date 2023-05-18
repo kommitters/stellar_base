@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.TransactionHistoryResultEntry do
     ext: TransactionHistoryResultEntryExt
   )
 
-  @type type_ledger_seq :: Uint32.t()
-  @type type_tx_result_set :: TransactionResultSet.t()
-  @type type_ext :: TransactionHistoryResultEntryExt.t()
+  @type ledger_seq_type :: Uint32.t()
+  @type tx_result_set_type :: TransactionResultSet.t()
+  @type ext_type :: TransactionHistoryResultEntryExt.t()
 
-  @type t :: %__MODULE__{ledger_seq: type_ledger_seq(), tx_result_set: type_tx_result_set(), ext: type_ext()}
+  @type t :: %__MODULE__{ledger_seq: ledger_seq_type(), tx_result_set: tx_result_set_type(), ext: ext_type()}
 
   defstruct [:ledger_seq, :tx_result_set, :ext]
 
-  @spec new(ledger_seq :: type_ledger_seq(), tx_result_set :: type_tx_result_set(), ext :: type_ext()) :: t()
+  @spec new(ledger_seq :: ledger_seq_type(), tx_result_set :: tx_result_set_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = ledger_seq,
     %TransactionResultSet{} = tx_result_set,

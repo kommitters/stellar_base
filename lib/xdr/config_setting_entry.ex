@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     setting: ConfigSetting
   )
 
-  @type type_ext :: ConfigSettingEntryExt.t()
-  @type type_config_setting_id :: ConfigSettingID.t()
-  @type type_setting :: ConfigSetting.t()
+  @type ext_type :: ConfigSettingEntryExt.t()
+  @type config_setting_id_type :: ConfigSettingID.t()
+  @type setting_type :: ConfigSetting.t()
 
-  @type t :: %__MODULE__{ext: type_ext(), config_setting_id: type_config_setting_id(), setting: type_setting()}
+  @type t :: %__MODULE__{ext: ext_type(), config_setting_id: config_setting_id_type(), setting: setting_type()}
 
   defstruct [:ext, :config_setting_id, :setting]
 
-  @spec new(ext :: type_ext(), config_setting_id :: type_config_setting_id(), setting :: type_setting()) :: t()
+  @spec new(ext :: ext_type(), config_setting_id :: config_setting_id_type(), setting :: setting_type()) :: t()
   def new(
     %ConfigSettingEntryExt{} = ext,
     %ConfigSettingID{} = config_setting_id,

@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.AccountEntryExtensionV3 do
     seq_time: TimePoint
   )
 
-  @type type_ext :: ExtensionPoint.t()
-  @type type_seq_ledger :: Uint32.t()
-  @type type_seq_time :: TimePoint.t()
+  @type ext_type :: ExtensionPoint.t()
+  @type seq_ledger_type :: Uint32.t()
+  @type seq_time_type :: TimePoint.t()
 
-  @type t :: %__MODULE__{ext: type_ext(), seq_ledger: type_seq_ledger(), seq_time: type_seq_time()}
+  @type t :: %__MODULE__{ext: ext_type(), seq_ledger: seq_ledger_type(), seq_time: seq_time_type()}
 
   defstruct [:ext, :seq_ledger, :seq_time]
 
-  @spec new(ext :: type_ext(), seq_ledger :: type_seq_ledger(), seq_time :: type_seq_time()) :: t()
+  @spec new(ext :: ext_type(), seq_ledger :: seq_ledger_type(), seq_time :: seq_time_type()) :: t()
   def new(
     %ExtensionPoint{} = ext,
     %Uint32{} = seq_ledger,

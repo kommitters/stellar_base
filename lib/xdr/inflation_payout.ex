@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.InflationPayout do
     amount: Int64
   )
 
-  @type type_destination :: AccountID.t()
-  @type type_amount :: Int64.t()
+  @type destination_type :: AccountID.t()
+  @type amount_type :: Int64.t()
 
-  @type t :: %__MODULE__{destination: type_destination(), amount: type_amount()}
+  @type t :: %__MODULE__{destination: destination_type(), amount: amount_type()}
 
   defstruct [:destination, :amount]
 
-  @spec new(destination :: type_destination(), amount :: type_amount()) :: t()
+  @spec new(destination :: destination_type(), amount :: amount_type()) :: t()
   def new(
     %AccountID{} = destination,
     %Int64{} = amount

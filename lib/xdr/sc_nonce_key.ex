@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SCNonceKey do
     nonce_address: SCAddress
   )
 
-  @type type_nonce_address :: SCAddress.t()
+  @type nonce_address_type :: SCAddress.t()
 
-  @type t :: %__MODULE__{nonce_address: type_nonce_address()}
+  @type t :: %__MODULE__{nonce_address: nonce_address_type()}
 
   defstruct [:nonce_address]
 
-  @spec new(nonce_address :: type_nonce_address()) :: t()
+  @spec new(nonce_address :: nonce_address_type()) :: t()
   def new(
     %SCAddress{} = nonce_address
   ),

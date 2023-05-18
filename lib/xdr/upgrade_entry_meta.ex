@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.UpgradeEntryMeta do
     changes: LedgerEntryChanges
   )
 
-  @type type_upgrade :: LedgerUpgrade.t()
-  @type type_changes :: LedgerEntryChanges.t()
+  @type upgrade_type :: LedgerUpgrade.t()
+  @type changes_type :: LedgerEntryChanges.t()
 
-  @type t :: %__MODULE__{upgrade: type_upgrade(), changes: type_changes()}
+  @type t :: %__MODULE__{upgrade: upgrade_type(), changes: changes_type()}
 
   defstruct [:upgrade, :changes]
 
-  @spec new(upgrade :: type_upgrade(), changes :: type_changes()) :: t()
+  @spec new(upgrade :: upgrade_type(), changes :: changes_type()) :: t()
   def new(
     %LedgerUpgrade{} = upgrade,
     %LedgerEntryChanges{} = changes

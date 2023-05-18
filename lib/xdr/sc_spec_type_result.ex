@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.SCSpecTypeResult do
     error_type: SCSpecTypeDef
   )
 
-  @type type_ok_type :: SCSpecTypeDef.t()
-  @type type_error_type :: SCSpecTypeDef.t()
+  @type ok_type_type :: SCSpecTypeDef.t()
+  @type error_type_type :: SCSpecTypeDef.t()
 
-  @type t :: %__MODULE__{ok_type: type_ok_type(), error_type: type_error_type()}
+  @type t :: %__MODULE__{ok_type: ok_type_type(), error_type: error_type_type()}
 
   defstruct [:ok_type, :error_type]
 
-  @spec new(ok_type :: type_ok_type(), error_type :: type_error_type()) :: t()
+  @spec new(ok_type :: ok_type_type(), error_type :: error_type_type()) :: t()
   def new(
     %SCSpecTypeDef{} = ok_type,
     %SCSpecTypeDef{} = error_type

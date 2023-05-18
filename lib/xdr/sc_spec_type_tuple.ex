@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SCSpecTypeTuple do
     value_types: SCSpecTypeDefList12
   )
 
-  @type type_value_types :: SCSpecTypeDefList12.t()
+  @type value_types_type :: SCSpecTypeDefList12.t()
 
-  @type t :: %__MODULE__{value_types: type_value_types()}
+  @type t :: %__MODULE__{value_types: value_types_type()}
 
   defstruct [:value_types]
 
-  @spec new(value_types :: type_value_types()) :: t()
+  @spec new(value_types :: value_types_type()) :: t()
   def new(
     %SCSpecTypeDefList12{} = value_types
   ),

@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.LedgerKeyLiquidityPool do
     liquidity_pool_id: PoolID
   )
 
-  @type type_liquidity_pool_id :: PoolID.t()
+  @type liquidity_pool_id_type :: PoolID.t()
 
-  @type t :: %__MODULE__{liquidity_pool_id: type_liquidity_pool_id()}
+  @type t :: %__MODULE__{liquidity_pool_id: liquidity_pool_id_type()}
 
   defstruct [:liquidity_pool_id]
 
-  @spec new(liquidity_pool_id :: type_liquidity_pool_id()) :: t()
+  @spec new(liquidity_pool_id :: liquidity_pool_id_type()) :: t()
   def new(
     %PoolID{} = liquidity_pool_id
   ),

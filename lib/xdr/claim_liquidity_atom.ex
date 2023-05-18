@@ -24,17 +24,17 @@ defmodule StellarBase.XDR.ClaimLiquidityAtom do
     amount_bought: Int64
   )
 
-  @type type_liquidity_pool_id :: PoolID.t()
-  @type type_asset_sold :: Asset.t()
-  @type type_amount_sold :: Int64.t()
-  @type type_asset_bought :: Asset.t()
-  @type type_amount_bought :: Int64.t()
+  @type liquidity_pool_id_type :: PoolID.t()
+  @type asset_sold_type :: Asset.t()
+  @type amount_sold_type :: Int64.t()
+  @type asset_bought_type :: Asset.t()
+  @type amount_bought_type :: Int64.t()
 
-  @type t :: %__MODULE__{liquidity_pool_id: type_liquidity_pool_id(), asset_sold: type_asset_sold(), amount_sold: type_amount_sold(), asset_bought: type_asset_bought(), amount_bought: type_amount_bought()}
+  @type t :: %__MODULE__{liquidity_pool_id: liquidity_pool_id_type(), asset_sold: asset_sold_type(), amount_sold: amount_sold_type(), asset_bought: asset_bought_type(), amount_bought: amount_bought_type()}
 
   defstruct [:liquidity_pool_id, :asset_sold, :amount_sold, :asset_bought, :amount_bought]
 
-  @spec new(liquidity_pool_id :: type_liquidity_pool_id(), asset_sold :: type_asset_sold(), amount_sold :: type_amount_sold(), asset_bought :: type_asset_bought(), amount_bought :: type_amount_bought()) :: t()
+  @spec new(liquidity_pool_id :: liquidity_pool_id_type(), asset_sold :: asset_sold_type(), amount_sold :: amount_sold_type(), asset_bought :: asset_bought_type(), amount_bought :: amount_bought_type()) :: t()
   def new(
     %PoolID{} = liquidity_pool_id,
     %Asset{} = asset_sold,

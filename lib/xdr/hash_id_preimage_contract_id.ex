@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.HashIDPreimageContractID do
     salt: Uint256
   )
 
-  @type type_network_id :: Hash.t()
-  @type type_contract_id :: Hash.t()
-  @type type_salt :: Uint256.t()
+  @type network_id_type :: Hash.t()
+  @type contract_id_type :: Hash.t()
+  @type salt_type :: Uint256.t()
 
-  @type t :: %__MODULE__{network_id: type_network_id(), contract_id: type_contract_id(), salt: type_salt()}
+  @type t :: %__MODULE__{network_id: network_id_type(), contract_id: contract_id_type(), salt: salt_type()}
 
   defstruct [:network_id, :contract_id, :salt]
 
-  @spec new(network_id :: type_network_id(), contract_id :: type_contract_id(), salt :: type_salt()) :: t()
+  @spec new(network_id :: network_id_type(), contract_id :: contract_id_type(), salt :: salt_type()) :: t()
   def new(
     %Hash{} = network_id,
     %Hash{} = contract_id,

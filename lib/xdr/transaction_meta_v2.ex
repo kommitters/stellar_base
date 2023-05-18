@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.TransactionMetaV2 do
     tx_changes_after: LedgerEntryChanges
   )
 
-  @type type_tx_changes_before :: LedgerEntryChanges.t()
-  @type type_operations :: OperationMetaList.t()
-  @type type_tx_changes_after :: LedgerEntryChanges.t()
+  @type tx_changes_before_type :: LedgerEntryChanges.t()
+  @type operations_type :: OperationMetaList.t()
+  @type tx_changes_after_type :: LedgerEntryChanges.t()
 
-  @type t :: %__MODULE__{tx_changes_before: type_tx_changes_before(), operations: type_operations(), tx_changes_after: type_tx_changes_after()}
+  @type t :: %__MODULE__{tx_changes_before: tx_changes_before_type(), operations: operations_type(), tx_changes_after: tx_changes_after_type()}
 
   defstruct [:tx_changes_before, :operations, :tx_changes_after]
 
-  @spec new(tx_changes_before :: type_tx_changes_before(), operations :: type_operations(), tx_changes_after :: type_tx_changes_after()) :: t()
+  @spec new(tx_changes_before :: tx_changes_before_type(), operations :: operations_type(), tx_changes_after :: tx_changes_after_type()) :: t()
   def new(
     %LedgerEntryChanges{} = tx_changes_before,
     %OperationMetaList{} = operations,

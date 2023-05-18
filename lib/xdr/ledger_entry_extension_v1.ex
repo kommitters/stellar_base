@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1 do
     ext: LedgerEntryExtensionV1Ext
   )
 
-  @type type_sponsoring_id :: SponsorshipDescriptor.t()
-  @type type_ext :: LedgerEntryExtensionV1Ext.t()
+  @type sponsoring_id_type :: SponsorshipDescriptor.t()
+  @type ext_type :: LedgerEntryExtensionV1Ext.t()
 
-  @type t :: %__MODULE__{sponsoring_id: type_sponsoring_id(), ext: type_ext()}
+  @type t :: %__MODULE__{sponsoring_id: sponsoring_id_type(), ext: ext_type()}
 
   defstruct [:sponsoring_id, :ext]
 
-  @spec new(sponsoring_id :: type_sponsoring_id(), ext :: type_ext()) :: t()
+  @spec new(sponsoring_id :: sponsoring_id_type(), ext :: ext_type()) :: t()
   def new(
     %SponsorshipDescriptor{} = sponsoring_id,
     %LedgerEntryExtensionV1Ext{} = ext

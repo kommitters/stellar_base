@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.SCPBallot do
     value: Value
   )
 
-  @type type_counter :: Uint32.t()
-  @type type_value :: Value.t()
+  @type counter_type :: Uint32.t()
+  @type value_type :: Value.t()
 
-  @type t :: %__MODULE__{counter: type_counter(), value: type_value()}
+  @type t :: %__MODULE__{counter: counter_type(), value: value_type()}
 
   defstruct [:counter, :value]
 
-  @spec new(counter :: type_counter(), value :: type_value()) :: t()
+  @spec new(counter :: counter_type(), value :: value_type()) :: t()
   def new(
     %Uint32{} = counter,
     %Value{} = value

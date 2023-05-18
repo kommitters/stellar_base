@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.DecoratedSignature do
     signature: Signature
   )
 
-  @type type_hint :: SignatureHint.t()
-  @type type_signature :: Signature.t()
+  @type hint_type :: SignatureHint.t()
+  @type signature_type :: Signature.t()
 
-  @type t :: %__MODULE__{hint: type_hint(), signature: type_signature()}
+  @type t :: %__MODULE__{hint: hint_type(), signature: signature_type()}
 
   defstruct [:hint, :signature]
 
-  @spec new(hint :: type_hint(), signature :: type_signature()) :: t()
+  @spec new(hint :: hint_type(), signature :: signature_type()) :: t()
   def new(
     %SignatureHint{} = hint,
     %Signature{} = signature

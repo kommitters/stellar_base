@@ -22,16 +22,17 @@ defmodule StellarBase.XDR.AuthenticatedMessage do
   @type value ::
           AuthenticatedMessageV0.t()
 
-  @type t :: %__MODULE__{value: value(), type: Uint32.t()}
+  @type t :: %__MODULE__{value: value(), type: integer()}
 
   defstruct [:value, :type]
 
-  @spec new(value :: value(), type :: Uint32.t()) :: t()
-  def new(value, %Uint32{} = type), do: %__MODULE__{value: value, type: type}
+  @spec new(value :: value(), type :: integer()) :: t()
+  def new(value, type), do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do
     type
+    |> Uint32.new()
     |> XDR.Union.new(@arms, value)
     |> XDR.Union.encode_xdr()
   end
@@ -39,6 +40,7 @@ defmodule StellarBase.XDR.AuthenticatedMessage do
   @impl true
   def encode_xdr!(%__MODULE__{value: value, type: type}) do
     type
+    |> Uint32.new()
     |> XDR.Union.new(@arms, value)
     |> XDR.Union.encode_xdr!()
   end
@@ -64,7 +66,7 @@ defmodule StellarBase.XDR.AuthenticatedMessage do
   @spec union_spec() :: XDR.Union.t()
   defp union_spec do
     0
-    |> Uint32.new()
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms)
   end
 end

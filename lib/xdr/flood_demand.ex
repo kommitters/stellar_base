@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.FloodDemand do
     tx_hashes: TxDemandVector
   )
 
-  @type type_tx_hashes :: TxDemandVector.t()
+  @type tx_hashes_type :: TxDemandVector.t()
 
-  @type t :: %__MODULE__{tx_hashes: type_tx_hashes()}
+  @type t :: %__MODULE__{tx_hashes: tx_hashes_type()}
 
   defstruct [:tx_hashes]
 
-  @spec new(tx_hashes :: type_tx_hashes()) :: t()
+  @spec new(tx_hashes :: tx_hashes_type()) :: t()
   def new(
     %TxDemandVector{} = tx_hashes
   ),

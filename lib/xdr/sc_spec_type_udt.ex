@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SCSpecTypeUDT do
     name: String60
   )
 
-  @type type_name :: String60.t()
+  @type name_type :: String60.t()
 
-  @type t :: %__MODULE__{name: type_name()}
+  @type t :: %__MODULE__{name: name_type()}
 
   defstruct [:name]
 
-  @spec new(name :: type_name()) :: t()
+  @spec new(name :: name_type()) :: t()
   def new(
     %String60{} = name
   ),

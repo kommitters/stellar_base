@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.ContractDataEntry do
     val: SCVal
   )
 
-  @type type_contract_id :: Hash.t()
-  @type type_key :: SCVal.t()
-  @type type_val :: SCVal.t()
+  @type contract_id_type :: Hash.t()
+  @type key_type :: SCVal.t()
+  @type val_type :: SCVal.t()
 
-  @type t :: %__MODULE__{contract_id: type_contract_id(), key: type_key(), val: type_val()}
+  @type t :: %__MODULE__{contract_id: contract_id_type(), key: key_type(), val: val_type()}
 
   defstruct [:contract_id, :key, :val]
 
-  @spec new(contract_id :: type_contract_id(), key :: type_key(), val :: type_val()) :: t()
+  @spec new(contract_id :: contract_id_type(), key :: key_type(), val :: val_type()) :: t()
   def new(
     %Hash{} = contract_id,
     %SCVal{} = key,

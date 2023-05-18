@@ -32,21 +32,21 @@ defmodule StellarBase.XDR.Hello do
     nonce: Uint256
   )
 
-  @type type_ledger_version :: Uint32.t()
-  @type type_overlay_version :: Uint32.t()
-  @type type_overlay_min_version :: Uint32.t()
-  @type type_network_id :: Hash.t()
-  @type type_version_str :: String100.t()
-  @type type_listening_port :: Int.t()
-  @type type_peer_id :: NodeID.t()
-  @type type_cert :: AuthCert.t()
-  @type type_nonce :: Uint256.t()
+  @type ledger_version_type :: Uint32.t()
+  @type overlay_version_type :: Uint32.t()
+  @type overlay_min_version_type :: Uint32.t()
+  @type network_id_type :: Hash.t()
+  @type version_str_type :: String100.t()
+  @type listening_port_type :: Int.t()
+  @type peer_id_type :: NodeID.t()
+  @type cert_type :: AuthCert.t()
+  @type nonce_type :: Uint256.t()
 
-  @type t :: %__MODULE__{ledger_version: type_ledger_version(), overlay_version: type_overlay_version(), overlay_min_version: type_overlay_min_version(), network_id: type_network_id(), version_str: type_version_str(), listening_port: type_listening_port(), peer_id: type_peer_id(), cert: type_cert(), nonce: type_nonce()}
+  @type t :: %__MODULE__{ledger_version: ledger_version_type(), overlay_version: overlay_version_type(), overlay_min_version: overlay_min_version_type(), network_id: network_id_type(), version_str: version_str_type(), listening_port: listening_port_type(), peer_id: peer_id_type(), cert: cert_type(), nonce: nonce_type()}
 
   defstruct [:ledger_version, :overlay_version, :overlay_min_version, :network_id, :version_str, :listening_port, :peer_id, :cert, :nonce]
 
-  @spec new(ledger_version :: type_ledger_version(), overlay_version :: type_overlay_version(), overlay_min_version :: type_overlay_min_version(), network_id :: type_network_id(), version_str :: type_version_str(), listening_port :: type_listening_port(), peer_id :: type_peer_id(), cert :: type_cert(), nonce :: type_nonce()) :: t()
+  @spec new(ledger_version :: ledger_version_type(), overlay_version :: overlay_version_type(), overlay_min_version :: overlay_min_version_type(), network_id :: network_id_type(), version_str :: version_str_type(), listening_port :: listening_port_type(), peer_id :: peer_id_type(), cert :: cert_type(), nonce :: nonce_type()) :: t()
   def new(
     %Uint32{} = ledger_version,
     %Uint32{} = overlay_version,

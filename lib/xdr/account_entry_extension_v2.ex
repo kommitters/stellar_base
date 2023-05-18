@@ -23,16 +23,16 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
     ext: AccountEntryExtensionV2Ext
   )
 
-  @type type_num_sponsored :: Uint32.t()
-  @type type_num_sponsoring :: Uint32.t()
-  @type type_signer_sponsoring_i_ds :: SponsorshipDescriptorList20.t()
-  @type type_ext :: AccountEntryExtensionV2Ext.t()
+  @type num_sponsored_type :: Uint32.t()
+  @type num_sponsoring_type :: Uint32.t()
+  @type signer_sponsoring_i_ds_type :: SponsorshipDescriptorList20.t()
+  @type ext_type :: AccountEntryExtensionV2Ext.t()
 
-  @type t :: %__MODULE__{num_sponsored: type_num_sponsored(), num_sponsoring: type_num_sponsoring(), signer_sponsoring_i_ds: type_signer_sponsoring_i_ds(), ext: type_ext()}
+  @type t :: %__MODULE__{num_sponsored: num_sponsored_type(), num_sponsoring: num_sponsoring_type(), signer_sponsoring_i_ds: signer_sponsoring_i_ds_type(), ext: ext_type()}
 
   defstruct [:num_sponsored, :num_sponsoring, :signer_sponsoring_i_ds, :ext]
 
-  @spec new(num_sponsored :: type_num_sponsored(), num_sponsoring :: type_num_sponsoring(), signer_sponsoring_i_ds :: type_signer_sponsoring_i_ds(), ext :: type_ext()) :: t()
+  @spec new(num_sponsored :: num_sponsored_type(), num_sponsoring :: num_sponsoring_type(), signer_sponsoring_i_ds :: signer_sponsoring_i_ds_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = num_sponsored,
     %Uint32{} = num_sponsoring,

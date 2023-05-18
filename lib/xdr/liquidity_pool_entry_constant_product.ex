@@ -23,17 +23,17 @@ defmodule StellarBase.XDR.LiquidityPoolEntryConstantProduct do
     pool_shares_trust_line_count: Int64
   )
 
-  @type type_params :: LiquidityPoolConstantProductParameters.t()
-  @type type_reserve_a :: Int64.t()
-  @type type_reserve_b :: Int64.t()
-  @type type_total_pool_shares :: Int64.t()
-  @type type_pool_shares_trust_line_count :: Int64.t()
+  @type params_type :: LiquidityPoolConstantProductParameters.t()
+  @type reserve_a_type :: Int64.t()
+  @type reserve_b_type :: Int64.t()
+  @type total_pool_shares_type :: Int64.t()
+  @type pool_shares_trust_line_count_type :: Int64.t()
 
-  @type t :: %__MODULE__{params: type_params(), reserve_a: type_reserve_a(), reserve_b: type_reserve_b(), total_pool_shares: type_total_pool_shares(), pool_shares_trust_line_count: type_pool_shares_trust_line_count()}
+  @type t :: %__MODULE__{params: params_type(), reserve_a: reserve_a_type(), reserve_b: reserve_b_type(), total_pool_shares: total_pool_shares_type(), pool_shares_trust_line_count: pool_shares_trust_line_count_type()}
 
   defstruct [:params, :reserve_a, :reserve_b, :total_pool_shares, :pool_shares_trust_line_count]
 
-  @spec new(params :: type_params(), reserve_a :: type_reserve_a(), reserve_b :: type_reserve_b(), total_pool_shares :: type_total_pool_shares(), pool_shares_trust_line_count :: type_pool_shares_trust_line_count()) :: t()
+  @spec new(params :: params_type(), reserve_a :: reserve_a_type(), reserve_b :: reserve_b_type(), total_pool_shares :: total_pool_shares_type(), pool_shares_trust_line_count :: pool_shares_trust_line_count_type()) :: t()
   def new(
     %LiquidityPoolConstantProductParameters{} = params,
     %Int64{} = reserve_a,

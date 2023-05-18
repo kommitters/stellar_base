@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.ContractEvent do
     body: ContractEventBody
   )
 
-  @type type_ext :: ExtensionPoint.t()
-  @type type_contract_id :: OptionalHash.t()
+  @type ext_type :: ExtensionPoint.t()
+  @type contract_id_type :: OptionalHash.t()
   @type type_type :: ContractEventType.t()
-  @type type_body :: ContractEventBody.t()
+  @type body_type :: ContractEventBody.t()
 
-  @type t :: %__MODULE__{ext: type_ext(), contract_id: type_contract_id(), type: type_type(), body: type_body()}
+  @type t :: %__MODULE__{ext: ext_type(), contract_id: contract_id_type(), type: type_type(), body: body_type()}
 
   defstruct [:ext, :contract_id, :type, :body]
 
-  @spec new(ext :: type_ext(), contract_id :: type_contract_id(), type :: type_type(), body :: type_body()) :: t()
+  @spec new(ext :: ext_type(), contract_id :: contract_id_type(), type :: type_type(), body :: body_type()) :: t()
   def new(
     %ExtensionPoint{} = ext,
     %OptionalHash{} = contract_id,

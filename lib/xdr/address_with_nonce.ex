@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.AddressWithNonce do
     nonce: Uint64
   )
 
-  @type type_address :: SCAddress.t()
-  @type type_nonce :: Uint64.t()
+  @type address_type :: SCAddress.t()
+  @type nonce_type :: Uint64.t()
 
-  @type t :: %__MODULE__{address: type_address(), nonce: type_nonce()}
+  @type t :: %__MODULE__{address: address_type(), nonce: nonce_type()}
 
   defstruct [:address, :nonce]
 
-  @spec new(address :: type_address(), nonce :: type_nonce()) :: t()
+  @spec new(address :: address_type(), nonce :: nonce_type()) :: t()
   def new(
     %SCAddress{} = address,
     %Uint64{} = nonce

@@ -24,16 +24,16 @@ defmodule StellarBase.XDR.AuthorizedInvocation do
     sub_invocations: AuthorizedInvocationList
   )
 
-  @type type_contract_id :: Hash.t()
-  @type type_function_name :: SCSymbol.t()
-  @type type_args :: SCVec.t()
-  @type type_sub_invocations :: AuthorizedInvocationList.t()
+  @type contract_id_type :: Hash.t()
+  @type function_name_type :: SCSymbol.t()
+  @type args_type :: SCVec.t()
+  @type sub_invocations_type :: AuthorizedInvocationList.t()
 
-  @type t :: %__MODULE__{contract_id: type_contract_id(), function_name: type_function_name(), args: type_args(), sub_invocations: type_sub_invocations()}
+  @type t :: %__MODULE__{contract_id: contract_id_type(), function_name: function_name_type(), args: args_type(), sub_invocations: sub_invocations_type()}
 
   defstruct [:contract_id, :function_name, :args, :sub_invocations]
 
-  @spec new(contract_id :: type_contract_id(), function_name :: type_function_name(), args :: type_args(), sub_invocations :: type_sub_invocations()) :: t()
+  @spec new(contract_id :: contract_id_type(), function_name :: function_name_type(), args :: args_type(), sub_invocations :: sub_invocations_type()) :: t()
   def new(
     %Hash{} = contract_id,
     %SCSymbol{} = function_name,

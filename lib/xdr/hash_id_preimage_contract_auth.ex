@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.HashIDPreimageContractAuth do
     invocation: AuthorizedInvocation
   )
 
-  @type type_network_id :: Hash.t()
-  @type type_nonce :: Uint64.t()
-  @type type_invocation :: AuthorizedInvocation.t()
+  @type network_id_type :: Hash.t()
+  @type nonce_type :: Uint64.t()
+  @type invocation_type :: AuthorizedInvocation.t()
 
-  @type t :: %__MODULE__{network_id: type_network_id(), nonce: type_nonce(), invocation: type_invocation()}
+  @type t :: %__MODULE__{network_id: network_id_type(), nonce: nonce_type(), invocation: invocation_type()}
 
   defstruct [:network_id, :nonce, :invocation]
 
-  @spec new(network_id :: type_network_id(), nonce :: type_nonce(), invocation :: type_invocation()) :: t()
+  @spec new(network_id :: network_id_type(), nonce :: nonce_type(), invocation :: invocation_type()) :: t()
   def new(
     %Hash{} = network_id,
     %Uint64{} = nonce,

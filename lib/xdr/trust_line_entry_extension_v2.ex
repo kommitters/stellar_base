@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TrustLineEntryExtensionV2 do
     ext: TrustLineEntryExtensionV2Ext
   )
 
-  @type type_liquidity_pool_use_count :: Int32.t()
-  @type type_ext :: TrustLineEntryExtensionV2Ext.t()
+  @type liquidity_pool_use_count_type :: Int32.t()
+  @type ext_type :: TrustLineEntryExtensionV2Ext.t()
 
-  @type t :: %__MODULE__{liquidity_pool_use_count: type_liquidity_pool_use_count(), ext: type_ext()}
+  @type t :: %__MODULE__{liquidity_pool_use_count: liquidity_pool_use_count_type(), ext: ext_type()}
 
   defstruct [:liquidity_pool_use_count, :ext]
 
-  @spec new(liquidity_pool_use_count :: type_liquidity_pool_use_count(), ext :: type_ext()) :: t()
+  @spec new(liquidity_pool_use_count :: liquidity_pool_use_count_type(), ext :: ext_type()) :: t()
   def new(
     %Int32{} = liquidity_pool_use_count,
     %TrustLineEntryExtensionV2Ext{} = ext

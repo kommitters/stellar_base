@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.LedgerKeyContractCode do
     hash: Hash
   )
 
-  @type type_hash :: Hash.t()
+  @type hash_type :: Hash.t()
 
-  @type t :: %__MODULE__{hash: type_hash()}
+  @type t :: %__MODULE__{hash: hash_type()}
 
   defstruct [:hash]
 
-  @spec new(hash :: type_hash()) :: t()
+  @spec new(hash :: hash_type()) :: t()
   def new(
     %Hash{} = hash
   ),

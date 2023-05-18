@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.LiquidityPoolConstantProductParameters do
     fee: Int32
   )
 
-  @type type_asset_a :: Asset.t()
-  @type type_asset_b :: Asset.t()
-  @type type_fee :: Int32.t()
+  @type asset_a_type :: Asset.t()
+  @type asset_b_type :: Asset.t()
+  @type fee_type :: Int32.t()
 
-  @type t :: %__MODULE__{asset_a: type_asset_a(), asset_b: type_asset_b(), fee: type_fee()}
+  @type t :: %__MODULE__{asset_a: asset_a_type(), asset_b: asset_b_type(), fee: fee_type()}
 
   defstruct [:asset_a, :asset_b, :fee]
 
-  @spec new(asset_a :: type_asset_a(), asset_b :: type_asset_b(), fee :: type_fee()) :: t()
+  @spec new(asset_a :: asset_a_type(), asset_b :: asset_b_type(), fee :: fee_type()) :: t()
   def new(
     %Asset{} = asset_a,
     %Asset{} = asset_b,

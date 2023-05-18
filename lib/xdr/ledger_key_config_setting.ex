@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.LedgerKeyConfigSetting do
     config_setting_id: ConfigSettingID
   )
 
-  @type type_config_setting_id :: ConfigSettingID.t()
+  @type config_setting_id_type :: ConfigSettingID.t()
 
-  @type t :: %__MODULE__{config_setting_id: type_config_setting_id()}
+  @type t :: %__MODULE__{config_setting_id: config_setting_id_type()}
 
   defstruct [:config_setting_id]
 
-  @spec new(config_setting_id :: type_config_setting_id()) :: t()
+  @spec new(config_setting_id :: config_setting_id_type()) :: t()
   def new(
     %ConfigSettingID{} = config_setting_id
   ),

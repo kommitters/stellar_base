@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.InvokeHostFunctionOp do
     auth: ContractAuthList
   )
 
-  @type type_function :: HostFunction.t()
-  @type type_footprint :: LedgerFootprint.t()
-  @type type_auth :: ContractAuthList.t()
+  @type function_type :: HostFunction.t()
+  @type footprint_type :: LedgerFootprint.t()
+  @type auth_type :: ContractAuthList.t()
 
-  @type t :: %__MODULE__{function: type_function(), footprint: type_footprint(), auth: type_auth()}
+  @type t :: %__MODULE__{function: function_type(), footprint: footprint_type(), auth: auth_type()}
 
   defstruct [:function, :footprint, :auth]
 
-  @spec new(function :: type_function(), footprint :: type_footprint(), auth :: type_auth()) :: t()
+  @spec new(function :: function_type(), footprint :: footprint_type(), auth :: auth_type()) :: t()
   def new(
     %HostFunction{} = function,
     %LedgerFootprint{} = footprint,

@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SCSpecTypeVec do
     element_type: SCSpecTypeDef
   )
 
-  @type type_element_type :: SCSpecTypeDef.t()
+  @type element_type_type :: SCSpecTypeDef.t()
 
-  @type t :: %__MODULE__{element_type: type_element_type()}
+  @type t :: %__MODULE__{element_type: element_type_type()}
 
   defstruct [:element_type]
 
-  @spec new(element_type :: type_element_type()) :: t()
+  @spec new(element_type :: element_type_type()) :: t()
   def new(
     %SCSpecTypeDef{} = element_type
   ),

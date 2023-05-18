@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.SCSpecFunctionInputV0 do
     type: SCSpecTypeDef
   )
 
-  @type type_doc :: String1024.t()
-  @type type_name :: String30.t()
+  @type doc_type :: String1024.t()
+  @type name_type :: String30.t()
   @type type_type :: SCSpecTypeDef.t()
 
-  @type t :: %__MODULE__{doc: type_doc(), name: type_name(), type: type_type()}
+  @type t :: %__MODULE__{doc: doc_type(), name: name_type(), type: type_type()}
 
   defstruct [:doc, :name, :type]
 
-  @spec new(doc :: type_doc(), name :: type_name(), type :: type_type()) :: t()
+  @spec new(doc :: doc_type(), name :: name_type(), type :: type_type()) :: t()
   def new(
     %String1024{} = doc,
     %String30{} = name,

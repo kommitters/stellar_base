@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveResultSuccess do
     last: SimplePaymentResult
   )
 
-  @type type_offers :: ClaimAtomList.t()
-  @type type_last :: SimplePaymentResult.t()
+  @type offers_type :: ClaimAtomList.t()
+  @type last_type :: SimplePaymentResult.t()
 
-  @type t :: %__MODULE__{offers: type_offers(), last: type_last()}
+  @type t :: %__MODULE__{offers: offers_type(), last: last_type()}
 
   defstruct [:offers, :last]
 
-  @spec new(offers :: type_offers(), last :: type_last()) :: t()
+  @spec new(offers :: offers_type(), last :: last_type()) :: t()
   def new(
     %ClaimAtomList{} = offers,
     %SimplePaymentResult{} = last

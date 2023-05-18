@@ -34,27 +34,27 @@ defmodule StellarBase.XDR.PeerStats do
     duplicate_fetch_message_recv: Uint64
   )
 
-  @type type_id :: NodeID.t()
-  @type type_version_str :: String100.t()
-  @type type_messages_read :: Uint64.t()
-  @type type_messages_written :: Uint64.t()
-  @type type_bytes_read :: Uint64.t()
-  @type type_bytes_written :: Uint64.t()
-  @type type_seconds_connected :: Uint64.t()
-  @type type_unique_flood_bytes_recv :: Uint64.t()
-  @type type_duplicate_flood_bytes_recv :: Uint64.t()
-  @type type_unique_fetch_bytes_recv :: Uint64.t()
-  @type type_duplicate_fetch_bytes_recv :: Uint64.t()
-  @type type_unique_flood_message_recv :: Uint64.t()
-  @type type_duplicate_flood_message_recv :: Uint64.t()
-  @type type_unique_fetch_message_recv :: Uint64.t()
-  @type type_duplicate_fetch_message_recv :: Uint64.t()
+  @type id_type :: NodeID.t()
+  @type version_str_type :: String100.t()
+  @type messages_read_type :: Uint64.t()
+  @type messages_written_type :: Uint64.t()
+  @type bytes_read_type :: Uint64.t()
+  @type bytes_written_type :: Uint64.t()
+  @type seconds_connected_type :: Uint64.t()
+  @type unique_flood_bytes_recv_type :: Uint64.t()
+  @type duplicate_flood_bytes_recv_type :: Uint64.t()
+  @type unique_fetch_bytes_recv_type :: Uint64.t()
+  @type duplicate_fetch_bytes_recv_type :: Uint64.t()
+  @type unique_flood_message_recv_type :: Uint64.t()
+  @type duplicate_flood_message_recv_type :: Uint64.t()
+  @type unique_fetch_message_recv_type :: Uint64.t()
+  @type duplicate_fetch_message_recv_type :: Uint64.t()
 
-  @type t :: %__MODULE__{id: type_id(), version_str: type_version_str(), messages_read: type_messages_read(), messages_written: type_messages_written(), bytes_read: type_bytes_read(), bytes_written: type_bytes_written(), seconds_connected: type_seconds_connected(), unique_flood_bytes_recv: type_unique_flood_bytes_recv(), duplicate_flood_bytes_recv: type_duplicate_flood_bytes_recv(), unique_fetch_bytes_recv: type_unique_fetch_bytes_recv(), duplicate_fetch_bytes_recv: type_duplicate_fetch_bytes_recv(), unique_flood_message_recv: type_unique_flood_message_recv(), duplicate_flood_message_recv: type_duplicate_flood_message_recv(), unique_fetch_message_recv: type_unique_fetch_message_recv(), duplicate_fetch_message_recv: type_duplicate_fetch_message_recv()}
+  @type t :: %__MODULE__{id: id_type(), version_str: version_str_type(), messages_read: messages_read_type(), messages_written: messages_written_type(), bytes_read: bytes_read_type(), bytes_written: bytes_written_type(), seconds_connected: seconds_connected_type(), unique_flood_bytes_recv: unique_flood_bytes_recv_type(), duplicate_flood_bytes_recv: duplicate_flood_bytes_recv_type(), unique_fetch_bytes_recv: unique_fetch_bytes_recv_type(), duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv_type(), unique_flood_message_recv: unique_flood_message_recv_type(), duplicate_flood_message_recv: duplicate_flood_message_recv_type(), unique_fetch_message_recv: unique_fetch_message_recv_type(), duplicate_fetch_message_recv: duplicate_fetch_message_recv_type()}
 
   defstruct [:id, :version_str, :messages_read, :messages_written, :bytes_read, :bytes_written, :seconds_connected, :unique_flood_bytes_recv, :duplicate_flood_bytes_recv, :unique_fetch_bytes_recv, :duplicate_fetch_bytes_recv, :unique_flood_message_recv, :duplicate_flood_message_recv, :unique_fetch_message_recv, :duplicate_fetch_message_recv]
 
-  @spec new(id :: type_id(), version_str :: type_version_str(), messages_read :: type_messages_read(), messages_written :: type_messages_written(), bytes_read :: type_bytes_read(), bytes_written :: type_bytes_written(), seconds_connected :: type_seconds_connected(), unique_flood_bytes_recv :: type_unique_flood_bytes_recv(), duplicate_flood_bytes_recv :: type_duplicate_flood_bytes_recv(), unique_fetch_bytes_recv :: type_unique_fetch_bytes_recv(), duplicate_fetch_bytes_recv :: type_duplicate_fetch_bytes_recv(), unique_flood_message_recv :: type_unique_flood_message_recv(), duplicate_flood_message_recv :: type_duplicate_flood_message_recv(), unique_fetch_message_recv :: type_unique_fetch_message_recv(), duplicate_fetch_message_recv :: type_duplicate_fetch_message_recv()) :: t()
+  @spec new(id :: id_type(), version_str :: version_str_type(), messages_read :: messages_read_type(), messages_written :: messages_written_type(), bytes_read :: bytes_read_type(), bytes_written :: bytes_written_type(), seconds_connected :: seconds_connected_type(), unique_flood_bytes_recv :: unique_flood_bytes_recv_type(), duplicate_flood_bytes_recv :: duplicate_flood_bytes_recv_type(), unique_fetch_bytes_recv :: unique_fetch_bytes_recv_type(), duplicate_fetch_bytes_recv :: duplicate_fetch_bytes_recv_type(), unique_flood_message_recv :: unique_flood_message_recv_type(), duplicate_flood_message_recv :: duplicate_flood_message_recv_type(), unique_fetch_message_recv :: unique_fetch_message_recv_type(), duplicate_fetch_message_recv :: duplicate_fetch_message_recv_type()) :: t()
   def new(
     %NodeID{} = id,
     %String100{} = version_str,

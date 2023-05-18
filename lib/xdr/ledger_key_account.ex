@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.LedgerKeyAccount do
     account_id: AccountID
   )
 
-  @type type_account_id :: AccountID.t()
+  @type account_id_type :: AccountID.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id()}
+  @type t :: %__MODULE__{account_id: account_id_type()}
 
   defstruct [:account_id]
 
-  @spec new(account_id :: type_account_id()) :: t()
+  @spec new(account_id :: account_id_type()) :: t()
   def new(
     %AccountID{} = account_id
   ),

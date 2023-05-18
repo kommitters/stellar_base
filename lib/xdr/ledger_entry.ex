@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.LedgerEntry do
     ext: LedgerEntryExt
   )
 
-  @type type_last_modified_ledger_seq :: Uint32.t()
-  @type type_data :: LedgerEntryData.t()
-  @type type_ext :: LedgerEntryExt.t()
+  @type last_modified_ledger_seq_type :: Uint32.t()
+  @type data_type :: LedgerEntryData.t()
+  @type ext_type :: LedgerEntryExt.t()
 
-  @type t :: %__MODULE__{last_modified_ledger_seq: type_last_modified_ledger_seq(), data: type_data(), ext: type_ext()}
+  @type t :: %__MODULE__{last_modified_ledger_seq: last_modified_ledger_seq_type(), data: data_type(), ext: ext_type()}
 
   defstruct [:last_modified_ledger_seq, :data, :ext]
 
-  @spec new(last_modified_ledger_seq :: type_last_modified_ledger_seq(), data :: type_data(), ext :: type_ext()) :: t()
+  @spec new(last_modified_ledger_seq :: last_modified_ledger_seq_type(), data :: data_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = last_modified_ledger_seq,
     %LedgerEntryData{} = data,

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TransactionSignaturePayload do
     tagged_transaction: TransactionSignaturePayloadTaggedTransaction
   )
 
-  @type type_network_id :: Hash.t()
-  @type type_tagged_transaction :: TransactionSignaturePayloadTaggedTransaction.t()
+  @type network_id_type :: Hash.t()
+  @type tagged_transaction_type :: TransactionSignaturePayloadTaggedTransaction.t()
 
-  @type t :: %__MODULE__{network_id: type_network_id(), tagged_transaction: type_tagged_transaction()}
+  @type t :: %__MODULE__{network_id: network_id_type(), tagged_transaction: tagged_transaction_type()}
 
   defstruct [:network_id, :tagged_transaction]
 
-  @spec new(network_id :: type_network_id(), tagged_transaction :: type_tagged_transaction()) :: t()
+  @spec new(network_id :: network_id_type(), tagged_transaction :: tagged_transaction_type()) :: t()
   def new(
     %Hash{} = network_id,
     %TransactionSignaturePayloadTaggedTransaction{} = tagged_transaction

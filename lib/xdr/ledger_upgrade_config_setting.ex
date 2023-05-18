@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerUpgradeConfigSetting do
     setting: ConfigSetting
   )
 
-  @type type_id :: ConfigSettingID.t()
-  @type type_setting :: ConfigSetting.t()
+  @type id_type :: ConfigSettingID.t()
+  @type setting_type :: ConfigSetting.t()
 
-  @type t :: %__MODULE__{id: type_id(), setting: type_setting()}
+  @type t :: %__MODULE__{id: id_type(), setting: setting_type()}
 
   defstruct [:id, :setting]
 
-  @spec new(id :: type_id(), setting :: type_setting()) :: t()
+  @spec new(id :: id_type(), setting :: setting_type()) :: t()
   def new(
     %ConfigSettingID{} = id,
     %ConfigSetting{} = setting

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpSigner do
     signer_key: SignerKey
   )
 
-  @type type_account_id :: AccountID.t()
-  @type type_signer_key :: SignerKey.t()
+  @type account_id_type :: AccountID.t()
+  @type signer_key_type :: SignerKey.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id(), signer_key: type_signer_key()}
+  @type t :: %__MODULE__{account_id: account_id_type(), signer_key: signer_key_type()}
 
   defstruct [:account_id, :signer_key]
 
-  @spec new(account_id :: type_account_id(), signer_key :: type_signer_key()) :: t()
+  @spec new(account_id :: account_id_type(), signer_key :: signer_key_type()) :: t()
   def new(
     %AccountID{} = account_id,
     %SignerKey{} = signer_key

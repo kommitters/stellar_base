@@ -25,17 +25,17 @@ defmodule StellarBase.XDR.SurveyRequestMessage do
     command_type: SurveyMessageCommandType
   )
 
-  @type type_surveyor_peer_id :: NodeID.t()
-  @type type_surveyed_peer_id :: NodeID.t()
-  @type type_ledger_num :: Uint32.t()
-  @type type_encryption_key :: Curve25519Public.t()
-  @type type_command_type :: SurveyMessageCommandType.t()
+  @type surveyor_peer_id_type :: NodeID.t()
+  @type surveyed_peer_id_type :: NodeID.t()
+  @type ledger_num_type :: Uint32.t()
+  @type encryption_key_type :: Curve25519Public.t()
+  @type command_type_type :: SurveyMessageCommandType.t()
 
-  @type t :: %__MODULE__{surveyor_peer_id: type_surveyor_peer_id(), surveyed_peer_id: type_surveyed_peer_id(), ledger_num: type_ledger_num(), encryption_key: type_encryption_key(), command_type: type_command_type()}
+  @type t :: %__MODULE__{surveyor_peer_id: surveyor_peer_id_type(), surveyed_peer_id: surveyed_peer_id_type(), ledger_num: ledger_num_type(), encryption_key: encryption_key_type(), command_type: command_type_type()}
 
   defstruct [:surveyor_peer_id, :surveyed_peer_id, :ledger_num, :encryption_key, :command_type]
 
-  @spec new(surveyor_peer_id :: type_surveyor_peer_id(), surveyed_peer_id :: type_surveyed_peer_id(), ledger_num :: type_ledger_num(), encryption_key :: type_encryption_key(), command_type :: type_command_type()) :: t()
+  @spec new(surveyor_peer_id :: surveyor_peer_id_type(), surveyed_peer_id :: surveyed_peer_id_type(), ledger_num :: ledger_num_type(), encryption_key :: encryption_key_type(), command_type :: command_type_type()) :: t()
   def new(
     %NodeID{} = surveyor_peer_id,
     %NodeID{} = surveyed_peer_id,

@@ -24,18 +24,18 @@ defmodule StellarBase.XDR.TopologyResponseBodyV1 do
     max_outbound_peer_count: Uint32
   )
 
-  @type type_inbound_peers :: PeerStatList.t()
-  @type type_outbound_peers :: PeerStatList.t()
-  @type type_total_inbound_peer_count :: Uint32.t()
-  @type type_total_outbound_peer_count :: Uint32.t()
-  @type type_max_inbound_peer_count :: Uint32.t()
-  @type type_max_outbound_peer_count :: Uint32.t()
+  @type inbound_peers_type :: PeerStatList.t()
+  @type outbound_peers_type :: PeerStatList.t()
+  @type total_inbound_peer_count_type :: Uint32.t()
+  @type total_outbound_peer_count_type :: Uint32.t()
+  @type max_inbound_peer_count_type :: Uint32.t()
+  @type max_outbound_peer_count_type :: Uint32.t()
 
-  @type t :: %__MODULE__{inbound_peers: type_inbound_peers(), outbound_peers: type_outbound_peers(), total_inbound_peer_count: type_total_inbound_peer_count(), total_outbound_peer_count: type_total_outbound_peer_count(), max_inbound_peer_count: type_max_inbound_peer_count(), max_outbound_peer_count: type_max_outbound_peer_count()}
+  @type t :: %__MODULE__{inbound_peers: inbound_peers_type(), outbound_peers: outbound_peers_type(), total_inbound_peer_count: total_inbound_peer_count_type(), total_outbound_peer_count: total_outbound_peer_count_type(), max_inbound_peer_count: max_inbound_peer_count_type(), max_outbound_peer_count: max_outbound_peer_count_type()}
 
   defstruct [:inbound_peers, :outbound_peers, :total_inbound_peer_count, :total_outbound_peer_count, :max_inbound_peer_count, :max_outbound_peer_count]
 
-  @spec new(inbound_peers :: type_inbound_peers(), outbound_peers :: type_outbound_peers(), total_inbound_peer_count :: type_total_inbound_peer_count(), total_outbound_peer_count :: type_total_outbound_peer_count(), max_inbound_peer_count :: type_max_inbound_peer_count(), max_outbound_peer_count :: type_max_outbound_peer_count()) :: t()
+  @spec new(inbound_peers :: inbound_peers_type(), outbound_peers :: outbound_peers_type(), total_inbound_peer_count :: total_inbound_peer_count_type(), total_outbound_peer_count :: total_outbound_peer_count_type(), max_inbound_peer_count :: max_inbound_peer_count_type(), max_outbound_peer_count :: max_outbound_peer_count_type()) :: t()
   def new(
     %PeerStatList{} = inbound_peers,
     %PeerStatList{} = outbound_peers,

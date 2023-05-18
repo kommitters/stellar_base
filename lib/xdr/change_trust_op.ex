@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.ChangeTrustOp do
     limit: Int64
   )
 
-  @type type_line :: ChangeTrustAsset.t()
-  @type type_limit :: Int64.t()
+  @type line_type :: ChangeTrustAsset.t()
+  @type limit_type :: Int64.t()
 
-  @type t :: %__MODULE__{line: type_line(), limit: type_limit()}
+  @type t :: %__MODULE__{line: line_type(), limit: limit_type()}
 
   defstruct [:line, :limit]
 
-  @spec new(line :: type_line(), limit :: type_limit()) :: t()
+  @spec new(line :: line_type(), limit :: limit_type()) :: t()
   def new(
     %ChangeTrustAsset{} = line,
     %Int64{} = limit

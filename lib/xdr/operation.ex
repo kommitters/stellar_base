@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.Operation do
     body: OperationBody
   )
 
-  @type type_source_account :: OptionalMuxedAccount.t()
-  @type type_body :: OperationBody.t()
+  @type source_account_type :: OptionalMuxedAccount.t()
+  @type body_type :: OperationBody.t()
 
-  @type t :: %__MODULE__{source_account: type_source_account(), body: type_body()}
+  @type t :: %__MODULE__{source_account: source_account_type(), body: body_type()}
 
   defstruct [:source_account, :body]
 
-  @spec new(source_account :: type_source_account(), body :: type_body()) :: t()
+  @spec new(source_account :: source_account_type(), body :: body_type()) :: t()
   def new(
     %OptionalMuxedAccount{} = source_account,
     %OperationBody{} = body

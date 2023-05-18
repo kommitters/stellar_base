@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.SCSpecTypeMap do
     value_type: SCSpecTypeDef
   )
 
-  @type type_key_type :: SCSpecTypeDef.t()
-  @type type_value_type :: SCSpecTypeDef.t()
+  @type key_type_type :: SCSpecTypeDef.t()
+  @type value_type_type :: SCSpecTypeDef.t()
 
-  @type t :: %__MODULE__{key_type: type_key_type(), value_type: type_value_type()}
+  @type t :: %__MODULE__{key_type: key_type_type(), value_type: value_type_type()}
 
   defstruct [:key_type, :value_type]
 
-  @spec new(key_type :: type_key_type(), value_type :: type_value_type()) :: t()
+  @spec new(key_type :: key_type_type(), value_type :: value_type_type()) :: t()
   def new(
     %SCSpecTypeDef{} = key_type,
     %SCSpecTypeDef{} = value_type

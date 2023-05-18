@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerCloseValueSignature do
     signature: Signature
   )
 
-  @type type_node_id :: NodeID.t()
-  @type type_signature :: Signature.t()
+  @type node_id_type :: NodeID.t()
+  @type signature_type :: Signature.t()
 
-  @type t :: %__MODULE__{node_id: type_node_id(), signature: type_signature()}
+  @type t :: %__MODULE__{node_id: node_id_type(), signature: signature_type()}
 
   defstruct [:node_id, :signature]
 
-  @spec new(node_id :: type_node_id(), signature :: type_signature()) :: t()
+  @spec new(node_id :: node_id_type(), signature :: signature_type()) :: t()
   def new(
     %NodeID{} = node_id,
     %Signature{} = signature

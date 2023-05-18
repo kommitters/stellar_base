@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.Price do
     d: Int32
   )
 
-  @type type_n :: Int32.t()
-  @type type_d :: Int32.t()
+  @type n_type :: Int32.t()
+  @type d_type :: Int32.t()
 
-  @type t :: %__MODULE__{n: type_n(), d: type_d()}
+  @type t :: %__MODULE__{n: n_type(), d: d_type()}
 
   defstruct [:n, :d]
 
-  @spec new(n :: type_n(), d :: type_d()) :: t()
+  @spec new(n :: n_type(), d :: d_type()) :: t()
   def new(
     %Int32{} = n,
     %Int32{} = d

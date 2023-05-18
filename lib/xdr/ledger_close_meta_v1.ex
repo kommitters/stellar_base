@@ -26,17 +26,17 @@ defmodule StellarBase.XDR.LedgerCloseMetaV1 do
     scp_info: SCPHistoryEntryList
   )
 
-  @type type_ledger_header :: LedgerHeaderHistoryEntry.t()
-  @type type_tx_set :: GeneralizedTransactionSet.t()
-  @type type_tx_processing :: TransactionResultMetaList.t()
-  @type type_upgrades_processing :: UpgradeEntryMetaList.t()
-  @type type_scp_info :: SCPHistoryEntryList.t()
+  @type ledger_header_type :: LedgerHeaderHistoryEntry.t()
+  @type tx_set_type :: GeneralizedTransactionSet.t()
+  @type tx_processing_type :: TransactionResultMetaList.t()
+  @type upgrades_processing_type :: UpgradeEntryMetaList.t()
+  @type scp_info_type :: SCPHistoryEntryList.t()
 
-  @type t :: %__MODULE__{ledger_header: type_ledger_header(), tx_set: type_tx_set(), tx_processing: type_tx_processing(), upgrades_processing: type_upgrades_processing(), scp_info: type_scp_info()}
+  @type t :: %__MODULE__{ledger_header: ledger_header_type(), tx_set: tx_set_type(), tx_processing: tx_processing_type(), upgrades_processing: upgrades_processing_type(), scp_info: scp_info_type()}
 
   defstruct [:ledger_header, :tx_set, :tx_processing, :upgrades_processing, :scp_info]
 
-  @spec new(ledger_header :: type_ledger_header(), tx_set :: type_tx_set(), tx_processing :: type_tx_processing(), upgrades_processing :: type_upgrades_processing(), scp_info :: type_scp_info()) :: t()
+  @spec new(ledger_header :: ledger_header_type(), tx_set :: tx_set_type(), tx_processing :: tx_processing_type(), upgrades_processing :: upgrades_processing_type(), scp_info :: scp_info_type()) :: t()
   def new(
     %LedgerHeaderHistoryEntry{} = ledger_header,
     %GeneralizedTransactionSet{} = tx_set,

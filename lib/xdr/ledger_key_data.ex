@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerKeyData do
     data_name: String64
   )
 
-  @type type_account_id :: AccountID.t()
-  @type type_data_name :: String64.t()
+  @type account_id_type :: AccountID.t()
+  @type data_name_type :: String64.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id(), data_name: type_data_name()}
+  @type t :: %__MODULE__{account_id: account_id_type(), data_name: data_name_type()}
 
   defstruct [:account_id, :data_name]
 
-  @spec new(account_id :: type_account_id(), data_name :: type_data_name()) :: t()
+  @spec new(account_id :: account_id_type(), data_name :: data_name_type()) :: t()
   def new(
     %AccountID{} = account_id,
     %String64{} = data_name

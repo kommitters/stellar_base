@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.SCPStatementExternalize do
     commit_quorum_set_hash: Hash
   )
 
-  @type type_commit :: SCPBallot.t()
-  @type type_n_h :: Uint32.t()
-  @type type_commit_quorum_set_hash :: Hash.t()
+  @type commit_type :: SCPBallot.t()
+  @type n_h_type :: Uint32.t()
+  @type commit_quorum_set_hash_type :: Hash.t()
 
-  @type t :: %__MODULE__{commit: type_commit(), n_h: type_n_h(), commit_quorum_set_hash: type_commit_quorum_set_hash()}
+  @type t :: %__MODULE__{commit: commit_type(), n_h: n_h_type(), commit_quorum_set_hash: commit_quorum_set_hash_type()}
 
   defstruct [:commit, :n_h, :commit_quorum_set_hash]
 
-  @spec new(commit :: type_commit(), n_h :: type_n_h(), commit_quorum_set_hash :: type_commit_quorum_set_hash()) :: t()
+  @spec new(commit :: commit_type(), n_h :: n_h_type(), commit_quorum_set_hash :: commit_quorum_set_hash_type()) :: t()
   def new(
     %SCPBallot{} = commit,
     %Uint32{} = n_h,

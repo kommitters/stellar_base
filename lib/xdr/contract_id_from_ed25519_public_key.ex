@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.ContractIDFromEd25519PublicKey do
     salt: Uint256
   )
 
-  @type type_key :: Uint256.t()
-  @type type_signature :: Signature.t()
-  @type type_salt :: Uint256.t()
+  @type key_type :: Uint256.t()
+  @type signature_type :: Signature.t()
+  @type salt_type :: Uint256.t()
 
-  @type t :: %__MODULE__{key: type_key(), signature: type_signature(), salt: type_salt()}
+  @type t :: %__MODULE__{key: key_type(), signature: signature_type(), salt: salt_type()}
 
   defstruct [:key, :signature, :salt]
 
-  @spec new(key :: type_key(), signature :: type_signature(), salt :: type_salt()) :: t()
+  @spec new(key :: key_type(), signature :: signature_type(), salt :: salt_type()) :: t()
   def new(
     %Uint256{} = key,
     %Signature{} = signature,

@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.TimeBounds do
     max_time: TimePoint
   )
 
-  @type type_min_time :: TimePoint.t()
-  @type type_max_time :: TimePoint.t()
+  @type min_time_type :: TimePoint.t()
+  @type max_time_type :: TimePoint.t()
 
-  @type t :: %__MODULE__{min_time: type_min_time(), max_time: type_max_time()}
+  @type t :: %__MODULE__{min_time: min_time_type(), max_time: max_time_type()}
 
   defstruct [:min_time, :max_time]
 
-  @spec new(min_time :: type_min_time(), max_time :: type_max_time()) :: t()
+  @spec new(min_time :: min_time_type(), max_time :: max_time_type()) :: t()
   def new(
     %TimePoint{} = min_time,
     %TimePoint{} = max_time

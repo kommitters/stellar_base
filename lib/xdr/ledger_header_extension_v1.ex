@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.LedgerHeaderExtensionV1 do
     ext: LedgerHeaderExtensionV1Ext
   )
 
-  @type type_flags :: Uint32.t()
-  @type type_ext :: LedgerHeaderExtensionV1Ext.t()
+  @type flags_type :: Uint32.t()
+  @type ext_type :: LedgerHeaderExtensionV1Ext.t()
 
-  @type t :: %__MODULE__{flags: type_flags(), ext: type_ext()}
+  @type t :: %__MODULE__{flags: flags_type(), ext: ext_type()}
 
   defstruct [:flags, :ext]
 
-  @spec new(flags :: type_flags(), ext :: type_ext()) :: t()
+  @spec new(flags :: flags_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = flags,
     %LedgerHeaderExtensionV1Ext{} = ext

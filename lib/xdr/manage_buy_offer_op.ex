@@ -24,17 +24,17 @@ defmodule StellarBase.XDR.ManageBuyOfferOp do
     offer_id: Int64
   )
 
-  @type type_selling :: Asset.t()
-  @type type_buying :: Asset.t()
-  @type type_buy_amount :: Int64.t()
-  @type type_price :: Price.t()
-  @type type_offer_id :: Int64.t()
+  @type selling_type :: Asset.t()
+  @type buying_type :: Asset.t()
+  @type buy_amount_type :: Int64.t()
+  @type price_type :: Price.t()
+  @type offer_id_type :: Int64.t()
 
-  @type t :: %__MODULE__{selling: type_selling(), buying: type_buying(), buy_amount: type_buy_amount(), price: type_price(), offer_id: type_offer_id()}
+  @type t :: %__MODULE__{selling: selling_type(), buying: buying_type(), buy_amount: buy_amount_type(), price: price_type(), offer_id: offer_id_type()}
 
   defstruct [:selling, :buying, :buy_amount, :price, :offer_id]
 
-  @spec new(selling :: type_selling(), buying :: type_buying(), buy_amount :: type_buy_amount(), price :: type_price(), offer_id :: type_offer_id()) :: t()
+  @spec new(selling :: selling_type(), buying :: buying_type(), buy_amount :: buy_amount_type(), price :: price_type(), offer_id :: offer_id_type()) :: t()
   def new(
     %Asset{} = selling,
     %Asset{} = buying,

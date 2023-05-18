@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.TransactionHistoryEntry do
     ext: TransactionHistoryEntryExt
   )
 
-  @type type_ledger_seq :: Uint32.t()
-  @type type_tx_set :: TransactionSet.t()
-  @type type_ext :: TransactionHistoryEntryExt.t()
+  @type ledger_seq_type :: Uint32.t()
+  @type tx_set_type :: TransactionSet.t()
+  @type ext_type :: TransactionHistoryEntryExt.t()
 
-  @type t :: %__MODULE__{ledger_seq: type_ledger_seq(), tx_set: type_tx_set(), ext: type_ext()}
+  @type t :: %__MODULE__{ledger_seq: ledger_seq_type(), tx_set: tx_set_type(), ext: ext_type()}
 
   defstruct [:ledger_seq, :tx_set, :ext]
 
-  @spec new(ledger_seq :: type_ledger_seq(), tx_set :: type_tx_set(), ext :: type_ext()) :: t()
+  @spec new(ledger_seq :: ledger_seq_type(), tx_set :: tx_set_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = ledger_seq,
     %TransactionSet{} = tx_set,

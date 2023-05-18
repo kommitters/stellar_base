@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TransactionSet do
     txs: TransactionEnvelopeList
   )
 
-  @type type_previous_ledger_hash :: Hash.t()
-  @type type_txs :: TransactionEnvelopeList.t()
+  @type previous_ledger_hash_type :: Hash.t()
+  @type txs_type :: TransactionEnvelopeList.t()
 
-  @type t :: %__MODULE__{previous_ledger_hash: type_previous_ledger_hash(), txs: type_txs()}
+  @type t :: %__MODULE__{previous_ledger_hash: previous_ledger_hash_type(), txs: txs_type()}
 
   defstruct [:previous_ledger_hash, :txs]
 
-  @spec new(previous_ledger_hash :: type_previous_ledger_hash(), txs :: type_txs()) :: t()
+  @spec new(previous_ledger_hash :: previous_ledger_hash_type(), txs :: txs_type()) :: t()
   def new(
     %Hash{} = previous_ledger_hash,
     %TransactionEnvelopeList{} = txs

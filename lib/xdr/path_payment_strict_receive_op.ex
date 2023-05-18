@@ -26,18 +26,18 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOp do
     path: AssetList5
   )
 
-  @type type_send_asset :: Asset.t()
-  @type type_send_max :: Int64.t()
-  @type type_destination :: MuxedAccount.t()
-  @type type_dest_asset :: Asset.t()
-  @type type_dest_amount :: Int64.t()
-  @type type_path :: AssetList5.t()
+  @type send_asset_type :: Asset.t()
+  @type send_max_type :: Int64.t()
+  @type destination_type :: MuxedAccount.t()
+  @type dest_asset_type :: Asset.t()
+  @type dest_amount_type :: Int64.t()
+  @type path_type :: AssetList5.t()
 
-  @type t :: %__MODULE__{send_asset: type_send_asset(), send_max: type_send_max(), destination: type_destination(), dest_asset: type_dest_asset(), dest_amount: type_dest_amount(), path: type_path()}
+  @type t :: %__MODULE__{send_asset: send_asset_type(), send_max: send_max_type(), destination: destination_type(), dest_asset: dest_asset_type(), dest_amount: dest_amount_type(), path: path_type()}
 
   defstruct [:send_asset, :send_max, :destination, :dest_asset, :dest_amount, :path]
 
-  @spec new(send_asset :: type_send_asset(), send_max :: type_send_max(), destination :: type_destination(), dest_asset :: type_dest_asset(), dest_amount :: type_dest_amount(), path :: type_path()) :: t()
+  @spec new(send_asset :: send_asset_type(), send_max :: send_max_type(), destination :: destination_type(), dest_asset :: dest_asset_type(), dest_amount :: dest_amount_type(), path :: path_type()) :: t()
   def new(
     %Asset{} = send_asset,
     %Int64{} = send_max,

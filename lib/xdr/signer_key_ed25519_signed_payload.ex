@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.SignerKeyEd25519SignedPayload do
     payload: VariableOpaque64
   )
 
-  @type type_ed25519 :: Uint256.t()
-  @type type_payload :: VariableOpaque64.t()
+  @type ed25519_type :: Uint256.t()
+  @type payload_type :: VariableOpaque64.t()
 
-  @type t :: %__MODULE__{ed25519: type_ed25519(), payload: type_payload()}
+  @type t :: %__MODULE__{ed25519: ed25519_type(), payload: payload_type()}
 
   defstruct [:ed25519, :payload]
 
-  @spec new(ed25519 :: type_ed25519(), payload :: type_payload()) :: t()
+  @spec new(ed25519 :: ed25519_type(), payload :: payload_type()) :: t()
   def new(
     %Uint256{} = ed25519,
     %VariableOpaque64{} = payload

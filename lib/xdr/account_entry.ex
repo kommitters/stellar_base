@@ -35,22 +35,22 @@ defmodule StellarBase.XDR.AccountEntry do
     ext: AccountEntryExt
   )
 
-  @type type_account_id :: AccountID.t()
-  @type type_balance :: Int64.t()
-  @type type_seq_num :: SequenceNumber.t()
-  @type type_num_sub_entries :: Uint32.t()
-  @type type_inflation_dest :: OptionalAccountID.t()
-  @type type_flags :: Uint32.t()
-  @type type_home_domain :: String32.t()
-  @type type_thresholds :: Thresholds.t()
-  @type type_signers :: SignerList20.t()
-  @type type_ext :: AccountEntryExt.t()
+  @type account_id_type :: AccountID.t()
+  @type balance_type :: Int64.t()
+  @type seq_num_type :: SequenceNumber.t()
+  @type num_sub_entries_type :: Uint32.t()
+  @type inflation_dest_type :: OptionalAccountID.t()
+  @type flags_type :: Uint32.t()
+  @type home_domain_type :: String32.t()
+  @type thresholds_type :: Thresholds.t()
+  @type signers_type :: SignerList20.t()
+  @type ext_type :: AccountEntryExt.t()
 
-  @type t :: %__MODULE__{account_id: type_account_id(), balance: type_balance(), seq_num: type_seq_num(), num_sub_entries: type_num_sub_entries(), inflation_dest: type_inflation_dest(), flags: type_flags(), home_domain: type_home_domain(), thresholds: type_thresholds(), signers: type_signers(), ext: type_ext()}
+  @type t :: %__MODULE__{account_id: account_id_type(), balance: balance_type(), seq_num: seq_num_type(), num_sub_entries: num_sub_entries_type(), inflation_dest: inflation_dest_type(), flags: flags_type(), home_domain: home_domain_type(), thresholds: thresholds_type(), signers: signers_type(), ext: ext_type()}
 
   defstruct [:account_id, :balance, :seq_num, :num_sub_entries, :inflation_dest, :flags, :home_domain, :thresholds, :signers, :ext]
 
-  @spec new(account_id :: type_account_id(), balance :: type_balance(), seq_num :: type_seq_num(), num_sub_entries :: type_num_sub_entries(), inflation_dest :: type_inflation_dest(), flags :: type_flags(), home_domain :: type_home_domain(), thresholds :: type_thresholds(), signers :: type_signers(), ext :: type_ext()) :: t()
+  @spec new(account_id :: account_id_type(), balance :: balance_type(), seq_num :: seq_num_type(), num_sub_entries :: num_sub_entries_type(), inflation_dest :: inflation_dest_type(), flags :: flags_type(), home_domain :: home_domain_type(), thresholds :: thresholds_type(), signers :: signers_type(), ext :: ext_type()) :: t()
   def new(
     %AccountID{} = account_id,
     %Int64{} = balance,

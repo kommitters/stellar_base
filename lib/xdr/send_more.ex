@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SendMore do
     num_messages: Uint32
   )
 
-  @type type_num_messages :: Uint32.t()
+  @type num_messages_type :: Uint32.t()
 
-  @type t :: %__MODULE__{num_messages: type_num_messages()}
+  @type t :: %__MODULE__{num_messages: num_messages_type()}
 
   defstruct [:num_messages]
 
-  @spec new(num_messages :: type_num_messages()) :: t()
+  @spec new(num_messages :: num_messages_type()) :: t()
   def new(
     %Uint32{} = num_messages
   ),

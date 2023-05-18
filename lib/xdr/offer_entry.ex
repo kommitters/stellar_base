@@ -30,20 +30,20 @@ defmodule StellarBase.XDR.OfferEntry do
     ext: OfferEntryExt
   )
 
-  @type type_seller_id :: AccountID.t()
-  @type type_offer_id :: Int64.t()
-  @type type_selling :: Asset.t()
-  @type type_buying :: Asset.t()
-  @type type_amount :: Int64.t()
-  @type type_price :: Price.t()
-  @type type_flags :: Uint32.t()
-  @type type_ext :: OfferEntryExt.t()
+  @type seller_id_type :: AccountID.t()
+  @type offer_id_type :: Int64.t()
+  @type selling_type :: Asset.t()
+  @type buying_type :: Asset.t()
+  @type amount_type :: Int64.t()
+  @type price_type :: Price.t()
+  @type flags_type :: Uint32.t()
+  @type ext_type :: OfferEntryExt.t()
 
-  @type t :: %__MODULE__{seller_id: type_seller_id(), offer_id: type_offer_id(), selling: type_selling(), buying: type_buying(), amount: type_amount(), price: type_price(), flags: type_flags(), ext: type_ext()}
+  @type t :: %__MODULE__{seller_id: seller_id_type(), offer_id: offer_id_type(), selling: selling_type(), buying: buying_type(), amount: amount_type(), price: price_type(), flags: flags_type(), ext: ext_type()}
 
   defstruct [:seller_id, :offer_id, :selling, :buying, :amount, :price, :flags, :ext]
 
-  @spec new(seller_id :: type_seller_id(), offer_id :: type_offer_id(), selling :: type_selling(), buying :: type_buying(), amount :: type_amount(), price :: type_price(), flags :: type_flags(), ext :: type_ext()) :: t()
+  @spec new(seller_id :: seller_id_type(), offer_id :: offer_id_type(), selling :: selling_type(), buying :: buying_type(), amount :: amount_type(), price :: price_type(), flags :: flags_type(), ext :: ext_type()) :: t()
   def new(
     %AccountID{} = seller_id,
     %Int64{} = offer_id,

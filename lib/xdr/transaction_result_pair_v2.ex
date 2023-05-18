@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.TransactionResultPairV2 do
     hash_of_meta_hashes: Hash
   )
 
-  @type type_transaction_hash :: Hash.t()
-  @type type_hash_of_meta_hashes :: Hash.t()
+  @type transaction_hash_type :: Hash.t()
+  @type hash_of_meta_hashes_type :: Hash.t()
 
-  @type t :: %__MODULE__{transaction_hash: type_transaction_hash(), hash_of_meta_hashes: type_hash_of_meta_hashes()}
+  @type t :: %__MODULE__{transaction_hash: transaction_hash_type(), hash_of_meta_hashes: hash_of_meta_hashes_type()}
 
   defstruct [:transaction_hash, :hash_of_meta_hashes]
 
-  @spec new(transaction_hash :: type_transaction_hash(), hash_of_meta_hashes :: type_hash_of_meta_hashes()) :: t()
+  @spec new(transaction_hash :: transaction_hash_type(), hash_of_meta_hashes :: hash_of_meta_hashes_type()) :: t()
   def new(
     %Hash{} = transaction_hash,
     %Hash{} = hash_of_meta_hashes

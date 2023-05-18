@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.BeginSponsoringFutureReservesOp do
     sponsored_id: AccountID
   )
 
-  @type type_sponsored_id :: AccountID.t()
+  @type sponsored_id_type :: AccountID.t()
 
-  @type t :: %__MODULE__{sponsored_id: type_sponsored_id()}
+  @type t :: %__MODULE__{sponsored_id: sponsored_id_type()}
 
   defstruct [:sponsored_id]
 
-  @spec new(sponsored_id :: type_sponsored_id()) :: t()
+  @spec new(sponsored_id :: sponsored_id_type()) :: t()
   def new(
     %AccountID{} = sponsored_id
   ),

@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.AuthenticatedMessageV0 do
     mac: HmacSha256Mac
   )
 
-  @type type_sequence :: Uint64.t()
-  @type type_message :: StellarMessage.t()
-  @type type_mac :: HmacSha256Mac.t()
+  @type sequence_type :: Uint64.t()
+  @type message_type :: StellarMessage.t()
+  @type mac_type :: HmacSha256Mac.t()
 
-  @type t :: %__MODULE__{sequence: type_sequence(), message: type_message(), mac: type_mac()}
+  @type t :: %__MODULE__{sequence: sequence_type(), message: message_type(), mac: mac_type()}
 
   defstruct [:sequence, :message, :mac]
 
-  @spec new(sequence :: type_sequence(), message :: type_message(), mac :: type_mac()) :: t()
+  @spec new(sequence :: sequence_type(), message :: message_type(), mac :: mac_type()) :: t()
   def new(
     %Uint64{} = sequence,
     %StellarMessage{} = message,

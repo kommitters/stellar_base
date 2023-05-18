@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.PeerAddress do
     num_failures: Uint32
   )
 
-  @type type_ip :: PeerAddressIp.t()
-  @type type_port :: Uint32.t()
-  @type type_num_failures :: Uint32.t()
+  @type ip_type :: PeerAddressIp.t()
+  @type port_type :: Uint32.t()
+  @type num_failures_type :: Uint32.t()
 
-  @type t :: %__MODULE__{ip: type_ip(), port: type_port(), num_failures: type_num_failures()}
+  @type t :: %__MODULE__{ip: ip_type(), port: port_type(), num_failures: num_failures_type()}
 
   defstruct [:ip, :port, :num_failures]
 
-  @spec new(ip :: type_ip(), port :: type_port(), num_failures :: type_num_failures()) :: t()
+  @spec new(ip :: ip_type(), port :: port_type(), num_failures :: num_failures_type()) :: t()
   def new(
     %PeerAddressIp{} = ip,
     %Uint32{} = port,

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.ClaimantV0 do
     predicate: ClaimPredicate
   )
 
-  @type type_destination :: AccountID.t()
-  @type type_predicate :: ClaimPredicate.t()
+  @type destination_type :: AccountID.t()
+  @type predicate_type :: ClaimPredicate.t()
 
-  @type t :: %__MODULE__{destination: type_destination(), predicate: type_predicate()}
+  @type t :: %__MODULE__{destination: destination_type(), predicate: predicate_type()}
 
   defstruct [:destination, :predicate]
 
-  @spec new(destination :: type_destination(), predicate :: type_predicate()) :: t()
+  @spec new(destination :: destination_type(), predicate :: predicate_type()) :: t()
   def new(
     %AccountID{} = destination,
     %ClaimPredicate{} = predicate

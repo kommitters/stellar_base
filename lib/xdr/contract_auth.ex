@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.ContractAuth do
     signature_args: SCVec
   )
 
-  @type type_address_with_nonce :: OptionalAddressWithNonce.t()
-  @type type_root_invocation :: AuthorizedInvocation.t()
-  @type type_signature_args :: SCVec.t()
+  @type address_with_nonce_type :: OptionalAddressWithNonce.t()
+  @type root_invocation_type :: AuthorizedInvocation.t()
+  @type signature_args_type :: SCVec.t()
 
-  @type t :: %__MODULE__{address_with_nonce: type_address_with_nonce(), root_invocation: type_root_invocation(), signature_args: type_signature_args()}
+  @type t :: %__MODULE__{address_with_nonce: address_with_nonce_type(), root_invocation: root_invocation_type(), signature_args: signature_args_type()}
 
   defstruct [:address_with_nonce, :root_invocation, :signature_args]
 
-  @spec new(address_with_nonce :: type_address_with_nonce(), root_invocation :: type_root_invocation(), signature_args :: type_signature_args()) :: t()
+  @spec new(address_with_nonce :: address_with_nonce_type(), root_invocation :: root_invocation_type(), signature_args :: signature_args_type()) :: t()
   def new(
     %OptionalAddressWithNonce{} = address_with_nonce,
     %AuthorizedInvocation{} = root_invocation,

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.SCPHistoryEntryV0 do
     ledger_messages: LedgerSCPMessages
   )
 
-  @type type_quorum_sets :: SCPQuorumSetList.t()
-  @type type_ledger_messages :: LedgerSCPMessages.t()
+  @type quorum_sets_type :: SCPQuorumSetList.t()
+  @type ledger_messages_type :: LedgerSCPMessages.t()
 
-  @type t :: %__MODULE__{quorum_sets: type_quorum_sets(), ledger_messages: type_ledger_messages()}
+  @type t :: %__MODULE__{quorum_sets: quorum_sets_type(), ledger_messages: ledger_messages_type()}
 
   defstruct [:quorum_sets, :ledger_messages]
 
-  @spec new(quorum_sets :: type_quorum_sets(), ledger_messages :: type_ledger_messages()) :: t()
+  @spec new(quorum_sets :: quorum_sets_type(), ledger_messages :: ledger_messages_type()) :: t()
   def new(
     %SCPQuorumSetList{} = quorum_sets,
     %LedgerSCPMessages{} = ledger_messages

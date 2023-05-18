@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.SignedSurveyRequestMessage do
     request: SurveyRequestMessage
   )
 
-  @type type_request_signature :: Signature.t()
-  @type type_request :: SurveyRequestMessage.t()
+  @type request_signature_type :: Signature.t()
+  @type request_type :: SurveyRequestMessage.t()
 
-  @type t :: %__MODULE__{request_signature: type_request_signature(), request: type_request()}
+  @type t :: %__MODULE__{request_signature: request_signature_type(), request: request_type()}
 
   defstruct [:request_signature, :request]
 
-  @spec new(request_signature :: type_request_signature(), request :: type_request()) :: t()
+  @spec new(request_signature :: request_signature_type(), request :: request_type()) :: t()
   def new(
     %Signature{} = request_signature,
     %SurveyRequestMessage{} = request

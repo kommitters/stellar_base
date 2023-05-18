@@ -30,19 +30,19 @@ defmodule StellarBase.XDR.TransactionV0 do
     ext: TransactionV0Ext
   )
 
-  @type type_source_account_ed25519 :: Uint256.t()
-  @type type_fee :: Uint32.t()
-  @type type_seq_num :: SequenceNumber.t()
-  @type type_time_bounds :: OptionalTimeBounds.t()
-  @type type_memo :: Memo.t()
-  @type type_operations :: OperationList100.t()
-  @type type_ext :: TransactionV0Ext.t()
+  @type source_account_ed25519_type :: Uint256.t()
+  @type fee_type :: Uint32.t()
+  @type seq_num_type :: SequenceNumber.t()
+  @type time_bounds_type :: OptionalTimeBounds.t()
+  @type memo_type :: Memo.t()
+  @type operations_type :: OperationList100.t()
+  @type ext_type :: TransactionV0Ext.t()
 
-  @type t :: %__MODULE__{source_account_ed25519: type_source_account_ed25519(), fee: type_fee(), seq_num: type_seq_num(), time_bounds: type_time_bounds(), memo: type_memo(), operations: type_operations(), ext: type_ext()}
+  @type t :: %__MODULE__{source_account_ed25519: source_account_ed25519_type(), fee: fee_type(), seq_num: seq_num_type(), time_bounds: time_bounds_type(), memo: memo_type(), operations: operations_type(), ext: ext_type()}
 
   defstruct [:source_account_ed25519, :fee, :seq_num, :time_bounds, :memo, :operations, :ext]
 
-  @spec new(source_account_ed25519 :: type_source_account_ed25519(), fee :: type_fee(), seq_num :: type_seq_num(), time_bounds :: type_time_bounds(), memo :: type_memo(), operations :: type_operations(), ext :: type_ext()) :: t()
+  @spec new(source_account_ed25519 :: source_account_ed25519_type(), fee :: fee_type(), seq_num :: seq_num_type(), time_bounds :: time_bounds_type(), memo :: memo_type(), operations :: operations_type(), ext :: ext_type()) :: t()
   def new(
     %Uint256{} = source_account_ed25519,
     %Uint32{} = fee,

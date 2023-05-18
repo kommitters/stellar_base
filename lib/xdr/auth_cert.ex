@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.AuthCert do
     sig: Signature
   )
 
-  @type type_pubkey :: Curve25519Public.t()
-  @type type_expiration :: Uint64.t()
-  @type type_sig :: Signature.t()
+  @type pubkey_type :: Curve25519Public.t()
+  @type expiration_type :: Uint64.t()
+  @type sig_type :: Signature.t()
 
-  @type t :: %__MODULE__{pubkey: type_pubkey(), expiration: type_expiration(), sig: type_sig()}
+  @type t :: %__MODULE__{pubkey: pubkey_type(), expiration: expiration_type(), sig: sig_type()}
 
   defstruct [:pubkey, :expiration, :sig]
 
-  @spec new(pubkey :: type_pubkey(), expiration :: type_expiration(), sig :: type_sig()) :: t()
+  @spec new(pubkey :: pubkey_type(), expiration :: expiration_type(), sig :: sig_type()) :: t()
   def new(
     %Curve25519Public{} = pubkey,
     %Uint64{} = expiration,

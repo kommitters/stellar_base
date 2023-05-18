@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.InnerTransactionResultPair do
     result: InnerTransactionResult
   )
 
-  @type type_transaction_hash :: Hash.t()
-  @type type_result :: InnerTransactionResult.t()
+  @type transaction_hash_type :: Hash.t()
+  @type result_type :: InnerTransactionResult.t()
 
-  @type t :: %__MODULE__{transaction_hash: type_transaction_hash(), result: type_result()}
+  @type t :: %__MODULE__{transaction_hash: transaction_hash_type(), result: result_type()}
 
   defstruct [:transaction_hash, :result]
 
-  @spec new(transaction_hash :: type_transaction_hash(), result :: type_result()) :: t()
+  @spec new(transaction_hash :: transaction_hash_type(), result :: result_type()) :: t()
   def new(
     %Hash{} = transaction_hash,
     %InnerTransactionResult{} = result

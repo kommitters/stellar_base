@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.ContractEventV0 do
     data: SCVal
   )
 
-  @type type_topics :: SCVec.t()
-  @type type_data :: SCVal.t()
+  @type topics_type :: SCVec.t()
+  @type data_type :: SCVal.t()
 
-  @type t :: %__MODULE__{topics: type_topics(), data: type_data()}
+  @type t :: %__MODULE__{topics: topics_type(), data: data_type()}
 
   defstruct [:topics, :data]
 
-  @spec new(topics :: type_topics(), data :: type_data()) :: t()
+  @spec new(topics :: topics_type(), data :: data_type()) :: t()
   def new(
     %SCVec{} = topics,
     %SCVal{} = data

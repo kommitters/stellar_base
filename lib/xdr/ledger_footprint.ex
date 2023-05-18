@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.LedgerFootprint do
     read_write: LedgerKeyList
   )
 
-  @type type_read_only :: LedgerKeyList.t()
-  @type type_read_write :: LedgerKeyList.t()
+  @type read_only_type :: LedgerKeyList.t()
+  @type read_write_type :: LedgerKeyList.t()
 
-  @type t :: %__MODULE__{read_only: type_read_only(), read_write: type_read_write()}
+  @type t :: %__MODULE__{read_only: read_only_type(), read_write: read_write_type()}
 
   defstruct [:read_only, :read_write]
 
-  @spec new(read_only :: type_read_only(), read_write :: type_read_write()) :: t()
+  @spec new(read_only :: read_only_type(), read_write :: read_write_type()) :: t()
   def new(
     %LedgerKeyList{} = read_only,
     %LedgerKeyList{} = read_write

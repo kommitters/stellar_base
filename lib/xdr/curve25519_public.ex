@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.Curve25519Public do
     key: Opaque32
   )
 
-  @type type_key :: Opaque32.t()
+  @type key_type :: Opaque32.t()
 
-  @type t :: %__MODULE__{key: type_key()}
+  @type t :: %__MODULE__{key: key_type()}
 
   defstruct [:key]
 
-  @spec new(key :: type_key()) :: t()
+  @spec new(key :: key_type()) :: t()
   def new(
     %Opaque32{} = key
   ),

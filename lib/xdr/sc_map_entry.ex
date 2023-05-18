@@ -19,14 +19,14 @@ defmodule StellarBase.XDR.SCMapEntry do
     val: SCVal
   )
 
-  @type type_key :: SCVal.t()
-  @type type_val :: SCVal.t()
+  @type key_type :: SCVal.t()
+  @type val_type :: SCVal.t()
 
-  @type t :: %__MODULE__{key: type_key(), val: type_val()}
+  @type t :: %__MODULE__{key: key_type(), val: val_type()}
 
   defstruct [:key, :val]
 
-  @spec new(key :: type_key(), val :: type_val()) :: t()
+  @spec new(key :: key_type(), val :: val_type()) :: t()
   def new(
     %SCVal{} = key,
     %SCVal{} = val

@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.Auth do
     flags: Int
   )
 
-  @type type_flags :: Int.t()
+  @type flags_type :: Int.t()
 
-  @type t :: %__MODULE__{flags: type_flags()}
+  @type t :: %__MODULE__{flags: flags_type()}
 
   defstruct [:flags]
 
-  @spec new(flags :: type_flags()) :: t()
+  @spec new(flags :: flags_type()) :: t()
   def new(
     %Int{} = flags
   ),

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.CreateAccountOp do
     starting_balance: Int64
   )
 
-  @type type_destination :: AccountID.t()
-  @type type_starting_balance :: Int64.t()
+  @type destination_type :: AccountID.t()
+  @type starting_balance_type :: Int64.t()
 
-  @type t :: %__MODULE__{destination: type_destination(), starting_balance: type_starting_balance()}
+  @type t :: %__MODULE__{destination: destination_type(), starting_balance: starting_balance_type()}
 
   defstruct [:destination, :starting_balance]
 
-  @spec new(destination :: type_destination(), starting_balance :: type_starting_balance()) :: t()
+  @spec new(destination :: destination_type(), starting_balance :: starting_balance_type()) :: t()
   def new(
     %AccountID{} = destination,
     %Int64{} = starting_balance

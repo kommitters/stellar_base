@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.OperationMeta do
     changes: LedgerEntryChanges
   )
 
-  @type type_changes :: LedgerEntryChanges.t()
+  @type changes_type :: LedgerEntryChanges.t()
 
-  @type t :: %__MODULE__{changes: type_changes()}
+  @type t :: %__MODULE__{changes: changes_type()}
 
   defstruct [:changes]
 
-  @spec new(changes :: type_changes()) :: t()
+  @spec new(changes :: changes_type()) :: t()
   def new(
     %LedgerEntryChanges{} = changes
   ),

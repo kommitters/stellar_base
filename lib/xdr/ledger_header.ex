@@ -38,27 +38,27 @@ defmodule StellarBase.XDR.LedgerHeader do
     ext: LedgerHeaderExt
   )
 
-  @type type_ledger_version :: Uint32.t()
-  @type type_previous_ledger_hash :: Hash.t()
-  @type type_scp_value :: StellarValue.t()
-  @type type_tx_set_result_hash :: Hash.t()
-  @type type_bucket_list_hash :: Hash.t()
-  @type type_ledger_seq :: Uint32.t()
-  @type type_total_coins :: Int64.t()
-  @type type_fee_pool :: Int64.t()
-  @type type_inflation_seq :: Uint32.t()
-  @type type_id_pool :: Uint64.t()
-  @type type_base_fee :: Uint32.t()
-  @type type_base_reserve :: Uint32.t()
-  @type type_max_tx_set_size :: Uint32.t()
-  @type type_skip_list :: HashFixedList.t()
-  @type type_ext :: LedgerHeaderExt.t()
+  @type ledger_version_type :: Uint32.t()
+  @type previous_ledger_hash_type :: Hash.t()
+  @type scp_value_type :: StellarValue.t()
+  @type tx_set_result_hash_type :: Hash.t()
+  @type bucket_list_hash_type :: Hash.t()
+  @type ledger_seq_type :: Uint32.t()
+  @type total_coins_type :: Int64.t()
+  @type fee_pool_type :: Int64.t()
+  @type inflation_seq_type :: Uint32.t()
+  @type id_pool_type :: Uint64.t()
+  @type base_fee_type :: Uint32.t()
+  @type base_reserve_type :: Uint32.t()
+  @type max_tx_set_size_type :: Uint32.t()
+  @type skip_list_type :: HashFixedList.t()
+  @type ext_type :: LedgerHeaderExt.t()
 
-  @type t :: %__MODULE__{ledger_version: type_ledger_version(), previous_ledger_hash: type_previous_ledger_hash(), scp_value: type_scp_value(), tx_set_result_hash: type_tx_set_result_hash(), bucket_list_hash: type_bucket_list_hash(), ledger_seq: type_ledger_seq(), total_coins: type_total_coins(), fee_pool: type_fee_pool(), inflation_seq: type_inflation_seq(), id_pool: type_id_pool(), base_fee: type_base_fee(), base_reserve: type_base_reserve(), max_tx_set_size: type_max_tx_set_size(), skip_list: type_skip_list(), ext: type_ext()}
+  @type t :: %__MODULE__{ledger_version: ledger_version_type(), previous_ledger_hash: previous_ledger_hash_type(), scp_value: scp_value_type(), tx_set_result_hash: tx_set_result_hash_type(), bucket_list_hash: bucket_list_hash_type(), ledger_seq: ledger_seq_type(), total_coins: total_coins_type(), fee_pool: fee_pool_type(), inflation_seq: inflation_seq_type(), id_pool: id_pool_type(), base_fee: base_fee_type(), base_reserve: base_reserve_type(), max_tx_set_size: max_tx_set_size_type(), skip_list: skip_list_type(), ext: ext_type()}
 
   defstruct [:ledger_version, :previous_ledger_hash, :scp_value, :tx_set_result_hash, :bucket_list_hash, :ledger_seq, :total_coins, :fee_pool, :inflation_seq, :id_pool, :base_fee, :base_reserve, :max_tx_set_size, :skip_list, :ext]
 
-  @spec new(ledger_version :: type_ledger_version(), previous_ledger_hash :: type_previous_ledger_hash(), scp_value :: type_scp_value(), tx_set_result_hash :: type_tx_set_result_hash(), bucket_list_hash :: type_bucket_list_hash(), ledger_seq :: type_ledger_seq(), total_coins :: type_total_coins(), fee_pool :: type_fee_pool(), inflation_seq :: type_inflation_seq(), id_pool :: type_id_pool(), base_fee :: type_base_fee(), base_reserve :: type_base_reserve(), max_tx_set_size :: type_max_tx_set_size(), skip_list :: type_skip_list(), ext :: type_ext()) :: t()
+  @spec new(ledger_version :: ledger_version_type(), previous_ledger_hash :: previous_ledger_hash_type(), scp_value :: scp_value_type(), tx_set_result_hash :: tx_set_result_hash_type(), bucket_list_hash :: bucket_list_hash_type(), ledger_seq :: ledger_seq_type(), total_coins :: total_coins_type(), fee_pool :: fee_pool_type(), inflation_seq :: inflation_seq_type(), id_pool :: id_pool_type(), base_fee :: base_fee_type(), base_reserve :: base_reserve_type(), max_tx_set_size :: max_tx_set_size_type(), skip_list :: skip_list_type(), ext :: ext_type()) :: t()
   def new(
     %Uint32{} = ledger_version,
     %Hash{} = previous_ledger_hash,

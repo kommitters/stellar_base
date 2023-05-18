@@ -29,21 +29,21 @@ defmodule StellarBase.XDR.SetOptionsOp do
     signer: OptionalSigner
   )
 
-  @type type_inflation_dest :: OptionalAccountID.t()
-  @type type_clear_flags :: OptionalUint32.t()
-  @type type_set_flags :: OptionalUint32.t()
-  @type type_master_weight :: OptionalUint32.t()
-  @type type_low_threshold :: OptionalUint32.t()
-  @type type_med_threshold :: OptionalUint32.t()
-  @type type_high_threshold :: OptionalUint32.t()
-  @type type_home_domain :: OptionalString32.t()
-  @type type_signer :: OptionalSigner.t()
+  @type inflation_dest_type :: OptionalAccountID.t()
+  @type clear_flags_type :: OptionalUint32.t()
+  @type set_flags_type :: OptionalUint32.t()
+  @type master_weight_type :: OptionalUint32.t()
+  @type low_threshold_type :: OptionalUint32.t()
+  @type med_threshold_type :: OptionalUint32.t()
+  @type high_threshold_type :: OptionalUint32.t()
+  @type home_domain_type :: OptionalString32.t()
+  @type signer_type :: OptionalSigner.t()
 
-  @type t :: %__MODULE__{inflation_dest: type_inflation_dest(), clear_flags: type_clear_flags(), set_flags: type_set_flags(), master_weight: type_master_weight(), low_threshold: type_low_threshold(), med_threshold: type_med_threshold(), high_threshold: type_high_threshold(), home_domain: type_home_domain(), signer: type_signer()}
+  @type t :: %__MODULE__{inflation_dest: inflation_dest_type(), clear_flags: clear_flags_type(), set_flags: set_flags_type(), master_weight: master_weight_type(), low_threshold: low_threshold_type(), med_threshold: med_threshold_type(), high_threshold: high_threshold_type(), home_domain: home_domain_type(), signer: signer_type()}
 
   defstruct [:inflation_dest, :clear_flags, :set_flags, :master_weight, :low_threshold, :med_threshold, :high_threshold, :home_domain, :signer]
 
-  @spec new(inflation_dest :: type_inflation_dest(), clear_flags :: type_clear_flags(), set_flags :: type_set_flags(), master_weight :: type_master_weight(), low_threshold :: type_low_threshold(), med_threshold :: type_med_threshold(), high_threshold :: type_high_threshold(), home_domain :: type_home_domain(), signer :: type_signer()) :: t()
+  @spec new(inflation_dest :: inflation_dest_type(), clear_flags :: clear_flags_type(), set_flags :: set_flags_type(), master_weight :: master_weight_type(), low_threshold :: low_threshold_type(), med_threshold :: med_threshold_type(), high_threshold :: high_threshold_type(), home_domain :: home_domain_type(), signer :: signer_type()) :: t()
   def new(
     %OptionalAccountID{} = inflation_dest,
     %OptionalUint32{} = clear_flags,

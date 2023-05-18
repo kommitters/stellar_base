@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.AllowTrustOp do
     authorize: Uint32
   )
 
-  @type type_trustor :: AccountID.t()
-  @type type_asset :: AssetCode.t()
-  @type type_authorize :: Uint32.t()
+  @type trustor_type :: AccountID.t()
+  @type asset_type :: AssetCode.t()
+  @type authorize_type :: Uint32.t()
 
-  @type t :: %__MODULE__{trustor: type_trustor(), asset: type_asset(), authorize: type_authorize()}
+  @type t :: %__MODULE__{trustor: trustor_type(), asset: asset_type(), authorize: authorize_type()}
 
   defstruct [:trustor, :asset, :authorize]
 
-  @spec new(trustor :: type_trustor(), asset :: type_asset(), authorize :: type_authorize()) :: t()
+  @spec new(trustor :: trustor_type(), asset :: asset_type(), authorize :: authorize_type()) :: t()
   def new(
     %AccountID{} = trustor,
     %AssetCode{} = asset,

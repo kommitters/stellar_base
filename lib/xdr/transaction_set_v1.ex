@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TransactionSetV1 do
     phases: TransactionPhaseList
   )
 
-  @type type_previous_ledger_hash :: Hash.t()
-  @type type_phases :: TransactionPhaseList.t()
+  @type previous_ledger_hash_type :: Hash.t()
+  @type phases_type :: TransactionPhaseList.t()
 
-  @type t :: %__MODULE__{previous_ledger_hash: type_previous_ledger_hash(), phases: type_phases()}
+  @type t :: %__MODULE__{previous_ledger_hash: previous_ledger_hash_type(), phases: phases_type()}
 
   defstruct [:previous_ledger_hash, :phases]
 
-  @spec new(previous_ledger_hash :: type_previous_ledger_hash(), phases :: type_phases()) :: t()
+  @spec new(previous_ledger_hash :: previous_ledger_hash_type(), phases :: phases_type()) :: t()
   def new(
     %Hash{} = previous_ledger_hash,
     %TransactionPhaseList{} = phases

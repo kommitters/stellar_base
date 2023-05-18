@@ -22,15 +22,15 @@ defmodule StellarBase.XDR.SCPQuorumSet do
     inner_sets: SCPQuorumSetList
   )
 
-  @type type_threshold :: Uint32.t()
-  @type type_validators :: NodeIDList.t()
-  @type type_inner_sets :: SCPQuorumSetList.t()
+  @type threshold_type :: Uint32.t()
+  @type validators_type :: NodeIDList.t()
+  @type inner_sets_type :: SCPQuorumSetList.t()
 
-  @type t :: %__MODULE__{threshold: type_threshold(), validators: type_validators(), inner_sets: type_inner_sets()}
+  @type t :: %__MODULE__{threshold: threshold_type(), validators: validators_type(), inner_sets: inner_sets_type()}
 
   defstruct [:threshold, :validators, :inner_sets]
 
-  @spec new(threshold :: type_threshold(), validators :: type_validators(), inner_sets :: type_inner_sets()) :: t()
+  @spec new(threshold :: threshold_type(), validators :: validators_type(), inner_sets :: inner_sets_type()) :: t()
   def new(
     %Uint32{} = threshold,
     %NodeIDList{} = validators,

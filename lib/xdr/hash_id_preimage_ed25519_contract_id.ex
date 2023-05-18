@@ -21,15 +21,15 @@ defmodule StellarBase.XDR.HashIDPreimageEd25519ContractID do
     salt: Uint256
   )
 
-  @type type_network_id :: Hash.t()
-  @type type_ed25519 :: Uint256.t()
-  @type type_salt :: Uint256.t()
+  @type network_id_type :: Hash.t()
+  @type ed25519_type :: Uint256.t()
+  @type salt_type :: Uint256.t()
 
-  @type t :: %__MODULE__{network_id: type_network_id(), ed25519: type_ed25519(), salt: type_salt()}
+  @type t :: %__MODULE__{network_id: network_id_type(), ed25519: ed25519_type(), salt: salt_type()}
 
   defstruct [:network_id, :ed25519, :salt]
 
-  @spec new(network_id :: type_network_id(), ed25519 :: type_ed25519(), salt :: type_salt()) :: t()
+  @spec new(network_id :: network_id_type(), ed25519 :: ed25519_type(), salt :: salt_type()) :: t()
   def new(
     %Hash{} = network_id,
     %Uint256{} = ed25519,

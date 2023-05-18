@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1 do
     ext: AccountEntryExtensionV1Ext
   )
 
-  @type type_liabilities :: Liabilities.t()
-  @type type_ext :: AccountEntryExtensionV1Ext.t()
+  @type liabilities_type :: Liabilities.t()
+  @type ext_type :: AccountEntryExtensionV1Ext.t()
 
-  @type t :: %__MODULE__{liabilities: type_liabilities(), ext: type_ext()}
+  @type t :: %__MODULE__{liabilities: liabilities_type(), ext: ext_type()}
 
   defstruct [:liabilities, :ext]
 
-  @spec new(liabilities :: type_liabilities(), ext :: type_ext()) :: t()
+  @spec new(liabilities :: liabilities_type(), ext :: ext_type()) :: t()
   def new(
     %Liabilities{} = liabilities,
     %AccountEntryExtensionV1Ext{} = ext
