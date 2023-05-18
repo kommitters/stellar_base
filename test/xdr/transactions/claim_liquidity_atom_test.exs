@@ -3,11 +3,14 @@ defmodule StellarBase.XDR.ClaimLiquidityAtomTest do
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{ClaimLiquidityAtom, Int64, PoolID}
+  alias StellarBase.XDR.{ClaimLiquidityAtom, Int64, PoolID, Hash}
 
   describe "ClaimLiquidityAtom" do
     setup do
-      pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      pool_id =
+        "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+        |> Hash.new()
+        |> PoolID.new()
 
       asset_sold =
         create_asset(:alpha_num4,

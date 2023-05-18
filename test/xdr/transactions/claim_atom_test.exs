@@ -10,6 +10,7 @@ defmodule StellarBase.XDR.ClaimAtomTest do
     ClaimOfferAtom,
     ClaimOfferAtomV0,
     Int64,
+    Hash,
     PoolID
   }
 
@@ -176,7 +177,10 @@ defmodule StellarBase.XDR.ClaimAtomTest do
     } do
       claim_atom_type = ClaimAtomType.new(:CLAIM_ATOM_TYPE_LIQUIDITY_POOL)
 
-      pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      pool_id =
+        "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+        |> Hash.new()
+        |> PoolID.new()
 
       claim_offer_atom =
         ClaimLiquidityAtom.new(

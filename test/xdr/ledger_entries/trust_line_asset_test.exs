@@ -150,7 +150,10 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     setup do
       asset_type = AssetType.new(:ASSET_TYPE_POOL_SHARE)
 
-      pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      pool_id =
+        "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+        |> Hash.new()
+        |> PoolID.new()
 
       %{
         pool_id: pool_id,

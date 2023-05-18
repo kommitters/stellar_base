@@ -115,7 +115,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionInnerTxTest do
       create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
     fee = Uint32.new(100)
-    seq_num = SequenceNumber.new(12_345_678)
+    seq_num = SequenceNumber.new(Int64.new(12_345_678))
 
     # preconditions
     min_time = TimePoint.new(123)

@@ -1,11 +1,11 @@
 defmodule StellarBase.XDR.PoolIDTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.PoolID
+  alias StellarBase.XDR.{Hash, PoolID}
 
   describe "PoolID" do
     setup do
-      value = "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+      value = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
 
       %{
         value: value,

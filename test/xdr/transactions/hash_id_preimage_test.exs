@@ -10,12 +10,13 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
     PoolID,
     HashIDPreimageRevokeID,
     SequenceNumber,
+    Int64,
     Uint32
   }
 
   setup do
     account_id = create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
-    seq_number = SequenceNumber.new(123_456)
+    seq_number = SequenceNumber.new(Int64.new(123_456))
     op_num = Uint32.new(123_456)
 
     {:ok,

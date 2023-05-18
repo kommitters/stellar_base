@@ -9,7 +9,6 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     FeeBumpTransactionInnerTx,
     FeeBumpTransaction,
     FeeBumpTransactionEnvelope,
-    Int,
     Int64,
     Memo,
     MemoType,
@@ -59,7 +58,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     operations = build_operations()
 
     # ext
-    ext = TransactionV0Ext.new(Void.new(), Int.new(0))
+    ext = TransactionV0Ext.new(Void.new(), 0)
 
     {:ok,
      %{
