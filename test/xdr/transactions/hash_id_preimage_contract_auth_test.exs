@@ -32,7 +32,7 @@ defmodule StellarBase.XDR.HashIDPreimageContractAuthTest do
           contract_id,
           function_name,
           args,
-          AuthorizedInvocationList.new()
+          AuthorizedInvocationList.new([])
         )
 
       sub_invocations =

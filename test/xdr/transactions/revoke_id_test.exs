@@ -3,16 +3,22 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeIDTest do
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{HashIDPreimageRevokeID, PoolID, SequenceNumber, Uint32}
+  alias StellarBase.XDR.{HashIDPreimageRevokeID, PoolID, SequenceNumber, Uint32, Int64, Hash}
 
   describe "OperationID" do
     setup do
       source_account =
         create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
-      seq_number = SequenceNumber.new(123_456)
+      seq_number =
+        123_456
+        |> Int64.new()
+        |> SequenceNumber.new()
       op_num = Uint32.new(123_456)
-      pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      pool_id =
+        "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+        |> Hash.new()
+        |> PoolID.new()
 
       asset =
         create_asset(:alpha_num4,

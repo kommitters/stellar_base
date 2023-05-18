@@ -1,12 +1,11 @@
 defmodule StellarBase.XDR.BumpSequenceOpTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SequenceNumber
-  alias StellarBase.XDR.BumpSequenceOp
+  alias StellarBase.XDR.{SequenceNumber, Int64, BumpSequenceOp}
 
   describe "BumpSequenceOp Operation" do
     setup do
-      sequence_number = SequenceNumber.new(12_345)
+      sequence_number = SequenceNumber.new(Int64.new(12_345))
 
       %{
         bump_to: sequence_number,

@@ -13,18 +13,18 @@ defmodule StellarBase.XDR.ContractCodeEntry do
   alias StellarBase.XDR.{
     ExtensionPoint,
     Hash,
-    VariableOpaque
+    VariableOpaque256000
   }
 
   @struct_spec XDR.Struct.new(
     ext: ExtensionPoint,
     hash: Hash,
-    code: VariableOpaque
+    code: VariableOpaque256000
   )
 
   @type type_ext :: ExtensionPoint.t()
   @type type_hash :: Hash.t()
-  @type type_code :: VariableOpaque.t()
+  @type type_code :: VariableOpaque256000.t()
 
   @type t :: %__MODULE__{ext: type_ext(), hash: type_hash(), code: type_code()}
 
@@ -34,7 +34,7 @@ defmodule StellarBase.XDR.ContractCodeEntry do
   def new(
     %ExtensionPoint{} = ext,
     %Hash{} = hash,
-    %VariableOpaque{} = code
+    %VariableOpaque256000{} = code
   ),
   do: %__MODULE__{ext: ext, hash: hash, code: code}
 

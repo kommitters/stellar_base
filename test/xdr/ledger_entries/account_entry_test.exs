@@ -22,8 +22,9 @@ defmodule StellarBase.XDR.AccountEntryTest do
     Uint32,
     String32,
     Thresholds,
-    Signers,
+    SignerList20,
     Uint256,
+    Uint64,
     SignerKey,
     Signer,
     SignerKeyType,
@@ -55,12 +56,12 @@ defmodule StellarBase.XDR.AccountEntryTest do
         |> Signer.new(signer_weight)
 
       balance = Int64.new(5)
-      seq_num = SequenceNumber.new(12_345_678)
+      seq_num = SequenceNumber.new(Int64.new(12_345_678))
       num_sub_entries = Uint32.new(5)
       flags = Uint32.new(5)
       home_domain = String32.new("kommit.co")
       thresholds = Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
-      signers = Signers.new([signer])
+      signers = SignerList20.new([signer])
 
       buying = Int64.new(20)
       selling = Int64.new(10)
@@ -68,7 +69,7 @@ defmodule StellarBase.XDR.AccountEntryTest do
 
       extension_point = ExtensionPoint.new(Void.new(), 0)
       seq_ledger = Uint32.new(10)
-      seq_time = TimePoint.new(12_345)
+      seq_time = TimePoint.new(Uint64.new(12_345))
 
       account_entry_extension_v2_ext_list =
         [

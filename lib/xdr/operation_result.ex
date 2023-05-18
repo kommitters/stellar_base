@@ -17,13 +17,13 @@ defmodule StellarBase.XDR.OperationResult do
   }
 
   @arms [
-    OP_INNER: OperationResultTr,
-    OP_BAD_AUTH: Void,
-    OP_NO_ACCOUNT: Void,
-    OP_NOT_SUPPORTED: Void,
-    OP_TOO_MANY_SUBENTRIES: Void,
-    OP_EXCEEDED_WORK_LIMIT: Void,
-    OP_TOO_MANY_SPONSORING: Void
+    opINNER: OperationResultTr,
+    opBAD_AUTH: Void,
+    opNO_ACCOUNT: Void,
+    opNOT_SUPPORTED: Void,
+    opTOO_MANY_SUBENTRIES: Void,
+    opEXCEEDED_WORK_LIMIT: Void,
+    opTOO_MANY_SPONSORING: Void
   ]
 
   @type value ::

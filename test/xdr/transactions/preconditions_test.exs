@@ -18,15 +18,17 @@ defmodule StellarBase.XDR.PreconditionsTest do
     SignerKeyType,
     TimeBounds,
     TimePoint,
-    Uint32
+    Uint32,
+    Int64,
+    Uint64
   }
 
   describe "Precondition Time Bound" do
     setup do
       precondition_type = PreconditionType.new(:PRECOND_TIME)
 
-      min_time = TimePoint.new(123)
-      max_time = TimePoint.new(321)
+      min_time = TimePoint.new(Uint64.new(123))
+      max_time = TimePoint.new(Uint64.new(321))
 
       time_bounds = TimeBounds.new(min_time, max_time)
 
@@ -81,8 +83,8 @@ defmodule StellarBase.XDR.PreconditionsTest do
       precondition_type = PreconditionType.new(:PRECOND_V2)
       key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_PRE_AUTH_TX)
 
-      min_time = TimePoint.new(123)
-      max_time = TimePoint.new(321)
+      min_time = TimePoint.new(Uint64.new(123))
+      max_time = TimePoint.new(Uint64.new(321))
       min_ledger = Uint32.new(123)
       max_ledger = Uint32.new(321)
 
@@ -109,6 +111,7 @@ defmodule StellarBase.XDR.PreconditionsTest do
 
       min_seq_num =
         1234
+        |> Int64.new()
         |> SequenceNumber.new()
         |> OptionalSequenceNumber.new()
 

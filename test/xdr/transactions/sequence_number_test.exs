@@ -1,18 +1,21 @@
 defmodule StellarBase.XDR.SequenceNumberTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SequenceNumber
+  alias StellarBase.XDR.{SequenceNumber, Int64}
 
   describe "SequenceNumber" do
     setup do
       %{
-        sequence_number: SequenceNumber.new(1234),
+        sequence_number: SequenceNumber.new(Int64.new(1234)),
         binary: <<0, 0, 0, 0, 0, 0, 4, 210>>
       }
     end
 
     test "new/1" do
-      %SequenceNumber{sequence_number: 1234} = SequenceNumber.new(1234)
+      %SequenceNumber{sequence_number: 1234} =
+        1234
+        |> Int64.new()
+        |> SequenceNumber.new()
     end
 
     test "encode_xdr/1", %{sequence_number: sequence_number, binary: binary} do
@@ -22,6 +25,7 @@ defmodule StellarBase.XDR.SequenceNumberTest do
     test "encode_xdr/1 a non-integer value" do
       {:error, :not_integer} =
         "hello"
+        |> Int64.new()
         |> SequenceNumber.new()
         |> SequenceNumber.encode_xdr()
     end

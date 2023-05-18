@@ -30,7 +30,8 @@ defmodule StellarBase.XDR.LedgerKeyOfferTest do
     end
 
     test "new/1", %{seller_id: seller_id, offer_id: offer_id} do
-      %LedgerKeyOffer{seller_id: ^seller_id, offer_id: ^offer_id} = LedgerKeyOffer.new(seller_id, offer_id)
+      %LedgerKeyOffer{seller_id: ^seller_id, offer_id: ^offer_id} =
+        LedgerKeyOffer.new(seller_id, offer_id)
     end
 
     test "encode_xdr/1", %{offer: offer, binary: binary} do

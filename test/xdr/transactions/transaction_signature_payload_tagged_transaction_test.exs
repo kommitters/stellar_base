@@ -5,8 +5,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
 
   alias StellarBase.XDR.{
     EnvelopeType,
-    Ext,
-    FeeBumpInnerTx,
+    TransactionExt,
+    FeeBumpTransactionInnerTx,
     FeeBumpTransaction,
     Int64,
     Memo,
@@ -15,14 +15,15 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     Preconditions,
     OptionalMuxedAccount,
     Operation,
-    Operations,
+    OperationList100,
     SequenceNumber,
     TimeBounds,
     TimePoint,
     Transaction,
     TransactionV1Envelope,
     Uint32,
-    Uint64
+    Uint64,
+    Void
   }
 
   alias StellarBase.XDR.TransactionSignaturePayloadTaggedTransaction, as: TaggedTransaction
@@ -30,11 +31,11 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
   setup do
     # Seq number
     fee = Uint32.new(100)
-    seq_num = SequenceNumber.new(12_345_678)
+    seq_num = SequenceNumber.new(Int64.new(12_345_678))
 
     # time bounds
-    min_time = TimePoint.new(123)
-    max_time = TimePoint.new(321)
+    min_time = TimePoint.new(Uint64.new(123))
+    max_time = TimePoint.new(Uint64.new(321))
     time_bounds = TimeBounds.new(min_time, max_time)
     precondition_type = PreconditionType.new(:PRECOND_TIME)
     preconditions = Preconditions.new(time_bounds, precondition_type)
@@ -48,7 +49,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     operations = build_operations()
 
     # ext
-    ext = Ext.new()
+    ext = TransactionExt.new(Void.new(), 0)
 
     {:ok,
      %{
@@ -172,7 +173,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
       fee_bump_tx =
         tx
         |> TransactionV1Envelope.new(signatures)
-        |> FeeBumpInnerTx.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
+        |> FeeBumpTransactionInnerTx.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
         |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, ext)).()
 
       %{
@@ -231,7 +232,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     end
   end
 
-  @spec build_operations() :: Operations.t()
+  @spec build_operations() :: OperationList100.t()
   defp build_operations do
     source_account =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -250,7 +251,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     clawback_operation = clawback_op_body(asset, destination, Int64.new(1_000_000_000))
 
     [payment_operation, clawback_operation]
-    |> Enum.map(fn op -> Operation.new(op, source_account) end)
-    |> Operations.new()
+    |> Enum.map(fn op -> Operation.new(source_account, op) end)
+    |> OperationList100.new()
   end
 end

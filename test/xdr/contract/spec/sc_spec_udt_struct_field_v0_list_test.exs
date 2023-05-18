@@ -25,7 +25,8 @@ defmodule StellarBase.XDR.SCSpecUDTStructFieldV0List40Test do
 
       %{
         sc_spec_udt_struct_field_v0s: sc_spec_udt_struct_field_v0s,
-        sponsorship_descriptor_list: SCSpecUDTStructFieldV0List40.new(sc_spec_udt_struct_field_v0s),
+        sponsorship_descriptor_list:
+          SCSpecUDTStructFieldV0List40.new(sc_spec_udt_struct_field_v0s),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 26, 72, 101, 108, 108, 111, 32, 116, 104, 101, 114, 101, 32, 116,
             104, 105, 115, 32, 105, 115, 32, 97, 32, 116, 101, 115, 116, 0, 0, 0, 0, 0, 14, 72,
@@ -37,7 +38,8 @@ defmodule StellarBase.XDR.SCSpecUDTStructFieldV0List40Test do
     end
 
     test "new/1", %{sc_spec_udt_struct_field_v0s: sc_spec_udt_struct_field_v0s} do
-      %SCSpecUDTStructFieldV0List40{items: ^sc_spec_udt_struct_field_v0s} = SCSpecUDTStructFieldV0List40.new(sc_spec_udt_struct_field_v0s)
+      %SCSpecUDTStructFieldV0List40{items: ^sc_spec_udt_struct_field_v0s} =
+        SCSpecUDTStructFieldV0List40.new(sc_spec_udt_struct_field_v0s)
     end
 
     test "encode_xdr/1", %{

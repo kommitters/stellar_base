@@ -1,11 +1,14 @@
 defmodule StellarBase.XDR.LedgerKeyLiquidityPoolTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{PoolID, LedgerKeyLiquidityPool}
+  alias StellarBase.XDR.{PoolID, LedgerKeyLiquidityPool, Hash}
 
   describe "Ledger LedgerKeyLiquidityPool" do
     setup do
-      pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      pool_id =
+        "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+        |> Hash.new()
+        |> PoolID.new()
 
       %{
         pool_id: pool_id,

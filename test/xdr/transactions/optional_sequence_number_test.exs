@@ -1,11 +1,14 @@
 defmodule StellarBaseXdr.Transactions.OptionalSequenceNumberTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{SequenceNumber, OptionalSequenceNumber}
+  alias StellarBase.XDR.{SequenceNumber, OptionalSequenceNumber, Int64}
 
   describe "OptionalSequenceNumber" do
     setup do
-      sequence_number = SequenceNumber.new(12_345)
+      sequence_number =
+        12_345
+        |> Int64.new()
+        |> SequenceNumber.new()
 
       %{
         sequence_number: sequence_number,

@@ -49,7 +49,7 @@ defmodule StellarBase.XDR.ClawbackOpTest do
         asset: asset,
         from: from,
         amount: amount,
-        clawback: Clawback.new(asset, from, amount),
+        clawback: ClawbackOp.new(asset, from, amount),
         binary:
           <<0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
             149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
@@ -60,7 +60,8 @@ defmodule StellarBase.XDR.ClawbackOpTest do
     end
 
     test "new/1", %{asset: asset, from: from, amount: amount} do
-      %ClawbackOp{asset: ^asset, from: ^from, amount: ^amount} = ClawbackOp.new(asset, from, amount)
+      %ClawbackOp{asset: ^asset, from: ^from, amount: ^amount} =
+        ClawbackOp.new(asset, from, amount)
     end
 
     test "encode_xdr/1", %{clawback: clawback, binary: binary} do

@@ -49,7 +49,7 @@ defmodule StellarBase.XDR.BeginSponsoringFutureReservesResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%BeginSponsoringFutureReservesResult{
-        value: %BeginSponsoringFutureReservesResultCode{
+         value: %BeginSponsoringFutureReservesResultCode{
            identifier: :BEGIN_SPONSORING_FUTURE_RESERVES_ALREADY_SPONSORED
          }
        }, ""} = BeginSponsoringFutureReservesResult.decode_xdr!(<<255, 255, 255, 254>>)

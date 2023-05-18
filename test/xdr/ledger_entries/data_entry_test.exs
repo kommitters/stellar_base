@@ -8,8 +8,9 @@ defmodule StellarBase.XDR.DataEntryTest do
     String64,
     Uint256,
     DataValue,
-    Ext,
-    DataEntry
+    DataEntryExt,
+    DataEntry,
+    Void
   }
 
   alias StellarBase.StrKey
@@ -29,7 +30,7 @@ defmodule StellarBase.XDR.DataEntryTest do
 
       data_value = DataValue.new("GCIZ3GSM5")
 
-      ext = Ext.new()
+      ext = DataEntryExt.new(Void.new(), 0)
 
       %{
         account_id: account_id,

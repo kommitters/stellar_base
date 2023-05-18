@@ -20,7 +20,7 @@ defmodule StellarBase.XDR.Preconditions do
   @arms [
     PRECOND_NONE: Void,
     PRECOND_TIME: TimeBounds,
-    PRECONDV2: PreconditionsV2
+    PRECOND_V2: PreconditionsV2
   ]
 
   @type value ::

@@ -1,18 +1,18 @@
 defmodule StellarBase.XDR.TimePointTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.TimePoint
+  alias StellarBase.XDR.{TimePoint, Uint64}
 
   describe "TimePoint" do
     setup do
       %{
-        time_point: TimePoint.new(1234),
+        time_point: TimePoint.new(Uint64.new(1234)),
         binary: <<0, 0, 0, 0, 0, 0, 4, 210>>
       }
     end
 
     test "new/1" do
-      %TimePoint{time_point: 1234} = TimePoint.new(1234)
+      %TimePoint{time_point: 1234} = TimePoint.new(Uint64.new(1234))
     end
 
     test "encode_xdr/1", %{time_point: time_point, binary: binary} do
@@ -22,6 +22,7 @@ defmodule StellarBase.XDR.TimePointTest do
     test "encode_xdr/1 a non-integer value" do
       {:error, :not_integer} =
         "hello"
+        |> Uint64.new()
         |> TimePoint.new()
         |> TimePoint.encode_xdr()
     end

@@ -47,7 +47,7 @@ defmodule StellarBase.XDR.AssetTest do
     end
 
     test "new/1", %{alpha_num4: alpha_num4, asset_type: asset_type} do
-      %Asset{asset: ^alpha_num4, type: ^asset_type} = Asset.new(alpha_num4, asset_type)
+      %Asset{value: ^alpha_num4, type: ^asset_type} = Asset.new(alpha_num4, asset_type)
     end
 
     test "encode_xdr/1", %{asset: asset, binary: binary} do
@@ -104,7 +104,7 @@ defmodule StellarBase.XDR.AssetTest do
     end
 
     test "new/1", %{alpha_num12: alpha_num12, asset_type: asset_type} do
-      %Asset{asset: ^alpha_num12, type: ^asset_type} = Asset.new(alpha_num12, asset_type)
+      %Asset{value: ^alpha_num12, type: ^asset_type} = Asset.new(alpha_num12, asset_type)
     end
 
     test "encode_xdr/1", %{asset: asset, binary: binary} do

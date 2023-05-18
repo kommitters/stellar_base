@@ -8,7 +8,7 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOpTest do
     AssetCode4,
     AssetType,
     Claimant,
-    Claimants,
+    ClaimantList10,
     ClaimantType,
     ClaimantV0,
     ClaimPredicateType,
@@ -55,7 +55,7 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOpTest do
           :CLAIM_PREDICATE_BEFORE_ABSOLUTE_TIME
         )
 
-      claimants = Claimants.new([claimant1, claimant2])
+      claimants = ClaimantList10.new([claimant1, claimant2])
 
       %{
         asset: asset,

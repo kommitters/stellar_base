@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.LedgerKeyListTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    Account,
+    LedgerKeyAccount,
     AccountID,
     LedgerEntryType,
     LedgerKey,
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.LedgerKeyListTest do
         |> AccountID.new()
 
       type = LedgerEntryType.new(:ACCOUNT)
-      ledger_key_data = Account.new(account_id)
+      ledger_key_data = LedgerKeyAccount.new(account_id)
 
       ledger_keys = [LedgerKey.new(ledger_key_data, type)]
 

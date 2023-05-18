@@ -17,22 +17,22 @@ defmodule StellarBase.XDR.InnerTransactionResultResult do
   }
 
   @arms [
-    TX_SUCCESS: OperationResultList,
-    TX_FAILED: OperationResultList,
-    TX_TOO_EARLY: Void,
-    TX_TOO_LATE: Void,
-    TX_MISSING_OPERATION: Void,
-    TX_BAD_SEQ: Void,
-    TX_BAD_AUTH: Void,
-    TX_INSUFFICIENT_BALANCE: Void,
-    TX_NO_ACCOUNT: Void,
-    TX_INSUFFICIENT_FEE: Void,
-    TX_BAD_AUTH_EXTRA: Void,
-    TX_INTERNAL_ERROR: Void,
-    TX_NOT_SUPPORTED: Void,
-    TX_BAD_SPONSORSHIP: Void,
-    TX_BAD_MIN_SEQ_AGE_OR_GAP: Void,
-    TX_MALFORMED: Void
+    txSUCCESS: OperationResultList,
+    txFAILED: OperationResultList,
+    txTOO_EARLY: Void,
+    txTOO_LATE: Void,
+    txMISSING_OPERATION: Void,
+    txBAD_SEQ: Void,
+    txBAD_AUTH: Void,
+    txINSUFFICIENT_BALANCE: Void,
+    txNO_ACCOUNT: Void,
+    txINSUFFICIENT_FEE: Void,
+    txBAD_AUTH_EXTRA: Void,
+    txINTERNAL_ERROR: Void,
+    txNOT_SUPPORTED: Void,
+    txBAD_SPONSORSHIP: Void,
+    txBAD_MIN_SEQ_AGE_OR_GAP: Void,
+    txMALFORMED: Void
   ]
 
   @type value ::

@@ -16,7 +16,7 @@ defmodule StellarBase.XDR.OperationList100Test do
     Uint256
   }
 
-  alias StellarBase.XDR.CreateAccount
+  alias StellarBase.XDR.CreateAccountOp
 
   describe "OperationList100" do
     setup do
@@ -40,10 +40,10 @@ defmodule StellarBase.XDR.OperationList100Test do
 
       operation_body =
         destination
-        |> CreateAccount.new(starting_balance)
+        |> CreateAccountOp.new(starting_balance)
         |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
 
-      operation = Operation.new(operation_body, source_account)
+      operation = Operation.new(source_account, operation_body)
 
       %{
         operations_list: [operation],

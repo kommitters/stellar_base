@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.ContractCodeEntryTest do
         ext: ext,
         hash: hash,
         code: code,
-        contract_code_entry: ContractCodeEntry.new(hash, code, ext),
+        contract_code_entry: ContractCodeEntry.new(ext, hash, code),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 9, 71, 67, 73, 90, 51, 71, 83,
@@ -36,7 +36,7 @@ defmodule StellarBase.XDR.ContractCodeEntryTest do
         hash: ^hash,
         code: ^code,
         ext: ^ext
-      } = ContractCodeEntry.new(hash, code, ext)
+      } = ContractCodeEntry.new(ext, hash, code)
     end
 
     test "encode_xdr/1", %{contract_code_entry: contract_code_entry, binary: binary} do

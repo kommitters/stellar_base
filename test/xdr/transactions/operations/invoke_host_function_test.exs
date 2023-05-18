@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
     LedgerEntryType,
     Uint256,
     PublicKey,
-    Account,
+    LedgerKeyAccount,
     LedgerKey,
     LedgerKeyList,
     ContractAuthList,
@@ -63,7 +63,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
         |> AccountID.new()
 
       type = LedgerEntryType.new(:ACCOUNT)
-      ledger_key_data = Account.new(account_id)
+      ledger_key_data = LedgerKeyAccount.new(account_id)
 
       ledger_keys = [LedgerKey.new(ledger_key_data, type)]
 

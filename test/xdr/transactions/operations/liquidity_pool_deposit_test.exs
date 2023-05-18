@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.LiquidityPoolDepositOpTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{Int32, Int64, PoolID, Price}
+  alias StellarBase.XDR.{Int32, Int64, PoolID, Price, Hash}
   alias StellarBase.XDR.LiquidityPoolDepositOp
 
   describe "LiquidityPoolDepositOp Operation" do
     setup do
-      pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      pool_id = PoolID.new(Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"))
       max_amount_a = Int64.new(1_000_000)
       max_amount_b = Int64.new(5_000_000)
       min_price = Price.new(Int32.new(10), Int32.new(100))

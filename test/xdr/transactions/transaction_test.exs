@@ -4,12 +4,12 @@ defmodule StellarBase.XDR.TransactionTest do
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{
-    Ext,
+    TransactionExt,
     Int64,
     Memo,
     MemoType,
     Operation,
-    Operations,
+    OperationList100,
     OptionalMuxedAccount,
     Preconditions,
     PreconditionType,
@@ -18,7 +18,8 @@ defmodule StellarBase.XDR.TransactionTest do
     TimePoint,
     Transaction,
     Uint32,
-    Uint64
+    Uint64,
+    Void
   }
 
   alias StellarBase.XDR.Transaction
@@ -31,11 +32,11 @@ defmodule StellarBase.XDR.TransactionTest do
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
       fee = Uint32.new(100)
-      seq_num = SequenceNumber.new(12_345_678)
+      seq_num = SequenceNumber.new(Int64.new(12_345_678))
 
       # preconditions
-      min_time = TimePoint.new(123)
-      max_time = TimePoint.new(321)
+      min_time = TimePoint.new(Uint64.new(123))
+      max_time = TimePoint.new(Uint64.new(321))
 
       preconditions =
         min_time
@@ -50,7 +51,7 @@ defmodule StellarBase.XDR.TransactionTest do
       # operations
       operations = build_operations()
 
-      ext = Ext.new()
+      ext = TransactionExt.new(Void.new(), 0)
 
       %{
         source_account: source_account,
@@ -129,7 +130,7 @@ defmodule StellarBase.XDR.TransactionTest do
     end
   end
 
-  @spec build_operations() :: Operations.t()
+  @spec build_operations() :: OperationList100.t()
   defp build_operations do
     source_account =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -154,7 +155,7 @@ defmodule StellarBase.XDR.TransactionTest do
     clawback_operation = clawback_op_body(asset2, destination, Int64.new(1_000_000_000))
 
     [payment_operation, clawback_operation]
-    |> Enum.map(fn op -> Operation.new(op, source_account) end)
-    |> Operations.new()
+    |> Enum.map(fn op -> Operation.new(source_account, op) end)
+    |> OperationList100.new()
   end
 end

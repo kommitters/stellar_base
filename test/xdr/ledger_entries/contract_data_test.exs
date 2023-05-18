@@ -19,7 +19,8 @@ defmodule StellarBase.XDR.LedgerKeyContractDataTest do
     end
 
     test "new/1", %{contract_id: contract_id, key: key} do
-      %LedgerKeyContractData{contract_id: ^contract_id, key: ^key} = LedgerKeyContractData.new(contract_id, key)
+      %LedgerKeyContractData{contract_id: ^contract_id, key: ^key} =
+        LedgerKeyContractData.new(contract_id, key)
     end
 
     test "encode_xdr/1", %{contract_data_entry: contract_data_entry, binary: binary} do

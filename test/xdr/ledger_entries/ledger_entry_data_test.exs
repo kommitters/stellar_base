@@ -65,7 +65,10 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       |> Signer.new(signer_weight)
 
     balance = Int64.new(5)
-    seq_num = SequenceNumber.new(12_345_678)
+    seq_num =
+      12_345_678
+      |> Int64.new()
+      |> SequenceNumber.new()
     num_sub_entries = Uint32.new(5)
     flags = Uint32.new(5)
     home_domain = String32.new("kommit.co")

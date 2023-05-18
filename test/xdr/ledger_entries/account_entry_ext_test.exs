@@ -15,6 +15,7 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
     SponsorshipDescriptorList20,
     SponsorshipDescriptor,
     Int64,
+    Uint64,
     Liabilities,
     TimePoint,
     Uint32,
@@ -32,7 +33,7 @@ defmodule StellarBase.XDR.AccountEntryExtTest do
 
       extension_point = ExtensionPoint.new(Void.new(), 0)
       seq_ledger = Uint32.new(10)
-      seq_time = TimePoint.new(12_345)
+      seq_time = TimePoint.new(Uint64.new(12_345))
 
       account_entry_extension_v2_ext_list =
         [

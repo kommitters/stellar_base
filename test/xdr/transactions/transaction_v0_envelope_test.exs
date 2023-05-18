@@ -4,14 +4,14 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{
-    Ext,
+    TransactionV0Ext,
     Int64,
     Memo,
     MemoType,
     OptionalTimeBounds,
     OptionalMuxedAccount,
     Operation,
-    Operations,
+    OperationList100,
     SequenceNumber,
     TimeBounds,
     TimePoint,
@@ -19,7 +19,8 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     TransactionV0Envelope,
     Uint32,
     Uint64,
-    Uint256
+    Uint256,
+    Void
   }
 
   alias StellarBase.StrKey
@@ -100,11 +101,11 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
       |> Uint256.new()
 
     fee = Uint32.new(100)
-    seq_num = SequenceNumber.new(12_345_678)
+    seq_num = SequenceNumber.new(Int64.new(12_345_678))
 
     # time bounds
-    min_time = TimePoint.new(123)
-    max_time = TimePoint.new(321)
+    min_time = TimePoint.new(Uint64.new(123))
+    max_time = TimePoint.new(Uint64.new(321))
     time_bounds = TimeBounds.new(min_time, max_time)
     op_time_bounds = OptionalTimeBounds.new(time_bounds)
 
@@ -116,7 +117,7 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     # operations
     operations = build_operations()
 
-    ext = Ext.new()
+    ext = TransactionV0Ext.new(Void.new(), 0)
 
     TransactionV0.new(
       source_account_ed25519,
@@ -129,7 +130,7 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     )
   end
 
-  @spec build_operations() :: Operations.t()
+  @spec build_operations() :: OperationList100.t()
   defp build_operations do
     source_account =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -148,7 +149,7 @@ defmodule StellarBase.XDR.TransactionV0EnvelopeTest do
     clawback_operation = clawback_op_body(asset, destination, Int64.new(1_000_000_000))
 
     [payment_operation, clawback_operation]
-    |> Enum.map(fn op -> Operation.new(op, source_account) end)
-    |> Operations.new()
+    |> Enum.map(fn op -> Operation.new(source_account, op) end)
+    |> OperationList100.new()
   end
 end

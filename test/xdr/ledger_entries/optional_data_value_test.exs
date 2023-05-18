@@ -16,7 +16,8 @@ defmodule StellarBase.XDR.OptionalDataValueTest do
     end
 
     test "new/1", %{optional_data_value: optional_data_value} do
-      %OptionalDataValue{data_value: ^optional_data_value} = OptionalDataValue.new(optional_data_value)
+      %OptionalDataValue{data_value: ^optional_data_value} =
+        OptionalDataValue.new(optional_data_value)
     end
 
     test "new/1 no DataValue opted" do
@@ -44,7 +45,8 @@ defmodule StellarBase.XDR.OptionalDataValueTest do
     end
 
     test "decode_xdr/2 when DataValue is not opted" do
-      {:ok, {%OptionalDataValue{data_value: nil}, ""}} = OptionalDataValue.decode_xdr(<<0, 0, 0, 0>>)
+      {:ok, {%OptionalDataValue{data_value: nil}, ""}} =
+        OptionalDataValue.decode_xdr(<<0, 0, 0, 0>>)
     end
 
     test "decode_xdr!/2", %{optional_data_value: optional_data_value, binary: binary} do

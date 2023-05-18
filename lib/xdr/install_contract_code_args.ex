@@ -11,14 +11,14 @@ defmodule StellarBase.XDR.InstallContractCodeArgs do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    VariableOpaque
+    VariableOpaque256000
   }
 
   @struct_spec XDR.Struct.new(
-    code: VariableOpaque
+    code: VariableOpaque256000
   )
 
-  @type type_code :: VariableOpaque.t()
+  @type type_code :: VariableOpaque256000.t()
 
   @type t :: %__MODULE__{code: type_code()}
 
@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.InstallContractCodeArgs do
 
   @spec new(code :: type_code()) :: t()
   def new(
-    %VariableOpaque{} = code
+    %VariableOpaque256000{} = code
   ),
   do: %__MODULE__{code: code}
 

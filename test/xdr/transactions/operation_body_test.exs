@@ -11,7 +11,7 @@ defmodule StellarBase.XDR.OperationBodyTest do
     Uint256
   }
 
-  alias StellarBase.XDR.CreateAccount
+  alias StellarBase.XDR.CreateAccountOp
 
   describe "OperationBody" do
     setup do
@@ -30,7 +30,7 @@ defmodule StellarBase.XDR.OperationBodyTest do
 
       operation_type = OperationType.new(:CREATE_ACCOUNT)
 
-      create_account_op = CreateAccount.new(destination, starting_balance)
+      create_account_op = CreateAccountOp.new(destination, starting_balance)
 
       operation_body = OperationBody.new(create_account_op, operation_type)
 

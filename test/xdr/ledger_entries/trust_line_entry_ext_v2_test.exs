@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.TrustLineEntryExtensionV2Test do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{Int32, Ext, TrustLineEntryExtensionV2}
+  alias StellarBase.XDR.{Int32, TrustLineEntryExtensionV2Ext, TrustLineEntryExtensionV2, Void, Int}
 
   describe "TrustLineEntryExtensionV2" do
     setup do
       liquidity_pool_use_count = Int32.new(10)
-      ext = Ext.new()
+      ext = TrustLineEntryExtensionV2Ext.new(Void.new(), 0)
 
       %{
         liquidity_pool_use_count: liquidity_pool_use_count,

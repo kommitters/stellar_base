@@ -1,18 +1,18 @@
 defmodule StellarBase.XDR.DurationTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.Duration
+  alias StellarBase.XDR.{Duration, Uint64}
 
   describe "Duration" do
     setup do
       %{
-        duration: Duration.new(1234),
+        duration: Duration.new(Uint64.new(1234)),
         binary: <<0, 0, 0, 0, 0, 0, 4, 210>>
       }
     end
 
     test "new/1" do
-      %Duration{duration: 1234} = Duration.new(1234)
+      %Duration{duration: 1234} = Duration.new(Uint64.new(1234))
     end
 
     test "encode_xdr/1", %{duration: duration, binary: binary} do
@@ -22,6 +22,7 @@ defmodule StellarBase.XDR.DurationTest do
     test "encode_xdr/1 a non-integer value" do
       {:error, :not_integer} =
         "hello"
+        |> Uint64.new()
         |> Duration.new()
         |> Duration.encode_xdr()
     end

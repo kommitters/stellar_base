@@ -17,8 +17,8 @@ defmodule StellarBase.XDR.PeerAddressIp do
   }
 
   @arms [
-    I_PV4: Opaque4,
-    I_PV6: Opaque16
+    IPv4: Opaque4,
+    IPv6: Opaque16
   ]
 
   @type value ::

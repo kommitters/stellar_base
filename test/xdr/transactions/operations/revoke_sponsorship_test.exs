@@ -5,7 +5,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpTest do
     AccountID,
     LedgerEntryType,
     LedgerKey,
-    RevokeSponsorshipOpType,
+    RevokeSponsorshipType,
     PublicKey,
     PublicKeyType,
     SignerKey,
@@ -13,7 +13,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpTest do
     Uint256
   }
 
-  alias StellarBase.XDR.{Account, RevokeSponsorshipOpSigner}
+  alias StellarBase.XDR.{LedgerKeyAccount, RevokeSponsorshipOpSigner}
   alias StellarBase.XDR.RevokeSponsorshipOp
   alias StellarBase.StrKey
 
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpTest do
 
   describe "LedgerKey RevokeSponsorshipOp" do
     setup %{account_id: account_id} do
-      sponsorship_type = RevokeSponsorshipOpType.new(:REVOKE_SPONSORSHIP_LEDGER_ENTRY)
+      sponsorship_type = RevokeSponsorshipType.new(:REVOKE_SPONSORSHIP_LEDGER_ENTRY)
 
       ledger_key =
         account_id
-        |> Account.new()
+        |> LedgerKeyAccount.new()
         |> LedgerKey.new(LedgerEntryType.new(:ACCOUNT))
 
       %{
@@ -80,7 +80,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpTest do
                    "The key which you try to encode doesn't belong to the current declarations",
                    fn ->
                      ledger_key
-                     |> RevokeSponsorshipOp.new(RevokeSponsorshipOpType.new(:TEST))
+                     |> RevokeSponsorshipOp.new(RevokeSponsorshipType.new(:TEST))
                      |> RevokeSponsorshipOp.encode_xdr()
                    end
     end
@@ -88,7 +88,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpTest do
 
   describe "Signer RevokeSponsorshipOp" do
     setup %{account_id: account_id} do
-      sponsorship_type = RevokeSponsorshipOpType.new(:REVOKE_SPONSORSHIP_SIGNER)
+      sponsorship_type = RevokeSponsorshipType.new(:REVOKE_SPONSORSHIP_SIGNER)
       signer_key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_ED25519)
 
       signer_key =

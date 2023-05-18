@@ -16,15 +16,17 @@ defmodule StellarBase.XDR.PreconditionsV2Test do
     TimePoint,
     TimeBounds,
     SequenceNumber,
-    LedgerBounds
+    LedgerBounds,
+    Uint64,
+    Int64
   }
 
   describe "PreconditionsV2" do
     setup do
       key_type = SignerKeyType.new(:SIGNER_KEY_TYPE_PRE_AUTH_TX)
 
-      min_time = TimePoint.new(123)
-      max_time = TimePoint.new(321)
+      min_time = TimePoint.new(Uint64.new(123))
+      max_time = TimePoint.new(Uint64.new(321))
       min_ledger = Uint32.new(123)
       max_ledger = Uint32.new(321)
 
@@ -52,10 +54,11 @@ defmodule StellarBase.XDR.PreconditionsV2Test do
 
       min_seq_num =
         1234
+        |> Int64.new()
         |> SequenceNumber.new()
         |> OptionalSequenceNumber.new()
 
-      min_seq_age = Duration.new(1234)
+      min_seq_age = Duration.new(Uint64.new(1234))
       min_seq_ledger_gap = Uint32.new(4_294_967_295)
       extra_signers = SignerKeyList2.new(signer_keys)
 

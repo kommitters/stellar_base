@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.ContractIDTest do
     AssetCode4,
     AlphaNum4,
     Signature,
-    FromEd25519PublicKey,
+    ContractIDFromEd25519PublicKey,
     PublicKeyType
   }
 
@@ -36,7 +36,7 @@ defmodule StellarBase.XDR.ContractIDTest do
 
       asset = Asset.new(alpha_num4, asset_type)
 
-      ## FromEd25519PublicKey
+      ## ContractIDFromEd25519PublicKey
       key =
         "GCVILYTXYXYHZIBYEF4BSLATAP3CPZMW23NE6DUL7I6LCCDUNFBQFAVR"
         |> StrKey.decode!(:ed25519_public_key)
@@ -50,7 +50,7 @@ defmodule StellarBase.XDR.ContractIDTest do
             108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
         )
 
-      from_ed25519_public_key = FromEd25519PublicKey.new(key, signature, salt)
+      from_ed25519_public_key = ContractIDFromEd25519PublicKey.new(key, signature, salt)
 
       ## Uint256
       salt_case =

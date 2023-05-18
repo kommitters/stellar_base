@@ -34,7 +34,8 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseV0List50Test do
     end
 
     test "new/1", %{sc_spec_udt_union_case_v0s: sc_spec_udt_union_case_v0s} do
-      %SCSpecUDTUnionCaseV0List50{items: ^sc_spec_udt_union_case_v0s} = SCSpecUDTUnionCaseV0List50.new(sc_spec_udt_union_case_v0s)
+      %SCSpecUDTUnionCaseV0List50{items: ^sc_spec_udt_union_case_v0s} =
+        SCSpecUDTUnionCaseV0List50.new(sc_spec_udt_union_case_v0s)
     end
 
     test "encode_xdr/1", %{

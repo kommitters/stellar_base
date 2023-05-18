@@ -100,12 +100,12 @@ defmodule StellarBase.XDR.SCValTest do
         },
         %{
           val_type: SCValType.new(:SCV_TIMEPOINT),
-          value: TimePoint.new(1234),
+          value: TimePoint.new(Uint64.new(1234)),
           binary: <<0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 4, 210>>
         },
         %{
           val_type: SCValType.new(:SCV_DURATION),
-          value: Duration.new(1234),
+          value: Duration.new(Uint64.new(1234)),
           binary: <<0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 4, 210>>
         },
         %{

@@ -48,7 +48,7 @@ defmodule StellarBase.XDR.AccountMergeResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%AccountMergeResult{
-        value: %AccountMergeResultCode{identifier: :ACCOUNT_MERGE_NO_ACCOUNT}
+         value: %AccountMergeResultCode{identifier: :ACCOUNT_MERGE_NO_ACCOUNT}
        }, ""} = AccountMergeResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

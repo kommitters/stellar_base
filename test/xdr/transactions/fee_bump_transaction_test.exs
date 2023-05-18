@@ -5,14 +5,14 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
 
   alias StellarBase.XDR.{
     EnvelopeType,
-    Ext,
+    FeeBumpTransactionExt,
     FeeBumpInnerTx,
     FeeBumpTransaction,
     Int64,
     Memo,
     MemoType,
     Operation,
-    Operations,
+    OperationList100,
     OptionalMuxedAccount,
     Preconditions,
     PreconditionType,
@@ -22,7 +22,8 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
     Transaction,
     TransactionV1Envelope,
     Uint32,
-    Uint64
+    Uint64,
+    Void
   }
 
   describe "FeeBumpInnerTx" do
@@ -32,7 +33,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
 
       fee = Int64.new(100_000)
       inner_tx = build_fee_bump_inner_tx()
-      ext = Ext.new()
+      ext = FeeBumpTransactionExt.new(Void.new(), 0)
 
       %{
         fee_source: fee_source,
@@ -134,7 +135,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
     # operations
     operations = build_operations()
 
-    ext = Ext.new()
+    ext = TransactionExt.new(Void.new(), 0)
 
     Transaction.new(
       source_account,
@@ -147,7 +148,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
     )
   end
 
-  @spec build_operations() :: Operations.t()
+  @spec build_operations() :: OperationList100.t()
   defp build_operations do
     source_account =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
@@ -167,6 +168,6 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
 
     [payment_operation, clawback_operation]
     |> Enum.map(fn op -> Operation.new(op, source_account) end)
-    |> Operations.new()
+    |> OperationList100.new()
   end
 end

@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOpTest do
     AlphaNum4,
     AlphaNum12,
     Asset,
-    Assets,
+    AssetList5,
     AssetCode4,
     AssetCode12,
     AssetType,
@@ -61,7 +61,7 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOpTest do
       path =
         Void.new()
         |> Asset.new(AssetType.new(:ASSET_TYPE_NATIVE))
-        |> (&Assets.new([&1])).()
+        |> (&AssetList5.new([&1])).()
 
       payment_strict =
         PathPaymentStrictReceiveOp.new(

@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.OperationResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    OperationInnerResult,
+    OperationBody,
     OperationResult,
     OperationResultCode,
     OperationType,
@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.OperationResultTest do
       result =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationInnerResult.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
 
       %{
         code: code,

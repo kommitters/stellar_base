@@ -14,7 +14,7 @@ defmodule StellarBase.XDR.PathPaymentStrictSendResultTest do
   alias StellarBase.XDR.{
     PathPaymentStrictSendResult,
     PathPaymentStrictSendResultCode,
-    PathPaymentStrictResultSuccess,
+    PathPaymentStrictSendResultSuccess,
     SimplePaymentResult
   }
 
@@ -61,7 +61,7 @@ defmodule StellarBase.XDR.PathPaymentStrictSendResultTest do
 
       code = PathPaymentStrictSendResultCode.new(:PATH_PAYMENT_STRICT_SEND_SUCCESS)
 
-      path_payment_success = PathPaymentStrictResultSuccess.new(offers, last_payment)
+      path_payment_success = PathPaymentStrictSendResultSuccess.new(offers, last_payment)
 
       %{
         code: code,

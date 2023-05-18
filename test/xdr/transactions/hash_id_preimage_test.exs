@@ -6,9 +6,9 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
   alias StellarBase.XDR.{
     EnvelopeType,
     HashIDPreimage,
-    OperationID,
+    HashIDPreimageOperationID,
     PoolID,
-    RevokeID,
+    HashIDPreimageRevokeID,
     SequenceNumber,
     Uint32
   }
@@ -26,10 +26,10 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
      }}
   end
 
-  describe "OperationID" do
+  describe "HashIDPreimageOperationID" do
     setup %{account_id: account_id, seq_number: seq_number, op_num: op_num} do
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_OP_ID)
-      operation_id = OperationID.new(account_id, seq_number, op_num)
+      operation_id = HashIDPreimageOperationID.new(account_id, seq_number, op_num)
 
       %{
         envelope_type: envelope_type,
@@ -68,7 +68,7 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
     end
   end
 
-  describe "RevokeID" do
+  describe "HashIDPreimageRevokeID" do
     setup %{account_id: account_id, seq_number: seq_number, op_num: op_num} do
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_POOL_REVOKE_OP_ID)
       liquidity_pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
@@ -79,7 +79,7 @@ defmodule StellarBase.XDR.HashIDPreimageTest do
           issuer: "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         )
 
-      revoke_id = RevokeID.new(account_id, seq_number, op_num, liquidity_pool_id, asset)
+      revoke_id = HashIDPreimageRevokeID.new(account_id, seq_number, op_num, liquidity_pool_id, asset)
 
       %{
         envelope_type: envelope_type,

@@ -20,7 +20,8 @@ defmodule StellarBase.XDR.LedgerKeyClaimableBalanceTest do
     end
 
     test "new/1", %{balance_id: balance_id} do
-      %LedgerKeyClaimableBalance{balance_id: ^balance_id} = LedgerKeyClaimableBalance.new(balance_id)
+      %LedgerKeyClaimableBalance{balance_id: ^balance_id} =
+        LedgerKeyClaimableBalance.new(balance_id)
     end
 
     test "encode_xdr/1", %{claimable_balance: claimable_balance, binary: binary} do

@@ -2,12 +2,12 @@ defmodule StellarBase.XDR.TransactionResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    Ext,
+    TransactionResultExt,
     Hash,
     InnerTransactionResult,
     InnerTransactionResultPair,
     Int64,
-    OperationInnerResult,
+    OperationResultTr,
     OperationResult,
     OperationResultCode,
     OperationResultList,
@@ -28,12 +28,12 @@ defmodule StellarBase.XDR.TransactionResultTest do
       result =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationInnerResult.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(OperationResultCode.new(:opINNER))
         |> (&OperationResultList.new([&1])).()
         |> TxResultV0.new(TransactionResultCode.new(:txSUCCESS))
 
-      inner_tx_result = InnerTransactionResult.new(Int64.new(100), result, Ext.new())
+      inner_tx_result = InnerTransactionResult.new(Int64.new(100), result, TransactionResultExt.new(Void.new(), 0))
 
       tx_result =
         "c61305a67fff6a82dbc6eebf1eb56a42"
@@ -41,7 +41,7 @@ defmodule StellarBase.XDR.TransactionResultTest do
         |> InnerTransactionResultPair.new(inner_tx_result)
         |> TxResult.new(TransactionResultCode.new(:txFEE_BUMP_INNER_SUCCESS))
 
-      ext = Ext.new()
+      ext = TransactionResultExt.new(Void.new(), 0)
 
       %{
         fee_charged: fee_charged,

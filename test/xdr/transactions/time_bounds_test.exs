@@ -1,12 +1,12 @@
 defmodule StellarBase.XDR.TimeBoundsTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{TimePoint, TimeBounds}
+  alias StellarBase.XDR.{TimePoint, TimeBounds, Uint64}
 
   describe "TimeBounds" do
     setup do
-      min_time = TimePoint.new(123)
-      max_time = TimePoint.new(321)
+      min_time = TimePoint.new(Uint64.new(123))
+      max_time = TimePoint.new(Uint64.new(321))
 
       %{
         min_time: min_time,

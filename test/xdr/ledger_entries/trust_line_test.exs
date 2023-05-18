@@ -56,7 +56,8 @@ defmodule StellarBase.XDR.LedgerKeyTrustLineTest do
     end
 
     test "new/1", %{account_id: account_id, asset: asset} do
-      %LedgerKeyTrustLine{account_id: ^account_id, asset: ^asset} = LedgerKeyTrustLine.new(account_id, asset)
+      %LedgerKeyTrustLine{account_id: ^account_id, asset: ^asset} =
+        LedgerKeyTrustLine.new(account_id, asset)
     end
 
     test "encode_xdr/1", %{account: account, binary: binary} do

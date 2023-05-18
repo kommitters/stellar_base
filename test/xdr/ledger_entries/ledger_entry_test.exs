@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.LedgerEntryTest do
     LedgerEntryExt,
     LedgerEntryData,
     Hash,
-    Ext,
+    LedgerEntryExtensionV1Ext,
     Void
   }
 
@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.LedgerEntryTest do
         |> create_account_id()
         |> OptionalAccountID.new()
 
-      ext = Ext.new()
+      ext = LedgerEntryExtensionV1Ext.new(Void.new(), 0)
       sponsoring_id = SponsorshipDescriptor.new(account_id)
       last_modified_ledger_seq = Uint32.new(5)
 

@@ -19,8 +19,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefList1Test do
     end
 
     test "new/1", %{sc_spec_type_defs: sc_spec_type_defs} do
-      %SCSpecTypeDefList1{items: ^sc_spec_type_defs} =
-        SCSpecTypeDefList1.new(sc_spec_type_defs)
+      %SCSpecTypeDefList1{items: ^sc_spec_type_defs} = SCSpecTypeDefList1.new(sc_spec_type_defs)
     end
 
     test "encode_xdr/1", %{

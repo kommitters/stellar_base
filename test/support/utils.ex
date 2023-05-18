@@ -12,7 +12,7 @@ defmodule StellarBase.Test.Utils do
     AssetType,
     CryptoKeyType,
     DecoratedSignature,
-    DecoratedSignatures,
+    DecoratedSignatureList20,
     MuxedAccount,
     OperationBody,
     OperationType,
@@ -25,7 +25,7 @@ defmodule StellarBase.Test.Utils do
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.{Payment, Clawback}
+  alias StellarBase.XDR.{PaymentOp, ClawbackOp}
 
   @spec ed25519_public_key(pk_key :: binary()) :: Uint256.t()
   def ed25519_public_key(pk_key) do
@@ -88,18 +88,18 @@ defmodule StellarBase.Test.Utils do
           OperationBody.t()
   def clawback_op_body(asset, from, amount) do
     asset
-    |> Clawback.new(from, amount)
+    |> ClawbackOp.new(from, amount)
     |> OperationBody.new(OperationType.new(:CLAWBACK))
   end
 
-  @spec build_decorated_signatures(signatures :: list(binary())) :: DecoratedSignatures.t()
+  @spec build_decorated_signatures(signatures :: list(binary())) :: DecoratedSignatureList20.t()
   def build_decorated_signatures(signatures) do
     signatures
     |> Enum.map(&build_signature/1)
-    |> DecoratedSignatures.new()
+    |> DecoratedSignatureList20.new()
   end
 
-  @spec build_signature(secret_seed :: binary()) :: DecoratedSignatures.t()
+  @spec build_signature(secret_seed :: binary()) :: DecoratedSignatureList20.t()
   def build_signature(<<_hint::binary-size(52), hint::binary-size(4)>> = secret_seed) do
     signature = Signature.new(secret_seed)
 

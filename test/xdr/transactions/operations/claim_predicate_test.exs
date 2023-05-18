@@ -6,7 +6,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
     ClaimPredicateType,
     Int64,
     OptionalClaimPredicate,
-    ClaimPredicates,
+    ClaimPredicateList2,
     Void
   }
 
@@ -60,7 +60,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
       claim_predicate2 = ClaimPredicate.new(predicate2, predicate_type2)
 
       predicate_type = ClaimPredicateType.new(:CLAIM_PREDICATE_AND)
-      predicate = ClaimPredicates.new([claim_predicate1, claim_predicate2])
+      predicate = ClaimPredicateList2.new([claim_predicate1, claim_predicate2])
 
       %{
         predicate: predicate,
@@ -107,7 +107,7 @@ defmodule StellarBase.XDR.ClaimPredicateTest do
       claim_predicate2 = ClaimPredicate.new(predicate2, predicate_type2)
 
       predicate_type = ClaimPredicateType.new(:CLAIM_PREDICATE_OR)
-      predicate = ClaimPredicates.new([claim_predicate1, claim_predicate2])
+      predicate = ClaimPredicateList2.new([claim_predicate1, claim_predicate2])
 
       %{
         predicate: predicate,

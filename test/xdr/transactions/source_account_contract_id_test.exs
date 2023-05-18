@@ -35,7 +35,8 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractIDTest do
         network_id: network_id,
         source_account: source_account,
         salt: salt,
-        source_account_contract_id: HashIDPreimageSourceAccountContractID.new(network_id, source_account, salt),
+        source_account_contract_id:
+          HashIDPreimageSourceAccountContractID.new(network_id, source_account, salt),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27,
@@ -59,7 +60,8 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractIDTest do
     end
 
     test "encode_xdr/1", %{source_account_contract_id: source_account_contract_id, binary: binary} do
-      {:ok, ^binary} = HashIDPreimageSourceAccountContractID.encode_xdr(source_account_contract_id)
+      {:ok, ^binary} =
+        HashIDPreimageSourceAccountContractID.encode_xdr(source_account_contract_id)
     end
 
     test "encode_xdr!/1", %{
@@ -70,7 +72,8 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractIDTest do
     end
 
     test "decode_xdr/2", %{source_account_contract_id: source_account_contract_id, binary: binary} do
-      {:ok, {^source_account_contract_id, ""}} = HashIDPreimageSourceAccountContractID.decode_xdr(binary)
+      {:ok, {^source_account_contract_id, ""}} =
+        HashIDPreimageSourceAccountContractID.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
@@ -81,7 +84,8 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractIDTest do
       source_account_contract_id: source_account_contract_id,
       binary: binary
     } do
-      {^source_account_contract_id, ""} = HashIDPreimageSourceAccountContractID.decode_xdr!(binary)
+      {^source_account_contract_id, ""} =
+        HashIDPreimageSourceAccountContractID.decode_xdr!(binary)
     end
   end
 end
