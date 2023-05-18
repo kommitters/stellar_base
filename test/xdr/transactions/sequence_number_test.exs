@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.SequenceNumberTest do
     end
 
     test "new/1" do
-      %SequenceNumber{sequence_number: 1234} =
+      %SequenceNumber{sequence_number: %Int64{datum: 1234}} =
         1234
         |> Int64.new()
         |> SequenceNumber.new()

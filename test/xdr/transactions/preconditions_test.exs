@@ -115,7 +115,10 @@ defmodule StellarBase.XDR.PreconditionsTest do
         |> SequenceNumber.new()
         |> OptionalSequenceNumber.new()
 
-      min_seq_age = Duration.new(1234)
+      min_seq_age =
+        1234
+        |> Uint64.new()
+        |> Duration.new()
       min_seq_ledger_gap = Uint32.new(4_294_967_295)
       extra_signers = SignerKeyList2.new(signer_keys)
 

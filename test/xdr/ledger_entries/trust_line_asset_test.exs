@@ -8,6 +8,7 @@ defmodule StellarBase.XDR.TrustLineAssetTest do
     AssetCode4,
     AssetCode12,
     AssetType,
+    Hash,
     PoolID,
     PublicKey,
     PublicKeyType,

@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.LiquidityPoolEntryTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    ConstantProduct,
+    LiquidityPoolEntryConstantProduct,
     LiquidityPoolEntry,
     LiquidityPoolEntryBody,
     LiquidityPoolConstantProductParameters,
@@ -50,7 +50,7 @@ defmodule StellarBase.XDR.LiquidityPoolEntryTest do
       params = LiquidityPoolConstantProductParameters.new(asset_a, asset_b, fee)
 
       entry =
-        ConstantProduct.new(
+        LiquidityPoolEntryConstantProduct.new(
           params,
           reserve_a,
           reserve_b,

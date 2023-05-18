@@ -3,14 +3,17 @@ defmodule StellarBase.XDR.HashIDPreimageOperationIDTest do
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{HashIDPreimageOperationID, SequenceNumber, Uint32}
+  alias StellarBase.XDR.{HashIDPreimageOperationID, SequenceNumber, Uint32, Int64}
 
   describe "HashIDPreimageOperationID" do
     setup do
       source_account =
         create_account_id("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
-      seq_number = SequenceNumber.new(123_456)
+      seq_number =
+        123_456
+        |> Int64.new()
+        |> SequenceNumber.new()
       op_num = Uint32.new(123_456)
 
       %{

@@ -8,7 +8,7 @@ defmodule StellarBase.XDR.LedgerKeyTrustLineTest do
     AssetType,
     PublicKey,
     PublicKeyType,
-    LedgerKeyTrustLineAsset,
+    LedgerKeyTrustLine,
     Uint256
   }
 
@@ -40,7 +40,7 @@ defmodule StellarBase.XDR.LedgerKeyTrustLineTest do
         "BTCN"
         |> AssetCode4.new()
         |> AlphaNum4.new(issuer)
-        |> LedgerKeyTrustLineAsset.new(asset_type)
+        |> LedgerKeyTrustLine.new(asset_type)
 
       %{
         account_id: account_id,

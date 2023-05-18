@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.TrustLineEntryExtensionV2Test do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{Int32, TrustLineEntryExtensionV2Ext, TrustLineEntryExtensionV2, Void, Int}
+  alias StellarBase.XDR.{Int32, TrustLineEntryExtensionV2Ext, TrustLineEntryExtensionV2, Void}
 
   describe "TrustLineEntryExtensionV2" do
     setup do

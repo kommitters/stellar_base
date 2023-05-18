@@ -90,7 +90,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionOpTest do
           contract_id,
           function_name,
           sc_vec,
-          AuthorizedInvocationList.new()
+          AuthorizedInvocationList.new([])
         )
 
       auth = ContractAuth.new(address_with_nonce, authorized_invocation, sc_vec)

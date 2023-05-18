@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.LiquidityPoolEntryBodyTest do
     Asset,
     AssetCode4,
     AssetType,
-    ConstantProduct,
+    LiquidityPoolEntryConstantProduct,
     Int32,
     Int64,
     LiquidityPoolConstantProductParameters,
@@ -47,7 +47,7 @@ defmodule StellarBase.XDR.LiquidityPoolEntryBodyTest do
     params = LiquidityPoolConstantProductParameters.new(asset_a, asset_b, fee)
 
     entry =
-      ConstantProduct.new(
+      LiquidityPoolEntryConstantProduct.new(
         params,
         reserve_a,
         reserve_b,
