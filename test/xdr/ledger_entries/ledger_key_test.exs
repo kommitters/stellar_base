@@ -6,7 +6,6 @@ defmodule StellarBase.XDR.LedgerKeyTest do
     LedgerKeyContractCode,
     Hash,
     Int64,
-    LedgerKeyAccount,
     LedgerEntryType,
     LedgerKey,
     PublicKey,
@@ -15,7 +14,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
     Uint256
   }
 
-  alias StellarBase.XDR.{Data, Offer}
+  alias StellarBase.XDR.{LedgerKeyAccount, LedgerKeyData, LedgerKeyOffer}
 
   alias StellarBase.StrKey
 
@@ -44,7 +43,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
       },
       %{
         type: LedgerEntryType.new(:OFFER),
-        ledger_key_data: Offer.new(account_id, offer_id),
+        ledger_key_data: LedgerKeyOffer.new(account_id, offer_id),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
             205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,
@@ -52,7 +51,7 @@ defmodule StellarBase.XDR.LedgerKeyTest do
       },
       %{
         type: LedgerEntryType.new(:DATA),
-        ledger_key_data: Data.new(account_id, data_name),
+        ledger_key_data: LedgerKeyData.new(account_id, data_name),
         binary:
           <<0, 0, 0, 3, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
             205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,

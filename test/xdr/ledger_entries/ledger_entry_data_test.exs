@@ -20,7 +20,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     SequenceNumber,
     String32,
     Thresholds,
-    Signers,
+    SignerList20,
     AccountEntryExt,
     AccountEntry,
     TrustLineEntryExt,
@@ -39,7 +39,8 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     SCVal,
     SCValType,
     ContractDataEntry,
-    Ext
+    OfferEntryExt,
+    DataEntryExt
   }
 
   alias StellarBase.StrKey
@@ -73,7 +74,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     flags = Uint32.new(5)
     home_domain = String32.new("kommit.co")
     thresholds = Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
-    signers = Signers.new([signer])
+    signers = SignerList20.new([signer])
     account_entry_ext = AccountEntryExt.new(Void.new(), 0)
 
     ## TrutLineEntry
@@ -109,10 +110,11 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
 
     amount = Int64.new(5_000_000)
     price = Price.new(Int32.new(1), Int32.new(10))
-    ext = Ext.new()
+    offer_entry_ext = OfferEntryExt.new(Void.new(), 0)
 
     ## DataEntry
 
+    data_entry_ext = DataEntryExt.new(Void.new(), 0)
     data_name = String64.new("Test")
     data_value = DataValue.new("GCIZ3GSM5")
 
@@ -125,8 +127,14 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     ## ContractDataEntry
 
     contract_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-    key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
-    val = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
+    key =
+      1
+      |> Int64.new()
+      |> SCVal.new(SCValType.new(:SCV_I64))
+    val =
+      2
+      |> Int64.new()
+      |> SCVal.new(SCValType.new(:SCV_I64))
 
     discriminants = [
       %{
@@ -170,7 +178,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       %{
         type: LedgerEntryType.new(:OFFER),
         ledger_entry_data:
-          OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, flags, ext),
+          OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, flags, offer_entry_ext),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,
@@ -183,7 +191,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       },
       %{
         type: LedgerEntryType.new(:DATA),
-        ledger_entry_data: DataEntry.new(account_id, data_name, data_value, ext),
+        ledger_entry_data: DataEntry.new(account_id, data_name, data_value, data_entry_ext),
         binary:
           <<0, 0, 0, 3, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,

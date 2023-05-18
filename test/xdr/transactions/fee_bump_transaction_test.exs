@@ -174,7 +174,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionTest do
     clawback_operation = clawback_op_body(asset, destination, Int64.new(1_000_000_000))
 
     [payment_operation, clawback_operation]
-    |> Enum.map(fn op -> Operation.new(op, source_account) end)
+    |> Enum.map(fn op -> Operation.new(source_account, op) end)
     |> OperationList100.new()
   end
 end

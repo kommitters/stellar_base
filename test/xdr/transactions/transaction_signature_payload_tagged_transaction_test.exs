@@ -6,6 +6,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
   alias StellarBase.XDR.{
     EnvelopeType,
     TransactionExt,
+    FeeBumpTransactionExt,
     FeeBumpTransactionInnerTx,
     FeeBumpTransaction,
     Int64,
@@ -170,11 +171,13 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
           "SBVNQLIDS7V3NAOYTATT26QL7Y4S6C2X4YN7PN5FIJ6JUAN4UV4YPLUY"
         ])
 
+      fee_bump_transaction_ext = FeeBumpTransactionExt.new(Void.new(), 0)
+
       fee_bump_tx =
         tx
         |> TransactionV1Envelope.new(signatures)
         |> FeeBumpTransactionInnerTx.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
-        |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, ext)).()
+        |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, fee_bump_transaction_ext)).()
 
       %{
         tx: fee_bump_tx,

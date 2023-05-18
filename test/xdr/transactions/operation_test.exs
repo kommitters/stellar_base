@@ -42,7 +42,7 @@ defmodule StellarBase.XDR.OperationTest do
         |> CreateAccountOp.new(starting_balance)
         |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
 
-      operation = Operation.new(operation_body, source_account)
+      operation = Operation.new(source_account, operation_body)
 
       %{
         source_account: source_account,
@@ -59,7 +59,7 @@ defmodule StellarBase.XDR.OperationTest do
 
     test "new/1", %{source_account: source_account, body: operation_body} do
       %Operation{source_account: ^source_account, body: ^operation_body} =
-        Operation.new(operation_body, source_account)
+        Operation.new(source_account, operation_body)
     end
 
     test "encode_xdr/1", %{operation: operation, binary: binary} do

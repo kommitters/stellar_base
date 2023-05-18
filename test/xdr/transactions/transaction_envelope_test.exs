@@ -6,6 +6,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
   alias StellarBase.XDR.{
     EnvelopeType,
     TransactionV0Ext,
+    FeeBumpTransactionExt,
     FeeBumpTransactionInnerTx,
     FeeBumpTransaction,
     FeeBumpTransactionEnvelope,
@@ -23,6 +24,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     TimePoint,
     Transaction,
     TransactionV0,
+    TransactionExt,
     TransactionEnvelope,
     TransactionV0Envelope,
     TransactionV1Envelope,
@@ -58,7 +60,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     operations = build_operations()
 
     # ext
-    ext = TransactionV0Ext.new(Void.new(), 0)
+    ext = TransactionExt.new(Void.new(), 0)
 
     {:ok,
      %{
@@ -78,14 +80,14 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
       seq_num: seq_num,
       time_bounds: time_bounds,
       memo: memo,
-      operations: operations,
-      ext: ext
+      operations: operations
     } do
       source_account_ed25519 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> StrKey.decode!(:ed25519_public_key)
         |> Uint256.new()
 
+      transaction_v0_ext = TransactionV0Ext.new(Void.new(), 0)
       tx =
         TransactionV0.new(
           source_account_ed25519,
@@ -94,7 +96,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
           time_bounds,
           memo,
           operations,
-          ext
+          transaction_v0_ext
         )
 
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_TX_V0)
@@ -283,11 +285,13 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
           "SBVNQLIDS7V3NAOYTATT26QL7Y4S6C2X4YN7PN5FIJ6JUAN4UV4YPLUY"
         ])
 
+      fee_bump_transaction_ext = FeeBumpTransactionExt.new(Void.new(), 0)
+
       tx_envelope =
         tx
         |> TransactionV1Envelope.new(signatures)
         |> FeeBumpTransactionInnerTx.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
-        |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, ext)).()
+        |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, fee_bump_transaction_ext)).()
         |> FeeBumpTransactionEnvelope.new(signatures)
 
       %{

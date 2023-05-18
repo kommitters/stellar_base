@@ -4,7 +4,7 @@ defmodule StellarBase.XDR.AllowTrustOpTest do
   alias StellarBase.XDR.{
     AccountID,
     AlphaNum4,
-    Asset,
+    AssetCode,
     AssetCode4,
     AssetType,
     PublicKey,
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.AllowTrustOpTest do
         "BTCN"
         |> AssetCode4.new()
         |> AlphaNum4.new(issuer)
-        |> Asset.new(AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4))
+        |> AssetCode.new(AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM4))
 
       authorize = Uint32.new(1)
 
