@@ -66,7 +66,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryExtensionV1Ext do
   @spec union_spec() :: XDR.Union.t()
   defp union_spec do
     0
-    |> XDR.Int.new()
+    |> Int.new()
     |> XDR.Union.new(@arms)
   end
 end
