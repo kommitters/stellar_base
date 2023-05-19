@@ -18,6 +18,7 @@ defmodule StellarBase.XDR.LiquidityPoolEntryTest do
     PublicKey,
     PublicKeyType,
     Uint256,
+    Hash,
     Void
   }
 
@@ -60,12 +61,13 @@ defmodule StellarBase.XDR.LiquidityPoolEntryTest do
 
       type = LiquidityPoolType.new(:LIQUIDITY_POOL_CONSTANT_PRODUCT)
       body = LiquidityPoolEntryBody.new(entry, type)
-      liquidity_pool_id = PoolID.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      liquidity_pool_id = PoolID.new(hash)
 
       %{
         body: body,
         liquidity_pool_id: liquidity_pool_id,
-        liquidity_pool_entry: LiquidityPoolEntry.new(body, liquidity_pool_id),
+        liquidity_pool_entry: LiquidityPoolEntry.new(liquidity_pool_id, body),
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 66, 84, 67, 78, 0, 0, 0, 0, 114, 213, 178, 144,
             98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37,
@@ -78,7 +80,7 @@ defmodule StellarBase.XDR.LiquidityPoolEntryTest do
 
     test "new/1", %{body: body, liquidity_pool_id: liquidity_pool_id} do
       %LiquidityPoolEntry{body: ^body, liquidity_pool_id: ^liquidity_pool_id} =
-        LiquidityPoolEntry.new(body, liquidity_pool_id)
+        LiquidityPoolEntry.new(liquidity_pool_id, body)
     end
 
     test "encode_xdr/1", %{liquidity_pool_entry: liquidity_pool_entry, binary: binary} do

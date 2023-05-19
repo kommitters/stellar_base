@@ -22,6 +22,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryTest do
     ClaimPredicate,
     ClaimantType,
     Int64,
+    ClaimantList10,
     ClaimableBalanceEntryExt
   }
 
@@ -62,6 +63,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryTest do
         |> ClaimantV0.new(claim_predicate1)
         |> Claimant.new(claimant_type)
 
+      claimant_list = ClaimantList10.new([claimant])
       asset = Asset.new(Void.new(), AssetType.new(:ASSET_TYPE_NATIVE))
 
       amount = Int64.new(1)
@@ -83,7 +85,7 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryTest do
           |> Enum.map(fn claimable_balance_entry_ext ->
             ClaimableBalanceEntry.new(
               claimable_balance_id,
-              claimant,
+              claimant_list,
               asset,
               amount,
               claimable_balance_entry_ext

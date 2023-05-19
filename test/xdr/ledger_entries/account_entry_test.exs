@@ -60,7 +60,7 @@ defmodule StellarBase.XDR.AccountEntryTest do
       num_sub_entries = Uint32.new(5)
       flags = Uint32.new(5)
       home_domain = String32.new("kommit.co")
-      thresholds = Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
+      thresholds =  Thresholds.new(<<128, 16, 32, 64>>)
       signers = SignerList20.new([signer])
 
       buying = Int64.new(20)
@@ -267,13 +267,11 @@ defmodule StellarBase.XDR.AccountEntryTest do
     sponsorship_descriptor_1 =
       "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
       |> create_account_id()
-      |> OptionalAccountID.new()
       |> SponsorshipDescriptor.new()
 
     sponsorship_descriptor_2 =
       "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
       |> create_account_id()
-      |> OptionalAccountID.new()
       |> SponsorshipDescriptor.new()
 
     SponsorshipDescriptorList20.new([sponsorship_descriptor_1, sponsorship_descriptor_2])

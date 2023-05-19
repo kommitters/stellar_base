@@ -75,7 +75,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     num_sub_entries = Uint32.new(5)
     flags = Uint32.new(5)
     home_domain = String32.new("kommit.co")
-    thresholds = Thresholds.new(master_weight: 128, low: 16, med: 32, high: 64)
+    thresholds = Thresholds.new(<<128, 16, 32, 64>>)
     signers = SignerList20.new([signer])
     account_entry_ext = AccountEntryExt.new(Void.new(), 0)
 
@@ -221,7 +221,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       },
       %{
         type: LedgerEntryType.new(:CONTRACT_CODE),
-        ledger_entry_data: ContractCodeEntry.new(hash, code, extension_point),
+        ledger_entry_data: ContractCodeEntry.new(extension_point, hash, code),
         binary:
           <<0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80,
             54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 9, 71, 67, 73, 90,

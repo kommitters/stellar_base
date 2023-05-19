@@ -15,6 +15,7 @@ defmodule StellarBase.XDR.Opaque12 do
   defstruct [:opaque]
 
   @length 12
+  @length_range 5..@length
 
   @opaque_spec XDR.FixedOpaque.new(nil, @length)
 
@@ -32,9 +33,11 @@ defmodule StellarBase.XDR.Opaque12 do
   end
 
   @impl true
-  def decode_xdr(bytes, spec \\ @opaque_spec)
+  def decode_xdr(bytes, spec \\ @length)
 
   def decode_xdr(bytes, spec) do
+    IO.inspect(opaque_spec(spec), label: "DECODE")
+
     case XDR.FixedOpaque.decode_xdr(bytes, spec) do
       {:ok, {%XDR.FixedOpaque{opaque: opaque}, rest}} -> {:ok, {new(opaque), rest}}
       error -> error
@@ -45,7 +48,31 @@ defmodule StellarBase.XDR.Opaque12 do
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
   def decode_xdr!(bytes, spec) do
-    {%XDR.FixedOpaque{opaque: opaque}, rest} = XDR.FixedOpaque.decode_xdr!(bytes, spec)
+    IO.inspect(opaque_spec(spec), label: "DECODE BANG")
+
+    {%XDR.FixedOpaque{opaque: opaque}, rest} =
+      XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(spec))
+
     {new(opaque), rest}
   end
+
+  @spec opaque_spec(bytes :: binary()) :: XDR.FixedOpaque.t()
+  defp opaque_spec(bytes), do: XDR.FixedOpaque.new(nil, length_from_binary(bytes, 5))
+
+  @spec length_from_binary(bytes :: binary(), acc :: non_neg_integer()) :: non_neg_integer()
+  defp length_from_binary(<<opaque::binary-size(@length), _rest::binary>>, acc)
+       when acc in @length_range do
+    <<_hd::binary-size(acc), rest::binary>> = opaque
+
+    IO.inspect(acc, label: "ACC: ")
+
+    residual_zero_bytes =
+      (@length - acc)
+      |> (&List.duplicate(0, &1)).()
+      |> to_string()
+
+    if residual_zero_bytes == rest, do: acc, else: length_from_binary(opaque, acc + 1)
+  end
+
+  defp length_from_binary(_bytes, _acc), do: @length
 end
