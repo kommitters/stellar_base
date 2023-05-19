@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.ContractEventV0 do
   }
 
   @struct_spec XDR.Struct.new(
-    topics: SCVec,
-    data: SCVal
-  )
+                 topics: SCVec,
+                 data: SCVal
+               )
 
   @type topics_type :: SCVec.t()
   @type data_type :: SCVal.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.ContractEventV0 do
 
   @spec new(topics :: topics_type(), data :: data_type()) :: t()
   def new(
-    %SCVec{} = topics,
-    %SCVal{} = data
-  ),
-  do: %__MODULE__{topics: topics, data: data}
+        %SCVec{} = topics,
+        %SCVal{} = data
+      ),
+      do: %__MODULE__{topics: topics, data: data}
 
   @impl true
   def encode_xdr(%__MODULE__{topics: topics, data: data}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.ContractEventV0 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [topics: topics, data: data]}, rest}} ->
         {:ok, {new(topics, data), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.ContractEventV0 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [topics: topics, data: data]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(topics, data), rest}
   end
 end

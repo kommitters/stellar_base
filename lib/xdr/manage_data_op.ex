@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.ManageDataOp do
   }
 
   @struct_spec XDR.Struct.new(
-    data_name: String64,
-    data_value: OptionalDataValue
-  )
+                 data_name: String64,
+                 data_value: OptionalDataValue
+               )
 
   @type data_name_type :: String64.t()
   @type data_value_type :: OptionalDataValue.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.ManageDataOp do
 
   @spec new(data_name :: data_name_type(), data_value :: data_value_type()) :: t()
   def new(
-    %String64{} = data_name,
-    %OptionalDataValue{} = data_value
-  ),
-  do: %__MODULE__{data_name: data_name, data_value: data_value}
+        %String64{} = data_name,
+        %OptionalDataValue{} = data_value
+      ),
+      do: %__MODULE__{data_name: data_name, data_value: data_value}
 
   @impl true
   def encode_xdr(%__MODULE__{data_name: data_name, data_value: data_value}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.ManageDataOp do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [data_name: data_name, data_value: data_value]}, rest}} ->
         {:ok, {new(data_name, data_value), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.ManageDataOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [data_name: data_name, data_value: data_value]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(data_name, data_value), rest}
   end
 end

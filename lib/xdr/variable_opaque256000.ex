@@ -14,7 +14,7 @@ defmodule StellarBase.XDR.VariableOpaque256000 do
 
   defstruct [:opaque]
 
-  @max_size 256000
+  @max_size 256_000
 
   @opaque_spec XDR.VariableOpaque.new(nil, @max_size)
 

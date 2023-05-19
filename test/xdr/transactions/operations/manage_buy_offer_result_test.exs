@@ -119,7 +119,8 @@ defmodule StellarBase.XDR.ManageBuyOfferResultTest do
         ClaimAtom.new(claim_offer_atom, ClaimAtomType.new(:CLAIM_ATOM_TYPE_ORDER_BOOK))
       ])
 
-    manage_offer = ManageOfferSuccessResultOffer.new(Void.new(), ManageOfferEffect.new(:MANAGE_OFFER_DELETED))
+    manage_offer =
+      ManageOfferSuccessResultOffer.new(Void.new(), ManageOfferEffect.new(:MANAGE_OFFER_DELETED))
 
     ManageOfferSuccessResult.new(offers, manage_offer)
   end

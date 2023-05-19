@@ -16,13 +16,13 @@ defmodule StellarBase.XDR.TopologyResponseBodyV1 do
   }
 
   @struct_spec XDR.Struct.new(
-    inbound_peers: PeerStatList,
-    outbound_peers: PeerStatList,
-    total_inbound_peer_count: Uint32,
-    total_outbound_peer_count: Uint32,
-    max_inbound_peer_count: Uint32,
-    max_outbound_peer_count: Uint32
-  )
+                 inbound_peers: PeerStatList,
+                 outbound_peers: PeerStatList,
+                 total_inbound_peer_count: Uint32,
+                 total_outbound_peer_count: Uint32,
+                 max_inbound_peer_count: Uint32,
+                 max_outbound_peer_count: Uint32
+               )
 
   @type inbound_peers_type :: PeerStatList.t()
   @type outbound_peers_type :: PeerStatList.t()
@@ -31,31 +31,87 @@ defmodule StellarBase.XDR.TopologyResponseBodyV1 do
   @type max_inbound_peer_count_type :: Uint32.t()
   @type max_outbound_peer_count_type :: Uint32.t()
 
-  @type t :: %__MODULE__{inbound_peers: inbound_peers_type(), outbound_peers: outbound_peers_type(), total_inbound_peer_count: total_inbound_peer_count_type(), total_outbound_peer_count: total_outbound_peer_count_type(), max_inbound_peer_count: max_inbound_peer_count_type(), max_outbound_peer_count: max_outbound_peer_count_type()}
+  @type t :: %__MODULE__{
+          inbound_peers: inbound_peers_type(),
+          outbound_peers: outbound_peers_type(),
+          total_inbound_peer_count: total_inbound_peer_count_type(),
+          total_outbound_peer_count: total_outbound_peer_count_type(),
+          max_inbound_peer_count: max_inbound_peer_count_type(),
+          max_outbound_peer_count: max_outbound_peer_count_type()
+        }
 
-  defstruct [:inbound_peers, :outbound_peers, :total_inbound_peer_count, :total_outbound_peer_count, :max_inbound_peer_count, :max_outbound_peer_count]
+  defstruct [
+    :inbound_peers,
+    :outbound_peers,
+    :total_inbound_peer_count,
+    :total_outbound_peer_count,
+    :max_inbound_peer_count,
+    :max_outbound_peer_count
+  ]
 
-  @spec new(inbound_peers :: inbound_peers_type(), outbound_peers :: outbound_peers_type(), total_inbound_peer_count :: total_inbound_peer_count_type(), total_outbound_peer_count :: total_outbound_peer_count_type(), max_inbound_peer_count :: max_inbound_peer_count_type(), max_outbound_peer_count :: max_outbound_peer_count_type()) :: t()
+  @spec new(
+          inbound_peers :: inbound_peers_type(),
+          outbound_peers :: outbound_peers_type(),
+          total_inbound_peer_count :: total_inbound_peer_count_type(),
+          total_outbound_peer_count :: total_outbound_peer_count_type(),
+          max_inbound_peer_count :: max_inbound_peer_count_type(),
+          max_outbound_peer_count :: max_outbound_peer_count_type()
+        ) :: t()
   def new(
-    %PeerStatList{} = inbound_peers,
-    %PeerStatList{} = outbound_peers,
-    %Uint32{} = total_inbound_peer_count,
-    %Uint32{} = total_outbound_peer_count,
-    %Uint32{} = max_inbound_peer_count,
-    %Uint32{} = max_outbound_peer_count
-  ),
-  do: %__MODULE__{inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count}
+        %PeerStatList{} = inbound_peers,
+        %PeerStatList{} = outbound_peers,
+        %Uint32{} = total_inbound_peer_count,
+        %Uint32{} = total_outbound_peer_count,
+        %Uint32{} = max_inbound_peer_count,
+        %Uint32{} = max_outbound_peer_count
+      ),
+      do: %__MODULE__{
+        inbound_peers: inbound_peers,
+        outbound_peers: outbound_peers,
+        total_inbound_peer_count: total_inbound_peer_count,
+        total_outbound_peer_count: total_outbound_peer_count,
+        max_inbound_peer_count: max_inbound_peer_count,
+        max_outbound_peer_count: max_outbound_peer_count
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count}) do
-    [inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count]
+  def encode_xdr(%__MODULE__{
+        inbound_peers: inbound_peers,
+        outbound_peers: outbound_peers,
+        total_inbound_peer_count: total_inbound_peer_count,
+        total_outbound_peer_count: total_outbound_peer_count,
+        max_inbound_peer_count: max_inbound_peer_count,
+        max_outbound_peer_count: max_outbound_peer_count
+      }) do
+    [
+      inbound_peers: inbound_peers,
+      outbound_peers: outbound_peers,
+      total_inbound_peer_count: total_inbound_peer_count,
+      total_outbound_peer_count: total_outbound_peer_count,
+      max_inbound_peer_count: max_inbound_peer_count,
+      max_outbound_peer_count: max_outbound_peer_count
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count}) do
-    [inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count]
+  def encode_xdr!(%__MODULE__{
+        inbound_peers: inbound_peers,
+        outbound_peers: outbound_peers,
+        total_inbound_peer_count: total_inbound_peer_count,
+        total_outbound_peer_count: total_outbound_peer_count,
+        max_inbound_peer_count: max_inbound_peer_count,
+        max_outbound_peer_count: max_outbound_peer_count
+      }) do
+    [
+      inbound_peers: inbound_peers,
+      outbound_peers: outbound_peers,
+      total_inbound_peer_count: total_inbound_peer_count,
+      total_outbound_peer_count: total_outbound_peer_count,
+      max_inbound_peer_count: max_inbound_peer_count,
+      max_outbound_peer_count: max_outbound_peer_count
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -65,9 +121,29 @@ defmodule StellarBase.XDR.TopologyResponseBodyV1 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count]}, rest}} ->
-        {:ok, {new(inbound_peers, outbound_peers, total_inbound_peer_count, total_outbound_peer_count, max_inbound_peer_count, max_outbound_peer_count), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            inbound_peers: inbound_peers,
+            outbound_peers: outbound_peers,
+            total_inbound_peer_count: total_inbound_peer_count,
+            total_outbound_peer_count: total_outbound_peer_count,
+            max_inbound_peer_count: max_inbound_peer_count,
+            max_outbound_peer_count: max_outbound_peer_count
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(
+            inbound_peers,
+            outbound_peers,
+            total_inbound_peer_count,
+            total_outbound_peer_count,
+            max_inbound_peer_count,
+            max_outbound_peer_count
+          ), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -75,8 +151,24 @@ defmodule StellarBase.XDR.TopologyResponseBodyV1 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [inbound_peers: inbound_peers, outbound_peers: outbound_peers, total_inbound_peer_count: total_inbound_peer_count, total_outbound_peer_count: total_outbound_peer_count, max_inbound_peer_count: max_inbound_peer_count, max_outbound_peer_count: max_outbound_peer_count]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
-    {new(inbound_peers, outbound_peers, total_inbound_peer_count, total_outbound_peer_count, max_inbound_peer_count, max_outbound_peer_count), rest}
+    {%XDR.Struct{
+       components: [
+         inbound_peers: inbound_peers,
+         outbound_peers: outbound_peers,
+         total_inbound_peer_count: total_inbound_peer_count,
+         total_outbound_peer_count: total_outbound_peer_count,
+         max_inbound_peer_count: max_inbound_peer_count,
+         max_outbound_peer_count: max_outbound_peer_count
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(
+       inbound_peers,
+       outbound_peers,
+       total_inbound_peer_count,
+       total_outbound_peer_count,
+       max_inbound_peer_count,
+       max_outbound_peer_count
+     ), rest}
   end
 end

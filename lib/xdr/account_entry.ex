@@ -23,17 +23,17 @@ defmodule StellarBase.XDR.AccountEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    account_id: AccountID,
-    balance: Int64,
-    seq_num: SequenceNumber,
-    num_sub_entries: Uint32,
-    inflation_dest: OptionalAccountID,
-    flags: Uint32,
-    home_domain: String32,
-    thresholds: Thresholds,
-    signers: SignerList20,
-    ext: AccountEntryExt
-  )
+                 account_id: AccountID,
+                 balance: Int64,
+                 seq_num: SequenceNumber,
+                 num_sub_entries: Uint32,
+                 inflation_dest: OptionalAccountID,
+                 flags: Uint32,
+                 home_domain: String32,
+                 thresholds: Thresholds,
+                 signers: SignerList20,
+                 ext: AccountEntryExt
+               )
 
   @type account_id_type :: AccountID.t()
   @type balance_type :: Int64.t()
@@ -46,35 +46,123 @@ defmodule StellarBase.XDR.AccountEntry do
   @type signers_type :: SignerList20.t()
   @type ext_type :: AccountEntryExt.t()
 
-  @type t :: %__MODULE__{account_id: account_id_type(), balance: balance_type(), seq_num: seq_num_type(), num_sub_entries: num_sub_entries_type(), inflation_dest: inflation_dest_type(), flags: flags_type(), home_domain: home_domain_type(), thresholds: thresholds_type(), signers: signers_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          account_id: account_id_type(),
+          balance: balance_type(),
+          seq_num: seq_num_type(),
+          num_sub_entries: num_sub_entries_type(),
+          inflation_dest: inflation_dest_type(),
+          flags: flags_type(),
+          home_domain: home_domain_type(),
+          thresholds: thresholds_type(),
+          signers: signers_type(),
+          ext: ext_type()
+        }
 
-  defstruct [:account_id, :balance, :seq_num, :num_sub_entries, :inflation_dest, :flags, :home_domain, :thresholds, :signers, :ext]
+  defstruct [
+    :account_id,
+    :balance,
+    :seq_num,
+    :num_sub_entries,
+    :inflation_dest,
+    :flags,
+    :home_domain,
+    :thresholds,
+    :signers,
+    :ext
+  ]
 
-  @spec new(account_id :: account_id_type(), balance :: balance_type(), seq_num :: seq_num_type(), num_sub_entries :: num_sub_entries_type(), inflation_dest :: inflation_dest_type(), flags :: flags_type(), home_domain :: home_domain_type(), thresholds :: thresholds_type(), signers :: signers_type(), ext :: ext_type()) :: t()
+  @spec new(
+          account_id :: account_id_type(),
+          balance :: balance_type(),
+          seq_num :: seq_num_type(),
+          num_sub_entries :: num_sub_entries_type(),
+          inflation_dest :: inflation_dest_type(),
+          flags :: flags_type(),
+          home_domain :: home_domain_type(),
+          thresholds :: thresholds_type(),
+          signers :: signers_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %AccountID{} = account_id,
-    %Int64{} = balance,
-    %SequenceNumber{} = seq_num,
-    %Uint32{} = num_sub_entries,
-    %OptionalAccountID{} = inflation_dest,
-    %Uint32{} = flags,
-    %String32{} = home_domain,
-    %Thresholds{} = thresholds,
-    %SignerList20{} = signers,
-    %AccountEntryExt{} = ext
-  ),
-  do: %__MODULE__{account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext}
+        %AccountID{} = account_id,
+        %Int64{} = balance,
+        %SequenceNumber{} = seq_num,
+        %Uint32{} = num_sub_entries,
+        %OptionalAccountID{} = inflation_dest,
+        %Uint32{} = flags,
+        %String32{} = home_domain,
+        %Thresholds{} = thresholds,
+        %SignerList20{} = signers,
+        %AccountEntryExt{} = ext
+      ),
+      do: %__MODULE__{
+        account_id: account_id,
+        balance: balance,
+        seq_num: seq_num,
+        num_sub_entries: num_sub_entries,
+        inflation_dest: inflation_dest,
+        flags: flags,
+        home_domain: home_domain,
+        thresholds: thresholds,
+        signers: signers,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext}) do
-    [account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext]
+  def encode_xdr(%__MODULE__{
+        account_id: account_id,
+        balance: balance,
+        seq_num: seq_num,
+        num_sub_entries: num_sub_entries,
+        inflation_dest: inflation_dest,
+        flags: flags,
+        home_domain: home_domain,
+        thresholds: thresholds,
+        signers: signers,
+        ext: ext
+      }) do
+    [
+      account_id: account_id,
+      balance: balance,
+      seq_num: seq_num,
+      num_sub_entries: num_sub_entries,
+      inflation_dest: inflation_dest,
+      flags: flags,
+      home_domain: home_domain,
+      thresholds: thresholds,
+      signers: signers,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext}) do
-    [account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext]
+  def encode_xdr!(%__MODULE__{
+        account_id: account_id,
+        balance: balance,
+        seq_num: seq_num,
+        num_sub_entries: num_sub_entries,
+        inflation_dest: inflation_dest,
+        flags: flags,
+        home_domain: home_domain,
+        thresholds: thresholds,
+        signers: signers,
+        ext: ext
+      }) do
+    [
+      account_id: account_id,
+      balance: balance,
+      seq_num: seq_num,
+      num_sub_entries: num_sub_entries,
+      inflation_dest: inflation_dest,
+      flags: flags,
+      home_domain: home_domain,
+      thresholds: thresholds,
+      signers: signers,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -84,9 +172,37 @@ defmodule StellarBase.XDR.AccountEntry do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext]}, rest}} ->
-        {:ok, {new(account_id, balance, seq_num, num_sub_entries, inflation_dest, flags, home_domain, thresholds, signers, ext), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            account_id: account_id,
+            balance: balance,
+            seq_num: seq_num,
+            num_sub_entries: num_sub_entries,
+            inflation_dest: inflation_dest,
+            flags: flags,
+            home_domain: home_domain,
+            thresholds: thresholds,
+            signers: signers,
+            ext: ext
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(
+            account_id,
+            balance,
+            seq_num,
+            num_sub_entries,
+            inflation_dest,
+            flags,
+            home_domain,
+            thresholds,
+            signers,
+            ext
+          ), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -94,8 +210,32 @@ defmodule StellarBase.XDR.AccountEntry do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [account_id: account_id, balance: balance, seq_num: seq_num, num_sub_entries: num_sub_entries, inflation_dest: inflation_dest, flags: flags, home_domain: home_domain, thresholds: thresholds, signers: signers, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
-    {new(account_id, balance, seq_num, num_sub_entries, inflation_dest, flags, home_domain, thresholds, signers, ext), rest}
+    {%XDR.Struct{
+       components: [
+         account_id: account_id,
+         balance: balance,
+         seq_num: seq_num,
+         num_sub_entries: num_sub_entries,
+         inflation_dest: inflation_dest,
+         flags: flags,
+         home_domain: home_domain,
+         thresholds: thresholds,
+         signers: signers,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(
+       account_id,
+       balance,
+       seq_num,
+       num_sub_entries,
+       inflation_dest,
+       flags,
+       home_domain,
+       thresholds,
+       signers,
+       ext
+     ), rest}
   end
 end

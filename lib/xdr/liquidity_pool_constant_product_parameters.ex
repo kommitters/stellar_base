@@ -16,10 +16,10 @@ defmodule StellarBase.XDR.LiquidityPoolConstantProductParameters do
   }
 
   @struct_spec XDR.Struct.new(
-    asset_a: Asset,
-    asset_b: Asset,
-    fee: Int32
-  )
+                 asset_a: Asset,
+                 asset_b: Asset,
+                 fee: Int32
+               )
 
   @type asset_a_type :: Asset.t()
   @type asset_b_type :: Asset.t()
@@ -31,11 +31,11 @@ defmodule StellarBase.XDR.LiquidityPoolConstantProductParameters do
 
   @spec new(asset_a :: asset_a_type(), asset_b :: asset_b_type(), fee :: fee_type()) :: t()
   def new(
-    %Asset{} = asset_a,
-    %Asset{} = asset_b,
-    %Int32{} = fee
-  ),
-  do: %__MODULE__{asset_a: asset_a, asset_b: asset_b, fee: fee}
+        %Asset{} = asset_a,
+        %Asset{} = asset_b,
+        %Int32{} = fee
+      ),
+      do: %__MODULE__{asset_a: asset_a, asset_b: asset_b, fee: fee}
 
   @impl true
   def encode_xdr(%__MODULE__{asset_a: asset_a, asset_b: asset_b, fee: fee}) do
@@ -58,7 +58,9 @@ defmodule StellarBase.XDR.LiquidityPoolConstantProductParameters do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [asset_a: asset_a, asset_b: asset_b, fee: fee]}, rest}} ->
         {:ok, {new(asset_a, asset_b, fee), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -68,6 +70,7 @@ defmodule StellarBase.XDR.LiquidityPoolConstantProductParameters do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [asset_a: asset_a, asset_b: asset_b, fee: fee]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(asset_a, asset_b, fee), rest}
   end
 end

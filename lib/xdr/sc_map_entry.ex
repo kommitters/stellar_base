@@ -15,9 +15,9 @@ defmodule StellarBase.XDR.SCMapEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    key: SCVal,
-    val: SCVal
-  )
+                 key: SCVal,
+                 val: SCVal
+               )
 
   @type key_type :: SCVal.t()
   @type val_type :: SCVal.t()
@@ -28,10 +28,10 @@ defmodule StellarBase.XDR.SCMapEntry do
 
   @spec new(key :: key_type(), val :: val_type()) :: t()
   def new(
-    %SCVal{} = key,
-    %SCVal{} = val
-  ),
-  do: %__MODULE__{key: key, val: val}
+        %SCVal{} = key,
+        %SCVal{} = val
+      ),
+      do: %__MODULE__{key: key, val: val}
 
   @impl true
   def encode_xdr(%__MODULE__{key: key, val: val}) do
@@ -54,7 +54,9 @@ defmodule StellarBase.XDR.SCMapEntry do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [key: key, val: val]}, rest}} ->
         {:ok, {new(key, val), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -62,8 +64,7 @@ defmodule StellarBase.XDR.SCMapEntry do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [key: key, val: val]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [key: key, val: val]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(key, val), rest}
   end
 end

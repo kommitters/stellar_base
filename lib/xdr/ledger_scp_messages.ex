@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerSCPMessages do
   }
 
   @struct_spec XDR.Struct.new(
-    ledger_seq: Uint32,
-    messages: SCPEnvelopeList
-  )
+                 ledger_seq: Uint32,
+                 messages: SCPEnvelopeList
+               )
 
   @type ledger_seq_type :: Uint32.t()
   @type messages_type :: SCPEnvelopeList.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerSCPMessages do
 
   @spec new(ledger_seq :: ledger_seq_type(), messages :: messages_type()) :: t()
   def new(
-    %Uint32{} = ledger_seq,
-    %SCPEnvelopeList{} = messages
-  ),
-  do: %__MODULE__{ledger_seq: ledger_seq, messages: messages}
+        %Uint32{} = ledger_seq,
+        %SCPEnvelopeList{} = messages
+      ),
+      do: %__MODULE__{ledger_seq: ledger_seq, messages: messages}
 
   @impl true
   def encode_xdr(%__MODULE__{ledger_seq: ledger_seq, messages: messages}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerSCPMessages do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [ledger_seq: ledger_seq, messages: messages]}, rest}} ->
         {:ok, {new(ledger_seq, messages), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerSCPMessages do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ledger_seq: ledger_seq, messages: messages]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ledger_seq, messages), rest}
   end
 end

@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.SCSpecTypeTuple do
     SCSpecTypeDefList12
   }
 
-  @struct_spec XDR.Struct.new(
-    value_types: SCSpecTypeDefList12
-  )
+  @struct_spec XDR.Struct.new(value_types: SCSpecTypeDefList12)
 
   @type value_types_type :: SCSpecTypeDefList12.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.SCSpecTypeTuple do
   defstruct [:value_types]
 
   @spec new(value_types :: value_types_type()) :: t()
-  def new(
-    %SCSpecTypeDefList12{} = value_types
-  ),
-  do: %__MODULE__{value_types: value_types}
+  def new(%SCSpecTypeDefList12{} = value_types),
+    do: %__MODULE__{value_types: value_types}
 
   @impl true
   def encode_xdr(%__MODULE__{value_types: value_types}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.SCSpecTypeTuple do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [value_types: value_types]}, rest}} ->
         {:ok, {new(value_types), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -61,6 +59,7 @@ defmodule StellarBase.XDR.SCSpecTypeTuple do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [value_types: value_types]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(value_types), rest}
   end
 end

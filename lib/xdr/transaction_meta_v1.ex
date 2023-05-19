@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.TransactionMetaV1 do
   }
 
   @struct_spec XDR.Struct.new(
-    tx_changes: LedgerEntryChanges,
-    operations: OperationMetaList
-  )
+                 tx_changes: LedgerEntryChanges,
+                 operations: OperationMetaList
+               )
 
   @type tx_changes_type :: LedgerEntryChanges.t()
   @type operations_type :: OperationMetaList.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.TransactionMetaV1 do
 
   @spec new(tx_changes :: tx_changes_type(), operations :: operations_type()) :: t()
   def new(
-    %LedgerEntryChanges{} = tx_changes,
-    %OperationMetaList{} = operations
-  ),
-  do: %__MODULE__{tx_changes: tx_changes, operations: operations}
+        %LedgerEntryChanges{} = tx_changes,
+        %OperationMetaList{} = operations
+      ),
+      do: %__MODULE__{tx_changes: tx_changes, operations: operations}
 
   @impl true
   def encode_xdr(%__MODULE__{tx_changes: tx_changes, operations: operations}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.TransactionMetaV1 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [tx_changes: tx_changes, operations: operations]}, rest}} ->
         {:ok, {new(tx_changes, operations), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.TransactionMetaV1 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [tx_changes: tx_changes, operations: operations]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(tx_changes, operations), rest}
   end
 end

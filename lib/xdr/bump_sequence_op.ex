@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.BumpSequenceOp do
     SequenceNumber
   }
 
-  @struct_spec XDR.Struct.new(
-    bump_to: SequenceNumber
-  )
+  @struct_spec XDR.Struct.new(bump_to: SequenceNumber)
 
   @type bump_to_type :: SequenceNumber.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.BumpSequenceOp do
   defstruct [:bump_to]
 
   @spec new(bump_to :: bump_to_type()) :: t()
-  def new(
-    %SequenceNumber{} = bump_to
-  ),
-  do: %__MODULE__{bump_to: bump_to}
+  def new(%SequenceNumber{} = bump_to),
+    do: %__MODULE__{bump_to: bump_to}
 
   @impl true
   def encode_xdr(%__MODULE__{bump_to: bump_to}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.BumpSequenceOp do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [bump_to: bump_to]}, rest}} ->
         {:ok, {new(bump_to), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.BumpSequenceOp do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [bump_to: bump_to]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [bump_to: bump_to]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(bump_to), rest}
   end
 end

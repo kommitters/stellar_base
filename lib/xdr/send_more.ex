@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.SendMore do
     Uint32
   }
 
-  @struct_spec XDR.Struct.new(
-    num_messages: Uint32
-  )
+  @struct_spec XDR.Struct.new(num_messages: Uint32)
 
   @type num_messages_type :: Uint32.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.SendMore do
   defstruct [:num_messages]
 
   @spec new(num_messages :: num_messages_type()) :: t()
-  def new(
-    %Uint32{} = num_messages
-  ),
-  do: %__MODULE__{num_messages: num_messages}
+  def new(%Uint32{} = num_messages),
+    do: %__MODULE__{num_messages: num_messages}
 
   @impl true
   def encode_xdr(%__MODULE__{num_messages: num_messages}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.SendMore do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [num_messages: num_messages]}, rest}} ->
         {:ok, {new(num_messages), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -61,6 +59,7 @@ defmodule StellarBase.XDR.SendMore do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [num_messages: num_messages]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(num_messages), rest}
   end
 end

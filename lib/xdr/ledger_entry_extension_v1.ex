@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1 do
   }
 
   @struct_spec XDR.Struct.new(
-    sponsoring_id: SponsorshipDescriptor,
-    ext: LedgerEntryExtensionV1Ext
-  )
+                 sponsoring_id: SponsorshipDescriptor,
+                 ext: LedgerEntryExtensionV1Ext
+               )
 
   @type sponsoring_id_type :: SponsorshipDescriptor.t()
   @type ext_type :: LedgerEntryExtensionV1Ext.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1 do
 
   @spec new(sponsoring_id :: sponsoring_id_type(), ext :: ext_type()) :: t()
   def new(
-    %SponsorshipDescriptor{} = sponsoring_id,
-    %LedgerEntryExtensionV1Ext{} = ext
-  ),
-  do: %__MODULE__{sponsoring_id: sponsoring_id, ext: ext}
+        %SponsorshipDescriptor{} = sponsoring_id,
+        %LedgerEntryExtensionV1Ext{} = ext
+      ),
+      do: %__MODULE__{sponsoring_id: sponsoring_id, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{sponsoring_id: sponsoring_id, ext: ext}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [sponsoring_id: sponsoring_id, ext: ext]}, rest}} ->
         {:ok, {new(sponsoring_id, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [sponsoring_id: sponsoring_id, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(sponsoring_id, ext), rest}
   end
 end

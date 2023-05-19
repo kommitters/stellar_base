@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
   }
 
   @struct_spec XDR.Struct.new(
-    doc: String1024,
-    name: String60
-  )
+                 doc: String1024,
+                 name: String60
+               )
 
   @type doc_type :: String1024.t()
   @type name_type :: String60.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
 
   @spec new(doc :: doc_type(), name :: name_type()) :: t()
   def new(
-    %String1024{} = doc,
-    %String60{} = name
-  ),
-  do: %__MODULE__{doc: doc, name: name}
+        %String1024{} = doc,
+        %String60{} = name
+      ),
+      do: %__MODULE__{doc: doc, name: name}
 
   @impl true
   def encode_xdr(%__MODULE__{doc: doc, name: name}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [doc: doc, name: name]}, rest}} ->
         {:ok, {new(doc, name), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.SCSpecUDTUnionCaseVoidV0 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [doc: doc, name: name]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(doc, name), rest}
   end
 end

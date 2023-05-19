@@ -17,26 +17,31 @@ defmodule StellarBase.XDR.PaymentOp do
   }
 
   @struct_spec XDR.Struct.new(
-    destination: MuxedAccount,
-    asset: Asset,
-    amount: Int64
-  )
+                 destination: MuxedAccount,
+                 asset: Asset,
+                 amount: Int64
+               )
 
   @type destination_type :: MuxedAccount.t()
   @type asset_type :: Asset.t()
   @type amount_type :: Int64.t()
 
-  @type t :: %__MODULE__{destination: destination_type(), asset: asset_type(), amount: amount_type()}
+  @type t :: %__MODULE__{
+          destination: destination_type(),
+          asset: asset_type(),
+          amount: amount_type()
+        }
 
   defstruct [:destination, :asset, :amount]
 
-  @spec new(destination :: destination_type(), asset :: asset_type(), amount :: amount_type()) :: t()
+  @spec new(destination :: destination_type(), asset :: asset_type(), amount :: amount_type()) ::
+          t()
   def new(
-    %MuxedAccount{} = destination,
-    %Asset{} = asset,
-    %Int64{} = amount
-  ),
-  do: %__MODULE__{destination: destination, asset: asset, amount: amount}
+        %MuxedAccount{} = destination,
+        %Asset{} = asset,
+        %Int64{} = amount
+      ),
+      do: %__MODULE__{destination: destination, asset: asset, amount: amount}
 
   @impl true
   def encode_xdr(%__MODULE__{destination: destination, asset: asset, amount: amount}) do
@@ -57,9 +62,12 @@ defmodule StellarBase.XDR.PaymentOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [destination: destination, asset: asset, amount: amount]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [destination: destination, asset: asset, amount: amount]}, rest}} ->
         {:ok, {new(destination, asset, amount), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +77,7 @@ defmodule StellarBase.XDR.PaymentOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [destination: destination, asset: asset, amount: amount]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(destination, asset, amount), rest}
   end
 end

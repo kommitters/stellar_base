@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.TransactionResult do
   }
 
   @struct_spec XDR.Struct.new(
-    fee_charged: Int64,
-    result: TransactionResultResult,
-    ext: TransactionResultExt
-  )
+                 fee_charged: Int64,
+                 result: TransactionResultResult,
+                 ext: TransactionResultExt
+               )
 
   @type fee_charged_type :: Int64.t()
   @type result_type :: TransactionResultResult.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.TransactionResult do
 
   @spec new(fee_charged :: fee_charged_type(), result :: result_type(), ext :: ext_type()) :: t()
   def new(
-    %Int64{} = fee_charged,
-    %TransactionResultResult{} = result,
-    %TransactionResultExt{} = ext
-  ),
-  do: %__MODULE__{fee_charged: fee_charged, result: result, ext: ext}
+        %Int64{} = fee_charged,
+        %TransactionResultResult{} = result,
+        %TransactionResultExt{} = ext
+      ),
+      do: %__MODULE__{fee_charged: fee_charged, result: result, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{fee_charged: fee_charged, result: result, ext: ext}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.TransactionResult do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [fee_charged: fee_charged, result: result, ext: ext]}, rest}} ->
         {:ok, {new(fee_charged, result, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.TransactionResult do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [fee_charged: fee_charged, result: result, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(fee_charged, result, ext), rest}
   end
 end

@@ -19,13 +19,13 @@ defmodule StellarBase.XDR.TrustLineEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    account_id: AccountID,
-    asset: TrustLineAsset,
-    balance: Int64,
-    limit: Int64,
-    flags: Uint32,
-    ext: TrustLineEntryExt
-  )
+                 account_id: AccountID,
+                 asset: TrustLineAsset,
+                 balance: Int64,
+                 limit: Int64,
+                 flags: Uint32,
+                 ext: TrustLineEntryExt
+               )
 
   @type account_id_type :: AccountID.t()
   @type asset_type :: TrustLineAsset.t()
@@ -34,30 +34,65 @@ defmodule StellarBase.XDR.TrustLineEntry do
   @type flags_type :: Uint32.t()
   @type ext_type :: TrustLineEntryExt.t()
 
-  @type t :: %__MODULE__{account_id: account_id_type(), asset: asset_type(), balance: balance_type(), limit: limit_type(), flags: flags_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          account_id: account_id_type(),
+          asset: asset_type(),
+          balance: balance_type(),
+          limit: limit_type(),
+          flags: flags_type(),
+          ext: ext_type()
+        }
 
   defstruct [:account_id, :asset, :balance, :limit, :flags, :ext]
 
-  @spec new(account_id :: account_id_type(), asset :: asset_type(), balance :: balance_type(), limit :: limit_type(), flags :: flags_type(), ext :: ext_type()) :: t()
+  @spec new(
+          account_id :: account_id_type(),
+          asset :: asset_type(),
+          balance :: balance_type(),
+          limit :: limit_type(),
+          flags :: flags_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %AccountID{} = account_id,
-    %TrustLineAsset{} = asset,
-    %Int64{} = balance,
-    %Int64{} = limit,
-    %Uint32{} = flags,
-    %TrustLineEntryExt{} = ext
-  ),
-  do: %__MODULE__{account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext}
+        %AccountID{} = account_id,
+        %TrustLineAsset{} = asset,
+        %Int64{} = balance,
+        %Int64{} = limit,
+        %Uint32{} = flags,
+        %TrustLineEntryExt{} = ext
+      ),
+      do: %__MODULE__{
+        account_id: account_id,
+        asset: asset,
+        balance: balance,
+        limit: limit,
+        flags: flags,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext}) do
+  def encode_xdr(%__MODULE__{
+        account_id: account_id,
+        asset: asset,
+        balance: balance,
+        limit: limit,
+        flags: flags,
+        ext: ext
+      }) do
     [account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext}) do
+  def encode_xdr!(%__MODULE__{
+        account_id: account_id,
+        asset: asset,
+        balance: balance,
+        limit: limit,
+        flags: flags,
+        ext: ext
+      }) do
     [account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -68,9 +103,21 @@ defmodule StellarBase.XDR.TrustLineEntry do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            account_id: account_id,
+            asset: asset,
+            balance: balance,
+            limit: limit,
+            flags: flags,
+            ext: ext
+          ]
+        }, rest}} ->
         {:ok, {new(account_id, asset, balance, limit, flags, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -78,8 +125,17 @@ defmodule StellarBase.XDR.TrustLineEntry do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [account_id: account_id, asset: asset, balance: balance, limit: limit, flags: flags, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         account_id: account_id,
+         asset: asset,
+         balance: balance,
+         limit: limit,
+         flags: flags,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(account_id, asset, balance, limit, flags, ext), rest}
   end
 end

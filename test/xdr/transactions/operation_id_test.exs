@@ -14,6 +14,7 @@ defmodule StellarBase.XDR.HashIDPreimageOperationIDTest do
         123_456
         |> Int64.new()
         |> SequenceNumber.new()
+
       op_num = Uint32.new(123_456)
 
       %{

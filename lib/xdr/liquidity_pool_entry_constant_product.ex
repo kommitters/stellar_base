@@ -16,12 +16,12 @@ defmodule StellarBase.XDR.LiquidityPoolEntryConstantProduct do
   }
 
   @struct_spec XDR.Struct.new(
-    params: LiquidityPoolConstantProductParameters,
-    reserve_a: Int64,
-    reserve_b: Int64,
-    total_pool_shares: Int64,
-    pool_shares_trust_line_count: Int64
-  )
+                 params: LiquidityPoolConstantProductParameters,
+                 reserve_a: Int64,
+                 reserve_b: Int64,
+                 total_pool_shares: Int64,
+                 pool_shares_trust_line_count: Int64
+               )
 
   @type params_type :: LiquidityPoolConstantProductParameters.t()
   @type reserve_a_type :: Int64.t()
@@ -29,30 +29,72 @@ defmodule StellarBase.XDR.LiquidityPoolEntryConstantProduct do
   @type total_pool_shares_type :: Int64.t()
   @type pool_shares_trust_line_count_type :: Int64.t()
 
-  @type t :: %__MODULE__{params: params_type(), reserve_a: reserve_a_type(), reserve_b: reserve_b_type(), total_pool_shares: total_pool_shares_type(), pool_shares_trust_line_count: pool_shares_trust_line_count_type()}
+  @type t :: %__MODULE__{
+          params: params_type(),
+          reserve_a: reserve_a_type(),
+          reserve_b: reserve_b_type(),
+          total_pool_shares: total_pool_shares_type(),
+          pool_shares_trust_line_count: pool_shares_trust_line_count_type()
+        }
 
   defstruct [:params, :reserve_a, :reserve_b, :total_pool_shares, :pool_shares_trust_line_count]
 
-  @spec new(params :: params_type(), reserve_a :: reserve_a_type(), reserve_b :: reserve_b_type(), total_pool_shares :: total_pool_shares_type(), pool_shares_trust_line_count :: pool_shares_trust_line_count_type()) :: t()
+  @spec new(
+          params :: params_type(),
+          reserve_a :: reserve_a_type(),
+          reserve_b :: reserve_b_type(),
+          total_pool_shares :: total_pool_shares_type(),
+          pool_shares_trust_line_count :: pool_shares_trust_line_count_type()
+        ) :: t()
   def new(
-    %LiquidityPoolConstantProductParameters{} = params,
-    %Int64{} = reserve_a,
-    %Int64{} = reserve_b,
-    %Int64{} = total_pool_shares,
-    %Int64{} = pool_shares_trust_line_count
-  ),
-  do: %__MODULE__{params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count}
+        %LiquidityPoolConstantProductParameters{} = params,
+        %Int64{} = reserve_a,
+        %Int64{} = reserve_b,
+        %Int64{} = total_pool_shares,
+        %Int64{} = pool_shares_trust_line_count
+      ),
+      do: %__MODULE__{
+        params: params,
+        reserve_a: reserve_a,
+        reserve_b: reserve_b,
+        total_pool_shares: total_pool_shares,
+        pool_shares_trust_line_count: pool_shares_trust_line_count
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count}) do
-    [params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count]
+  def encode_xdr(%__MODULE__{
+        params: params,
+        reserve_a: reserve_a,
+        reserve_b: reserve_b,
+        total_pool_shares: total_pool_shares,
+        pool_shares_trust_line_count: pool_shares_trust_line_count
+      }) do
+    [
+      params: params,
+      reserve_a: reserve_a,
+      reserve_b: reserve_b,
+      total_pool_shares: total_pool_shares,
+      pool_shares_trust_line_count: pool_shares_trust_line_count
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count}) do
-    [params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count]
+  def encode_xdr!(%__MODULE__{
+        params: params,
+        reserve_a: reserve_a,
+        reserve_b: reserve_b,
+        total_pool_shares: total_pool_shares,
+        pool_shares_trust_line_count: pool_shares_trust_line_count
+      }) do
+    [
+      params: params,
+      reserve_a: reserve_a,
+      reserve_b: reserve_b,
+      total_pool_shares: total_pool_shares,
+      pool_shares_trust_line_count: pool_shares_trust_line_count
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -62,9 +104,22 @@ defmodule StellarBase.XDR.LiquidityPoolEntryConstantProduct do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count]}, rest}} ->
-        {:ok, {new(params, reserve_a, reserve_b, total_pool_shares, pool_shares_trust_line_count), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            params: params,
+            reserve_a: reserve_a,
+            reserve_b: reserve_b,
+            total_pool_shares: total_pool_shares,
+            pool_shares_trust_line_count: pool_shares_trust_line_count
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(params, reserve_a, reserve_b, total_pool_shares, pool_shares_trust_line_count),
+          rest}}
+
+      error ->
+        error
     end
   end
 
@@ -72,8 +127,16 @@ defmodule StellarBase.XDR.LiquidityPoolEntryConstantProduct do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [params: params, reserve_a: reserve_a, reserve_b: reserve_b, total_pool_shares: total_pool_shares, pool_shares_trust_line_count: pool_shares_trust_line_count]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         params: params,
+         reserve_a: reserve_a,
+         reserve_b: reserve_b,
+         total_pool_shares: total_pool_shares,
+         pool_shares_trust_line_count: pool_shares_trust_line_count
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(params, reserve_a, reserve_b, total_pool_shares, pool_shares_trust_line_count), rest}
   end
 end

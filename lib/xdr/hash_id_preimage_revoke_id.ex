@@ -19,12 +19,12 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeID do
   }
 
   @struct_spec XDR.Struct.new(
-    source_account: AccountID,
-    seq_num: SequenceNumber,
-    op_num: Uint32,
-    liquidity_pool_id: PoolID,
-    asset: Asset
-  )
+                 source_account: AccountID,
+                 seq_num: SequenceNumber,
+                 op_num: Uint32,
+                 liquidity_pool_id: PoolID,
+                 asset: Asset
+               )
 
   @type source_account_type :: AccountID.t()
   @type seq_num_type :: SequenceNumber.t()
@@ -32,30 +32,72 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeID do
   @type liquidity_pool_id_type :: PoolID.t()
   @type asset_type :: Asset.t()
 
-  @type t :: %__MODULE__{source_account: source_account_type(), seq_num: seq_num_type(), op_num: op_num_type(), liquidity_pool_id: liquidity_pool_id_type(), asset: asset_type()}
+  @type t :: %__MODULE__{
+          source_account: source_account_type(),
+          seq_num: seq_num_type(),
+          op_num: op_num_type(),
+          liquidity_pool_id: liquidity_pool_id_type(),
+          asset: asset_type()
+        }
 
   defstruct [:source_account, :seq_num, :op_num, :liquidity_pool_id, :asset]
 
-  @spec new(source_account :: source_account_type(), seq_num :: seq_num_type(), op_num :: op_num_type(), liquidity_pool_id :: liquidity_pool_id_type(), asset :: asset_type()) :: t()
+  @spec new(
+          source_account :: source_account_type(),
+          seq_num :: seq_num_type(),
+          op_num :: op_num_type(),
+          liquidity_pool_id :: liquidity_pool_id_type(),
+          asset :: asset_type()
+        ) :: t()
   def new(
-    %AccountID{} = source_account,
-    %SequenceNumber{} = seq_num,
-    %Uint32{} = op_num,
-    %PoolID{} = liquidity_pool_id,
-    %Asset{} = asset
-  ),
-  do: %__MODULE__{source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset}
+        %AccountID{} = source_account,
+        %SequenceNumber{} = seq_num,
+        %Uint32{} = op_num,
+        %PoolID{} = liquidity_pool_id,
+        %Asset{} = asset
+      ),
+      do: %__MODULE__{
+        source_account: source_account,
+        seq_num: seq_num,
+        op_num: op_num,
+        liquidity_pool_id: liquidity_pool_id,
+        asset: asset
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset}) do
-    [source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset]
+  def encode_xdr(%__MODULE__{
+        source_account: source_account,
+        seq_num: seq_num,
+        op_num: op_num,
+        liquidity_pool_id: liquidity_pool_id,
+        asset: asset
+      }) do
+    [
+      source_account: source_account,
+      seq_num: seq_num,
+      op_num: op_num,
+      liquidity_pool_id: liquidity_pool_id,
+      asset: asset
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset}) do
-    [source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset]
+  def encode_xdr!(%__MODULE__{
+        source_account: source_account,
+        seq_num: seq_num,
+        op_num: op_num,
+        liquidity_pool_id: liquidity_pool_id,
+        asset: asset
+      }) do
+    [
+      source_account: source_account,
+      seq_num: seq_num,
+      op_num: op_num,
+      liquidity_pool_id: liquidity_pool_id,
+      asset: asset
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -65,9 +107,20 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeID do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            source_account: source_account,
+            seq_num: seq_num,
+            op_num: op_num,
+            liquidity_pool_id: liquidity_pool_id,
+            asset: asset
+          ]
+        }, rest}} ->
         {:ok, {new(source_account, seq_num, op_num, liquidity_pool_id, asset), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -75,8 +128,16 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeID do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [source_account: source_account, seq_num: seq_num, op_num: op_num, liquidity_pool_id: liquidity_pool_id, asset: asset]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         source_account: source_account,
+         seq_num: seq_num,
+         op_num: op_num,
+         liquidity_pool_id: liquidity_pool_id,
+         asset: asset
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(source_account, seq_num, op_num, liquidity_pool_id, asset), rest}
   end
 end

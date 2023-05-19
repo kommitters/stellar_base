@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.AuthCert do
   }
 
   @struct_spec XDR.Struct.new(
-    pubkey: Curve25519Public,
-    expiration: Uint64,
-    sig: Signature
-  )
+                 pubkey: Curve25519Public,
+                 expiration: Uint64,
+                 sig: Signature
+               )
 
   @type pubkey_type :: Curve25519Public.t()
   @type expiration_type :: Uint64.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.AuthCert do
 
   @spec new(pubkey :: pubkey_type(), expiration :: expiration_type(), sig :: sig_type()) :: t()
   def new(
-    %Curve25519Public{} = pubkey,
-    %Uint64{} = expiration,
-    %Signature{} = sig
-  ),
-  do: %__MODULE__{pubkey: pubkey, expiration: expiration, sig: sig}
+        %Curve25519Public{} = pubkey,
+        %Uint64{} = expiration,
+        %Signature{} = sig
+      ),
+      do: %__MODULE__{pubkey: pubkey, expiration: expiration, sig: sig}
 
   @impl true
   def encode_xdr(%__MODULE__{pubkey: pubkey, expiration: expiration, sig: sig}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.AuthCert do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [pubkey: pubkey, expiration: expiration, sig: sig]}, rest}} ->
         {:ok, {new(pubkey, expiration, sig), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.AuthCert do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [pubkey: pubkey, expiration: expiration, sig: sig]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(pubkey, expiration, sig), rest}
   end
 end

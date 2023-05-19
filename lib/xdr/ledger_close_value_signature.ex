@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerCloseValueSignature do
   }
 
   @struct_spec XDR.Struct.new(
-    node_id: NodeID,
-    signature: Signature
-  )
+                 node_id: NodeID,
+                 signature: Signature
+               )
 
   @type node_id_type :: NodeID.t()
   @type signature_type :: Signature.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerCloseValueSignature do
 
   @spec new(node_id :: node_id_type(), signature :: signature_type()) :: t()
   def new(
-    %NodeID{} = node_id,
-    %Signature{} = signature
-  ),
-  do: %__MODULE__{node_id: node_id, signature: signature}
+        %NodeID{} = node_id,
+        %Signature{} = signature
+      ),
+      do: %__MODULE__{node_id: node_id, signature: signature}
 
   @impl true
   def encode_xdr(%__MODULE__{node_id: node_id, signature: signature}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerCloseValueSignature do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [node_id: node_id, signature: signature]}, rest}} ->
         {:ok, {new(node_id, signature), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerCloseValueSignature do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [node_id: node_id, signature: signature]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(node_id, signature), rest}
   end
 end

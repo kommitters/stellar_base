@@ -15,9 +15,9 @@ defmodule StellarBase.XDR.SCSpecTypeResult do
   }
 
   @struct_spec XDR.Struct.new(
-    ok_type: SCSpecTypeDef,
-    error_type: SCSpecTypeDef
-  )
+                 ok_type: SCSpecTypeDef,
+                 error_type: SCSpecTypeDef
+               )
 
   @type ok_type_type :: SCSpecTypeDef.t()
   @type error_type_type :: SCSpecTypeDef.t()
@@ -28,10 +28,10 @@ defmodule StellarBase.XDR.SCSpecTypeResult do
 
   @spec new(ok_type :: ok_type_type(), error_type :: error_type_type()) :: t()
   def new(
-    %SCSpecTypeDef{} = ok_type,
-    %SCSpecTypeDef{} = error_type
-  ),
-  do: %__MODULE__{ok_type: ok_type, error_type: error_type}
+        %SCSpecTypeDef{} = ok_type,
+        %SCSpecTypeDef{} = error_type
+      ),
+      do: %__MODULE__{ok_type: ok_type, error_type: error_type}
 
   @impl true
   def encode_xdr(%__MODULE__{ok_type: ok_type, error_type: error_type}) do
@@ -54,7 +54,9 @@ defmodule StellarBase.XDR.SCSpecTypeResult do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [ok_type: ok_type, error_type: error_type]}, rest}} ->
         {:ok, {new(ok_type, error_type), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -64,6 +66,7 @@ defmodule StellarBase.XDR.SCSpecTypeResult do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ok_type: ok_type, error_type: error_type]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ok_type, error_type), rest}
   end
 end

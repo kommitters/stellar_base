@@ -15,9 +15,9 @@ defmodule StellarBase.XDR.Liabilities do
   }
 
   @struct_spec XDR.Struct.new(
-    buying: Int64,
-    selling: Int64
-  )
+                 buying: Int64,
+                 selling: Int64
+               )
 
   @type buying_type :: Int64.t()
   @type selling_type :: Int64.t()
@@ -28,10 +28,10 @@ defmodule StellarBase.XDR.Liabilities do
 
   @spec new(buying :: buying_type(), selling :: selling_type()) :: t()
   def new(
-    %Int64{} = buying,
-    %Int64{} = selling
-  ),
-  do: %__MODULE__{buying: buying, selling: selling}
+        %Int64{} = buying,
+        %Int64{} = selling
+      ),
+      do: %__MODULE__{buying: buying, selling: selling}
 
   @impl true
   def encode_xdr(%__MODULE__{buying: buying, selling: selling}) do
@@ -54,7 +54,9 @@ defmodule StellarBase.XDR.Liabilities do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [buying: buying, selling: selling]}, rest}} ->
         {:ok, {new(buying, selling), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -64,6 +66,7 @@ defmodule StellarBase.XDR.Liabilities do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [buying: buying, selling: selling]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(buying, selling), rest}
   end
 end

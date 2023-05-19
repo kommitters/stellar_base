@@ -34,7 +34,12 @@ defmodule StellarBase.XDR.TransactionResultTest do
         |> (&OperationResultList.new([&1])).()
         |> InnerTransactionResultResult.new(TransactionResultCode.new(:txSUCCESS))
 
-      inner_tx_result = InnerTransactionResult.new(Int64.new(100), result, InnerTransactionResultExt.new(Void.new(), 0))
+      inner_tx_result =
+        InnerTransactionResult.new(
+          Int64.new(100),
+          result,
+          InnerTransactionResultExt.new(Void.new(), 0)
+        )
 
       tx_result =
         "c61305a67fff6a82dbc6eebf1eb56a42"

@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.DecoratedSignature do
   }
 
   @struct_spec XDR.Struct.new(
-    hint: SignatureHint,
-    signature: Signature
-  )
+                 hint: SignatureHint,
+                 signature: Signature
+               )
 
   @type hint_type :: SignatureHint.t()
   @type signature_type :: Signature.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.DecoratedSignature do
 
   @spec new(hint :: hint_type(), signature :: signature_type()) :: t()
   def new(
-    %SignatureHint{} = hint,
-    %Signature{} = signature
-  ),
-  do: %__MODULE__{hint: hint, signature: signature}
+        %SignatureHint{} = hint,
+        %Signature{} = signature
+      ),
+      do: %__MODULE__{hint: hint, signature: signature}
 
   @impl true
   def encode_xdr(%__MODULE__{hint: hint, signature: signature}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.DecoratedSignature do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [hint: hint, signature: signature]}, rest}} ->
         {:ok, {new(hint, signature), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.DecoratedSignature do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [hint: hint, signature: signature]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(hint, signature), rest}
   end
 end

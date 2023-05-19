@@ -18,12 +18,12 @@ defmodule StellarBase.XDR.SurveyRequestMessage do
   }
 
   @struct_spec XDR.Struct.new(
-    surveyor_peer_id: NodeID,
-    surveyed_peer_id: NodeID,
-    ledger_num: Uint32,
-    encryption_key: Curve25519Public,
-    command_type: SurveyMessageCommandType
-  )
+                 surveyor_peer_id: NodeID,
+                 surveyed_peer_id: NodeID,
+                 ledger_num: Uint32,
+                 encryption_key: Curve25519Public,
+                 command_type: SurveyMessageCommandType
+               )
 
   @type surveyor_peer_id_type :: NodeID.t()
   @type surveyed_peer_id_type :: NodeID.t()
@@ -31,30 +31,72 @@ defmodule StellarBase.XDR.SurveyRequestMessage do
   @type encryption_key_type :: Curve25519Public.t()
   @type command_type_type :: SurveyMessageCommandType.t()
 
-  @type t :: %__MODULE__{surveyor_peer_id: surveyor_peer_id_type(), surveyed_peer_id: surveyed_peer_id_type(), ledger_num: ledger_num_type(), encryption_key: encryption_key_type(), command_type: command_type_type()}
+  @type t :: %__MODULE__{
+          surveyor_peer_id: surveyor_peer_id_type(),
+          surveyed_peer_id: surveyed_peer_id_type(),
+          ledger_num: ledger_num_type(),
+          encryption_key: encryption_key_type(),
+          command_type: command_type_type()
+        }
 
   defstruct [:surveyor_peer_id, :surveyed_peer_id, :ledger_num, :encryption_key, :command_type]
 
-  @spec new(surveyor_peer_id :: surveyor_peer_id_type(), surveyed_peer_id :: surveyed_peer_id_type(), ledger_num :: ledger_num_type(), encryption_key :: encryption_key_type(), command_type :: command_type_type()) :: t()
+  @spec new(
+          surveyor_peer_id :: surveyor_peer_id_type(),
+          surveyed_peer_id :: surveyed_peer_id_type(),
+          ledger_num :: ledger_num_type(),
+          encryption_key :: encryption_key_type(),
+          command_type :: command_type_type()
+        ) :: t()
   def new(
-    %NodeID{} = surveyor_peer_id,
-    %NodeID{} = surveyed_peer_id,
-    %Uint32{} = ledger_num,
-    %Curve25519Public{} = encryption_key,
-    %SurveyMessageCommandType{} = command_type
-  ),
-  do: %__MODULE__{surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type}
+        %NodeID{} = surveyor_peer_id,
+        %NodeID{} = surveyed_peer_id,
+        %Uint32{} = ledger_num,
+        %Curve25519Public{} = encryption_key,
+        %SurveyMessageCommandType{} = command_type
+      ),
+      do: %__MODULE__{
+        surveyor_peer_id: surveyor_peer_id,
+        surveyed_peer_id: surveyed_peer_id,
+        ledger_num: ledger_num,
+        encryption_key: encryption_key,
+        command_type: command_type
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type}) do
-    [surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type]
+  def encode_xdr(%__MODULE__{
+        surveyor_peer_id: surveyor_peer_id,
+        surveyed_peer_id: surveyed_peer_id,
+        ledger_num: ledger_num,
+        encryption_key: encryption_key,
+        command_type: command_type
+      }) do
+    [
+      surveyor_peer_id: surveyor_peer_id,
+      surveyed_peer_id: surveyed_peer_id,
+      ledger_num: ledger_num,
+      encryption_key: encryption_key,
+      command_type: command_type
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type}) do
-    [surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type]
+  def encode_xdr!(%__MODULE__{
+        surveyor_peer_id: surveyor_peer_id,
+        surveyed_peer_id: surveyed_peer_id,
+        ledger_num: ledger_num,
+        encryption_key: encryption_key,
+        command_type: command_type
+      }) do
+    [
+      surveyor_peer_id: surveyor_peer_id,
+      surveyed_peer_id: surveyed_peer_id,
+      ledger_num: ledger_num,
+      encryption_key: encryption_key,
+      command_type: command_type
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -64,9 +106,21 @@ defmodule StellarBase.XDR.SurveyRequestMessage do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type]}, rest}} ->
-        {:ok, {new(surveyor_peer_id, surveyed_peer_id, ledger_num, encryption_key, command_type), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            surveyor_peer_id: surveyor_peer_id,
+            surveyed_peer_id: surveyed_peer_id,
+            ledger_num: ledger_num,
+            encryption_key: encryption_key,
+            command_type: command_type
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(surveyor_peer_id, surveyed_peer_id, ledger_num, encryption_key, command_type), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -74,8 +128,16 @@ defmodule StellarBase.XDR.SurveyRequestMessage do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [surveyor_peer_id: surveyor_peer_id, surveyed_peer_id: surveyed_peer_id, ledger_num: ledger_num, encryption_key: encryption_key, command_type: command_type]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         surveyor_peer_id: surveyor_peer_id,
+         surveyed_peer_id: surveyed_peer_id,
+         ledger_num: ledger_num,
+         encryption_key: encryption_key,
+         command_type: command_type
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(surveyor_peer_id, surveyed_peer_id, ledger_num, encryption_key, command_type), rest}
   end
 end

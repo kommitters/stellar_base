@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.OperationDiagnosticEvents do
     DiagnosticEventList
   }
 
-  @struct_spec XDR.Struct.new(
-    events: DiagnosticEventList
-  )
+  @struct_spec XDR.Struct.new(events: DiagnosticEventList)
 
   @type events_type :: DiagnosticEventList.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.OperationDiagnosticEvents do
   defstruct [:events]
 
   @spec new(events :: events_type()) :: t()
-  def new(
-    %DiagnosticEventList{} = events
-  ),
-  do: %__MODULE__{events: events}
+  def new(%DiagnosticEventList{} = events),
+    do: %__MODULE__{events: events}
 
   @impl true
   def encode_xdr(%__MODULE__{events: events}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.OperationDiagnosticEvents do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [events: events]}, rest}} ->
         {:ok, {new(events), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.OperationDiagnosticEvents do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [events: events]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [events: events]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(events), rest}
   end
 end

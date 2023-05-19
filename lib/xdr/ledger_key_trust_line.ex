@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerKeyTrustLine do
   }
 
   @struct_spec XDR.Struct.new(
-    account_id: AccountID,
-    asset: TrustLineAsset
-  )
+                 account_id: AccountID,
+                 asset: TrustLineAsset
+               )
 
   @type account_id_type :: AccountID.t()
   @type asset_type :: TrustLineAsset.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerKeyTrustLine do
 
   @spec new(account_id :: account_id_type(), asset :: asset_type()) :: t()
   def new(
-    %AccountID{} = account_id,
-    %TrustLineAsset{} = asset
-  ),
-  do: %__MODULE__{account_id: account_id, asset: asset}
+        %AccountID{} = account_id,
+        %TrustLineAsset{} = asset
+      ),
+      do: %__MODULE__{account_id: account_id, asset: asset}
 
   @impl true
   def encode_xdr(%__MODULE__{account_id: account_id, asset: asset}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerKeyTrustLine do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [account_id: account_id, asset: asset]}, rest}} ->
         {:ok, {new(account_id, asset), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerKeyTrustLine do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [account_id: account_id, asset: asset]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(account_id, asset), rest}
   end
 end

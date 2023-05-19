@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOp do
   }
 
   @struct_spec XDR.Struct.new(
-    send_asset: Asset,
-    send_max: Int64,
-    destination: MuxedAccount,
-    dest_asset: Asset,
-    dest_amount: Int64,
-    path: AssetList5
-  )
+                 send_asset: Asset,
+                 send_max: Int64,
+                 destination: MuxedAccount,
+                 dest_asset: Asset,
+                 dest_amount: Int64,
+                 path: AssetList5
+               )
 
   @type send_asset_type :: Asset.t()
   @type send_max_type :: Int64.t()
@@ -33,31 +33,80 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOp do
   @type dest_amount_type :: Int64.t()
   @type path_type :: AssetList5.t()
 
-  @type t :: %__MODULE__{send_asset: send_asset_type(), send_max: send_max_type(), destination: destination_type(), dest_asset: dest_asset_type(), dest_amount: dest_amount_type(), path: path_type()}
+  @type t :: %__MODULE__{
+          send_asset: send_asset_type(),
+          send_max: send_max_type(),
+          destination: destination_type(),
+          dest_asset: dest_asset_type(),
+          dest_amount: dest_amount_type(),
+          path: path_type()
+        }
 
   defstruct [:send_asset, :send_max, :destination, :dest_asset, :dest_amount, :path]
 
-  @spec new(send_asset :: send_asset_type(), send_max :: send_max_type(), destination :: destination_type(), dest_asset :: dest_asset_type(), dest_amount :: dest_amount_type(), path :: path_type()) :: t()
+  @spec new(
+          send_asset :: send_asset_type(),
+          send_max :: send_max_type(),
+          destination :: destination_type(),
+          dest_asset :: dest_asset_type(),
+          dest_amount :: dest_amount_type(),
+          path :: path_type()
+        ) :: t()
   def new(
-    %Asset{} = send_asset,
-    %Int64{} = send_max,
-    %MuxedAccount{} = destination,
-    %Asset{} = dest_asset,
-    %Int64{} = dest_amount,
-    %AssetList5{} = path
-  ),
-  do: %__MODULE__{send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path}
+        %Asset{} = send_asset,
+        %Int64{} = send_max,
+        %MuxedAccount{} = destination,
+        %Asset{} = dest_asset,
+        %Int64{} = dest_amount,
+        %AssetList5{} = path
+      ),
+      do: %__MODULE__{
+        send_asset: send_asset,
+        send_max: send_max,
+        destination: destination,
+        dest_asset: dest_asset,
+        dest_amount: dest_amount,
+        path: path
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path}) do
-    [send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path]
+  def encode_xdr(%__MODULE__{
+        send_asset: send_asset,
+        send_max: send_max,
+        destination: destination,
+        dest_asset: dest_asset,
+        dest_amount: dest_amount,
+        path: path
+      }) do
+    [
+      send_asset: send_asset,
+      send_max: send_max,
+      destination: destination,
+      dest_asset: dest_asset,
+      dest_amount: dest_amount,
+      path: path
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path}) do
-    [send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path]
+  def encode_xdr!(%__MODULE__{
+        send_asset: send_asset,
+        send_max: send_max,
+        destination: destination,
+        dest_asset: dest_asset,
+        dest_amount: dest_amount,
+        path: path
+      }) do
+    [
+      send_asset: send_asset,
+      send_max: send_max,
+      destination: destination,
+      dest_asset: dest_asset,
+      dest_amount: dest_amount,
+      path: path
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -67,9 +116,21 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            send_asset: send_asset,
+            send_max: send_max,
+            destination: destination,
+            dest_asset: dest_asset,
+            dest_amount: dest_amount,
+            path: path
+          ]
+        }, rest}} ->
         {:ok, {new(send_asset, send_max, destination, dest_asset, dest_amount, path), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -77,8 +138,17 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveOp do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [send_asset: send_asset, send_max: send_max, destination: destination, dest_asset: dest_asset, dest_amount: dest_amount, path: path]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         send_asset: send_asset,
+         send_max: send_max,
+         destination: destination,
+         dest_asset: dest_asset,
+         dest_amount: dest_amount,
+         path: path
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(send_asset, send_max, destination, dest_asset, dest_amount, path), rest}
   end
 end

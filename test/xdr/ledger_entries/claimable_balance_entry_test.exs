@@ -29,7 +29,14 @@ defmodule StellarBase.XDR.ClaimableBalanceEntryTest do
 
   @arms [
     %{type: 0, value: Void.new()},
-    %{type: 1, value: ClaimableBalanceEntryExtensionV1.new(ClaimableBalanceEntryExtensionV1Ext.new(Void.new(), 0), Uint32.new(1))}
+    %{
+      type: 1,
+      value:
+        ClaimableBalanceEntryExtensionV1.new(
+          ClaimableBalanceEntryExtensionV1Ext.new(Void.new(), 0),
+          Uint32.new(1)
+        )
+    }
   ]
 
   describe "ClaimableBalanceEntry" do

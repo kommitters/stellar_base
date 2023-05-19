@@ -18,40 +18,75 @@ defmodule StellarBase.XDR.AuthorizedInvocation do
   }
 
   @struct_spec XDR.Struct.new(
-    contract_id: Hash,
-    function_name: SCSymbol,
-    args: SCVec,
-    sub_invocations: AuthorizedInvocationList
-  )
+                 contract_id: Hash,
+                 function_name: SCSymbol,
+                 args: SCVec,
+                 sub_invocations: AuthorizedInvocationList
+               )
 
   @type contract_id_type :: Hash.t()
   @type function_name_type :: SCSymbol.t()
   @type args_type :: SCVec.t()
   @type sub_invocations_type :: AuthorizedInvocationList.t()
 
-  @type t :: %__MODULE__{contract_id: contract_id_type(), function_name: function_name_type(), args: args_type(), sub_invocations: sub_invocations_type()}
+  @type t :: %__MODULE__{
+          contract_id: contract_id_type(),
+          function_name: function_name_type(),
+          args: args_type(),
+          sub_invocations: sub_invocations_type()
+        }
 
   defstruct [:contract_id, :function_name, :args, :sub_invocations]
 
-  @spec new(contract_id :: contract_id_type(), function_name :: function_name_type(), args :: args_type(), sub_invocations :: sub_invocations_type()) :: t()
+  @spec new(
+          contract_id :: contract_id_type(),
+          function_name :: function_name_type(),
+          args :: args_type(),
+          sub_invocations :: sub_invocations_type()
+        ) :: t()
   def new(
-    %Hash{} = contract_id,
-    %SCSymbol{} = function_name,
-    %SCVec{} = args,
-    %AuthorizedInvocationList{} = sub_invocations
-  ),
-  do: %__MODULE__{contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations}
+        %Hash{} = contract_id,
+        %SCSymbol{} = function_name,
+        %SCVec{} = args,
+        %AuthorizedInvocationList{} = sub_invocations
+      ),
+      do: %__MODULE__{
+        contract_id: contract_id,
+        function_name: function_name,
+        args: args,
+        sub_invocations: sub_invocations
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations}) do
-    [contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations]
+  def encode_xdr(%__MODULE__{
+        contract_id: contract_id,
+        function_name: function_name,
+        args: args,
+        sub_invocations: sub_invocations
+      }) do
+    [
+      contract_id: contract_id,
+      function_name: function_name,
+      args: args,
+      sub_invocations: sub_invocations
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations}) do
-    [contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations]
+  def encode_xdr!(%__MODULE__{
+        contract_id: contract_id,
+        function_name: function_name,
+        args: args,
+        sub_invocations: sub_invocations
+      }) do
+    [
+      contract_id: contract_id,
+      function_name: function_name,
+      args: args,
+      sub_invocations: sub_invocations
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -61,9 +96,19 @@ defmodule StellarBase.XDR.AuthorizedInvocation do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            contract_id: contract_id,
+            function_name: function_name,
+            args: args,
+            sub_invocations: sub_invocations
+          ]
+        }, rest}} ->
         {:ok, {new(contract_id, function_name, args, sub_invocations), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -71,8 +116,15 @@ defmodule StellarBase.XDR.AuthorizedInvocation do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [contract_id: contract_id, function_name: function_name, args: args, sub_invocations: sub_invocations]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         contract_id: contract_id,
+         function_name: function_name,
+         args: args,
+         sub_invocations: sub_invocations
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(contract_id, function_name, args, sub_invocations), rest}
   end
 end

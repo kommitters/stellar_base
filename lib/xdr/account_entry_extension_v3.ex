@@ -17,26 +17,31 @@ defmodule StellarBase.XDR.AccountEntryExtensionV3 do
   }
 
   @struct_spec XDR.Struct.new(
-    ext: ExtensionPoint,
-    seq_ledger: Uint32,
-    seq_time: TimePoint
-  )
+                 ext: ExtensionPoint,
+                 seq_ledger: Uint32,
+                 seq_time: TimePoint
+               )
 
   @type ext_type :: ExtensionPoint.t()
   @type seq_ledger_type :: Uint32.t()
   @type seq_time_type :: TimePoint.t()
 
-  @type t :: %__MODULE__{ext: ext_type(), seq_ledger: seq_ledger_type(), seq_time: seq_time_type()}
+  @type t :: %__MODULE__{
+          ext: ext_type(),
+          seq_ledger: seq_ledger_type(),
+          seq_time: seq_time_type()
+        }
 
   defstruct [:ext, :seq_ledger, :seq_time]
 
-  @spec new(ext :: ext_type(), seq_ledger :: seq_ledger_type(), seq_time :: seq_time_type()) :: t()
+  @spec new(ext :: ext_type(), seq_ledger :: seq_ledger_type(), seq_time :: seq_time_type()) ::
+          t()
   def new(
-    %ExtensionPoint{} = ext,
-    %Uint32{} = seq_ledger,
-    %TimePoint{} = seq_time
-  ),
-  do: %__MODULE__{ext: ext, seq_ledger: seq_ledger, seq_time: seq_time}
+        %ExtensionPoint{} = ext,
+        %Uint32{} = seq_ledger,
+        %TimePoint{} = seq_time
+      ),
+      do: %__MODULE__{ext: ext, seq_ledger: seq_ledger, seq_time: seq_time}
 
   @impl true
   def encode_xdr(%__MODULE__{ext: ext, seq_ledger: seq_ledger, seq_time: seq_time}) do
@@ -57,9 +62,12 @@ defmodule StellarBase.XDR.AccountEntryExtensionV3 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [ext: ext, seq_ledger: seq_ledger, seq_time: seq_time]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [ext: ext, seq_ledger: seq_ledger, seq_time: seq_time]}, rest}} ->
         {:ok, {new(ext, seq_ledger, seq_time), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +77,7 @@ defmodule StellarBase.XDR.AccountEntryExtensionV3 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ext: ext, seq_ledger: seq_ledger, seq_time: seq_time]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ext, seq_ledger, seq_time), rest}
   end
 end

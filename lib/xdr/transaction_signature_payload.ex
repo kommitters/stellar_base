@@ -16,23 +16,27 @@ defmodule StellarBase.XDR.TransactionSignaturePayload do
   }
 
   @struct_spec XDR.Struct.new(
-    network_id: Hash,
-    tagged_transaction: TransactionSignaturePayloadTaggedTransaction
-  )
+                 network_id: Hash,
+                 tagged_transaction: TransactionSignaturePayloadTaggedTransaction
+               )
 
   @type network_id_type :: Hash.t()
   @type tagged_transaction_type :: TransactionSignaturePayloadTaggedTransaction.t()
 
-  @type t :: %__MODULE__{network_id: network_id_type(), tagged_transaction: tagged_transaction_type()}
+  @type t :: %__MODULE__{
+          network_id: network_id_type(),
+          tagged_transaction: tagged_transaction_type()
+        }
 
   defstruct [:network_id, :tagged_transaction]
 
-  @spec new(network_id :: network_id_type(), tagged_transaction :: tagged_transaction_type()) :: t()
+  @spec new(network_id :: network_id_type(), tagged_transaction :: tagged_transaction_type()) ::
+          t()
   def new(
-    %Hash{} = network_id,
-    %TransactionSignaturePayloadTaggedTransaction{} = tagged_transaction
-  ),
-  do: %__MODULE__{network_id: network_id, tagged_transaction: tagged_transaction}
+        %Hash{} = network_id,
+        %TransactionSignaturePayloadTaggedTransaction{} = tagged_transaction
+      ),
+      do: %__MODULE__{network_id: network_id, tagged_transaction: tagged_transaction}
 
   @impl true
   def encode_xdr(%__MODULE__{network_id: network_id, tagged_transaction: tagged_transaction}) do
@@ -53,9 +57,13 @@ defmodule StellarBase.XDR.TransactionSignaturePayload do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [network_id: network_id, tagged_transaction: tagged_transaction]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [network_id: network_id, tagged_transaction: tagged_transaction]},
+        rest}} ->
         {:ok, {new(network_id, tagged_transaction), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -63,8 +71,9 @@ defmodule StellarBase.XDR.TransactionSignaturePayload do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [network_id: network_id, tagged_transaction: tagged_transaction]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [network_id: network_id, tagged_transaction: tagged_transaction]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(network_id, tagged_transaction), rest}
   end
 end

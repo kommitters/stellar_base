@@ -20,13 +20,13 @@ defmodule StellarBase.XDR.PreconditionsV2 do
   }
 
   @struct_spec XDR.Struct.new(
-    time_bounds: OptionalTimeBounds,
-    ledger_bounds: OptionalLedgerBounds,
-    min_seq_num: OptionalSequenceNumber,
-    min_seq_age: Duration,
-    min_seq_ledger_gap: Uint32,
-    extra_signers: SignerKeyList2
-  )
+                 time_bounds: OptionalTimeBounds,
+                 ledger_bounds: OptionalLedgerBounds,
+                 min_seq_num: OptionalSequenceNumber,
+                 min_seq_age: Duration,
+                 min_seq_ledger_gap: Uint32,
+                 extra_signers: SignerKeyList2
+               )
 
   @type time_bounds_type :: OptionalTimeBounds.t()
   @type ledger_bounds_type :: OptionalLedgerBounds.t()
@@ -35,31 +35,87 @@ defmodule StellarBase.XDR.PreconditionsV2 do
   @type min_seq_ledger_gap_type :: Uint32.t()
   @type extra_signers_type :: SignerKeyList2.t()
 
-  @type t :: %__MODULE__{time_bounds: time_bounds_type(), ledger_bounds: ledger_bounds_type(), min_seq_num: min_seq_num_type(), min_seq_age: min_seq_age_type(), min_seq_ledger_gap: min_seq_ledger_gap_type(), extra_signers: extra_signers_type()}
+  @type t :: %__MODULE__{
+          time_bounds: time_bounds_type(),
+          ledger_bounds: ledger_bounds_type(),
+          min_seq_num: min_seq_num_type(),
+          min_seq_age: min_seq_age_type(),
+          min_seq_ledger_gap: min_seq_ledger_gap_type(),
+          extra_signers: extra_signers_type()
+        }
 
-  defstruct [:time_bounds, :ledger_bounds, :min_seq_num, :min_seq_age, :min_seq_ledger_gap, :extra_signers]
+  defstruct [
+    :time_bounds,
+    :ledger_bounds,
+    :min_seq_num,
+    :min_seq_age,
+    :min_seq_ledger_gap,
+    :extra_signers
+  ]
 
-  @spec new(time_bounds :: time_bounds_type(), ledger_bounds :: ledger_bounds_type(), min_seq_num :: min_seq_num_type(), min_seq_age :: min_seq_age_type(), min_seq_ledger_gap :: min_seq_ledger_gap_type(), extra_signers :: extra_signers_type()) :: t()
+  @spec new(
+          time_bounds :: time_bounds_type(),
+          ledger_bounds :: ledger_bounds_type(),
+          min_seq_num :: min_seq_num_type(),
+          min_seq_age :: min_seq_age_type(),
+          min_seq_ledger_gap :: min_seq_ledger_gap_type(),
+          extra_signers :: extra_signers_type()
+        ) :: t()
   def new(
-    %OptionalTimeBounds{} = time_bounds,
-    %OptionalLedgerBounds{} = ledger_bounds,
-    %OptionalSequenceNumber{} = min_seq_num,
-    %Duration{} = min_seq_age,
-    %Uint32{} = min_seq_ledger_gap,
-    %SignerKeyList2{} = extra_signers
-  ),
-  do: %__MODULE__{time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers}
+        %OptionalTimeBounds{} = time_bounds,
+        %OptionalLedgerBounds{} = ledger_bounds,
+        %OptionalSequenceNumber{} = min_seq_num,
+        %Duration{} = min_seq_age,
+        %Uint32{} = min_seq_ledger_gap,
+        %SignerKeyList2{} = extra_signers
+      ),
+      do: %__MODULE__{
+        time_bounds: time_bounds,
+        ledger_bounds: ledger_bounds,
+        min_seq_num: min_seq_num,
+        min_seq_age: min_seq_age,
+        min_seq_ledger_gap: min_seq_ledger_gap,
+        extra_signers: extra_signers
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers}) do
-    [time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers]
+  def encode_xdr(%__MODULE__{
+        time_bounds: time_bounds,
+        ledger_bounds: ledger_bounds,
+        min_seq_num: min_seq_num,
+        min_seq_age: min_seq_age,
+        min_seq_ledger_gap: min_seq_ledger_gap,
+        extra_signers: extra_signers
+      }) do
+    [
+      time_bounds: time_bounds,
+      ledger_bounds: ledger_bounds,
+      min_seq_num: min_seq_num,
+      min_seq_age: min_seq_age,
+      min_seq_ledger_gap: min_seq_ledger_gap,
+      extra_signers: extra_signers
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers}) do
-    [time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers]
+  def encode_xdr!(%__MODULE__{
+        time_bounds: time_bounds,
+        ledger_bounds: ledger_bounds,
+        min_seq_num: min_seq_num,
+        min_seq_age: min_seq_age,
+        min_seq_ledger_gap: min_seq_ledger_gap,
+        extra_signers: extra_signers
+      }) do
+    [
+      time_bounds: time_bounds,
+      ledger_bounds: ledger_bounds,
+      min_seq_num: min_seq_num,
+      min_seq_age: min_seq_age,
+      min_seq_ledger_gap: min_seq_ledger_gap,
+      extra_signers: extra_signers
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -69,9 +125,29 @@ defmodule StellarBase.XDR.PreconditionsV2 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers]}, rest}} ->
-        {:ok, {new(time_bounds, ledger_bounds, min_seq_num, min_seq_age, min_seq_ledger_gap, extra_signers), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            time_bounds: time_bounds,
+            ledger_bounds: ledger_bounds,
+            min_seq_num: min_seq_num,
+            min_seq_age: min_seq_age,
+            min_seq_ledger_gap: min_seq_ledger_gap,
+            extra_signers: extra_signers
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(
+            time_bounds,
+            ledger_bounds,
+            min_seq_num,
+            min_seq_age,
+            min_seq_ledger_gap,
+            extra_signers
+          ), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -79,8 +155,18 @@ defmodule StellarBase.XDR.PreconditionsV2 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [time_bounds: time_bounds, ledger_bounds: ledger_bounds, min_seq_num: min_seq_num, min_seq_age: min_seq_age, min_seq_ledger_gap: min_seq_ledger_gap, extra_signers: extra_signers]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
-    {new(time_bounds, ledger_bounds, min_seq_num, min_seq_age, min_seq_ledger_gap, extra_signers), rest}
+    {%XDR.Struct{
+       components: [
+         time_bounds: time_bounds,
+         ledger_bounds: ledger_bounds,
+         min_seq_num: min_seq_num,
+         min_seq_age: min_seq_age,
+         min_seq_ledger_gap: min_seq_ledger_gap,
+         extra_signers: extra_signers
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(time_bounds, ledger_bounds, min_seq_num, min_seq_age, min_seq_ledger_gap, extra_signers),
+     rest}
   end
 end

@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.SCPHistoryEntryV0 do
   }
 
   @struct_spec XDR.Struct.new(
-    quorum_sets: SCPQuorumSetList,
-    ledger_messages: LedgerSCPMessages
-  )
+                 quorum_sets: SCPQuorumSetList,
+                 ledger_messages: LedgerSCPMessages
+               )
 
   @type quorum_sets_type :: SCPQuorumSetList.t()
   @type ledger_messages_type :: LedgerSCPMessages.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.SCPHistoryEntryV0 do
 
   @spec new(quorum_sets :: quorum_sets_type(), ledger_messages :: ledger_messages_type()) :: t()
   def new(
-    %SCPQuorumSetList{} = quorum_sets,
-    %LedgerSCPMessages{} = ledger_messages
-  ),
-  do: %__MODULE__{quorum_sets: quorum_sets, ledger_messages: ledger_messages}
+        %SCPQuorumSetList{} = quorum_sets,
+        %LedgerSCPMessages{} = ledger_messages
+      ),
+      do: %__MODULE__{quorum_sets: quorum_sets, ledger_messages: ledger_messages}
 
   @impl true
   def encode_xdr(%__MODULE__{quorum_sets: quorum_sets, ledger_messages: ledger_messages}) do
@@ -53,9 +53,13 @@ defmodule StellarBase.XDR.SCPHistoryEntryV0 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [quorum_sets: quorum_sets, ledger_messages: ledger_messages]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [quorum_sets: quorum_sets, ledger_messages: ledger_messages]},
+        rest}} ->
         {:ok, {new(quorum_sets, ledger_messages), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +69,7 @@ defmodule StellarBase.XDR.SCPHistoryEntryV0 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [quorum_sets: quorum_sets, ledger_messages: ledger_messages]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(quorum_sets, ledger_messages), rest}
   end
 end

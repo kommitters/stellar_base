@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.TransactionSet do
   }
 
   @struct_spec XDR.Struct.new(
-    previous_ledger_hash: Hash,
-    txs: TransactionEnvelopeList
-  )
+                 previous_ledger_hash: Hash,
+                 txs: TransactionEnvelopeList
+               )
 
   @type previous_ledger_hash_type :: Hash.t()
   @type txs_type :: TransactionEnvelopeList.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.TransactionSet do
 
   @spec new(previous_ledger_hash :: previous_ledger_hash_type(), txs :: txs_type()) :: t()
   def new(
-    %Hash{} = previous_ledger_hash,
-    %TransactionEnvelopeList{} = txs
-  ),
-  do: %__MODULE__{previous_ledger_hash: previous_ledger_hash, txs: txs}
+        %Hash{} = previous_ledger_hash,
+        %TransactionEnvelopeList{} = txs
+      ),
+      do: %__MODULE__{previous_ledger_hash: previous_ledger_hash, txs: txs}
 
   @impl true
   def encode_xdr(%__MODULE__{previous_ledger_hash: previous_ledger_hash, txs: txs}) do
@@ -53,9 +53,12 @@ defmodule StellarBase.XDR.TransactionSet do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [previous_ledger_hash: previous_ledger_hash, txs: txs]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [previous_ledger_hash: previous_ledger_hash, txs: txs]}, rest}} ->
         {:ok, {new(previous_ledger_hash, txs), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +68,7 @@ defmodule StellarBase.XDR.TransactionSet do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [previous_ledger_hash: previous_ledger_hash, txs: txs]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(previous_ledger_hash, txs), rest}
   end
 end

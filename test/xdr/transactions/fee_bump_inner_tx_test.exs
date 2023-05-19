@@ -122,10 +122,12 @@ defmodule StellarBase.XDR.FeeBumpTransactionInnerTxTest do
       123
       |> Uint64.new()
       |> TimePoint.new()
+
     max_time =
       321
       |> Uint64.new()
       |> TimePoint.new()
+
     time_bounds = TimeBounds.new(min_time, max_time)
     precondition_type = PreconditionType.new(:PRECOND_TIME)
     preconditions = Preconditions.new(time_bounds, precondition_type)

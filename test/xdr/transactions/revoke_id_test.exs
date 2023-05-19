@@ -14,7 +14,9 @@ defmodule StellarBase.XDR.HashIDPreimageRevokeIDTest do
         123_456
         |> Int64.new()
         |> SequenceNumber.new()
+
       op_num = Uint32.new(123_456)
+
       pool_id =
         "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
         |> Hash.new()

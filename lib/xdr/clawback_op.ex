@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.ClawbackOp do
   }
 
   @struct_spec XDR.Struct.new(
-    asset: Asset,
-    from: MuxedAccount,
-    amount: Int64
-  )
+                 asset: Asset,
+                 from: MuxedAccount,
+                 amount: Int64
+               )
 
   @type asset_type :: Asset.t()
   @type from_type :: MuxedAccount.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.ClawbackOp do
 
   @spec new(asset :: asset_type(), from :: from_type(), amount :: amount_type()) :: t()
   def new(
-    %Asset{} = asset,
-    %MuxedAccount{} = from,
-    %Int64{} = amount
-  ),
-  do: %__MODULE__{asset: asset, from: from, amount: amount}
+        %Asset{} = asset,
+        %MuxedAccount{} = from,
+        %Int64{} = amount
+      ),
+      do: %__MODULE__{asset: asset, from: from, amount: amount}
 
   @impl true
   def encode_xdr(%__MODULE__{asset: asset, from: from, amount: amount}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.ClawbackOp do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [asset: asset, from: from, amount: amount]}, rest}} ->
         {:ok, {new(asset, from, amount), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.ClawbackOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [asset: asset, from: from, amount: amount]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(asset, from, amount), rest}
   end
 end

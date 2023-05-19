@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
     Uint32
   }
 
-  @struct_spec XDR.Struct.new(
-    n: Uint32
-  )
+  @struct_spec XDR.Struct.new(n: Uint32)
 
   @type n_type :: Uint32.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
   defstruct [:n]
 
   @spec new(n :: n_type()) :: t()
-  def new(
-    %Uint32{} = n
-  ),
-  do: %__MODULE__{n: n}
+  def new(%Uint32{} = n),
+    do: %__MODULE__{n: n}
 
   @impl true
   def encode_xdr(%__MODULE__{n: n}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [n: n]}, rest}} ->
         {:ok, {new(n), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.SCSpecTypeBytesN do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [n: n]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [n: n]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(n), rest}
   end
 end

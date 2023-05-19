@@ -17,40 +17,75 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
   }
 
   @struct_spec XDR.Struct.new(
-    num_sponsored: Uint32,
-    num_sponsoring: Uint32,
-    signer_sponsoring_i_ds: SponsorshipDescriptorList20,
-    ext: AccountEntryExtensionV2Ext
-  )
+                 num_sponsored: Uint32,
+                 num_sponsoring: Uint32,
+                 signer_sponsoring_i_ds: SponsorshipDescriptorList20,
+                 ext: AccountEntryExtensionV2Ext
+               )
 
   @type num_sponsored_type :: Uint32.t()
   @type num_sponsoring_type :: Uint32.t()
   @type signer_sponsoring_i_ds_type :: SponsorshipDescriptorList20.t()
   @type ext_type :: AccountEntryExtensionV2Ext.t()
 
-  @type t :: %__MODULE__{num_sponsored: num_sponsored_type(), num_sponsoring: num_sponsoring_type(), signer_sponsoring_i_ds: signer_sponsoring_i_ds_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          num_sponsored: num_sponsored_type(),
+          num_sponsoring: num_sponsoring_type(),
+          signer_sponsoring_i_ds: signer_sponsoring_i_ds_type(),
+          ext: ext_type()
+        }
 
   defstruct [:num_sponsored, :num_sponsoring, :signer_sponsoring_i_ds, :ext]
 
-  @spec new(num_sponsored :: num_sponsored_type(), num_sponsoring :: num_sponsoring_type(), signer_sponsoring_i_ds :: signer_sponsoring_i_ds_type(), ext :: ext_type()) :: t()
+  @spec new(
+          num_sponsored :: num_sponsored_type(),
+          num_sponsoring :: num_sponsoring_type(),
+          signer_sponsoring_i_ds :: signer_sponsoring_i_ds_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %Uint32{} = num_sponsored,
-    %Uint32{} = num_sponsoring,
-    %SponsorshipDescriptorList20{} = signer_sponsoring_i_ds,
-    %AccountEntryExtensionV2Ext{} = ext
-  ),
-  do: %__MODULE__{num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext}
+        %Uint32{} = num_sponsored,
+        %Uint32{} = num_sponsoring,
+        %SponsorshipDescriptorList20{} = signer_sponsoring_i_ds,
+        %AccountEntryExtensionV2Ext{} = ext
+      ),
+      do: %__MODULE__{
+        num_sponsored: num_sponsored,
+        num_sponsoring: num_sponsoring,
+        signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext}) do
-    [num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext]
+  def encode_xdr(%__MODULE__{
+        num_sponsored: num_sponsored,
+        num_sponsoring: num_sponsoring,
+        signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+        ext: ext
+      }) do
+    [
+      num_sponsored: num_sponsored,
+      num_sponsoring: num_sponsoring,
+      signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext}) do
-    [num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext]
+  def encode_xdr!(%__MODULE__{
+        num_sponsored: num_sponsored,
+        num_sponsoring: num_sponsoring,
+        signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+        ext: ext
+      }) do
+    [
+      num_sponsored: num_sponsored,
+      num_sponsoring: num_sponsoring,
+      signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -60,9 +95,19 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            num_sponsored: num_sponsored,
+            num_sponsoring: num_sponsoring,
+            signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+            ext: ext
+          ]
+        }, rest}} ->
         {:ok, {new(num_sponsored, num_sponsoring, signer_sponsoring_i_ds, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -70,8 +115,15 @@ defmodule StellarBase.XDR.AccountEntryExtensionV2 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [num_sponsored: num_sponsored, num_sponsoring: num_sponsoring, signer_sponsoring_i_ds: signer_sponsoring_i_ds, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         num_sponsored: num_sponsored,
+         num_sponsoring: num_sponsoring,
+         signer_sponsoring_i_ds: signer_sponsoring_i_ds,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(num_sponsored, num_sponsoring, signer_sponsoring_i_ds, ext), rest}
   end
 end

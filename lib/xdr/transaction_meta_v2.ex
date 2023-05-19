@@ -16,37 +16,65 @@ defmodule StellarBase.XDR.TransactionMetaV2 do
   }
 
   @struct_spec XDR.Struct.new(
-    tx_changes_before: LedgerEntryChanges,
-    operations: OperationMetaList,
-    tx_changes_after: LedgerEntryChanges
-  )
+                 tx_changes_before: LedgerEntryChanges,
+                 operations: OperationMetaList,
+                 tx_changes_after: LedgerEntryChanges
+               )
 
   @type tx_changes_before_type :: LedgerEntryChanges.t()
   @type operations_type :: OperationMetaList.t()
   @type tx_changes_after_type :: LedgerEntryChanges.t()
 
-  @type t :: %__MODULE__{tx_changes_before: tx_changes_before_type(), operations: operations_type(), tx_changes_after: tx_changes_after_type()}
+  @type t :: %__MODULE__{
+          tx_changes_before: tx_changes_before_type(),
+          operations: operations_type(),
+          tx_changes_after: tx_changes_after_type()
+        }
 
   defstruct [:tx_changes_before, :operations, :tx_changes_after]
 
-  @spec new(tx_changes_before :: tx_changes_before_type(), operations :: operations_type(), tx_changes_after :: tx_changes_after_type()) :: t()
+  @spec new(
+          tx_changes_before :: tx_changes_before_type(),
+          operations :: operations_type(),
+          tx_changes_after :: tx_changes_after_type()
+        ) :: t()
   def new(
-    %LedgerEntryChanges{} = tx_changes_before,
-    %OperationMetaList{} = operations,
-    %LedgerEntryChanges{} = tx_changes_after
-  ),
-  do: %__MODULE__{tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after}
+        %LedgerEntryChanges{} = tx_changes_before,
+        %OperationMetaList{} = operations,
+        %LedgerEntryChanges{} = tx_changes_after
+      ),
+      do: %__MODULE__{
+        tx_changes_before: tx_changes_before,
+        operations: operations,
+        tx_changes_after: tx_changes_after
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after}) do
-    [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after]
+  def encode_xdr(%__MODULE__{
+        tx_changes_before: tx_changes_before,
+        operations: operations,
+        tx_changes_after: tx_changes_after
+      }) do
+    [
+      tx_changes_before: tx_changes_before,
+      operations: operations,
+      tx_changes_after: tx_changes_after
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after}) do
-    [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after]
+  def encode_xdr!(%__MODULE__{
+        tx_changes_before: tx_changes_before,
+        operations: operations,
+        tx_changes_after: tx_changes_after
+      }) do
+    [
+      tx_changes_before: tx_changes_before,
+      operations: operations,
+      tx_changes_after: tx_changes_after
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -56,9 +84,18 @@ defmodule StellarBase.XDR.TransactionMetaV2 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            tx_changes_before: tx_changes_before,
+            operations: operations,
+            tx_changes_after: tx_changes_after
+          ]
+        }, rest}} ->
         {:ok, {new(tx_changes_before, operations, tx_changes_after), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -66,8 +103,14 @@ defmodule StellarBase.XDR.TransactionMetaV2 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         tx_changes_before: tx_changes_before,
+         operations: operations,
+         tx_changes_after: tx_changes_after
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(tx_changes_before, operations, tx_changes_after), rest}
   end
 end

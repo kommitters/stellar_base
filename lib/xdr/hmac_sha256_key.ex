@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.HmacSha256Key do
     Opaque32
   }
 
-  @struct_spec XDR.Struct.new(
-    key: Opaque32
-  )
+  @struct_spec XDR.Struct.new(key: Opaque32)
 
   @type key_type :: Opaque32.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.HmacSha256Key do
   defstruct [:key]
 
   @spec new(key :: key_type()) :: t()
-  def new(
-    %Opaque32{} = key
-  ),
-  do: %__MODULE__{key: key}
+  def new(%Opaque32{} = key),
+    do: %__MODULE__{key: key}
 
   @impl true
   def encode_xdr(%__MODULE__{key: key}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.HmacSha256Key do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [key: key]}, rest}} ->
         {:ok, {new(key), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.HmacSha256Key do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [key: key]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [key: key]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(key), rest}
   end
 end

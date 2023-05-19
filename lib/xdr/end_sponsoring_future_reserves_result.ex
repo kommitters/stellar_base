@@ -28,7 +28,8 @@ defmodule StellarBase.XDR.EndSponsoringFutureReservesResult do
   defstruct [:value, :type]
 
   @spec new(value :: value(), type :: EndSponsoringFutureReservesResultCode.t()) :: t()
-  def new(value, %EndSponsoringFutureReservesResultCode{} = type), do: %__MODULE__{value: value, type: type}
+  def new(value, %EndSponsoringFutureReservesResultCode{} = type),
+    do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do

@@ -57,5 +57,4 @@ defmodule StellarBase.XDR.OptionalSCVec do
       {nil, rest} -> {new(), rest}
     end
   end
-
 end

@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.SCPBallot do
   }
 
   @struct_spec XDR.Struct.new(
-    counter: Uint32,
-    value: Value
-  )
+                 counter: Uint32,
+                 value: Value
+               )
 
   @type counter_type :: Uint32.t()
   @type value_type :: Value.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.SCPBallot do
 
   @spec new(counter :: counter_type(), value :: value_type()) :: t()
   def new(
-    %Uint32{} = counter,
-    %Value{} = value
-  ),
-  do: %__MODULE__{counter: counter, value: value}
+        %Uint32{} = counter,
+        %Value{} = value
+      ),
+      do: %__MODULE__{counter: counter, value: value}
 
   @impl true
   def encode_xdr(%__MODULE__{counter: counter, value: value}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.SCPBallot do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [counter: counter, value: value]}, rest}} ->
         {:ok, {new(counter, value), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.SCPBallot do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [counter: counter, value: value]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(counter, value), rest}
   end
 end

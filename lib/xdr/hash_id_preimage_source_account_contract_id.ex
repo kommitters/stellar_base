@@ -17,26 +17,34 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractID do
   }
 
   @struct_spec XDR.Struct.new(
-    network_id: Hash,
-    source_account: AccountID,
-    salt: Uint256
-  )
+                 network_id: Hash,
+                 source_account: AccountID,
+                 salt: Uint256
+               )
 
   @type network_id_type :: Hash.t()
   @type source_account_type :: AccountID.t()
   @type salt_type :: Uint256.t()
 
-  @type t :: %__MODULE__{network_id: network_id_type(), source_account: source_account_type(), salt: salt_type()}
+  @type t :: %__MODULE__{
+          network_id: network_id_type(),
+          source_account: source_account_type(),
+          salt: salt_type()
+        }
 
   defstruct [:network_id, :source_account, :salt]
 
-  @spec new(network_id :: network_id_type(), source_account :: source_account_type(), salt :: salt_type()) :: t()
+  @spec new(
+          network_id :: network_id_type(),
+          source_account :: source_account_type(),
+          salt :: salt_type()
+        ) :: t()
   def new(
-    %Hash{} = network_id,
-    %AccountID{} = source_account,
-    %Uint256{} = salt
-  ),
-  do: %__MODULE__{network_id: network_id, source_account: source_account, salt: salt}
+        %Hash{} = network_id,
+        %AccountID{} = source_account,
+        %Uint256{} = salt
+      ),
+      do: %__MODULE__{network_id: network_id, source_account: source_account, salt: salt}
 
   @impl true
   def encode_xdr(%__MODULE__{network_id: network_id, source_account: source_account, salt: salt}) do
@@ -57,9 +65,14 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractID do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [network_id: network_id, source_account: source_account, salt: salt]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [network_id: network_id, source_account: source_account, salt: salt]
+        }, rest}} ->
         {:ok, {new(network_id, source_account, salt), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -67,8 +80,10 @@ defmodule StellarBase.XDR.HashIDPreimageSourceAccountContractID do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [network_id: network_id, source_account: source_account, salt: salt]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [network_id: network_id, source_account: source_account, salt: salt]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(network_id, source_account, salt), rest}
   end
 end

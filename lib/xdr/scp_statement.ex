@@ -17,26 +17,31 @@ defmodule StellarBase.XDR.SCPStatement do
   }
 
   @struct_spec XDR.Struct.new(
-    node_id: NodeID,
-    slot_index: Uint64,
-    pledges: SCPStatementPledges
-  )
+                 node_id: NodeID,
+                 slot_index: Uint64,
+                 pledges: SCPStatementPledges
+               )
 
   @type node_id_type :: NodeID.t()
   @type slot_index_type :: Uint64.t()
   @type pledges_type :: SCPStatementPledges.t()
 
-  @type t :: %__MODULE__{node_id: node_id_type(), slot_index: slot_index_type(), pledges: pledges_type()}
+  @type t :: %__MODULE__{
+          node_id: node_id_type(),
+          slot_index: slot_index_type(),
+          pledges: pledges_type()
+        }
 
   defstruct [:node_id, :slot_index, :pledges]
 
-  @spec new(node_id :: node_id_type(), slot_index :: slot_index_type(), pledges :: pledges_type()) :: t()
+  @spec new(node_id :: node_id_type(), slot_index :: slot_index_type(), pledges :: pledges_type()) ::
+          t()
   def new(
-    %NodeID{} = node_id,
-    %Uint64{} = slot_index,
-    %SCPStatementPledges{} = pledges
-  ),
-  do: %__MODULE__{node_id: node_id, slot_index: slot_index, pledges: pledges}
+        %NodeID{} = node_id,
+        %Uint64{} = slot_index,
+        %SCPStatementPledges{} = pledges
+      ),
+      do: %__MODULE__{node_id: node_id, slot_index: slot_index, pledges: pledges}
 
   @impl true
   def encode_xdr(%__MODULE__{node_id: node_id, slot_index: slot_index, pledges: pledges}) do
@@ -57,9 +62,13 @@ defmodule StellarBase.XDR.SCPStatement do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [node_id: node_id, slot_index: slot_index, pledges: pledges]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [node_id: node_id, slot_index: slot_index, pledges: pledges]},
+        rest}} ->
         {:ok, {new(node_id, slot_index, pledges), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +78,7 @@ defmodule StellarBase.XDR.SCPStatement do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [node_id: node_id, slot_index: slot_index, pledges: pledges]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(node_id, slot_index, pledges), rest}
   end
 end

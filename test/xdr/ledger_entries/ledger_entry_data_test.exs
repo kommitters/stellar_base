@@ -66,10 +66,12 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       |> Signer.new(signer_weight)
 
     balance = Int64.new(5)
+
     seq_num =
       12_345_678
       |> Int64.new()
       |> SequenceNumber.new()
+
     num_sub_entries = Uint32.new(5)
     flags = Uint32.new(5)
     home_domain = String32.new("kommit.co")
@@ -127,10 +129,12 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     ## ContractDataEntry
 
     contract_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+
     key =
       1
       |> Int64.new()
       |> SCVal.new(SCValType.new(:SCV_I64))
+
     val =
       2
       |> Int64.new()
@@ -178,7 +182,16 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       %{
         type: LedgerEntryType.new(:OFFER),
         ledger_entry_data:
-          OfferEntry.new(seller_id, offer_id, selling, buying, amount, price, flags, offer_entry_ext),
+          OfferEntry.new(
+            seller_id,
+            offer_id,
+            selling,
+            buying,
+            amount,
+            price,
+            flags,
+            offer_entry_ext
+          ),
         binary:
           <<0, 0, 0, 2, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67,
             32, 113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89,

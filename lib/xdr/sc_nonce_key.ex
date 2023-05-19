@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.SCNonceKey do
     SCAddress
   }
 
-  @struct_spec XDR.Struct.new(
-    nonce_address: SCAddress
-  )
+  @struct_spec XDR.Struct.new(nonce_address: SCAddress)
 
   @type nonce_address_type :: SCAddress.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.SCNonceKey do
   defstruct [:nonce_address]
 
   @spec new(nonce_address :: nonce_address_type()) :: t()
-  def new(
-    %SCAddress{} = nonce_address
-  ),
-  do: %__MODULE__{nonce_address: nonce_address}
+  def new(%SCAddress{} = nonce_address),
+    do: %__MODULE__{nonce_address: nonce_address}
 
   @impl true
   def encode_xdr(%__MODULE__{nonce_address: nonce_address}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.SCNonceKey do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [nonce_address: nonce_address]}, rest}} ->
         {:ok, {new(nonce_address), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -61,6 +59,7 @@ defmodule StellarBase.XDR.SCNonceKey do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [nonce_address: nonce_address]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(nonce_address), rest}
   end
 end

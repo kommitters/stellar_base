@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.CreateContractArgs do
   }
 
   @struct_spec XDR.Struct.new(
-    contract_id: ContractID,
-    source: SCContractExecutable
-  )
+                 contract_id: ContractID,
+                 source: SCContractExecutable
+               )
 
   @type contract_id_type :: ContractID.t()
   @type source_type :: SCContractExecutable.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.CreateContractArgs do
 
   @spec new(contract_id :: contract_id_type(), source :: source_type()) :: t()
   def new(
-    %ContractID{} = contract_id,
-    %SCContractExecutable{} = source
-  ),
-  do: %__MODULE__{contract_id: contract_id, source: source}
+        %ContractID{} = contract_id,
+        %SCContractExecutable{} = source
+      ),
+      do: %__MODULE__{contract_id: contract_id, source: source}
 
   @impl true
   def encode_xdr(%__MODULE__{contract_id: contract_id, source: source}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.CreateContractArgs do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [contract_id: contract_id, source: source]}, rest}} ->
         {:ok, {new(contract_id, source), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.CreateContractArgs do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [contract_id: contract_id, source: source]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(contract_id, source), rest}
   end
 end

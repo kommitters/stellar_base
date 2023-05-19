@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerKeyOffer do
   }
 
   @struct_spec XDR.Struct.new(
-    seller_id: AccountID,
-    offer_id: Int64
-  )
+                 seller_id: AccountID,
+                 offer_id: Int64
+               )
 
   @type seller_id_type :: AccountID.t()
   @type offer_id_type :: Int64.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerKeyOffer do
 
   @spec new(seller_id :: seller_id_type(), offer_id :: offer_id_type()) :: t()
   def new(
-    %AccountID{} = seller_id,
-    %Int64{} = offer_id
-  ),
-  do: %__MODULE__{seller_id: seller_id, offer_id: offer_id}
+        %AccountID{} = seller_id,
+        %Int64{} = offer_id
+      ),
+      do: %__MODULE__{seller_id: seller_id, offer_id: offer_id}
 
   @impl true
   def encode_xdr(%__MODULE__{seller_id: seller_id, offer_id: offer_id}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerKeyOffer do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [seller_id: seller_id, offer_id: offer_id]}, rest}} ->
         {:ok, {new(seller_id, offer_id), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerKeyOffer do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [seller_id: seller_id, offer_id: offer_id]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(seller_id, offer_id), rest}
   end
 end

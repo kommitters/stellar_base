@@ -34,7 +34,8 @@ defmodule StellarBase.XDR.LiquidityPoolDepositResult do
   defstruct [:value, :type]
 
   @spec new(value :: value(), type :: LiquidityPoolDepositResultCode.t()) :: t()
-  def new(value, %LiquidityPoolDepositResultCode{} = type), do: %__MODULE__{value: value, type: type}
+  def new(value, %LiquidityPoolDepositResultCode{} = type),
+    do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do

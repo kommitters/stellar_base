@@ -17,26 +17,31 @@ defmodule StellarBase.XDR.InvokeHostFunctionOp do
   }
 
   @struct_spec XDR.Struct.new(
-    function: HostFunction,
-    footprint: LedgerFootprint,
-    auth: ContractAuthList
-  )
+                 function: HostFunction,
+                 footprint: LedgerFootprint,
+                 auth: ContractAuthList
+               )
 
   @type function_type :: HostFunction.t()
   @type footprint_type :: LedgerFootprint.t()
   @type auth_type :: ContractAuthList.t()
 
-  @type t :: %__MODULE__{function: function_type(), footprint: footprint_type(), auth: auth_type()}
+  @type t :: %__MODULE__{
+          function: function_type(),
+          footprint: footprint_type(),
+          auth: auth_type()
+        }
 
   defstruct [:function, :footprint, :auth]
 
-  @spec new(function :: function_type(), footprint :: footprint_type(), auth :: auth_type()) :: t()
+  @spec new(function :: function_type(), footprint :: footprint_type(), auth :: auth_type()) ::
+          t()
   def new(
-    %HostFunction{} = function,
-    %LedgerFootprint{} = footprint,
-    %ContractAuthList{} = auth
-  ),
-  do: %__MODULE__{function: function, footprint: footprint, auth: auth}
+        %HostFunction{} = function,
+        %LedgerFootprint{} = footprint,
+        %ContractAuthList{} = auth
+      ),
+      do: %__MODULE__{function: function, footprint: footprint, auth: auth}
 
   @impl true
   def encode_xdr(%__MODULE__{function: function, footprint: footprint, auth: auth}) do
@@ -57,9 +62,12 @@ defmodule StellarBase.XDR.InvokeHostFunctionOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [function: function, footprint: footprint, auth: auth]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [function: function, footprint: footprint, auth: auth]}, rest}} ->
         {:ok, {new(function, footprint, auth), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +77,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [function: function, footprint: footprint, auth: auth]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(function, footprint, auth), rest}
   end
 end

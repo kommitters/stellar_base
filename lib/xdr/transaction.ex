@@ -21,14 +21,14 @@ defmodule StellarBase.XDR.Transaction do
   }
 
   @struct_spec XDR.Struct.new(
-    source_account: MuxedAccount,
-    fee: Uint32,
-    seq_num: SequenceNumber,
-    cond: Preconditions,
-    memo: Memo,
-    operations: OperationList100,
-    ext: TransactionExt
-  )
+                 source_account: MuxedAccount,
+                 fee: Uint32,
+                 seq_num: SequenceNumber,
+                 cond: Preconditions,
+                 memo: Memo,
+                 operations: OperationList100,
+                 ext: TransactionExt
+               )
 
   @type source_account_type :: MuxedAccount.t()
   @type fee_type :: Uint32.t()
@@ -38,32 +38,88 @@ defmodule StellarBase.XDR.Transaction do
   @type operations_type :: OperationList100.t()
   @type ext_type :: TransactionExt.t()
 
-  @type t :: %__MODULE__{source_account: source_account_type(), fee: fee_type(), seq_num: seq_num_type(), cond: cond_type(), memo: memo_type(), operations: operations_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          source_account: source_account_type(),
+          fee: fee_type(),
+          seq_num: seq_num_type(),
+          cond: cond_type(),
+          memo: memo_type(),
+          operations: operations_type(),
+          ext: ext_type()
+        }
 
   defstruct [:source_account, :fee, :seq_num, :cond, :memo, :operations, :ext]
 
-  @spec new(source_account :: source_account_type(), fee :: fee_type(), seq_num :: seq_num_type(), cond :: cond_type(), memo :: memo_type(), operations :: operations_type(), ext :: ext_type()) :: t()
+  @spec new(
+          source_account :: source_account_type(),
+          fee :: fee_type(),
+          seq_num :: seq_num_type(),
+          cond :: cond_type(),
+          memo :: memo_type(),
+          operations :: operations_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %MuxedAccount{} = source_account,
-    %Uint32{} = fee,
-    %SequenceNumber{} = seq_num,
-    %Preconditions{} = cond,
-    %Memo{} = memo,
-    %OperationList100{} = operations,
-    %TransactionExt{} = ext
-  ),
-  do: %__MODULE__{source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext}
+        %MuxedAccount{} = source_account,
+        %Uint32{} = fee,
+        %SequenceNumber{} = seq_num,
+        %Preconditions{} = cond,
+        %Memo{} = memo,
+        %OperationList100{} = operations,
+        %TransactionExt{} = ext
+      ),
+      do: %__MODULE__{
+        source_account: source_account,
+        fee: fee,
+        seq_num: seq_num,
+        cond: cond,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext}) do
-    [source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext]
+  def encode_xdr(%__MODULE__{
+        source_account: source_account,
+        fee: fee,
+        seq_num: seq_num,
+        cond: cond,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }) do
+    [
+      source_account: source_account,
+      fee: fee,
+      seq_num: seq_num,
+      cond: cond,
+      memo: memo,
+      operations: operations,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext}) do
-    [source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext]
+  def encode_xdr!(%__MODULE__{
+        source_account: source_account,
+        fee: fee,
+        seq_num: seq_num,
+        cond: cond,
+        memo: memo,
+        operations: operations,
+        ext: ext
+      }) do
+    [
+      source_account: source_account,
+      fee: fee,
+      seq_num: seq_num,
+      cond: cond,
+      memo: memo,
+      operations: operations,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -73,9 +129,22 @@ defmodule StellarBase.XDR.Transaction do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            source_account: source_account,
+            fee: fee,
+            seq_num: seq_num,
+            cond: cond,
+            memo: memo,
+            operations: operations,
+            ext: ext
+          ]
+        }, rest}} ->
         {:ok, {new(source_account, fee, seq_num, cond, memo, operations, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -83,8 +152,18 @@ defmodule StellarBase.XDR.Transaction do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [source_account: source_account, fee: fee, seq_num: seq_num, cond: cond, memo: memo, operations: operations, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         source_account: source_account,
+         fee: fee,
+         seq_num: seq_num,
+         cond: cond,
+         memo: memo,
+         operations: operations,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(source_account, fee, seq_num, cond, memo, operations, ext), rest}
   end
 end

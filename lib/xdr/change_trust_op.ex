@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.ChangeTrustOp do
   }
 
   @struct_spec XDR.Struct.new(
-    line: ChangeTrustAsset,
-    limit: Int64
-  )
+                 line: ChangeTrustAsset,
+                 limit: Int64
+               )
 
   @type line_type :: ChangeTrustAsset.t()
   @type limit_type :: Int64.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.ChangeTrustOp do
 
   @spec new(line :: line_type(), limit :: limit_type()) :: t()
   def new(
-    %ChangeTrustAsset{} = line,
-    %Int64{} = limit
-  ),
-  do: %__MODULE__{line: line, limit: limit}
+        %ChangeTrustAsset{} = line,
+        %Int64{} = limit
+      ),
+      do: %__MODULE__{line: line, limit: limit}
 
   @impl true
   def encode_xdr(%__MODULE__{line: line, limit: limit}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.ChangeTrustOp do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [line: line, limit: limit]}, rest}} ->
         {:ok, {new(line, limit), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.ChangeTrustOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [line: line, limit: limit]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(line, limit), rest}
   end
 end

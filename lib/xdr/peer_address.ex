@@ -16,10 +16,10 @@ defmodule StellarBase.XDR.PeerAddress do
   }
 
   @struct_spec XDR.Struct.new(
-    ip: PeerAddressIp,
-    port: Uint32,
-    num_failures: Uint32
-  )
+                 ip: PeerAddressIp,
+                 port: Uint32,
+                 num_failures: Uint32
+               )
 
   @type ip_type :: PeerAddressIp.t()
   @type port_type :: Uint32.t()
@@ -31,11 +31,11 @@ defmodule StellarBase.XDR.PeerAddress do
 
   @spec new(ip :: ip_type(), port :: port_type(), num_failures :: num_failures_type()) :: t()
   def new(
-    %PeerAddressIp{} = ip,
-    %Uint32{} = port,
-    %Uint32{} = num_failures
-  ),
-  do: %__MODULE__{ip: ip, port: port, num_failures: num_failures}
+        %PeerAddressIp{} = ip,
+        %Uint32{} = port,
+        %Uint32{} = num_failures
+      ),
+      do: %__MODULE__{ip: ip, port: port, num_failures: num_failures}
 
   @impl true
   def encode_xdr(%__MODULE__{ip: ip, port: port, num_failures: num_failures}) do
@@ -58,7 +58,9 @@ defmodule StellarBase.XDR.PeerAddress do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [ip: ip, port: port, num_failures: num_failures]}, rest}} ->
         {:ok, {new(ip, port, num_failures), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -68,6 +70,7 @@ defmodule StellarBase.XDR.PeerAddress do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ip: ip, port: port, num_failures: num_failures]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ip, port, num_failures), rest}
   end
 end

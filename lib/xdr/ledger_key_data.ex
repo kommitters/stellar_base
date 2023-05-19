@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerKeyData do
   }
 
   @struct_spec XDR.Struct.new(
-    account_id: AccountID,
-    data_name: String64
-  )
+                 account_id: AccountID,
+                 data_name: String64
+               )
 
   @type account_id_type :: AccountID.t()
   @type data_name_type :: String64.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerKeyData do
 
   @spec new(account_id :: account_id_type(), data_name :: data_name_type()) :: t()
   def new(
-    %AccountID{} = account_id,
-    %String64{} = data_name
-  ),
-  do: %__MODULE__{account_id: account_id, data_name: data_name}
+        %AccountID{} = account_id,
+        %String64{} = data_name
+      ),
+      do: %__MODULE__{account_id: account_id, data_name: data_name}
 
   @impl true
   def encode_xdr(%__MODULE__{account_id: account_id, data_name: data_name}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerKeyData do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [account_id: account_id, data_name: data_name]}, rest}} ->
         {:ok, {new(account_id, data_name), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerKeyData do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [account_id: account_id, data_name: data_name]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(account_id, data_name), rest}
   end
 end

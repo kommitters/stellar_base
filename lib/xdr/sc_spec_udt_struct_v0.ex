@@ -18,29 +18,35 @@ defmodule StellarBase.XDR.SCSpecUDTStructV0 do
   }
 
   @struct_spec XDR.Struct.new(
-    doc: String1024,
-    lib: String80,
-    name: String60,
-    fields: SCSpecUDTStructFieldV0List40
-  )
+                 doc: String1024,
+                 lib: String80,
+                 name: String60,
+                 fields: SCSpecUDTStructFieldV0List40
+               )
 
   @type doc_type :: String1024.t()
   @type lib_type :: String80.t()
   @type name_type :: String60.t()
   @type fields_type :: SCSpecUDTStructFieldV0List40.t()
 
-  @type t :: %__MODULE__{doc: doc_type(), lib: lib_type(), name: name_type(), fields: fields_type()}
+  @type t :: %__MODULE__{
+          doc: doc_type(),
+          lib: lib_type(),
+          name: name_type(),
+          fields: fields_type()
+        }
 
   defstruct [:doc, :lib, :name, :fields]
 
-  @spec new(doc :: doc_type(), lib :: lib_type(), name :: name_type(), fields :: fields_type()) :: t()
+  @spec new(doc :: doc_type(), lib :: lib_type(), name :: name_type(), fields :: fields_type()) ::
+          t()
   def new(
-    %String1024{} = doc,
-    %String80{} = lib,
-    %String60{} = name,
-    %SCSpecUDTStructFieldV0List40{} = fields
-  ),
-  do: %__MODULE__{doc: doc, lib: lib, name: name, fields: fields}
+        %String1024{} = doc,
+        %String80{} = lib,
+        %String60{} = name,
+        %SCSpecUDTStructFieldV0List40{} = fields
+      ),
+      do: %__MODULE__{doc: doc, lib: lib, name: name, fields: fields}
 
   @impl true
   def encode_xdr(%__MODULE__{doc: doc, lib: lib, name: name, fields: fields}) do
@@ -63,7 +69,9 @@ defmodule StellarBase.XDR.SCSpecUDTStructV0 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [doc: doc, lib: lib, name: name, fields: fields]}, rest}} ->
         {:ok, {new(doc, lib, name, fields), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -73,6 +81,7 @@ defmodule StellarBase.XDR.SCSpecUDTStructV0 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [doc: doc, lib: lib, name: name, fields: fields]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(doc, lib, name, fields), rest}
   end
 end

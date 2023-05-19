@@ -18,39 +18,64 @@ defmodule StellarBase.XDR.StellarValue do
   }
 
   @struct_spec XDR.Struct.new(
-    tx_set_hash: Hash,
-    close_time: TimePoint,
-    upgrades: UpgradeTypeList6,
-    ext: StellarValueExt
-  )
+                 tx_set_hash: Hash,
+                 close_time: TimePoint,
+                 upgrades: UpgradeTypeList6,
+                 ext: StellarValueExt
+               )
 
   @type tx_set_hash_type :: Hash.t()
   @type close_time_type :: TimePoint.t()
   @type upgrades_type :: UpgradeTypeList6.t()
   @type ext_type :: StellarValueExt.t()
 
-  @type t :: %__MODULE__{tx_set_hash: tx_set_hash_type(), close_time: close_time_type(), upgrades: upgrades_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          tx_set_hash: tx_set_hash_type(),
+          close_time: close_time_type(),
+          upgrades: upgrades_type(),
+          ext: ext_type()
+        }
 
   defstruct [:tx_set_hash, :close_time, :upgrades, :ext]
 
-  @spec new(tx_set_hash :: tx_set_hash_type(), close_time :: close_time_type(), upgrades :: upgrades_type(), ext :: ext_type()) :: t()
+  @spec new(
+          tx_set_hash :: tx_set_hash_type(),
+          close_time :: close_time_type(),
+          upgrades :: upgrades_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %Hash{} = tx_set_hash,
-    %TimePoint{} = close_time,
-    %UpgradeTypeList6{} = upgrades,
-    %StellarValueExt{} = ext
-  ),
-  do: %__MODULE__{tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext}
+        %Hash{} = tx_set_hash,
+        %TimePoint{} = close_time,
+        %UpgradeTypeList6{} = upgrades,
+        %StellarValueExt{} = ext
+      ),
+      do: %__MODULE__{
+        tx_set_hash: tx_set_hash,
+        close_time: close_time,
+        upgrades: upgrades,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext}) do
+  def encode_xdr(%__MODULE__{
+        tx_set_hash: tx_set_hash,
+        close_time: close_time,
+        upgrades: upgrades,
+        ext: ext
+      }) do
     [tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext}) do
+  def encode_xdr!(%__MODULE__{
+        tx_set_hash: tx_set_hash,
+        close_time: close_time,
+        upgrades: upgrades,
+        ext: ext
+      }) do
     [tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -61,9 +86,19 @@ defmodule StellarBase.XDR.StellarValue do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            tx_set_hash: tx_set_hash,
+            close_time: close_time,
+            upgrades: upgrades,
+            ext: ext
+          ]
+        }, rest}} ->
         {:ok, {new(tx_set_hash, close_time, upgrades, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -71,8 +106,15 @@ defmodule StellarBase.XDR.StellarValue do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [tx_set_hash: tx_set_hash, close_time: close_time, upgrades: upgrades, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         tx_set_hash: tx_set_hash,
+         close_time: close_time,
+         upgrades: upgrades,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(tx_set_hash, close_time, upgrades, ext), rest}
   end
 end

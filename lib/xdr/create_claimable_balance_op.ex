@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOp do
   }
 
   @struct_spec XDR.Struct.new(
-    asset: Asset,
-    amount: Int64,
-    claimants: ClaimantList10
-  )
+                 asset: Asset,
+                 amount: Int64,
+                 claimants: ClaimantList10
+               )
 
   @type asset_type :: Asset.t()
   @type amount_type :: Int64.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOp do
 
   @spec new(asset :: asset_type(), amount :: amount_type(), claimants :: claimants_type()) :: t()
   def new(
-    %Asset{} = asset,
-    %Int64{} = amount,
-    %ClaimantList10{} = claimants
-  ),
-  do: %__MODULE__{asset: asset, amount: amount, claimants: claimants}
+        %Asset{} = asset,
+        %Int64{} = amount,
+        %ClaimantList10{} = claimants
+      ),
+      do: %__MODULE__{asset: asset, amount: amount, claimants: claimants}
 
   @impl true
   def encode_xdr(%__MODULE__{asset: asset, amount: amount, claimants: claimants}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOp do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [asset: asset, amount: amount, claimants: claimants]}, rest}} ->
         {:ok, {new(asset, amount, claimants), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.CreateClaimableBalanceOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [asset: asset, amount: amount, claimants: claimants]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(asset, amount, claimants), rest}
   end
 end

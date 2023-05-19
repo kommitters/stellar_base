@@ -17,12 +17,12 @@ defmodule StellarBase.XDR.LiquidityPoolDepositOp do
   }
 
   @struct_spec XDR.Struct.new(
-    liquidity_pool_id: PoolID,
-    max_amount_a: Int64,
-    max_amount_b: Int64,
-    min_price: Price,
-    max_price: Price
-  )
+                 liquidity_pool_id: PoolID,
+                 max_amount_a: Int64,
+                 max_amount_b: Int64,
+                 min_price: Price,
+                 max_price: Price
+               )
 
   @type liquidity_pool_id_type :: PoolID.t()
   @type max_amount_a_type :: Int64.t()
@@ -30,30 +30,72 @@ defmodule StellarBase.XDR.LiquidityPoolDepositOp do
   @type min_price_type :: Price.t()
   @type max_price_type :: Price.t()
 
-  @type t :: %__MODULE__{liquidity_pool_id: liquidity_pool_id_type(), max_amount_a: max_amount_a_type(), max_amount_b: max_amount_b_type(), min_price: min_price_type(), max_price: max_price_type()}
+  @type t :: %__MODULE__{
+          liquidity_pool_id: liquidity_pool_id_type(),
+          max_amount_a: max_amount_a_type(),
+          max_amount_b: max_amount_b_type(),
+          min_price: min_price_type(),
+          max_price: max_price_type()
+        }
 
   defstruct [:liquidity_pool_id, :max_amount_a, :max_amount_b, :min_price, :max_price]
 
-  @spec new(liquidity_pool_id :: liquidity_pool_id_type(), max_amount_a :: max_amount_a_type(), max_amount_b :: max_amount_b_type(), min_price :: min_price_type(), max_price :: max_price_type()) :: t()
+  @spec new(
+          liquidity_pool_id :: liquidity_pool_id_type(),
+          max_amount_a :: max_amount_a_type(),
+          max_amount_b :: max_amount_b_type(),
+          min_price :: min_price_type(),
+          max_price :: max_price_type()
+        ) :: t()
   def new(
-    %PoolID{} = liquidity_pool_id,
-    %Int64{} = max_amount_a,
-    %Int64{} = max_amount_b,
-    %Price{} = min_price,
-    %Price{} = max_price
-  ),
-  do: %__MODULE__{liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price}
+        %PoolID{} = liquidity_pool_id,
+        %Int64{} = max_amount_a,
+        %Int64{} = max_amount_b,
+        %Price{} = min_price,
+        %Price{} = max_price
+      ),
+      do: %__MODULE__{
+        liquidity_pool_id: liquidity_pool_id,
+        max_amount_a: max_amount_a,
+        max_amount_b: max_amount_b,
+        min_price: min_price,
+        max_price: max_price
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price}) do
-    [liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price]
+  def encode_xdr(%__MODULE__{
+        liquidity_pool_id: liquidity_pool_id,
+        max_amount_a: max_amount_a,
+        max_amount_b: max_amount_b,
+        min_price: min_price,
+        max_price: max_price
+      }) do
+    [
+      liquidity_pool_id: liquidity_pool_id,
+      max_amount_a: max_amount_a,
+      max_amount_b: max_amount_b,
+      min_price: min_price,
+      max_price: max_price
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price}) do
-    [liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price]
+  def encode_xdr!(%__MODULE__{
+        liquidity_pool_id: liquidity_pool_id,
+        max_amount_a: max_amount_a,
+        max_amount_b: max_amount_b,
+        min_price: min_price,
+        max_price: max_price
+      }) do
+    [
+      liquidity_pool_id: liquidity_pool_id,
+      max_amount_a: max_amount_a,
+      max_amount_b: max_amount_b,
+      min_price: min_price,
+      max_price: max_price
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -63,9 +105,20 @@ defmodule StellarBase.XDR.LiquidityPoolDepositOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            liquidity_pool_id: liquidity_pool_id,
+            max_amount_a: max_amount_a,
+            max_amount_b: max_amount_b,
+            min_price: min_price,
+            max_price: max_price
+          ]
+        }, rest}} ->
         {:ok, {new(liquidity_pool_id, max_amount_a, max_amount_b, min_price, max_price), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -73,8 +126,16 @@ defmodule StellarBase.XDR.LiquidityPoolDepositOp do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [liquidity_pool_id: liquidity_pool_id, max_amount_a: max_amount_a, max_amount_b: max_amount_b, min_price: min_price, max_price: max_price]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         liquidity_pool_id: liquidity_pool_id,
+         max_amount_a: max_amount_a,
+         max_amount_b: max_amount_b,
+         min_price: min_price,
+         max_price: max_price
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(liquidity_pool_id, max_amount_a, max_amount_b, min_price, max_price), rest}
   end
 end

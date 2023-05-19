@@ -18,13 +18,13 @@ defmodule StellarBase.XDR.SCPStatementPrepare do
   }
 
   @struct_spec XDR.Struct.new(
-    quorum_set_hash: Hash,
-    ballot: SCPBallot,
-    prepared: OptionalSCPBallot,
-    prepared_prime: OptionalSCPBallot,
-    n_c: Uint32,
-    n_h: Uint32
-  )
+                 quorum_set_hash: Hash,
+                 ballot: SCPBallot,
+                 prepared: OptionalSCPBallot,
+                 prepared_prime: OptionalSCPBallot,
+                 n_c: Uint32,
+                 n_h: Uint32
+               )
 
   @type quorum_set_hash_type :: Hash.t()
   @type ballot_type :: SCPBallot.t()
@@ -33,31 +33,80 @@ defmodule StellarBase.XDR.SCPStatementPrepare do
   @type n_c_type :: Uint32.t()
   @type n_h_type :: Uint32.t()
 
-  @type t :: %__MODULE__{quorum_set_hash: quorum_set_hash_type(), ballot: ballot_type(), prepared: prepared_type(), prepared_prime: prepared_prime_type(), n_c: n_c_type(), n_h: n_h_type()}
+  @type t :: %__MODULE__{
+          quorum_set_hash: quorum_set_hash_type(),
+          ballot: ballot_type(),
+          prepared: prepared_type(),
+          prepared_prime: prepared_prime_type(),
+          n_c: n_c_type(),
+          n_h: n_h_type()
+        }
 
   defstruct [:quorum_set_hash, :ballot, :prepared, :prepared_prime, :n_c, :n_h]
 
-  @spec new(quorum_set_hash :: quorum_set_hash_type(), ballot :: ballot_type(), prepared :: prepared_type(), prepared_prime :: prepared_prime_type(), n_c :: n_c_type(), n_h :: n_h_type()) :: t()
+  @spec new(
+          quorum_set_hash :: quorum_set_hash_type(),
+          ballot :: ballot_type(),
+          prepared :: prepared_type(),
+          prepared_prime :: prepared_prime_type(),
+          n_c :: n_c_type(),
+          n_h :: n_h_type()
+        ) :: t()
   def new(
-    %Hash{} = quorum_set_hash,
-    %SCPBallot{} = ballot,
-    %OptionalSCPBallot{} = prepared,
-    %OptionalSCPBallot{} = prepared_prime,
-    %Uint32{} = n_c,
-    %Uint32{} = n_h
-  ),
-  do: %__MODULE__{quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h}
+        %Hash{} = quorum_set_hash,
+        %SCPBallot{} = ballot,
+        %OptionalSCPBallot{} = prepared,
+        %OptionalSCPBallot{} = prepared_prime,
+        %Uint32{} = n_c,
+        %Uint32{} = n_h
+      ),
+      do: %__MODULE__{
+        quorum_set_hash: quorum_set_hash,
+        ballot: ballot,
+        prepared: prepared,
+        prepared_prime: prepared_prime,
+        n_c: n_c,
+        n_h: n_h
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h}) do
-    [quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h]
+  def encode_xdr(%__MODULE__{
+        quorum_set_hash: quorum_set_hash,
+        ballot: ballot,
+        prepared: prepared,
+        prepared_prime: prepared_prime,
+        n_c: n_c,
+        n_h: n_h
+      }) do
+    [
+      quorum_set_hash: quorum_set_hash,
+      ballot: ballot,
+      prepared: prepared,
+      prepared_prime: prepared_prime,
+      n_c: n_c,
+      n_h: n_h
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h}) do
-    [quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h]
+  def encode_xdr!(%__MODULE__{
+        quorum_set_hash: quorum_set_hash,
+        ballot: ballot,
+        prepared: prepared,
+        prepared_prime: prepared_prime,
+        n_c: n_c,
+        n_h: n_h
+      }) do
+    [
+      quorum_set_hash: quorum_set_hash,
+      ballot: ballot,
+      prepared: prepared,
+      prepared_prime: prepared_prime,
+      n_c: n_c,
+      n_h: n_h
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -67,9 +116,21 @@ defmodule StellarBase.XDR.SCPStatementPrepare do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            quorum_set_hash: quorum_set_hash,
+            ballot: ballot,
+            prepared: prepared,
+            prepared_prime: prepared_prime,
+            n_c: n_c,
+            n_h: n_h
+          ]
+        }, rest}} ->
         {:ok, {new(quorum_set_hash, ballot, prepared, prepared_prime, n_c, n_h), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -77,8 +138,17 @@ defmodule StellarBase.XDR.SCPStatementPrepare do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [quorum_set_hash: quorum_set_hash, ballot: ballot, prepared: prepared, prepared_prime: prepared_prime, n_c: n_c, n_h: n_h]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         quorum_set_hash: quorum_set_hash,
+         ballot: ballot,
+         prepared: prepared,
+         prepared_prime: prepared_prime,
+         n_c: n_c,
+         n_h: n_h
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(quorum_set_hash, ballot, prepared, prepared_prime, n_c, n_h), rest}
   end
 end

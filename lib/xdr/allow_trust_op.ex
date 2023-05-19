@@ -17,26 +17,31 @@ defmodule StellarBase.XDR.AllowTrustOp do
   }
 
   @struct_spec XDR.Struct.new(
-    trustor: AccountID,
-    asset: AssetCode,
-    authorize: Uint32
-  )
+                 trustor: AccountID,
+                 asset: AssetCode,
+                 authorize: Uint32
+               )
 
   @type trustor_type :: AccountID.t()
   @type asset_type :: AssetCode.t()
   @type authorize_type :: Uint32.t()
 
-  @type t :: %__MODULE__{trustor: trustor_type(), asset: asset_type(), authorize: authorize_type()}
+  @type t :: %__MODULE__{
+          trustor: trustor_type(),
+          asset: asset_type(),
+          authorize: authorize_type()
+        }
 
   defstruct [:trustor, :asset, :authorize]
 
-  @spec new(trustor :: trustor_type(), asset :: asset_type(), authorize :: authorize_type()) :: t()
+  @spec new(trustor :: trustor_type(), asset :: asset_type(), authorize :: authorize_type()) ::
+          t()
   def new(
-    %AccountID{} = trustor,
-    %AssetCode{} = asset,
-    %Uint32{} = authorize
-  ),
-  do: %__MODULE__{trustor: trustor, asset: asset, authorize: authorize}
+        %AccountID{} = trustor,
+        %AssetCode{} = asset,
+        %Uint32{} = authorize
+      ),
+      do: %__MODULE__{trustor: trustor, asset: asset, authorize: authorize}
 
   @impl true
   def encode_xdr(%__MODULE__{trustor: trustor, asset: asset, authorize: authorize}) do
@@ -57,9 +62,12 @@ defmodule StellarBase.XDR.AllowTrustOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [trustor: trustor, asset: asset, authorize: authorize]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [trustor: trustor, asset: asset, authorize: authorize]}, rest}} ->
         {:ok, {new(trustor, asset, authorize), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +77,7 @@ defmodule StellarBase.XDR.AllowTrustOp do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [trustor: trustor, asset: asset, authorize: authorize]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(trustor, asset, authorize), rest}
   end
 end

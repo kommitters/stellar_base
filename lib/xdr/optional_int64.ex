@@ -57,5 +57,4 @@ defmodule StellarBase.XDR.OptionalInt64 do
       {nil, rest} -> {new(), rest}
     end
   end
-
 end

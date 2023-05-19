@@ -31,7 +31,12 @@ defmodule StellarBase.XDR.InnerTransactionResultPairTest do
 
       transaction_hash = Hash.new("c61305a67fff6a82dbc6eebf1eb56a42")
 
-      inner_tx_result = InnerTransactionResult.new(Int64.new(100), result, InnerTransactionResultExt.new(Void.new(), 0))
+      inner_tx_result =
+        InnerTransactionResult.new(
+          Int64.new(100),
+          result,
+          InnerTransactionResultExt.new(Void.new(), 0)
+        )
 
       %{
         transaction_hash: transaction_hash,

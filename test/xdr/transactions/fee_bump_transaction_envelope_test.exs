@@ -134,6 +134,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionEnvelopeTest do
       create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
 
     fee = Uint32.new(100)
+
     seq_num =
       12_345_678
       |> Int64.new()
@@ -144,10 +145,12 @@ defmodule StellarBase.XDR.FeeBumpTransactionEnvelopeTest do
       123
       |> Uint64.new()
       |> TimePoint.new()
+
     max_time =
       321
       |> Uint64.new()
       |> TimePoint.new()
+
     time_bounds = TimeBounds.new(min_time, max_time)
     precondition_type = PreconditionType.new(:PRECOND_TIME)
     preconditions = Preconditions.new(time_bounds, precondition_type)

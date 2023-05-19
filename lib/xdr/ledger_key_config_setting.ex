@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.LedgerKeyConfigSetting do
     ConfigSettingID
   }
 
-  @struct_spec XDR.Struct.new(
-    config_setting_id: ConfigSettingID
-  )
+  @struct_spec XDR.Struct.new(config_setting_id: ConfigSettingID)
 
   @type config_setting_id_type :: ConfigSettingID.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.LedgerKeyConfigSetting do
   defstruct [:config_setting_id]
 
   @spec new(config_setting_id :: config_setting_id_type()) :: t()
-  def new(
-    %ConfigSettingID{} = config_setting_id
-  ),
-  do: %__MODULE__{config_setting_id: config_setting_id}
+  def new(%ConfigSettingID{} = config_setting_id),
+    do: %__MODULE__{config_setting_id: config_setting_id}
 
   @impl true
   def encode_xdr(%__MODULE__{config_setting_id: config_setting_id}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.LedgerKeyConfigSetting do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [config_setting_id: config_setting_id]}, rest}} ->
         {:ok, {new(config_setting_id), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -61,6 +59,7 @@ defmodule StellarBase.XDR.LedgerKeyConfigSetting do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [config_setting_id: config_setting_id]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(config_setting_id), rest}
   end
 end

@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.LedgerKeyContractCode do
     Hash
   }
 
-  @struct_spec XDR.Struct.new(
-    hash: Hash
-  )
+  @struct_spec XDR.Struct.new(hash: Hash)
 
   @type hash_type :: Hash.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.LedgerKeyContractCode do
   defstruct [:hash]
 
   @spec new(hash :: hash_type()) :: t()
-  def new(
-    %Hash{} = hash
-  ),
-  do: %__MODULE__{hash: hash}
+  def new(%Hash{} = hash),
+    do: %__MODULE__{hash: hash}
 
   @impl true
   def encode_xdr(%__MODULE__{hash: hash}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.LedgerKeyContractCode do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [hash: hash]}, rest}} ->
         {:ok, {new(hash), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.LedgerKeyContractCode do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [hash: hash]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [hash: hash]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(hash), rest}
   end
 end

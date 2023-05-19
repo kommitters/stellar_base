@@ -15,9 +15,9 @@ defmodule StellarBase.XDR.Price do
   }
 
   @struct_spec XDR.Struct.new(
-    n: Int32,
-    d: Int32
-  )
+                 n: Int32,
+                 d: Int32
+               )
 
   @type n_type :: Int32.t()
   @type d_type :: Int32.t()
@@ -28,10 +28,10 @@ defmodule StellarBase.XDR.Price do
 
   @spec new(n :: n_type(), d :: d_type()) :: t()
   def new(
-    %Int32{} = n,
-    %Int32{} = d
-  ),
-  do: %__MODULE__{n: n, d: d}
+        %Int32{} = n,
+        %Int32{} = d
+      ),
+      do: %__MODULE__{n: n, d: d}
 
   @impl true
   def encode_xdr(%__MODULE__{n: n, d: d}) do
@@ -54,7 +54,9 @@ defmodule StellarBase.XDR.Price do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [n: n, d: d]}, rest}} ->
         {:ok, {new(n, d), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -62,8 +64,7 @@ defmodule StellarBase.XDR.Price do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [n: n, d: d]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [n: n, d: d]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(n, d), rest}
   end
 end

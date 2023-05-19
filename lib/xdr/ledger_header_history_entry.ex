@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.LedgerHeaderHistoryEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    hash: Hash,
-    header: LedgerHeader,
-    ext: LedgerHeaderHistoryEntryExt
-  )
+                 hash: Hash,
+                 header: LedgerHeader,
+                 ext: LedgerHeaderHistoryEntryExt
+               )
 
   @type hash_type :: Hash.t()
   @type header_type :: LedgerHeader.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.LedgerHeaderHistoryEntry do
 
   @spec new(hash :: hash_type(), header :: header_type(), ext :: ext_type()) :: t()
   def new(
-    %Hash{} = hash,
-    %LedgerHeader{} = header,
-    %LedgerHeaderHistoryEntryExt{} = ext
-  ),
-  do: %__MODULE__{hash: hash, header: header, ext: ext}
+        %Hash{} = hash,
+        %LedgerHeader{} = header,
+        %LedgerHeaderHistoryEntryExt{} = ext
+      ),
+      do: %__MODULE__{hash: hash, header: header, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{hash: hash, header: header, ext: ext}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.LedgerHeaderHistoryEntry do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [hash: hash, header: header, ext: ext]}, rest}} ->
         {:ok, {new(hash, header, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.LedgerHeaderHistoryEntry do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [hash: hash, header: header, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(hash, header, ext), rest}
   end
 end

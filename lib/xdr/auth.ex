@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.Auth do
     Int
   }
 
-  @struct_spec XDR.Struct.new(
-    flags: Int
-  )
+  @struct_spec XDR.Struct.new(flags: Int)
 
   @type flags_type :: Int.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.Auth do
   defstruct [:flags]
 
   @spec new(flags :: flags_type()) :: t()
-  def new(
-    %Int{} = flags
-  ),
-  do: %__MODULE__{flags: flags}
+  def new(%Int{} = flags),
+    do: %__MODULE__{flags: flags}
 
   @impl true
   def encode_xdr(%__MODULE__{flags: flags}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.Auth do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [flags: flags]}, rest}} ->
         {:ok, {new(flags), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.Auth do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [flags: flags]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [flags: flags]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(flags), rest}
   end
 end

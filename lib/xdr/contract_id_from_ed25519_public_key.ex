@@ -16,10 +16,10 @@ defmodule StellarBase.XDR.ContractIDFromEd25519PublicKey do
   }
 
   @struct_spec XDR.Struct.new(
-    key: Uint256,
-    signature: Signature,
-    salt: Uint256
-  )
+                 key: Uint256,
+                 signature: Signature,
+                 salt: Uint256
+               )
 
   @type key_type :: Uint256.t()
   @type signature_type :: Signature.t()
@@ -31,11 +31,11 @@ defmodule StellarBase.XDR.ContractIDFromEd25519PublicKey do
 
   @spec new(key :: key_type(), signature :: signature_type(), salt :: salt_type()) :: t()
   def new(
-    %Uint256{} = key,
-    %Signature{} = signature,
-    %Uint256{} = salt
-  ),
-  do: %__MODULE__{key: key, signature: signature, salt: salt}
+        %Uint256{} = key,
+        %Signature{} = signature,
+        %Uint256{} = salt
+      ),
+      do: %__MODULE__{key: key, signature: signature, salt: salt}
 
   @impl true
   def encode_xdr(%__MODULE__{key: key, signature: signature, salt: salt}) do
@@ -58,7 +58,9 @@ defmodule StellarBase.XDR.ContractIDFromEd25519PublicKey do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [key: key, signature: signature, salt: salt]}, rest}} ->
         {:ok, {new(key, signature, salt), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -68,6 +70,7 @@ defmodule StellarBase.XDR.ContractIDFromEd25519PublicKey do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [key: key, signature: signature, salt: salt]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(key, signature, salt), rest}
   end
 end

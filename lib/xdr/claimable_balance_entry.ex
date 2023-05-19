@@ -19,12 +19,12 @@ defmodule StellarBase.XDR.ClaimableBalanceEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    balance_id: ClaimableBalanceID,
-    claimants: ClaimantList10,
-    asset: Asset,
-    amount: Int64,
-    ext: ClaimableBalanceEntryExt
-  )
+                 balance_id: ClaimableBalanceID,
+                 claimants: ClaimantList10,
+                 asset: Asset,
+                 amount: Int64,
+                 ext: ClaimableBalanceEntryExt
+               )
 
   @type balance_id_type :: ClaimableBalanceID.t()
   @type claimants_type :: ClaimantList10.t()
@@ -32,29 +32,59 @@ defmodule StellarBase.XDR.ClaimableBalanceEntry do
   @type amount_type :: Int64.t()
   @type ext_type :: ClaimableBalanceEntryExt.t()
 
-  @type t :: %__MODULE__{balance_id: balance_id_type(), claimants: claimants_type(), asset: asset_type(), amount: amount_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          balance_id: balance_id_type(),
+          claimants: claimants_type(),
+          asset: asset_type(),
+          amount: amount_type(),
+          ext: ext_type()
+        }
 
   defstruct [:balance_id, :claimants, :asset, :amount, :ext]
 
-  @spec new(balance_id :: balance_id_type(), claimants :: claimants_type(), asset :: asset_type(), amount :: amount_type(), ext :: ext_type()) :: t()
+  @spec new(
+          balance_id :: balance_id_type(),
+          claimants :: claimants_type(),
+          asset :: asset_type(),
+          amount :: amount_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %ClaimableBalanceID{} = balance_id,
-    %ClaimantList10{} = claimants,
-    %Asset{} = asset,
-    %Int64{} = amount,
-    %ClaimableBalanceEntryExt{} = ext
-  ),
-  do: %__MODULE__{balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext}
+        %ClaimableBalanceID{} = balance_id,
+        %ClaimantList10{} = claimants,
+        %Asset{} = asset,
+        %Int64{} = amount,
+        %ClaimableBalanceEntryExt{} = ext
+      ),
+      do: %__MODULE__{
+        balance_id: balance_id,
+        claimants: claimants,
+        asset: asset,
+        amount: amount,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext}) do
+  def encode_xdr(%__MODULE__{
+        balance_id: balance_id,
+        claimants: claimants,
+        asset: asset,
+        amount: amount,
+        ext: ext
+      }) do
     [balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext}) do
+  def encode_xdr!(%__MODULE__{
+        balance_id: balance_id,
+        claimants: claimants,
+        asset: asset,
+        amount: amount,
+        ext: ext
+      }) do
     [balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -65,9 +95,20 @@ defmodule StellarBase.XDR.ClaimableBalanceEntry do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            balance_id: balance_id,
+            claimants: claimants,
+            asset: asset,
+            amount: amount,
+            ext: ext
+          ]
+        }, rest}} ->
         {:ok, {new(balance_id, claimants, asset, amount, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -75,8 +116,16 @@ defmodule StellarBase.XDR.ClaimableBalanceEntry do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [balance_id: balance_id, claimants: claimants, asset: asset, amount: amount, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         balance_id: balance_id,
+         claimants: claimants,
+         asset: asset,
+         amount: amount,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(balance_id, claimants, asset, amount, ext), rest}
   end
 end

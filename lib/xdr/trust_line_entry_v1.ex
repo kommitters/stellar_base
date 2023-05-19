@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.TrustLineEntryV1 do
   }
 
   @struct_spec XDR.Struct.new(
-    liabilities: Liabilities,
-    ext: TrustLineEntryV1Ext
-  )
+                 liabilities: Liabilities,
+                 ext: TrustLineEntryV1Ext
+               )
 
   @type liabilities_type :: Liabilities.t()
   @type ext_type :: TrustLineEntryV1Ext.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.TrustLineEntryV1 do
 
   @spec new(liabilities :: liabilities_type(), ext :: ext_type()) :: t()
   def new(
-    %Liabilities{} = liabilities,
-    %TrustLineEntryV1Ext{} = ext
-  ),
-  do: %__MODULE__{liabilities: liabilities, ext: ext}
+        %Liabilities{} = liabilities,
+        %TrustLineEntryV1Ext{} = ext
+      ),
+      do: %__MODULE__{liabilities: liabilities, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{liabilities: liabilities, ext: ext}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.TrustLineEntryV1 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [liabilities: liabilities, ext: ext]}, rest}} ->
         {:ok, {new(liabilities, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.TrustLineEntryV1 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [liabilities: liabilities, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(liabilities, ext), rest}
   end
 end

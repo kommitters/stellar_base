@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.SignedSurveyResponseMessage do
   }
 
   @struct_spec XDR.Struct.new(
-    response_signature: Signature,
-    response: SurveyResponseMessage
-  )
+                 response_signature: Signature,
+                 response: SurveyResponseMessage
+               )
 
   @type response_signature_type :: Signature.t()
   @type response_type :: SurveyResponseMessage.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.SignedSurveyResponseMessage do
 
   @spec new(response_signature :: response_signature_type(), response :: response_type()) :: t()
   def new(
-    %Signature{} = response_signature,
-    %SurveyResponseMessage{} = response
-  ),
-  do: %__MODULE__{response_signature: response_signature, response: response}
+        %Signature{} = response_signature,
+        %SurveyResponseMessage{} = response
+      ),
+      do: %__MODULE__{response_signature: response_signature, response: response}
 
   @impl true
   def encode_xdr(%__MODULE__{response_signature: response_signature, response: response}) do
@@ -53,9 +53,13 @@ defmodule StellarBase.XDR.SignedSurveyResponseMessage do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [response_signature: response_signature, response: response]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [response_signature: response_signature, response: response]},
+        rest}} ->
         {:ok, {new(response_signature, response), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +69,7 @@ defmodule StellarBase.XDR.SignedSurveyResponseMessage do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [response_signature: response_signature, response: response]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(response_signature, response), rest}
   end
 end

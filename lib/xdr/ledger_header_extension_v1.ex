@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.LedgerHeaderExtensionV1 do
   }
 
   @struct_spec XDR.Struct.new(
-    flags: Uint32,
-    ext: LedgerHeaderExtensionV1Ext
-  )
+                 flags: Uint32,
+                 ext: LedgerHeaderExtensionV1Ext
+               )
 
   @type flags_type :: Uint32.t()
   @type ext_type :: LedgerHeaderExtensionV1Ext.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.LedgerHeaderExtensionV1 do
 
   @spec new(flags :: flags_type(), ext :: ext_type()) :: t()
   def new(
-    %Uint32{} = flags,
-    %LedgerHeaderExtensionV1Ext{} = ext
-  ),
-  do: %__MODULE__{flags: flags, ext: ext}
+        %Uint32{} = flags,
+        %LedgerHeaderExtensionV1Ext{} = ext
+      ),
+      do: %__MODULE__{flags: flags, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{flags: flags, ext: ext}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.LedgerHeaderExtensionV1 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [flags: flags, ext: ext]}, rest}} ->
         {:ok, {new(flags, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.LedgerHeaderExtensionV1 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [flags: flags, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(flags, ext), rest}
   end
 end

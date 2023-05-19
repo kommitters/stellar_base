@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.MuxedAccountMed25519 do
   }
 
   @struct_spec XDR.Struct.new(
-    id: Uint64,
-    ed25519: Uint256
-  )
+                 id: Uint64,
+                 ed25519: Uint256
+               )
 
   @type id_type :: Uint64.t()
   @type ed25519_type :: Uint256.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.MuxedAccountMed25519 do
 
   @spec new(id :: id_type(), ed25519 :: ed25519_type()) :: t()
   def new(
-    %Uint64{} = id,
-    %Uint256{} = ed25519
-  ),
-  do: %__MODULE__{id: id, ed25519: ed25519}
+        %Uint64{} = id,
+        %Uint256{} = ed25519
+      ),
+      do: %__MODULE__{id: id, ed25519: ed25519}
 
   @impl true
   def encode_xdr(%__MODULE__{id: id, ed25519: ed25519}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.MuxedAccountMed25519 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [id: id, ed25519: ed25519]}, rest}} ->
         {:ok, {new(id, ed25519), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.MuxedAccountMed25519 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [id: id, ed25519: ed25519]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(id, ed25519), rest}
   end
 end

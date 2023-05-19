@@ -15,9 +15,9 @@ defmodule StellarBase.XDR.LedgerFootprint do
   }
 
   @struct_spec XDR.Struct.new(
-    read_only: LedgerKeyList,
-    read_write: LedgerKeyList
-  )
+                 read_only: LedgerKeyList,
+                 read_write: LedgerKeyList
+               )
 
   @type read_only_type :: LedgerKeyList.t()
   @type read_write_type :: LedgerKeyList.t()
@@ -28,10 +28,10 @@ defmodule StellarBase.XDR.LedgerFootprint do
 
   @spec new(read_only :: read_only_type(), read_write :: read_write_type()) :: t()
   def new(
-    %LedgerKeyList{} = read_only,
-    %LedgerKeyList{} = read_write
-  ),
-  do: %__MODULE__{read_only: read_only, read_write: read_write}
+        %LedgerKeyList{} = read_only,
+        %LedgerKeyList{} = read_write
+      ),
+      do: %__MODULE__{read_only: read_only, read_write: read_write}
 
   @impl true
   def encode_xdr(%__MODULE__{read_only: read_only, read_write: read_write}) do
@@ -54,7 +54,9 @@ defmodule StellarBase.XDR.LedgerFootprint do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [read_only: read_only, read_write: read_write]}, rest}} ->
         {:ok, {new(read_only, read_write), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -64,6 +66,7 @@ defmodule StellarBase.XDR.LedgerFootprint do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [read_only: read_only, read_write: read_write]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(read_only, read_write), rest}
   end
 end

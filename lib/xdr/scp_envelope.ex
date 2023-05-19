@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.SCPEnvelope do
   }
 
   @struct_spec XDR.Struct.new(
-    statement: SCPStatement,
-    signature: Signature
-  )
+                 statement: SCPStatement,
+                 signature: Signature
+               )
 
   @type statement_type :: SCPStatement.t()
   @type signature_type :: Signature.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.SCPEnvelope do
 
   @spec new(statement :: statement_type(), signature :: signature_type()) :: t()
   def new(
-    %SCPStatement{} = statement,
-    %Signature{} = signature
-  ),
-  do: %__MODULE__{statement: statement, signature: signature}
+        %SCPStatement{} = statement,
+        %Signature{} = signature
+      ),
+      do: %__MODULE__{statement: statement, signature: signature}
 
   @impl true
   def encode_xdr(%__MODULE__{statement: statement, signature: signature}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.SCPEnvelope do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [statement: statement, signature: signature]}, rest}} ->
         {:ok, {new(statement, signature), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.SCPEnvelope do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [statement: statement, signature: signature]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(statement, signature), rest}
   end
 end

@@ -14,7 +14,7 @@ defmodule StellarBase.XDR.SCString do
 
   defstruct [:value]
 
-  @max_length 256000
+  @max_length 256_000
 
   @spec new(value :: String.t()) :: t()
   def new(value), do: %__MODULE__{value: value}

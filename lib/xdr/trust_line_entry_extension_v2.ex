@@ -16,23 +16,26 @@ defmodule StellarBase.XDR.TrustLineEntryExtensionV2 do
   }
 
   @struct_spec XDR.Struct.new(
-    liquidity_pool_use_count: Int32,
-    ext: TrustLineEntryExtensionV2Ext
-  )
+                 liquidity_pool_use_count: Int32,
+                 ext: TrustLineEntryExtensionV2Ext
+               )
 
   @type liquidity_pool_use_count_type :: Int32.t()
   @type ext_type :: TrustLineEntryExtensionV2Ext.t()
 
-  @type t :: %__MODULE__{liquidity_pool_use_count: liquidity_pool_use_count_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          liquidity_pool_use_count: liquidity_pool_use_count_type(),
+          ext: ext_type()
+        }
 
   defstruct [:liquidity_pool_use_count, :ext]
 
   @spec new(liquidity_pool_use_count :: liquidity_pool_use_count_type(), ext :: ext_type()) :: t()
   def new(
-    %Int32{} = liquidity_pool_use_count,
-    %TrustLineEntryExtensionV2Ext{} = ext
-  ),
-  do: %__MODULE__{liquidity_pool_use_count: liquidity_pool_use_count, ext: ext}
+        %Int32{} = liquidity_pool_use_count,
+        %TrustLineEntryExtensionV2Ext{} = ext
+      ),
+      do: %__MODULE__{liquidity_pool_use_count: liquidity_pool_use_count, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{liquidity_pool_use_count: liquidity_pool_use_count, ext: ext}) do
@@ -53,9 +56,13 @@ defmodule StellarBase.XDR.TrustLineEntryExtensionV2 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [liquidity_pool_use_count: liquidity_pool_use_count, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [liquidity_pool_use_count: liquidity_pool_use_count, ext: ext]},
+        rest}} ->
         {:ok, {new(liquidity_pool_use_count, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -63,8 +70,9 @@ defmodule StellarBase.XDR.TrustLineEntryExtensionV2 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [liquidity_pool_use_count: liquidity_pool_use_count, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [liquidity_pool_use_count: liquidity_pool_use_count, ext: ext]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(liquidity_pool_use_count, ext), rest}
   end
 end

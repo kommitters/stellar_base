@@ -57,5 +57,4 @@ defmodule StellarBase.XDR.OptionalTimeBounds do
       {nil, rest} -> {new(), rest}
     end
   end
-
 end

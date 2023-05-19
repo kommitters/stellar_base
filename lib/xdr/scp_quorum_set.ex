@@ -17,26 +17,34 @@ defmodule StellarBase.XDR.SCPQuorumSet do
   }
 
   @struct_spec XDR.Struct.new(
-    threshold: Uint32,
-    validators: NodeIDList,
-    inner_sets: SCPQuorumSetList
-  )
+                 threshold: Uint32,
+                 validators: NodeIDList,
+                 inner_sets: SCPQuorumSetList
+               )
 
   @type threshold_type :: Uint32.t()
   @type validators_type :: NodeIDList.t()
   @type inner_sets_type :: SCPQuorumSetList.t()
 
-  @type t :: %__MODULE__{threshold: threshold_type(), validators: validators_type(), inner_sets: inner_sets_type()}
+  @type t :: %__MODULE__{
+          threshold: threshold_type(),
+          validators: validators_type(),
+          inner_sets: inner_sets_type()
+        }
 
   defstruct [:threshold, :validators, :inner_sets]
 
-  @spec new(threshold :: threshold_type(), validators :: validators_type(), inner_sets :: inner_sets_type()) :: t()
+  @spec new(
+          threshold :: threshold_type(),
+          validators :: validators_type(),
+          inner_sets :: inner_sets_type()
+        ) :: t()
   def new(
-    %Uint32{} = threshold,
-    %NodeIDList{} = validators,
-    %SCPQuorumSetList{} = inner_sets
-  ),
-  do: %__MODULE__{threshold: threshold, validators: validators, inner_sets: inner_sets}
+        %Uint32{} = threshold,
+        %NodeIDList{} = validators,
+        %SCPQuorumSetList{} = inner_sets
+      ),
+      do: %__MODULE__{threshold: threshold, validators: validators, inner_sets: inner_sets}
 
   @impl true
   def encode_xdr(%__MODULE__{threshold: threshold, validators: validators, inner_sets: inner_sets}) do
@@ -46,7 +54,11 @@ defmodule StellarBase.XDR.SCPQuorumSet do
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{threshold: threshold, validators: validators, inner_sets: inner_sets}) do
+  def encode_xdr!(%__MODULE__{
+        threshold: threshold,
+        validators: validators,
+        inner_sets: inner_sets
+      }) do
     [threshold: threshold, validators: validators, inner_sets: inner_sets]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -57,9 +69,14 @@ defmodule StellarBase.XDR.SCPQuorumSet do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [threshold: threshold, validators: validators, inner_sets: inner_sets]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [threshold: threshold, validators: validators, inner_sets: inner_sets]
+        }, rest}} ->
         {:ok, {new(threshold, validators, inner_sets), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -67,8 +84,10 @@ defmodule StellarBase.XDR.SCPQuorumSet do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [threshold: threshold, validators: validators, inner_sets: inner_sets]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [threshold: threshold, validators: validators, inner_sets: inner_sets]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(threshold, validators, inner_sets), rest}
   end
 end

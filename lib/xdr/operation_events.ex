@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.OperationEvents do
     ContractEventList
   }
 
-  @struct_spec XDR.Struct.new(
-    events: ContractEventList
-  )
+  @struct_spec XDR.Struct.new(events: ContractEventList)
 
   @type events_type :: ContractEventList.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.OperationEvents do
   defstruct [:events]
 
   @spec new(events :: events_type()) :: t()
-  def new(
-    %ContractEventList{} = events
-  ),
-  do: %__MODULE__{events: events}
+  def new(%ContractEventList{} = events),
+    do: %__MODULE__{events: events}
 
   @impl true
   def encode_xdr(%__MODULE__{events: events}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.OperationEvents do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [events: events]}, rest}} ->
         {:ok, {new(events), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.OperationEvents do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [events: events]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [events: events]}, rest} = XDR.Struct.decode_xdr!(bytes, struct)
     {new(events), rest}
   end
 end

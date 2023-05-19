@@ -57,5 +57,4 @@ defmodule StellarBase.XDR.OptionalHash do
       {nil, rest} -> {new(), rest}
     end
   end
-
 end

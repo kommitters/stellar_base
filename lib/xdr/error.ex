@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.Error do
   }
 
   @struct_spec XDR.Struct.new(
-    code: ErrorCode,
-    msg: String100
-  )
+                 code: ErrorCode,
+                 msg: String100
+               )
 
   @type code_type :: ErrorCode.t()
   @type msg_type :: String100.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.Error do
 
   @spec new(code :: code_type(), msg :: msg_type()) :: t()
   def new(
-    %ErrorCode{} = code,
-    %String100{} = msg
-  ),
-  do: %__MODULE__{code: code, msg: msg}
+        %ErrorCode{} = code,
+        %String100{} = msg
+      ),
+      do: %__MODULE__{code: code, msg: msg}
 
   @impl true
   def encode_xdr(%__MODULE__{code: code, msg: msg}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.Error do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [code: code, msg: msg]}, rest}} ->
         {:ok, {new(code, msg), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.Error do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [code: code, msg: msg]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(code, msg), rest}
   end
 end

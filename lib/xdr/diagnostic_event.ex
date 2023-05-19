@@ -16,33 +16,45 @@ defmodule StellarBase.XDR.DiagnosticEvent do
   }
 
   @struct_spec XDR.Struct.new(
-    in_successful_contract_call: Bool,
-    event: ContractEvent
-  )
+                 in_successful_contract_call: Bool,
+                 event: ContractEvent
+               )
 
   @type in_successful_contract_call_type :: Bool.t()
   @type event_type :: ContractEvent.t()
 
-  @type t :: %__MODULE__{in_successful_contract_call: in_successful_contract_call_type(), event: event_type()}
+  @type t :: %__MODULE__{
+          in_successful_contract_call: in_successful_contract_call_type(),
+          event: event_type()
+        }
 
   defstruct [:in_successful_contract_call, :event]
 
-  @spec new(in_successful_contract_call :: in_successful_contract_call_type(), event :: event_type()) :: t()
+  @spec new(
+          in_successful_contract_call :: in_successful_contract_call_type(),
+          event :: event_type()
+        ) :: t()
   def new(
-    %Bool{} = in_successful_contract_call,
-    %ContractEvent{} = event
-  ),
-  do: %__MODULE__{in_successful_contract_call: in_successful_contract_call, event: event}
+        %Bool{} = in_successful_contract_call,
+        %ContractEvent{} = event
+      ),
+      do: %__MODULE__{in_successful_contract_call: in_successful_contract_call, event: event}
 
   @impl true
-  def encode_xdr(%__MODULE__{in_successful_contract_call: in_successful_contract_call, event: event}) do
+  def encode_xdr(%__MODULE__{
+        in_successful_contract_call: in_successful_contract_call,
+        event: event
+      }) do
     [in_successful_contract_call: in_successful_contract_call, event: event]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{in_successful_contract_call: in_successful_contract_call, event: event}) do
+  def encode_xdr!(%__MODULE__{
+        in_successful_contract_call: in_successful_contract_call,
+        event: event
+      }) do
     [in_successful_contract_call: in_successful_contract_call, event: event]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -53,9 +65,14 @@ defmodule StellarBase.XDR.DiagnosticEvent do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [in_successful_contract_call: in_successful_contract_call, event: event]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [in_successful_contract_call: in_successful_contract_call, event: event]
+        }, rest}} ->
         {:ok, {new(in_successful_contract_call, event), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -63,8 +80,10 @@ defmodule StellarBase.XDR.DiagnosticEvent do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [in_successful_contract_call: in_successful_contract_call, event: event]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [in_successful_contract_call: in_successful_contract_call, event: event]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(in_successful_contract_call, event), rest}
   end
 end

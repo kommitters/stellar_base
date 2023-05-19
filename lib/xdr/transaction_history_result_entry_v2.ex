@@ -17,26 +17,34 @@ defmodule StellarBase.XDR.TransactionHistoryResultEntryV2 do
   }
 
   @struct_spec XDR.Struct.new(
-    ledger_seq: Uint32,
-    tx_result_set: TransactionResultSetV2,
-    ext: TransactionHistoryResultEntryV2Ext
-  )
+                 ledger_seq: Uint32,
+                 tx_result_set: TransactionResultSetV2,
+                 ext: TransactionHistoryResultEntryV2Ext
+               )
 
   @type ledger_seq_type :: Uint32.t()
   @type tx_result_set_type :: TransactionResultSetV2.t()
   @type ext_type :: TransactionHistoryResultEntryV2Ext.t()
 
-  @type t :: %__MODULE__{ledger_seq: ledger_seq_type(), tx_result_set: tx_result_set_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          ledger_seq: ledger_seq_type(),
+          tx_result_set: tx_result_set_type(),
+          ext: ext_type()
+        }
 
   defstruct [:ledger_seq, :tx_result_set, :ext]
 
-  @spec new(ledger_seq :: ledger_seq_type(), tx_result_set :: tx_result_set_type(), ext :: ext_type()) :: t()
+  @spec new(
+          ledger_seq :: ledger_seq_type(),
+          tx_result_set :: tx_result_set_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %Uint32{} = ledger_seq,
-    %TransactionResultSetV2{} = tx_result_set,
-    %TransactionHistoryResultEntryV2Ext{} = ext
-  ),
-  do: %__MODULE__{ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext}
+        %Uint32{} = ledger_seq,
+        %TransactionResultSetV2{} = tx_result_set,
+        %TransactionHistoryResultEntryV2Ext{} = ext
+      ),
+      do: %__MODULE__{ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext}) do
@@ -57,9 +65,13 @@ defmodule StellarBase.XDR.TransactionHistoryResultEntryV2 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext]},
+        rest}} ->
         {:ok, {new(ledger_seq, tx_result_set, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -67,8 +79,9 @@ defmodule StellarBase.XDR.TransactionHistoryResultEntryV2 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [ledger_seq: ledger_seq, tx_result_set: tx_result_set, ext: ext]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ledger_seq, tx_result_set, ext), rest}
   end
 end

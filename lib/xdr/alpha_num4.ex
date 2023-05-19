@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.AlphaNum4 do
   }
 
   @struct_spec XDR.Struct.new(
-    asset_code: AssetCode4,
-    issuer: AccountID
-  )
+                 asset_code: AssetCode4,
+                 issuer: AccountID
+               )
 
   @type asset_code_type :: AssetCode4.t()
   @type issuer_type :: AccountID.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.AlphaNum4 do
 
   @spec new(asset_code :: asset_code_type(), issuer :: issuer_type()) :: t()
   def new(
-    %AssetCode4{} = asset_code,
-    %AccountID{} = issuer
-  ),
-  do: %__MODULE__{asset_code: asset_code, issuer: issuer}
+        %AssetCode4{} = asset_code,
+        %AccountID{} = issuer
+      ),
+      do: %__MODULE__{asset_code: asset_code, issuer: issuer}
 
   @impl true
   def encode_xdr(%__MODULE__{asset_code: asset_code, issuer: issuer}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.AlphaNum4 do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [asset_code: asset_code, issuer: issuer]}, rest}} ->
         {:ok, {new(asset_code, issuer), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.AlphaNum4 do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [asset_code: asset_code, issuer: issuer]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(asset_code, issuer), rest}
   end
 end

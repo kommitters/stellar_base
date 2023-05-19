@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.BucketMetadata do
   }
 
   @struct_spec XDR.Struct.new(
-    ledger_version: Uint32,
-    ext: BucketMetadataExt
-  )
+                 ledger_version: Uint32,
+                 ext: BucketMetadataExt
+               )
 
   @type ledger_version_type :: Uint32.t()
   @type ext_type :: BucketMetadataExt.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.BucketMetadata do
 
   @spec new(ledger_version :: ledger_version_type(), ext :: ext_type()) :: t()
   def new(
-    %Uint32{} = ledger_version,
-    %BucketMetadataExt{} = ext
-  ),
-  do: %__MODULE__{ledger_version: ledger_version, ext: ext}
+        %Uint32{} = ledger_version,
+        %BucketMetadataExt{} = ext
+      ),
+      do: %__MODULE__{ledger_version: ledger_version, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{ledger_version: ledger_version, ext: ext}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.BucketMetadata do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [ledger_version: ledger_version, ext: ext]}, rest}} ->
         {:ok, {new(ledger_version, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.BucketMetadata do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ledger_version: ledger_version, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ledger_version, ext), rest}
   end
 end

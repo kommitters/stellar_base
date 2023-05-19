@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.SCVec do
 
   alias StellarBase.XDR.SCVal
 
-  @max_length 256000
+  @max_length 256_000
 
   @array_type SCVal
 

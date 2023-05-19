@@ -57,5 +57,4 @@ defmodule StellarBase.XDR.OptionalClaimPredicate do
       {nil, rest} -> {new(), rest}
     end
   end
-
 end

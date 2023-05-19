@@ -20,15 +20,15 @@ defmodule StellarBase.XDR.OfferEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    seller_id: AccountID,
-    offer_id: Int64,
-    selling: Asset,
-    buying: Asset,
-    amount: Int64,
-    price: Price,
-    flags: Uint32,
-    ext: OfferEntryExt
-  )
+                 seller_id: AccountID,
+                 offer_id: Int64,
+                 selling: Asset,
+                 buying: Asset,
+                 amount: Int64,
+                 price: Price,
+                 flags: Uint32,
+                 ext: OfferEntryExt
+               )
 
   @type seller_id_type :: AccountID.t()
   @type offer_id_type :: Int64.t()
@@ -39,33 +39,96 @@ defmodule StellarBase.XDR.OfferEntry do
   @type flags_type :: Uint32.t()
   @type ext_type :: OfferEntryExt.t()
 
-  @type t :: %__MODULE__{seller_id: seller_id_type(), offer_id: offer_id_type(), selling: selling_type(), buying: buying_type(), amount: amount_type(), price: price_type(), flags: flags_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          seller_id: seller_id_type(),
+          offer_id: offer_id_type(),
+          selling: selling_type(),
+          buying: buying_type(),
+          amount: amount_type(),
+          price: price_type(),
+          flags: flags_type(),
+          ext: ext_type()
+        }
 
   defstruct [:seller_id, :offer_id, :selling, :buying, :amount, :price, :flags, :ext]
 
-  @spec new(seller_id :: seller_id_type(), offer_id :: offer_id_type(), selling :: selling_type(), buying :: buying_type(), amount :: amount_type(), price :: price_type(), flags :: flags_type(), ext :: ext_type()) :: t()
+  @spec new(
+          seller_id :: seller_id_type(),
+          offer_id :: offer_id_type(),
+          selling :: selling_type(),
+          buying :: buying_type(),
+          amount :: amount_type(),
+          price :: price_type(),
+          flags :: flags_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %AccountID{} = seller_id,
-    %Int64{} = offer_id,
-    %Asset{} = selling,
-    %Asset{} = buying,
-    %Int64{} = amount,
-    %Price{} = price,
-    %Uint32{} = flags,
-    %OfferEntryExt{} = ext
-  ),
-  do: %__MODULE__{seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext}
+        %AccountID{} = seller_id,
+        %Int64{} = offer_id,
+        %Asset{} = selling,
+        %Asset{} = buying,
+        %Int64{} = amount,
+        %Price{} = price,
+        %Uint32{} = flags,
+        %OfferEntryExt{} = ext
+      ),
+      do: %__MODULE__{
+        seller_id: seller_id,
+        offer_id: offer_id,
+        selling: selling,
+        buying: buying,
+        amount: amount,
+        price: price,
+        flags: flags,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext}) do
-    [seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext]
+  def encode_xdr(%__MODULE__{
+        seller_id: seller_id,
+        offer_id: offer_id,
+        selling: selling,
+        buying: buying,
+        amount: amount,
+        price: price,
+        flags: flags,
+        ext: ext
+      }) do
+    [
+      seller_id: seller_id,
+      offer_id: offer_id,
+      selling: selling,
+      buying: buying,
+      amount: amount,
+      price: price,
+      flags: flags,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext}) do
-    [seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext]
+  def encode_xdr!(%__MODULE__{
+        seller_id: seller_id,
+        offer_id: offer_id,
+        selling: selling,
+        buying: buying,
+        amount: amount,
+        price: price,
+        flags: flags,
+        ext: ext
+      }) do
+    [
+      seller_id: seller_id,
+      offer_id: offer_id,
+      selling: selling,
+      buying: buying,
+      amount: amount,
+      price: price,
+      flags: flags,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -75,9 +138,23 @@ defmodule StellarBase.XDR.OfferEntry do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            seller_id: seller_id,
+            offer_id: offer_id,
+            selling: selling,
+            buying: buying,
+            amount: amount,
+            price: price,
+            flags: flags,
+            ext: ext
+          ]
+        }, rest}} ->
         {:ok, {new(seller_id, offer_id, selling, buying, amount, price, flags, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -85,8 +162,19 @@ defmodule StellarBase.XDR.OfferEntry do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [seller_id: seller_id, offer_id: offer_id, selling: selling, buying: buying, amount: amount, price: price, flags: flags, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         seller_id: seller_id,
+         offer_id: offer_id,
+         selling: selling,
+         buying: buying,
+         amount: amount,
+         price: price,
+         flags: flags,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(seller_id, offer_id, selling, buying, amount, price, flags, ext), rest}
   end
 end

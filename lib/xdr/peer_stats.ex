@@ -17,22 +17,22 @@ defmodule StellarBase.XDR.PeerStats do
   }
 
   @struct_spec XDR.Struct.new(
-    id: NodeID,
-    version_str: String100,
-    messages_read: Uint64,
-    messages_written: Uint64,
-    bytes_read: Uint64,
-    bytes_written: Uint64,
-    seconds_connected: Uint64,
-    unique_flood_bytes_recv: Uint64,
-    duplicate_flood_bytes_recv: Uint64,
-    unique_fetch_bytes_recv: Uint64,
-    duplicate_fetch_bytes_recv: Uint64,
-    unique_flood_message_recv: Uint64,
-    duplicate_flood_message_recv: Uint64,
-    unique_fetch_message_recv: Uint64,
-    duplicate_fetch_message_recv: Uint64
-  )
+                 id: NodeID,
+                 version_str: String100,
+                 messages_read: Uint64,
+                 messages_written: Uint64,
+                 bytes_read: Uint64,
+                 bytes_written: Uint64,
+                 seconds_connected: Uint64,
+                 unique_flood_bytes_recv: Uint64,
+                 duplicate_flood_bytes_recv: Uint64,
+                 unique_fetch_bytes_recv: Uint64,
+                 duplicate_fetch_bytes_recv: Uint64,
+                 unique_flood_message_recv: Uint64,
+                 duplicate_flood_message_recv: Uint64,
+                 unique_fetch_message_recv: Uint64,
+                 duplicate_fetch_message_recv: Uint64
+               )
 
   @type id_type :: NodeID.t()
   @type version_str_type :: String100.t()
@@ -50,40 +50,168 @@ defmodule StellarBase.XDR.PeerStats do
   @type unique_fetch_message_recv_type :: Uint64.t()
   @type duplicate_fetch_message_recv_type :: Uint64.t()
 
-  @type t :: %__MODULE__{id: id_type(), version_str: version_str_type(), messages_read: messages_read_type(), messages_written: messages_written_type(), bytes_read: bytes_read_type(), bytes_written: bytes_written_type(), seconds_connected: seconds_connected_type(), unique_flood_bytes_recv: unique_flood_bytes_recv_type(), duplicate_flood_bytes_recv: duplicate_flood_bytes_recv_type(), unique_fetch_bytes_recv: unique_fetch_bytes_recv_type(), duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv_type(), unique_flood_message_recv: unique_flood_message_recv_type(), duplicate_flood_message_recv: duplicate_flood_message_recv_type(), unique_fetch_message_recv: unique_fetch_message_recv_type(), duplicate_fetch_message_recv: duplicate_fetch_message_recv_type()}
+  @type t :: %__MODULE__{
+          id: id_type(),
+          version_str: version_str_type(),
+          messages_read: messages_read_type(),
+          messages_written: messages_written_type(),
+          bytes_read: bytes_read_type(),
+          bytes_written: bytes_written_type(),
+          seconds_connected: seconds_connected_type(),
+          unique_flood_bytes_recv: unique_flood_bytes_recv_type(),
+          duplicate_flood_bytes_recv: duplicate_flood_bytes_recv_type(),
+          unique_fetch_bytes_recv: unique_fetch_bytes_recv_type(),
+          duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv_type(),
+          unique_flood_message_recv: unique_flood_message_recv_type(),
+          duplicate_flood_message_recv: duplicate_flood_message_recv_type(),
+          unique_fetch_message_recv: unique_fetch_message_recv_type(),
+          duplicate_fetch_message_recv: duplicate_fetch_message_recv_type()
+        }
 
-  defstruct [:id, :version_str, :messages_read, :messages_written, :bytes_read, :bytes_written, :seconds_connected, :unique_flood_bytes_recv, :duplicate_flood_bytes_recv, :unique_fetch_bytes_recv, :duplicate_fetch_bytes_recv, :unique_flood_message_recv, :duplicate_flood_message_recv, :unique_fetch_message_recv, :duplicate_fetch_message_recv]
+  defstruct [
+    :id,
+    :version_str,
+    :messages_read,
+    :messages_written,
+    :bytes_read,
+    :bytes_written,
+    :seconds_connected,
+    :unique_flood_bytes_recv,
+    :duplicate_flood_bytes_recv,
+    :unique_fetch_bytes_recv,
+    :duplicate_fetch_bytes_recv,
+    :unique_flood_message_recv,
+    :duplicate_flood_message_recv,
+    :unique_fetch_message_recv,
+    :duplicate_fetch_message_recv
+  ]
 
-  @spec new(id :: id_type(), version_str :: version_str_type(), messages_read :: messages_read_type(), messages_written :: messages_written_type(), bytes_read :: bytes_read_type(), bytes_written :: bytes_written_type(), seconds_connected :: seconds_connected_type(), unique_flood_bytes_recv :: unique_flood_bytes_recv_type(), duplicate_flood_bytes_recv :: duplicate_flood_bytes_recv_type(), unique_fetch_bytes_recv :: unique_fetch_bytes_recv_type(), duplicate_fetch_bytes_recv :: duplicate_fetch_bytes_recv_type(), unique_flood_message_recv :: unique_flood_message_recv_type(), duplicate_flood_message_recv :: duplicate_flood_message_recv_type(), unique_fetch_message_recv :: unique_fetch_message_recv_type(), duplicate_fetch_message_recv :: duplicate_fetch_message_recv_type()) :: t()
+  @spec new(
+          id :: id_type(),
+          version_str :: version_str_type(),
+          messages_read :: messages_read_type(),
+          messages_written :: messages_written_type(),
+          bytes_read :: bytes_read_type(),
+          bytes_written :: bytes_written_type(),
+          seconds_connected :: seconds_connected_type(),
+          unique_flood_bytes_recv :: unique_flood_bytes_recv_type(),
+          duplicate_flood_bytes_recv :: duplicate_flood_bytes_recv_type(),
+          unique_fetch_bytes_recv :: unique_fetch_bytes_recv_type(),
+          duplicate_fetch_bytes_recv :: duplicate_fetch_bytes_recv_type(),
+          unique_flood_message_recv :: unique_flood_message_recv_type(),
+          duplicate_flood_message_recv :: duplicate_flood_message_recv_type(),
+          unique_fetch_message_recv :: unique_fetch_message_recv_type(),
+          duplicate_fetch_message_recv :: duplicate_fetch_message_recv_type()
+        ) :: t()
   def new(
-    %NodeID{} = id,
-    %String100{} = version_str,
-    %Uint64{} = messages_read,
-    %Uint64{} = messages_written,
-    %Uint64{} = bytes_read,
-    %Uint64{} = bytes_written,
-    %Uint64{} = seconds_connected,
-    %Uint64{} = unique_flood_bytes_recv,
-    %Uint64{} = duplicate_flood_bytes_recv,
-    %Uint64{} = unique_fetch_bytes_recv,
-    %Uint64{} = duplicate_fetch_bytes_recv,
-    %Uint64{} = unique_flood_message_recv,
-    %Uint64{} = duplicate_flood_message_recv,
-    %Uint64{} = unique_fetch_message_recv,
-    %Uint64{} = duplicate_fetch_message_recv
-  ),
-  do: %__MODULE__{id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv}
+        %NodeID{} = id,
+        %String100{} = version_str,
+        %Uint64{} = messages_read,
+        %Uint64{} = messages_written,
+        %Uint64{} = bytes_read,
+        %Uint64{} = bytes_written,
+        %Uint64{} = seconds_connected,
+        %Uint64{} = unique_flood_bytes_recv,
+        %Uint64{} = duplicate_flood_bytes_recv,
+        %Uint64{} = unique_fetch_bytes_recv,
+        %Uint64{} = duplicate_fetch_bytes_recv,
+        %Uint64{} = unique_flood_message_recv,
+        %Uint64{} = duplicate_flood_message_recv,
+        %Uint64{} = unique_fetch_message_recv,
+        %Uint64{} = duplicate_fetch_message_recv
+      ),
+      do: %__MODULE__{
+        id: id,
+        version_str: version_str,
+        messages_read: messages_read,
+        messages_written: messages_written,
+        bytes_read: bytes_read,
+        bytes_written: bytes_written,
+        seconds_connected: seconds_connected,
+        unique_flood_bytes_recv: unique_flood_bytes_recv,
+        duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+        unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+        duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+        unique_flood_message_recv: unique_flood_message_recv,
+        duplicate_flood_message_recv: duplicate_flood_message_recv,
+        unique_fetch_message_recv: unique_fetch_message_recv,
+        duplicate_fetch_message_recv: duplicate_fetch_message_recv
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv}) do
-    [id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv]
+  def encode_xdr(%__MODULE__{
+        id: id,
+        version_str: version_str,
+        messages_read: messages_read,
+        messages_written: messages_written,
+        bytes_read: bytes_read,
+        bytes_written: bytes_written,
+        seconds_connected: seconds_connected,
+        unique_flood_bytes_recv: unique_flood_bytes_recv,
+        duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+        unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+        duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+        unique_flood_message_recv: unique_flood_message_recv,
+        duplicate_flood_message_recv: duplicate_flood_message_recv,
+        unique_fetch_message_recv: unique_fetch_message_recv,
+        duplicate_fetch_message_recv: duplicate_fetch_message_recv
+      }) do
+    [
+      id: id,
+      version_str: version_str,
+      messages_read: messages_read,
+      messages_written: messages_written,
+      bytes_read: bytes_read,
+      bytes_written: bytes_written,
+      seconds_connected: seconds_connected,
+      unique_flood_bytes_recv: unique_flood_bytes_recv,
+      duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+      unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+      duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+      unique_flood_message_recv: unique_flood_message_recv,
+      duplicate_flood_message_recv: duplicate_flood_message_recv,
+      unique_fetch_message_recv: unique_fetch_message_recv,
+      duplicate_fetch_message_recv: duplicate_fetch_message_recv
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv}) do
-    [id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv]
+  def encode_xdr!(%__MODULE__{
+        id: id,
+        version_str: version_str,
+        messages_read: messages_read,
+        messages_written: messages_written,
+        bytes_read: bytes_read,
+        bytes_written: bytes_written,
+        seconds_connected: seconds_connected,
+        unique_flood_bytes_recv: unique_flood_bytes_recv,
+        duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+        unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+        duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+        unique_flood_message_recv: unique_flood_message_recv,
+        duplicate_flood_message_recv: duplicate_flood_message_recv,
+        unique_fetch_message_recv: unique_fetch_message_recv,
+        duplicate_fetch_message_recv: duplicate_fetch_message_recv
+      }) do
+    [
+      id: id,
+      version_str: version_str,
+      messages_read: messages_read,
+      messages_written: messages_written,
+      bytes_read: bytes_read,
+      bytes_written: bytes_written,
+      seconds_connected: seconds_connected,
+      unique_flood_bytes_recv: unique_flood_bytes_recv,
+      duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+      unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+      duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+      unique_flood_message_recv: unique_flood_message_recv,
+      duplicate_flood_message_recv: duplicate_flood_message_recv,
+      unique_fetch_message_recv: unique_fetch_message_recv,
+      duplicate_fetch_message_recv: duplicate_fetch_message_recv
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -93,9 +221,47 @@ defmodule StellarBase.XDR.PeerStats do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv]}, rest}} ->
-        {:ok, {new(id, version_str, messages_read, messages_written, bytes_read, bytes_written, seconds_connected, unique_flood_bytes_recv, duplicate_flood_bytes_recv, unique_fetch_bytes_recv, duplicate_fetch_bytes_recv, unique_flood_message_recv, duplicate_flood_message_recv, unique_fetch_message_recv, duplicate_fetch_message_recv), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            id: id,
+            version_str: version_str,
+            messages_read: messages_read,
+            messages_written: messages_written,
+            bytes_read: bytes_read,
+            bytes_written: bytes_written,
+            seconds_connected: seconds_connected,
+            unique_flood_bytes_recv: unique_flood_bytes_recv,
+            duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+            unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+            duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+            unique_flood_message_recv: unique_flood_message_recv,
+            duplicate_flood_message_recv: duplicate_flood_message_recv,
+            unique_fetch_message_recv: unique_fetch_message_recv,
+            duplicate_fetch_message_recv: duplicate_fetch_message_recv
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(
+            id,
+            version_str,
+            messages_read,
+            messages_written,
+            bytes_read,
+            bytes_written,
+            seconds_connected,
+            unique_flood_bytes_recv,
+            duplicate_flood_bytes_recv,
+            unique_fetch_bytes_recv,
+            duplicate_fetch_bytes_recv,
+            unique_flood_message_recv,
+            duplicate_flood_message_recv,
+            unique_fetch_message_recv,
+            duplicate_fetch_message_recv
+          ), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -103,8 +269,42 @@ defmodule StellarBase.XDR.PeerStats do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [id: id, version_str: version_str, messages_read: messages_read, messages_written: messages_written, bytes_read: bytes_read, bytes_written: bytes_written, seconds_connected: seconds_connected, unique_flood_bytes_recv: unique_flood_bytes_recv, duplicate_flood_bytes_recv: duplicate_flood_bytes_recv, unique_fetch_bytes_recv: unique_fetch_bytes_recv, duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv, unique_flood_message_recv: unique_flood_message_recv, duplicate_flood_message_recv: duplicate_flood_message_recv, unique_fetch_message_recv: unique_fetch_message_recv, duplicate_fetch_message_recv: duplicate_fetch_message_recv]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
-    {new(id, version_str, messages_read, messages_written, bytes_read, bytes_written, seconds_connected, unique_flood_bytes_recv, duplicate_flood_bytes_recv, unique_fetch_bytes_recv, duplicate_fetch_bytes_recv, unique_flood_message_recv, duplicate_flood_message_recv, unique_fetch_message_recv, duplicate_fetch_message_recv), rest}
+    {%XDR.Struct{
+       components: [
+         id: id,
+         version_str: version_str,
+         messages_read: messages_read,
+         messages_written: messages_written,
+         bytes_read: bytes_read,
+         bytes_written: bytes_written,
+         seconds_connected: seconds_connected,
+         unique_flood_bytes_recv: unique_flood_bytes_recv,
+         duplicate_flood_bytes_recv: duplicate_flood_bytes_recv,
+         unique_fetch_bytes_recv: unique_fetch_bytes_recv,
+         duplicate_fetch_bytes_recv: duplicate_fetch_bytes_recv,
+         unique_flood_message_recv: unique_flood_message_recv,
+         duplicate_flood_message_recv: duplicate_flood_message_recv,
+         unique_fetch_message_recv: unique_fetch_message_recv,
+         duplicate_fetch_message_recv: duplicate_fetch_message_recv
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(
+       id,
+       version_str,
+       messages_read,
+       messages_written,
+       bytes_read,
+       bytes_written,
+       seconds_connected,
+       unique_flood_bytes_recv,
+       duplicate_flood_bytes_recv,
+       unique_fetch_bytes_recv,
+       duplicate_fetch_bytes_recv,
+       unique_flood_message_recv,
+       duplicate_flood_message_recv,
+       unique_fetch_message_recv,
+       duplicate_fetch_message_recv
+     ), rest}
   end
 end

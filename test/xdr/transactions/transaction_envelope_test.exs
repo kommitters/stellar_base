@@ -88,6 +88,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
         |> Uint256.new()
 
       transaction_v0_ext = TransactionV0Ext.new(Void.new(), 0)
+
       tx =
         TransactionV0.new(
           source_account_ed25519,
@@ -291,7 +292,12 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
         tx
         |> TransactionV1Envelope.new(signatures)
         |> FeeBumpTransactionInnerTx.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
-        |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, fee_bump_transaction_ext)).()
+        |> (&FeeBumpTransaction.new(
+              source_account,
+              Int64.new(100_000),
+              &1,
+              fee_bump_transaction_ext
+            )).()
         |> FeeBumpTransactionEnvelope.new(signatures)
 
       %{

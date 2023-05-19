@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.FloodAdvert do
     TxAdvertVector
   }
 
-  @struct_spec XDR.Struct.new(
-    tx_hashes: TxAdvertVector
-  )
+  @struct_spec XDR.Struct.new(tx_hashes: TxAdvertVector)
 
   @type tx_hashes_type :: TxAdvertVector.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.FloodAdvert do
   defstruct [:tx_hashes]
 
   @spec new(tx_hashes :: tx_hashes_type()) :: t()
-  def new(
-    %TxAdvertVector{} = tx_hashes
-  ),
-  do: %__MODULE__{tx_hashes: tx_hashes}
+  def new(%TxAdvertVector{} = tx_hashes),
+    do: %__MODULE__{tx_hashes: tx_hashes}
 
   @impl true
   def encode_xdr(%__MODULE__{tx_hashes: tx_hashes}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.FloodAdvert do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [tx_hashes: tx_hashes]}, rest}} ->
         {:ok, {new(tx_hashes), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -61,6 +59,7 @@ defmodule StellarBase.XDR.FloodAdvert do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [tx_hashes: tx_hashes]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(tx_hashes), rest}
   end
 end

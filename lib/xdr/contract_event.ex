@@ -18,29 +18,39 @@ defmodule StellarBase.XDR.ContractEvent do
   }
 
   @struct_spec XDR.Struct.new(
-    ext: ExtensionPoint,
-    contract_id: OptionalHash,
-    type: ContractEventType,
-    body: ContractEventBody
-  )
+                 ext: ExtensionPoint,
+                 contract_id: OptionalHash,
+                 type: ContractEventType,
+                 body: ContractEventBody
+               )
 
   @type ext_type :: ExtensionPoint.t()
   @type contract_id_type :: OptionalHash.t()
   @type type_type :: ContractEventType.t()
   @type body_type :: ContractEventBody.t()
 
-  @type t :: %__MODULE__{ext: ext_type(), contract_id: contract_id_type(), type: type_type(), body: body_type()}
+  @type t :: %__MODULE__{
+          ext: ext_type(),
+          contract_id: contract_id_type(),
+          type: type_type(),
+          body: body_type()
+        }
 
   defstruct [:ext, :contract_id, :type, :body]
 
-  @spec new(ext :: ext_type(), contract_id :: contract_id_type(), type :: type_type(), body :: body_type()) :: t()
+  @spec new(
+          ext :: ext_type(),
+          contract_id :: contract_id_type(),
+          type :: type_type(),
+          body :: body_type()
+        ) :: t()
   def new(
-    %ExtensionPoint{} = ext,
-    %OptionalHash{} = contract_id,
-    %ContractEventType{} = type,
-    %ContractEventBody{} = body
-  ),
-  do: %__MODULE__{ext: ext, contract_id: contract_id, type: type, body: body}
+        %ExtensionPoint{} = ext,
+        %OptionalHash{} = contract_id,
+        %ContractEventType{} = type,
+        %ContractEventBody{} = body
+      ),
+      do: %__MODULE__{ext: ext, contract_id: contract_id, type: type, body: body}
 
   @impl true
   def encode_xdr(%__MODULE__{ext: ext, contract_id: contract_id, type: type, body: body}) do
@@ -61,9 +71,13 @@ defmodule StellarBase.XDR.ContractEvent do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [ext: ext, contract_id: contract_id, type: type, body: body]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [ext: ext, contract_id: contract_id, type: type, body: body]},
+        rest}} ->
         {:ok, {new(ext, contract_id, type, body), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -73,6 +87,7 @@ defmodule StellarBase.XDR.ContractEvent do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ext: ext, contract_id: contract_id, type: type, body: body]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ext, contract_id, type, body), rest}
   end
 end

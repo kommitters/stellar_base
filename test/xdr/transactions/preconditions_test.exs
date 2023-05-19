@@ -119,6 +119,7 @@ defmodule StellarBase.XDR.PreconditionsTest do
         1234
         |> Uint64.new()
         |> Duration.new()
+
       min_seq_ledger_gap = Uint32.new(4_294_967_295)
       extra_signers = SignerKeyList2.new(signer_keys)
 

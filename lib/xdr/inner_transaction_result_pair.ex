@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.InnerTransactionResultPair do
   }
 
   @struct_spec XDR.Struct.new(
-    transaction_hash: Hash,
-    result: InnerTransactionResult
-  )
+                 transaction_hash: Hash,
+                 result: InnerTransactionResult
+               )
 
   @type transaction_hash_type :: Hash.t()
   @type result_type :: InnerTransactionResult.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.InnerTransactionResultPair do
 
   @spec new(transaction_hash :: transaction_hash_type(), result :: result_type()) :: t()
   def new(
-    %Hash{} = transaction_hash,
-    %InnerTransactionResult{} = result
-  ),
-  do: %__MODULE__{transaction_hash: transaction_hash, result: result}
+        %Hash{} = transaction_hash,
+        %InnerTransactionResult{} = result
+      ),
+      do: %__MODULE__{transaction_hash: transaction_hash, result: result}
 
   @impl true
   def encode_xdr(%__MODULE__{transaction_hash: transaction_hash, result: result}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.InnerTransactionResultPair do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [transaction_hash: transaction_hash, result: result]}, rest}} ->
         {:ok, {new(transaction_hash, result), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.InnerTransactionResultPair do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [transaction_hash: transaction_hash, result: result]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(transaction_hash, result), rest}
   end
 end

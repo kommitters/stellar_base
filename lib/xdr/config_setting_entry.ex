@@ -17,26 +17,34 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    ext: ConfigSettingEntryExt,
-    config_setting_id: ConfigSettingID,
-    setting: ConfigSetting
-  )
+                 ext: ConfigSettingEntryExt,
+                 config_setting_id: ConfigSettingID,
+                 setting: ConfigSetting
+               )
 
   @type ext_type :: ConfigSettingEntryExt.t()
   @type config_setting_id_type :: ConfigSettingID.t()
   @type setting_type :: ConfigSetting.t()
 
-  @type t :: %__MODULE__{ext: ext_type(), config_setting_id: config_setting_id_type(), setting: setting_type()}
+  @type t :: %__MODULE__{
+          ext: ext_type(),
+          config_setting_id: config_setting_id_type(),
+          setting: setting_type()
+        }
 
   defstruct [:ext, :config_setting_id, :setting]
 
-  @spec new(ext :: ext_type(), config_setting_id :: config_setting_id_type(), setting :: setting_type()) :: t()
+  @spec new(
+          ext :: ext_type(),
+          config_setting_id :: config_setting_id_type(),
+          setting :: setting_type()
+        ) :: t()
   def new(
-    %ConfigSettingEntryExt{} = ext,
-    %ConfigSettingID{} = config_setting_id,
-    %ConfigSetting{} = setting
-  ),
-  do: %__MODULE__{ext: ext, config_setting_id: config_setting_id, setting: setting}
+        %ConfigSettingEntryExt{} = ext,
+        %ConfigSettingID{} = config_setting_id,
+        %ConfigSetting{} = setting
+      ),
+      do: %__MODULE__{ext: ext, config_setting_id: config_setting_id, setting: setting}
 
   @impl true
   def encode_xdr(%__MODULE__{ext: ext, config_setting_id: config_setting_id, setting: setting}) do
@@ -57,9 +65,14 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [ext: ext, config_setting_id: config_setting_id, setting: setting]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [ext: ext, config_setting_id: config_setting_id, setting: setting]
+        }, rest}} ->
         {:ok, {new(ext, config_setting_id, setting), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -67,8 +80,9 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [ext: ext, config_setting_id: config_setting_id, setting: setting]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [ext: ext, config_setting_id: config_setting_id, setting: setting]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ext, config_setting_id, setting), rest}
   end
 end

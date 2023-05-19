@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
   }
 
   @struct_spec XDR.Struct.new(
-    network_id: Hash,
-    source: SCContractExecutable,
-    salt: Uint256
-  )
+                 network_id: Hash,
+                 source: SCContractExecutable,
+                 salt: Uint256
+               )
 
   @type network_id_type :: Hash.t()
   @type source_type :: SCContractExecutable.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
 
   @spec new(network_id :: network_id_type(), source :: source_type(), salt :: salt_type()) :: t()
   def new(
-    %Hash{} = network_id,
-    %SCContractExecutable{} = source,
-    %Uint256{} = salt
-  ),
-  do: %__MODULE__{network_id: network_id, source: source, salt: salt}
+        %Hash{} = network_id,
+        %SCContractExecutable{} = source,
+        %Uint256{} = salt
+      ),
+      do: %__MODULE__{network_id: network_id, source: source, salt: salt}
 
   @impl true
   def encode_xdr(%__MODULE__{network_id: network_id, source: source, salt: salt}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [network_id: network_id, source: source, salt: salt]}, rest}} ->
         {:ok, {new(network_id, source, salt), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [network_id: network_id, source: source, salt: salt]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(network_id, source, salt), rest}
   end
 end

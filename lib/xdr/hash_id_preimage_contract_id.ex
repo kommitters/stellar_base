@@ -16,26 +16,34 @@ defmodule StellarBase.XDR.HashIDPreimageContractID do
   }
 
   @struct_spec XDR.Struct.new(
-    network_id: Hash,
-    contract_id: Hash,
-    salt: Uint256
-  )
+                 network_id: Hash,
+                 contract_id: Hash,
+                 salt: Uint256
+               )
 
   @type network_id_type :: Hash.t()
   @type contract_id_type :: Hash.t()
   @type salt_type :: Uint256.t()
 
-  @type t :: %__MODULE__{network_id: network_id_type(), contract_id: contract_id_type(), salt: salt_type()}
+  @type t :: %__MODULE__{
+          network_id: network_id_type(),
+          contract_id: contract_id_type(),
+          salt: salt_type()
+        }
 
   defstruct [:network_id, :contract_id, :salt]
 
-  @spec new(network_id :: network_id_type(), contract_id :: contract_id_type(), salt :: salt_type()) :: t()
+  @spec new(
+          network_id :: network_id_type(),
+          contract_id :: contract_id_type(),
+          salt :: salt_type()
+        ) :: t()
   def new(
-    %Hash{} = network_id,
-    %Hash{} = contract_id,
-    %Uint256{} = salt
-  ),
-  do: %__MODULE__{network_id: network_id, contract_id: contract_id, salt: salt}
+        %Hash{} = network_id,
+        %Hash{} = contract_id,
+        %Uint256{} = salt
+      ),
+      do: %__MODULE__{network_id: network_id, contract_id: contract_id, salt: salt}
 
   @impl true
   def encode_xdr(%__MODULE__{network_id: network_id, contract_id: contract_id, salt: salt}) do
@@ -56,9 +64,13 @@ defmodule StellarBase.XDR.HashIDPreimageContractID do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [network_id: network_id, contract_id: contract_id, salt: salt]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [network_id: network_id, contract_id: contract_id, salt: salt]},
+        rest}} ->
         {:ok, {new(network_id, contract_id, salt), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -66,8 +78,9 @@ defmodule StellarBase.XDR.HashIDPreimageContractID do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [network_id: network_id, contract_id: contract_id, salt: salt]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [network_id: network_id, contract_id: contract_id, salt: salt]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(network_id, contract_id, salt), rest}
   end
 end

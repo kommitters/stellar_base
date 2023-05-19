@@ -17,29 +17,39 @@ defmodule StellarBase.XDR.CreatePassiveSellOfferOp do
   }
 
   @struct_spec XDR.Struct.new(
-    selling: Asset,
-    buying: Asset,
-    amount: Int64,
-    price: Price
-  )
+                 selling: Asset,
+                 buying: Asset,
+                 amount: Int64,
+                 price: Price
+               )
 
   @type selling_type :: Asset.t()
   @type buying_type :: Asset.t()
   @type amount_type :: Int64.t()
   @type price_type :: Price.t()
 
-  @type t :: %__MODULE__{selling: selling_type(), buying: buying_type(), amount: amount_type(), price: price_type()}
+  @type t :: %__MODULE__{
+          selling: selling_type(),
+          buying: buying_type(),
+          amount: amount_type(),
+          price: price_type()
+        }
 
   defstruct [:selling, :buying, :amount, :price]
 
-  @spec new(selling :: selling_type(), buying :: buying_type(), amount :: amount_type(), price :: price_type()) :: t()
+  @spec new(
+          selling :: selling_type(),
+          buying :: buying_type(),
+          amount :: amount_type(),
+          price :: price_type()
+        ) :: t()
   def new(
-    %Asset{} = selling,
-    %Asset{} = buying,
-    %Int64{} = amount,
-    %Price{} = price
-  ),
-  do: %__MODULE__{selling: selling, buying: buying, amount: amount, price: price}
+        %Asset{} = selling,
+        %Asset{} = buying,
+        %Int64{} = amount,
+        %Price{} = price
+      ),
+      do: %__MODULE__{selling: selling, buying: buying, amount: amount, price: price}
 
   @impl true
   def encode_xdr(%__MODULE__{selling: selling, buying: buying, amount: amount, price: price}) do
@@ -60,9 +70,13 @@ defmodule StellarBase.XDR.CreatePassiveSellOfferOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [selling: selling, buying: buying, amount: amount, price: price]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [selling: selling, buying: buying, amount: amount, price: price]},
+        rest}} ->
         {:ok, {new(selling, buying, amount, price), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -70,8 +84,9 @@ defmodule StellarBase.XDR.CreatePassiveSellOfferOp do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [selling: selling, buying: buying, amount: amount, price: price]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [selling: selling, buying: buying, amount: amount, price: price]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(selling, buying, amount, price), rest}
   end
 end

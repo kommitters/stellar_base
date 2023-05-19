@@ -14,9 +14,7 @@ defmodule StellarBase.XDR.SCSpecTypeSet do
     SCSpecTypeDef
   }
 
-  @struct_spec XDR.Struct.new(
-    element_type: SCSpecTypeDef
-  )
+  @struct_spec XDR.Struct.new(element_type: SCSpecTypeDef)
 
   @type element_type_type :: SCSpecTypeDef.t()
 
@@ -25,10 +23,8 @@ defmodule StellarBase.XDR.SCSpecTypeSet do
   defstruct [:element_type]
 
   @spec new(element_type :: element_type_type()) :: t()
-  def new(
-    %SCSpecTypeDef{} = element_type
-  ),
-  do: %__MODULE__{element_type: element_type}
+  def new(%SCSpecTypeDef{} = element_type),
+    do: %__MODULE__{element_type: element_type}
 
   @impl true
   def encode_xdr(%__MODULE__{element_type: element_type}) do
@@ -51,7 +47,9 @@ defmodule StellarBase.XDR.SCSpecTypeSet do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [element_type: element_type]}, rest}} ->
         {:ok, {new(element_type), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -61,6 +59,7 @@ defmodule StellarBase.XDR.SCSpecTypeSet do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [element_type: element_type]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(element_type), rest}
   end
 end

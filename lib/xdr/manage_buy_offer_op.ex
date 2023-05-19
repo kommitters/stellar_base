@@ -17,12 +17,12 @@ defmodule StellarBase.XDR.ManageBuyOfferOp do
   }
 
   @struct_spec XDR.Struct.new(
-    selling: Asset,
-    buying: Asset,
-    buy_amount: Int64,
-    price: Price,
-    offer_id: Int64
-  )
+                 selling: Asset,
+                 buying: Asset,
+                 buy_amount: Int64,
+                 price: Price,
+                 offer_id: Int64
+               )
 
   @type selling_type :: Asset.t()
   @type buying_type :: Asset.t()
@@ -30,29 +30,59 @@ defmodule StellarBase.XDR.ManageBuyOfferOp do
   @type price_type :: Price.t()
   @type offer_id_type :: Int64.t()
 
-  @type t :: %__MODULE__{selling: selling_type(), buying: buying_type(), buy_amount: buy_amount_type(), price: price_type(), offer_id: offer_id_type()}
+  @type t :: %__MODULE__{
+          selling: selling_type(),
+          buying: buying_type(),
+          buy_amount: buy_amount_type(),
+          price: price_type(),
+          offer_id: offer_id_type()
+        }
 
   defstruct [:selling, :buying, :buy_amount, :price, :offer_id]
 
-  @spec new(selling :: selling_type(), buying :: buying_type(), buy_amount :: buy_amount_type(), price :: price_type(), offer_id :: offer_id_type()) :: t()
+  @spec new(
+          selling :: selling_type(),
+          buying :: buying_type(),
+          buy_amount :: buy_amount_type(),
+          price :: price_type(),
+          offer_id :: offer_id_type()
+        ) :: t()
   def new(
-    %Asset{} = selling,
-    %Asset{} = buying,
-    %Int64{} = buy_amount,
-    %Price{} = price,
-    %Int64{} = offer_id
-  ),
-  do: %__MODULE__{selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id}
+        %Asset{} = selling,
+        %Asset{} = buying,
+        %Int64{} = buy_amount,
+        %Price{} = price,
+        %Int64{} = offer_id
+      ),
+      do: %__MODULE__{
+        selling: selling,
+        buying: buying,
+        buy_amount: buy_amount,
+        price: price,
+        offer_id: offer_id
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id}) do
+  def encode_xdr(%__MODULE__{
+        selling: selling,
+        buying: buying,
+        buy_amount: buy_amount,
+        price: price,
+        offer_id: offer_id
+      }) do
     [selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id}) do
+  def encode_xdr!(%__MODULE__{
+        selling: selling,
+        buying: buying,
+        buy_amount: buy_amount,
+        price: price,
+        offer_id: offer_id
+      }) do
     [selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -63,9 +93,20 @@ defmodule StellarBase.XDR.ManageBuyOfferOp do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            selling: selling,
+            buying: buying,
+            buy_amount: buy_amount,
+            price: price,
+            offer_id: offer_id
+          ]
+        }, rest}} ->
         {:ok, {new(selling, buying, buy_amount, price, offer_id), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -73,8 +114,16 @@ defmodule StellarBase.XDR.ManageBuyOfferOp do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [selling: selling, buying: buying, buy_amount: buy_amount, price: price, offer_id: offer_id]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         selling: selling,
+         buying: buying,
+         buy_amount: buy_amount,
+         price: price,
+         offer_id: offer_id
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(selling, buying, buy_amount, price, offer_id), rest}
   end
 end

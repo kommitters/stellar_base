@@ -17,10 +17,10 @@ defmodule StellarBase.XDR.ContractCodeEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    ext: ExtensionPoint,
-    hash: Hash,
-    code: VariableOpaque256000
-  )
+                 ext: ExtensionPoint,
+                 hash: Hash,
+                 code: VariableOpaque256000
+               )
 
   @type ext_type :: ExtensionPoint.t()
   @type hash_type :: Hash.t()
@@ -32,11 +32,11 @@ defmodule StellarBase.XDR.ContractCodeEntry do
 
   @spec new(ext :: ext_type(), hash :: hash_type(), code :: code_type()) :: t()
   def new(
-    %ExtensionPoint{} = ext,
-    %Hash{} = hash,
-    %VariableOpaque256000{} = code
-  ),
-  do: %__MODULE__{ext: ext, hash: hash, code: code}
+        %ExtensionPoint{} = ext,
+        %Hash{} = hash,
+        %VariableOpaque256000{} = code
+      ),
+      do: %__MODULE__{ext: ext, hash: hash, code: code}
 
   @impl true
   def encode_xdr(%__MODULE__{ext: ext, hash: hash, code: code}) do
@@ -59,7 +59,9 @@ defmodule StellarBase.XDR.ContractCodeEntry do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [ext: ext, hash: hash, code: code]}, rest}} ->
         {:ok, {new(ext, hash, code), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -69,6 +71,7 @@ defmodule StellarBase.XDR.ContractCodeEntry do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [ext: ext, hash: hash, code: code]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(ext, hash, code), rest}
   end
 end

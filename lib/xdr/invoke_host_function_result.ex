@@ -31,7 +31,8 @@ defmodule StellarBase.XDR.InvokeHostFunctionResult do
   defstruct [:value, :type]
 
   @spec new(value :: value(), type :: InvokeHostFunctionResultCode.t()) :: t()
-  def new(value, %InvokeHostFunctionResultCode{} = type), do: %__MODULE__{value: value, type: type}
+  def new(value, %InvokeHostFunctionResultCode{} = type),
+    do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do

@@ -20,14 +20,14 @@ defmodule StellarBase.XDR.TransactionMetaV3 do
   }
 
   @struct_spec XDR.Struct.new(
-    tx_changes_before: LedgerEntryChanges,
-    operations: OperationMetaList,
-    tx_changes_after: LedgerEntryChanges,
-    events: OperationEventsList,
-    tx_result: TransactionResult,
-    hashes: HashFixedList,
-    diagnostic_events: OperationDiagnosticEventsList
-  )
+                 tx_changes_before: LedgerEntryChanges,
+                 operations: OperationMetaList,
+                 tx_changes_after: LedgerEntryChanges,
+                 events: OperationEventsList,
+                 tx_result: TransactionResult,
+                 hashes: HashFixedList,
+                 diagnostic_events: OperationDiagnosticEventsList
+               )
 
   @type tx_changes_before_type :: LedgerEntryChanges.t()
   @type operations_type :: OperationMetaList.t()
@@ -37,32 +37,96 @@ defmodule StellarBase.XDR.TransactionMetaV3 do
   @type hashes_type :: HashFixedList.t()
   @type diagnostic_events_type :: OperationDiagnosticEventsList.t()
 
-  @type t :: %__MODULE__{tx_changes_before: tx_changes_before_type(), operations: operations_type(), tx_changes_after: tx_changes_after_type(), events: events_type(), tx_result: tx_result_type(), hashes: hashes_type(), diagnostic_events: diagnostic_events_type()}
+  @type t :: %__MODULE__{
+          tx_changes_before: tx_changes_before_type(),
+          operations: operations_type(),
+          tx_changes_after: tx_changes_after_type(),
+          events: events_type(),
+          tx_result: tx_result_type(),
+          hashes: hashes_type(),
+          diagnostic_events: diagnostic_events_type()
+        }
 
-  defstruct [:tx_changes_before, :operations, :tx_changes_after, :events, :tx_result, :hashes, :diagnostic_events]
+  defstruct [
+    :tx_changes_before,
+    :operations,
+    :tx_changes_after,
+    :events,
+    :tx_result,
+    :hashes,
+    :diagnostic_events
+  ]
 
-  @spec new(tx_changes_before :: tx_changes_before_type(), operations :: operations_type(), tx_changes_after :: tx_changes_after_type(), events :: events_type(), tx_result :: tx_result_type(), hashes :: hashes_type(), diagnostic_events :: diagnostic_events_type()) :: t()
+  @spec new(
+          tx_changes_before :: tx_changes_before_type(),
+          operations :: operations_type(),
+          tx_changes_after :: tx_changes_after_type(),
+          events :: events_type(),
+          tx_result :: tx_result_type(),
+          hashes :: hashes_type(),
+          diagnostic_events :: diagnostic_events_type()
+        ) :: t()
   def new(
-    %LedgerEntryChanges{} = tx_changes_before,
-    %OperationMetaList{} = operations,
-    %LedgerEntryChanges{} = tx_changes_after,
-    %OperationEventsList{} = events,
-    %TransactionResult{} = tx_result,
-    %HashFixedList{} = hashes,
-    %OperationDiagnosticEventsList{} = diagnostic_events
-  ),
-  do: %__MODULE__{tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events}
+        %LedgerEntryChanges{} = tx_changes_before,
+        %OperationMetaList{} = operations,
+        %LedgerEntryChanges{} = tx_changes_after,
+        %OperationEventsList{} = events,
+        %TransactionResult{} = tx_result,
+        %HashFixedList{} = hashes,
+        %OperationDiagnosticEventsList{} = diagnostic_events
+      ),
+      do: %__MODULE__{
+        tx_changes_before: tx_changes_before,
+        operations: operations,
+        tx_changes_after: tx_changes_after,
+        events: events,
+        tx_result: tx_result,
+        hashes: hashes,
+        diagnostic_events: diagnostic_events
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events}) do
-    [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events]
+  def encode_xdr(%__MODULE__{
+        tx_changes_before: tx_changes_before,
+        operations: operations,
+        tx_changes_after: tx_changes_after,
+        events: events,
+        tx_result: tx_result,
+        hashes: hashes,
+        diagnostic_events: diagnostic_events
+      }) do
+    [
+      tx_changes_before: tx_changes_before,
+      operations: operations,
+      tx_changes_after: tx_changes_after,
+      events: events,
+      tx_result: tx_result,
+      hashes: hashes,
+      diagnostic_events: diagnostic_events
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events}) do
-    [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events]
+  def encode_xdr!(%__MODULE__{
+        tx_changes_before: tx_changes_before,
+        operations: operations,
+        tx_changes_after: tx_changes_after,
+        events: events,
+        tx_result: tx_result,
+        hashes: hashes,
+        diagnostic_events: diagnostic_events
+      }) do
+    [
+      tx_changes_before: tx_changes_before,
+      operations: operations,
+      tx_changes_after: tx_changes_after,
+      events: events,
+      tx_result: tx_result,
+      hashes: hashes,
+      diagnostic_events: diagnostic_events
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -72,9 +136,31 @@ defmodule StellarBase.XDR.TransactionMetaV3 do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events]}, rest}} ->
-        {:ok, {new(tx_changes_before, operations, tx_changes_after, events, tx_result, hashes, diagnostic_events), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            tx_changes_before: tx_changes_before,
+            operations: operations,
+            tx_changes_after: tx_changes_after,
+            events: events,
+            tx_result: tx_result,
+            hashes: hashes,
+            diagnostic_events: diagnostic_events
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(
+            tx_changes_before,
+            operations,
+            tx_changes_after,
+            events,
+            tx_result,
+            hashes,
+            diagnostic_events
+          ), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -82,8 +168,26 @@ defmodule StellarBase.XDR.TransactionMetaV3 do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [tx_changes_before: tx_changes_before, operations: operations, tx_changes_after: tx_changes_after, events: events, tx_result: tx_result, hashes: hashes, diagnostic_events: diagnostic_events]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
-    {new(tx_changes_before, operations, tx_changes_after, events, tx_result, hashes, diagnostic_events), rest}
+    {%XDR.Struct{
+       components: [
+         tx_changes_before: tx_changes_before,
+         operations: operations,
+         tx_changes_after: tx_changes_after,
+         events: events,
+         tx_result: tx_result,
+         hashes: hashes,
+         diagnostic_events: diagnostic_events
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(
+       tx_changes_before,
+       operations,
+       tx_changes_after,
+       events,
+       tx_result,
+       hashes,
+       diagnostic_events
+     ), rest}
   end
 end

@@ -43,7 +43,8 @@ defmodule StellarBase.XDR.PathPaymentStrictReceiveResult do
   defstruct [:value, :type]
 
   @spec new(value :: value(), type :: PathPaymentStrictReceiveResultCode.t()) :: t()
-  def new(value, %PathPaymentStrictReceiveResultCode{} = type), do: %__MODULE__{value: value, type: type}
+  def new(value, %PathPaymentStrictReceiveResultCode{} = type),
+    do: %__MODULE__{value: value, type: type}
 
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do

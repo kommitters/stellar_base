@@ -1,7 +1,12 @@
 defmodule StellarBase.XDR.ClaimableBalanceEntryExtensionV1Test do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{ClaimableBalanceEntryExtensionV1Ext, Void, Uint32, ClaimableBalanceEntryExtensionV1}
+  alias StellarBase.XDR.{
+    ClaimableBalanceEntryExtensionV1Ext,
+    Void,
+    Uint32,
+    ClaimableBalanceEntryExtensionV1
+  }
 
   describe "ClaimableBalanceEntryExtensionV1" do
     setup do

@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.Signer do
   }
 
   @struct_spec XDR.Struct.new(
-    key: SignerKey,
-    weight: Uint32
-  )
+                 key: SignerKey,
+                 weight: Uint32
+               )
 
   @type key_type :: SignerKey.t()
   @type weight_type :: Uint32.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.Signer do
 
   @spec new(key :: key_type(), weight :: weight_type()) :: t()
   def new(
-    %SignerKey{} = key,
-    %Uint32{} = weight
-  ),
-  do: %__MODULE__{key: key, weight: weight}
+        %SignerKey{} = key,
+        %Uint32{} = weight
+      ),
+      do: %__MODULE__{key: key, weight: weight}
 
   @impl true
   def encode_xdr(%__MODULE__{key: key, weight: weight}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.Signer do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [key: key, weight: weight]}, rest}} ->
         {:ok, {new(key, weight), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.Signer do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [key: key, weight: weight]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(key, weight), rest}
   end
 end

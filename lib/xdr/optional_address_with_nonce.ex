@@ -42,9 +42,14 @@ defmodule StellarBase.XDR.OptionalAddressWithNonce do
 
   def decode_xdr(bytes, optional_spec) do
     case XDR.Optional.decode_xdr(bytes, optional_spec) do
-      {:ok, {%XDR.Optional{type: address_with_nonce}, rest}} -> {:ok, {new(address_with_nonce), rest}}
-      {:ok, {nil, rest}} -> {:ok, {new(), rest}}
-      error -> error
+      {:ok, {%XDR.Optional{type: address_with_nonce}, rest}} ->
+        {:ok, {new(address_with_nonce), rest}}
+
+      {:ok, {nil, rest}} ->
+        {:ok, {new(), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -57,5 +62,4 @@ defmodule StellarBase.XDR.OptionalAddressWithNonce do
       {nil, rest} -> {new(), rest}
     end
   end
-
 end

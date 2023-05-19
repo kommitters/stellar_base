@@ -16,26 +16,34 @@ defmodule StellarBase.XDR.SCPNomination do
   }
 
   @struct_spec XDR.Struct.new(
-    quorum_set_hash: Hash,
-    votes: ValueList,
-    accepted: ValueList
-  )
+                 quorum_set_hash: Hash,
+                 votes: ValueList,
+                 accepted: ValueList
+               )
 
   @type quorum_set_hash_type :: Hash.t()
   @type votes_type :: ValueList.t()
   @type accepted_type :: ValueList.t()
 
-  @type t :: %__MODULE__{quorum_set_hash: quorum_set_hash_type(), votes: votes_type(), accepted: accepted_type()}
+  @type t :: %__MODULE__{
+          quorum_set_hash: quorum_set_hash_type(),
+          votes: votes_type(),
+          accepted: accepted_type()
+        }
 
   defstruct [:quorum_set_hash, :votes, :accepted]
 
-  @spec new(quorum_set_hash :: quorum_set_hash_type(), votes :: votes_type(), accepted :: accepted_type()) :: t()
+  @spec new(
+          quorum_set_hash :: quorum_set_hash_type(),
+          votes :: votes_type(),
+          accepted :: accepted_type()
+        ) :: t()
   def new(
-    %Hash{} = quorum_set_hash,
-    %ValueList{} = votes,
-    %ValueList{} = accepted
-  ),
-  do: %__MODULE__{quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted}
+        %Hash{} = quorum_set_hash,
+        %ValueList{} = votes,
+        %ValueList{} = accepted
+      ),
+      do: %__MODULE__{quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted}
 
   @impl true
   def encode_xdr(%__MODULE__{quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted}) do
@@ -56,9 +64,14 @@ defmodule StellarBase.XDR.SCPNomination do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted]
+        }, rest}} ->
         {:ok, {new(quorum_set_hash, votes, accepted), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -66,8 +79,10 @@ defmodule StellarBase.XDR.SCPNomination do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [quorum_set_hash: quorum_set_hash, votes: votes, accepted: accepted]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(quorum_set_hash, votes, accepted), rest}
   end
 end

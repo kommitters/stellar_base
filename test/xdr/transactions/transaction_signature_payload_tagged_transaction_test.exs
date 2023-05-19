@@ -177,7 +177,12 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
         tx
         |> TransactionV1Envelope.new(signatures)
         |> FeeBumpTransactionInnerTx.new(EnvelopeType.new(:ENVELOPE_TYPE_TX))
-        |> (&FeeBumpTransaction.new(source_account, Int64.new(100_000), &1, fee_bump_transaction_ext)).()
+        |> (&FeeBumpTransaction.new(
+              source_account,
+              Int64.new(100_000),
+              &1,
+              fee_bump_transaction_ext
+            )).()
 
       %{
         tx: fee_bump_tx,

@@ -21,22 +21,22 @@ defmodule StellarBase.XDR.LedgerHeader do
   }
 
   @struct_spec XDR.Struct.new(
-    ledger_version: Uint32,
-    previous_ledger_hash: Hash,
-    scp_value: StellarValue,
-    tx_set_result_hash: Hash,
-    bucket_list_hash: Hash,
-    ledger_seq: Uint32,
-    total_coins: Int64,
-    fee_pool: Int64,
-    inflation_seq: Uint32,
-    id_pool: Uint64,
-    base_fee: Uint32,
-    base_reserve: Uint32,
-    max_tx_set_size: Uint32,
-    skip_list: HashFixedList,
-    ext: LedgerHeaderExt
-  )
+                 ledger_version: Uint32,
+                 previous_ledger_hash: Hash,
+                 scp_value: StellarValue,
+                 tx_set_result_hash: Hash,
+                 bucket_list_hash: Hash,
+                 ledger_seq: Uint32,
+                 total_coins: Int64,
+                 fee_pool: Int64,
+                 inflation_seq: Uint32,
+                 id_pool: Uint64,
+                 base_fee: Uint32,
+                 base_reserve: Uint32,
+                 max_tx_set_size: Uint32,
+                 skip_list: HashFixedList,
+                 ext: LedgerHeaderExt
+               )
 
   @type ledger_version_type :: Uint32.t()
   @type previous_ledger_hash_type :: Hash.t()
@@ -54,40 +54,168 @@ defmodule StellarBase.XDR.LedgerHeader do
   @type skip_list_type :: HashFixedList.t()
   @type ext_type :: LedgerHeaderExt.t()
 
-  @type t :: %__MODULE__{ledger_version: ledger_version_type(), previous_ledger_hash: previous_ledger_hash_type(), scp_value: scp_value_type(), tx_set_result_hash: tx_set_result_hash_type(), bucket_list_hash: bucket_list_hash_type(), ledger_seq: ledger_seq_type(), total_coins: total_coins_type(), fee_pool: fee_pool_type(), inflation_seq: inflation_seq_type(), id_pool: id_pool_type(), base_fee: base_fee_type(), base_reserve: base_reserve_type(), max_tx_set_size: max_tx_set_size_type(), skip_list: skip_list_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          ledger_version: ledger_version_type(),
+          previous_ledger_hash: previous_ledger_hash_type(),
+          scp_value: scp_value_type(),
+          tx_set_result_hash: tx_set_result_hash_type(),
+          bucket_list_hash: bucket_list_hash_type(),
+          ledger_seq: ledger_seq_type(),
+          total_coins: total_coins_type(),
+          fee_pool: fee_pool_type(),
+          inflation_seq: inflation_seq_type(),
+          id_pool: id_pool_type(),
+          base_fee: base_fee_type(),
+          base_reserve: base_reserve_type(),
+          max_tx_set_size: max_tx_set_size_type(),
+          skip_list: skip_list_type(),
+          ext: ext_type()
+        }
 
-  defstruct [:ledger_version, :previous_ledger_hash, :scp_value, :tx_set_result_hash, :bucket_list_hash, :ledger_seq, :total_coins, :fee_pool, :inflation_seq, :id_pool, :base_fee, :base_reserve, :max_tx_set_size, :skip_list, :ext]
+  defstruct [
+    :ledger_version,
+    :previous_ledger_hash,
+    :scp_value,
+    :tx_set_result_hash,
+    :bucket_list_hash,
+    :ledger_seq,
+    :total_coins,
+    :fee_pool,
+    :inflation_seq,
+    :id_pool,
+    :base_fee,
+    :base_reserve,
+    :max_tx_set_size,
+    :skip_list,
+    :ext
+  ]
 
-  @spec new(ledger_version :: ledger_version_type(), previous_ledger_hash :: previous_ledger_hash_type(), scp_value :: scp_value_type(), tx_set_result_hash :: tx_set_result_hash_type(), bucket_list_hash :: bucket_list_hash_type(), ledger_seq :: ledger_seq_type(), total_coins :: total_coins_type(), fee_pool :: fee_pool_type(), inflation_seq :: inflation_seq_type(), id_pool :: id_pool_type(), base_fee :: base_fee_type(), base_reserve :: base_reserve_type(), max_tx_set_size :: max_tx_set_size_type(), skip_list :: skip_list_type(), ext :: ext_type()) :: t()
+  @spec new(
+          ledger_version :: ledger_version_type(),
+          previous_ledger_hash :: previous_ledger_hash_type(),
+          scp_value :: scp_value_type(),
+          tx_set_result_hash :: tx_set_result_hash_type(),
+          bucket_list_hash :: bucket_list_hash_type(),
+          ledger_seq :: ledger_seq_type(),
+          total_coins :: total_coins_type(),
+          fee_pool :: fee_pool_type(),
+          inflation_seq :: inflation_seq_type(),
+          id_pool :: id_pool_type(),
+          base_fee :: base_fee_type(),
+          base_reserve :: base_reserve_type(),
+          max_tx_set_size :: max_tx_set_size_type(),
+          skip_list :: skip_list_type(),
+          ext :: ext_type()
+        ) :: t()
   def new(
-    %Uint32{} = ledger_version,
-    %Hash{} = previous_ledger_hash,
-    %StellarValue{} = scp_value,
-    %Hash{} = tx_set_result_hash,
-    %Hash{} = bucket_list_hash,
-    %Uint32{} = ledger_seq,
-    %Int64{} = total_coins,
-    %Int64{} = fee_pool,
-    %Uint32{} = inflation_seq,
-    %Uint64{} = id_pool,
-    %Uint32{} = base_fee,
-    %Uint32{} = base_reserve,
-    %Uint32{} = max_tx_set_size,
-    %HashFixedList{} = skip_list,
-    %LedgerHeaderExt{} = ext
-  ),
-  do: %__MODULE__{ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext}
+        %Uint32{} = ledger_version,
+        %Hash{} = previous_ledger_hash,
+        %StellarValue{} = scp_value,
+        %Hash{} = tx_set_result_hash,
+        %Hash{} = bucket_list_hash,
+        %Uint32{} = ledger_seq,
+        %Int64{} = total_coins,
+        %Int64{} = fee_pool,
+        %Uint32{} = inflation_seq,
+        %Uint64{} = id_pool,
+        %Uint32{} = base_fee,
+        %Uint32{} = base_reserve,
+        %Uint32{} = max_tx_set_size,
+        %HashFixedList{} = skip_list,
+        %LedgerHeaderExt{} = ext
+      ),
+      do: %__MODULE__{
+        ledger_version: ledger_version,
+        previous_ledger_hash: previous_ledger_hash,
+        scp_value: scp_value,
+        tx_set_result_hash: tx_set_result_hash,
+        bucket_list_hash: bucket_list_hash,
+        ledger_seq: ledger_seq,
+        total_coins: total_coins,
+        fee_pool: fee_pool,
+        inflation_seq: inflation_seq,
+        id_pool: id_pool,
+        base_fee: base_fee,
+        base_reserve: base_reserve,
+        max_tx_set_size: max_tx_set_size,
+        skip_list: skip_list,
+        ext: ext
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext}) do
-    [ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext]
+  def encode_xdr(%__MODULE__{
+        ledger_version: ledger_version,
+        previous_ledger_hash: previous_ledger_hash,
+        scp_value: scp_value,
+        tx_set_result_hash: tx_set_result_hash,
+        bucket_list_hash: bucket_list_hash,
+        ledger_seq: ledger_seq,
+        total_coins: total_coins,
+        fee_pool: fee_pool,
+        inflation_seq: inflation_seq,
+        id_pool: id_pool,
+        base_fee: base_fee,
+        base_reserve: base_reserve,
+        max_tx_set_size: max_tx_set_size,
+        skip_list: skip_list,
+        ext: ext
+      }) do
+    [
+      ledger_version: ledger_version,
+      previous_ledger_hash: previous_ledger_hash,
+      scp_value: scp_value,
+      tx_set_result_hash: tx_set_result_hash,
+      bucket_list_hash: bucket_list_hash,
+      ledger_seq: ledger_seq,
+      total_coins: total_coins,
+      fee_pool: fee_pool,
+      inflation_seq: inflation_seq,
+      id_pool: id_pool,
+      base_fee: base_fee,
+      base_reserve: base_reserve,
+      max_tx_set_size: max_tx_set_size,
+      skip_list: skip_list,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext}) do
-    [ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext]
+  def encode_xdr!(%__MODULE__{
+        ledger_version: ledger_version,
+        previous_ledger_hash: previous_ledger_hash,
+        scp_value: scp_value,
+        tx_set_result_hash: tx_set_result_hash,
+        bucket_list_hash: bucket_list_hash,
+        ledger_seq: ledger_seq,
+        total_coins: total_coins,
+        fee_pool: fee_pool,
+        inflation_seq: inflation_seq,
+        id_pool: id_pool,
+        base_fee: base_fee,
+        base_reserve: base_reserve,
+        max_tx_set_size: max_tx_set_size,
+        skip_list: skip_list,
+        ext: ext
+      }) do
+    [
+      ledger_version: ledger_version,
+      previous_ledger_hash: previous_ledger_hash,
+      scp_value: scp_value,
+      tx_set_result_hash: tx_set_result_hash,
+      bucket_list_hash: bucket_list_hash,
+      ledger_seq: ledger_seq,
+      total_coins: total_coins,
+      fee_pool: fee_pool,
+      inflation_seq: inflation_seq,
+      id_pool: id_pool,
+      base_fee: base_fee,
+      base_reserve: base_reserve,
+      max_tx_set_size: max_tx_set_size,
+      skip_list: skip_list,
+      ext: ext
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -97,9 +225,47 @@ defmodule StellarBase.XDR.LedgerHeader do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext]}, rest}} ->
-        {:ok, {new(ledger_version, previous_ledger_hash, scp_value, tx_set_result_hash, bucket_list_hash, ledger_seq, total_coins, fee_pool, inflation_seq, id_pool, base_fee, base_reserve, max_tx_set_size, skip_list, ext), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            ledger_version: ledger_version,
+            previous_ledger_hash: previous_ledger_hash,
+            scp_value: scp_value,
+            tx_set_result_hash: tx_set_result_hash,
+            bucket_list_hash: bucket_list_hash,
+            ledger_seq: ledger_seq,
+            total_coins: total_coins,
+            fee_pool: fee_pool,
+            inflation_seq: inflation_seq,
+            id_pool: id_pool,
+            base_fee: base_fee,
+            base_reserve: base_reserve,
+            max_tx_set_size: max_tx_set_size,
+            skip_list: skip_list,
+            ext: ext
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(
+            ledger_version,
+            previous_ledger_hash,
+            scp_value,
+            tx_set_result_hash,
+            bucket_list_hash,
+            ledger_seq,
+            total_coins,
+            fee_pool,
+            inflation_seq,
+            id_pool,
+            base_fee,
+            base_reserve,
+            max_tx_set_size,
+            skip_list,
+            ext
+          ), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -107,8 +273,42 @@ defmodule StellarBase.XDR.LedgerHeader do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [ledger_version: ledger_version, previous_ledger_hash: previous_ledger_hash, scp_value: scp_value, tx_set_result_hash: tx_set_result_hash, bucket_list_hash: bucket_list_hash, ledger_seq: ledger_seq, total_coins: total_coins, fee_pool: fee_pool, inflation_seq: inflation_seq, id_pool: id_pool, base_fee: base_fee, base_reserve: base_reserve, max_tx_set_size: max_tx_set_size, skip_list: skip_list, ext: ext]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
-    {new(ledger_version, previous_ledger_hash, scp_value, tx_set_result_hash, bucket_list_hash, ledger_seq, total_coins, fee_pool, inflation_seq, id_pool, base_fee, base_reserve, max_tx_set_size, skip_list, ext), rest}
+    {%XDR.Struct{
+       components: [
+         ledger_version: ledger_version,
+         previous_ledger_hash: previous_ledger_hash,
+         scp_value: scp_value,
+         tx_set_result_hash: tx_set_result_hash,
+         bucket_list_hash: bucket_list_hash,
+         ledger_seq: ledger_seq,
+         total_coins: total_coins,
+         fee_pool: fee_pool,
+         inflation_seq: inflation_seq,
+         id_pool: id_pool,
+         base_fee: base_fee,
+         base_reserve: base_reserve,
+         max_tx_set_size: max_tx_set_size,
+         skip_list: skip_list,
+         ext: ext
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
+    {new(
+       ledger_version,
+       previous_ledger_hash,
+       scp_value,
+       tx_set_result_hash,
+       bucket_list_hash,
+       ledger_seq,
+       total_coins,
+       fee_pool,
+       inflation_seq,
+       id_pool,
+       base_fee,
+       base_reserve,
+       max_tx_set_size,
+       skip_list,
+       ext
+     ), rest}
   end
 end

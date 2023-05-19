@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.ManageOfferSuccessResult do
   }
 
   @struct_spec XDR.Struct.new(
-    offers_claimed: ClaimAtomList,
-    offer: ManageOfferSuccessResultOffer
-  )
+                 offers_claimed: ClaimAtomList,
+                 offer: ManageOfferSuccessResultOffer
+               )
 
   @type offers_claimed_type :: ClaimAtomList.t()
   @type offer_type :: ManageOfferSuccessResultOffer.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.ManageOfferSuccessResult do
 
   @spec new(offers_claimed :: offers_claimed_type(), offer :: offer_type()) :: t()
   def new(
-    %ClaimAtomList{} = offers_claimed,
-    %ManageOfferSuccessResultOffer{} = offer
-  ),
-  do: %__MODULE__{offers_claimed: offers_claimed, offer: offer}
+        %ClaimAtomList{} = offers_claimed,
+        %ManageOfferSuccessResultOffer{} = offer
+      ),
+      do: %__MODULE__{offers_claimed: offers_claimed, offer: offer}
 
   @impl true
   def encode_xdr(%__MODULE__{offers_claimed: offers_claimed, offer: offer}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.ManageOfferSuccessResult do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [offers_claimed: offers_claimed, offer: offer]}, rest}} ->
         {:ok, {new(offers_claimed, offer), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.ManageOfferSuccessResult do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [offers_claimed: offers_claimed, offer: offer]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(offers_claimed, offer), rest}
   end
 end

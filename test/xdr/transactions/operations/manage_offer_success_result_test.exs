@@ -17,7 +17,11 @@ defmodule StellarBase.XDR.ManageOfferSuccessResultTest do
     Void
   }
 
-  alias StellarBase.XDR.{ManageOfferSuccessResultOffer, ManageOfferEffect, ManageOfferSuccessResult}
+  alias StellarBase.XDR.{
+    ManageOfferSuccessResultOffer,
+    ManageOfferEffect,
+    ManageOfferSuccessResult
+  }
 
   describe "ManageOfferSuccessResult" do
     setup do

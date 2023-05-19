@@ -17,13 +17,13 @@ defmodule StellarBase.XDR.ClaimOfferAtom do
   }
 
   @struct_spec XDR.Struct.new(
-    seller_id: AccountID,
-    offer_id: Int64,
-    asset_sold: Asset,
-    amount_sold: Int64,
-    asset_bought: Asset,
-    amount_bought: Int64
-  )
+                 seller_id: AccountID,
+                 offer_id: Int64,
+                 asset_sold: Asset,
+                 amount_sold: Int64,
+                 asset_bought: Asset,
+                 amount_bought: Int64
+               )
 
   @type seller_id_type :: AccountID.t()
   @type offer_id_type :: Int64.t()
@@ -32,31 +32,80 @@ defmodule StellarBase.XDR.ClaimOfferAtom do
   @type asset_bought_type :: Asset.t()
   @type amount_bought_type :: Int64.t()
 
-  @type t :: %__MODULE__{seller_id: seller_id_type(), offer_id: offer_id_type(), asset_sold: asset_sold_type(), amount_sold: amount_sold_type(), asset_bought: asset_bought_type(), amount_bought: amount_bought_type()}
+  @type t :: %__MODULE__{
+          seller_id: seller_id_type(),
+          offer_id: offer_id_type(),
+          asset_sold: asset_sold_type(),
+          amount_sold: amount_sold_type(),
+          asset_bought: asset_bought_type(),
+          amount_bought: amount_bought_type()
+        }
 
   defstruct [:seller_id, :offer_id, :asset_sold, :amount_sold, :asset_bought, :amount_bought]
 
-  @spec new(seller_id :: seller_id_type(), offer_id :: offer_id_type(), asset_sold :: asset_sold_type(), amount_sold :: amount_sold_type(), asset_bought :: asset_bought_type(), amount_bought :: amount_bought_type()) :: t()
+  @spec new(
+          seller_id :: seller_id_type(),
+          offer_id :: offer_id_type(),
+          asset_sold :: asset_sold_type(),
+          amount_sold :: amount_sold_type(),
+          asset_bought :: asset_bought_type(),
+          amount_bought :: amount_bought_type()
+        ) :: t()
   def new(
-    %AccountID{} = seller_id,
-    %Int64{} = offer_id,
-    %Asset{} = asset_sold,
-    %Int64{} = amount_sold,
-    %Asset{} = asset_bought,
-    %Int64{} = amount_bought
-  ),
-  do: %__MODULE__{seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought}
+        %AccountID{} = seller_id,
+        %Int64{} = offer_id,
+        %Asset{} = asset_sold,
+        %Int64{} = amount_sold,
+        %Asset{} = asset_bought,
+        %Int64{} = amount_bought
+      ),
+      do: %__MODULE__{
+        seller_id: seller_id,
+        offer_id: offer_id,
+        asset_sold: asset_sold,
+        amount_sold: amount_sold,
+        asset_bought: asset_bought,
+        amount_bought: amount_bought
+      }
 
   @impl true
-  def encode_xdr(%__MODULE__{seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought}) do
-    [seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought]
+  def encode_xdr(%__MODULE__{
+        seller_id: seller_id,
+        offer_id: offer_id,
+        asset_sold: asset_sold,
+        amount_sold: amount_sold,
+        asset_bought: asset_bought,
+        amount_bought: amount_bought
+      }) do
+    [
+      seller_id: seller_id,
+      offer_id: offer_id,
+      asset_sold: asset_sold,
+      amount_sold: amount_sold,
+      asset_bought: asset_bought,
+      amount_bought: amount_bought
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought}) do
-    [seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought]
+  def encode_xdr!(%__MODULE__{
+        seller_id: seller_id,
+        offer_id: offer_id,
+        asset_sold: asset_sold,
+        amount_sold: amount_sold,
+        asset_bought: asset_bought,
+        amount_bought: amount_bought
+      }) do
+    [
+      seller_id: seller_id,
+      offer_id: offer_id,
+      asset_sold: asset_sold,
+      amount_sold: amount_sold,
+      asset_bought: asset_bought,
+      amount_bought: amount_bought
+    ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -66,9 +115,22 @@ defmodule StellarBase.XDR.ClaimOfferAtom do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought]}, rest}} ->
-        {:ok, {new(seller_id, offer_id, asset_sold, amount_sold, asset_bought, amount_bought), rest}}
-      error -> error
+      {:ok,
+       {%XDR.Struct{
+          components: [
+            seller_id: seller_id,
+            offer_id: offer_id,
+            asset_sold: asset_sold,
+            amount_sold: amount_sold,
+            asset_bought: asset_bought,
+            amount_bought: amount_bought
+          ]
+        }, rest}} ->
+        {:ok,
+         {new(seller_id, offer_id, asset_sold, amount_sold, asset_bought, amount_bought), rest}}
+
+      error ->
+        error
     end
   end
 
@@ -76,8 +138,17 @@ defmodule StellarBase.XDR.ClaimOfferAtom do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [seller_id: seller_id, offer_id: offer_id, asset_sold: asset_sold, amount_sold: amount_sold, asset_bought: asset_bought, amount_bought: amount_bought]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [
+         seller_id: seller_id,
+         offer_id: offer_id,
+         asset_sold: asset_sold,
+         amount_sold: amount_sold,
+         asset_bought: asset_bought,
+         amount_bought: amount_bought
+       ]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(seller_id, offer_id, asset_sold, amount_sold, asset_bought, amount_bought), rest}
   end
 end

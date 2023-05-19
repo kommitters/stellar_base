@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.UpgradeEntryMeta do
   }
 
   @struct_spec XDR.Struct.new(
-    upgrade: LedgerUpgrade,
-    changes: LedgerEntryChanges
-  )
+                 upgrade: LedgerUpgrade,
+                 changes: LedgerEntryChanges
+               )
 
   @type upgrade_type :: LedgerUpgrade.t()
   @type changes_type :: LedgerEntryChanges.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.UpgradeEntryMeta do
 
   @spec new(upgrade :: upgrade_type(), changes :: changes_type()) :: t()
   def new(
-    %LedgerUpgrade{} = upgrade,
-    %LedgerEntryChanges{} = changes
-  ),
-  do: %__MODULE__{upgrade: upgrade, changes: changes}
+        %LedgerUpgrade{} = upgrade,
+        %LedgerEntryChanges{} = changes
+      ),
+      do: %__MODULE__{upgrade: upgrade, changes: changes}
 
   @impl true
   def encode_xdr(%__MODULE__{upgrade: upgrade, changes: changes}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.UpgradeEntryMeta do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [upgrade: upgrade, changes: changes]}, rest}} ->
         {:ok, {new(upgrade, changes), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.UpgradeEntryMeta do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [upgrade: upgrade, changes: changes]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(upgrade, changes), rest}
   end
 end
