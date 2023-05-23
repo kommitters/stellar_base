@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.PaymentResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %PaymentResult{value: ^code, type: ^value} = PaymentResult.new(value, code)
+      %PaymentResult{value: ^value, type: ^code} = PaymentResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -42,8 +42,10 @@ defmodule StellarBase.XDR.PaymentResultTest do
     end
 
     test "decode_xdr!/2 an error code" do
-      {%PaymentResult{value: %PaymentResultCode{identifier: :PAYMENT_UNDERFUNDED}}, ""} =
-        PaymentResult.decode_xdr!(<<255, 255, 255, 254>>)
+      {%PaymentResult{
+         value: %Void{value: nil},
+         type: %PaymentResultCode{identifier: :PAYMENT_UNDERFUNDED}
+       }, ""} = PaymentResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 
     test "decode_xdr/2 with an invalid binary" do

@@ -23,18 +23,22 @@ defmodule StellarBase.XDR.Opaque12 do
   def new(opaque), do: %__MODULE__{opaque: opaque}
 
   @impl true
-  def encode_xdr(%__MODULE__{opaque: opaque}) do
+  def encode_xdr(%__MODULE__{opaque: opaque}) when byte_size(opaque) in @length_range do
     opaque
     |> build_opaque(byte_size(opaque))
     |> XDR.FixedOpaque.encode_xdr()
   end
 
+  def encode_xdr(_asset_code), do: {:error, :invalid_length}
+
   @impl true
-  def encode_xdr!(%__MODULE__{opaque: opaque}) do
+  def encode_xdr!(%__MODULE__{opaque: opaque}) when byte_size(opaque) in @length_range do
     opaque
     |> build_opaque(byte_size(opaque))
     |> XDR.FixedOpaque.encode_xdr!()
   end
+
+  def encode_xdr!(_asset_code), do: {:error, :invalid_length}
 
   @impl true
   def decode_xdr(bytes, spec \\ @length)
@@ -55,6 +59,9 @@ defmodule StellarBase.XDR.Opaque12 do
 
     {new(opaque), rest}
   end
+
+  # DO NOT REMOVE THIS FUNCTIONS.
+  # If you generate this file again, this functions should be added manually
 
   @spec build_opaque(code :: binary(), length :: non_neg_integer()) :: XDR.FixedOpaque.t()
   defp build_opaque(code, length) do

@@ -9,7 +9,6 @@ defmodule StellarBase.XDR.AccountEntryExtensionV1ExtTest do
     AccountEntryExtensionV2Ext,
     AccountEntryExtensionV3,
     ExtensionPoint,
-    OptionalAccountID,
     SponsorshipDescriptorList20,
     SponsorshipDescriptor,
     TimePoint,

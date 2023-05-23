@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.BumpSequenceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%BumpSequenceResult{
-        value: %Void{value: nil},
+         value: %Void{value: nil},
          type: %BumpSequenceResultCode{identifier: :BUMP_SEQUENCE_BAD_SEQ}
        }, ""} = BumpSequenceResult.decode_xdr!(<<255, 255, 255, 255>>)
     end

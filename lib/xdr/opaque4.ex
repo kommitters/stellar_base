@@ -15,6 +15,7 @@ defmodule StellarBase.XDR.Opaque4 do
   defstruct [:opaque]
 
   @length 4
+  @length_range 1..@length
 
   @opaque_spec XDR.FixedOpaque.new(nil, @length)
 
@@ -22,20 +23,28 @@ defmodule StellarBase.XDR.Opaque4 do
   def new(opaque), do: %__MODULE__{opaque: opaque}
 
   @impl true
-  def encode_xdr(%__MODULE__{opaque: opaque}) do
-    XDR.FixedOpaque.encode_xdr(%XDR.FixedOpaque{opaque: opaque, length: @length})
+  def encode_xdr(%__MODULE__{opaque: opaque}) when byte_size(opaque) in @length_range do
+    opaque
+    |> XDR.FixedOpaque.new(byte_size(opaque))
+    |> XDR.FixedOpaque.encode_xdr()
   end
 
+  def encode_xdr(_asset_code), do: {:error, :invalid_length}
+
   @impl true
-  def encode_xdr!(%__MODULE__{opaque: opaque}) do
-    XDR.FixedOpaque.encode_xdr!(%XDR.FixedOpaque{opaque: opaque, length: @length})
+  def encode_xdr!(%__MODULE__{opaque: opaque}) when byte_size(opaque) in @length_range do
+    opaque
+    |> XDR.FixedOpaque.new(byte_size(opaque))
+    |> XDR.FixedOpaque.encode_xdr!()
   end
+
+  def encode_xdr!(_asset_code), do: {:error, :invalid_length}
 
   @impl true
   def decode_xdr(bytes, spec \\ @opaque_spec)
 
-  def decode_xdr(bytes, spec) do
-    case XDR.FixedOpaque.decode_xdr(bytes, spec) do
+  def decode_xdr(bytes, _spec) do
+    case XDR.FixedOpaque.decode_xdr(bytes, opaque_spec(bytes)) do
       {:ok, {%XDR.FixedOpaque{opaque: opaque}, rest}} -> {:ok, {new(opaque), rest}}
       error -> error
     end
@@ -44,8 +53,31 @@ defmodule StellarBase.XDR.Opaque4 do
   @impl true
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
-  def decode_xdr!(bytes, spec) do
-    {%XDR.FixedOpaque{opaque: opaque}, rest} = XDR.FixedOpaque.decode_xdr!(bytes, spec)
+  def decode_xdr!(bytes, _spec) do
+    {%XDR.FixedOpaque{opaque: opaque}, rest} =
+      XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(bytes))
+
     {new(opaque), rest}
   end
+
+  # DO NOT REMOVE THIS FUNCTIONS.
+  # If you generate this file again, this functions should be added manually
+
+  @spec opaque_spec(bytes :: binary()) :: XDR.FixedOpaque.t()
+  defp opaque_spec(bytes), do: XDR.FixedOpaque.new(nil, length_from_binary(bytes, 1))
+
+  @spec length_from_binary(bytes :: binary(), acc :: non_neg_integer()) :: non_neg_integer()
+  defp length_from_binary(<<opaque::binary-size(@length), _rest::binary>>, acc)
+       when acc in @length_range do
+    <<_hd::binary-size(acc), rest::binary>> = opaque
+
+    residual_zero_bytes =
+      (@length - acc)
+      |> (&List.duplicate(0, &1)).()
+      |> to_string()
+
+    if residual_zero_bytes == rest, do: acc, else: length_from_binary(opaque, acc + 1)
+  end
+
+  defp length_from_binary(_bytes, _acc), do: @length
 end

@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.AllowTrustResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %AllowTrustResult{value: ^code, type: ^value} = AllowTrustResult.new(value, code)
+      %AllowTrustResult{value: ^value, type: ^code} = AllowTrustResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,8 @@ defmodule StellarBase.XDR.AllowTrustResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%AllowTrustResult{
-         value: %AllowTrustResultCode{identifier: :ALLOW_TRUST_NO_TRUST_LINE}
+         value: %Void{value: nil},
+         type: %AllowTrustResultCode{identifier: :ALLOW_TRUST_NO_TRUST_LINE}
        }, ""} = AllowTrustResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

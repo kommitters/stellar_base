@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.ManageSellOfferResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ManageSellOfferResult{value: ^code, type: ^value} = ManageSellOfferResult.new(value, code)
+      %ManageSellOfferResult{value: ^value, type: ^code} = ManageSellOfferResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -73,7 +73,8 @@ defmodule StellarBase.XDR.ManageSellOfferResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ManageSellOfferResult{
-         value: %ManageSellOfferResultCode{identifier: :MANAGE_SELL_OFFER_SELL_NO_TRUST}
+         value: %Void{value: nil},
+         type: %ManageSellOfferResultCode{identifier: :MANAGE_SELL_OFFER_SELL_NO_TRUST}
        }, ""} = ManageSellOfferResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

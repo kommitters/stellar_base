@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.ClaimClaimableBalanceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ClaimClaimableBalanceResult{
-        value: %Void{value: nil},
+         value: %Void{value: nil},
          type: %ClaimClaimableBalanceResultCode{
            identifier: :CLAIM_CLAIMABLE_BALANCE_CANNOT_CLAIM
          }

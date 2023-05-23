@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.ManageDataResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ManageDataResult{value: ^code, type: ^value} = ManageDataResult.new(value, code)
+      %ManageDataResult{value: ^value, type: ^code} = ManageDataResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,8 @@ defmodule StellarBase.XDR.ManageDataResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ManageDataResult{
-         value: %ManageDataResultCode{identifier: :MANAGE_DATA_NAME_NOT_FOUND}
+         value: %Void{value: nil},
+         type: %ManageDataResultCode{identifier: :MANAGE_DATA_NAME_NOT_FOUND}
        }, ""} = ManageDataResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

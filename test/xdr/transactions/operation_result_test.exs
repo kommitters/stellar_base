@@ -2,7 +2,6 @@ defmodule StellarBase.XDR.OperationResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    OperationBody,
     OperationResult,
     OperationResultCode,
     OperationResultTr,

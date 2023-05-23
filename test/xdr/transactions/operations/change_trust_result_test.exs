@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.ChangeTrustResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ChangeTrustResult{
-        value: %Void{value: nil},
+         value: %Void{value: nil},
          type: %ChangeTrustResultCode{identifier: :CHANGE_TRUST_NO_ISSUER}
        }, ""} = ChangeTrustResult.decode_xdr!(<<255, 255, 255, 254>>)
     end

@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SponsorhipDescriptorListTest do
 
   import StellarBase.Test.Utils
 
-  alias StellarBase.XDR.{SponsorshipDescriptorList20, OptionalAccountID, SponsorshipDescriptor}
+  alias StellarBase.XDR.{SponsorshipDescriptorList20, SponsorshipDescriptor}
 
   describe "SponsorshipDescriptorList20" do
     setup do

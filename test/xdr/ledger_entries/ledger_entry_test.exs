@@ -5,7 +5,6 @@ defmodule StellarBase.XDR.LedgerEntryTest do
 
   alias StellarBase.XDR.{
     LedgerEntry,
-    OptionalAccountID,
     SponsorshipDescriptor,
     LedgerEntryExtensionV1,
     Uint32,

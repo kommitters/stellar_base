@@ -8,7 +8,8 @@ defmodule StellarBase.XDR.PathPaymentStrictSendResultTest do
     ClaimAtomType,
     ClaimOfferAtom,
     ClaimAtomList,
-    Int64
+    Int64,
+    Void
   }
 
   alias StellarBase.XDR.{
@@ -85,7 +86,7 @@ defmodule StellarBase.XDR.PathPaymentStrictSendResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %PathPaymentStrictSendResult{value: ^code, type: ^value} =
+      %PathPaymentStrictSendResult{value: ^value, type: ^code} =
         PathPaymentStrictSendResult.new(value, code)
     end
 
@@ -114,7 +115,8 @@ defmodule StellarBase.XDR.PathPaymentStrictSendResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%PathPaymentStrictSendResult{
-         value: %PathPaymentStrictSendResultCode{
+         value: %Void{value: nil},
+         type: %PathPaymentStrictSendResultCode{
            identifier: :PATH_PAYMENT_STRICT_SEND_SRC_NOT_AUTHORIZED
          }
        }, ""} = PathPaymentStrictSendResult.decode_xdr!(<<255, 255, 255, 252>>)

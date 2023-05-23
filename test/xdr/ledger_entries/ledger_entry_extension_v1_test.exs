@@ -7,7 +7,6 @@ defmodule StellarBase.XDR.LedgerEntryExtensionV1Test do
     SponsorshipDescriptor,
     LedgerEntryExtensionV1Ext,
     LedgerEntryExtensionV1,
-    OptionalAccountID,
     Void
   }
 

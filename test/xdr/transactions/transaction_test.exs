@@ -110,8 +110,6 @@ defmodule StellarBase.XDR.TransactionTest do
     end
 
     test "encode_xdr/1", %{transaction: transaction, binary: binary} do
-      # IO.inspect(transaction)
-      IO.inspect(Transaction.decode_xdr(binary))
       {:ok, ^binary} = Transaction.encode_xdr(transaction)
     end
 

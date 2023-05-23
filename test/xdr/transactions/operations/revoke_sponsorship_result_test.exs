@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %RevokeSponsorshipResult{value: ^code, type: ^value} =
+      %RevokeSponsorshipResult{value: ^value, type: ^code} =
         RevokeSponsorshipResult.new(value, code)
     end
 
@@ -44,7 +44,8 @@ defmodule StellarBase.XDR.RevokeSponsorshipResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%RevokeSponsorshipResult{
-         value: %RevokeSponsorshipResultCode{identifier: :REVOKE_SPONSORSHIP_NOT_SPONSOR}
+         value: %Void{value: nil},
+         type: %RevokeSponsorshipResultCode{identifier: :REVOKE_SPONSORSHIP_NOT_SPONSOR}
        }, ""} = RevokeSponsorshipResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

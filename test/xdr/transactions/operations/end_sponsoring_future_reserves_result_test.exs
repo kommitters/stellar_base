@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.EndSponsoringFutureReservesResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %EndSponsoringFutureReservesResult{value: ^code, type: ^value} =
+      %EndSponsoringFutureReservesResult{value: ^value, type: ^code} =
         EndSponsoringFutureReservesResult.new(value, code)
     end
 
@@ -48,7 +48,8 @@ defmodule StellarBase.XDR.EndSponsoringFutureReservesResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%EndSponsoringFutureReservesResult{
-         value: %EndSponsoringFutureReservesResultCode{
+         value: %Void{value: nil},
+         type: %EndSponsoringFutureReservesResultCode{
            identifier: :END_SPONSORING_FUTURE_RESERVES_NOT_SPONSORED
          }
        }, ""} = EndSponsoringFutureReservesResult.decode_xdr!(<<255, 255, 255, 255>>)

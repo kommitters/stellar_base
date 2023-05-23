@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.SponsorshipDescriptorTest do
 
   import StellarBase.Test.Utils, only: [create_account_id: 1]
 
-  alias StellarBase.XDR.{SponsorshipDescriptor, OptionalAccountID}
+  alias StellarBase.XDR.{SponsorshipDescriptor}
 
   describe "SponsorshipDescriptor" do
     setup do

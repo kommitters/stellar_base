@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SetTrustLineFlagsResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %SetTrustLineFlagsResult{value: ^code, type: ^value} =
+      %SetTrustLineFlagsResult{value: ^value, type: ^code} =
         SetTrustLineFlagsResult.new(value, code)
     end
 
@@ -44,7 +44,8 @@ defmodule StellarBase.XDR.SetTrustLineFlagsResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%SetTrustLineFlagsResult{
-         value: %SetTrustLineFlagsResultCode{identifier: :SET_TRUST_LINE_FLAGS_NO_TRUST_LINE}
+         value: %Void{value: nil},
+         type: %SetTrustLineFlagsResultCode{identifier: :SET_TRUST_LINE_FLAGS_NO_TRUST_LINE}
        }, ""} = SetTrustLineFlagsResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

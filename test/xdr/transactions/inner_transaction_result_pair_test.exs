@@ -7,7 +7,6 @@ defmodule StellarBase.XDR.InnerTransactionResultPairTest do
     InnerTransactionResult,
     InnerTransactionResultPair,
     Int64,
-    OperationBody,
     OperationResult,
     OperationResultCode,
     OperationResultList,

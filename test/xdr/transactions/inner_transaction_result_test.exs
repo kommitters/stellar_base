@@ -5,13 +5,11 @@ defmodule StellarBase.XDR.InnerTransactionResultTest do
     InnerTransactionResultExt,
     InnerTransactionResult,
     Int64,
-    OperationBody,
     OperationResult,
     OperationResultCode,
     OperationResultList,
     OperationResultTr,
     OperationType,
-    TransactionResultResult,
     InnerTransactionResultResult,
     TransactionResultCode,
     Void

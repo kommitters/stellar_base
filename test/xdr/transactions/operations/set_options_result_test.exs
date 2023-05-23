@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.SetOptionsResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %SetOptionsResult{value: ^code, type: ^value} = SetOptionsResult.new(value, code)
+      %SetOptionsResult{value: ^value, type: ^code} = SetOptionsResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,8 @@ defmodule StellarBase.XDR.SetOptionsResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%SetOptionsResult{
-         value: %SetOptionsResultCode{identifier: :SET_OPTIONS_TOO_MANY_SIGNERS}
+         value: %Void{value: nil},
+         type: %SetOptionsResultCode{identifier: :SET_OPTIONS_TOO_MANY_SIGNERS}
        }, ""} = SetOptionsResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.LiquidityPoolWithdrawResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %LiquidityPoolWithdrawResult{value: ^code, type: ^value} =
+      %LiquidityPoolWithdrawResult{value: ^value, type: ^code} =
         LiquidityPoolWithdrawResult.new(value, code)
     end
 
@@ -44,7 +44,8 @@ defmodule StellarBase.XDR.LiquidityPoolWithdrawResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%LiquidityPoolWithdrawResult{
-         value: %LiquidityPoolWithdrawResultCode{identifier: :LIQUIDITY_POOL_WITHDRAW_NO_TRUST}
+         value: %Void{value: nil},
+         type: %LiquidityPoolWithdrawResultCode{identifier: :LIQUIDITY_POOL_WITHDRAW_NO_TRUST}
        }, ""} = LiquidityPoolWithdrawResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 
