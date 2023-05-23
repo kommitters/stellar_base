@@ -33,7 +33,7 @@ defmodule StellarBase.XDR.AssetCode4Test do
     end
 
     test "encode_xdr!/1 with an invalid length" do
-      assert_raise StellarBase.XDR.AssetCode4Error,
+      assert_raise XDR.FixedOpaqueError,
                    fn ->
                      "BTC2021"
                      |> AssetCode4.new()

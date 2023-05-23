@@ -17,7 +17,6 @@ defmodule StellarBase.XDR.LedgerEntryExtTest do
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> create_account_id()
-        |> OptionalAccountID.new()
 
       ext = LedgerEntryExtensionV1Ext.new(Void.new(), 0)
       sponsoring_id = SponsorshipDescriptor.new(account_id)

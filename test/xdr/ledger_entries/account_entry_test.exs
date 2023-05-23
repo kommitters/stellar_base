@@ -60,7 +60,7 @@ defmodule StellarBase.XDR.AccountEntryTest do
       num_sub_entries = Uint32.new(5)
       flags = Uint32.new(5)
       home_domain = String32.new("kommit.co")
-      thresholds =  Thresholds.new(<<128, 16, 32, 64>>)
+      thresholds = Thresholds.new(<<128, 16, 32, 64>>)
       signers = SignerList20.new([signer])
 
       buying = Int64.new(20)

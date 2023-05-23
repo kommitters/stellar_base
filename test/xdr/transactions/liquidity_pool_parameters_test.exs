@@ -57,7 +57,7 @@ defmodule StellarBase.XDR.LiquidityPoolParametersTest do
     end
 
     test "new/1", %{liquidity_type: liquidity_type, liquidity_product: liquidity_product} do
-      %LiquidityPoolParameters{value: ^liquidity_type, type: ^liquidity_product} =
+      %LiquidityPoolParameters{value: ^liquidity_product, type: ^liquidity_type} =
         LiquidityPoolParameters.new(liquidity_product, liquidity_type)
     end
 

@@ -5,7 +5,8 @@ defmodule StellarBase.XDR.CreateClaimableBalanceResultTest do
 
   alias StellarBase.XDR.{
     CreateClaimableBalanceResult,
-    CreateClaimableBalanceResultCode
+    CreateClaimableBalanceResultCode,
+    Void
   }
 
   describe "CreateClaimableBalanceResult" do
@@ -28,7 +29,7 @@ defmodule StellarBase.XDR.CreateClaimableBalanceResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %CreateClaimableBalanceResult{value: ^code, type: ^value} =
+      %CreateClaimableBalanceResult{value: ^value, type: ^code} =
         CreateClaimableBalanceResult.new(value, code)
     end
 
@@ -59,7 +60,8 @@ defmodule StellarBase.XDR.CreateClaimableBalanceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%CreateClaimableBalanceResult{
-         value: %CreateClaimableBalanceResultCode{
+        value: %Void{value: nil},
+         type: %CreateClaimableBalanceResultCode{
            identifier: :CREATE_CLAIMABLE_BALANCE_LOW_RESERVE
          }
        }, ""} = CreateClaimableBalanceResult.decode_xdr!(<<255, 255, 255, 254>>)

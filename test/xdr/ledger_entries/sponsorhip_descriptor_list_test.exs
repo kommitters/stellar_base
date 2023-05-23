@@ -10,13 +10,11 @@ defmodule StellarBase.XDR.SponsorhipDescriptorListTest do
       sponsorship_descriptor_1 =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> create_account_id()
-        |> OptionalAccountID.new()
         |> SponsorshipDescriptor.new()
 
       sponsorship_descriptor_2 =
         "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
         |> create_account_id()
-        |> OptionalAccountID.new()
         |> SponsorshipDescriptor.new()
 
       sponsorship_descriptors = [sponsorship_descriptor_1, sponsorship_descriptor_2]

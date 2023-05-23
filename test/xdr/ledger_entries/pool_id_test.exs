@@ -5,17 +5,18 @@ defmodule StellarBase.XDR.PoolIDTest do
 
   describe "PoolID" do
     setup do
-      value = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      value = "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
+      hash_value = Hash.new(value)
 
       %{
-        value: value,
-        pool_id: PoolID.new(value),
+        hash_value: hash_value,
+        pool_id: PoolID.new(hash_value),
         binary: value
       }
     end
 
-    test "new/1", %{value: value} do
-      %PoolID{pool_id: ^value} = PoolID.new(value)
+    test "new/1", %{hash_value: hash_value} do
+      %PoolID{pool_id: ^hash_value} = PoolID.new(hash_value)
     end
 
     test "encode_xdr/1", %{pool_id: pool_id, binary: binary} do
@@ -23,7 +24,7 @@ defmodule StellarBase.XDR.PoolIDTest do
     end
 
     test "encode_xdr!/1 with an invalid PoolID length" do
-      {:error, :invalid_length} = PoolID.encode_xdr(%PoolID{pool_id: <<0, 0, 4, 210, 33>>})
+      {:error, :invalid_length} = <<0, 0, 4, 210, 33>> |> Hash.new() |> PoolID.new() |> PoolID.encode_xdr()
     end
 
     test "encode_xdr!/1", %{pool_id: pool_id, binary: binary} do

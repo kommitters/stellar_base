@@ -10,7 +10,6 @@ defmodule StellarBase.XDR.SponsorshipDescriptorTest do
       account_id =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
         |> create_account_id()
-        |> OptionalAccountID.new()
 
       %{
         account_id: account_id,

@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.ClawbackResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ClawbackResult{value: ^code, type: ^value} = ClawbackResult.new(value, code)
+      %ClawbackResult{value: ^value, type: ^code} = ClawbackResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,8 @@ defmodule StellarBase.XDR.ClawbackResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ClawbackResult{
-         value: %ClawbackResultCode{identifier: :CLAWBACK_NOT_CLAWBACK_ENABLED}
+        value: %Void{value: nil},
+         type: %ClawbackResultCode{identifier: :CLAWBACK_NOT_CLAWBACK_ENABLED}
        }, ""} = ClawbackResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

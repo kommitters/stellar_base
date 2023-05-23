@@ -17,7 +17,7 @@ defmodule StellarBase.XDR.CreateAccountResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %CreateAccountResult{value: ^code, type: ^value} = CreateAccountResult.new(value, code)
+      %CreateAccountResult{value: ^value, type: ^code} = CreateAccountResult.new(value, code)
     end
 
     test "encode_xdr/1", %{result: result, binary: binary} do
@@ -43,7 +43,8 @@ defmodule StellarBase.XDR.CreateAccountResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%CreateAccountResult{
-         value: %CreateAccountResultCode{identifier: :CREATE_ACCOUNT_UNDERFUNDED}
+          value: %Void{value: nil},
+         type: %CreateAccountResultCode{identifier: :CREATE_ACCOUNT_UNDERFUNDED}
        }, ""} = CreateAccountResult.decode_xdr!(<<255, 255, 255, 254>>)
     end
 

@@ -24,21 +24,23 @@ defmodule StellarBase.XDR.Opaque12 do
 
   @impl true
   def encode_xdr(%__MODULE__{opaque: opaque}) do
-    XDR.FixedOpaque.encode_xdr(%XDR.FixedOpaque{opaque: opaque, length: @length})
+    opaque
+    |> build_opaque(byte_size(opaque))
+    |> XDR.FixedOpaque.encode_xdr()
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{opaque: opaque}) do
-    XDR.FixedOpaque.encode_xdr!(%XDR.FixedOpaque{opaque: opaque, length: @length})
+    opaque
+    |> build_opaque(byte_size(opaque))
+    |> XDR.FixedOpaque.encode_xdr!()
   end
 
   @impl true
   def decode_xdr(bytes, spec \\ @length)
 
-  def decode_xdr(bytes, spec) do
-    IO.inspect(opaque_spec(spec), label: "DECODE")
-
-    case XDR.FixedOpaque.decode_xdr(bytes, spec) do
+  def decode_xdr(bytes, _spec) do
+    case XDR.FixedOpaque.decode_xdr(bytes, opaque_spec(bytes)) do
       {:ok, {%XDR.FixedOpaque{opaque: opaque}, rest}} -> {:ok, {new(opaque), rest}}
       error -> error
     end
@@ -47,13 +49,18 @@ defmodule StellarBase.XDR.Opaque12 do
   @impl true
   def decode_xdr!(bytes, spec \\ @opaque_spec)
 
-  def decode_xdr!(bytes, spec) do
-    IO.inspect(opaque_spec(spec), label: "DECODE BANG")
-
-    {%XDR.FixedOpaque{opaque: opaque}, rest} =
-      XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(spec))
+  def decode_xdr!(<<bytes::binary-size(12), rest::binary>>, _spec) do
+    {%XDR.FixedOpaque{opaque: opaque}, _rest} =
+      XDR.FixedOpaque.decode_xdr!(bytes, opaque_spec(bytes))
 
     {new(opaque), rest}
+  end
+
+  @spec build_opaque(code :: binary(), length :: non_neg_integer()) :: XDR.FixedOpaque.t()
+  defp build_opaque(code, length) do
+    zeros = @length - length
+    bin = <<code::binary, 0::zeros*8>>
+    XDR.FixedOpaque.new(bin, @length)
   end
 
   @spec opaque_spec(bytes :: binary()) :: XDR.FixedOpaque.t()
@@ -63,8 +70,6 @@ defmodule StellarBase.XDR.Opaque12 do
   defp length_from_binary(<<opaque::binary-size(@length), _rest::binary>>, acc)
        when acc in @length_range do
     <<_hd::binary-size(acc), rest::binary>> = opaque
-
-    IO.inspect(acc, label: "ACC: ")
 
     residual_zero_bytes =
       (@length - acc)

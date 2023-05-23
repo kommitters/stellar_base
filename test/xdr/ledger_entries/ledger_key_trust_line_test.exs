@@ -6,13 +6,12 @@ defmodule StellarBase.XDR.LedgerKeyTrustLineTest do
     AlphaNum4,
     AssetCode4,
     AssetType,
+    LedgerKeyTrustLine,
     PublicKey,
     PublicKeyType,
-    LedgerKeyTrustLine,
+    TrustLineAsset,
     Uint256
   }
-
-  alias StellarBase.XDR.LedgerKeyTrustLine
 
   alias StellarBase.StrKey
 
@@ -40,7 +39,7 @@ defmodule StellarBase.XDR.LedgerKeyTrustLineTest do
         "BTCN"
         |> AssetCode4.new()
         |> AlphaNum4.new(issuer)
-        |> LedgerKeyTrustLine.new(asset_type)
+        |> TrustLineAsset.new(asset_type)
 
       %{
         account_id: account_id,

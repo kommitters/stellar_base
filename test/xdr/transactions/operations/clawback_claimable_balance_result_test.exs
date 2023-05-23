@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.ClawbackClaimableBalanceResultTest do
     end
 
     test "new/1", %{code: code, value: value} do
-      %ClawbackClaimableBalanceResult{value: ^code, type: ^value} =
+      %ClawbackClaimableBalanceResult{value: ^value, type: ^code} =
         ClawbackClaimableBalanceResult.new(value, code)
     end
 
@@ -48,7 +48,8 @@ defmodule StellarBase.XDR.ClawbackClaimableBalanceResultTest do
 
     test "decode_xdr!/2 an error code" do
       {%ClawbackClaimableBalanceResult{
-         value: %ClawbackClaimableBalanceResultCode{
+          value: %Void{value: nil},
+         type: %ClawbackClaimableBalanceResultCode{
            identifier: :CLAWBACK_CLAIMABLE_BALANCE_NOT_ISSUER
          }
        }, ""} = ClawbackClaimableBalanceResult.decode_xdr!(<<255, 255, 255, 254>>)

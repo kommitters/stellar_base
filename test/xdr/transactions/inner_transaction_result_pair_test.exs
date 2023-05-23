@@ -11,6 +11,7 @@ defmodule StellarBase.XDR.InnerTransactionResultPairTest do
     OperationResult,
     OperationResultCode,
     OperationResultList,
+    OperationResultTr,
     OperationType,
     InnerTransactionResultResult,
     TransactionResultCode,
@@ -21,13 +22,15 @@ defmodule StellarBase.XDR.InnerTransactionResultPairTest do
 
   describe "InnerTransactionResultPair" do
     setup do
+      transaction_result_code = TransactionResultCode.new(:txSUCCESS)
+
       result =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(OperationResultCode.new(:opINNER))
         |> (&OperationResultList.new([&1])).()
-        |> InnerTransactionResultResult.new(TransactionResultCode.new(:txSUCCESS))
+        |> InnerTransactionResultResult.new(transaction_result_code)
 
       transaction_hash = Hash.new("c61305a67fff6a82dbc6eebf1eb56a42")
 

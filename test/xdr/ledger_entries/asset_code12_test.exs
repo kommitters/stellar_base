@@ -22,10 +22,12 @@ defmodule StellarBase.XDR.AssetCode12Test do
     end
 
     test "encode_xdr/1 with an invalid length" do
-      {:error, :invalid_length} =
-        "BTCNEW2000000"
-        |> AssetCode12.new()
-        |> AssetCode12.encode_xdr()
+      assert_raise ArgumentError,
+        fn ->
+          "BTC2021000000000"
+          |> AssetCode12.new()
+          |> AssetCode12.encode_xdr()
+        end
     end
 
     test "encode_xdr!/1", %{asset_code: asset_code, binary: binary} do
@@ -33,7 +35,7 @@ defmodule StellarBase.XDR.AssetCode12Test do
     end
 
     test "encode_xdr!/1 with an invalid length" do
-      assert_raise StellarBase.XDR.AssetCode12Error,
+      assert_raise ArgumentError,
                    fn ->
                      "BTC2021000000000"
                      |> AssetCode12.new()

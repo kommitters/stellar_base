@@ -73,7 +73,7 @@ defmodule StellarBase.XDR.AllowTrustOpTest do
     end
 
     test "decode_xdr/2", %{allow_trust: allow_trust, binary: binary} do
-      {:ok, {^allow_trust, ""}} = AllowTrustOp.decode_xdr(binary)
+      {:ok, {^allow_trust, ""}} = AllowTrustOp.decode_xdr(binary)|> IO.inspect()
     end
 
     test "decode_xdr/2 with an invalid binary" do

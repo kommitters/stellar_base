@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.ConfigSettingEntryTest do
         config_setting: config_setting,
         config_setting_entry:
           ConfigSettingEntry.new(extension_point, config_setting_id, config_setting),
-        binary: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 90, 210, 0, 0, 0, 0>>
+        binary: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 90, 210>>
       }
     end
 

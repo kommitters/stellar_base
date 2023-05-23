@@ -19,7 +19,12 @@ defmodule StellarBase.XDR.AssetTest do
   setup_all do
     key_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
-    issuer = "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY" |> StrKey.decode!(:ed25519_public_key) |> Uint256.new() |> PublicKey.new(key_type)|> AccountID.new()
+    issuer =
+      "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"
+      |> StrKey.decode!(:ed25519_public_key)
+      |> Uint256.new()
+      |> PublicKey.new(key_type)
+      |> AccountID.new()
 
     {:ok, %{issuer: issuer}}
   end
@@ -82,10 +87,7 @@ defmodule StellarBase.XDR.AssetTest do
     setup %{issuer: issuer} do
       asset_type = AssetType.new(:ASSET_TYPE_CREDIT_ALPHANUM12)
 
-      alpha_num12 =
-        "BTCN2021" <> <<0,0,0,0>>
-        |> AssetCode12.new()
-        |> AlphaNum12.new(issuer)
+      alpha_num12 = "BTCN2021" |> AssetCode12.new() |> AlphaNum12.new(issuer)
 
       %{
         alpha_num12: alpha_num12,

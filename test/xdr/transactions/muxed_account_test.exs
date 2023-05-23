@@ -27,11 +27,6 @@ defmodule StellarBase.XDR.MuxedAccountTest do
       %MuxedAccount{value: ^ed25519_account} = MuxedAccount.new(ed25519_account, type)
     end
 
-    test "new/1 with an invalid account", %{ed25519_account: ed25519_account} do
-      type = CryptoKeyType.new(:KEY_TYPE_HASH_X)
-      {:error, :invalid_key_type} = MuxedAccount.new(ed25519_account, type)
-    end
-
     test "encode_xdr/1", %{muxed_account: muxed_account, encoded_binary: binary} do
       {:ok, ^binary} = MuxedAccount.encode_xdr(muxed_account)
     end

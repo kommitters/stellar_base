@@ -5,6 +5,7 @@ defmodule StellarBase.XDR.OperationResultListTest do
     OperationBody,
     OperationResult,
     OperationResultList,
+    OperationResultTr,
     OperationResultCode,
     OperationType,
     Void
@@ -19,13 +20,13 @@ defmodule StellarBase.XDR.OperationResultListTest do
       op_result1 =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(code)
 
       op_result2 =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationBody.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(code)
 
       op_results = [op_result1, op_result2]
