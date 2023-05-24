@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.OperationDiagnosticEvents do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    DiagnosticEventList
-  }
+  alias StellarBase.XDR.DiagnosticEventList
 
   @struct_spec XDR.Struct.new(events: DiagnosticEventList)
 

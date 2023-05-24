@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SendMore do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Uint32
-  }
+  alias StellarBase.XDR.Uint32
 
   @struct_spec XDR.Struct.new(num_messages: Uint32)
 

@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.Auth do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Int
-  }
+  alias StellarBase.XDR.Int
 
   @struct_spec XDR.Struct.new(flags: Int)
 

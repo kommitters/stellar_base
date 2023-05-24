@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.FloodDemand do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    TxDemandVector
-  }
+  alias StellarBase.XDR.TxDemandVector
 
   @struct_spec XDR.Struct.new(tx_hashes: TxDemandVector)
 

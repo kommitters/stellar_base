@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.TransactionResultPairV2 do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Hash
-  }
+  alias StellarBase.XDR.Hash
 
   @struct_spec XDR.Struct.new(
                  transaction_hash: Hash,

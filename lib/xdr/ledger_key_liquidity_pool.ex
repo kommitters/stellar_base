@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.LedgerKeyLiquidityPool do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    PoolID
-  }
+  alias StellarBase.XDR.PoolID
 
   @struct_spec XDR.Struct.new(liquidity_pool_id: PoolID)
 

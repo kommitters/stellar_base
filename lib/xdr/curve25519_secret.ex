@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.Curve25519Secret do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Opaque32
-  }
+  alias StellarBase.XDR.Opaque32
 
   @struct_spec XDR.Struct.new(key: Opaque32)
 

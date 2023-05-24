@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.Price do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Int32
-  }
+  alias StellarBase.XDR.Int32
 
   @struct_spec XDR.Struct.new(
                  n: Int32,

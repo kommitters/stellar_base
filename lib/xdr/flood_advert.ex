@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.FloodAdvert do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    TxAdvertVector
-  }
+  alias StellarBase.XDR.TxAdvertVector
 
   @struct_spec XDR.Struct.new(tx_hashes: TxAdvertVector)
 

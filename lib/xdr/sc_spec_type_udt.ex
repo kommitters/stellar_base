@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SCSpecTypeUDT do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    String60
-  }
+  alias StellarBase.XDR.String60
 
   @struct_spec XDR.Struct.new(name: String60)
 

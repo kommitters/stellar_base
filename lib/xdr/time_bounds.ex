@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.TimeBounds do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    TimePoint
-  }
+  alias StellarBase.XDR.TimePoint
 
   @struct_spec XDR.Struct.new(
                  min_time: TimePoint,

@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.LedgerKeyAccount do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    AccountID
-  }
+  alias StellarBase.XDR.AccountID
 
   @struct_spec XDR.Struct.new(account_id: AccountID)
 

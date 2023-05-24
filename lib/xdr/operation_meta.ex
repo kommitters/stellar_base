@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.OperationMeta do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    LedgerEntryChanges
-  }
+  alias StellarBase.XDR.LedgerEntryChanges
 
   @struct_spec XDR.Struct.new(changes: LedgerEntryChanges)
 

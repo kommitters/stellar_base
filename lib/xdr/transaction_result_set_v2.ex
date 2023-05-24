@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.TransactionResultSetV2 do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    TransactionResultPairV2List
-  }
+  alias StellarBase.XDR.TransactionResultPairV2List
 
   @struct_spec XDR.Struct.new(results: TransactionResultPairV2List)
 

@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SCNonceKey do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    SCAddress
-  }
+  alias StellarBase.XDR.SCAddress
 
   @struct_spec XDR.Struct.new(nonce_address: SCAddress)
 

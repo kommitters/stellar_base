@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.LedgerBounds do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Uint32
-  }
+  alias StellarBase.XDR.Uint32
 
   @struct_spec XDR.Struct.new(
                  min_ledger: Uint32,

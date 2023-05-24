@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.BumpSequenceOp do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    SequenceNumber
-  }
+  alias StellarBase.XDR.SequenceNumber
 
   @struct_spec XDR.Struct.new(bump_to: SequenceNumber)
 

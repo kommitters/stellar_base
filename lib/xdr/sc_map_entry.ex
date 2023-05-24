@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SCMapEntry do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    SCVal
-  }
+  alias StellarBase.XDR.SCVal
 
   @struct_spec XDR.Struct.new(
                  key: SCVal,

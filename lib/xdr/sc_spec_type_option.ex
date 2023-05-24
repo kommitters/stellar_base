@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SCSpecTypeOption do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    SCSpecTypeDef
-  }
+  alias StellarBase.XDR.SCSpecTypeDef
 
   @struct_spec XDR.Struct.new(value_type: SCSpecTypeDef)
 

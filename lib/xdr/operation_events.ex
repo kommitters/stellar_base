@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.OperationEvents do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    ContractEventList
-  }
+  alias StellarBase.XDR.ContractEventList
 
   @struct_spec XDR.Struct.new(events: ContractEventList)
 

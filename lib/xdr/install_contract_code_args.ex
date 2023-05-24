@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.InstallContractCodeArgs do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    VariableOpaque256000
-  }
+  alias StellarBase.XDR.VariableOpaque256000
 
   @struct_spec XDR.Struct.new(code: VariableOpaque256000)
 

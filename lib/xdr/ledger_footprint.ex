@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.LedgerFootprint do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    LedgerKeyList
-  }
+  alias StellarBase.XDR.LedgerKeyList
 
   @struct_spec XDR.Struct.new(
                  read_only: LedgerKeyList,

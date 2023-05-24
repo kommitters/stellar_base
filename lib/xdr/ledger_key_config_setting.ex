@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.LedgerKeyConfigSetting do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    ConfigSettingID
-  }
+  alias StellarBase.XDR.ConfigSettingID
 
   @struct_spec XDR.Struct.new(config_setting_id: ConfigSettingID)
 

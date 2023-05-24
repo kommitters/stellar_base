@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.HmacSha256Mac do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Opaque32
-  }
+  alias StellarBase.XDR.Opaque32
 
   @struct_spec XDR.Struct.new(mac: Opaque32)
 

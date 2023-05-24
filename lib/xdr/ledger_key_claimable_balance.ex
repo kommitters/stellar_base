@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.LedgerKeyClaimableBalance do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    ClaimableBalanceID
-  }
+  alias StellarBase.XDR.ClaimableBalanceID
 
   @struct_spec XDR.Struct.new(balance_id: ClaimableBalanceID)
 
