@@ -1,9 +1,6 @@
 defmodule StellarBase.XDR.SCStatusTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SCStatus
-  alias StellarBase.XDR.SCStatusType
-
   alias StellarBase.XDR.{
     SCUnknownErrorCode,
     SCHostValErrorCode,
@@ -13,6 +10,7 @@ defmodule StellarBase.XDR.SCStatusTest do
     SCHostContextErrorCode,
     SCVmErrorCode,
     SCHostAuthErrorCode,
+    SCStatus,
     SCStatusType,
     Uint32,
     Void

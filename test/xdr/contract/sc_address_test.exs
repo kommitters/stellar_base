@@ -1,14 +1,13 @@
 defmodule StellarBase.XDR.SCAddressTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SCAddress
-  alias StellarBase.XDR.SCAddressType
-
   alias StellarBase.XDR.{
     AccountID,
     PublicKey,
     PublicKeyType,
-    Uint256
+    Uint256,
+    SCAddress,
+    SCAddressType
   }
 
   alias StellarBase.StrKey

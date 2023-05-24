@@ -1,9 +1,7 @@
 defmodule StellarBase.XDR.LedgerKeyAccountTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, Uint256}
-
-  alias StellarBase.XDR.LedgerKeyAccount
+  alias StellarBase.XDR.{AccountID, LedgerKeyAccount, PublicKey, PublicKeyType, Uint256}
 
   alias StellarBase.StrKey
 
