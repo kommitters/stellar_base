@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
 
   alias StellarBase.XDR.{
     ConfigSettingID,
-    Uint32,
+    UInt32,
     ConfigSettingContractComputeV0,
     ConfigSettingContractLedgerCostV0,
     ConfigSettingContractHistoricalDataV0,
@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
   }
 
   @arms [
-    CONFIG_SETTING_CONTRACT_MAX_SIZE_BYTES: Uint32,
+    CONFIG_SETTING_CONTRACT_MAX_SIZE_BYTES: UInt32,
     CONFIG_SETTING_CONTRACT_COMPUTE_V0: ConfigSettingContractComputeV0,
     CONFIG_SETTING_CONTRACT_LEDGER_COST_V0: ConfigSettingContractLedgerCostV0,
     CONFIG_SETTING_CONTRACT_HISTORICAL_DATA_V0: ConfigSettingContractHistoricalDataV0,
@@ -30,12 +30,12 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     CONFIG_SETTING_CONTRACT_BANDWIDTH_V0: ConfigSettingContractBandwidthV0,
     CONFIG_SETTING_CONTRACT_COST_PARAMS_CPU_INSTRUCTIONS: ContractCostParams,
     CONFIG_SETTING_CONTRACT_COST_PARAMS_MEMORY_BYTES: ContractCostParams,
-    CONFIG_SETTING_CONTRACT_DATA_KEY_SIZE_BYTES: Uint32,
-    CONFIG_SETTING_CONTRACT_DATA_ENTRY_SIZE_BYTES: Uint32
+    CONFIG_SETTING_CONTRACT_DATA_KEY_SIZE_BYTES: UInt32,
+    CONFIG_SETTING_CONTRACT_DATA_ENTRY_SIZE_BYTES: UInt32
   ]
 
   @type value ::
-          Uint32.t()
+          UInt32.t()
           | ConfigSettingContractComputeV0.t()
           | ConfigSettingContractLedgerCostV0.t()
           | ConfigSettingContractHistoricalDataV0.t()

@@ -12,16 +12,16 @@ defmodule StellarBase.XDR.Int128Parts do
 
   alias StellarBase.XDR.{
     Int64,
-    Uint64
+    UInt64
   }
 
   @struct_spec XDR.Struct.new(
                  hi: Int64,
-                 lo: Uint64
+                 lo: UInt64
                )
 
   @type hi_type :: Int64.t()
-  @type lo_type :: Uint64.t()
+  @type lo_type :: UInt64.t()
 
   @type t :: %__MODULE__{hi: hi_type(), lo: lo_type()}
 
@@ -30,7 +30,7 @@ defmodule StellarBase.XDR.Int128Parts do
   @spec new(hi :: hi_type(), lo :: lo_type()) :: t()
   def new(
         %Int64{} = hi,
-        %Uint64{} = lo
+        %UInt64{} = lo
       ),
       do: %__MODULE__{hi: hi, lo: lo}
 

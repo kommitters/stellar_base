@@ -12,22 +12,22 @@ defmodule StellarBase.XDR.SorobanResources do
 
   alias StellarBase.XDR.{
     LedgerFootprint,
-    Uint32
+    UInt32
   }
 
   @struct_spec XDR.Struct.new(
                  footprint: LedgerFootprint,
-                 instructions: Uint32,
-                 read_bytes: Uint32,
-                 write_bytes: Uint32,
-                 extended_meta_data_size_bytes: Uint32
+                 instructions: UInt32,
+                 read_bytes: UInt32,
+                 write_bytes: UInt32,
+                 extended_meta_data_size_bytes: UInt32
                )
 
   @type footprint_type :: LedgerFootprint.t()
-  @type instructions_type :: Uint32.t()
-  @type read_bytes_type :: Uint32.t()
-  @type write_bytes_type :: Uint32.t()
-  @type extended_meta_data_size_bytes_type :: Uint32.t()
+  @type instructions_type :: UInt32.t()
+  @type read_bytes_type :: UInt32.t()
+  @type write_bytes_type :: UInt32.t()
+  @type extended_meta_data_size_bytes_type :: UInt32.t()
 
   @type t :: %__MODULE__{
           footprint: footprint_type(),
@@ -48,10 +48,10 @@ defmodule StellarBase.XDR.SorobanResources do
         ) :: t()
   def new(
         %LedgerFootprint{} = footprint,
-        %Uint32{} = instructions,
-        %Uint32{} = read_bytes,
-        %Uint32{} = write_bytes,
-        %Uint32{} = extended_meta_data_size_bytes
+        %UInt32{} = instructions,
+        %UInt32{} = read_bytes,
+        %UInt32{} = write_bytes,
+        %UInt32{} = extended_meta_data_size_bytes
       ),
       do: %__MODULE__{
         footprint: footprint,

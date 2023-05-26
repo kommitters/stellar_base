@@ -11,19 +11,19 @@ defmodule StellarBase.XDR.ConfigSettingContractLedgerCostV0 do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    Uint32,
+    UInt32,
     Int64
   }
 
   @struct_spec XDR.Struct.new(
-                 ledger_max_read_ledger_entries: Uint32,
-                 ledger_max_read_bytes: Uint32,
-                 ledger_max_write_ledger_entries: Uint32,
-                 ledger_max_write_bytes: Uint32,
-                 tx_max_read_ledger_entries: Uint32,
-                 tx_max_read_bytes: Uint32,
-                 tx_max_write_ledger_entries: Uint32,
-                 tx_max_write_bytes: Uint32,
+                 ledger_max_read_ledger_entries: UInt32,
+                 ledger_max_read_bytes: UInt32,
+                 ledger_max_write_ledger_entries: UInt32,
+                 ledger_max_write_bytes: UInt32,
+                 tx_max_read_ledger_entries: UInt32,
+                 tx_max_read_bytes: UInt32,
+                 tx_max_write_ledger_entries: UInt32,
+                 tx_max_write_bytes: UInt32,
                  fee_read_ledger_entry: Int64,
                  fee_write_ledger_entry: Int64,
                  fee_read1_kb: Int64,
@@ -31,17 +31,17 @@ defmodule StellarBase.XDR.ConfigSettingContractLedgerCostV0 do
                  bucket_list_size_bytes: Int64,
                  bucket_list_fee_rate_low: Int64,
                  bucket_list_fee_rate_high: Int64,
-                 bucket_list_growth_factor: Uint32
+                 bucket_list_growth_factor: UInt32
                )
 
-  @type ledger_max_read_ledger_entries_type :: Uint32.t()
-  @type ledger_max_read_bytes_type :: Uint32.t()
-  @type ledger_max_write_ledger_entries_type :: Uint32.t()
-  @type ledger_max_write_bytes_type :: Uint32.t()
-  @type tx_max_read_ledger_entries_type :: Uint32.t()
-  @type tx_max_read_bytes_type :: Uint32.t()
-  @type tx_max_write_ledger_entries_type :: Uint32.t()
-  @type tx_max_write_bytes_type :: Uint32.t()
+  @type ledger_max_read_ledger_entries_type :: UInt32.t()
+  @type ledger_max_read_bytes_type :: UInt32.t()
+  @type ledger_max_write_ledger_entries_type :: UInt32.t()
+  @type ledger_max_write_bytes_type :: UInt32.t()
+  @type tx_max_read_ledger_entries_type :: UInt32.t()
+  @type tx_max_read_bytes_type :: UInt32.t()
+  @type tx_max_write_ledger_entries_type :: UInt32.t()
+  @type tx_max_write_bytes_type :: UInt32.t()
   @type fee_read_ledger_entry_type :: Int64.t()
   @type fee_write_ledger_entry_type :: Int64.t()
   @type fee_read1_kb_type :: Int64.t()
@@ -49,7 +49,7 @@ defmodule StellarBase.XDR.ConfigSettingContractLedgerCostV0 do
   @type bucket_list_size_bytes_type :: Int64.t()
   @type bucket_list_fee_rate_low_type :: Int64.t()
   @type bucket_list_fee_rate_high_type :: Int64.t()
-  @type bucket_list_growth_factor_type :: Uint32.t()
+  @type bucket_list_growth_factor_type :: UInt32.t()
 
   @type t :: %__MODULE__{
           ledger_max_read_ledger_entries: ledger_max_read_ledger_entries_type(),
@@ -108,14 +108,14 @@ defmodule StellarBase.XDR.ConfigSettingContractLedgerCostV0 do
           bucket_list_growth_factor :: bucket_list_growth_factor_type()
         ) :: t()
   def new(
-        %Uint32{} = ledger_max_read_ledger_entries,
-        %Uint32{} = ledger_max_read_bytes,
-        %Uint32{} = ledger_max_write_ledger_entries,
-        %Uint32{} = ledger_max_write_bytes,
-        %Uint32{} = tx_max_read_ledger_entries,
-        %Uint32{} = tx_max_read_bytes,
-        %Uint32{} = tx_max_write_ledger_entries,
-        %Uint32{} = tx_max_write_bytes,
+        %UInt32{} = ledger_max_read_ledger_entries,
+        %UInt32{} = ledger_max_read_bytes,
+        %UInt32{} = ledger_max_write_ledger_entries,
+        %UInt32{} = ledger_max_write_bytes,
+        %UInt32{} = tx_max_read_ledger_entries,
+        %UInt32{} = tx_max_read_bytes,
+        %UInt32{} = tx_max_write_ledger_entries,
+        %UInt32{} = tx_max_write_bytes,
         %Int64{} = fee_read_ledger_entry,
         %Int64{} = fee_write_ledger_entry,
         %Int64{} = fee_read1_kb,
@@ -123,7 +123,7 @@ defmodule StellarBase.XDR.ConfigSettingContractLedgerCostV0 do
         %Int64{} = bucket_list_size_bytes,
         %Int64{} = bucket_list_fee_rate_low,
         %Int64{} = bucket_list_fee_rate_high,
-        %Uint32{} = bucket_list_growth_factor
+        %UInt32{} = bucket_list_growth_factor
       ),
       do: %__MODULE__{
         ledger_max_read_ledger_entries: ledger_max_read_ledger_entries,

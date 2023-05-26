@@ -13,18 +13,18 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
   alias StellarBase.XDR.{
     Hash,
     SCContractExecutable,
-    Uint256
+    UInt256
   }
 
   @struct_spec XDR.Struct.new(
                  network_id: Hash,
                  executable: SCContractExecutable,
-                 salt: Uint256
+                 salt: UInt256
                )
 
   @type network_id_type :: Hash.t()
   @type executable_type :: SCContractExecutable.t()
-  @type salt_type :: Uint256.t()
+  @type salt_type :: UInt256.t()
 
   @type t :: %__MODULE__{
           network_id: network_id_type(),
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgs do
   def new(
         %Hash{} = network_id,
         %SCContractExecutable{} = executable,
-        %Uint256{} = salt
+        %UInt256{} = salt
       ),
       do: %__MODULE__{network_id: network_id, executable: executable, salt: salt}
 

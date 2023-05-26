@@ -12,20 +12,20 @@ defmodule StellarBase.XDR.ConfigSettingContractComputeV0 do
 
   alias StellarBase.XDR.{
     Int64,
-    Uint32
+    UInt32
   }
 
   @struct_spec XDR.Struct.new(
                  ledger_max_instructions: Int64,
                  tx_max_instructions: Int64,
                  fee_rate_per_instructions_increment: Int64,
-                 tx_memory_limit: Uint32
+                 tx_memory_limit: UInt32
                )
 
   @type ledger_max_instructions_type :: Int64.t()
   @type tx_max_instructions_type :: Int64.t()
   @type fee_rate_per_instructions_increment_type :: Int64.t()
-  @type tx_memory_limit_type :: Uint32.t()
+  @type tx_memory_limit_type :: UInt32.t()
 
   @type t :: %__MODULE__{
           ledger_max_instructions: ledger_max_instructions_type(),
@@ -51,7 +51,7 @@ defmodule StellarBase.XDR.ConfigSettingContractComputeV0 do
         %Int64{} = ledger_max_instructions,
         %Int64{} = tx_max_instructions,
         %Int64{} = fee_rate_per_instructions_increment,
-        %Uint32{} = tx_memory_limit
+        %UInt32{} = tx_memory_limit
       ),
       do: %__MODULE__{
         ledger_max_instructions: ledger_max_instructions,

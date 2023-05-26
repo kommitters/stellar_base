@@ -11,16 +11,16 @@ defmodule StellarBase.XDR.ConfigSettingContractMetaDataV0 do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    Uint32,
+    UInt32,
     Int64
   }
 
   @struct_spec XDR.Struct.new(
-                 tx_max_extended_meta_data_size_bytes: Uint32,
+                 tx_max_extended_meta_data_size_bytes: UInt32,
                  fee_extended_meta_data1_kb: Int64
                )
 
-  @type tx_max_extended_meta_data_size_bytes_type :: Uint32.t()
+  @type tx_max_extended_meta_data_size_bytes_type :: UInt32.t()
   @type fee_extended_meta_data1_kb_type :: Int64.t()
 
   @type t :: %__MODULE__{
@@ -35,7 +35,7 @@ defmodule StellarBase.XDR.ConfigSettingContractMetaDataV0 do
           fee_extended_meta_data1_kb :: fee_extended_meta_data1_kb_type()
         ) :: t()
   def new(
-        %Uint32{} = tx_max_extended_meta_data_size_bytes,
+        %UInt32{} = tx_max_extended_meta_data_size_bytes,
         %Int64{} = fee_extended_meta_data1_kb
       ),
       do: %__MODULE__{

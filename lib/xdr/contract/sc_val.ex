@@ -15,9 +15,9 @@ defmodule StellarBase.XDR.SCVal do
     Bool,
     Void,
     SCStatus,
-    Uint32,
+    UInt32,
     Int32,
-    Uint64,
+    UInt64,
     Int64,
     TimePoint,
     Duration,
@@ -39,9 +39,9 @@ defmodule StellarBase.XDR.SCVal do
     SCV_BOOL: Bool,
     SCV_VOID: Void,
     SCV_STATUS: SCStatus,
-    SCV_U32: Uint32,
+    SCV_U32: UInt32,
     SCV_I32: Int32,
-    SCV_U64: Uint64,
+    SCV_U64: UInt64,
     SCV_I64: Int64,
     SCV_TIMEPOINT: TimePoint,
     SCV_DURATION: Duration,
@@ -64,9 +64,9 @@ defmodule StellarBase.XDR.SCVal do
           Bool.t()
           | Void.t()
           | SCStatus.t()
-          | Uint32.t()
+          | UInt32.t()
           | Int32.t()
-          | Uint64.t()
+          | UInt64.t()
           | Int64.t()
           | TimePoint.t()
           | Duration.t()
