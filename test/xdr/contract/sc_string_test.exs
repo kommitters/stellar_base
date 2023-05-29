@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.SCStringTest do
         |> SCString.encode_xdr()
     end
 
-    test "encode_xdr/1 an invalid string lenght" do
+    test "encode_xdr/1 an invalid string length" do
       bits = 256_001 * 8
       large_string = <<64::size(bits)>>
 

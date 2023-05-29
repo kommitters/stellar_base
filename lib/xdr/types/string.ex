@@ -5,11 +5,13 @@ defmodule StellarBase.XDR.String do
 
   @behaviour XDR.Declaration
 
-  @type t :: %__MODULE__{value: string()}
+  @type string_type :: String.t()
+
+  @type t :: %__MODULE__{value: string_type()}
 
   defstruct [:value]
 
-  @spec new(value :: string()) :: t()
+  @spec new(value :: string_type()) :: t()
   def new(value), do: %__MODULE__{value: value}
 
   @impl true

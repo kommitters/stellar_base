@@ -6,6 +6,8 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
   alias StellarBase.XDR.{
     EnvelopeType,
     Ext,
+    TransactionExt,
+    Void,
     FeeBumpInnerTx,
     FeeBumpTransaction,
     FeeBumpTransactionEnvelope,
@@ -59,6 +61,9 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
     # ext
     ext = Ext.new()
 
+    # transaction ext
+    tx_ext = TransactionExt.new(Void.new(), 0)
+
     {:ok,
      %{
        fee: fee,
@@ -67,7 +72,8 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
        preconditions: preconditions,
        memo: memo,
        operations: operations,
-       ext: ext
+       ext: ext,
+       tx_ext: tx_ext
      }}
   end
 
@@ -171,7 +177,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
       preconditions: preconditions,
       memo: memo,
       operations: operations,
-      ext: ext
+      tx_ext: tx_ext
     } do
       source_account =
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
@@ -184,7 +190,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
           preconditions,
           memo,
           operations,
-          ext
+          tx_ext
         )
 
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_TX)
@@ -258,7 +264,8 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
       preconditions: preconditions,
       memo: memo,
       operations: operations,
-      ext: ext
+      ext: ext,
+      tx_ext: tx_ext
     } do
       source_account =
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
@@ -271,7 +278,7 @@ defmodule StellarBase.XDR.TransactionEnvelopeTest do
           preconditions,
           memo,
           operations,
-          ext
+          tx_ext
         )
 
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_TX_FEE_BUMP)

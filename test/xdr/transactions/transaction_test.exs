@@ -4,7 +4,7 @@ defmodule StellarBase.XDR.TransactionTest do
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{
-    Ext,
+    TransactionExt,
     Int64,
     Memo,
     MemoType,
@@ -18,7 +18,8 @@ defmodule StellarBase.XDR.TransactionTest do
     TimePoint,
     Transaction,
     UInt32,
-    UInt64
+    UInt64,
+    Void
   }
 
   alias StellarBase.XDR.Transaction
@@ -50,7 +51,7 @@ defmodule StellarBase.XDR.TransactionTest do
       # operations
       operations = build_operations()
 
-      ext = Ext.new()
+      ext = TransactionExt.new(Void.new(), 0)
 
       %{
         source_account: source_account,

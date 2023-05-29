@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
     end
 
     test "new/1", %{contract_id: contract_id, sc_contract_executable: sc_contract_executable} do
-      %CreateContractArgs{contract_id: ^contract_id, source: ^sc_contract_executable} =
+      %CreateContractArgs{contract_id: ^contract_id, executable: ^sc_contract_executable} =
         CreateContractArgs.new(contract_id, sc_contract_executable)
     end
 

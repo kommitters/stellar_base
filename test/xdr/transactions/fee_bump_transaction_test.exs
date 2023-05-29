@@ -20,9 +20,11 @@ defmodule StellarBase.XDR.Operations.FeeBumpTransactionTest do
     TimeBounds,
     TimePoint,
     Transaction,
+    TransactionExt,
     TransactionV1Envelope,
     UInt32,
-    UInt64
+    UInt64,
+    Void
   }
 
   describe "FeeBumpInnerTx" do
@@ -134,7 +136,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpTransactionTest do
     # operations
     operations = build_operations()
 
-    ext = Ext.new()
+    ext = TransactionExt.new(Void.new(), 0)
 
     Transaction.new(
       source_account,

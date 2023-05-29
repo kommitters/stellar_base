@@ -2,18 +2,22 @@ defmodule StellarBase.XDR.TransactionResult do
   @moduledoc """
   Representation of Stellar `TransactionResult` type.
   """
-  alias StellarBase.XDR.{Ext, Int64, TxResult}
+  alias StellarBase.XDR.{Ext, Int64, TransactionResultResult}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(fee_charged: Int64, result: TxResult, ext: Ext)
+  @struct_spec XDR.Struct.new(fee_charged: Int64, result: TransactionResultResult, ext: Ext)
 
-  @type t :: %__MODULE__{fee_charged: Int64.t(), result: TxResult.t(), ext: Ext.t()}
+  @type t :: %__MODULE__{
+          fee_charged: Int64.t(),
+          result: TransactionResultResult.t(),
+          ext: Ext.t()
+        }
 
   defstruct [:fee_charged, :result, :ext]
 
   @spec new(fee_charged :: Int64.t(), result :: TxResult.t(), ext :: Ext.t()) :: t()
-  def new(%Int64{} = fee_charged, %TxResult{} = result, %Ext{} = ext),
+  def new(%Int64{} = fee_charged, %TransactionResultResult{} = result, %Ext{} = ext),
     do: %__MODULE__{fee_charged: fee_charged, result: result, ext: ext}
 
   @impl true

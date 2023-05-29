@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.HostFunctionTest do
+defmodule StellarBase.XDR.HostFunctionList100 do
   use ExUnit.Case
 
   alias StellarBase.XDR.{

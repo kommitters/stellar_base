@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
 
       contract_executable = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWK")
       sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
-      source = SCContractExecutable.new(contract_executable, sc_contract_executable_type)
+      executable = SCContractExecutable.new(contract_executable, sc_contract_executable_type)
 
       salt =
         UInt256.new(
@@ -25,10 +25,10 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
 
       %{
         network_id: network_id,
-        source: source,
+        executable: executable,
         salt: salt,
         hash_id_preimage_create_contract_args:
-          HashIDPreimageCreateContractArgs.new(network_id, source, salt),
+          HashIDPreimageCreateContractArgs.new(network_id, executable, salt),
         binary:
           <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
             72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83,
@@ -40,14 +40,14 @@ defmodule StellarBase.XDR.HashIDPreimageCreateContractArgsTest do
 
     test "new/1", %{
       network_id: network_id,
-      source: source,
+      executable: executable,
       salt: salt
     } do
       %HashIDPreimageCreateContractArgs{
         network_id: ^network_id,
-        source: ^source,
+        executable: ^executable,
         salt: ^salt
-      } = HashIDPreimageCreateContractArgs.new(network_id, source, salt)
+      } = HashIDPreimageCreateContractArgs.new(network_id, executable, salt)
     end
 
     test "encode_xdr/1", %{

@@ -11,7 +11,6 @@ defmodule StellarBase.XDR.TransactionExt do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    Int,
     Void,
     SorobanTransactionData
   }
@@ -35,7 +34,7 @@ defmodule StellarBase.XDR.TransactionExt do
   @impl true
   def encode_xdr(%__MODULE__{value: value, type: type}) do
     type
-    |> Int.new()
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms, value)
     |> XDR.Union.encode_xdr()
   end
@@ -43,7 +42,7 @@ defmodule StellarBase.XDR.TransactionExt do
   @impl true
   def encode_xdr!(%__MODULE__{value: value, type: type}) do
     type
-    |> Int.new()
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms, value)
     |> XDR.Union.encode_xdr!()
   end
@@ -69,7 +68,7 @@ defmodule StellarBase.XDR.TransactionExt do
   @spec union_spec() :: XDR.Union.t()
   defp union_spec do
     0
-    |> Int.new()
+    |> XDR.Int.new()
     |> XDR.Union.new(@arms)
   end
 end
