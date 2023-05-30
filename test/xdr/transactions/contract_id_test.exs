@@ -52,7 +52,7 @@ defmodule StellarBase.XDR.ContractIDTest do
 
       from_ed25519_public_key = FromEd25519PublicKey.new(key, signature, salt)
 
-      ## Uint256
+      ## UInt256
       salt_case =
         "GCJCFK7GZEOXVAWWOWYFTR5C5IZAQBYV5HIJUGVZPUBDJNRFVXXZEHHV"
         |> StrKey.decode!(:ed25519_public_key)

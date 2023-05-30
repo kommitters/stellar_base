@@ -6,33 +6,23 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
     SCValType,
     SCVec,
     Int64,
-    HostFunctionType,
     HostFunction,
-    PublicKeyType,
-    LedgerEntryType,
-    UInt256,
+    HostFunctionArgs,
+    HostFunctionType,
     PublicKey,
-    Account,
-    LedgerKey,
-    LedgerKeyList,
+    PublicKeyType,
+    UInt256,
+    ContractAuth,
     ContractAuthList,
     AccountID,
-    LedgerFootprint,
     AuthorizedInvocation,
     AuthorizedInvocationList,
-    AccountID,
     AddressWithNonce,
-    ContractAuth,
     Hash,
-    Int64,
-    PublicKey,
-    PublicKeyType,
+    HostFunctionList100,
     SCAddress,
     SCAddressType,
     SCSymbol,
-    SCVal,
-    SCValType,
-    SCVec,
     OptionalAddressWithNonce,
     UInt64
   }
@@ -50,7 +40,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
       sc_vec = SCVec.new(sc_vals)
 
       host_function_type = HostFunctionType.new(:HOST_FUNCTION_TYPE_INVOKE_CONTRACT)
-      host_function = HostFunction.new(sc_vec, host_function_type)
+      host_function_args = HostFunctionArgs.new(sc_vec, host_function_type)
 
       ## LedgerFootprint
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
@@ -61,16 +51,6 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
         |> UInt256.new()
         |> PublicKey.new(pk_type)
         |> AccountID.new()
-
-      type = LedgerEntryType.new(:ACCOUNT)
-      ledger_key_data = Account.new(account_id)
-
-      ledger_keys = [LedgerKey.new(ledger_key_data, type)]
-
-      read_only = LedgerKeyList.new(ledger_keys)
-      read_write = LedgerKeyList.new(ledger_keys)
-
-      footprint = LedgerFootprint.new(read_only, read_write)
 
       ## ContractAuthList
       # AddressWithNonce
@@ -95,38 +75,34 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
 
       auth = ContractAuth.new(address_with_nonce, authorized_invocation, sc_vec)
       auth_list = ContractAuthList.new([auth, auth])
+      host_function = HostFunction.new(host_function_args, auth_list)
+      host_function_list = HostFunctionList100.new([host_function])
 
       %{
-        host_function: host_function,
-        footprint: footprint,
-        auth: auth_list,
-        invoke_host_function_op: InvokeHostFunction.new(host_function, footprint, auth_list),
+        host_function_list: host_function_list,
+        invoke_host_function_op: InvokeHostFunction.new(host_function_list),
         binary:
-          <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0,
-            0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154,
-            137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212,
-            179, 73, 138, 2, 227, 119, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98,
-            27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10,
-            76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-            0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187,
-            173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 0, 0, 0,
-            0, 123, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54,
-            52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 5, 72, 101, 108, 108,
-            111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0,
-            0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0,
-            0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27,
-            186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76,
-            25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 0, 0, 0, 0, 123, 71, 67, 73, 90, 51, 71,
-            83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67,
-            90, 51, 90, 87, 78, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
-            6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
-            0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
+          <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0,
+            0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178,
+            144, 98, 27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210,
+            37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 0, 0, 0, 0, 123, 71, 67, 73,
+            90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84, 72, 77, 68,
+            90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0,
+            2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+            0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+            0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149,
+            154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2,
+            227, 119, 0, 0, 0, 0, 0, 0, 0, 123, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55,
+            79, 85, 83, 52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0,
+            0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3,
+            0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0,
+            0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 
-    test "new/1", %{host_function: host_function, footprint: footprint, auth: auth} do
-      %InvokeHostFunction{host_function: ^host_function, footprint: ^footprint, auth: ^auth} =
-        InvokeHostFunction.new(host_function, footprint, auth)
+    test "new/1", %{host_function_list: host_function_list} do
+      %InvokeHostFunction{functions: ^host_function_list} =
+        InvokeHostFunction.new(host_function_list)
     end
 
     test "encode_xdr/1", %{

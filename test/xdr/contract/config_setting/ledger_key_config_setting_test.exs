@@ -5,7 +5,7 @@ defmodule StellarBase.XDR.LedgerKeyConfigSettingTest do
 
   describe "LedgerKeyConfigSetting" do
     setup do
-      config_setting_id = ConfigSettingID.new(:CONFIG_SETTING_CONTRACT_MAX_SIZE)
+      config_setting_id = ConfigSettingID.new(:CONFIG_SETTING_CONTRACT_MAX_SIZE_BYTES)
 
       %{
         config_setting_id: config_setting_id,

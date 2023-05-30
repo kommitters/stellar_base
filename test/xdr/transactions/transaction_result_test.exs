@@ -12,8 +12,8 @@ defmodule StellarBase.XDR.TransactionResultTest do
     OperationResultCode,
     OperationResultList,
     OperationType,
-    TxResultV0,
-    TxResult,
+    InnerTransactionResultResult,
+    TransactionResultResult,
     TransactionResult,
     TransactionResultCode,
     Void
@@ -31,7 +31,7 @@ defmodule StellarBase.XDR.TransactionResultTest do
         |> OperationInnerResult.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(OperationResultCode.new(:opINNER))
         |> (&OperationResultList.new([&1])).()
-        |> TxResultV0.new(TransactionResultCode.new(:txSUCCESS))
+        |> InnerTransactionResultResult.new(TransactionResultCode.new(:txSUCCESS))
 
       inner_tx_result = InnerTransactionResult.new(Int64.new(100), result, Ext.new())
 
@@ -39,7 +39,7 @@ defmodule StellarBase.XDR.TransactionResultTest do
         "c61305a67fff6a82dbc6eebf1eb56a42"
         |> Hash.new()
         |> InnerTransactionResultPair.new(inner_tx_result)
-        |> TxResult.new(TransactionResultCode.new(:txFEE_BUMP_INNER_SUCCESS))
+        |> TransactionResultResult.new(TransactionResultCode.new(:txFEE_BUMP_INNER_SUCCESS))
 
       ext = Ext.new()
 

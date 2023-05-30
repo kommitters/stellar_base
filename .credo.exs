@@ -9,7 +9,7 @@
       checks: [
         {Credo.Check.Readability.AliasOrder, false},
         {Credo.Check.Readability.Specs, []},
-        {Credo.Check.Refactor.FunctionArity, max_arity: 10}
+        {Credo.Check.Refactor.FunctionArity, max_arity: 16}
       ]
     }
   ]

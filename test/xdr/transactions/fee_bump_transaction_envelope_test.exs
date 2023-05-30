@@ -21,9 +21,11 @@ defmodule StellarBase.XDR.FeeBumpTransactionEnvelopeTest do
     TimeBounds,
     TimePoint,
     Transaction,
+    TransactionExt,
     TransactionV1Envelope,
     UInt32,
-    UInt64
+    UInt64,
+    Void
   }
 
   describe "FeeBumpTransactionEnvelope" do
@@ -149,7 +151,7 @@ defmodule StellarBase.XDR.FeeBumpTransactionEnvelopeTest do
     # operations
     operations = build_operations()
 
-    ext = Ext.new()
+    ext = TransactionExt.new(Void.new(), 0)
 
     Transaction.new(
       source_account,

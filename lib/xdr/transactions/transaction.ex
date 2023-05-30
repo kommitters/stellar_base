@@ -4,7 +4,7 @@ defmodule StellarBase.XDR.Transaction do
   """
 
   alias StellarBase.XDR.{
-    Ext,
+    TransactionExt,
     Memo,
     MuxedAccount,
     Preconditions,
@@ -22,7 +22,7 @@ defmodule StellarBase.XDR.Transaction do
                  preconditions: Preconditions,
                  memo: Memo,
                  operations: Operations,
-                 ext: Ext
+                 ext: TransactionExt
                )
 
   @type t :: %__MODULE__{
@@ -32,7 +32,7 @@ defmodule StellarBase.XDR.Transaction do
           preconditions: Preconditions.t(),
           memo: Memo.t(),
           operations: Operations.t(),
-          ext: Ext.t()
+          ext: TransactionExt.t()
         }
 
   defstruct [:source_account, :fee, :seq_num, :preconditions, :memo, :operations, :ext]
@@ -44,7 +44,7 @@ defmodule StellarBase.XDR.Transaction do
           preconditions :: Preconditions.t(),
           memo :: Memo.t(),
           operations :: Operations.t(),
-          ext :: Ext.t()
+          ext :: TransactionExt.t()
         ) :: t()
   def new(
         %MuxedAccount{} = source_account,
@@ -53,7 +53,7 @@ defmodule StellarBase.XDR.Transaction do
         %Preconditions{} = preconditions,
         %Memo{} = memo,
         %Operations{} = operations,
-        %Ext{} = ext
+        %TransactionExt{} = ext
       ),
       do: %__MODULE__{
         source_account: source_account,

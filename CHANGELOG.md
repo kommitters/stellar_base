@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.0 (30.05.2023)
+
+* [Soroban Preview 9 support](https://github.com/kommitters/stellar_base/issues/265) with its respective [Preview 9 changes](https://github.com/stellar/stellar-xdr/compare/7356dc237ee0db5626561c129fb3fa4beaabbac6...2f16687fdf6f4bcfb56805e2035f69997f4b34c4).
+
 ## 0.10.2 (02.05.2023)
 
 * Add missing version_byte type in strkey.
