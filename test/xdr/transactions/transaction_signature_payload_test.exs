@@ -5,7 +5,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTest do
 
   alias StellarBase.XDR.{
     EnvelopeType,
-    Ext,
+    TransactionExt,
+    Void,
     Hash,
     Int64,
     Memo,
@@ -48,7 +49,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTest do
       operations = build_operations()
 
       # ext
-      ext = Ext.new()
+      ext = TransactionExt.new(Void.new(), 0)
 
       tagged_tx =
         "GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY"

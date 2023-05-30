@@ -3,19 +3,23 @@ defmodule StellarBase.XDR.InnerTransactionResult do
   Representation of Stellar `InnerTransactionResult` type.
   InnerTransactionResult must be binary compatible with TransactionResult.
   """
-  alias StellarBase.XDR.{Int64, TxResultV0}
-  alias StellarBase.XDR.Ext
+  alias StellarBase.XDR.{Int64, InnerTransactionResultResult, Ext}
 
   @behaviour XDR.Declaration
 
-  @struct_spec XDR.Struct.new(fee_charged: Int64, result: TxResultV0, ext: Ext)
+  @struct_spec XDR.Struct.new(fee_charged: Int64, result: InnerTransactionResultResult, ext: Ext)
 
-  @type t :: %__MODULE__{fee_charged: Int64.t(), result: TxResultV0.t(), ext: Ext.t()}
+  @type t :: %__MODULE__{
+          fee_charged: Int64.t(),
+          result: InnerTransactionResultResult.t(),
+          ext: Ext.t()
+        }
 
   defstruct [:fee_charged, :result, :ext]
 
-  @spec new(fee_charged :: Int64.t(), result :: TxResultV0.t(), ext :: Ext.t()) :: t()
-  def new(%Int64{} = fee_charged, %TxResultV0{} = result, %Ext{} = ext),
+  @spec new(fee_charged :: Int64.t(), result :: InnerTransactionResultResult.t(), ext :: Ext.t()) ::
+          t()
+  def new(%Int64{} = fee_charged, %InnerTransactionResultResult{} = result, %Ext{} = ext),
     do: %__MODULE__{fee_charged: fee_charged, result: result, ext: ext}
 
   @impl true

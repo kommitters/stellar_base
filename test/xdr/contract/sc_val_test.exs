@@ -29,9 +29,13 @@ defmodule StellarBase.XDR.SCValTest do
     SCSymbol,
     SCUnknownErrorCode,
     TimePoint,
-    UInt256,
     UInt32,
     UInt64,
+    UInt256,
+    UInt128Parts,
+    UInt256Parts,
+    Int256Parts,
+    Int64,
     Void
   }
 
@@ -110,35 +114,34 @@ defmodule StellarBase.XDR.SCValTest do
         },
         %{
           val_type: SCValType.new(:SCV_U128),
-          value: Int128Parts.new(UInt64.new(3312), UInt64.new(3313)),
+          value: UInt128Parts.new(UInt64.new(3312), UInt64.new(3313)),
           binary: <<0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241>>
         },
         %{
           val_type: SCValType.new(:SCV_I128),
-          value: Int128Parts.new(UInt64.new(3312), UInt64.new(3313)),
+          value: Int128Parts.new(Int64.new(3312), UInt64.new(3313)),
           binary: <<0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241>>
         },
         %{
           val_type: SCValType.new(:SCV_U256),
           value:
-            UInt256.new(
-              <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
-                108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+            UInt256Parts.new(
+              UInt64.new(3312),
+              UInt64.new(3313),
+              UInt64.new(3314),
+              UInt64.new(3315)
             ),
           binary:
-            <<0, 0, 0, 11, 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0,
-              72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+            <<0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241, 0, 0, 0, 0, 0, 0,
+              12, 242, 0, 0, 0, 0, 0, 0, 12, 243>>
         },
         %{
           val_type: SCValType.new(:SCV_I256),
           value:
-            UInt256.new(
-              <<72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0, 72, 101, 108,
-                108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
-            ),
+            Int256Parts.new(Int64.new(3312), UInt64.new(3313), UInt64.new(3314), UInt64.new(3315)),
           binary:
-            <<0, 0, 0, 12, 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0,
-              72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0, 21, 0, 1, 0>>
+            <<0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 12, 240, 0, 0, 0, 0, 0, 0, 12, 241, 0, 0, 0, 0, 0, 0,
+              12, 242, 0, 0, 0, 0, 0, 0, 12, 243>>
         },
         %{
           val_type: SCValType.new(:SCV_BYTES),

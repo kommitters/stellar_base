@@ -20,6 +20,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     TimeBounds,
     TimePoint,
     Transaction,
+    TransactionExt,
+    Void,
     TransactionV1Envelope,
     UInt32,
     UInt64
@@ -50,6 +52,9 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
     # ext
     ext = Ext.new()
 
+    # tx ext
+    tx_ext = TransactionExt.new(Void.new(), 0)
+
     {:ok,
      %{
        fee: fee,
@@ -57,7 +62,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
        preconditions: preconditions,
        memo: memo,
        operations: operations,
-       ext: ext
+       ext: ext,
+       tx_ext: tx_ext
      }}
   end
 
@@ -68,7 +74,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
       preconditions: preconditions,
       memo: memo,
       operations: operations,
-      ext: ext
+      tx_ext: tx_ext
     } do
       source_account =
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
@@ -81,7 +87,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
           preconditions,
           memo,
           operations,
-          ext
+          tx_ext
         )
 
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_TX)
@@ -145,7 +151,8 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
       preconditions: preconditions,
       memo: memo,
       operations: operations,
-      ext: ext
+      ext: ext,
+      tx_ext: tx_ext
     } do
       source_account =
         create_muxed_account("GCNY5OXYSY4FKHOPT2SPOQZAOEIGXB5LBYW3HVU3OWSTQITS65M5RCNY")
@@ -158,7 +165,7 @@ defmodule StellarBase.XDR.TransactionSignaturePayloadTaggedTransactionTest do
           preconditions,
           memo,
           operations,
-          ext
+          tx_ext
         )
 
       envelope_type = EnvelopeType.new(:ENVELOPE_TYPE_TX_FEE_BUMP)

@@ -7,6 +7,7 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
     InvokeHostFunctionResultCode,
     SCVal,
     SCValType,
+    SCValList100,
     Void
   }
 
@@ -26,25 +27,26 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
       int_64 = Int64.new(3)
       scval_type = SCValType.new(:SCV_I64)
       scval = SCVal.new(int_64, scval_type)
+      scval_list = SCValList100.new([scval])
 
       discriminants = [
         %{
-          value: scval,
-          invoke_host_function_result_code: invoke_host_function_result_success,
+          value: scval_list,
+          invoke_host_function_result_type: invoke_host_function_result_success,
           invoke_host_function_result:
-            InvokeHostFunctionResult.new(scval, invoke_host_function_result_success),
-          binary: <<0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3>>
+            InvokeHostFunctionResult.new(scval_list, invoke_host_function_result_success),
+          binary: <<0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3>>
         },
         %{
           value: void,
-          invoke_host_function_result_code: invoke_host_function_result_malformed,
+          invoke_host_function_result_type: invoke_host_function_result_malformed,
           invoke_host_function_result:
             InvokeHostFunctionResult.new(void, invoke_host_function_result_malformed),
           binary: <<255, 255, 255, 255>>
         },
         %{
           value: void,
-          invoke_host_function_result_code: invoke_host_function_result_trapped,
+          invoke_host_function_result_type: invoke_host_function_result_trapped,
           invoke_host_function_result:
             InvokeHostFunctionResult.new(void, invoke_host_function_result_trapped),
           binary: <<255, 255, 255, 254>>
@@ -55,9 +57,9 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
     end
 
     test "new/1", %{discriminants: discriminants} do
-      for %{value: value, invoke_host_function_result_code: invoke_host_function_result_code} <-
+      for %{value: value, invoke_host_function_result_type: invoke_host_function_result_code} <-
             discriminants do
-        %InvokeHostFunctionResult{value: ^value, code: ^invoke_host_function_result_code} =
+        %InvokeHostFunctionResult{value: ^value, type: ^invoke_host_function_result_code} =
           InvokeHostFunctionResult.new(value, invoke_host_function_result_code)
       end
     end

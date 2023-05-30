@@ -23,6 +23,12 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultCodeTest do
           invoke_host_function_result_code:
             InvokeHostFunctionResultCode.new(:INVOKE_HOST_FUNCTION_TRAPPED),
           binary: <<255, 255, 255, 254>>
+        },
+        %{
+          identifier: :INVOKE_HOST_FUNCTION_RESOURCE_LIMIT_EXCEEDED,
+          invoke_host_function_result_code:
+            InvokeHostFunctionResultCode.new(:INVOKE_HOST_FUNCTION_RESOURCE_LIMIT_EXCEEDED),
+          binary: <<255, 255, 255, 253>>
         }
       ]
 

@@ -26,7 +26,7 @@ defmodule StellarBase.XDR.SCSymbolTest do
         |> SCSymbol.encode_xdr()
     end
 
-    test "encode_xdr/1 an invalid string lenght" do
+    test "encode_xdr/1 an invalid string length" do
       {:error, :invalid_length} =
         "The length of the string exceeds the max length allowed"
         |> SCSymbol.new()
