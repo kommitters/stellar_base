@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SCMetaV0 do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    String
-  }
+  alias StellarBase.XDR.String
 
   @struct_spec XDR.Struct.new(
                  key: String,

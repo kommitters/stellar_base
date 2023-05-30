@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.UInt128Parts do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    UInt64
-  }
+  alias StellarBase.XDR.UInt64
 
   @struct_spec XDR.Struct.new(
                  hi: UInt64,
