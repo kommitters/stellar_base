@@ -16,26 +16,31 @@ defmodule StellarBase.XDR.ContractCostParamEntry do
   }
 
   @struct_spec XDR.Struct.new(
-    const_term: Int64,
-    linear_term: Int64,
-    ext: ExtensionPoint
-  )
+                 const_term: Int64,
+                 linear_term: Int64,
+                 ext: ExtensionPoint
+               )
 
   @type const_term_type :: Int64.t()
   @type linear_term_type :: Int64.t()
   @type ext_type :: ExtensionPoint.t()
 
-  @type t :: %__MODULE__{const_term: const_term_type(), linear_term: linear_term_type(), ext: ext_type()}
+  @type t :: %__MODULE__{
+          const_term: const_term_type(),
+          linear_term: linear_term_type(),
+          ext: ext_type()
+        }
 
   defstruct [:const_term, :linear_term, :ext]
 
-  @spec new(const_term :: const_term_type(), linear_term :: linear_term_type(), ext :: ext_type()) :: t()
+  @spec new(const_term :: const_term_type(), linear_term :: linear_term_type(), ext :: ext_type()) ::
+          t()
   def new(
-    %Int64{} = const_term,
-    %Int64{} = linear_term,
-    %ExtensionPoint{} = ext
-  ),
-  do: %__MODULE__{const_term: const_term, linear_term: linear_term, ext: ext}
+        %Int64{} = const_term,
+        %Int64{} = linear_term,
+        %ExtensionPoint{} = ext
+      ),
+      do: %__MODULE__{const_term: const_term, linear_term: linear_term, ext: ext}
 
   @impl true
   def encode_xdr(%__MODULE__{const_term: const_term, linear_term: linear_term, ext: ext}) do
@@ -56,9 +61,13 @@ defmodule StellarBase.XDR.ContractCostParamEntry do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [const_term: const_term, linear_term: linear_term, ext: ext]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{components: [const_term: const_term, linear_term: linear_term, ext: ext]},
+        rest}} ->
         {:ok, {new(const_term, linear_term, ext), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -68,6 +77,7 @@ defmodule StellarBase.XDR.ContractCostParamEntry do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [const_term: const_term, linear_term: linear_term, ext: ext]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(const_term, linear_term, ext), rest}
   end
 end

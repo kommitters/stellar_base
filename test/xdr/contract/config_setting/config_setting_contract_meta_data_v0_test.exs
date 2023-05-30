@@ -53,7 +53,8 @@ defmodule StellarBase.XDR.ConfigSettingContractMetaDataV0Test do
     config_setting_contract_meta_data: config_setting_contract_meta_data,
     binary: binary
   } do
-    {:ok, {^config_setting_contract_meta_data, ""}} = ConfigSettingContractMetaDataV0.decode_xdr(binary)
+    {:ok, {^config_setting_contract_meta_data, ""}} =
+      ConfigSettingContractMetaDataV0.decode_xdr(binary)
   end
 
   test "decode_xdr/2 with an invalid binary" do

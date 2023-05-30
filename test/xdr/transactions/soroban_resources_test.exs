@@ -78,8 +78,7 @@ defmodule StellarBase.XDR.SorobanResourcesTest do
     end
 
     test "encode_xdr/1", %{soroban_resources: soroban_resources, binary: binary} do
-      {:ok, ^binary} =
-        SorobanResources.encode_xdr(soroban_resources)
+      {:ok, ^binary} = SorobanResources.encode_xdr(soroban_resources)
     end
 
     test "encode_xdr!/1", %{soroban_resources: soroban_resources, binary: binary} do

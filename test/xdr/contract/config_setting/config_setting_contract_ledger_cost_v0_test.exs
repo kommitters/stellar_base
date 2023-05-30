@@ -135,7 +135,8 @@ defmodule StellarBase.XDR.ConfigSettingContractLedgerCostV0Test do
     config_setting_contract_ledger_cost_v0: config_setting_contract_ledger_cost_v0,
     binary: binary
   } do
-    ^binary = ConfigSettingContractLedgerCostV0.encode_xdr!(config_setting_contract_ledger_cost_v0)
+    ^binary =
+      ConfigSettingContractLedgerCostV0.encode_xdr!(config_setting_contract_ledger_cost_v0)
   end
 
   test "decode_xdr/2", %{

@@ -71,8 +71,7 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
     end
 
     test "encode_xdr/1", %{soroban_transaction_data: soroban_transaction_data, binary: binary} do
-      {:ok, ^binary} =
-        SorobanTransactionData.encode_xdr(soroban_transaction_data)
+      {:ok, ^binary} = SorobanTransactionData.encode_xdr(soroban_transaction_data)
     end
 
     test "encode_xdr!/1", %{soroban_transaction_data: soroban_transaction_data, binary: binary} do
