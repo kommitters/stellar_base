@@ -2,7 +2,7 @@ defmodule StellarBase.MixProject do
   use Mix.Project
 
   @github_url "https://github.com/kommitters/stellar_base"
-  @version "0.11.0"
+  @version "0.11.1"
 
   def project do
     [
