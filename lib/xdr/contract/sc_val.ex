@@ -70,6 +70,8 @@ defmodule StellarBase.XDR.SCVal do
           | Int64.t()
           | TimePoint.t()
           | Duration.t()
+          | Int128Parts.t()
+          | Int256Parts.t()
           | UInt128Parts.t()
           | UInt256Parts.t()
           | SCBytes.t()
