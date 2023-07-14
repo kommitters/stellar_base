@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.HostFunctionArgsTest do
     SCVal,
     Int64,
     SCValType,
-    VariableOpaque256000,
+    VariableOpaque,
     CreateContractArgs,
     SCVec,
     UploadContractWasmArgs,
@@ -49,7 +49,7 @@ defmodule StellarBase.XDR.HostFunctionArgsTest do
       create_contract_args = CreateContractArgs.new(contract_id, sc_contract_executable)
 
       ## UploadContractWasmArgs
-      code = VariableOpaque256000.new("GCIZ3GSM5")
+      code = VariableOpaque.new("GCIZ3GSM5")
       install_contract_code_args = UploadContractWasmArgs.new(code)
 
       discriminants = [

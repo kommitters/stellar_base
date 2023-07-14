@@ -34,7 +34,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     DataEntry,
     ExtensionPoint,
     Hash,
-    VariableOpaque256000,
+    VariableOpaque,
     ContractCodeEntry,
     SCVal,
     SCValType,
@@ -117,7 +117,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
 
     extension_point = ExtensionPoint.new(Void.new(), 0)
     hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-    code = VariableOpaque256000.new("GCIZ3GSM5")
+    code = VariableOpaque.new("GCIZ3GSM5")
 
     ## ContractDataEntry
 
