@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PaymentTest do
+defmodule StellarBase.XDR.PaymentTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -12,6 +12,7 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
     CryptoKeyType,
     Int64,
     MuxedAccount,
+    Payment,
     PublicKey,
     PublicKeyType,
     UInt256,
@@ -19,8 +20,6 @@ defmodule StellarBase.XDR.Operations.PaymentTest do
   }
 
   alias StellarBase.StrKey
-
-  alias StellarBase.XDR.Operations.Payment
 
   setup_all do
     pk_issuer =

@@ -16,9 +16,9 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpSigner do
   }
 
   @struct_spec XDR.Struct.new(
-    account_id: AccountID,
-    signer_key: SignerKey
-  )
+                 account_id: AccountID,
+                 signer_key: SignerKey
+               )
 
   @type account_id_type :: AccountID.t()
   @type signer_key_type :: SignerKey.t()
@@ -29,10 +29,10 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpSigner do
 
   @spec new(account_id :: account_id_type(), signer_key :: signer_key_type()) :: t()
   def new(
-    %AccountID{} = account_id,
-    %SignerKey{} = signer_key
-  ),
-  do: %__MODULE__{account_id: account_id, signer_key: signer_key}
+        %AccountID{} = account_id,
+        %SignerKey{} = signer_key
+      ),
+      do: %__MODULE__{account_id: account_id, signer_key: signer_key}
 
   @impl true
   def encode_xdr(%__MODULE__{account_id: account_id, signer_key: signer_key}) do
@@ -55,7 +55,9 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpSigner do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok, {%XDR.Struct{components: [account_id: account_id, signer_key: signer_key]}, rest}} ->
         {:ok, {new(account_id, signer_key), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -65,6 +67,7 @@ defmodule StellarBase.XDR.RevokeSponsorshipOpSigner do
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{components: [account_id: account_id, signer_key: signer_key]}, rest} =
       XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(account_id, signer_key), rest}
   end
 end

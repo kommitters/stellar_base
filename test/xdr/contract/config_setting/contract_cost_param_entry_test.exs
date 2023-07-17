@@ -10,9 +10,9 @@ defmodule StellarBase.XDR.ContractCostParamEntryTest do
 
     contract_cost_param_entry =
       ContractCostParamEntry.new(
+        ext,
         const_term,
-        linear_term,
-        ext
+        linear_term
       )
 
     %{
@@ -20,7 +20,7 @@ defmodule StellarBase.XDR.ContractCostParamEntryTest do
       linear_term: linear_term,
       ext: ext,
       contract_cost_param_entry: contract_cost_param_entry,
-      binary: <<0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0>>
+      binary: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10>>
     }
   end
 
@@ -30,14 +30,14 @@ defmodule StellarBase.XDR.ContractCostParamEntryTest do
     ext: ext
   } do
     %ContractCostParamEntry{
+      ext: ^ext,
       const_term: ^const_term,
-      linear_term: ^linear_term,
-      ext: ^ext
+      linear_term: ^linear_term
     } =
       ContractCostParamEntry.new(
+        ext,
         const_term,
-        linear_term,
-        ext
+        linear_term
       )
   end
 

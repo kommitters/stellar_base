@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.SetTrustLineFlagsTest do
+defmodule StellarBase.XDR.SetTrustLineFlagsTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -9,11 +9,10 @@ defmodule StellarBase.XDR.Operations.SetTrustLineFlagsTest do
     AssetType,
     PublicKey,
     PublicKeyType,
+    SetTrustLineFlags,
     UInt32,
     UInt256
   }
-
-  alias StellarBase.XDR.Operations.SetTrustLineFlags
 
   alias StellarBase.StrKey
 

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
+defmodule StellarBase.XDR.PathPaymentStrictReceiveTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -13,6 +13,7 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
     CryptoKeyType,
     Int64,
     MuxedAccount,
+    PathPaymentStrictReceive,
     PublicKey,
     PublicKeyType,
     UInt256,
@@ -20,8 +21,6 @@ defmodule StellarBase.XDR.Operations.PathPaymentStrictReceiveTest do
   }
 
   alias StellarBase.StrKey
-
-  alias StellarBase.XDR.Operations.PathPaymentStrictReceive
 
   describe "PathPaymentStrictReceive Operation" do
     setup do

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.PathPaymentStrictReceive do
+defmodule StellarBase.XDR.PathPaymentStrictReceive do
   @moduledoc """
   Representation of Stellar `PathPaymentStrictReceive` type.
   """

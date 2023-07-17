@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.SetOptionsTest do
+defmodule StellarBase.XDR.SetOptionsTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -9,6 +9,7 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
     OptionalSigner,
     PublicKey,
     PublicKeyType,
+    SetOptions,
     Signer,
     SignerKey,
     SignerKeyType,
@@ -16,8 +17,6 @@ defmodule StellarBase.XDR.Operations.SetOptionsTest do
     UInt32,
     UInt256
   }
-
-  alias StellarBase.XDR.Operations.SetOptions
 
   alias StellarBase.StrKey
 

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.CreatePassiveSellOffer do
+defmodule StellarBase.XDR.CreatePassiveSellOffer do
   @moduledoc """
   Representation of Stellar `CreatePassiveSellOffer` type.
   """

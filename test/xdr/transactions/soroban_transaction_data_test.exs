@@ -42,7 +42,7 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
           extended_meta_data_size_bytes
         )
 
-      soroban_transaction_data = SorobanTransactionData.new(resources, refundable_fee, ext)
+      soroban_transaction_data = SorobanTransactionData.new(ext, resources, refundable_fee)
 
       %{
         resources: resources,
@@ -50,11 +50,11 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
         ext: ext,
         soroban_transaction_data: soroban_transaction_data,
         binary:
-          <<0, 0, 0, 1, 0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
-            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 1, 0, 0,
-            0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52,
-            84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10,
-            0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0>>
+          <<0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55,
+            79, 85, 83, 52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0,
+            0, 1, 0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85,
+            80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 10, 0, 0, 0, 10,
+            0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10>>
       }
     end
 
@@ -64,10 +64,10 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
       ext: ext
     } do
       %SorobanTransactionData{
+        ext: ^ext,
         resources: ^resources,
-        refundable_fee: ^refundable_fee,
-        ext: ^ext
-      } = SorobanTransactionData.new(resources, refundable_fee, ext)
+        refundable_fee: ^refundable_fee
+      } = SorobanTransactionData.new(ext, resources, refundable_fee)
     end
 
     test "encode_xdr/1", %{soroban_transaction_data: soroban_transaction_data, binary: binary} do

@@ -43,7 +43,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
           binary: <<0, 0, 0, 2>>
         },
         %{
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_STATUS),
+          status_type: SCSpecType.new(:SC_SPEC_TYPE_ERROR),
           sc_code: Void.new(),
           binary: <<0, 0, 0, 3>>
         },
@@ -181,7 +181,7 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
 
     test "new/2", %{discriminants: discriminants} do
       for %{status_type: status_type, sc_code: sc_code} <- discriminants do
-        %SCSpecTypeDef{code: ^sc_code, type: ^status_type} =
+        %SCSpecTypeDef{value: ^sc_code, type: ^status_type} =
           SCSpecTypeDef.new(sc_code, status_type)
       end
     end

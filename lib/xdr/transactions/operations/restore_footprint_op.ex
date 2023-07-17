@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.RestoreFootprintOp do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    ExtensionPoint
-  }
+  alias StellarBase.XDR.ExtensionPoint
 
   @struct_spec XDR.Struct.new(ext: ExtensionPoint)
 

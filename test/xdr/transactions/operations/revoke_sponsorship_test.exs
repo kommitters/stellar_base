@@ -1,10 +1,13 @@
-defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
+defmodule StellarBase.XDR.RevokeSponsorshipTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
+    Account,
     AccountID,
     LedgerEntryType,
     LedgerKey,
+    RevokeSponsorship,
+    RevokeSponsorshipSigner,
     RevokeSponsorshipType,
     PublicKey,
     PublicKeyType,
@@ -13,8 +16,6 @@ defmodule StellarBase.XDR.Operations.RevokeSponsorshipTest do
     UInt256
   }
 
-  alias StellarBase.XDR.{Account, RevokeSponsorshipSigner}
-  alias StellarBase.XDR.Operations.RevokeSponsorship
   alias StellarBase.StrKey
 
   setup do

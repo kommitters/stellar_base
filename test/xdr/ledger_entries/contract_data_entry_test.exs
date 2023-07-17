@@ -1,29 +1,62 @@
 defmodule StellarBase.XDR.ContractDataEntryTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{ContractDataEntry, SCVal, SCValType, Int64, Hash}
+  alias StellarBase.XDR.{
+    ContractDataEntry,
+    ContractDataEntryBody,
+    ContractDataDurability,
+    ContractEntryBodyType,
+    Hash,
+    Int64,
+    SCAddress,
+    SCAddressType,
+    SCVal,
+    SCValType,
+    UInt32,
+    Void
+  }
 
   describe "ContractDataEntry" do
     setup do
-      contract_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
+      durability = ContractDataDurability.new()
+
+      body =
+        ContractDataEntryBody.new(Void.new(), ContractEntryBodyType.new(:EXPIRATION_EXTENSION))
+
+      expiration_ledger_seq = UInt32.new(132)
+      contract = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
       key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
-      val = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
 
       %{
-        contract_id: contract_id,
+        contract: contract,
         key: key,
-        val: val,
-        contract_data_entry: ContractDataEntry.new(contract_id, key, val),
+        durability: durability,
+        body: body,
+        expiration_ledger_seq: expiration_ledger_seq,
+        contract_data_entry:
+          ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq),
         binary:
-          <<71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
-            72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-            0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
+          <<0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79,
+            52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0,
+            0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132>>
       }
     end
 
-    test "new/1", %{contract_id: contract_id, key: key, val: val} do
-      %ContractDataEntry{contract_id: ^contract_id, key: ^key, val: ^val} =
-        ContractDataEntry.new(contract_id, key, val)
+    test "new/1", %{
+      contract: contract,
+      key: key,
+      durability: durability,
+      body: body,
+      expiration_ledger_seq: expiration_ledger_seq
+    } do
+      %ContractDataEntry{
+        contract: ^contract,
+        key: ^key,
+        durability: ^durability,
+        body: ^body,
+        expiration_ledger_seq: ^expiration_ledger_seq
+      } = ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq)
     end
 
     test "encode_xdr/1", %{contract_data_entry: contract_data_entry, binary: binary} do

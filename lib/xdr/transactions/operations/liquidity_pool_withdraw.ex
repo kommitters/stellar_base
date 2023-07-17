@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.LiquidityPoolWithdraw do
+defmodule StellarBase.XDR.LiquidityPoolWithdraw do
   @moduledoc """
   Representation of Stellar `LiquidityPoolWithdraw` type.
   """

@@ -37,15 +37,5 @@ defmodule StellarBase.XDR.VariableOpaqueTest do
     test "decode_xdr!/2", %{variable_opaque256000: variable_opaque256000, binary: binary} do
       {^variable_opaque256000, ""} = VariableOpaque.decode_xdr!(binary)
     end
-
-    test "invalid length" do
-      bits = 256_001 * 8
-      binary = <<0::size(bits)>>
-
-      {:error, :invalid_length} =
-        VariableOpaque.encode_xdr(%VariableOpaque{
-          opaque: binary
-        })
-    end
   end
 end

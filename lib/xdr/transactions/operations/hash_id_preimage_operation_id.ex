@@ -17,26 +17,34 @@ defmodule StellarBase.XDR.HashIDPreimageOperationID do
   }
 
   @struct_spec XDR.Struct.new(
-    source_account: AccountID,
-    seq_num: SequenceNumber,
-    op_num: UInt32
-  )
+                 source_account: AccountID,
+                 seq_num: SequenceNumber,
+                 op_num: UInt32
+               )
 
   @type source_account_type :: AccountID.t()
   @type seq_num_type :: SequenceNumber.t()
   @type op_num_type :: UInt32.t()
 
-  @type t :: %__MODULE__{source_account: source_account_type(), seq_num: seq_num_type(), op_num: op_num_type()}
+  @type t :: %__MODULE__{
+          source_account: source_account_type(),
+          seq_num: seq_num_type(),
+          op_num: op_num_type()
+        }
 
   defstruct [:source_account, :seq_num, :op_num]
 
-  @spec new(source_account :: source_account_type(), seq_num :: seq_num_type(), op_num :: op_num_type()) :: t()
+  @spec new(
+          source_account :: source_account_type(),
+          seq_num :: seq_num_type(),
+          op_num :: op_num_type()
+        ) :: t()
   def new(
-    %AccountID{} = source_account,
-    %SequenceNumber{} = seq_num,
-    %UInt32{} = op_num
-  ),
-  do: %__MODULE__{source_account: source_account, seq_num: seq_num, op_num: op_num}
+        %AccountID{} = source_account,
+        %SequenceNumber{} = seq_num,
+        %UInt32{} = op_num
+      ),
+      do: %__MODULE__{source_account: source_account, seq_num: seq_num, op_num: op_num}
 
   @impl true
   def encode_xdr(%__MODULE__{source_account: source_account, seq_num: seq_num, op_num: op_num}) do
@@ -57,9 +65,14 @@ defmodule StellarBase.XDR.HashIDPreimageOperationID do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [source_account: source_account, seq_num: seq_num, op_num: op_num]}, rest}} ->
+      {:ok,
+       {%XDR.Struct{
+          components: [source_account: source_account, seq_num: seq_num, op_num: op_num]
+        }, rest}} ->
         {:ok, {new(source_account, seq_num, op_num), rest}}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -67,8 +80,9 @@ defmodule StellarBase.XDR.HashIDPreimageOperationID do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [source_account: source_account, seq_num: seq_num, op_num: op_num]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [source_account: source_account, seq_num: seq_num, op_num: op_num]},
+     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+
     {new(source_account, seq_num, op_num), rest}
   end
 end

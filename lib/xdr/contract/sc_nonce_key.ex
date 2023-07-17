@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.SCNonceKey do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    Int64
-  }
+  alias StellarBase.XDR.Int64
 
   @struct_spec XDR.Struct.new(nonce: Int64)
 

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.ChangeTrust do
+defmodule StellarBase.XDR.ChangeTrust do
   @moduledoc """
   Representation of Stellar `ChangeTrust` type.
   """

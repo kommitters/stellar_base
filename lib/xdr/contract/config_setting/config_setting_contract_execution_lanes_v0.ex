@@ -10,9 +10,7 @@ defmodule StellarBase.XDR.ConfigSettingContractExecutionLanesV0 do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    UInt32
-  }
+  alias StellarBase.XDR.UInt32
 
   @struct_spec XDR.Struct.new(ledger_max_tx_count: UInt32)
 

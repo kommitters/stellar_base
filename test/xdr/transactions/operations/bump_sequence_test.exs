@@ -1,8 +1,7 @@
-defmodule StellarBase.XDR.Operations.BumpSequenceTest do
+defmodule StellarBase.XDR.BumpSequenceTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.SequenceNumber
-  alias StellarBase.XDR.Operations.BumpSequence
+  alias StellarBase.XDR.{BumpSequence, SequenceNumber}
 
   describe "BumpSequence Operation" do
     setup do

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
+defmodule StellarBase.XDR.ManageSellOfferTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -11,6 +11,7 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
     AssetType,
     Int32,
     Int64,
+    ManageSellOffer,
     Price,
     PublicKey,
     PublicKeyType,
@@ -18,8 +19,6 @@ defmodule StellarBase.XDR.Operations.ManageSellOfferTest do
   }
 
   alias StellarBase.StrKey
-
-  alias StellarBase.XDR.Operations.ManageSellOffer
 
   describe "ManageSellOffer Operation" do
     setup do

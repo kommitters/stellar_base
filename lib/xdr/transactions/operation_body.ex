@@ -12,88 +12,88 @@ defmodule StellarBase.XDR.OperationBody do
 
   alias StellarBase.XDR.{
     OperationType,
-    CreateAccountOp,
-    PaymentOp,
-    PathPaymentStrictReceiveOp,
-    ManageSellOfferOp,
-    CreatePassiveSellOfferOp,
-    SetOptionsOp,
-    ChangeTrustOp,
-    AllowTrustOp,
+    CreateAccount,
+    Payment,
+    PathPaymentStrictReceive,
+    ManageSellOffer,
+    CreatePassiveSellOffer,
+    SetOptions,
+    ChangeTrust,
+    AllowTrust,
     MuxedAccount,
     Void,
-    ManageDataOp,
-    BumpSequenceOp,
-    ManageBuyOfferOp,
-    PathPaymentStrictSendOp,
-    CreateClaimableBalanceOp,
-    ClaimClaimableBalanceOp,
-    BeginSponsoringFutureReservesOp,
-    RevokeSponsorshipOp,
-    ClawbackOp,
-    ClawbackClaimableBalanceOp,
-    SetTrustLineFlagsOp,
-    LiquidityPoolDepositOp,
-    LiquidityPoolWithdrawOp,
+    ManageData,
+    BumpSequence,
+    ManageBuyOffer,
+    PathPaymentStrictSend,
+    CreateClaimableBalance,
+    ClaimClaimableBalance,
+    BeginSponsoringFutureReserves,
+    RevokeSponsorship,
+    Clawback,
+    ClawbackClaimableBalance,
+    SetTrustLineFlags,
+    LiquidityPoolDeposit,
+    LiquidityPoolWithdraw,
     InvokeHostFunctionOp,
     BumpFootprintExpirationOp,
     RestoreFootprintOp
   }
 
   @arms [
-    CREATE_ACCOUNT: CreateAccountOp,
-    PAYMENT: PaymentOp,
-    PATH_PAYMENT_STRICT_RECEIVE: PathPaymentStrictReceiveOp,
-    MANAGE_SELL_OFFER: ManageSellOfferOp,
-    CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOfferOp,
-    SET_OPTIONS: SetOptionsOp,
-    CHANGE_TRUST: ChangeTrustOp,
-    ALLOW_TRUST: AllowTrustOp,
+    CREATE_ACCOUNT: CreateAccount,
+    PAYMENT: Payment,
+    PATH_PAYMENT_STRICT_RECEIVE: PathPaymentStrictReceive,
+    MANAGE_SELL_OFFER: ManageSellOffer,
+    CREATE_PASSIVE_SELL_OFFER: CreatePassiveSellOffer,
+    SET_OPTIONS: SetOptions,
+    CHANGE_TRUST: ChangeTrust,
+    ALLOW_TRUST: AllowTrust,
     ACCOUNT_MERGE: MuxedAccount,
     INFLATION: Void,
-    MANAGE_DATA: ManageDataOp,
-    BUMP_SEQUENCE: BumpSequenceOp,
-    MANAGE_BUY_OFFER: ManageBuyOfferOp,
-    PATH_PAYMENT_STRICT_SEND: PathPaymentStrictSendOp,
-    CREATE_CLAIMABLE_BALANCE: CreateClaimableBalanceOp,
-    CLAIM_CLAIMABLE_BALANCE: ClaimClaimableBalanceOp,
-    BEGIN_SPONSORING_FUTURE_RESERVES: BeginSponsoringFutureReservesOp,
+    MANAGE_DATA: ManageData,
+    BUMP_SEQUENCE: BumpSequence,
+    MANAGE_BUY_OFFER: ManageBuyOffer,
+    PATH_PAYMENT_STRICT_SEND: PathPaymentStrictSend,
+    CREATE_CLAIMABLE_BALANCE: CreateClaimableBalance,
+    CLAIM_CLAIMABLE_BALANCE: ClaimClaimableBalance,
+    BEGIN_SPONSORING_FUTURE_RESERVES: BeginSponsoringFutureReserves,
     END_SPONSORING_FUTURE_RESERVES: Void,
-    REVOKE_SPONSORSHIP: RevokeSponsorshipOp,
-    CLAWBACK: ClawbackOp,
-    CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalanceOp,
-    SET_TRUST_LINE_FLAGS: SetTrustLineFlagsOp,
-    LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDepositOp,
-    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdrawOp,
+    REVOKE_SPONSORSHIP: RevokeSponsorship,
+    CLAWBACK: Clawback,
+    CLAWBACK_CLAIMABLE_BALANCE: ClawbackClaimableBalance,
+    SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
+    LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
+    LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw,
     INVOKE_HOST_FUNCTION: InvokeHostFunctionOp,
     BUMP_FOOTPRINT_EXPIRATION: BumpFootprintExpirationOp,
     RESTORE_FOOTPRINT: RestoreFootprintOp
   ]
 
   @type value ::
-          CreateAccountOp.t()
-          | PaymentOp.t()
-          | PathPaymentStrictReceiveOp.t()
-          | ManageSellOfferOp.t()
-          | CreatePassiveSellOfferOp.t()
-          | SetOptionsOp.t()
-          | ChangeTrustOp.t()
-          | AllowTrustOp.t()
+          CreateAccount.t()
+          | Payment.t()
+          | PathPaymentStrictReceive.t()
+          | ManageSellOffer.t()
+          | CreatePassiveSellOffer.t()
+          | SetOptions.t()
+          | ChangeTrust.t()
+          | AllowTrust.t()
           | MuxedAccount.t()
           | Void.t()
-          | ManageDataOp.t()
-          | BumpSequenceOp.t()
-          | ManageBuyOfferOp.t()
-          | PathPaymentStrictSendOp.t()
-          | CreateClaimableBalanceOp.t()
-          | ClaimClaimableBalanceOp.t()
-          | BeginSponsoringFutureReservesOp.t()
-          | RevokeSponsorshipOp.t()
-          | ClawbackOp.t()
-          | ClawbackClaimableBalanceOp.t()
-          | SetTrustLineFlagsOp.t()
-          | LiquidityPoolDepositOp.t()
-          | LiquidityPoolWithdrawOp.t()
+          | ManageData.t()
+          | BumpSequence.t()
+          | ManageBuyOffer.t()
+          | PathPaymentStrictSend.t()
+          | CreateClaimableBalance.t()
+          | ClaimClaimableBalance.t()
+          | BeginSponsoringFutureReserves.t()
+          | RevokeSponsorship.t()
+          | Clawback.t()
+          | ClawbackClaimableBalance.t()
+          | SetTrustLineFlags.t()
+          | LiquidityPoolDeposit.t()
+          | LiquidityPoolWithdraw.t()
           | InvokeHostFunctionOp.t()
           | BumpFootprintExpirationOp.t()
           | RestoreFootprintOp.t()

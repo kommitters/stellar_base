@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.RevokeSponsorship do
+defmodule StellarBase.XDR.RevokeSponsorship do
   @moduledoc """
   Representation of Stellar `RevokeSponsorship` type.
   """

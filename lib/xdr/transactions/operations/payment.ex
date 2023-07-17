@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.Payment do
+defmodule StellarBase.XDR.Payment do
   @moduledoc """
   Representation of Stellar `Payment` type.
   """

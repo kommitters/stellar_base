@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Operations.AllowTrust do
+defmodule StellarBase.XDR.AllowTrust do
   @moduledoc """
   Representation of Stellar `AllowTrust` type.
   """
