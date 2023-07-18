@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.CreateAccount do
+defmodule StellarBase.XDR.Operations.CreateAccount do
   @moduledoc """
   Representation of Stellar `CreateAccount` type.
   """

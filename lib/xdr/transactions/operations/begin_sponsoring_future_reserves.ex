@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.BeginSponsoringFutureReserves do
+defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReserves do
   @moduledoc """
   Representation of Stellar `BeginSponsoringFutureReserves` type.
   """

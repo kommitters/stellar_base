@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.Clawback do
+defmodule StellarBase.XDR.Operations.Clawback do
   @moduledoc """
   Representation of Stellar `Clawback` type.
   """

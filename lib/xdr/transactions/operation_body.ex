@@ -12,32 +12,35 @@ defmodule StellarBase.XDR.OperationBody do
 
   alias StellarBase.XDR.{
     OperationType,
-    CreateAccount,
-    Payment,
-    PathPaymentStrictReceive,
-    ManageSellOffer,
-    CreatePassiveSellOffer,
-    SetOptions,
-    ChangeTrust,
-    AllowTrust,
     MuxedAccount,
-    Void,
-    ManageData,
-    BumpSequence,
-    ManageBuyOffer,
-    PathPaymentStrictSend,
-    CreateClaimableBalance,
-    ClaimClaimableBalance,
+    Void
+  }
+
+  alias StellarBase.XDR.Operations.{
+    AllowTrust,
     BeginSponsoringFutureReserves,
-    RevokeSponsorship,
+    BumpFootprintExpiration,
+    BumpSequence,
+    ChangeTrust,
     Clawback,
     ClawbackClaimableBalance,
-    SetTrustLineFlags,
+    ClaimClaimableBalance,
+    CreateClaimableBalance,
+    CreateAccount,
+    CreatePassiveSellOffer,
+    InvokeHostFunction,
     LiquidityPoolDeposit,
     LiquidityPoolWithdraw,
-    InvokeHostFunctionOp,
-    BumpFootprintExpirationOp,
-    RestoreFootprintOp
+    ManageData,
+    ManageBuyOffer,
+    ManageSellOffer,
+    Payment,
+    PathPaymentStrictReceive,
+    PathPaymentStrictSend,
+    RestoreFootprint,
+    RevokeSponsorship,
+    SetOptions,
+    SetTrustLineFlags
   }
 
   @arms [
@@ -65,9 +68,9 @@ defmodule StellarBase.XDR.OperationBody do
     SET_TRUST_LINE_FLAGS: SetTrustLineFlags,
     LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
     LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw,
-    INVOKE_HOST_FUNCTION: InvokeHostFunctionOp,
-    BUMP_FOOTPRINT_EXPIRATION: BumpFootprintExpirationOp,
-    RESTORE_FOOTPRINT: RestoreFootprintOp
+    INVOKE_HOST_FUNCTION: InvokeHostFunction,
+    BUMP_FOOTPRINT_EXPIRATION: BumpFootprintExpiration,
+    RESTORE_FOOTPRINT: RestoreFootprint
   ]
 
   @type value ::
@@ -94,9 +97,9 @@ defmodule StellarBase.XDR.OperationBody do
           | SetTrustLineFlags.t()
           | LiquidityPoolDeposit.t()
           | LiquidityPoolWithdraw.t()
-          | InvokeHostFunctionOp.t()
-          | BumpFootprintExpirationOp.t()
-          | RestoreFootprintOp.t()
+          | InvokeHostFunction.t()
+          | BumpFootprintExpiration.t()
+          | RestoreFootprint.t()
 
   @type t :: %__MODULE__{value: value(), type: OperationType.t()}
 

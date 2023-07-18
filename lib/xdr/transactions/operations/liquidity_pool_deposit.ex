@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.LiquidityPoolDeposit do
+defmodule StellarBase.XDR.Operations.LiquidityPoolDeposit do
   @moduledoc """
   Representation of Stellar `LiquidityPoolDeposit` type.
   """

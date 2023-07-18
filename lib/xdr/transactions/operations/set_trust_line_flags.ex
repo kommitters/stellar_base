@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SetTrustLineFlags do
+defmodule StellarBase.XDR.Operations.SetTrustLineFlags do
   @moduledoc """
   Representation of Stellar `SetTrustLineFlags` type.
   """

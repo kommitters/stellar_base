@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.ManageData do
+defmodule StellarBase.XDR.Operations.ManageData do
   @moduledoc """
   Representation of Stellar `ManageData` type.
   """

@@ -2,7 +2,6 @@ defmodule StellarBase.XDR.Operations.AllowTrustTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    AllowTrust,
     AccountID,
     AlphaNum4,
     Asset,
@@ -13,6 +12,8 @@ defmodule StellarBase.XDR.Operations.AllowTrustTest do
     UInt32,
     UInt256
   }
+
+  alias StellarBase.XDR.Operations.AllowTrust
 
   alias StellarBase.StrKey
 

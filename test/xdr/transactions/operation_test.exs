@@ -3,7 +3,6 @@ defmodule StellarBase.XDR.OperationTest do
 
   alias StellarBase.XDR.{
     AccountID,
-    CreateAccount,
     CryptoKeyType,
     Int64,
     MuxedAccount,
@@ -15,6 +14,8 @@ defmodule StellarBase.XDR.OperationTest do
     PublicKeyType,
     UInt256
   }
+
+  alias StellarBase.XDR.Operations.CreateAccount
 
   describe "Operation" do
     setup do

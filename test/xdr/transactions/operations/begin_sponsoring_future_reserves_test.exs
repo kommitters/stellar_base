@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.BeginSponsoringFutureReservesTest do
+defmodule StellarBase.XDR.Operations.BeginSponsoringFutureReservesTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{AccountID, PublicKey, PublicKeyType, UInt256}
-  alias StellarBase.XDR.BeginSponsoringFutureReserves
+  alias StellarBase.XDR.Operations.BeginSponsoringFutureReserves
   alias StellarBase.StrKey
 
   describe "BeginSponsoringFutureReserves Operation" do

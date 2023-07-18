@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.ClawbackClaimableBalanceTest do
+defmodule StellarBase.XDR.Operations.ClawbackClaimableBalanceTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{ClaimableBalanceID, ClaimableBalanceIDType, Hash}
-  alias StellarBase.XDR.ClawbackClaimableBalance
+  alias StellarBase.XDR.Operations.ClawbackClaimableBalance
 
   describe "ClawbackClaimableBalance Operation" do
     setup do

@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.ManageDataTest do
+defmodule StellarBase.XDR.Operations.ManageDataTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{DataValue, OptionalDataValue, String64}
-  alias StellarBase.XDR.ManageData
+  alias StellarBase.XDR.Operations.ManageData
 
   describe "ManageData Operation" do
     setup do

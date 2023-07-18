@@ -7,7 +7,6 @@ defmodule StellarBase.XDR.Operations.ClawbackTest do
     Asset,
     AssetCode4,
     AssetType,
-    Clawback,
     CryptoKeyType,
     Int64,
     MuxedAccount,
@@ -15,6 +14,8 @@ defmodule StellarBase.XDR.Operations.ClawbackTest do
     PublicKeyType,
     UInt256
   }
+
+  alias StellarBase.XDR.Operations.Clawback
 
   alias StellarBase.StrKey
 

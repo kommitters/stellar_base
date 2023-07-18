@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.CreatePassiveSellOfferTest do
+defmodule StellarBase.XDR.Operations.CreatePassiveSellOfferTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.CreatePassiveSellOfferTest do
 
   alias StellarBase.StrKey
 
-  alias StellarBase.XDR.CreatePassiveSellOffer
+  alias StellarBase.XDR.Operations.CreatePassiveSellOffer
 
   describe "CreatePassiveSellOffer Operation" do
     setup do

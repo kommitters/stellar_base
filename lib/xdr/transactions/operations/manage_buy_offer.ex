@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.ManageBuyOffer do
+defmodule StellarBase.XDR.Operations.ManageBuyOffer do
   @moduledoc """
   Representation of Stellar `ManageBuyOffer` type.
   """

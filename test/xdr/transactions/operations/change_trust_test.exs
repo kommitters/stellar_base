@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.ChangeTrustTest do
+defmodule StellarBase.XDR.Operations.ChangeTrustTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -8,7 +8,6 @@ defmodule StellarBase.XDR.ChangeTrustTest do
     AlphaNum12,
     AssetCode12,
     AssetType,
-    ChangeTrust,
     ChangeTrustAsset,
     Int64,
     PublicKey,
@@ -16,6 +15,8 @@ defmodule StellarBase.XDR.ChangeTrustTest do
     UInt256,
     Void
   }
+
+  alias StellarBase.XDR.Operations.ChangeTrust
 
   alias StellarBase.StrKey
 

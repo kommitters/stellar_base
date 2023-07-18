@@ -2,7 +2,6 @@ defmodule StellarBase.Test.Utils do
   @moduledoc """
   Utils functions for test constructions.
   """
-
   alias StellarBase.XDR.{
     AccountID,
     AlphaNum12,
@@ -21,12 +20,12 @@ defmodule StellarBase.Test.Utils do
     PublicKeyType,
     Signature,
     SignatureHint,
-    UInt256,
-    Payment,
-    Clawback
+    UInt256
   }
 
   alias StellarBase.StrKey
+
+  alias StellarBase.XDR.Operations.{Payment, Clawback}
 
   @spec ed25519_public_key(pk_key :: binary()) :: UInt256.t()
   def ed25519_public_key(pk_key) do

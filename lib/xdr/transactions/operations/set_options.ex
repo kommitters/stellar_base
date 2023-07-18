@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SetOptions do
+defmodule StellarBase.XDR.Operations.SetOptions do
   @moduledoc """
   Representation of Stellar `SetOptions` type.
   """
