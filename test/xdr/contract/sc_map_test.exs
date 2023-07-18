@@ -31,7 +31,7 @@ defmodule StellarBase.XDR.SCMapTest do
     end
 
     test "new/1", %{scmap_entries: scmap_entries} do
-      %SCMap{scmap_entries: ^scmap_entries} = SCMap.new(scmap_entries)
+      %SCMap{items: ^scmap_entries} = SCMap.new(scmap_entries)
     end
 
     test "encode_xdr/1", %{scmap: scmap, binary: binary} do

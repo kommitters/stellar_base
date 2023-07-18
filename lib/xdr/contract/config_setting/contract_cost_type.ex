@@ -30,8 +30,18 @@ defmodule StellarBase.XDR.ContractCostType do
     VmMemRead: 16,
     VmMemWrite: 17,
     VmInstantiation: 18,
-    InvokeVmFunction: 19,
-    ChargeBudget: 20
+    VmCachedInstantiation: 19,
+    InvokeVmFunction: 20,
+    ChargeBudget: 21,
+    ComputeKeccak256Hash: 22,
+    ComputeEcdsaSecp256k1Key: 23,
+    ComputeEcdsaSecp256k1Sig: 24,
+    RecoverEcdsaSecp256k1Key: 25,
+    Int256AddSub: 26,
+    Int256Mul: 27,
+    Int256Div: 28,
+    Int256Pow: 29,
+    Int256Shift: 30
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

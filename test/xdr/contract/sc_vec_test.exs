@@ -24,7 +24,7 @@ defmodule StellarBase.XDR.SCVecTest do
     end
 
     test "new/1", %{sc_vals: sc_vals} do
-      %SCVec{sc_vals: ^sc_vals} = SCVec.new(sc_vals)
+      %SCVec{items: ^sc_vals} = SCVec.new(sc_vals)
     end
 
     test "encode_xdr/1", %{scvec: scvec, binary: binary} do

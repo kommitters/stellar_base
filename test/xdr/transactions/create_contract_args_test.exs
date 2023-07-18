@@ -2,12 +2,15 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    ContractID,
-    ContractIDType,
+    ContractIDPreimage,
+    ContractIDPreimageFromAddress,
+    ContractIDPreimageType,
     CreateContractArgs,
-    SCContractExecutable,
-    SCContractExecutableType,
+    ContractExecutable,
+    ContractExecutableType,
     Hash,
+    SCAddress,
+    SCAddressType,
     UInt256
   }
 
@@ -15,37 +18,52 @@ defmodule StellarBase.XDR.CreateContractArgsTest do
 
   describe "CreateContractArgs" do
     setup do
-      # SCContractExecutable
-      contract_executable = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
+      # ContractExecutable
+      address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
+      sc_address = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
 
-      sc_contract_executable =
-        SCContractExecutable.new(contract_executable, sc_contract_executable_type)
-
-      # ContractID
       salt =
         "GCJCFK7GZEOXVAWWOWYFTR5C5IZAQBYV5HIJUGVZPUBDJNRFVXXZEHHV"
         |> StrKey.decode!(:ed25519_public_key)
         |> UInt256.new()
 
-      contract_id_type = ContractIDType.new(:CONTRACT_ID_FROM_SOURCE_ACCOUNT)
-      contract_id = ContractID.new(salt, contract_id_type)
+      id_preimage_address =
+        ContractIDPreimageFromAddress.new(
+          sc_address,
+          salt
+        )
+
+      # ContractID
+      contract_id_preimage =
+        ContractIDPreimage.new(id_preimage_address, ContractIDPreimageType.new())
+
+      sc_contract_executable_type = ContractExecutableType.new(:CONTRACT_EXECUTABLE_WASM)
+
+      sc_contract_executable = ContractExecutable.new(address, sc_contract_executable_type)
 
       %{
         sc_contract_executable: sc_contract_executable,
-        contract_id: contract_id,
-        create_contract_args: CreateContractArgs.new(contract_id, sc_contract_executable),
+        contract_id_preimage: contract_id_preimage,
+        create_contract_args:
+          CreateContractArgs.new(contract_id_preimage, sc_contract_executable),
         binary:
-          <<0, 0, 0, 0, 146, 34, 171, 230, 201, 29, 122, 130, 214, 117, 176, 89, 199, 162, 234,
-            50, 8, 7, 21, 233, 208, 154, 26, 185, 125, 2, 52, 182, 37, 173, 239, 146, 0, 0, 0, 0,
-            71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52, 84,
-            72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78>>
+          <<0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70,
+            75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 146, 34, 171, 230,
+            201, 29, 122, 130, 214, 117, 176, 89, 199, 162, 234, 50, 8, 7, 21, 233, 208, 154, 26,
+            185, 125, 2, 52, 182, 37, 173, 239, 146, 0, 0, 0, 0, 67, 65, 87, 73, 73, 90, 80, 88,
+            78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69,
+            88, 81, 75>>
       }
     end
 
-    test "new/1", %{contract_id: contract_id, sc_contract_executable: sc_contract_executable} do
-      %CreateContractArgs{contract_id: ^contract_id, executable: ^sc_contract_executable} =
-        CreateContractArgs.new(contract_id, sc_contract_executable)
+    test "new/1", %{
+      contract_id_preimage: contract_id_preimage,
+      sc_contract_executable: sc_contract_executable
+    } do
+      %CreateContractArgs{
+        contract_id_preimage: ^contract_id_preimage,
+        executable: ^sc_contract_executable
+      } = CreateContractArgs.new(contract_id_preimage, sc_contract_executable)
     end
 
     test "encode_xdr/1", %{create_contract_args: create_contract_args, binary: binary} do

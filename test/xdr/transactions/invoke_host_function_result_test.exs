@@ -1,13 +1,11 @@
 defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
   use ExUnit.Case
 
+  alias StellarBase.XDR.Hash
+
   alias StellarBase.XDR.{
     InvokeHostFunctionResult,
-    Int64,
     InvokeHostFunctionResultCode,
-    SCVal,
-    SCValType,
-    SCValList100,
     Void
   }
 
@@ -24,18 +22,17 @@ defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
 
       void = Void.new()
 
-      int_64 = Int64.new(3)
-      scval_type = SCValType.new(:SCV_I64)
-      scval = SCVal.new(int_64, scval_type)
-      scval_list = SCValList100.new([scval])
+      hash = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
 
       discriminants = [
         %{
-          value: scval_list,
+          value: hash,
           invoke_host_function_result_type: invoke_host_function_result_success,
           invoke_host_function_result:
-            InvokeHostFunctionResult.new(scval_list, invoke_host_function_result_success),
-          binary: <<0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3>>
+            InvokeHostFunctionResult.new(hash, invoke_host_function_result_success),
+          binary:
+            <<0, 0, 0, 0, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79,
+              52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75>>
         },
         %{
           value: void,

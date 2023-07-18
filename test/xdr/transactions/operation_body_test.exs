@@ -46,7 +46,7 @@ defmodule StellarBase.XDR.OperationBodyTest do
     end
 
     test "new/1", %{operation: operation, operation_type: operation_type} do
-      %OperationBody{operation: ^operation, type: ^operation_type} =
+      %OperationBody{value: ^operation, type: ^operation_type} =
         OperationBody.new(operation, operation_type)
     end
 

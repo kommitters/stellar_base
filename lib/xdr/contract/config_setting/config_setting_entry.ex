@@ -18,7 +18,10 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     ConfigSettingContractHistoricalDataV0,
     ConfigSettingContractMetaDataV0,
     ConfigSettingContractBandwidthV0,
-    ContractCostParams
+    ContractCostParams,
+    StateExpirationSettings,
+    ConfigSettingContractExecutionLanesV0,
+    UInt64List
   }
 
   @arms [
@@ -31,7 +34,10 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     CONFIG_SETTING_CONTRACT_COST_PARAMS_CPU_INSTRUCTIONS: ContractCostParams,
     CONFIG_SETTING_CONTRACT_COST_PARAMS_MEMORY_BYTES: ContractCostParams,
     CONFIG_SETTING_CONTRACT_DATA_KEY_SIZE_BYTES: UInt32,
-    CONFIG_SETTING_CONTRACT_DATA_ENTRY_SIZE_BYTES: UInt32
+    CONFIG_SETTING_CONTRACT_DATA_ENTRY_SIZE_BYTES: UInt32,
+    CONFIG_SETTING_STATE_EXPIRATION: StateExpirationSettings,
+    CONFIG_SETTING_CONTRACT_EXECUTION_LANES: ConfigSettingContractExecutionLanesV0,
+    CONFIG_SETTING_BUCKETLIST_SIZE_WINDOW: UInt64List
   ]
 
   @type value ::
@@ -42,6 +48,9 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
           | ConfigSettingContractMetaDataV0.t()
           | ConfigSettingContractBandwidthV0.t()
           | ContractCostParams.t()
+          | StateExpirationSettings.t()
+          | ConfigSettingContractExecutionLanesV0.t()
+          | UInt64List.t()
 
   @type t :: %__MODULE__{value: value(), type: ConfigSettingID.t()}
 

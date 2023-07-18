@@ -11,39 +11,43 @@ defmodule StellarBase.XDR.CreateContractArgs do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    ContractID,
-    SCContractExecutable
+    ContractIDPreimage,
+    ContractExecutable
   }
 
   @struct_spec XDR.Struct.new(
-                 contract_id: ContractID,
-                 executable: SCContractExecutable
+                 contract_id_preimage: ContractIDPreimage,
+                 executable: ContractExecutable
                )
 
-  @type contract_id_type :: ContractID.t()
-  @type executable_type :: SCContractExecutable.t()
+  @type contract_id_preimage_type :: ContractIDPreimage.t()
+  @type executable_type :: ContractExecutable.t()
 
-  @type t :: %__MODULE__{contract_id: contract_id_type(), executable: executable_type()}
+  @type t :: %__MODULE__{
+          contract_id_preimage: contract_id_preimage_type(),
+          executable: executable_type()
+        }
 
-  defstruct [:contract_id, :executable]
+  defstruct [:contract_id_preimage, :executable]
 
-  @spec new(contract_id :: contract_id_type(), executable :: executable_type()) :: t()
+  @spec new(contract_id_preimage :: contract_id_preimage_type(), executable :: executable_type()) ::
+          t()
   def new(
-        %ContractID{} = contract_id,
-        %SCContractExecutable{} = executable
+        %ContractIDPreimage{} = contract_id_preimage,
+        %ContractExecutable{} = executable
       ),
-      do: %__MODULE__{contract_id: contract_id, executable: executable}
+      do: %__MODULE__{contract_id_preimage: contract_id_preimage, executable: executable}
 
   @impl true
-  def encode_xdr(%__MODULE__{contract_id: contract_id, executable: executable}) do
-    [contract_id: contract_id, executable: executable]
+  def encode_xdr(%__MODULE__{contract_id_preimage: contract_id_preimage, executable: executable}) do
+    [contract_id_preimage: contract_id_preimage, executable: executable]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{contract_id: contract_id, executable: executable}) do
-    [contract_id: contract_id, executable: executable]
+  def encode_xdr!(%__MODULE__{contract_id_preimage: contract_id_preimage, executable: executable}) do
+    [contract_id_preimage: contract_id_preimage, executable: executable]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -53,8 +57,11 @@ defmodule StellarBase.XDR.CreateContractArgs do
 
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [contract_id: contract_id, executable: executable]}, rest}} ->
-        {:ok, {new(contract_id, executable), rest}}
+      {:ok,
+       {%XDR.Struct{
+          components: [contract_id_preimage: contract_id_preimage, executable: executable]
+        }, rest}} ->
+        {:ok, {new(contract_id_preimage, executable), rest}}
 
       error ->
         error
@@ -65,9 +72,10 @@ defmodule StellarBase.XDR.CreateContractArgs do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [contract_id: contract_id, executable: executable]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{
+       components: [contract_id_preimage: contract_id_preimage, executable: executable]
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(contract_id, executable), rest}
+    {new(contract_id_preimage, executable), rest}
   end
 end

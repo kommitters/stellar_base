@@ -4,20 +4,26 @@ defmodule StellarBase.XDR.LedgerEntryTest do
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{
+    ContractDataEntry,
+    ContractDataEntry,
+    ContractDataEntryBody,
+    ContractEntryBodyType,
+    ContractDataDurability,
+    Ext,
     LedgerEntry,
     OptionalAccountID,
     SponsorshipDescriptor,
     LedgerEntryExtensionV1,
     UInt32,
     Int64,
+    SCAddress,
+    SCAddressType,
     SCVal,
     SCValType,
     LedgerEntryType,
-    ContractDataEntry,
     LedgerEntryExt,
     LedgerEntryData,
     Hash,
-    Ext,
     Void
   }
 
@@ -32,11 +38,18 @@ defmodule StellarBase.XDR.LedgerEntryTest do
       sponsoring_id = SponsorshipDescriptor.new(account_id)
       last_modified_ledger_seq = UInt32.new(5)
 
-      contract_id = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+      address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
+      contract = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
+      durability = ContractDataDurability.new()
       key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
-      val = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       ledger_entry_type = LedgerEntryType.new(:CONTRACT_DATA)
-      ledger_entry_data = ContractDataEntry.new(contract_id, key, val)
+      expiration_ledger_seq = UInt32.new(132)
+
+      body =
+        ContractDataEntryBody.new(Void.new(), ContractEntryBodyType.new(:EXPIRATION_EXTENSION))
+
+      ledger_entry_data =
+        ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq)
 
       data = LedgerEntryData.new(ledger_entry_data, ledger_entry_type)
 
@@ -68,14 +81,15 @@ defmodule StellarBase.XDR.LedgerEntryTest do
         ledger_entry_ext_list: ledger_entry_ext_list,
         ledger_entry_list: ledger_entry_list,
         binaries: [
-          <<0, 0, 0, 5, 0, 0, 0, 6, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
-            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 6, 0, 0,
-            0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0>>,
-          <<0, 0, 0, 5, 0, 0, 0, 6, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
-            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 6, 0, 0,
-            0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
-            0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32, 113, 16, 107, 135,
-            171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0, 0, 0, 0>>
+          <<0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55,
+            88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0,
+            0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132, 0, 0, 0, 0>>,
+          <<0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55,
+            88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0,
+            0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132, 0, 0, 0, 1, 0, 0,
+            0, 1, 0, 0, 0, 0, 155, 142, 186, 248, 150, 56, 85, 29, 207, 158, 164, 247, 67, 32,
+            113, 16, 107, 135, 171, 14, 45, 179, 214, 155, 117, 165, 56, 34, 114, 247, 89, 216, 0,
+            0, 0, 0>>
         ]
       }
     end
