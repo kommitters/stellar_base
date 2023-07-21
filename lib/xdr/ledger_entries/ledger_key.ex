@@ -12,8 +12,8 @@ defmodule StellarBase.XDR.LedgerKey do
     Data,
     ClaimableBalance,
     LiquidityPool,
-    ContractData,
-    ContractCode,
+    LedgerKeyContractData,
+    LedgerKeyContractCode,
     LedgerKeyConfigSetting
   }
 
@@ -26,8 +26,8 @@ defmodule StellarBase.XDR.LedgerKey do
     DATA: Data,
     CLAIMABLE_BALANCE: ClaimableBalance,
     LIQUIDITY_POOL: LiquidityPool,
-    CONTRACT_DATA: ContractData,
-    CONTRACT_CODE: ContractCode,
+    CONTRACT_DATA: LedgerKeyContractData,
+    CONTRACT_CODE: LedgerKeyContractCode,
     CONFIG_SETTING: LedgerKeyConfigSetting
   ]
 
@@ -38,8 +38,8 @@ defmodule StellarBase.XDR.LedgerKey do
           | Data.t()
           | ClaimableBalance.t()
           | LiquidityPool.t()
-          | ContractData.t()
-          | ContractCode.t()
+          | LedgerKeyContractData.t()
+          | LedgerKeyContractCode.t()
           | LedgerKeyConfigSetting.t()
 
   @type t :: %__MODULE__{entry: entry(), type: LedgerEntryType.t()}
