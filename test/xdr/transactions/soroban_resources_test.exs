@@ -4,12 +4,13 @@ defmodule StellarBase.XDR.SorobanResourcesTest do
   alias StellarBase.XDR.LedgerFootprint
 
   alias StellarBase.XDR.{
-    ContractCode,
+    ContractEntryBodyType,
     Hash,
     UInt32,
     SorobanResources,
     LedgerEntryType,
     LedgerKey,
+    LedgerKeyContractCode,
     LedgerKeyList,
     LedgerFootprint
   }
@@ -18,7 +19,7 @@ defmodule StellarBase.XDR.SorobanResourcesTest do
     setup do
       hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
       type = LedgerEntryType.new(:CONTRACT_CODE)
-      ledger_key_data = ContractCode.new(hash)
+      ledger_key_data = LedgerKeyContractCode.new(hash, ContractEntryBodyType.new())
       ledger_key1 = LedgerKey.new(ledger_key_data, type)
       ledger_key2 = LedgerKey.new(ledger_key_data, type)
       ledger_key_list_read = LedgerKeyList.new([ledger_key1])
@@ -47,10 +48,10 @@ defmodule StellarBase.XDR.SorobanResourcesTest do
         soroban_resources: soroban_resources,
         binary:
           <<0, 0, 0, 1, 0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
-            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 1, 0, 0,
-            0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80, 54, 52,
-            84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10,
-            0, 0, 0, 10>>
+            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 0, 0,
+            0, 1, 0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85,
+            80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 0, 0, 0, 10,
+            0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10>>
       }
     end
 

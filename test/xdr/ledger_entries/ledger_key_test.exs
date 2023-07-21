@@ -3,11 +3,12 @@ defmodule StellarBase.XDR.LedgerKeyTest do
 
   alias StellarBase.XDR.{
     AccountID,
-    ContractCode,
+    ContractEntryBodyType,
     Hash,
     Int64,
     LedgerEntryType,
     LedgerKey,
+    LedgerKeyContractCode,
     PublicKey,
     PublicKeyType,
     String64,
@@ -59,10 +60,10 @@ defmodule StellarBase.XDR.LedgerKeyTest do
       },
       %{
         type: LedgerEntryType.new(:CONTRACT_CODE),
-        ledger_key_data: ContractCode.new(hash),
+        ledger_key_data: LedgerKeyContractCode.new(hash, ContractEntryBodyType.new()),
         binary:
           <<0, 0, 0, 7, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83, 52, 85, 80,
-            54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78>>
+            54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0>>
       }
     ]
 
