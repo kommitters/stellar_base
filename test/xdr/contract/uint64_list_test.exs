@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.UInt64ListTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.UInt64List
+  alias StellarBase.XDR.{UInt64, UInt64List}
 
   setup do
     list_items = [123, 456, 789]
@@ -9,7 +9,7 @@ defmodule StellarBase.XDR.UInt64ListTest do
     encoded_result =
       <<0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 200, 0, 0, 0, 0, 0, 0, 3, 21>>
 
-    uint64_items = Enum.map(list_items, &StellarBase.XDR.UInt64.new/1)
+    uint64_items = Enum.map(list_items, &UInt64.new/1)
     uint64_list = UInt64List.new(uint64_items)
 
     %{
