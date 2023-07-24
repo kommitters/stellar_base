@@ -1,6 +1,7 @@
 defmodule StellarBase.XDR.SCValTest do
   use ExUnit.Case
 
+  alias StellarBase.XDR.SCContractInstance
   alias StellarBase.StrKey
 
   alias StellarBase.XDR.{
@@ -19,15 +20,15 @@ defmodule StellarBase.XDR.SCValTest do
     PublicKey,
     SCBytes,
     SCNonceKey,
-    SCContractExecutable,
-    SCContractExecutableType,
+    ContractExecutable,
+    ContractExecutableType,
     SCVal,
     SCValType,
-    SCStatus,
-    SCStatusType,
+    SCError,
+    SCErrorCode,
     SCString,
     SCSymbol,
-    SCUnknownErrorCode,
+    SCErrorType,
     TimePoint,
     UInt32,
     UInt64,
@@ -54,13 +55,15 @@ defmodule StellarBase.XDR.SCValTest do
       sc_address_type = SCAddressType.new(:SC_ADDRESS_TYPE_ACCOUNT)
       sc_address = SCAddress.new(account_id, sc_address_type)
 
-      # SCContractExecutable
-      sc_contract_executable_type = SCContractExecutableType.new(:SCCONTRACT_EXECUTABLE_WASM_REF)
+      # ContractExecutable
+      sc_contract_executable_type = ContractExecutableType.new(:CONTRACT_EXECUTABLE_WASM)
 
       sc_contract_executable =
         "GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN"
         |> Hash.new()
-        |> SCContractExecutable.new(sc_contract_executable_type)
+        |> ContractExecutable.new(sc_contract_executable_type)
+
+      sc_contract_instance = SCContractInstance.new(sc_contract_executable, OptionalSCMap.new())
 
       discriminants = [
         %{
@@ -74,13 +77,13 @@ defmodule StellarBase.XDR.SCValTest do
           binary: <<0, 0, 0, 1>>
         },
         %{
-          val_type: SCValType.new(:SCV_STATUS),
+          val_type: SCValType.new(:SCV_ERROR),
           value:
-            SCStatus.new(
-              SCUnknownErrorCode.new(:UNKNOWN_ERROR_GENERAL),
-              SCStatusType.new(:SST_UNKNOWN_ERROR)
+            SCError.new(
+              SCErrorType.new(),
+              SCErrorCode.new()
             ),
-          binary: <<0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0>>
+          binary: <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0>>
         },
         %{
           val_type: SCValType.new(:SCV_U32),
@@ -169,32 +172,29 @@ defmodule StellarBase.XDR.SCValTest do
           binary: <<0, 0, 0, 17, 0, 0, 0, 0>>
         },
         %{
-          val_type: SCValType.new(:SCV_CONTRACT_EXECUTABLE),
-          value: sc_contract_executable,
+          val_type: SCValType.new(:SCV_CONTRACT_INSTANCE),
+          value: sc_contract_instance,
           binary:
-            <<0, 0, 0, 18, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
-              52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78>>
+            <<0, 0, 0, 19, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
+              52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0>>
         },
         %{
           val_type: SCValType.new(:SCV_ADDRESS),
           value: sc_address,
           binary:
-            <<0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
+            <<0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
               149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
               138, 2, 227, 119>>
         },
         %{
-          val_type: SCValType.new(:SCV_LEDGER_KEY_CONTRACT_EXECUTABLE),
+          val_type: SCValType.new(:SCV_LEDGER_KEY_CONTRACT_INSTANCE),
           value: Void.new(),
           binary: <<0, 0, 0, 20>>
         },
         %{
           val_type: SCValType.new(:SCV_LEDGER_KEY_NONCE),
-          value: SCNonceKey.new(sc_address),
-          binary:
-            <<0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
-              149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
-              138, 2, 227, 119>>
+          value: SCNonceKey.new(Int64.new(21_658)),
+          binary: <<0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 84, 154>>
         }
       ]
 

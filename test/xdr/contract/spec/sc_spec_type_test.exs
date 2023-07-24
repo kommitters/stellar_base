@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.SCSpecTypeTest do
     :SC_SPEC_TYPE_VAL,
     :SC_SPEC_TYPE_BOOL,
     :SC_SPEC_TYPE_VOID,
-    :SC_SPEC_TYPE_STATUS,
+    :SC_SPEC_TYPE_ERROR,
     :SC_SPEC_TYPE_U32,
     :SC_SPEC_TYPE_I32,
     :SC_SPEC_TYPE_U64,

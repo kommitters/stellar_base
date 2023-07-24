@@ -12,12 +12,8 @@ defmodule StellarBase.XDR.EnvelopeTypeTest do
     :ENVELOPE_TYPE_TX_FEE_BUMP,
     :ENVELOPE_TYPE_OP_ID,
     :ENVELOPE_TYPE_POOL_REVOKE_OP_ID,
-    :ENVELOPE_TYPE_CONTRACT_ID_FROM_ED25519,
-    :ENVELOPE_TYPE_CONTRACT_ID_FROM_CONTRACT,
-    :ENVELOPE_TYPE_CONTRACT_ID_FROM_ASSET,
-    :ENVELOPE_TYPE_CONTRACT_ID_FROM_SOURCE_ACCOUNT,
-    :ENVELOPE_TYPE_CREATE_CONTRACT_ARGS,
-    :ENVELOPE_TYPE_CONTRACT_AUTH
+    :ENVELOPE_TYPE_CONTRACT_ID,
+    :ENVELOPE_TYPE_SOROBAN_AUTHORIZATION
   ]
 
   @binaries [
@@ -30,11 +26,7 @@ defmodule StellarBase.XDR.EnvelopeTypeTest do
     <<0, 0, 0, 6>>,
     <<0, 0, 0, 7>>,
     <<0, 0, 0, 8>>,
-    <<0, 0, 0, 9>>,
-    <<0, 0, 0, 10>>,
-    <<0, 0, 0, 11>>,
-    <<0, 0, 0, 12>>,
-    <<0, 0, 0, 13>>
+    <<0, 0, 0, 9>>
   ]
 
   describe "EnvelopeType" do

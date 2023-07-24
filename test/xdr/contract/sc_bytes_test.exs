@@ -37,15 +37,5 @@ defmodule StellarBase.XDR.SCBytesTest do
     test "decode_xdr!/2", %{sc_bytes: sc_bytes, binary: binary} do
       {^sc_bytes, ""} = SCBytes.decode_xdr!(binary)
     end
-
-    test "invalid length" do
-      bits = 256_001 * 8
-      binary = <<0::size(bits)>>
-
-      {:error, :invalid_length} =
-        SCBytes.encode_xdr(%SCBytes{
-          value: binary
-        })
-    end
   end
 end

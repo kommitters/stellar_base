@@ -159,6 +159,7 @@ defmodule StellarBase.XDR.Operations.FeeBumpInnerTxTest do
       )
 
     payment_operation = payment_op_body(destination, asset, Int64.new(5_000_000_000))
+
     clawback_operation = clawback_op_body(asset, destination, Int64.new(1_000_000_000))
 
     [payment_operation, clawback_operation]

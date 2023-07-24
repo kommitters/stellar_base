@@ -26,31 +26,8 @@ defmodule StellarBase.XDR.SCStringTest do
         |> SCString.encode_xdr()
     end
 
-    test "encode_xdr/1 an invalid string length" do
-      bits = 256_001 * 8
-      large_string = <<64::size(bits)>>
-
-      {:error, :invalid_length} =
-        large_string
-        |> SCString.new()
-        |> SCString.encode_xdr()
-    end
-
     test "encode_xdr!/1", %{sc_symbol: sc_symbol, binary: binary} do
       ^binary = SCString.encode_xdr!(sc_symbol)
-    end
-
-    test "encode_xdr!/1 a string longer than 256000-bytes" do
-      bits = 256_001 * 8
-      large_string = <<64::size(bits)>>
-
-      assert_raise XDR.StringError,
-                   "The length of the string exceeds the max length allowed",
-                   fn ->
-                     large_string
-                     |> SCString.new()
-                     |> SCString.encode_xdr!()
-                   end
     end
 
     test "decode_xdr/2", %{sc_symbol: sc_symbol, binary: binary} do
