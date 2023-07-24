@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SorobanAuthorizedInvocationTest do
+defmodule StellarBase.XDR.SorobanAuthorizedInvocationListTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{

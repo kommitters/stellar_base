@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SorobanAuthorizationEntryTest do
+defmodule StellarBase.XDR.SorobanAuthorizedContractFunctionTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -14,24 +14,14 @@ defmodule StellarBase.XDR.SorobanAuthorizationEntryTest do
     SCValType,
     SCVec,
     SorobanAuthorizedContractFunction,
-    SorobanAuthorizedInvocation,
-    SorobanAuthorizedInvocationList,
-    SorobanAuthorizedFunction,
-    SorobanAuthorizedFunctionType,
-    SorobanAuthorizationEntry,
-    SorobanCredentials,
-    SorobanCredentialsType,
-    UInt256,
-    Void
+    SorobanAuthorizedContractFunction,
+    UInt256
   }
 
   alias StellarBase.StrKey
 
-  describe "SorobanAuthorizationEntry" do
+  describe "SorobanAuthorizedContractFunction" do
     setup do
-      type = SorobanCredentialsType.new(:SOROBAN_CREDENTIALS_SOURCE_ACCOUNT)
-      credentials = SorobanCredentials.new(Void.new(), type)
-
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
       account_id =
@@ -51,72 +41,72 @@ defmodule StellarBase.XDR.SorobanAuthorizationEntryTest do
       sc_vals = [scval1, scval2]
 
       args = SCVec.new(sc_vals)
-      value = SorobanAuthorizedContractFunction.new(contract_address, function_name, args)
-      type = SorobanAuthorizedFunctionType.new(:SOROBAN_AUTHORIZED_FUNCTION_TYPE_CONTRACT_FN)
-
-      soroban_auth_function = SorobanAuthorizedFunction.new(value, type)
-
-      soroban_auth_invocation_list = SorobanAuthorizedInvocationList.new([])
-
-      root_invocation =
-        SorobanAuthorizedInvocation.new(soroban_auth_function, soroban_auth_invocation_list)
 
       %{
-        credentials: credentials,
-        root_invocation: root_invocation,
-        soroban_auth_entry: SorobanAuthorizationEntry.new(credentials, root_invocation),
+        contract_address: contract_address,
+        function_name: function_name,
+        args: args,
+        soroban_authorized_contract_function:
+          SorobanAuthorizedContractFunction.new(contract_address, function_name, args),
         binary:
-          <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154,
-            137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212,
-            179, 73, 138, 2, 227, 119, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0,
-            0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0>>
+          <<0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
+            205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,
+            0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0,
+            0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
       }
     end
 
     test "new/1", %{
-      credentials: credentials,
-      root_invocation: root_invocation
+      contract_address: contract_address,
+      function_name: function_name,
+      args: args
     } do
-      %SorobanAuthorizationEntry{
-        credentials: ^credentials,
-        root_invocation: ^root_invocation
+      %SorobanAuthorizedContractFunction{
+        contract_address: ^contract_address,
+        function_name: ^function_name,
+        args: ^args
       } =
-        SorobanAuthorizationEntry.new(
-          credentials,
-          root_invocation
+        SorobanAuthorizedContractFunction.new(
+          contract_address,
+          function_name,
+          args
         )
     end
 
     test "encode_xdr/1", %{
-      soroban_auth_entry: soroban_auth_entry,
+      soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      {:ok, ^binary} = SorobanAuthorizationEntry.encode_xdr(soroban_auth_entry)
+      {:ok, ^binary} =
+        SorobanAuthorizedContractFunction.encode_xdr(soroban_authorized_contract_function)
     end
 
     test "encode_xdr!/1", %{
-      soroban_auth_entry: soroban_auth_entry,
+      soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      ^binary = SorobanAuthorizationEntry.encode_xdr!(soroban_auth_entry)
+      ^binary =
+        SorobanAuthorizedContractFunction.encode_xdr!(soroban_authorized_contract_function)
     end
 
     test "decode_xdr/2", %{
-      soroban_auth_entry: soroban_auth_entry,
+      soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      {:ok, {^soroban_auth_entry, ""}} = SorobanAuthorizationEntry.decode_xdr(binary)
+      {:ok, {^soroban_authorized_contract_function, ""}} =
+        SorobanAuthorizedContractFunction.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = SorobanAuthorizationEntry.decode_xdr(123)
+      {:error, :not_binary} = SorobanAuthorizedContractFunction.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
-      soroban_auth_entry: soroban_auth_entry,
+      soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      {^soroban_auth_entry, ^binary} = SorobanAuthorizationEntry.decode_xdr!(binary <> binary)
+      {^soroban_authorized_contract_function, ^binary} =
+        SorobanAuthorizedContractFunction.decode_xdr!(binary <> binary)
     end
   end
 end

@@ -30,7 +30,7 @@ defmodule StellarBase.XDR.SorobanCredentialsTypeTest do
         SorobanCredentialsType.encode_xdr(%SorobanCredentialsType{identifier: CREDENTIAL_TEST})
     end
 
-    test "encode_xdr!/1", %{soroban)_credentials_type: soroban_credentials_type, binary: binary} do
+    test "encode_xdr!/1", %{soroban_credentials_type: soroban_credentials_type, binary: binary} do
       ^binary = SorobanCredentialsType.encode_xdr!(soroban_credentials_type)
     end
 

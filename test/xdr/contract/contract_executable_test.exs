@@ -71,7 +71,6 @@ defmodule StellarBase.XDR.ContractExecutableTest do
   end
 
   test "encode_xdr/1 with wasm value", %{
-    binary_wasm: binary_wasm,
     wasm_value: wasm_value,
     wasm_type: wasm_type,
     binary_wasm_result: binary_wasm_result
@@ -83,8 +82,6 @@ defmodule StellarBase.XDR.ContractExecutableTest do
   end
 
   test "decode_xdr/2 with wasm value", %{
-    wasm_value: wasm_value,
-    wasm_type: wasm_type,
     binary_wasm_result: binary_wasm_result,
     contract_executable_wasm: contract_executable_wasm
   } do
@@ -93,8 +90,6 @@ defmodule StellarBase.XDR.ContractExecutableTest do
 
   test "decode_xdr/2 with token value", %{
     binary_token: binary_token,
-    token_value: token_value,
-    token_type: token_type,
     contract_executable_token: contract_executable_token
   } do
     {:ok, {^contract_executable_token, ""}} = ContractExecutable.decode_xdr(binary_token)
@@ -102,21 +97,17 @@ defmodule StellarBase.XDR.ContractExecutableTest do
 
   test "decode_xdr!/2 with wasm value", %{
     binary_wasm_result: binary_wasm_result,
-    wasm_value: wasm_value,
-    wasm_type: wasm_type,
     contract_executable_wasm: contract_executable_wasm
   } do
-    {contract_executable_wasm, ^binary_wasm_result} =
+    {^contract_executable_wasm, ^binary_wasm_result} =
       ContractExecutable.decode_xdr!(binary_wasm_result <> binary_wasm_result)
   end
 
   test "decode_xdr!/2 with token value", %{
     binary_token: binary_token,
-    token_value: token_value,
-    token_type: token_type,
     contract_executable_token: contract_executable_token
   } do
-    {contract_executable_token, ^binary_token} =
+    {^contract_executable_token, ^binary_token} =
       ContractExecutable.decode_xdr!(binary_token <> binary_token)
   end
 

@@ -1,4 +1,4 @@
-defmodule StellarBase.XDR.SorobanAuthorizationEntryTest do
+defmodule StellarBase.XDR.SorobanAuthorizationEntryListTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
@@ -16,6 +16,7 @@ defmodule StellarBase.XDR.SorobanAuthorizationEntryTest do
     SorobanAuthorizedInvocation,
     SorobanAuthorizedInvocationList,
     SorobanAuthorizationEntry,
+    SorobanAuthorizationEntryList,
     SorobanAuthorizedFunction,
     SorobanAuthorizedFunctionType,
     SorobanAuthorizedContractFunction,
@@ -67,64 +68,63 @@ defmodule StellarBase.XDR.SorobanAuthorizationEntryTest do
           SorobanCredentialsType.new(:SOROBAN_CREDENTIALS_SOURCE_ACCOUNT)
         )
 
+      soroban_authorization_entries = [
+        SorobanAuthorizationEntry.new(soroban_credentials, root_invocation)
+      ]
+
       %{
-        soroban_credentials: soroban_credentials,
-        root_invocation: root_invocation,
-        soroban_authorization_entry:
-          SorobanAuthorizationEntry.new(soroban_credentials, root_invocation),
+        soroban_authorization_entries: soroban_authorization_entries,
+        soroban_authorization_entry_list:
+          SorobanAuthorizationEntryList.new(soroban_authorization_entries),
         binary:
-          <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154,
-            137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212,
-            179, 73, 138, 2, 227, 119, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0,
-            0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0>>
+          <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98,
+            27, 186, 154, 137, 68, 149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10,
+            76, 25, 212, 179, 73, 138, 2, 227, 119, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0,
+            0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+            0, 0, 0>>
       }
     end
 
     test "new/1", %{
-      soroban_credentials: soroban_credentials,
-      root_invocation: root_invocation
+      soroban_authorization_entries: soroban_authorization_entries
     } do
-      %SorobanAuthorizationEntry{
-        credentials: ^soroban_credentials,
-        root_invocation: ^root_invocation
-      } =
-        SorobanAuthorizationEntry.new(
-          soroban_credentials,
-          root_invocation
-        )
+      %SorobanAuthorizationEntryList{
+        items: ^soroban_authorization_entries
+      } = SorobanAuthorizationEntryList.new(soroban_authorization_entries)
     end
 
     test "encode_xdr/1", %{
-      soroban_authorization_entry: soroban_authorization_entry,
+      soroban_authorization_entry_list: soroban_authorization_entry_list,
       binary: binary
     } do
-      {:ok, ^binary} = SorobanAuthorizationEntry.encode_xdr(soroban_authorization_entry)
+      {:ok, ^binary} = SorobanAuthorizationEntryList.encode_xdr(soroban_authorization_entry_list)
     end
 
     test "encode_xdr!/1", %{
-      soroban_authorization_entry: soroban_authorization_entry,
+      soroban_authorization_entry_list: soroban_authorization_entry_list,
       binary: binary
     } do
-      ^binary = SorobanAuthorizationEntry.encode_xdr!(soroban_authorization_entry)
+      ^binary = SorobanAuthorizationEntryList.encode_xdr!(soroban_authorization_entry_list)
     end
 
     test "decode_xdr/2", %{
-      soroban_authorization_entry: soroban_authorization_entry,
+      soroban_authorization_entry_list: soroban_authorization_entry_list,
       binary: binary
     } do
-      {:ok, {^soroban_authorization_entry, ""}} = SorobanAuthorizationEntry.decode_xdr(binary)
+      {:ok, {^soroban_authorization_entry_list, ""}} =
+        SorobanAuthorizationEntryList.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = SorobanAuthorizationEntry.decode_xdr(123)
+      {:error, :not_binary} = SorobanAuthorizationEntryList.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
-      soroban_authorization_entry: soroban_authorization_entry,
+      soroban_authorization_entry_list: soroban_authorization_entry_list,
       binary: binary
     } do
-      {^soroban_authorization_entry, ^binary} =
-        SorobanAuthorizationEntry.decode_xdr!(binary <> binary)
+      {^soroban_authorization_entry_list, ^binary} =
+        SorobanAuthorizationEntryList.decode_xdr!(binary <> binary)
     end
   end
 end

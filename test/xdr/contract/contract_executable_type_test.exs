@@ -1,7 +1,7 @@
 defmodule StellarBase.XDR.ContractExecutableTypeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.{ContractExecutableType, Void, Hash}
+  alias StellarBase.XDR.ContractExecutableType
 
   setup do
     %{
