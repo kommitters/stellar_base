@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.13.0 (27.07.2023)
+
+* [Allow to encode and decode TransactionMeta](https://github.com/kommitters/stellar_base/issues/279).
+
 ## 0.12.0 (24.07.2023)
 
 * [Soroban Preview 10 support](https://github.com/kommitters/stellar_base/issues/273).
+
 ## 0.11.1 (01.06.2023)
 
 * [Add missing value types in SCVal](https://github.com/kommitters/stellar_base/pull/270).
