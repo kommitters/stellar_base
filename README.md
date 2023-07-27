@@ -26,7 +26,7 @@ You should only use **`stellar_base`** if you are planning to build on top of it
 ```elixir
 def deps do
   [
-    {:stellar_base, "~> 0.12.0"}
+    {:stellar_base, "~> 0.13.0"}
   ]
 end
 ```
