@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.13.1 (02.08.2023)
+
+* [Add missing operation results and rename OperationInnerResult to OperationResultTr](https://github.com/kommitters/stellar_base/pull/284).
+* Update all dependencies.
+
 ## 0.13.0 (27.07.2023)
 
 * [Allow to encode and decode TransactionMeta](https://github.com/kommitters/stellar_base/issues/279).
