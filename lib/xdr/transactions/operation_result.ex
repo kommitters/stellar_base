@@ -2,13 +2,13 @@ defmodule StellarBase.XDR.OperationResult do
   @moduledoc """
   Representation of Stellar `OperationResult` type.
   """
-  alias StellarBase.XDR.{OperationInnerResult, OperationResultCode, Void}
+  alias StellarBase.XDR.{OperationResultTr, OperationResultCode, Void}
 
   @behaviour XDR.Declaration
 
-  @arms [opINNER: OperationInnerResult, default: Void]
+  @arms [opINNER: OperationResultTr, default: Void]
 
-  @type result :: OperationInnerResult.t() | Void.t() | any()
+  @type result :: OperationResultTr.t() | Void.t() | any()
 
   @type t :: %__MODULE__{result: result(), code: OperationResultCode.t()}
 
