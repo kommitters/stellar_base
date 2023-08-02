@@ -2,7 +2,7 @@ defmodule StellarBase.XDR.InnerTransactionResultResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    OperationInnerResult,
+    OperationResultTr,
     OperationResult,
     OperationResultCode,
     OperationResultList,
@@ -21,13 +21,13 @@ defmodule StellarBase.XDR.InnerTransactionResultResultTest do
       op_result1 =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationInnerResult.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(op_code)
 
       op_result2 =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationInnerResult.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(op_code)
 
       tx_code = TransactionResultCode.new(:txSUCCESS)

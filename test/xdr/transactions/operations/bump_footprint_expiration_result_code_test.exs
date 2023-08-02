@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.BumpFootprintExpirationResultCodeTest do
+defmodule StellarBase.XDR.Operations.BumpFootprintExpirationResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.BumpFootprintExpirationResultCode
+  alias StellarBase.XDR.Operations.BumpFootprintExpirationResultCode
 
   @codes [
     :BUMP_FOOTPRINT_EXPIRATION_SUCCESS,

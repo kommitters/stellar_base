@@ -1,8 +1,8 @@
-defmodule StellarBase.XDR.RestoreFootprintResultTest do
+defmodule StellarBase.XDR.Operations.RestoreFootprintResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Void
-  alias StellarBase.XDR.{RestoreFootprintResult, RestoreFootprintResultCode}
+  alias StellarBase.XDR.Operations.{RestoreFootprintResult, RestoreFootprintResultCode}
 
   describe "RestoreFootprintResult" do
     setup do

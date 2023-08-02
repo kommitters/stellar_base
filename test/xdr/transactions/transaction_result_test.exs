@@ -7,7 +7,7 @@ defmodule StellarBase.XDR.TransactionResultTest do
     InnerTransactionResult,
     InnerTransactionResultPair,
     Int64,
-    OperationInnerResult,
+    OperationResultTr,
     OperationResult,
     OperationResultCode,
     OperationResultList,
@@ -28,7 +28,7 @@ defmodule StellarBase.XDR.TransactionResultTest do
       result =
         Void.new()
         |> CreateAccountResult.new(CreateAccountResultCode.new(:CREATE_ACCOUNT_SUCCESS))
-        |> OperationInnerResult.new(OperationType.new(:CREATE_ACCOUNT))
+        |> OperationResultTr.new(OperationType.new(:CREATE_ACCOUNT))
         |> OperationResult.new(OperationResultCode.new(:opINNER))
         |> (&OperationResultList.new([&1])).()
         |> InnerTransactionResultResult.new(TransactionResultCode.new(:txSUCCESS))
