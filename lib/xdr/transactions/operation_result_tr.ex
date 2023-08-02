@@ -10,17 +10,13 @@ defmodule StellarBase.XDR.OperationResultTr do
 
   @behaviour XDR.Declaration
 
-  alias StellarBase.XDR.{
-    BumpFootprintExpirationResult,
-    RestoreFootprintResult,
-    InvokeHostFunctionResult,
-    OperationType
-  }
+  alias StellarBase.XDR.OperationType
 
   alias StellarBase.XDR.Operations.{
     AccountMergeResult,
     AllowTrustResult,
     BeginSponsoringFutureReservesResult,
+    BumpFootprintExpirationResult,
     BumpSequenceResult,
     ChangeTrustResult,
     ClaimClaimableBalanceResult,
@@ -30,6 +26,7 @@ defmodule StellarBase.XDR.OperationResultTr do
     CreateClaimableBalanceResult,
     EndSponsoringFutureReservesResult,
     InflationResult,
+    InvokeHostFunctionResult,
     LiquidityPoolDepositResult,
     LiquidityPoolWithdrawResult,
     ManageDataResult,
@@ -38,6 +35,7 @@ defmodule StellarBase.XDR.OperationResultTr do
     PaymentResult,
     PathPaymentStrictReceiveResult,
     PathPaymentStrictSendResult,
+    RestoreFootprintResult,
     RevokeSponsorshipResult,
     SetOptionsResult,
     SetTrustLineFlagsResult

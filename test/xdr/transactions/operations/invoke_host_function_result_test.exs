@@ -1,13 +1,14 @@
-defmodule StellarBase.XDR.InvokeHostFunctionResultTest do
+defmodule StellarBase.XDR.Operations.InvokeHostFunctionResultTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.Hash
 
-  alias StellarBase.XDR.{
+  alias StellarBase.XDR.Operations.{
     InvokeHostFunctionResult,
-    InvokeHostFunctionResultCode,
-    Void
+    InvokeHostFunctionResultCode
   }
+
+  alias StellarBase.XDR.Void
 
   describe "InvokeHostFunctionResult" do
     setup do

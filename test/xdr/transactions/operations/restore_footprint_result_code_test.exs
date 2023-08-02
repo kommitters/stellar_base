@@ -1,7 +1,7 @@
-defmodule StellarBase.XDR.RestoreFootprintResultCodeTest do
+defmodule StellarBase.XDR.Operations.RestoreFootprintResultCodeTest do
   use ExUnit.Case
 
-  alias StellarBase.XDR.RestoreFootprintResultCode
+  alias StellarBase.XDR.Operations.RestoreFootprintResultCode
 
   @codes [
     :RESTORE_FOOTPRINT_SUCCESS,
