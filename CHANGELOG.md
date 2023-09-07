@@ -1,5 +1,18 @@
 # Changelog
 
+# 0.13.2 (07.09.2023)
+
+* Update dependencies.
+  | Package | Type | Update | Change |
+  |---|---|---|---|
+  | [actions/checkout](https://togithub.com/actions/checkout) | action | major | `v3.5.3` -> `v4.0.0` |
+  | [actions/upload-artifact](https://togithub.com/actions/upload-artifact) | action | patch | `v3.1.2` -> `v3.1.3` |
+  | [excoveralls](https://hex.pm/packages/excoveralls) |  | minor | `~> 0.16` -> `~> 0.17` |
+  | [elixir_xdr](https://hex.pm/packages/elixir_xdr) |  | patch | `~> 0.3.9` -> `~> 0.3.10` |
+  | [github/codeql-action](https://togithub.com/github/codeql-action) | action | patch | `v2.21.2` -> `v2.21.5` |
+  | [step-security/harden-runner](https://togithub.com/step-security/harden-runner) | action | patch | `v2.5.0` -> `v2.5.1` |
+* Add renovate-bot config to lock ubuntu version to `20.04` for CI/CD due to OTP version incompatibility.
+
 ## 0.13.1 (02.08.2023)
 
 * [Add missing operation results and rename OperationInnerResult to OperationResultTr](https://github.com/kommitters/stellar_base/pull/284).
@@ -26,7 +39,7 @@
 
 * Add missing version_byte type in strkey.
 * Update all dependencies.
-* Add new domain `builds.hex.pm:443` to Harden Runner allowed-endpoints list. 
+* Add new domain `builds.hex.pm:443` to Harden Runner allowed-endpoints list.
 
 ## 0.10.1 (02.05.2023)
 
