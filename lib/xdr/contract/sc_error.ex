@@ -12,62 +12,70 @@ defmodule StellarBase.XDR.SCError do
 
   alias StellarBase.XDR.{
     SCErrorType,
+    UInt32,
     SCErrorCode
   }
 
-  @struct_spec XDR.Struct.new(
-                 type: SCErrorType,
-                 code: SCErrorCode
-               )
+  @arms [
+    SCE_CONTRACT: UInt32,
+    SCE_WASM_VM: SCErrorCode,
+    SCE_CONTEXT: SCErrorCode,
+    SCE_STORAGE: SCErrorCode,
+    SCE_OBJECT: SCErrorCode,
+    SCE_CRYPTO: SCErrorCode,
+    SCE_EVENTS: SCErrorCode,
+    SCE_BUDGET: SCErrorCode,
+    SCE_VALUE: SCErrorCode,
+    SCE_AUTH: SCErrorCode
+  ]
 
-  @type type_type :: SCErrorType.t()
-  @type code_type :: SCErrorCode.t()
+  @type value ::
+          UInt32.t()
+          | SCErrorCode.t()
 
-  @type t :: %__MODULE__{type: type_type(), code: code_type()}
+  @type t :: %__MODULE__{value: value(), type: SCErrorType.t()}
 
-  defstruct [:type, :code]
+  defstruct [:value, :type]
 
-  @spec new(type :: type_type(), code :: code_type()) :: t()
-  def new(
-        %SCErrorType{} = type,
-        %SCErrorCode{} = code
-      ),
-      do: %__MODULE__{type: type, code: code}
+  @spec new(value :: value(), type :: SCErrorType.t()) :: t()
+  def new(value, %SCErrorType{} = type), do: %__MODULE__{value: value, type: type}
 
   @impl true
-  def encode_xdr(%__MODULE__{type: type, code: code}) do
-    [type: type, code: code]
-    |> XDR.Struct.new()
-    |> XDR.Struct.encode_xdr()
+  def encode_xdr(%__MODULE__{value: value, type: type}) do
+    type
+    |> XDR.Union.new(@arms, value)
+    |> XDR.Union.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{type: type, code: code}) do
-    [type: type, code: code]
-    |> XDR.Struct.new()
-    |> XDR.Struct.encode_xdr!()
+  def encode_xdr!(%__MODULE__{value: value, type: type}) do
+    type
+    |> XDR.Union.new(@arms, value)
+    |> XDR.Union.encode_xdr!()
   end
 
   @impl true
-  def decode_xdr(bytes, struct \\ @struct_spec)
+  def decode_xdr(bytes, spec \\ union_spec())
 
-  def decode_xdr(bytes, struct) do
-    case XDR.Struct.decode_xdr(bytes, struct) do
-      {:ok, {%XDR.Struct{components: [type: type, code: code]}, rest}} ->
-        {:ok, {new(type, code), rest}}
-
-      error ->
-        error
+  def decode_xdr(bytes, spec) do
+    case XDR.Union.decode_xdr(bytes, spec) do
+      {:ok, {{type, value}, rest}} -> {:ok, {new(value, type), rest}}
+      error -> error
     end
   end
 
   @impl true
-  def decode_xdr!(bytes, struct \\ @struct_spec)
+  def decode_xdr!(bytes, spec \\ union_spec())
 
-  def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [type: type, code: code]}, rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+  def decode_xdr!(bytes, spec) do
+    {{type, value}, rest} = XDR.Union.decode_xdr!(bytes, spec)
+    {new(value, type), rest}
+  end
 
-    {new(type, code), rest}
+  @spec union_spec() :: XDR.Union.t()
+  defp union_spec do
+    nil
+    |> SCErrorType.new()
+    |> XDR.Union.new(@arms)
   end
 end

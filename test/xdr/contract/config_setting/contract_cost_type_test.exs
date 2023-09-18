@@ -9,23 +9,20 @@ defmodule StellarBase.XDR.ContractCostTypeTest do
     :HostMemAlloc,
     :HostMemCpy,
     :HostMemCmp,
-    :InvokeHostFunction,
+    :DispatchHostFunction,
     :VisitObject,
-    :ValXdrConv,
     :ValSer,
     :ValDeser,
     :ComputeSha256Hash,
     :ComputeEd25519PubKey,
     :MapEntry,
     :VecEntry,
-    :GuardFrame,
     :VerifyEd25519Sig,
     :VmMemRead,
     :VmMemWrite,
     :VmInstantiation,
     :VmCachedInstantiation,
     :InvokeVmFunction,
-    :ChargeBudget,
     :ComputeKeccak256Hash,
     :ComputeEcdsaSecp256k1Key,
     :ComputeEcdsaSecp256k1Sig,
@@ -65,10 +62,7 @@ defmodule StellarBase.XDR.ContractCostTypeTest do
     <<0, 0, 0, 24>>,
     <<0, 0, 0, 25>>,
     <<0, 0, 0, 26>>,
-    <<0, 0, 0, 27>>,
-    <<0, 0, 0, 28>>,
-    <<0, 0, 0, 29>>,
-    <<0, 0, 0, 30>>
+    <<0, 0, 0, 27>>
   ]
 
   describe "ContractCostType" do

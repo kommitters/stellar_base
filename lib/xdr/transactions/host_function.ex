@@ -12,19 +12,19 @@ defmodule StellarBase.XDR.HostFunction do
 
   alias StellarBase.XDR.{
     HostFunctionType,
-    SCVec,
+    InvokeContractArgs,
     CreateContractArgs,
     VariableOpaque
   }
 
   @arms [
-    HOST_FUNCTION_TYPE_INVOKE_CONTRACT: SCVec,
+    HOST_FUNCTION_TYPE_INVOKE_CONTRACT: InvokeContractArgs,
     HOST_FUNCTION_TYPE_CREATE_CONTRACT: CreateContractArgs,
     HOST_FUNCTION_TYPE_UPLOAD_CONTRACT_WASM: VariableOpaque
   ]
 
   @type value ::
-          SCVec.t()
+          InvokeContractArgs.t()
           | CreateContractArgs.t()
           | VariableOpaque.t()
 

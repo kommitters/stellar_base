@@ -14,7 +14,8 @@ defmodule StellarBase.XDR.LedgerKey do
     LiquidityPool,
     LedgerKeyContractData,
     LedgerKeyContractCode,
-    LedgerKeyConfigSetting
+    LedgerKeyConfigSetting,
+    LedgerKeyExpiration
   }
 
   @behaviour XDR.Declaration
@@ -28,7 +29,8 @@ defmodule StellarBase.XDR.LedgerKey do
     LIQUIDITY_POOL: LiquidityPool,
     CONTRACT_DATA: LedgerKeyContractData,
     CONTRACT_CODE: LedgerKeyContractCode,
-    CONFIG_SETTING: LedgerKeyConfigSetting
+    CONFIG_SETTING: LedgerKeyConfigSetting,
+    EXPIRATION: LedgerKeyExpiration
   ]
 
   @type entry ::
@@ -41,6 +43,7 @@ defmodule StellarBase.XDR.LedgerKey do
           | LedgerKeyContractData.t()
           | LedgerKeyContractCode.t()
           | LedgerKeyConfigSetting.t()
+          | LedgerKeyExpiration.t()
 
   @type t :: %__MODULE__{entry: entry(), type: LedgerEntryType.t()}
 

@@ -12,8 +12,8 @@ defmodule StellarBase.XDR.SorobanAuthorizedInvocationTest do
     SCSymbol,
     SCVal,
     SCValType,
-    SCVec,
-    SorobanAuthorizedContractFunction,
+    SCValList,
+    InvokeContractArgs,
     SorobanAuthorizedInvocation,
     SorobanAuthorizedInvocationList,
     SorobanAuthorizedFunction,
@@ -43,8 +43,8 @@ defmodule StellarBase.XDR.SorobanAuthorizedInvocationTest do
 
       sc_vals = [scval1, scval2]
 
-      args = SCVec.new(sc_vals)
-      value = SorobanAuthorizedContractFunction.new(contract_address, function_name, args)
+      args = SCValList.new(sc_vals)
+      value = InvokeContractArgs.new(contract_address, function_name, args)
       type = SorobanAuthorizedFunctionType.new(:SOROBAN_AUTHORIZED_FUNCTION_TYPE_CONTRACT_FN)
 
       soroban_auth_function = SorobanAuthorizedFunction.new(value, type)
