@@ -2,6 +2,7 @@ defmodule StellarBase.XDR.OperationMetaListTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
+    ExtensionPoint,
     OperationMetaList,
     OperationMeta,
     LedgerEntryChange,
@@ -9,8 +10,6 @@ defmodule StellarBase.XDR.OperationMetaListTest do
     LedgerEntryChangeType,
     UInt32,
     ContractDataEntry,
-    ContractDataEntryBody,
-    ContractEntryBodyType,
     SCAddress,
     SCAddressType,
     Hash,
@@ -27,17 +26,16 @@ defmodule StellarBase.XDR.OperationMetaListTest do
 
   setup do
     ledger_entry_type = LedgerEntryType.new(:CONTRACT_DATA)
-    expiration_ledger_seq = UInt32.new(132)
     address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
     durability = ContractDataDurability.new()
     key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+    val = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
     last_modified_ledger_seq = UInt32.new(5)
     contract = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
+    void = Void.new()
+    ext = ExtensionPoint.new(void, 0)
 
-    body = ContractDataEntryBody.new(Void.new(), ContractEntryBodyType.new(:EXPIRATION_EXTENSION))
-
-    ledger_entry_data =
-      ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq)
+    ledger_entry_data = ContractDataEntry.new(ext, contract, key, durability, val)
 
     data = LedgerEntryData.new(ledger_entry_data, ledger_entry_type)
 
@@ -57,10 +55,10 @@ defmodule StellarBase.XDR.OperationMetaListTest do
     operation_meta = OperationMeta.new(ledger_entry_changes)
 
     binary =
-      <<0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 1, 67, 65, 87, 73,
-        73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81,
-        79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-        0, 132, 0, 0, 0, 0>>
+      <<0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 67,
+        65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84,
+        53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+        0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0>>
 
     operation_meta_list = OperationMetaList.new([operation_meta])
 
@@ -82,7 +80,9 @@ defmodule StellarBase.XDR.OperationMetaListTest do
   end
 
   test "encode_xdr!/1", %{operation_meta_list_items: operation_meta_list_items, binary: binary} do
-    ^binary = OperationMetaList.new(operation_meta_list_items) |> OperationMetaList.encode_xdr!()
+    ^binary =
+      OperationMetaList.new(operation_meta_list_items)
+      |> OperationMetaList.encode_xdr!()
   end
 
   test "decode_xdr/2", %{operation_meta_list: operation_meta_list, binary: binary} do

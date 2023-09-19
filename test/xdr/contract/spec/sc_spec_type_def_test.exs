@@ -6,7 +6,6 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
     SCSpecType,
     SCSpecTypeVec,
     SCSpecTypeMap,
-    SCSpecTypeSet,
     SCSpecTypeTuple,
     SCSpecTypeBytesN,
     SCSpecTypeUDT,
@@ -139,13 +138,6 @@ defmodule StellarBase.XDR.SCSpecTypeDefTest do
             |> SCSpecTypeVec.new(),
           status_type: SCSpecType.new(:SC_SPEC_TYPE_VEC),
           binary: <<0, 0, 3, 234, 0, 0, 0, 0>>
-        },
-        %{
-          sc_code:
-            sc_spec_type_def_1
-            |> SCSpecTypeSet.new(),
-          status_type: SCSpecType.new(:SC_SPEC_TYPE_SET),
-          binary: <<0, 0, 3, 235, 0, 0, 0, 0>>
         },
         %{
           sc_code:

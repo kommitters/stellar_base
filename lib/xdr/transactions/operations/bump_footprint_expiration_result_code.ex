@@ -13,7 +13,8 @@ defmodule StellarBase.XDR.Operations.BumpFootprintExpirationResultCode do
   @declarations [
     BUMP_FOOTPRINT_EXPIRATION_SUCCESS: 0,
     BUMP_FOOTPRINT_EXPIRATION_MALFORMED: -1,
-    BUMP_FOOTPRINT_EXPIRATION_RESOURCE_LIMIT_EXCEEDED: -2
+    BUMP_FOOTPRINT_EXPIRATION_RESOURCE_LIMIT_EXCEEDED: -2,
+    BUMP_FOOTPRINT_EXPIRATION_INSUFFICIENT_REFUNDABLE_FEE: -3
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

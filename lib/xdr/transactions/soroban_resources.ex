@@ -19,46 +19,40 @@ defmodule StellarBase.XDR.SorobanResources do
                  footprint: LedgerFootprint,
                  instructions: UInt32,
                  read_bytes: UInt32,
-                 write_bytes: UInt32,
-                 extended_meta_data_size_bytes: UInt32
+                 write_bytes: UInt32
                )
 
   @type footprint_type :: LedgerFootprint.t()
   @type instructions_type :: UInt32.t()
   @type read_bytes_type :: UInt32.t()
   @type write_bytes_type :: UInt32.t()
-  @type extended_meta_data_size_bytes_type :: UInt32.t()
 
   @type t :: %__MODULE__{
           footprint: footprint_type(),
           instructions: instructions_type(),
           read_bytes: read_bytes_type(),
-          write_bytes: write_bytes_type(),
-          extended_meta_data_size_bytes: extended_meta_data_size_bytes_type()
+          write_bytes: write_bytes_type()
         }
 
-  defstruct [:footprint, :instructions, :read_bytes, :write_bytes, :extended_meta_data_size_bytes]
+  defstruct [:footprint, :instructions, :read_bytes, :write_bytes]
 
   @spec new(
           footprint :: footprint_type(),
           instructions :: instructions_type(),
           read_bytes :: read_bytes_type(),
-          write_bytes :: write_bytes_type(),
-          extended_meta_data_size_bytes :: extended_meta_data_size_bytes_type()
+          write_bytes :: write_bytes_type()
         ) :: t()
   def new(
         %LedgerFootprint{} = footprint,
         %UInt32{} = instructions,
         %UInt32{} = read_bytes,
-        %UInt32{} = write_bytes,
-        %UInt32{} = extended_meta_data_size_bytes
+        %UInt32{} = write_bytes
       ),
       do: %__MODULE__{
         footprint: footprint,
         instructions: instructions,
         read_bytes: read_bytes,
-        write_bytes: write_bytes,
-        extended_meta_data_size_bytes: extended_meta_data_size_bytes
+        write_bytes: write_bytes
       }
 
   @impl true
@@ -66,15 +60,13 @@ defmodule StellarBase.XDR.SorobanResources do
         footprint: footprint,
         instructions: instructions,
         read_bytes: read_bytes,
-        write_bytes: write_bytes,
-        extended_meta_data_size_bytes: extended_meta_data_size_bytes
+        write_bytes: write_bytes
       }) do
     [
       footprint: footprint,
       instructions: instructions,
       read_bytes: read_bytes,
-      write_bytes: write_bytes,
-      extended_meta_data_size_bytes: extended_meta_data_size_bytes
+      write_bytes: write_bytes
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
@@ -85,15 +77,13 @@ defmodule StellarBase.XDR.SorobanResources do
         footprint: footprint,
         instructions: instructions,
         read_bytes: read_bytes,
-        write_bytes: write_bytes,
-        extended_meta_data_size_bytes: extended_meta_data_size_bytes
+        write_bytes: write_bytes
       }) do
     [
       footprint: footprint,
       instructions: instructions,
       read_bytes: read_bytes,
-      write_bytes: write_bytes,
-      extended_meta_data_size_bytes: extended_meta_data_size_bytes
+      write_bytes: write_bytes
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -110,13 +100,10 @@ defmodule StellarBase.XDR.SorobanResources do
             footprint: footprint,
             instructions: instructions,
             read_bytes: read_bytes,
-            write_bytes: write_bytes,
-            extended_meta_data_size_bytes: extended_meta_data_size_bytes
+            write_bytes: write_bytes
           ]
         }, rest}} ->
-        {:ok,
-         {new(footprint, instructions, read_bytes, write_bytes, extended_meta_data_size_bytes),
-          rest}}
+        {:ok, {new(footprint, instructions, read_bytes, write_bytes), rest}}
 
       error ->
         error
@@ -132,11 +119,10 @@ defmodule StellarBase.XDR.SorobanResources do
          footprint: footprint,
          instructions: instructions,
          read_bytes: read_bytes,
-         write_bytes: write_bytes,
-         extended_meta_data_size_bytes: extended_meta_data_size_bytes
+         write_bytes: write_bytes
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(footprint, instructions, read_bytes, write_bytes, extended_meta_data_size_bytes), rest}
+    {new(footprint, instructions, read_bytes, write_bytes), rest}
   end
 end

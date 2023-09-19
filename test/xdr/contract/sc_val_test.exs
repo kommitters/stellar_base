@@ -25,7 +25,6 @@ defmodule StellarBase.XDR.SCValTest do
     SCVal,
     SCValType,
     SCError,
-    SCErrorCode,
     SCString,
     SCSymbol,
     SCErrorType,
@@ -80,8 +79,8 @@ defmodule StellarBase.XDR.SCValTest do
           val_type: SCValType.new(:SCV_ERROR),
           value:
             SCError.new(
-              SCErrorType.new(),
-              SCErrorCode.new()
+              UInt32.new(0),
+              SCErrorType.new()
             ),
           binary: <<0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0>>
         },

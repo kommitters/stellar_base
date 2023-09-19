@@ -11,8 +11,8 @@ defmodule StellarBase.XDR.HashIDPreimageSorobanAuthorizationTest do
     SCSymbol,
     SCVal,
     SCValType,
-    SCVec,
-    SorobanAuthorizedContractFunction,
+    SCValList,
+    InvokeContractArgs,
     SorobanAuthorizedFunction,
     SorobanAuthorizedFunctionType,
     SorobanAuthorizedInvocation,
@@ -29,12 +29,12 @@ defmodule StellarBase.XDR.HashIDPreimageSorobanAuthorizationTest do
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       sc_vals = [scval1, scval2]
-      args = SCVec.new(sc_vals)
+      args = SCValList.new(sc_vals)
 
       address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
       sc_address = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
 
-      contract_function = SorobanAuthorizedContractFunction.new(sc_address, function_name, args)
+      contract_function = InvokeContractArgs.new(sc_address, function_name, args)
 
       auth_function =
         SorobanAuthorizedFunction.new(contract_function, SorobanAuthorizedFunctionType.new())

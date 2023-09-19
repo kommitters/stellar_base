@@ -11,16 +11,16 @@ defmodule StellarBase.XDR.ContractEventV0 do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    SCVec,
+    SCValList,
     SCVal
   }
 
   @struct_spec XDR.Struct.new(
-                 topics: SCVec,
+                 topics: SCValList,
                  data: SCVal
                )
 
-  @type topics_type :: SCVec.t()
+  @type topics_type :: SCValList.t()
   @type data_type :: SCVal.t()
 
   @type t :: %__MODULE__{topics: topics_type(), data: data_type()}
@@ -29,7 +29,7 @@ defmodule StellarBase.XDR.ContractEventV0 do
 
   @spec new(topics :: topics_type(), data :: data_type()) :: t()
   def new(
-        %SCVec{} = topics,
+        %SCValList{} = topics,
         %SCVal{} = data
       ),
       do: %__MODULE__{topics: topics, data: data}

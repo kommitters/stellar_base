@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
     max_entry_expiration = UInt32.new(100)
     min_temp_entry_expiration = UInt32.new(50)
     min_persistent_entry_expiration = UInt32.new(60)
-    auto_bump_ledgers = UInt32.new(5)
+    starting_eviction_scan_level = UInt32.new(5)
     persistent_rent_rate_denominator = Int64.new(100)
     temp_rent_rate_denominator = Int64.new(200)
     max_entries_to_expire = UInt32.new(500)
@@ -20,27 +20,27 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
     eviction_scan_size = UInt64.new(5000)
 
     binary =
-      <<0, 0, 0, 100, 0, 0, 0, 50, 0, 0, 0, 60, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0,
-        0, 0, 0, 200, 0, 0, 1, 244, 0, 0, 3, 232, 0, 0, 0, 0, 0, 0, 19, 136>>
+      <<0, 0, 0, 100, 0, 0, 0, 50, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0,
+        200, 0, 0, 1, 244, 0, 0, 3, 232, 0, 0, 0, 0, 0, 0, 19, 136, 0, 0, 0, 5>>
 
     state_expiration_settings =
       StateExpirationSettings.new(
         max_entry_expiration,
         min_temp_entry_expiration,
         min_persistent_entry_expiration,
-        auto_bump_ledgers,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
         max_entries_to_expire,
         bucket_list_size_window_sample_size,
-        eviction_scan_size
+        eviction_scan_size,
+        starting_eviction_scan_level
       )
 
     %{
       max_entry_expiration: max_entry_expiration,
       min_temp_entry_expiration: min_temp_entry_expiration,
       min_persistent_entry_expiration: min_persistent_entry_expiration,
-      auto_bump_ledgers: auto_bump_ledgers,
+      starting_eviction_scan_level: starting_eviction_scan_level,
       persistent_rent_rate_denominator: persistent_rent_rate_denominator,
       temp_rent_rate_denominator: temp_rent_rate_denominator,
       max_entries_to_expire: max_entries_to_expire,
@@ -55,7 +55,7 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
     max_entry_expiration: max_entry_expiration,
     min_temp_entry_expiration: min_temp_entry_expiration,
     min_persistent_entry_expiration: min_persistent_entry_expiration,
-    auto_bump_ledgers: auto_bump_ledgers,
+    starting_eviction_scan_level: starting_eviction_scan_level,
     persistent_rent_rate_denominator: persistent_rent_rate_denominator,
     temp_rent_rate_denominator: temp_rent_rate_denominator,
     max_entries_to_expire: max_entries_to_expire,
@@ -66,23 +66,23 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
       max_entry_expiration: ^max_entry_expiration,
       min_temp_entry_expiration: ^min_temp_entry_expiration,
       min_persistent_entry_expiration: ^min_persistent_entry_expiration,
-      auto_bump_ledgers: ^auto_bump_ledgers,
       persistent_rent_rate_denominator: ^persistent_rent_rate_denominator,
       temp_rent_rate_denominator: ^temp_rent_rate_denominator,
       max_entries_to_expire: ^max_entries_to_expire,
       bucket_list_size_window_sample_size: ^bucket_list_size_window_sample_size,
-      eviction_scan_size: ^eviction_scan_size
+      eviction_scan_size: ^eviction_scan_size,
+      starting_eviction_scan_level: ^starting_eviction_scan_level
     } =
       StateExpirationSettings.new(
         max_entry_expiration,
         min_temp_entry_expiration,
         min_persistent_entry_expiration,
-        auto_bump_ledgers,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
         max_entries_to_expire,
         bucket_list_size_window_sample_size,
-        eviction_scan_size
+        eviction_scan_size,
+        starting_eviction_scan_level
       )
   end
 
@@ -91,7 +91,7 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
     max_entry_expiration: max_entry_expiration,
     min_temp_entry_expiration: min_temp_entry_expiration,
     min_persistent_entry_expiration: min_persistent_entry_expiration,
-    auto_bump_ledgers: auto_bump_ledgers,
+    starting_eviction_scan_level: starting_eviction_scan_level,
     persistent_rent_rate_denominator: persistent_rent_rate_denominator,
     temp_rent_rate_denominator: temp_rent_rate_denominator,
     max_entries_to_expire: max_entries_to_expire,
@@ -103,12 +103,12 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
         max_entry_expiration,
         min_temp_entry_expiration,
         min_persistent_entry_expiration,
-        auto_bump_ledgers,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
         max_entries_to_expire,
         bucket_list_size_window_sample_size,
-        eviction_scan_size
+        eviction_scan_size,
+        starting_eviction_scan_level
       )
       |> StateExpirationSettings.encode_xdr()
   end
@@ -118,7 +118,7 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
     max_entry_expiration: max_entry_expiration,
     min_temp_entry_expiration: min_temp_entry_expiration,
     min_persistent_entry_expiration: min_persistent_entry_expiration,
-    auto_bump_ledgers: auto_bump_ledgers,
+    starting_eviction_scan_level: starting_eviction_scan_level,
     persistent_rent_rate_denominator: persistent_rent_rate_denominator,
     temp_rent_rate_denominator: temp_rent_rate_denominator,
     max_entries_to_expire: max_entries_to_expire,
@@ -130,12 +130,12 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
         max_entry_expiration,
         min_temp_entry_expiration,
         min_persistent_entry_expiration,
-        auto_bump_ledgers,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
         max_entries_to_expire,
         bucket_list_size_window_sample_size,
-        eviction_scan_size
+        eviction_scan_size,
+        starting_eviction_scan_level
       )
       |> StateExpirationSettings.encode_xdr!()
   end

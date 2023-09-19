@@ -11,15 +11,15 @@ defmodule StellarBase.XDR.SorobanAuthorizationEntryListTest do
     SCAddress,
     SCSymbol,
     SCVal,
+    SCValList,
     SCValType,
-    SCVec,
     SorobanAuthorizedInvocation,
     SorobanAuthorizedInvocationList,
     SorobanAuthorizationEntry,
     SorobanAuthorizationEntryList,
     SorobanAuthorizedFunction,
     SorobanAuthorizedFunctionType,
-    SorobanAuthorizedContractFunction,
+    InvokeContractArgs,
     SorobanCredentials,
     SorobanCredentialsType,
     UInt256,
@@ -48,10 +48,10 @@ defmodule StellarBase.XDR.SorobanAuthorizationEntryListTest do
 
       sc_vals = [scval1, scval2]
 
-      args = SCVec.new(sc_vals)
+      args = SCValList.new(sc_vals)
 
       soroban_auth_contract_function =
-        SorobanAuthorizedContractFunction.new(contract_address, function_name, args)
+        InvokeContractArgs.new(contract_address, function_name, args)
 
       function =
         SorobanAuthorizedFunction.new(

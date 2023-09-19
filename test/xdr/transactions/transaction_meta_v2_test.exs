@@ -4,8 +4,7 @@ defmodule StellarBase.XDR.TransactionMetaV2Test do
   alias StellarBase.XDR.{
     ContractDataDurability,
     ContractDataEntry,
-    ContractDataEntryBody,
-    ContractEntryBodyType,
+    ExtensionPoint,
     Hash,
     Int64,
     LedgerEntry,
@@ -40,16 +39,17 @@ defmodule StellarBase.XDR.TransactionMetaV2Test do
         transaction_meta_v2:
           TransactionMetaV2.new(tx_changes_before, operations, tx_changes_after),
         binary:
-          <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90,
-            80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79,
-            83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-            0, 132, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0,
-            0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67,
-            87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0,
-            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0,
-            0, 0, 6, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75,
-            70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0,
-            0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132, 0, 0, 0, 0>>
+          <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87,
+            73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53,
+            68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+            0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+            5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55,
+            88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0,
+            0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87,
+            73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53,
+            68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+            0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0>>
       }
     end
 
@@ -89,17 +89,16 @@ defmodule StellarBase.XDR.TransactionMetaV2Test do
   @spec create_ledger_entry_changes() :: SponsorshipDescriptorList.t()
   defp create_ledger_entry_changes do
     ledger_entry_type = LedgerEntryType.new(:CONTRACT_DATA)
-    expiration_ledger_seq = UInt32.new(132)
     address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
     durability = ContractDataDurability.new()
     key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+    val = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
     last_modified_ledger_seq = UInt32.new(5)
     contract = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
+    void = Void.new()
+    ext = ExtensionPoint.new(void, 0)
 
-    body = ContractDataEntryBody.new(Void.new(), ContractEntryBodyType.new(:EXPIRATION_EXTENSION))
-
-    ledger_entry_data =
-      ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq)
+    ledger_entry_data = ContractDataEntry.new(ext, contract, key, durability, val)
 
     data = LedgerEntryData.new(ledger_entry_data, ledger_entry_type)
 

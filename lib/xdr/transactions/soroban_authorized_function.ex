@@ -12,17 +12,17 @@ defmodule StellarBase.XDR.SorobanAuthorizedFunction do
 
   alias StellarBase.XDR.{
     SorobanAuthorizedFunctionType,
-    SorobanAuthorizedContractFunction,
+    InvokeContractArgs,
     CreateContractArgs
   }
 
   @arms [
-    SOROBAN_AUTHORIZED_FUNCTION_TYPE_CONTRACT_FN: SorobanAuthorizedContractFunction,
+    SOROBAN_AUTHORIZED_FUNCTION_TYPE_CONTRACT_FN: InvokeContractArgs,
     SOROBAN_AUTHORIZED_FUNCTION_TYPE_CREATE_CONTRACT_HOST_FN: CreateContractArgs
   ]
 
   @type value ::
-          SorobanAuthorizedContractFunction.t()
+          InvokeContractArgs.t()
           | CreateContractArgs.t()
 
   @type t :: %__MODULE__{value: value(), type: SorobanAuthorizedFunctionType.t()}

@@ -9,9 +9,6 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
     AlphaNum4,
     ContractCodeEntry,
     ContractCodeEntry,
-    ContractCodeEntryBody,
-    ContractEntryBodyType,
-    ContractDataEntryBody,
     ContractDataDurability,
     TrustLineAsset,
     Int64,
@@ -125,18 +122,16 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
 
     extension_point = ExtensionPoint.new(Void.new(), 0)
     hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
-    code = ContractCodeEntryBody.new(VariableOpaque.new("GCIZ3GSM5"), ContractEntryBodyType.new())
+    code = VariableOpaque.new("GCIZ3GSM5")
 
     ## ContractDataEntry
 
     address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
     durability = ContractDataDurability.new()
 
-    body = ContractDataEntryBody.new(Void.new(), ContractEntryBodyType.new(:EXPIRATION_EXTENSION))
-
-    expiration_ledger_seq = UInt32.new(132)
     contract = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
     key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+    val = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
 
     discriminants = [
       %{
@@ -202,21 +197,19 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       },
       %{
         type: LedgerEntryType.new(:CONTRACT_DATA),
-        ledger_entry_data:
-          ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq),
+        ledger_entry_data: ContractDataEntry.new(extension_point, contract, key, durability, val),
         binary:
-          <<0, 0, 0, 6, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70,
-            75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0,
-            0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132>>
+          <<0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55,
+            88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0,
+            0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1>>
       },
       %{
         type: LedgerEntryType.new(:CONTRACT_CODE),
-        ledger_entry_data:
-          ContractCodeEntry.new(extension_point, hash, code, expiration_ledger_seq),
+        ledger_entry_data: ContractCodeEntry.new(extension_point, hash, code),
         binary:
           <<0, 0, 0, 7, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
-            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 0, 0, 0,
-            0, 9, 71, 67, 73, 90, 51, 71, 83, 77, 53, 0, 0, 0, 0, 0, 0, 132>>
+            52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 9, 71,
+            67, 73, 90, 51, 71, 83, 77, 53, 0, 0, 0>>
       }
     ]
 

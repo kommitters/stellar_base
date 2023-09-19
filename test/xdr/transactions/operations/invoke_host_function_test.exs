@@ -3,8 +3,8 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
 
   alias StellarBase.XDR.{
     SCVal,
+    SCValList,
     SCValType,
-    SCVec,
     Int64,
     HostFunction,
     HostFunctionType,
@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
     SCAddress,
     SCAddressType,
     SCSymbol,
-    SorobanAuthorizedContractFunction,
+    InvokeContractArgs,
     SorobanAuthorizationEntryList,
     SorobanAuthorizationEntry,
     SorobanAuthorizedFunction,
@@ -32,7 +32,7 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       sc_vals = [scval1, scval2]
-      args = SCVec.new(sc_vals)
+      args = SCValList.new(sc_vals)
 
       function_name = SCSymbol.new("Hello")
 
@@ -41,12 +41,12 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
         |> Hash.new()
         |> SCAddress.new(SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
 
-      contract_function = SorobanAuthorizedContractFunction.new(sc_address, function_name, args)
+      contract_function = InvokeContractArgs.new(sc_address, function_name, args)
 
       auth_function =
         SorobanAuthorizedFunction.new(contract_function, SorobanAuthorizedFunctionType.new())
 
-      host_function = HostFunction.new(args, HostFunctionType.new())
+      host_function = HostFunction.new(contract_function, HostFunctionType.new())
 
       invocation =
         SorobanAuthorizedInvocation.new(auth_function, SorobanAuthorizedInvocationList.new([]))
@@ -60,11 +60,14 @@ defmodule StellarBase.XDR.Operations.InvokeHostFunctionTest do
         auth: auth,
         invoke_host_function_op: InvokeHostFunction.new(host_function, auth),
         binary:
-          <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0,
-            0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80,
-            88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83,
-            69, 88, 81, 75, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6,
-            0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0>>
+          <<0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70,
+            75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 5, 72,
+            101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+            6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87,
+            73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53,
+            68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 5, 72, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0,
+            2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+            0>>
       }
     end
 

@@ -3,60 +3,55 @@ defmodule StellarBase.XDR.ContractDataEntryTest do
 
   alias StellarBase.XDR.{
     ContractDataEntry,
-    ContractDataEntryBody,
     ContractDataDurability,
-    ContractEntryBodyType,
+    ExtensionPoint,
     Hash,
     Int64,
     SCAddress,
     SCAddressType,
     SCVal,
     SCValType,
-    UInt32,
     Void
   }
 
   describe "ContractDataEntry" do
     setup do
       address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
+      void = Void.new()
+      ext = ExtensionPoint.new(void, 0)
       durability = ContractDataDurability.new()
-
-      body =
-        ContractDataEntryBody.new(Void.new(), ContractEntryBodyType.new(:EXPIRATION_EXTENSION))
-
-      expiration_ledger_seq = UInt32.new(132)
       contract = SCAddress.new(address, SCAddressType.new(:SC_ADDRESS_TYPE_CONTRACT))
       key = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
+      val = SCVal.new(Int64.new(1), SCValType.new(:SCV_I64))
 
       %{
+        ext: ext,
         contract: contract,
         key: key,
         durability: durability,
-        body: body,
-        expiration_ledger_seq: expiration_ledger_seq,
-        contract_data_entry:
-          ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq),
+        val: val,
+        contract_data_entry: ContractDataEntry.new(ext, contract, key, durability, val),
         binary:
-          <<0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70, 75, 70, 79,
-            52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0,
-            0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 132>>
+          <<0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55, 88, 51, 70,
+            75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 0, 0, 0, 6, 0, 0,
+            0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1>>
       }
     end
 
     test "new/1", %{
+      ext: ext,
       contract: contract,
       key: key,
       durability: durability,
-      body: body,
-      expiration_ledger_seq: expiration_ledger_seq
+      val: val
     } do
       %ContractDataEntry{
+        ext: ^ext,
         contract: ^contract,
         key: ^key,
         durability: ^durability,
-        body: ^body,
-        expiration_ledger_seq: ^expiration_ledger_seq
-      } = ContractDataEntry.new(contract, key, durability, body, expiration_ledger_seq)
+        val: ^val
+      } = ContractDataEntry.new(ext, contract, key, durability, val)
     end
 
     test "encode_xdr/1", %{contract_data_entry: contract_data_entry, binary: binary} do
