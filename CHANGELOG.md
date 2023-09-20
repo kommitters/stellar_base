@@ -1,6 +1,10 @@
 # Changelog
 
-# 0.13.2 (07.09.2023)
+## 0.14.0 (20.09.2023)
+
+* [Soroban Preview 11 support](https://github.com/kommitters/stellar_base/issues/290).
+
+## 0.13.2 (07.09.2023)
 
 * Update dependencies.
   | Package | Type | Update | Change |
