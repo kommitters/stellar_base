@@ -10,7 +10,6 @@ defmodule StellarBase.XDR.SorobanAddressCredentialsTest do
     SCAddressType,
     SCVal,
     SCValType,
-    SCVec,
     SorobanAddressCredentials,
     UInt32,
     UInt256
@@ -31,31 +30,24 @@ defmodule StellarBase.XDR.SorobanAddressCredentialsTest do
 
       sc_address_type = SCAddressType.new(:SC_ADDRESS_TYPE_ACCOUNT)
 
-      scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
-      scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
-
-      sc_vals = [scval1, scval2]
-
       address = SCAddress.new(account_id, sc_address_type)
       nonce = Int64.new(123_155)
       signature_expiration_ledger = UInt32.new(4_646_545)
-
-      signature_args = SCVec.new(sc_vals)
+      signature = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
 
       soroban_address_credentials =
-        SorobanAddressCredentials.new(address, nonce, signature_expiration_ledger, signature_args)
+        SorobanAddressCredentials.new(address, nonce, signature_expiration_ledger, signature)
 
       %{
         address: address,
         nonce: nonce,
         signature_expiration_ledger: signature_expiration_ledger,
-        signature_args: signature_args,
+        signature: signature,
         soroban_address_credentials: soroban_address_credentials,
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
             205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,
-            0, 0, 0, 0, 0, 1, 225, 19, 0, 70, 230, 145, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0,
-            0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>
+            0, 0, 0, 0, 0, 1, 225, 19, 0, 70, 230, 145, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3>>
       }
     end
 
@@ -63,19 +55,19 @@ defmodule StellarBase.XDR.SorobanAddressCredentialsTest do
       address: address,
       nonce: nonce,
       signature_expiration_ledger: signature_expiration_ledger,
-      signature_args: signature_args
+      signature: signature
     } do
       %SorobanAddressCredentials{
         address: ^address,
         nonce: ^nonce,
         signature_expiration_ledger: ^signature_expiration_ledger,
-        signature_args: ^signature_args
+        signature: ^signature
       } =
         SorobanAddressCredentials.new(
           address,
           nonce,
           signature_expiration_ledger,
-          signature_args
+          signature
         )
     end
 

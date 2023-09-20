@@ -2,7 +2,6 @@ defmodule StellarBase.XDR.LedgerKeyContractCodeTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    ContractEntryBodyType,
     Hash,
     LedgerKeyContractCode
   }
@@ -10,26 +9,22 @@ defmodule StellarBase.XDR.LedgerKeyContractCodeTest do
   describe "LedgerKeyContractCode" do
     setup do
       hash = Hash.new("CBT6AP4HS575FETHYO6CMIZ2NUFPLKC7")
-      body_type = ContractEntryBodyType.new(:DATA_ENTRY)
 
       %{
         hash: hash,
-        body_type: body_type,
-        ledger_key_contract_code: LedgerKeyContractCode.new(hash, body_type),
+        ledger_key_contract_code: LedgerKeyContractCode.new(hash),
         binary:
           <<67, 66, 84, 54, 65, 80, 52, 72, 83, 53, 55, 53, 70, 69, 84, 72, 89, 79, 54, 67, 77,
-            73, 90, 50, 78, 85, 70, 80, 76, 75, 67, 55, 0, 0, 0, 0>>
+            73, 90, 50, 78, 85, 70, 80, 76, 75, 67, 55>>
       }
     end
 
     test "new/3", %{
-      hash: hash,
-      body_type: body_type
+      hash: hash
     } do
       %LedgerKeyContractCode{
-        hash: ^hash,
-        body_type: ^body_type
-      } = LedgerKeyContractCode.new(hash, body_type)
+        hash: ^hash
+      } = LedgerKeyContractCode.new(hash)
     end
 
     test "encode_xdr/1", %{

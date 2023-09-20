@@ -11,93 +11,74 @@ defmodule StellarBase.XDR.ContractDataEntry do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
+    ExtensionPoint,
     SCAddress,
     SCVal,
-    ContractDataDurability,
-    ContractDataEntryBody,
-    UInt32
+    ContractDataDurability
   }
 
   @struct_spec XDR.Struct.new(
+                 ext: ExtensionPoint,
                  contract: SCAddress,
                  key: SCVal,
                  durability: ContractDataDurability,
-                 body: ContractDataEntryBody,
-                 expiration_ledger_seq: UInt32
+                 val: SCVal
                )
 
+  @type ext_type :: ExtensionPoint.t()
   @type contract_type :: SCAddress.t()
   @type key_type :: SCVal.t()
   @type durability_type :: ContractDataDurability.t()
-  @type body_type :: ContractDataEntryBody.t()
-  @type expiration_ledger_seq_type :: UInt32.t()
+  @type val_type :: SCVal.t()
 
   @type t :: %__MODULE__{
+          ext: ext_type(),
           contract: contract_type(),
           key: key_type(),
           durability: durability_type(),
-          body: body_type(),
-          expiration_ledger_seq: expiration_ledger_seq_type()
+          val: val_type()
         }
 
-  defstruct [:contract, :key, :durability, :body, :expiration_ledger_seq]
+  defstruct [:ext, :contract, :key, :durability, :val]
 
   @spec new(
+          ext :: ext_type(),
           contract :: contract_type(),
           key :: key_type(),
           durability :: durability_type(),
-          body :: body_type(),
-          expiration_ledger_seq :: expiration_ledger_seq_type()
+          val :: val_type()
         ) :: t()
   def new(
+        %ExtensionPoint{} = ext,
         %SCAddress{} = contract,
         %SCVal{} = key,
         %ContractDataDurability{} = durability,
-        %ContractDataEntryBody{} = body,
-        %UInt32{} = expiration_ledger_seq
+        %SCVal{} = val
       ),
-      do: %__MODULE__{
-        contract: contract,
-        key: key,
-        durability: durability,
-        body: body,
-        expiration_ledger_seq: expiration_ledger_seq
-      }
+      do: %__MODULE__{ext: ext, contract: contract, key: key, durability: durability, val: val}
 
   @impl true
   def encode_xdr(%__MODULE__{
+        ext: ext,
         contract: contract,
         key: key,
         durability: durability,
-        body: body,
-        expiration_ledger_seq: expiration_ledger_seq
+        val: val
       }) do
-    [
-      contract: contract,
-      key: key,
-      durability: durability,
-      body: body,
-      expiration_ledger_seq: expiration_ledger_seq
-    ]
+    [ext: ext, contract: contract, key: key, durability: durability, val: val]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
   def encode_xdr!(%__MODULE__{
+        ext: ext,
         contract: contract,
         key: key,
         durability: durability,
-        body: body,
-        expiration_ledger_seq: expiration_ledger_seq
+        val: val
       }) do
-    [
-      contract: contract,
-      key: key,
-      durability: durability,
-      body: body,
-      expiration_ledger_seq: expiration_ledger_seq
-    ]
+    [ext: ext, contract: contract, key: key, durability: durability, val: val]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -109,15 +90,9 @@ defmodule StellarBase.XDR.ContractDataEntry do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok,
        {%XDR.Struct{
-          components: [
-            contract: contract,
-            key: key,
-            durability: durability,
-            body: body,
-            expiration_ledger_seq: expiration_ledger_seq
-          ]
+          components: [ext: ext, contract: contract, key: key, durability: durability, val: val]
         }, rest}} ->
-        {:ok, {new(contract, key, durability, body, expiration_ledger_seq), rest}}
+        {:ok, {new(ext, contract, key, durability, val), rest}}
 
       error ->
         error
@@ -129,15 +104,9 @@ defmodule StellarBase.XDR.ContractDataEntry do
 
   def decode_xdr!(bytes, struct) do
     {%XDR.Struct{
-       components: [
-         contract: contract,
-         key: key,
-         durability: durability,
-         body: body,
-         expiration_ledger_seq: expiration_ledger_seq
-       ]
+       components: [ext: ext, contract: contract, key: key, durability: durability, val: val]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(contract, key, durability, body, expiration_ledger_seq), rest}
+    {new(ext, contract, key, durability, val), rest}
   end
 end

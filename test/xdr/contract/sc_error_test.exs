@@ -8,20 +8,20 @@ defmodule StellarBase.XDR.SCErrorTest do
   }
 
   setup do
-    type = %SCErrorType{identifier: :SCE_CONTRACT}
-    code = %SCErrorCode{identifier: :SCEC_INVALID_ACTION}
-    sc_error = SCError.new(type, code)
+    type = %SCErrorType{identifier: :SCE_AUTH}
+    value = %SCErrorCode{identifier: :SCEC_INVALID_ACTION}
+    sc_error = SCError.new(value, type)
 
     %{
       type: type,
-      code: code,
+      value: value,
       sc_error: sc_error,
-      binary: <<0, 0, 0, 0, 0, 0, 0, 6>>
+      binary: <<0, 0, 0, 9, 0, 0, 0, 6>>
     }
   end
 
-  test "new/2", %{type: type, code: code} do
-    %SCError{type: ^type, code: ^code} = SCError.new(type, code)
+  test "new/2", %{type: type, value: value} do
+    %SCError{type: ^type, value: ^value} = SCError.new(value, type)
   end
 
   test "encode_xdr/1", %{sc_error: sc_error, binary: binary} do

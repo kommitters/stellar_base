@@ -14,7 +14,8 @@ defmodule StellarBase.XDR.LedgerEntryType do
     LIQUIDITY_POOL: 5,
     CONTRACT_DATA: 6,
     CONTRACT_CODE: 7,
-    CONFIG_SETTING: 8
+    CONFIG_SETTING: 8,
+    EXPIRATION: 9
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

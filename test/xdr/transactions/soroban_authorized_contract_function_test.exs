@@ -12,15 +12,15 @@ defmodule StellarBase.XDR.SorobanAuthorizedContractFunctionTest do
     SCSymbol,
     SCVal,
     SCValType,
-    SCVec,
-    SorobanAuthorizedContractFunction,
-    SorobanAuthorizedContractFunction,
+    SCValList,
+    InvokeContractArgs,
+    InvokeContractArgs,
     UInt256
   }
 
   alias StellarBase.StrKey
 
-  describe "SorobanAuthorizedContractFunction" do
+  describe "InvokeContractArgs" do
     setup do
       pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
 
@@ -40,14 +40,14 @@ defmodule StellarBase.XDR.SorobanAuthorizedContractFunctionTest do
 
       sc_vals = [scval1, scval2]
 
-      args = SCVec.new(sc_vals)
+      args = SCValList.new(sc_vals)
 
       %{
         contract_address: contract_address,
         function_name: function_name,
         args: args,
         soroban_authorized_contract_function:
-          SorobanAuthorizedContractFunction.new(contract_address, function_name, args),
+          InvokeContractArgs.new(contract_address, function_name, args),
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68, 149, 154, 124,
             205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73, 138, 2, 227, 119,
@@ -61,12 +61,12 @@ defmodule StellarBase.XDR.SorobanAuthorizedContractFunctionTest do
       function_name: function_name,
       args: args
     } do
-      %SorobanAuthorizedContractFunction{
+      %InvokeContractArgs{
         contract_address: ^contract_address,
         function_name: ^function_name,
         args: ^args
       } =
-        SorobanAuthorizedContractFunction.new(
+        InvokeContractArgs.new(
           contract_address,
           function_name,
           args
@@ -77,28 +77,25 @@ defmodule StellarBase.XDR.SorobanAuthorizedContractFunctionTest do
       soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      {:ok, ^binary} =
-        SorobanAuthorizedContractFunction.encode_xdr(soroban_authorized_contract_function)
+      {:ok, ^binary} = InvokeContractArgs.encode_xdr(soroban_authorized_contract_function)
     end
 
     test "encode_xdr!/1", %{
       soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      ^binary =
-        SorobanAuthorizedContractFunction.encode_xdr!(soroban_authorized_contract_function)
+      ^binary = InvokeContractArgs.encode_xdr!(soroban_authorized_contract_function)
     end
 
     test "decode_xdr/2", %{
       soroban_authorized_contract_function: soroban_authorized_contract_function,
       binary: binary
     } do
-      {:ok, {^soroban_authorized_contract_function, ""}} =
-        SorobanAuthorizedContractFunction.decode_xdr(binary)
+      {:ok, {^soroban_authorized_contract_function, ""}} = InvokeContractArgs.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
-      {:error, :not_binary} = SorobanAuthorizedContractFunction.decode_xdr(123)
+      {:error, :not_binary} = InvokeContractArgs.decode_xdr(123)
     end
 
     test "decode_xdr!/2", %{
@@ -106,7 +103,7 @@ defmodule StellarBase.XDR.SorobanAuthorizedContractFunctionTest do
       binary: binary
     } do
       {^soroban_authorized_contract_function, ^binary} =
-        SorobanAuthorizedContractFunction.decode_xdr!(binary <> binary)
+        InvokeContractArgs.decode_xdr!(binary <> binary)
     end
   end
 end

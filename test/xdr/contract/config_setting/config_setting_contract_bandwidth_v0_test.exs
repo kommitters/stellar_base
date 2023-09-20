@@ -4,40 +4,40 @@ defmodule StellarBase.XDR.ConfigSettingContractBandwidthV0Test do
   alias StellarBase.XDR.{ConfigSettingContractBandwidthV0, UInt32, Int64}
 
   setup do
-    ledger_max_propagate_size_bytes = UInt32.new(10)
+    ledger_max_txs_size_bytes = UInt32.new(10)
     tx_max_size_bytes = UInt32.new(10)
-    fee_propagate_data1_kb = Int64.new(10)
+    fee_tx_size1_kb = Int64.new(10)
 
     config_setting_contract_bandwidth_v0 =
       ConfigSettingContractBandwidthV0.new(
-        ledger_max_propagate_size_bytes,
+        ledger_max_txs_size_bytes,
         tx_max_size_bytes,
-        fee_propagate_data1_kb
+        fee_tx_size1_kb
       )
 
     %{
-      ledger_max_propagate_size_bytes: ledger_max_propagate_size_bytes,
+      ledger_max_txs_size_bytes: ledger_max_txs_size_bytes,
       tx_max_size_bytes: tx_max_size_bytes,
-      fee_propagate_data1_kb: fee_propagate_data1_kb,
+      fee_tx_size1_kb: fee_tx_size1_kb,
       config_setting_contract_bandwidth_v0: config_setting_contract_bandwidth_v0,
       binary: <<0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10>>
     }
   end
 
   test "new/1", %{
-    ledger_max_propagate_size_bytes: ledger_max_propagate_size_bytes,
+    ledger_max_txs_size_bytes: ledger_max_txs_size_bytes,
     tx_max_size_bytes: tx_max_size_bytes,
-    fee_propagate_data1_kb: fee_propagate_data1_kb
+    fee_tx_size1_kb: fee_tx_size1_kb
   } do
     %ConfigSettingContractBandwidthV0{
-      ledger_max_propagate_size_bytes: ^ledger_max_propagate_size_bytes,
+      ledger_max_txs_size_bytes: ^ledger_max_txs_size_bytes,
       tx_max_size_bytes: ^tx_max_size_bytes,
-      fee_propagate_data1_kb: ^fee_propagate_data1_kb
+      fee_tx_size1_kb: ^fee_tx_size1_kb
     } =
       ConfigSettingContractBandwidthV0.new(
-        ledger_max_propagate_size_bytes,
+        ledger_max_txs_size_bytes,
         tx_max_size_bytes,
-        fee_propagate_data1_kb
+        fee_tx_size1_kb
       )
   end
 

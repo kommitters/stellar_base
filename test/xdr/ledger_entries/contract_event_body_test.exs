@@ -6,8 +6,8 @@ defmodule StellarBase.XDR.ContractEventBodyTest do
     ContractEventV0,
     Int64,
     SCVal,
-    SCValType,
-    SCVec
+    SCValList,
+    SCValType
   }
 
   describe "ContractEventBody" do
@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.ContractEventBodyTest do
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       sc_vals = [scval1, scval2]
-      topics = SCVec.new(sc_vals)
+      topics = SCValList.new(sc_vals)
       data = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       contract_event_v0 = ContractEventV0.new(topics, data)
 

@@ -17,7 +17,6 @@ defmodule StellarBase.XDR.SCSpecTypeDef do
     SCSpecTypeResult,
     SCSpecTypeVec,
     SCSpecTypeMap,
-    SCSpecTypeSet,
     SCSpecTypeTuple,
     SCSpecTypeBytesN,
     SCSpecTypeUDT
@@ -46,7 +45,6 @@ defmodule StellarBase.XDR.SCSpecTypeDef do
     SC_SPEC_TYPE_RESULT: SCSpecTypeResult,
     SC_SPEC_TYPE_VEC: SCSpecTypeVec,
     SC_SPEC_TYPE_MAP: SCSpecTypeMap,
-    SC_SPEC_TYPE_SET: SCSpecTypeSet,
     SC_SPEC_TYPE_TUPLE: SCSpecTypeTuple,
     SC_SPEC_TYPE_BYTES_N: SCSpecTypeBytesN,
     SC_SPEC_TYPE_UDT: SCSpecTypeUDT
@@ -58,7 +56,6 @@ defmodule StellarBase.XDR.SCSpecTypeDef do
           | SCSpecTypeResult.t()
           | SCSpecTypeVec.t()
           | SCSpecTypeMap.t()
-          | SCSpecTypeSet.t()
           | SCSpecTypeTuple.t()
           | SCSpecTypeBytesN.t()
           | SCSpecTypeUDT.t()

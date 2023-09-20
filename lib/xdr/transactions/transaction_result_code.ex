@@ -29,7 +29,7 @@ defmodule StellarBase.XDR.TransactionResultCode do
     txBAD_SPONSORSHIP: -14,
     txBAD_MIN_SEQ_AGE_OR_GAP: -15,
     txMALFORMED: -16,
-    txSOROBAN_RESOURCE_LIMIT_EXCEEDED: -17
+    txSOROBAN_INVALID: -17
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

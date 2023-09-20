@@ -14,47 +14,47 @@ defmodule StellarBase.XDR.SorobanAddressCredentials do
     SCAddress,
     Int64,
     UInt32,
-    SCVec
+    SCVal
   }
 
   @struct_spec XDR.Struct.new(
                  address: SCAddress,
                  nonce: Int64,
                  signature_expiration_ledger: UInt32,
-                 signature_args: SCVec
+                 signature: SCVal
                )
 
   @type address_type :: SCAddress.t()
   @type nonce_type :: Int64.t()
   @type signature_expiration_ledger_type :: UInt32.t()
-  @type signature_args_type :: SCVec.t()
+  @type signature_type :: SCVal.t()
 
   @type t :: %__MODULE__{
           address: address_type(),
           nonce: nonce_type(),
           signature_expiration_ledger: signature_expiration_ledger_type(),
-          signature_args: signature_args_type()
+          signature: signature_type()
         }
 
-  defstruct [:address, :nonce, :signature_expiration_ledger, :signature_args]
+  defstruct [:address, :nonce, :signature_expiration_ledger, :signature]
 
   @spec new(
           address :: address_type(),
           nonce :: nonce_type(),
           signature_expiration_ledger :: signature_expiration_ledger_type(),
-          signature_args :: signature_args_type()
+          signature :: signature_type()
         ) :: t()
   def new(
         %SCAddress{} = address,
         %Int64{} = nonce,
         %UInt32{} = signature_expiration_ledger,
-        %SCVec{} = signature_args
+        %SCVal{} = signature
       ),
       do: %__MODULE__{
         address: address,
         nonce: nonce,
         signature_expiration_ledger: signature_expiration_ledger,
-        signature_args: signature_args
+        signature: signature
       }
 
   @impl true
@@ -62,13 +62,13 @@ defmodule StellarBase.XDR.SorobanAddressCredentials do
         address: address,
         nonce: nonce,
         signature_expiration_ledger: signature_expiration_ledger,
-        signature_args: signature_args
+        signature: signature
       }) do
     [
       address: address,
       nonce: nonce,
       signature_expiration_ledger: signature_expiration_ledger,
-      signature_args: signature_args
+      signature: signature
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
@@ -79,13 +79,13 @@ defmodule StellarBase.XDR.SorobanAddressCredentials do
         address: address,
         nonce: nonce,
         signature_expiration_ledger: signature_expiration_ledger,
-        signature_args: signature_args
+        signature: signature
       }) do
     [
       address: address,
       nonce: nonce,
       signature_expiration_ledger: signature_expiration_ledger,
-      signature_args: signature_args
+      signature: signature
     ]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
@@ -102,10 +102,10 @@ defmodule StellarBase.XDR.SorobanAddressCredentials do
             address: address,
             nonce: nonce,
             signature_expiration_ledger: signature_expiration_ledger,
-            signature_args: signature_args
+            signature: signature
           ]
         }, rest}} ->
-        {:ok, {new(address, nonce, signature_expiration_ledger, signature_args), rest}}
+        {:ok, {new(address, nonce, signature_expiration_ledger, signature), rest}}
 
       error ->
         error
@@ -121,10 +121,10 @@ defmodule StellarBase.XDR.SorobanAddressCredentials do
          address: address,
          nonce: nonce,
          signature_expiration_ledger: signature_expiration_ledger,
-         signature_args: signature_args
+         signature: signature
        ]
      }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(address, nonce, signature_expiration_ledger, signature_args), rest}
+    {new(address, nonce, signature_expiration_ledger, signature), rest}
   end
 end

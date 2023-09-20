@@ -15,7 +15,8 @@ defmodule StellarBase.XDR.LedgerEntryData do
     ConfigSettingEntry,
     ClaimableBalanceEntry,
     LiquidityPoolEntry,
-    LedgerEntryType
+    LedgerEntryType,
+    ExpirationEntry
   }
 
   @behaviour XDR.Declaration
@@ -29,7 +30,8 @@ defmodule StellarBase.XDR.LedgerEntryData do
     LIQUIDITY_POOL: LiquidityPool,
     CONTRACT_DATA: ContractDataEntry,
     CONTRACT_CODE: ContractCodeEntry,
-    CONFIG_SETTING: ConfigSettingEntry
+    CONFIG_SETTING: ConfigSettingEntry,
+    EXPIRATION: ExpirationEntry
   ]
 
   @type entry ::
@@ -42,6 +44,7 @@ defmodule StellarBase.XDR.LedgerEntryData do
           | ContractDataEntry.t()
           | ContractCodeEntry.t()
           | ConfigSettingEntry.t()
+          | ExpirationEntry.t()
 
   @type t :: %__MODULE__{entry: entry(), type: LedgerEntryType.t()}
 

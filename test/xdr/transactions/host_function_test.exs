@@ -2,25 +2,26 @@ defmodule StellarBase.XDR.Operations.HostFunctionTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
+    AccountID,
     ContractIDPreimage,
     ContractIDPreimageFromAddress,
     ContractIDPreimageType,
     CreateContractArgs,
     ContractExecutable,
     ContractExecutableType,
-    SCAddress,
-    SCAddressType,
-    SCVal,
-    SCValType,
-    SCVec,
-    Int64,
     Hash,
     HostFunctionType,
     HostFunction,
     Int64,
+    InvokeContractArgs,
+    SCAddress,
+    SCAddressType,
+    SCSymbol,
     SCVal,
+    SCValList,
     SCValType,
-    SCVec,
+    PublicKey,
+    PublicKeyType,
     UInt256
   }
 
@@ -32,9 +33,25 @@ defmodule StellarBase.XDR.Operations.HostFunctionTest do
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       sc_vals = [scval1, scval2]
-      sc_vec = SCVec.new(sc_vals)
+
+      pk_type = PublicKeyType.new(:PUBLIC_KEY_TYPE_ED25519)
+
+      account_id =
+        "GBZNLMUQMIN3VGUJISKZU7GNY3O3XLMYEHJCKCSMDHKLGSMKALRXOEZD"
+        |> StrKey.decode!(:ed25519_public_key)
+        |> UInt256.new()
+        |> PublicKey.new(pk_type)
+        |> AccountID.new()
+
+      sc_address_type = SCAddressType.new(:SC_ADDRESS_TYPE_ACCOUNT)
+
+      contract_address = SCAddress.new(account_id, sc_address_type)
+      function_name = SCSymbol.new("hello")
+      args = SCValList.new(sc_vals)
+      invoke_contract_args = InvokeContractArgs.new(contract_address, function_name, args)
+
       host_function_type = HostFunctionType.new()
-      host_function = HostFunction.new(sc_vec, host_function_type)
+      host_function = HostFunction.new(invoke_contract_args, host_function_type)
 
       host_function_create_type = HostFunctionType.new(:HOST_FUNCTION_TYPE_CREATE_CONTRACT)
 
@@ -74,8 +91,10 @@ defmodule StellarBase.XDR.Operations.HostFunctionTest do
         host_function_type: host_function_type,
         host_function: host_function,
         binary:
-          <<0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0,
-            0, 0, 2>>,
+          <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 213, 178, 144, 98, 27, 186, 154, 137, 68,
+            149, 154, 124, 205, 198, 221, 187, 173, 152, 33, 210, 37, 10, 76, 25, 212, 179, 73,
+            138, 2, 227, 119, 0, 0, 0, 5, 104, 101, 108, 108, 111, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+            6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2>>,
         create_contact_binary:
           <<0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 67, 65, 87, 73, 73, 90, 80, 88, 78, 82, 89, 55,
             88, 51, 70, 75, 70, 79, 52, 67, 87, 74, 84, 53, 68, 81, 79, 83, 69, 88, 81, 75, 146,

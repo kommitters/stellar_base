@@ -15,7 +15,7 @@ defmodule StellarBase.XDR.SorobanTransactionMetaTest do
     OptionalHash,
     SCVal,
     SCValType,
-    SCVec,
+    SCValList,
     SorobanTransactionMeta,
     Void
   }
@@ -33,7 +33,7 @@ defmodule StellarBase.XDR.SorobanTransactionMetaTest do
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       scval2 = SCVal.new(Int64.new(2), SCValType.new(:SCV_I64))
       sc_vals = [scval1, scval2]
-      topics = SCVec.new(sc_vals)
+      topics = SCValList.new(sc_vals)
       data = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
       contract_event_v0 = ContractEventV0.new(topics, data)
       body = ContractEventBody.new(contract_event_v0, 0)
