@@ -1,21 +1,21 @@
-defmodule StellarBase.XDR.StateExpirationSettingsTest do
+defmodule StellarBase.XDR.StateArchivalSettingsTest do
   use ExUnit.Case
 
   alias StellarBase.XDR.{
-    StateExpirationSettings,
+    StateArchivalSettings,
     UInt32,
     Int64,
     UInt64
   }
 
   setup do
-    max_entry_expiration = UInt32.new(100)
-    min_temp_entry_expiration = UInt32.new(50)
-    min_persistent_entry_expiration = UInt32.new(60)
+    max_entry_ttl = UInt32.new(100)
+    min_temporary_ttl = UInt32.new(50)
+    min_persistent_ttl = UInt32.new(60)
     starting_eviction_scan_level = UInt32.new(5)
     persistent_rent_rate_denominator = Int64.new(100)
     temp_rent_rate_denominator = Int64.new(200)
-    max_entries_to_expire = UInt32.new(500)
+    max_entries_to_archive = UInt32.new(500)
     bucket_list_size_window_sample_size = UInt32.new(1000)
     eviction_scan_size = UInt64.new(5000)
 
@@ -24,26 +24,26 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
         200, 0, 0, 1, 244, 0, 0, 3, 232, 0, 0, 0, 0, 0, 0, 19, 136, 0, 0, 0, 5>>
 
     state_expiration_settings =
-      StateExpirationSettings.new(
-        max_entry_expiration,
-        min_temp_entry_expiration,
-        min_persistent_entry_expiration,
+      StateArchivalSettings.new(
+        max_entry_ttl,
+        min_temporary_ttl,
+        min_persistent_ttl,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
-        max_entries_to_expire,
+        max_entries_to_archive,
         bucket_list_size_window_sample_size,
         eviction_scan_size,
         starting_eviction_scan_level
       )
 
     %{
-      max_entry_expiration: max_entry_expiration,
-      min_temp_entry_expiration: min_temp_entry_expiration,
-      min_persistent_entry_expiration: min_persistent_entry_expiration,
+      max_entry_ttl: max_entry_ttl,
+      min_temporary_ttl: min_temporary_ttl,
+      min_persistent_ttl: min_persistent_ttl,
       starting_eviction_scan_level: starting_eviction_scan_level,
       persistent_rent_rate_denominator: persistent_rent_rate_denominator,
       temp_rent_rate_denominator: temp_rent_rate_denominator,
-      max_entries_to_expire: max_entries_to_expire,
+      max_entries_to_archive: max_entries_to_archive,
       bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
       eviction_scan_size: eviction_scan_size,
       binary: binary,
@@ -52,34 +52,34 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
   end
 
   test "new/1", %{
-    max_entry_expiration: max_entry_expiration,
-    min_temp_entry_expiration: min_temp_entry_expiration,
-    min_persistent_entry_expiration: min_persistent_entry_expiration,
+    max_entry_ttl: max_entry_ttl,
+    min_temporary_ttl: min_temporary_ttl,
+    min_persistent_ttl: min_persistent_ttl,
     starting_eviction_scan_level: starting_eviction_scan_level,
     persistent_rent_rate_denominator: persistent_rent_rate_denominator,
     temp_rent_rate_denominator: temp_rent_rate_denominator,
-    max_entries_to_expire: max_entries_to_expire,
+    max_entries_to_archive: max_entries_to_archive,
     bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
     eviction_scan_size: eviction_scan_size
   } do
-    %StateExpirationSettings{
-      max_entry_expiration: ^max_entry_expiration,
-      min_temp_entry_expiration: ^min_temp_entry_expiration,
-      min_persistent_entry_expiration: ^min_persistent_entry_expiration,
+    %StateArchivalSettings{
+      max_entry_ttl: ^max_entry_ttl,
+      min_temporary_ttl: ^min_temporary_ttl,
+      min_persistent_ttl: ^min_persistent_ttl,
       persistent_rent_rate_denominator: ^persistent_rent_rate_denominator,
       temp_rent_rate_denominator: ^temp_rent_rate_denominator,
-      max_entries_to_expire: ^max_entries_to_expire,
+      max_entries_to_archive: ^max_entries_to_archive,
       bucket_list_size_window_sample_size: ^bucket_list_size_window_sample_size,
       eviction_scan_size: ^eviction_scan_size,
       starting_eviction_scan_level: ^starting_eviction_scan_level
     } =
-      StateExpirationSettings.new(
-        max_entry_expiration,
-        min_temp_entry_expiration,
-        min_persistent_entry_expiration,
+      StateArchivalSettings.new(
+        max_entry_ttl,
+        min_temporary_ttl,
+        min_persistent_ttl,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
-        max_entries_to_expire,
+        max_entries_to_archive,
         bucket_list_size_window_sample_size,
         eviction_scan_size,
         starting_eviction_scan_level
@@ -88,67 +88,67 @@ defmodule StellarBase.XDR.StateExpirationSettingsTest do
 
   test "encode_xdr/1", %{
     binary: binary,
-    max_entry_expiration: max_entry_expiration,
-    min_temp_entry_expiration: min_temp_entry_expiration,
-    min_persistent_entry_expiration: min_persistent_entry_expiration,
+    max_entry_ttl: max_entry_ttl,
+    min_temporary_ttl: min_temporary_ttl,
+    min_persistent_ttl: min_persistent_ttl,
     starting_eviction_scan_level: starting_eviction_scan_level,
     persistent_rent_rate_denominator: persistent_rent_rate_denominator,
     temp_rent_rate_denominator: temp_rent_rate_denominator,
-    max_entries_to_expire: max_entries_to_expire,
+    max_entries_to_archive: max_entries_to_archive,
     bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
     eviction_scan_size: eviction_scan_size
   } do
     {:ok, ^binary} =
-      StateExpirationSettings.new(
-        max_entry_expiration,
-        min_temp_entry_expiration,
-        min_persistent_entry_expiration,
+      StateArchivalSettings.new(
+        max_entry_ttl,
+        min_temporary_ttl,
+        min_persistent_ttl,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
-        max_entries_to_expire,
+        max_entries_to_archive,
         bucket_list_size_window_sample_size,
         eviction_scan_size,
         starting_eviction_scan_level
       )
-      |> StateExpirationSettings.encode_xdr()
+      |> StateArchivalSettings.encode_xdr()
   end
 
   test "encode_xdr!/1", %{
     binary: binary,
-    max_entry_expiration: max_entry_expiration,
-    min_temp_entry_expiration: min_temp_entry_expiration,
-    min_persistent_entry_expiration: min_persistent_entry_expiration,
+    max_entry_ttl: max_entry_ttl,
+    min_temporary_ttl: min_temporary_ttl,
+    min_persistent_ttl: min_persistent_ttl,
     starting_eviction_scan_level: starting_eviction_scan_level,
     persistent_rent_rate_denominator: persistent_rent_rate_denominator,
     temp_rent_rate_denominator: temp_rent_rate_denominator,
-    max_entries_to_expire: max_entries_to_expire,
+    max_entries_to_archive: max_entries_to_archive,
     bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
     eviction_scan_size: eviction_scan_size
   } do
     ^binary =
-      StateExpirationSettings.new(
-        max_entry_expiration,
-        min_temp_entry_expiration,
-        min_persistent_entry_expiration,
+      StateArchivalSettings.new(
+        max_entry_ttl,
+        min_temporary_ttl,
+        min_persistent_ttl,
         persistent_rent_rate_denominator,
         temp_rent_rate_denominator,
-        max_entries_to_expire,
+        max_entries_to_archive,
         bucket_list_size_window_sample_size,
         eviction_scan_size,
         starting_eviction_scan_level
       )
-      |> StateExpirationSettings.encode_xdr!()
+      |> StateArchivalSettings.encode_xdr!()
   end
 
   test "decode_xdr/2", %{binary: binary, state_expiration_settings: state_expiration_settings} do
-    {:ok, {^state_expiration_settings, ""}} = StateExpirationSettings.decode_xdr(binary)
+    {:ok, {^state_expiration_settings, ""}} = StateArchivalSettings.decode_xdr(binary)
   end
 
   test "decode_xdr/2 with an invalid binary" do
-    {:error, :not_binary} = StateExpirationSettings.decode_xdr(123)
+    {:error, :not_binary} = StateArchivalSettings.decode_xdr(123)
   end
 
   test "decode_xdr!/2", %{binary: binary, state_expiration_settings: state_expiration_settings} do
-    {^state_expiration_settings, ^binary} = StateExpirationSettings.decode_xdr!(binary <> binary)
+    {^state_expiration_settings, ^binary} = StateArchivalSettings.decode_xdr!(binary <> binary)
   end
 end
