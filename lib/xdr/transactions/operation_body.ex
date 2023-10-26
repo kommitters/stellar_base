@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.OperationBody do
   alias StellarBase.XDR.Operations.{
     AllowTrust,
     BeginSponsoringFutureReserves,
-    BumpFootprintExpiration,
+    ExtendFootprintTTL,
     BumpSequence,
     ChangeTrust,
     Clawback,
@@ -69,7 +69,7 @@ defmodule StellarBase.XDR.OperationBody do
     LIQUIDITY_POOL_DEPOSIT: LiquidityPoolDeposit,
     LIQUIDITY_POOL_WITHDRAW: LiquidityPoolWithdraw,
     INVOKE_HOST_FUNCTION: InvokeHostFunction,
-    BUMP_FOOTPRINT_EXPIRATION: BumpFootprintExpiration,
+    EXTEND_FOOTPRINT_TTL: ExtendFootprintTTL,
     RESTORE_FOOTPRINT: RestoreFootprint
   ]
 
@@ -98,7 +98,7 @@ defmodule StellarBase.XDR.OperationBody do
           | LiquidityPoolDeposit.t()
           | LiquidityPoolWithdraw.t()
           | InvokeHostFunction.t()
-          | BumpFootprintExpiration.t()
+          | ExtendFootprintTTL.t()
           | RestoreFootprint.t()
 
   @type t :: %__MODULE__{value: value(), type: OperationType.t()}
