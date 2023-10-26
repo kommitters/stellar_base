@@ -19,43 +19,43 @@ defmodule StellarBase.XDR.SorobanTransactionData do
   @struct_spec XDR.Struct.new(
                  ext: ExtensionPoint,
                  resources: SorobanResources,
-                 refundable_fee: Int64
+                 resource_fee: Int64
                )
 
   @type ext_type :: ExtensionPoint.t()
   @type resources_type :: SorobanResources.t()
-  @type refundable_fee_type :: Int64.t()
+  @type resource_fee_type :: Int64.t()
 
   @type t :: %__MODULE__{
           ext: ext_type(),
           resources: resources_type(),
-          refundable_fee: refundable_fee_type()
+          resource_fee: resource_fee_type()
         }
 
-  defstruct [:ext, :resources, :refundable_fee]
+  defstruct [:ext, :resources, :resource_fee]
 
   @spec new(
           ext :: ext_type(),
           resources :: resources_type(),
-          refundable_fee :: refundable_fee_type()
+          resource_fee :: resource_fee_type()
         ) :: t()
   def new(
         %ExtensionPoint{} = ext,
         %SorobanResources{} = resources,
-        %Int64{} = refundable_fee
+        %Int64{} = resource_fee
       ),
-      do: %__MODULE__{ext: ext, resources: resources, refundable_fee: refundable_fee}
+      do: %__MODULE__{ext: ext, resources: resources, resource_fee: resource_fee}
 
   @impl true
-  def encode_xdr(%__MODULE__{ext: ext, resources: resources, refundable_fee: refundable_fee}) do
-    [ext: ext, resources: resources, refundable_fee: refundable_fee]
+  def encode_xdr(%__MODULE__{ext: ext, resources: resources, resource_fee: resource_fee}) do
+    [ext: ext, resources: resources, resource_fee: resource_fee]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr()
   end
 
   @impl true
-  def encode_xdr!(%__MODULE__{ext: ext, resources: resources, refundable_fee: refundable_fee}) do
-    [ext: ext, resources: resources, refundable_fee: refundable_fee]
+  def encode_xdr!(%__MODULE__{ext: ext, resources: resources, resource_fee: resource_fee}) do
+    [ext: ext, resources: resources, resource_fee: resource_fee]
     |> XDR.Struct.new()
     |> XDR.Struct.encode_xdr!()
   end
@@ -66,9 +66,9 @@ defmodule StellarBase.XDR.SorobanTransactionData do
   def decode_xdr(bytes, struct) do
     case XDR.Struct.decode_xdr(bytes, struct) do
       {:ok,
-       {%XDR.Struct{components: [ext: ext, resources: resources, refundable_fee: refundable_fee]},
+       {%XDR.Struct{components: [ext: ext, resources: resources, resource_fee: resource_fee]},
         rest}} ->
-        {:ok, {new(ext, resources, refundable_fee), rest}}
+        {:ok, {new(ext, resources, resource_fee), rest}}
 
       error ->
         error
@@ -79,9 +79,9 @@ defmodule StellarBase.XDR.SorobanTransactionData do
   def decode_xdr!(bytes, struct \\ @struct_spec)
 
   def decode_xdr!(bytes, struct) do
-    {%XDR.Struct{components: [ext: ext, resources: resources, refundable_fee: refundable_fee]},
-     rest} = XDR.Struct.decode_xdr!(bytes, struct)
+    {%XDR.Struct{components: [ext: ext, resources: resources, resource_fee: resource_fee]}, rest} =
+      XDR.Struct.decode_xdr!(bytes, struct)
 
-    {new(ext, resources, refundable_fee), rest}
+    {new(ext, resources, resource_fee), rest}
   end
 end

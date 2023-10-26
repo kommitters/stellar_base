@@ -12,7 +12,8 @@ defmodule StellarBase.XDR.LedgerEntryTypeTest do
     :LIQUIDITY_POOL,
     :CONTRACT_DATA,
     :CONTRACT_CODE,
-    :CONFIG_SETTING
+    :CONFIG_SETTING,
+    :TTL
   ]
 
   @binaries [
@@ -23,7 +24,9 @@ defmodule StellarBase.XDR.LedgerEntryTypeTest do
     <<0, 0, 0, 4>>,
     <<0, 0, 0, 5>>,
     <<0, 0, 0, 6>>,
-    <<0, 0, 0, 7>>
+    <<0, 0, 0, 7>>,
+    <<0, 0, 0, 8>>,
+    <<0, 0, 0, 9>>
   ]
 
   describe "LedgerEntryType" do
