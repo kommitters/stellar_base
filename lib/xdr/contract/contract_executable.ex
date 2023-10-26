@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.ContractExecutable do
 
   @arms [
     CONTRACT_EXECUTABLE_WASM: Hash,
-    CONTRACT_EXECUTABLE_TOKEN: Void
+    CONTRACT_EXECUTABLE_STELLAR_ASSET: Void
   ]
 
   @type value ::

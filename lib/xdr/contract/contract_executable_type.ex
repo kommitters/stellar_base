@@ -12,7 +12,7 @@ defmodule StellarBase.XDR.ContractExecutableType do
 
   @declarations [
     CONTRACT_EXECUTABLE_WASM: 0,
-    CONTRACT_EXECUTABLE_TOKEN: 1
+    CONTRACT_EXECUTABLE_STELLAR_ASSET: 1
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}
