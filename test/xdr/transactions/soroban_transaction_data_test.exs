@@ -18,7 +18,7 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
 
   describe "SorobanResources" do
     setup do
-      refundable_fee = Int64.new(10)
+      resource_fee = Int64.new(10)
       ext = ExtensionPoint.new(Void.new(), 0)
       hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
       type = LedgerEntryType.new(:CONTRACT_CODE)
@@ -40,11 +40,11 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
           write_bytes
         )
 
-      soroban_transaction_data = SorobanTransactionData.new(ext, resources, refundable_fee)
+      soroban_transaction_data = SorobanTransactionData.new(ext, resources, resource_fee)
 
       %{
         resources: resources,
-        refundable_fee: refundable_fee,
+        resource_fee: resource_fee,
         ext: ext,
         soroban_transaction_data: soroban_transaction_data,
         binary:
@@ -58,14 +58,14 @@ defmodule StellarBase.XDR.SorobanTransactionDataTest do
 
     test "new/1", %{
       resources: resources,
-      refundable_fee: refundable_fee,
+      resource_fee: resource_fee,
       ext: ext
     } do
       %SorobanTransactionData{
         ext: ^ext,
         resources: ^resources,
-        refundable_fee: ^refundable_fee
-      } = SorobanTransactionData.new(ext, resources, refundable_fee)
+        resource_fee: ^resource_fee
+      } = SorobanTransactionData.new(ext, resources, resource_fee)
     end
 
     test "encode_xdr/1", %{soroban_transaction_data: soroban_transaction_data, binary: binary} do

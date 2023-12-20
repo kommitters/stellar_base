@@ -6,13 +6,13 @@ defmodule StellarBase.XDR.ContractExecutableTypeTest do
   setup do
     %{
       wasm: :CONTRACT_EXECUTABLE_WASM,
-      token: :CONTRACT_EXECUTABLE_TOKEN,
+      token: :CONTRACT_EXECUTABLE_STELLAR_ASSET,
       binary_wasm: <<0, 0, 0, 0>>,
       binary_token: <<0, 0, 0, 1>>,
       wasm_identifier: :CONTRACT_EXECUTABLE_WASM,
-      token_identifier: :CONTRACT_EXECUTABLE_TOKEN,
+      token_identifier: :CONTRACT_EXECUTABLE_STELLAR_ASSET,
       wasm_type: %ContractExecutableType{identifier: :CONTRACT_EXECUTABLE_WASM},
-      token_type: %ContractExecutableType{identifier: :CONTRACT_EXECUTABLE_TOKEN}
+      token_type: %ContractExecutableType{identifier: :CONTRACT_EXECUTABLE_STELLAR_ASSET}
     }
   end
 
@@ -23,7 +23,7 @@ defmodule StellarBase.XDR.ContractExecutableTypeTest do
 
   test "new/1 with token identifier", %{token_identifier: token_identifier} do
     %ContractExecutableType{identifier: ^token_identifier} =
-      ContractExecutableType.new(:CONTRACT_EXECUTABLE_TOKEN)
+      ContractExecutableType.new(:CONTRACT_EXECUTABLE_STELLAR_ASSET)
   end
 
   test "encode_xdr/1 with wasm identifier", %{binary_wasm: binary_wasm, wasm_type: wasm_type} do

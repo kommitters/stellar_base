@@ -5,33 +5,28 @@ defmodule StellarBase.XDR.ContractCostTypeTest do
 
   @codes [
     :WasmInsnExec,
-    :WasmMemAlloc,
-    :HostMemAlloc,
-    :HostMemCpy,
-    :HostMemCmp,
+    :MemAlloc,
+    :MemCpy,
+    :MemCmp,
     :DispatchHostFunction,
     :VisitObject,
     :ValSer,
     :ValDeser,
     :ComputeSha256Hash,
     :ComputeEd25519PubKey,
-    :MapEntry,
-    :VecEntry,
     :VerifyEd25519Sig,
-    :VmMemRead,
-    :VmMemWrite,
     :VmInstantiation,
     :VmCachedInstantiation,
     :InvokeVmFunction,
     :ComputeKeccak256Hash,
-    :ComputeEcdsaSecp256k1Key,
     :ComputeEcdsaSecp256k1Sig,
     :RecoverEcdsaSecp256k1Key,
     :Int256AddSub,
     :Int256Mul,
     :Int256Div,
     :Int256Pow,
-    :Int256Shift
+    :Int256Shift,
+    :ChaCha20DrawBytes
   ]
 
   @binaries [
@@ -57,12 +52,7 @@ defmodule StellarBase.XDR.ContractCostTypeTest do
     <<0, 0, 0, 19>>,
     <<0, 0, 0, 20>>,
     <<0, 0, 0, 21>>,
-    <<0, 0, 0, 22>>,
-    <<0, 0, 0, 23>>,
-    <<0, 0, 0, 24>>,
-    <<0, 0, 0, 25>>,
-    <<0, 0, 0, 26>>,
-    <<0, 0, 0, 27>>
+    <<0, 0, 0, 22>>
   ]
 
   describe "ContractCostType" do

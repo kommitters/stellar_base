@@ -19,7 +19,7 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     ConfigSettingContractEventsV0,
     ConfigSettingContractBandwidthV0,
     ContractCostParams,
-    StateExpirationSettings,
+    StateArchivalSettings,
     ConfigSettingContractExecutionLanesV0,
     UInt64List,
     EvictionIterator
@@ -36,7 +36,7 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     CONFIG_SETTING_CONTRACT_COST_PARAMS_MEMORY_BYTES: ContractCostParams,
     CONFIG_SETTING_CONTRACT_DATA_KEY_SIZE_BYTES: UInt32,
     CONFIG_SETTING_CONTRACT_DATA_ENTRY_SIZE_BYTES: UInt32,
-    CONFIG_SETTING_STATE_EXPIRATION: StateExpirationSettings,
+    CONFIG_SETTING_STATE_ARCHIVAL: StateArchivalSettings,
     CONFIG_SETTING_CONTRACT_EXECUTION_LANES: ConfigSettingContractExecutionLanesV0,
     CONFIG_SETTING_BUCKETLIST_SIZE_WINDOW: UInt64List,
     CONFIG_SETTING_EVICTION_ITERATOR: EvictionIterator
@@ -50,7 +50,7 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
           | ConfigSettingContractEventsV0.t()
           | ConfigSettingContractBandwidthV0.t()
           | ContractCostParams.t()
-          | StateExpirationSettings.t()
+          | StateArchivalSettings.t()
           | ConfigSettingContractExecutionLanesV0.t()
           | UInt64List.t()
           | EvictionIterator.t()

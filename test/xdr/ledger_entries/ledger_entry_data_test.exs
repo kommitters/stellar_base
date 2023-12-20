@@ -218,7 +218,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
 
   test "new/1", %{discriminants: discriminants} do
     for %{type: type, ledger_entry_data: ledger_entry_data} <- discriminants do
-      %LedgerEntryData{entry: ^ledger_entry_data, type: ^type} =
+      %LedgerEntryData{value: ^ledger_entry_data, type: ^type} =
         LedgerEntryData.new(ledger_entry_data, type)
     end
   end

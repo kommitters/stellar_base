@@ -21,7 +21,7 @@ defmodule StellarBase.XDR.ContractExecutableTest do
     wasm_value = Hash.new(binary_wasm)
     token_value = Void.new()
     wasm_type = %ContractExecutableType{identifier: :CONTRACT_EXECUTABLE_WASM}
-    token_type = %ContractExecutableType{identifier: :CONTRACT_EXECUTABLE_TOKEN}
+    token_type = %ContractExecutableType{identifier: :CONTRACT_EXECUTABLE_STELLAR_ASSET}
     contract_executable_wasm = ContractExecutable.new(wasm_value, wasm_type)
     contract_executable_token = ContractExecutable.new(token_value, token_type)
 
