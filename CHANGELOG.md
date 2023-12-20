@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.0 (20.12.2023)
+
+* [Support stable Protocol 20 release](https://github.com/kommitters/stellar_base/issues/295).
+
 ## 0.14.0 (20.09.2023)
 
 * [Soroban Preview 11 support](https://github.com/kommitters/stellar_base/issues/290).
