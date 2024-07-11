@@ -11,20 +11,20 @@ defmodule StellarBase.XDR.SorobanTransactionMeta do
   @behaviour XDR.Declaration
 
   alias StellarBase.XDR.{
-    ExtensionPoint,
+    SorobanTransactionMetaExt,
     ContractEventList,
     SCVal,
     DiagnosticEventList
   }
 
   @struct_spec XDR.Struct.new(
-                 ext: ExtensionPoint,
+                 ext: SorobanTransactionMetaExt,
                  events: ContractEventList,
                  return_value: SCVal,
                  diagnostic_events: DiagnosticEventList
                )
 
-  @type ext_type :: ExtensionPoint.t()
+  @type ext_type :: SorobanTransactionMetaExt.t()
   @type events_type :: ContractEventList.t()
   @type return_value_type :: SCVal.t()
   @type diagnostic_events_type :: DiagnosticEventList.t()
@@ -45,7 +45,7 @@ defmodule StellarBase.XDR.SorobanTransactionMeta do
           diagnostic_events :: diagnostic_events_type()
         ) :: t()
   def new(
-        %ExtensionPoint{} = ext,
+        %SorobanTransactionMetaExt{} = ext,
         %ContractEventList{} = events,
         %SCVal{} = return_value,
         %DiagnosticEventList{} = diagnostic_events
