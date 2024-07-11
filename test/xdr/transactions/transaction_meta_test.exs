@@ -33,6 +33,7 @@ defmodule StellarBase.XDR.TransactionMetaTest do
     SCValType,
     SCValList,
     SorobanTransactionMeta,
+    SorobanTransactionMetaExt,
     TransactionMeta,
     TransactionMetaV3,
     UInt32,
@@ -148,6 +149,7 @@ defmodule StellarBase.XDR.TransactionMetaTest do
     extension_point_type = 0
     void = Void.new()
     ext = ExtensionPoint.new(void, extension_point_type)
+    soroban_tx_ext = SorobanTransactionMetaExt.new(void, extension_point_type)
 
     type = ContractEventType.new()
 
@@ -168,7 +170,7 @@ defmodule StellarBase.XDR.TransactionMetaTest do
     return_value = SCVal.new(Int64.new(100), SCValType.new(:SCV_I64))
 
     soroban_transaction_meta =
-      SorobanTransactionMeta.new(ext, events, return_value, diagnostic_events)
+      SorobanTransactionMeta.new(soroban_tx_ext, events, return_value, diagnostic_events)
 
     OptionalSorobanTransactionMeta.new(soroban_transaction_meta)
   end

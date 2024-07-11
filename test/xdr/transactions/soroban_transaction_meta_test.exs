@@ -17,6 +17,7 @@ defmodule StellarBase.XDR.SorobanTransactionMetaTest do
     SCValType,
     SCValList,
     SorobanTransactionMeta,
+    SorobanTransactionMetaExt,
     Void
   }
 
@@ -27,7 +28,7 @@ defmodule StellarBase.XDR.SorobanTransactionMetaTest do
       extension_point_type = 0
       void = Void.new()
       ext = ExtensionPoint.new(void, extension_point_type)
-
+      soroban_tx_ext = SorobanTransactionMetaExt.new(void, extension_point_type)
       type = ContractEventType.new()
 
       scval1 = SCVal.new(Int64.new(3), SCValType.new(:SCV_I64))
@@ -48,11 +49,12 @@ defmodule StellarBase.XDR.SorobanTransactionMetaTest do
 
       %{
         ext: ext,
+        soroban_tx_ext: soroban_tx_ext,
         events: events,
         return_value: return_value,
         diagnostic_events: diagnostic_events,
         soroban_transaction_meta:
-          SorobanTransactionMeta.new(ext, events, return_value, diagnostic_events),
+          SorobanTransactionMeta.new(soroban_tx_ext, events, return_value, diagnostic_events),
         binary:
           <<0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
             0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0,
@@ -63,19 +65,19 @@ defmodule StellarBase.XDR.SorobanTransactionMetaTest do
     end
 
     test "new/1", %{
-      ext: ext,
+      soroban_tx_ext: soroban_tx_ext,
       events: events,
       return_value: return_value,
       diagnostic_events: diagnostic_events
     } do
       %SorobanTransactionMeta{
-        ext: ^ext,
+        ext: ^soroban_tx_ext,
         events: ^events,
         return_value: ^return_value,
         diagnostic_events: ^diagnostic_events
       } =
         SorobanTransactionMeta.new(
-          ext,
+          soroban_tx_ext,
           events,
           return_value,
           diagnostic_events
