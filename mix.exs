@@ -39,10 +39,10 @@ defmodule StellarBase.MixProject do
       {:elixir_xdr, "~> 0.3"},
       {:crc, "~> 0.10.0"},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.17", only: :test, runtime: false},
+      {:excoveralls, "~> 0.18", only: :test, runtime: false},
       {:castore, "~> 1.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.30", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false}
     ]
   end
 
