@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.15.1 (12.07.2024)
+
+* [Update soroban transaction meta type](https://github.com/kommitters/stellar_base/issues/302).
+* Update dependencies.
+  | Package | Type | Update | Change |
+  |---|---|---|---|
+  | [actions/cache](https://togithub.com/actions/cache) | action | major | `v3.3.1` -> `v4.0.2` |
+  | [actions/checkout](https://togithub.com/actions/checkout) | action | minor | `v4.0.0` -> `v4.1.7` |
+  | [actions/upload-artifact](https://togithub.com/actions/upload-artifact) | action | major | `v3.1.3` -> `v4.3.4` |
+  | [erlef/setup-elixir](https://togithub.com/erlef/setup-elixir) | action | minor | `v1.16.0` -> `v1.18.0` |
+  | [ex_doc](https://hex.pm/packages/ex_doc) |  | minor | `~> 0.30` -> `~> 0.34` |
+  | [excoveralls](https://hex.pm/packages/excoveralls) |  | minor | `~> 0.17` -> `~> 0.18.1` |
+  | [github/codeql-action](https://togithub.com/github/codeql-action) | action | major | `v2.21.5` -> `v3.25.12` |
+  | [ossf/scorecard-action](https://togithub.com/ossf/scorecard-action) | action | minor | `v2.2.0` -> `v2.3.3` |
+  | [step-security/harden-runner](https://togithub.com/step-security/harden-runner) | action | minor | `v2.5.1` -> `v2.8.1` |
+
 ## 0.15.0 (20.12.2023)
 
 * [Support stable Protocol 20 release](https://github.com/kommitters/stellar_base/issues/295).
