@@ -77,7 +77,7 @@ defmodule StellarBase.XDR.TransactionMetaV1Test do
     ledger_entry_changes: ledger_entry_changes,
     operation_meta_list: operation_meta_list
   } do
-    assert %StellarBase.XDR.TransactionMetaV1{
+    assert %TransactionMetaV1{
              tx_changes: ^ledger_entry_changes,
              operations: ^operation_meta_list
            } = TransactionMetaV1.new(ledger_entry_changes, operation_meta_list)
