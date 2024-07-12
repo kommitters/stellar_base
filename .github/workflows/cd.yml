@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         otp: ['23.3']
-        elixir: ['1.11']
+        elixir: ['1.13']
     env:
       HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
     steps:
