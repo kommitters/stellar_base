@@ -4,8 +4,7 @@ defmodule StellarBase.XDR.StateArchivalSettingsTest do
   alias StellarBase.XDR.{
     StateArchivalSettings,
     UInt32,
-    Int64,
-    UInt64
+    Int64
   }
 
   setup do
