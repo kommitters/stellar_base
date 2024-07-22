@@ -216,9 +216,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
          eviction_scan_size: eviction_scan_size,
          starting_eviction_scan_level: starting_eviction_scan_level
        ]
-     },
-     rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
     {new(
        max_entry_ttl,
