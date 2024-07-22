@@ -12,8 +12,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
 
   alias StellarBase.XDR.{
     UInt32,
-    Int64,
-    UInt64
+    Int64
   }
 
   @struct_spec XDR.Struct.new(
@@ -24,7 +23,8 @@ defmodule StellarBase.XDR.StateArchivalSettings do
                  temp_rent_rate_denominator: Int64,
                  max_entries_to_archive: UInt32,
                  bucket_list_size_window_sample_size: UInt32,
-                 eviction_scan_size: UInt64,
+                 bucket_list_window_sample_period: UInt32,
+                 eviction_scan_size: UInt32,
                  starting_eviction_scan_level: UInt32
                )
 
@@ -35,7 +35,8 @@ defmodule StellarBase.XDR.StateArchivalSettings do
   @type temp_rent_rate_denominator_type :: Int64.t()
   @type max_entries_to_archive_type :: UInt32.t()
   @type bucket_list_size_window_sample_size_type :: UInt32.t()
-  @type eviction_scan_size_type :: UInt64.t()
+  @type bucket_list_window_sample_period_type :: UInt32.t()
+  @type eviction_scan_size_type :: UInt32.t()
   @type starting_eviction_scan_level_type :: UInt32.t()
 
   @type t :: %__MODULE__{
@@ -46,6 +47,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
           temp_rent_rate_denominator: temp_rent_rate_denominator_type(),
           max_entries_to_archive: max_entries_to_archive_type(),
           bucket_list_size_window_sample_size: bucket_list_size_window_sample_size_type(),
+          bucket_list_window_sample_period: bucket_list_window_sample_period_type(),
           eviction_scan_size: eviction_scan_size_type(),
           starting_eviction_scan_level: starting_eviction_scan_level_type()
         }
@@ -58,6 +60,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
     :temp_rent_rate_denominator,
     :max_entries_to_archive,
     :bucket_list_size_window_sample_size,
+    :bucket_list_window_sample_period,
     :eviction_scan_size,
     :starting_eviction_scan_level
   ]
@@ -70,6 +73,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
           temp_rent_rate_denominator :: temp_rent_rate_denominator_type(),
           max_entries_to_archive :: max_entries_to_archive_type(),
           bucket_list_size_window_sample_size :: bucket_list_size_window_sample_size_type(),
+          bucket_list_window_sample_period :: bucket_list_window_sample_period_type(),
           eviction_scan_size :: eviction_scan_size_type(),
           starting_eviction_scan_level :: starting_eviction_scan_level_type()
         ) :: t()
@@ -81,7 +85,8 @@ defmodule StellarBase.XDR.StateArchivalSettings do
         %Int64{} = temp_rent_rate_denominator,
         %UInt32{} = max_entries_to_archive,
         %UInt32{} = bucket_list_size_window_sample_size,
-        %UInt64{} = eviction_scan_size,
+        %UInt32{} = bucket_list_window_sample_period,
+        %UInt32{} = eviction_scan_size,
         %UInt32{} = starting_eviction_scan_level
       ),
       do: %__MODULE__{
@@ -92,6 +97,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
         temp_rent_rate_denominator: temp_rent_rate_denominator,
         max_entries_to_archive: max_entries_to_archive,
         bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+        bucket_list_window_sample_period: bucket_list_window_sample_period,
         eviction_scan_size: eviction_scan_size,
         starting_eviction_scan_level: starting_eviction_scan_level
       }
@@ -105,6 +111,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
         temp_rent_rate_denominator: temp_rent_rate_denominator,
         max_entries_to_archive: max_entries_to_archive,
         bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+        bucket_list_window_sample_period: bucket_list_window_sample_period,
         eviction_scan_size: eviction_scan_size,
         starting_eviction_scan_level: starting_eviction_scan_level
       }) do
@@ -116,6 +123,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
       temp_rent_rate_denominator: temp_rent_rate_denominator,
       max_entries_to_archive: max_entries_to_archive,
       bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+      bucket_list_window_sample_period: bucket_list_window_sample_period,
       eviction_scan_size: eviction_scan_size,
       starting_eviction_scan_level: starting_eviction_scan_level
     ]
@@ -132,6 +140,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
         temp_rent_rate_denominator: temp_rent_rate_denominator,
         max_entries_to_archive: max_entries_to_archive,
         bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+        bucket_list_window_sample_period: bucket_list_window_sample_period,
         eviction_scan_size: eviction_scan_size,
         starting_eviction_scan_level: starting_eviction_scan_level
       }) do
@@ -143,6 +152,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
       temp_rent_rate_denominator: temp_rent_rate_denominator,
       max_entries_to_archive: max_entries_to_archive,
       bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+      bucket_list_window_sample_period: bucket_list_window_sample_period,
       eviction_scan_size: eviction_scan_size,
       starting_eviction_scan_level: starting_eviction_scan_level
     ]
@@ -165,6 +175,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
             temp_rent_rate_denominator: temp_rent_rate_denominator,
             max_entries_to_archive: max_entries_to_archive,
             bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+            bucket_list_window_sample_period: bucket_list_window_sample_period,
             eviction_scan_size: eviction_scan_size,
             starting_eviction_scan_level: starting_eviction_scan_level
           ]
@@ -178,6 +189,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
             temp_rent_rate_denominator,
             max_entries_to_archive,
             bucket_list_size_window_sample_size,
+            bucket_list_window_sample_period,
             eviction_scan_size,
             starting_eviction_scan_level
           ), rest}}
@@ -200,10 +212,13 @@ defmodule StellarBase.XDR.StateArchivalSettings do
          temp_rent_rate_denominator: temp_rent_rate_denominator,
          max_entries_to_archive: max_entries_to_archive,
          bucket_list_size_window_sample_size: bucket_list_size_window_sample_size,
+         bucket_list_window_sample_period: bucket_list_window_sample_period,
          eviction_scan_size: eviction_scan_size,
          starting_eviction_scan_level: starting_eviction_scan_level
        ]
-     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
+     },
+     rest} =
+      XDR.Struct.decode_xdr!(bytes, struct)
 
     {new(
        max_entry_ttl,
@@ -213,6 +228,7 @@ defmodule StellarBase.XDR.StateArchivalSettings do
        temp_rent_rate_denominator,
        max_entries_to_archive,
        bucket_list_size_window_sample_size,
+       bucket_list_window_sample_period,
        eviction_scan_size,
        starting_eviction_scan_level
      ), rest}
