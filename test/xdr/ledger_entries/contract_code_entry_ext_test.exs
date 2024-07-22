@@ -35,8 +35,7 @@ defmodule StellarBase.XDR.ContractCodeEntryExtTest do
     end
 
     test "encode_xdr/1", %{contract_code_entry_ext: contract_code_entry_ext, binary: binary} do
-      {:ok, ^binary} =
-        ContractCodeEntryExt.encode_xdr(contract_code_entry_ext)
+      {:ok, ^binary} = ContractCodeEntryExt.encode_xdr(contract_code_entry_ext)
     end
 
     test "encode_xdr!/1", %{
@@ -47,8 +46,7 @@ defmodule StellarBase.XDR.ContractCodeEntryExtTest do
     end
 
     test "decode_xdr/2", %{contract_code_entry_ext: contract_code_entry_ext, binary: binary} do
-      {:ok, {^contract_code_entry_ext, ""}} =
-        ContractCodeEntryExt.decode_xdr(binary)
+      {:ok, {^contract_code_entry_ext, ""}} = ContractCodeEntryExt.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
@@ -59,8 +57,7 @@ defmodule StellarBase.XDR.ContractCodeEntryExtTest do
       contract_code_entry_ext: contract_code_entry_ext,
       binary: binary
     } do
-      {^contract_code_entry_ext, ""} =
-        ContractCodeEntryExt.decode_xdr!(binary)
+      {^contract_code_entry_ext, ""} = ContractCodeEntryExt.decode_xdr!(binary)
     end
   end
 
@@ -109,8 +106,7 @@ defmodule StellarBase.XDR.ContractCodeEntryExtTest do
     end
 
     test "encode_xdr/1", %{contract_code_entry_ext: contract_code_entry_ext, binary: binary} do
-      {:ok, ^binary} =
-        ContractCodeEntryExt.encode_xdr(contract_code_entry_ext)
+      {:ok, ^binary} = ContractCodeEntryExt.encode_xdr(contract_code_entry_ext)
     end
 
     test "encode_xdr!/1", %{
@@ -121,8 +117,7 @@ defmodule StellarBase.XDR.ContractCodeEntryExtTest do
     end
 
     test "decode_xdr/2", %{contract_code_entry_ext: contract_code_entry_ext, binary: binary} do
-      {:ok, {^contract_code_entry_ext, ""}} =
-        ContractCodeEntryExt.decode_xdr(binary)
+      {:ok, {^contract_code_entry_ext, ""}} = ContractCodeEntryExt.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
@@ -133,8 +128,7 @@ defmodule StellarBase.XDR.ContractCodeEntryExtTest do
       contract_code_entry_ext: contract_code_entry_ext,
       binary: binary
     } do
-      {^contract_code_entry_ext, ""} =
-        ContractCodeEntryExt.decode_xdr!(binary)
+      {^contract_code_entry_ext, ""} = ContractCodeEntryExt.decode_xdr!(binary)
     end
   end
 end

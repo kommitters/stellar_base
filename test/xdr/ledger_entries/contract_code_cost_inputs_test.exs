@@ -83,8 +83,7 @@ defmodule StellarBase.XDR.ContractCodeCostInputsTest do
     end
 
     test "encode_xdr/1", %{cost_inputs: cost_inputs, binary: binary} do
-      {:ok, ^binary} =
-        ContractCodeCostInputs.encode_xdr(cost_inputs)
+      {:ok, ^binary} = ContractCodeCostInputs.encode_xdr(cost_inputs)
     end
 
     test "encode_xdr!/1", %{cost_inputs: cost_inputs, binary: binary} do
@@ -92,8 +91,7 @@ defmodule StellarBase.XDR.ContractCodeCostInputsTest do
     end
 
     test "decode_xdr/2", %{cost_inputs: cost_inputs, binary: binary} do
-      {:ok, {^cost_inputs, ""}} =
-        ContractCodeCostInputs.decode_xdr(binary)
+      {:ok, {^cost_inputs, ""}} = ContractCodeCostInputs.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do
@@ -101,8 +99,7 @@ defmodule StellarBase.XDR.ContractCodeCostInputsTest do
     end
 
     test "decode_xdr!/2", %{cost_inputs: cost_inputs, binary: binary} do
-      {^cost_inputs, ""} =
-        ContractCodeCostInputs.decode_xdr!(binary)
+      {^cost_inputs, ""} = ContractCodeCostInputs.decode_xdr!(binary)
     end
   end
 end

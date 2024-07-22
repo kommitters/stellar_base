@@ -52,8 +52,7 @@ defmodule StellarBase.XDR.ContractCodeEntryV1Test do
     end
 
     test "encode_xdr/1", %{contra_code_entry_v1: contra_code_entry_v1, binary: binary} do
-      {:ok, ^binary} =
-        ContractCodeEntryV1.encode_xdr(contra_code_entry_v1)
+      {:ok, ^binary} = ContractCodeEntryV1.encode_xdr(contra_code_entry_v1)
     end
 
     test "encode_xdr!/1", %{
@@ -64,8 +63,7 @@ defmodule StellarBase.XDR.ContractCodeEntryV1Test do
     end
 
     test "decode_xdr/2", %{contra_code_entry_v1: contra_code_entry_v1, binary: binary} do
-      {:ok, {^contra_code_entry_v1, ""}} =
-        ContractCodeEntryV1.decode_xdr(binary)
+      {:ok, {^contra_code_entry_v1, ""}} = ContractCodeEntryV1.decode_xdr(binary)
     end
 
     test "decode_xdr/2 with an invalid binary" do

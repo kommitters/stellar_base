@@ -230,9 +230,7 @@ defmodule StellarBase.XDR.ContractCodeCostInputs do
          n_exports: n_exports,
          n_data_segment_bytes: n_data_segment_bytes
        ]
-     },
-     rest} =
-      XDR.Struct.decode_xdr!(bytes, struct)
+     }, rest} = XDR.Struct.decode_xdr!(bytes, struct)
 
     {new(
        ext,
