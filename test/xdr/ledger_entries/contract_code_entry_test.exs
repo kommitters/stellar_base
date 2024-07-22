@@ -3,7 +3,7 @@ defmodule StellarBase.XDR.ContractCodeEntryTest do
 
   alias StellarBase.XDR.{
     ContractCodeEntry,
-    ExtensionPoint,
+    ContractCodeEntryExt,
     Hash,
     VariableOpaque,
     Void
@@ -11,8 +11,9 @@ defmodule StellarBase.XDR.ContractCodeEntryTest do
 
   describe "ContractCodeEntry" do
     setup do
-      ext = ExtensionPoint.new(Void.new(), 0)
+      ext = ContractCodeEntryExt.new(Void.new(), 0)
       hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
+
       code = VariableOpaque.new("GCIZ3GSM5")
 
       %{
@@ -27,7 +28,7 @@ defmodule StellarBase.XDR.ContractCodeEntryTest do
       }
     end
 
-    test "new/1", %{
+    test "new/3", %{
       ext: ext,
       hash: hash,
       code: code

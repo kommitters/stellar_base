@@ -4,47 +4,46 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
   import StellarBase.Test.Utils
 
   alias StellarBase.XDR.{
+    AccountEntry,
+    AccountEntryExt,
+    AlphaNum4,
     AssetCode4,
     AssetType,
-    AlphaNum4,
     ContractCodeEntry,
-    ContractCodeEntry,
+    ContractCodeEntryExt,
     ContractDataDurability,
-    TrustLineAsset,
-    Int64,
-    LedgerEntryType,
-    LedgerEntryData,
-    UInt256,
-    OptionalAccountID,
-    SignerKeyType,
-    UInt32,
-    SignerKey,
-    Signer,
-    SequenceNumber,
-    String32,
-    Thresholds,
-    Signers,
-    AccountEntryExt,
-    AccountEntry,
-    TrustLineEntryExt,
-    TrustLineEntry,
-    Price,
-    Void,
-    Int32,
-    OfferEntry,
-    String64,
-    DataValue,
+    ContractDataEntry,
     DataEntry,
+    DataValue,
     ExtensionPoint,
+    Ext,
     Hash,
-    VariableOpaque,
-    ContractCodeEntry,
+    Int32,
+    Int64,
+    LedgerEntryData,
+    LedgerEntryType,
+    OfferEntry,
+    OptionalAccountID,
+    Price,
     SCAddress,
     SCAddressType,
     SCVal,
     SCValType,
-    ContractDataEntry,
-    Ext
+    SequenceNumber,
+    Signer,
+    SignerKey,
+    SignerKeyType,
+    Signers,
+    String32,
+    String64,
+    Thresholds,
+    TrustLineAsset,
+    TrustLineEntry,
+    TrustLineEntryExt,
+    UInt256,
+    UInt32,
+    VariableOpaque,
+    Void
   }
 
   alias StellarBase.StrKey
@@ -120,12 +119,13 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
 
     ## ContractCodeEntry
 
-    extension_point = ExtensionPoint.new(Void.new(), 0)
+    extension_contract_code_entry = ContractCodeEntryExt.new(Void.new(), 0)
     hash = Hash.new("GCIZ3GSM5XL7OUS4UP64THMDZ7CZ3ZWN")
     code = VariableOpaque.new("GCIZ3GSM5")
 
     ## ContractDataEntry
 
+    extension_point = ExtensionPoint.new(Void.new(), 0)
     address = Hash.new("CAWIIZPXNRY7X3FKFO4CWJT5DQOSEXQK")
     durability = ContractDataDurability.new()
 
@@ -205,7 +205,7 @@ defmodule StellarBase.XDR.LedgerEntryDataTest do
       },
       %{
         type: LedgerEntryType.new(:CONTRACT_CODE),
-        ledger_entry_data: ContractCodeEntry.new(extension_point, hash, code),
+        ledger_entry_data: ContractCodeEntry.new(extension_contract_code_entry, hash, code),
         binary:
           <<0, 0, 0, 7, 0, 0, 0, 0, 71, 67, 73, 90, 51, 71, 83, 77, 53, 88, 76, 55, 79, 85, 83,
             52, 85, 80, 54, 52, 84, 72, 77, 68, 90, 55, 67, 90, 51, 90, 87, 78, 0, 0, 0, 9, 71,
