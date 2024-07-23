@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.16.0 (23.07.2024)
+
+* [Support stable Protocol 21 release](https://github.com/kommitters/stellar_base/issues/310).
+
+
 ## 0.15.1 (12.07.2024)
 
 * [Update soroban transaction meta type](https://github.com/kommitters/stellar_base/issues/302).
