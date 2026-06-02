@@ -11,11 +11,11 @@ permissions:  # added using https://github.com/step-security/secure-workflows
 jobs:
   publish:
     name: Publish Release to HEX PM
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        otp: ['23.3']
-        elixir: ['1.13']
+        otp: ['27.2']
+        elixir: ['1.17']
     env:
       HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
     steps:
@@ -35,7 +35,7 @@ jobs:
         with:
           otp-version: ${{ matrix.otp }}
           elixir-version: ${{ matrix.elixir }}
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+      - uses: actions/cache@v4
         with:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
