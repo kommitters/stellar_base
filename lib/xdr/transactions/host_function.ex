@@ -14,19 +14,22 @@ defmodule StellarBase.XDR.HostFunction do
     HostFunctionType,
     InvokeContractArgs,
     CreateContractArgs,
-    VariableOpaque
+    VariableOpaque,
+    CreateContractArgsV2
   }
 
   @arms [
     HOST_FUNCTION_TYPE_INVOKE_CONTRACT: InvokeContractArgs,
     HOST_FUNCTION_TYPE_CREATE_CONTRACT: CreateContractArgs,
-    HOST_FUNCTION_TYPE_UPLOAD_CONTRACT_WASM: VariableOpaque
+    HOST_FUNCTION_TYPE_UPLOAD_CONTRACT_WASM: VariableOpaque,
+    HOST_FUNCTION_TYPE_CREATE_CONTRACT_V2: CreateContractArgsV2
   ]
 
   @type value ::
           InvokeContractArgs.t()
           | CreateContractArgs.t()
           | VariableOpaque.t()
+          | CreateContractArgsV2.t()
 
   @type t :: %__MODULE__{value: value(), type: HostFunctionType.t()}
 

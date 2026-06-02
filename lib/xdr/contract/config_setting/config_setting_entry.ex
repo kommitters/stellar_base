@@ -22,7 +22,14 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     StateArchivalSettings,
     ConfigSettingContractExecutionLanesV0,
     UInt64List,
-    EvictionIterator
+    EvictionIterator,
+    ConfigSettingContractParallelComputeV0,
+    ConfigSettingContractLedgerCostExtV0,
+    ConfigSettingSCPTiming,
+    FrozenLedgerKeys,
+    FrozenLedgerKeysDelta,
+    FreezeBypassTxs,
+    FreezeBypassTxsDelta
   }
 
   @arms [
@@ -38,8 +45,15 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
     CONFIG_SETTING_CONTRACT_DATA_ENTRY_SIZE_BYTES: UInt32,
     CONFIG_SETTING_STATE_ARCHIVAL: StateArchivalSettings,
     CONFIG_SETTING_CONTRACT_EXECUTION_LANES: ConfigSettingContractExecutionLanesV0,
-    CONFIG_SETTING_BUCKETLIST_SIZE_WINDOW: UInt64List,
-    CONFIG_SETTING_EVICTION_ITERATOR: EvictionIterator
+    CONFIG_SETTING_LIVE_SOROBAN_STATE_SIZE_WINDOW: UInt64List,
+    CONFIG_SETTING_EVICTION_ITERATOR: EvictionIterator,
+    CONFIG_SETTING_CONTRACT_PARALLEL_COMPUTE_V0: ConfigSettingContractParallelComputeV0,
+    CONFIG_SETTING_CONTRACT_LEDGER_COST_EXT_V0: ConfigSettingContractLedgerCostExtV0,
+    CONFIG_SETTING_SCP_TIMING: ConfigSettingSCPTiming,
+    CONFIG_SETTING_FROZEN_LEDGER_KEYS: FrozenLedgerKeys,
+    CONFIG_SETTING_FROZEN_LEDGER_KEYS_DELTA: FrozenLedgerKeysDelta,
+    CONFIG_SETTING_FREEZE_BYPASS_TXS: FreezeBypassTxs,
+    CONFIG_SETTING_FREEZE_BYPASS_TXS_DELTA: FreezeBypassTxsDelta
   ]
 
   @type value ::
@@ -54,6 +68,13 @@ defmodule StellarBase.XDR.ConfigSettingEntry do
           | ConfigSettingContractExecutionLanesV0.t()
           | UInt64List.t()
           | EvictionIterator.t()
+          | ConfigSettingContractParallelComputeV0.t()
+          | ConfigSettingContractLedgerCostExtV0.t()
+          | ConfigSettingSCPTiming.t()
+          | FrozenLedgerKeys.t()
+          | FrozenLedgerKeysDelta.t()
+          | FreezeBypassTxs.t()
+          | FreezeBypassTxsDelta.t()
 
   @type t :: %__MODULE__{value: value(), type: ConfigSettingID.t()}
 

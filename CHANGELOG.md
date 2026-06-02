@@ -1,6 +1,15 @@
 # Changelog
 
-# 0.16.0 (23.07.2024)
+## 0.17.0 (02.06.2026)
+
+* Support Protocol 22, 23, and 26 features.
+* Implement `TransactionMetaV4` and related structures.
+* Implement Quorum Freeze (CAP-0077) and new config settings.
+* Implement Smart Contract Constructor support (CAP-0058).
+* Update `SCSpecType` with Muxed Address (CAP-0079).
+* Update `SCAddress` with Muxed Account, Claimable Balance, and Liquidity Pool (CAP-0079).
+
+## 0.16.0 (23.07.2024)
 
 * [Support stable Protocol 21 release](https://github.com/kommitters/stellar_base/issues/310).
 

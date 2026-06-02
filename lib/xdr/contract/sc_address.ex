@@ -3,16 +3,31 @@ defmodule StellarBase.XDR.SCAddress do
   Representation of Stellar `SCAddress` type.
   """
 
-  alias StellarBase.XDR.{AccountID, Hash, SCAddressType}
+  alias StellarBase.XDR.{
+    AccountID,
+    Hash,
+    SCAddressType,
+    MuxedEd25519Account,
+    ClaimableBalanceID,
+    PoolID
+  }
 
   @behaviour XDR.Declaration
 
   @arms [
     SC_ADDRESS_TYPE_ACCOUNT: AccountID,
-    SC_ADDRESS_TYPE_CONTRACT: Hash
+    SC_ADDRESS_TYPE_CONTRACT: Hash,
+    SC_ADDRESS_TYPE_MUXED_ACCOUNT: MuxedEd25519Account,
+    SC_ADDRESS_TYPE_CLAIMABLE_BALANCE: ClaimableBalanceID,
+    SC_ADDRESS_TYPE_LIQUIDITY_POOL: PoolID
   ]
 
-  @type sc_address :: AccountID.t() | Hash.t()
+  @type sc_address ::
+          AccountID.t()
+          | Hash.t()
+          | MuxedEd25519Account.t()
+          | ClaimableBalanceID.t()
+          | PoolID.t()
 
   @type t :: %__MODULE__{sc_address: sc_address(), type: SCAddressType.t()}
 

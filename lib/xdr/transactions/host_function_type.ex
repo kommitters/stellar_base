@@ -13,7 +13,8 @@ defmodule StellarBase.XDR.HostFunctionType do
   @declarations [
     HOST_FUNCTION_TYPE_INVOKE_CONTRACT: 0,
     HOST_FUNCTION_TYPE_CREATE_CONTRACT: 1,
-    HOST_FUNCTION_TYPE_UPLOAD_CONTRACT_WASM: 2
+    HOST_FUNCTION_TYPE_UPLOAD_CONTRACT_WASM: 2,
+    HOST_FUNCTION_TYPE_CREATE_CONTRACT_V2: 3
   ]
 
   @enum_spec %XDR.Enum{declarations: @declarations, identifier: nil}

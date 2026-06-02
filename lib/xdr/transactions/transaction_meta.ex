@@ -14,14 +14,16 @@ defmodule StellarBase.XDR.TransactionMeta do
     OperationMetaList,
     TransactionMetaV1,
     TransactionMetaV2,
-    TransactionMetaV3
+    TransactionMetaV3,
+    TransactionMetaV4
   }
 
   @arms %{
     0 => OperationMetaList,
     1 => TransactionMetaV1,
     2 => TransactionMetaV2,
-    3 => TransactionMetaV3
+    3 => TransactionMetaV3,
+    4 => TransactionMetaV4
   }
 
   @type value ::
@@ -29,6 +31,7 @@ defmodule StellarBase.XDR.TransactionMeta do
           | TransactionMetaV1.t()
           | TransactionMetaV2.t()
           | TransactionMetaV3.t()
+          | TransactionMetaV4.t()
 
   @type t :: %__MODULE__{value: value(), type: integer()}
 
